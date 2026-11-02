@@ -9,7 +9,7 @@
 <title>Himalayan Odyssey Expedition – Travel Manager</title>
 
 <link rel="manifest" href="manifest.json">
-<link rel="icon" type="image/png" href="logo.png">
+<link rel="icon" type="image/png" href="file_000000005c4c821198bc252e0a9347c1.png">
 <link rel="stylesheet" href="style.css">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -19,7 +19,8 @@
 
 <header>
   <div style="display:flex;align-items:center;gap:10px;">
-    <img src="logo.png" alt="Himalayan Odyssey Expedition"
+    <img src="file_000000005c4c821198bc252e0a9347c1.png"
+    alt="Himalayan Odyssey Expedition"
     style="width:48px;height:48px;object-fit:contain;border-radius:10px;">
     <b>Himalayan Odyssey Expedition</b>
   </div>
@@ -30,7 +31,8 @@
 
 <section id="auth" class="card auth">
   <div style="text-align:center;margin-bottom:15px;">
-    <img src="logo.png" alt="Himalayan Odyssey Expedition Logo"
+    <img src="file_000000005c4c821198bc252e0a9347c1.png"
+    alt="Himalayan Odyssey Expedition Logo"
     style="width:115px;height:115px;object-fit:contain;">
   </div>
 
@@ -70,16 +72,13 @@
 
 <section id="dashboard" class="panel active">
   <h2>Overview</h2>
-
   <div class="stats">
     <div class="card">Leads<b id="nLeads">0</b></div>
     <div class="card">Bookings<b id="nBookings">0</b></div>
     <div class="card">Received<b id="nPaid">₹0</b></div>
     <div class="card">Pending<b id="nPending">₹0</b></div>
   </div>
-
   <button data-open="leadForm">＋ Add lead</button>
-
   <div class="card">
     <h3>Recent bookings</h3>
     <div id="recent">No bookings yet.</div>
@@ -112,13 +111,11 @@
 <section id="finance" class="panel">
   <h2>Payments & expenses</h2>
   <button data-open="financeForm">＋ Add transaction</button>
-
   <div class="stats">
     <div class="card">Received<b id="received">₹0</b></div>
     <div class="card">Expenses<b id="expenses">₹0</b></div>
     <div class="card">Net<b id="net">₹0</b></div>
   </div>
-
   <div id="financeList"></div>
 </section>
 
