@@ -414,7 +414,41 @@ function bindForms() {
 
 function bindActions() {
   document.addEventListener("click", async e => {
-    let button = e.target.closest("[data-del]");
+    
+    let button = e.target.closest("[data-invoice]");
+    if (button) {
+      bookingPDF(button.dataset.invoice);
+      return;
+    }
+
+    button = e.target.closest("[data-receipt]");
+    if (button) {
+      paymentPDF(button.dataset.receipt);
+      return;
+    }
+
+    button = e.target.closest("[data-confirm-wa], [data-remind]");
+    if (button) {
+      const id = button.dataset.confirmWa || button.dataset.remind;
+      const b = getBooking(id);
+      const c = getCustomer(b);
+      if (!b) return;
+
+      const total = Number(b.total_amount || 0);
+      const paid = Number(b.amount_paid || 0);
+      const balance = Math.max(0, total - paid);
+
+      const reminder = button.dataset.remind !== undefined;
+
+      const text = reminder
+        ? `Hello ${c.name || ""}, this is a friendly payment reminder from Himalayan Odyssey Expedition. Your ${b.destination || "trip"} booking has a pending balance of ${cash(balance)}. Thank you.`
+        : `Hello ${c.name || ""}, your ${b.destination || "trip"} booking is confirmed with Himalayan Odyssey Expedition. Travel date: ${b.start_date || "—"}. Total: ${cash(total)}. Received: ${cash(paid)}. Balance: ${cash(balance)}. Thank you!`;
+
+      openCustomerWhatsApp(c.phone, text);
+      return;
+    }
+
+    button = e.target.closest("[data-del]");
 
     if (button) {
       if (confirm("Delete this record?")) {
