@@ -92,6 +92,102 @@ function del(table, id) {
   return `<button class="danger" data-del="${table}" data-id="${esc(id)}">Delete</button>`;
 }
 
+function getBooking(id) {
+  return D.bookings.find(x => String(x.id) === String(id));
+}
+
+function getCustomer(booking) {
+  return D.customers.find(x => x.id === booking?.customer_id) || {};
+}
+
+function openCustomerWhatsApp(phone, text) {
+  let number = String(phone || "").replace(/\D/g, "");
+  if (number.startsWith("0")) number = number.slice(1);
+  if (number.length === 10) number = "91" + number;
+
+  if (number.length < 11 || number.length > 13) {
+    alert("Please check the customer's phone number.");
+    return;
+  }
+
+  window.open(
+    "https://wa.me/" + number + "?text=" + encodeURIComponent(text),
+    "_blank"
+  );
+}
+
+function makePDF(title, content) {
+  const w = window.open("", "_blank");
+  if (!w) {
+    alert("Allow pop-ups for this website and try again.");
+    return;
+  }
+
+  w.document.write(`
+    <html><head><title>${esc(title)}</title>
+    <style>
+      body{font-family:Arial;margin:30px;color:#173c36}
+      h1{font-size:22px}
+      .box{border:1px solid #ccc;padding:15px;margin:20px 0}
+      button{padding:12px;background:#173c36;color:white;border:0}
+      @media print{button{display:none}}
+    </style></head><body>
+    <h1>HIMALAYAN ODYSSEY EXPEDITION</h1>
+    <h2>${esc(title)}</h2>
+    ${content}
+    <p>Thank you for choosing Himalayan Odyssey Expedition.</p>
+    <button onclick="window.print()">Print / Save as PDF</button>
+    </body></html>
+  `);
+  w.document.close();
+}
+
+function bookingPDF(id) {
+  const b = getBooking(id);
+  if (!b) return;
+
+  const c = getCustomer(b);
+  const total = Number(b.total_amount || 0);
+  const paid = Number(b.amount_paid || 0);
+  const balance = Math.max(0, total - paid);
+
+  makePDF("Booking Invoice", `
+    <div class="box">
+      Customer: ${esc(c.name)}<br>
+      Phone: ${esc(c.phone)}<br>
+      Destination: ${esc(b.destination)}<br>
+      Travel date: ${esc(b.start_date)}<br>
+      Travellers: ${esc(b.travellers)}
+    </div>
+    <div class="box">
+      Total amount: ${cash(total)}<br>
+      Amount received: ${cash(paid)}<br>
+      Balance due: <b>${cash(balance)}</b>
+    </div>
+    <p>Booking reference: ${esc(b.id)}</p>
+  `);
+}
+
+function paymentPDF(id) {
+  const t = D.transactions.find(x => String(x.id) === String(id));
+  if (!t) return;
+
+  const b = getBooking(t.booking_id);
+  const c = getCustomer(b);
+
+  makePDF("Payment Receipt", `
+    <div class="box">
+      Customer: ${esc(c.name)}<br>
+      Destination: ${esc(b?.destination)}<br>
+      Payment date: ${esc(t.transaction_date)}<br>
+      Payment method: ${esc(t.payment_method)}<br>
+      Receipt reference: ${esc(t.id)}
+    </div>
+    <h2>Amount received: ${cash(t.amount)}</h2>
+    <p>${esc(t.description || "Booking payment")}</p>
+  `);
+}
+
 function render() {
   const customers = Object.fromEntries(
     D.customers.map(x => [x.id, x])
