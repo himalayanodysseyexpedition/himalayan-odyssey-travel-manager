@@ -306,8 +306,17 @@ function bindActions() {
     button = e.target.closest("[data-wa]");
 
     if (button) {
-      const phone = button.dataset.wa.replace(/\D/g, "");
-      window.open("https://wa.me/" + phone, "_blank");
+      const phone = String(button.dataset.wa || "").replace(/\D/g, "");
+const whatsappNumber = phone.startsWith("91")
+  ? phone
+  : "91" + phone;
+
+if (whatsappNumber.length !== 12) {
+  alert("Please check the customer's mobile number.");
+  return;
+}
+
+window.open("https://wa.me/" + whatsappNumber, "_blank");
       return;
     }
 
