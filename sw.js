@@ -1,0 +1,1 @@
+const C="hoe-travel-cloud-v1",F=["./","./index.html","./style.css","./app.js","./manifest.json"];self.addEventListener("install",e=>e.waitUntil(caches.open(C).then(c=>c.addAll(F))));self.addEventListener("fetch",e=>{if(e.request.url.includes("supabase.co")||e.request.url.includes("jsdelivr.net"))return;e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)))})
