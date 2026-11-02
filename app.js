@@ -247,7 +247,22 @@ function render() {
        ${del("leads", x.id)}`
     )).join("") || "No leads yet.";
 
-  $("bookingList").innerHTML =
+  
+$("bookingList").innerHTML =
+  bookings.map(x => card(x.c.name || "Booking", [
+    esc(x.destination || ""),
+    esc(x.start_date || ""),
+    `Total ${cash(x.total_amount)} • Paid ${cash(x.amount_paid)} • Balance ${cash(Number(x.total_amount || 0) - Number(x.amount_paid || 0))}`
+  ],
+    `${x.c.phone ? `
+      <button data-confirm-wa="${esc(x.id)}">Booking WhatsApp</button>
+      <button data-remind="${esc(x.id)}">Payment reminder</button>
+    ` : ""}
+    <button data-invoice="${esc(x.id)}">Invoice PDF</button>
+    <button data-pay="${esc(x.id)}">Add payment</button>
+    ${del("bookings", x.id)}`
+  )).join("") || "No bookings yet.";
+
     bookings.map(x => card(x.c.name || "Booking", [
       esc(x.destination || ""),
       esc(x.start_date || ""),
@@ -277,7 +292,22 @@ function render() {
        ${del("vendors", x.id)}`
     )).join("") || "No vendor contacts yet.";
 
-  $("financeList").innerHTML =
+  
+$("financeList").innerHTML =
+  D.transactions.map(x => card(
+    x.transaction_type + " • " + cash(x.amount),
+    [
+      esc(x.transaction_date || ""),
+      esc(x.payment_method || ""),
+      esc(x.category || ""),
+      esc(x.description || "")
+    ],
+    `${x.transaction_type === "Payment" && x.booking_id
+      ? `<button data-receipt="${esc(x.id)}">Payment receipt PDF</button>`
+      : ""}
+    ${del("transactions", x.id)}`
+  )).join("") || "No transactions yet.";
+
     D.transactions.map(x => card(
       x.transaction_type + " • " + cash(x.amount),
       [
