@@ -1,48 +1,123 @@
+
 "use strict";
 
+/* =========================================
+   HIMALAYAN ODYSSEY EXPEDITION
+   ADMIN DASHBOARD
+========================================= */
+
 const SUPABASE_URL = "https://ynkoiuyjevclypumnyes.supabase.co";
+
+// IMPORTANT: Replace this with your existing Supabase publishable key.
 const SUPABASE_KEY = "PASTE_YOUR_EXISTING_SUPABASE_PUBLISHABLE_KEY_HERE";
 
-let db, D = {}, editingItineraryId = null;
+let db;
+let D = {};
+let editingItineraryId = null;
 
 const $ = id => document.getElementById(id);
-const cash = n => "₹" + (Number(n) || 0).toLocaleString("en-IN");
 
-const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({
-  "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
-}[c]));
+const cash = n =>
+  "₹" + (Number(n) || 0).toLocaleString("en-IN");
 
-function message(t) {
-  if ($("msg")) $("msg").textContent = t;
+const esc = s =>
+  String(s ?? "").replace(/[&<>"']/g, c => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[c]));
+
+function message(text) {
+  if ($("msg")) $("msg").textContent = text;
 }
 
 function show(id) {
   $(id)?.showModal();
 }
 
-function bindPageButtons() {
-  document.querySelectorAll("[data-open]").forEach(b =>
-    b.addEventListener("click", () => show(b.dataset.open))
-  );
+/* =========================================
+   LOGIN / LOGOUT
+========================================= */
 
-  document.querySelectorAll("[data-close]").forEach(b =>
-    b.addEventListener("click", () => b.closest("dialog")?.close())
-  );
+async function login() {
+  const email = $("email")?.value.trim();
+  const password = $("password")?.value;
 
-  document.querySelectorAll("nav button").forEach(b =>
-    b.addEventListener("click", () => {
-      document.querySelectorAll(".panel").forEach(p =>
-        p.classList.toggle("active", p.id === b.dataset.tab)
-      );
-      document.querySelectorAll("nav button").forEach(n =>
-        n.classList.toggle("active", n === b)
-      );
-    })
-  );
+  if (!email || !password) {
+    message("Please enter your email and password.");
+    return;
+  }
+
+  const button = $("login");
+  if (button) button.disabled = true;
+
+  message("Signing in...");
+
+  try {
+    const { data, error } = await db.auth.signInWithPassword({
+      email,
+      password
+    });
+
+    if (error) throw error;
+
+    if (!data.user) {
+      throw new Error("Login could not be completed.");
+    }
+
+    await start();
+
+  } catch (error) {
+    message("Login failed: " + error.message);
+  } finally {
+    if (button) button.disabled = false;
+  }
 }
 
+async function logout() {
+  try {
+    const { error } = await db.auth.signOut();
+    if (error) throw error;
+
+    if ($("app")) $("app").hidden = true;
+    if ($("auth")) $("auth").hidden = false;
+
+    message("You have been logged out.");
+
+  } catch (error) {
+    message("Logout error: " + error.message);
+  }
+}
+
+async function start() {
+  try {
+    message("Loading dashboard...");
+
+    if ($("auth")) $("auth").hidden = true;
+    if ($("app")) $("app").hidden = false;
+
+    await load();
+
+    message("Dashboard ready.");
+
+  } catch (error) {
+    console.error(error);
+    message("Dashboard error: " + error.message);
+
+    if ($("app")) $("app").hidden = true;
+    if ($("auth")) $("auth").hidden = false;
+  }
+}
+
+/* =========================================
+   DATABASE
+========================================= */
+
 async function rows(table) {
-  const { data, error } = await db.from(table)
+  const { data, error } = await db
+    .from(table)
     .select("*")
     .order("created_at", { ascending: false });
 
@@ -51,68 +126,136 @@ async function rows(table) {
 }
 
 async function load() {
-  for (const t of [
-    "packages", "customers", "leads", "bookings",
-    "vendors", "transactions", "itineraries", "itinerary_days"
-  ]) {
-    D[t] = await rows(t);
+  const tables = [
+    "packages",
+    "customers",
+    "leads",
+    "bookings",
+    "vendors",
+    "transactions",
+    "itineraries",
+    "itinerary_days"
+  ];
+
+  for (const table of tables) {
+    D[table] = await rows(table);
   }
+
   render();
 }
 
+async function save(table, obj) {
+  const { error } = await db.from(table).insert(obj);
+
+  if (error) throw error;
+
+  await load();
+}
+
+/* =========================================
+   COMMON FUNCTIONS
+========================================= */
+
 function card(title, lines, buttons = "") {
-  return `<article>
-    <div><b>${esc(title)}</b>${lines.map(x => `<p>${x}</p>`).join("")}</div>
-    <div>${buttons}</div>
-  </article>`;
+  return `
+    <article>
+      <div>
+        <b>${esc(title)}</b>
+        ${lines.map(x => `<p>${x}</p>`).join("")}
+      </div>
+      <div>${buttons}</div>
+    </article>
+  `;
 }
 
 function del(table, id) {
-  return `<button class="danger" data-del="${table}" data-id="${esc(id)}">Delete</button>`;
+  return `
+    <button class="danger"
+      data-del="${table}"
+      data-id="${esc(id)}">
+      Delete
+    </button>
+  `;
 }
 
 function getBooking(id) {
-  return D.bookings.find(x => String(x.id) === String(id));
+  return (D.bookings || []).find(
+    x => String(x.id) === String(id)
+  );
 }
 
-function getCustomer(b) {
-  return D.customers.find(x => x.id === b?.customer_id) || {};
+function getCustomer(booking) {
+  return (D.customers || []).find(
+    x => String(x.id) === String(booking?.customer_id)
+  ) || {};
 }
+
+/* =========================================
+   WHATSAPP
+========================================= */
 
 function openCustomerWhatsApp(phone, text) {
-  let n = String(phone || "").replace(/\D/g, "");
-  if (n.startsWith("0")) n = n.slice(1);
-  if (n.length === 10) n = "91" + n;
+  let number = String(phone || "").replace(/\D/g, "");
 
-  if (n.length < 11 || n.length > 13) {
-    alert("Please check the customer's phone number.");
+  if (number.startsWith("0")) {
+    number = number.slice(1);
+  }
+
+  if (number.length === 10) {
+    number = "91" + number;
+  }
+
+  if (number.length < 11 || number.length > 13) {
+    alert("Please check the mobile number.");
     return;
   }
 
   window.open(
-    "https://wa.me/" + n + "?text=" + encodeURIComponent(text),
+    "https://wa.me/" + number +
+    "?text=" + encodeURIComponent(text),
     "_blank"
   );
 }
 
-function makePDF(title, content) {
-  const w = window.open("", "_blank");
+/* =========================================
+   PDF GENERATION
+========================================= */
 
-  if (!w) {
-    alert("Allow pop-ups for this website and try again.");
+function makePDF(title, content) {
+  const win = window.open("", "_blank");
+
+  if (!win) {
+    alert("Please allow pop-ups and try again.");
     return;
   }
 
-  w.document.write(`
+  win.document.write(`
+    <!DOCTYPE html>
     <html>
     <head>
       <title>${esc(title)}</title>
       <style>
-        body{font-family:Arial;margin:30px;color:#173c36}
-        h1{font-size:22px}
-        .box{border:1px solid #ccc;padding:15px;margin:20px 0}
-        button{padding:12px;background:#173c36;color:white;border:0}
-        @media print{button{display:none}}
+        body {
+          font-family: Arial, sans-serif;
+          margin: 30px;
+          color: #173c36;
+        }
+        h1 { font-size: 22px; }
+        .box {
+          border: 1px solid #ccc;
+          padding: 15px;
+          margin: 20px 0;
+          line-height: 1.8;
+        }
+        button {
+          padding: 12px;
+          background: #173c36;
+          color: white;
+          border: 0;
+        }
+        @media print {
+          button { display: none; }
+        }
       </style>
     </head>
     <body>
@@ -125,169 +268,239 @@ function makePDF(title, content) {
     </html>
   `);
 
-  w.document.close();
+  win.document.close();
 }
 
 function bookingPDF(id) {
-  const b = getBooking(id);
-  if (!b) return;
+  const booking = getBooking(id);
+  if (!booking) return;
 
-  const c = getCustomer(b);
-  const total = Number(b.total_amount || 0);
-  const paid = Number(b.amount_paid || 0);
+  const customer = getCustomer(booking);
+  const total = Number(booking.total_amount || 0);
+  const paid = Number(booking.amount_paid || 0);
 
   makePDF("Booking Invoice", `
     <div class="box">
-      Customer: ${esc(c.name)}<br>
-      Phone: ${esc(c.phone)}<br>
-      Destination: ${esc(b.destination)}<br>
-      Travel date: ${esc(b.start_date)}<br>
-      Travellers: ${esc(b.travellers)}
+      Customer: ${esc(customer.name)}<br>
+      Phone: ${esc(customer.phone)}<br>
+      Destination: ${esc(booking.destination)}<br>
+      Travel date: ${esc(booking.start_date)}<br>
+      Travellers: ${esc(booking.travellers)}
     </div>
     <div class="box">
       Total amount: ${cash(total)}<br>
       Amount received: ${cash(paid)}<br>
       Balance due: <b>${cash(Math.max(0, total - paid))}</b>
     </div>
-    <p>Booking reference: ${esc(b.id)}</p>
+    <p>Booking reference: ${esc(booking.id)}</p>
   `);
 }
 
 function paymentPDF(id) {
-  const t = D.transactions.find(x => String(x.id) === String(id));
-  if (!t) return;
+  const transaction = (D.transactions || []).find(
+    x => String(x.id) === String(id)
+  );
 
-  const b = getBooking(t.booking_id);
-  const c = getCustomer(b);
+  if (!transaction) return;
+
+  const booking = getBooking(transaction.booking_id);
+  const customer = getCustomer(booking);
 
   makePDF("Payment Receipt", `
     <div class="box">
-      Customer: ${esc(c.name)}<br>
-      Destination: ${esc(b?.destination)}<br>
-      Payment date: ${esc(t.transaction_date)}<br>
-      Payment method: ${esc(t.payment_method)}<br>
-      Receipt reference: ${esc(t.id)}
+      Customer: ${esc(customer.name)}<br>
+      Destination: ${esc(booking?.destination)}<br>
+      Payment date: ${esc(transaction.transaction_date)}<br>
+      Payment method: ${esc(transaction.payment_method)}<br>
+      Receipt reference: ${esc(transaction.id)}
     </div>
-    <h2>Amount received: ${cash(t.amount)}</h2>
-    <p>${esc(t.description || "Booking payment")}</p>
+    <h2>Amount received: ${cash(transaction.amount)}</h2>
+    <p>${esc(transaction.description || "Booking payment")}</p>
   `);
 }
 
+/* =========================================
+   DASHBOARD RENDERING
+========================================= */
+
+function setText(id, value) {
+  if ($(id)) $(id).textContent = value;
+}
+
+function setHTML(id, value) {
+  if ($(id)) $(id).innerHTML = value;
+}
+
 function render() {
-  const customers = Object.fromEntries(D.customers.map(x => [x.id, x]));
+  const customers = Object.fromEntries(
+    (D.customers || []).map(x => [x.id, x])
+  );
 
-  const leads = D.leads.map(x => ({
-    ...x, c: customers[x.customer_id] || {}
+  const leads = (D.leads || []).map(x => ({
+    ...x,
+    c: customers[x.customer_id] || {}
   }));
 
-  const bookings = D.bookings.map(x => ({
-    ...x, c: customers[x.customer_id] || {}
+  const bookings = (D.bookings || []).map(x => ({
+    ...x,
+    c: customers[x.customer_id] || {}
   }));
 
-  const income = D.transactions
+  const transactions = D.transactions || [];
+
+  const income = transactions
     .filter(x => x.transaction_type === "Payment")
     .reduce((s, x) => s + Number(x.amount || 0), 0);
 
-  const expenses = D.transactions
+  const expenses = transactions
     .filter(x => x.transaction_type === "Expense")
     .reduce((s, x) => s + Number(x.amount || 0), 0);
 
-  const pending = D.bookings.reduce(
+  const pending = (D.bookings || []).reduce(
     (s, x) => s + Math.max(
       0,
-      Number(x.total_amount || 0) - Number(x.amount_paid || 0)
+      Number(x.total_amount || 0) -
+      Number(x.amount_paid || 0)
     ),
     0
   );
 
-  $("nLeads").textContent = D.leads.length;
-  $("nBookings").textContent = D.bookings.length;
-  $("nPaid").textContent = cash(income);
-  $("nPending").textContent = cash(pending);
+  setText("nLeads", leads.length);
+  setText("nBookings", bookings.length);
+  setText("nPaid", cash(income));
+  setText("nPending", cash(pending));
 
-  $("received").textContent = cash(income);
-  $("expenses").textContent = cash(expenses);
-  $("net").textContent = cash(income - expenses);
+  setText("received", cash(income));
+  setText("expenses", cash(expenses));
+  setText("net", cash(income - expenses));
 
-  $("packageList").innerHTML = D.packages.map(x =>
-    card(x.name, [
-      esc(x.destination || ""),
-      esc(x.duration || ""),
-      cash(x.price_per_person),
-      esc(x.itinerary || "")
-    ], del("packages", x.id))
-  ).join("") || "No packages yet.";
+  /* Packages */
 
-  $("leadList").innerHTML = leads.map(x =>
-    card(x.c.name || "Lead", [
-      esc(x.c.phone || ""),
-      esc(x.destination || ""),
-      esc(x.travel_date || ""),
-      "Budget " + cash(x.budget)
-    ],
-      `${x.c.phone ? `<button data-wa="${esc(x.c.phone)}">WhatsApp</button>` : ""}
-       <button data-confirm="${esc(x.id)}">Confirm</button>
-       ${del("leads", x.id)}`
-    )
-  ).join("") || "No leads yet.";
+  setHTML("packageList",
+    (D.packages || []).map(x =>
+      card(x.name, [
+        esc(x.destination || ""),
+        esc(x.duration || ""),
+        cash(x.price_per_person),
+        esc(x.itinerary || "")
+      ], del("packages", x.id))
+    ).join("") || "No packages yet."
+  );
 
-  $("bookingList").innerHTML = bookings.map(x =>
-    card(x.c.name || "Booking", [
-      esc(x.destination || ""),
-      esc(x.start_date || ""),
-      `Total ${cash(x.total_amount)} • Paid ${cash(x.amount_paid)} • Balance ${cash(Number(x.total_amount || 0) - Number(x.amount_paid || 0))}`
-    ],
-      `${x.c.phone
-        ? `<button data-confirm-wa="${esc(x.id)}">Booking WhatsApp</button>
-           <button data-remind="${esc(x.id)}">Payment reminder</button>`
-        : ""}
-       <button data-invoice="${esc(x.id)}">Invoice PDF</button>
-       <button data-pay="${esc(x.id)}">Add payment</button>
-       ${del("bookings", x.id)}`
-    )
-  ).join("") || "No bookings yet.";
+  /* Leads */
 
-  $("recent").innerHTML = bookings.slice(0, 4).map(x =>
-    card(x.c.name || "Booking", [
-      esc(x.destination || ""),
-      cash(x.total_amount)
-    ])
-  ).join("") || "No bookings yet.";
+  setHTML("leadList",
+    leads.map(x =>
+      card(x.c.name || "Lead", [
+        esc(x.c.phone || ""),
+        esc(x.destination || ""),
+        esc(x.travel_date || ""),
+        "Budget " + cash(x.budget)
+      ],
+      `
+        ${x.c.phone
+          ? `<button data-wa="${esc(x.c.phone)}">WhatsApp</button>`
+          : ""}
+        <button data-confirm="${esc(x.id)}">Confirm</button>
+        ${del("leads", x.id)}
+      `)
+    ).join("") || "No leads yet."
+  );
 
-  $("vendorList").innerHTML = D.vendors.map(x =>
-    card(x.name, [
-      esc(x.category || ""),
-      esc(x.phone || ""),
-      esc(x.location || ""),
-      esc(x.details || "")
-    ],
-      `${x.phone ? `<a href="tel:${encodeURIComponent(x.phone)}">Call</a>` : ""}
-       ${del("vendors", x.id)}`
-    )
-  ).join("") || "No vendor contacts yet.";
+  /* Bookings */
 
-  $("financeList").innerHTML = D.transactions.map(x =>
-    card(x.transaction_type + " • " + cash(x.amount), [
-      esc(x.transaction_date || ""),
-      esc(x.payment_method || ""),
-      esc(x.category || ""),
-      esc(x.description || "")
-    ],
-      `${x.transaction_type === "Payment" && x.booking_id
-        ? `<button data-receipt="${esc(x.id)}">Payment receipt PDF</button>`
-        : ""}
-       ${del("transactions", x.id)}`
-    )
-  ).join("") || "No transactions yet.";
+  setHTML("bookingList",
+    bookings.map(x =>
+      card(x.c.name || "Booking", [
+        esc(x.destination || ""),
+        esc(x.start_date || ""),
+        `Total ${cash(x.total_amount)} • Paid ${cash(x.amount_paid)} • Balance ${cash(
+          Number(x.total_amount || 0) -
+          Number(x.amount_paid || 0)
+        )}`
+      ],
+      `
+        ${x.c.phone ? `
+          <button data-confirm-wa="${esc(x.id)}">
+            Booking WhatsApp
+          </button>
+          <button data-remind="${esc(x.id)}">
+            Payment reminder
+          </button>
+        ` : ""}
+        <button data-invoice="${esc(x.id)}">Invoice PDF</button>
+        <button data-pay="${esc(x.id)}">Add payment</button>
+        ${del("bookings", x.id)}
+      `)
+    ).join("") || "No bookings yet."
+  );
 
-  $("bookingSelect").innerHTML =
+  /* Recent bookings */
+
+  setHTML("recent",
+    bookings.slice(0, 4).map(x =>
+      card(x.c.name || "Booking", [
+        esc(x.destination || ""),
+        cash(x.total_amount)
+      ])
+    ).join("") || "No bookings yet."
+  );
+
+  /* Vendors */
+
+  setHTML("vendorList",
+    (D.vendors || []).map(x =>
+      card(x.name, [
+        esc(x.category || ""),
+        esc(x.phone || ""),
+        esc(x.location || ""),
+        esc(x.details || "")
+      ],
+      `
+        ${x.phone
+          ? `<a href="tel:${encodeURIComponent(x.phone)}">Call</a>`
+          : ""}
+        ${del("vendors", x.id)}
+      `)
+    ).join("") || "No vendor contacts yet."
+  );
+
+  /* Finance */
+
+  setHTML("financeList",
+    transactions.map(x =>
+      card(x.transaction_type + " • " + cash(x.amount), [
+        esc(x.transaction_date || ""),
+        esc(x.payment_method || ""),
+        esc(x.category || ""),
+        esc(x.description || "")
+      ],
+      `
+        ${x.transaction_type === "Payment" && x.booking_id
+          ? `<button data-receipt="${esc(x.id)}">Payment receipt PDF</button>`
+          : ""}
+        ${del("transactions", x.id)}
+      `)
+    ).join("") || "No transactions yet."
+  );
+
+  /* Booking selector */
+
+  setHTML("bookingSelect",
     '<option value="">No linked booking</option>' +
     bookings.map(x =>
-      `<option value="${esc(x.id)}">${esc(x.c.name || "Customer")} — ${esc(x.destination || "Trip")}</option>`
-    ).join("");
+      `<option value="${esc(x.id)}">
+        ${esc(x.c.name || "Customer")} — ${esc(x.destination || "Trip")}
+      </option>`
+    ).join("")
+  );
 
   renderItineraries();
 }
+
+/* =========================================
+   ITINERARIES
+========================================= */
 
 function renderItineraries() {
   const el = $("itineraryList");
@@ -304,42 +517,18 @@ function renderItineraries() {
       esc(it.summary || ""),
       `${days.length} day(s) added`
     ],
-      `<button data-edit-itinerary="${esc(it.id)}">Edit</button>
-       <button data-itinerary-wa="${esc(it.id)}">WhatsApp enquiry</button>
-       ${del("itineraries", it.id)}`
-    );
+    `
+      <button data-edit-itinerary="${esc(it.id)}">Edit</button>
+      <button data-itinerary-wa="${esc(it.id)}">WhatsApp enquiry</button>
+      ${del("itineraries", it.id)}
+    `);
   }).join("") || "No itineraries yet. Select Add itinerary to create your first one.";
-}
-
-async function save(table, obj) {
-  const { error } = await db.from(table).insert(obj);
-  if (error) throw error;
-  await load();
-}
-
-function bindForm(id, table, transform) {
-  $(id).addEventListener("submit", async e => {
-    e.preventDefault();
-
-    const form = e.target;
-    const obj = Object.fromEntries(new FormData(form));
-
-    Object.keys(obj).forEach(k => {
-      if (obj[k] === "") obj[k] = null;
-    });
-
-    try {
-      await save(table, transform ? transform(obj) : obj);
-      form.closest("dialog").close();
-      form.reset();
-    } catch (err) {
-      alert("Error: " + err.message);
-    }
-  });
 }
 
 function addDayRow(day = {}) {
   const wrap = $("dayEditor");
+  if (!wrap) return;
+
   const number = wrap.querySelectorAll(".day-entry").length + 1;
   const row = document.createElement("div");
 
@@ -364,11 +553,14 @@ function addDayRow(day = {}) {
     </label>
 
     <label>Overnight location
-      <input class="day-overnight" value="${esc(day.overnight_location || "")}"
+      <input class="day-overnight"
+        value="${esc(day.overnight_location || "")}"
         placeholder="e.g. Narkanda">
     </label>
 
-    <button type="button" class="danger remove-day">Remove this day</button>
+    <button type="button" class="danger remove-day">
+      Remove this day
+    </button>
   `;
 
   row.querySelector(".remove-day").addEventListener("click", () => {
@@ -381,28 +573,37 @@ function addDayRow(day = {}) {
 }
 
 function renumberDayLabels() {
-  document.querySelectorAll("#dayEditor .day-entry").forEach((r, i) => {
-    r.querySelector(".day-label").textContent = i + 1;
+  document.querySelectorAll("#dayEditor .day-entry").forEach((row, i) => {
+    row.querySelector(".day-label").textContent = i + 1;
   });
 }
 
 function resetItineraryForm() {
   editingItineraryId = null;
-  $("itineraryF").reset();
-  $("dayEditor").innerHTML = "";
-  $("itineraryDialogTitle").textContent = "Add itinerary";
-  $("itinerarySave").textContent = "Save itinerary";
+
+  $("itineraryF")?.reset();
+
+  if ($("dayEditor")) {
+    $("dayEditor").innerHTML = "";
+  }
+
+  setText("itineraryDialogTitle", "Add itinerary");
+  setText("itinerarySave", "Save itinerary");
+
   addDayRow();
 }
 
 function openEditItinerary(id) {
-  const it = D.itineraries.find(x => String(x.id) === String(id));
+  const it = (D.itineraries || []).find(
+    x => String(x.id) === String(id)
+  );
+
   if (!it) return;
 
   editingItineraryId = it.id;
 
-  $("itineraryDialogTitle").textContent = "Edit itinerary";
-  $("itinerarySave").textContent = "Update itinerary";
+  setText("itineraryDialogTitle", "Edit itinerary");
+  setText("itinerarySave", "Update itinerary");
 
   $("itineraryTitle").value = it.title || "";
   $("itineraryDestination").value = it.destination || "";
@@ -415,7 +616,7 @@ function openEditItinerary(id) {
 
   $("dayEditor").innerHTML = "";
 
-  const days = D.itinerary_days
+  const days = (D.itinerary_days || [])
     .filter(d => String(d.itinerary_id) === String(it.id))
     .sort((a, b) => Number(a.day_number) - Number(b.day_number));
 
@@ -427,78 +628,156 @@ function openEditItinerary(id) {
 }
 
 function bindItineraryForm() {
-  $("addItineraryDay").addEventListener("click", () => addDayRow());
+  if (!$("itineraryF")) return;
+
+  $("addItineraryDay")?.addEventListener("click", () => {
+    addDayRow();
+  });
 
   $("itineraryF").addEventListener("submit", async e => {
     e.preventDefault();
 
-    const { data: userData, error: userError } = await db.auth.getUser();
-
-    if (userError || !userData.user) {
-      alert(userError?.message || "Please sign in again.");
-      return;
-    }
-
-    const itinerary = {
-      title: $("itineraryTitle").value.trim(),
-      destination: $("itineraryDestination").value.trim() || null,
-      duration_days: $("itineraryDays").value ? Number($("itineraryDays").value) : null,
-      duration_nights: $("itineraryNights").value ? Number($("itineraryNights").value) : null,
-      price: $("itineraryPrice").value.trim() || null,
-      cover_image: $("itineraryCover").value.trim() || null,
-      summary: $("itinerarySummary").value.trim() || null,
-      published: $("itineraryPublished").checked
-    };
-
-    const days = [...document.querySelectorAll("#dayEditor .day-entry")]
-      .map(r => ({
-        owner_id: userData.user.id,
-        day_number: Number(r.querySelector(".day-number").value),
-        title: r.querySelector(".day-title").value.trim() || null,
-        description: r.querySelector(".day-description").value.trim() || null,
-        overnight_location: r.querySelector(".day-overnight").value.trim() || null
-      }))
-      .filter(d => d.day_number > 0);
-
-    if (!days.length) {
-      alert("Please add at least one itinerary day.");
-      return;
-    }
-
     try {
+      const { data: userData, error: userError } =
+        await db.auth.getUser();
+
+      if (userError || !userData.user) {
+        throw new Error(userError?.message || "Please sign in again.");
+      }
+
+      const itinerary = {
+        title: $("itineraryTitle").value.trim(),
+        destination: $("itineraryDestination").value.trim() || null,
+        duration_days: $("itineraryDays").value
+          ? Number($("itineraryDays").value) : null,
+        duration_nights: $("itineraryNights").value
+          ? Number($("itineraryNights").value) : null,
+        price: $("itineraryPrice").value.trim() || null,
+        cover_image: $("itineraryCover").value.trim() || null,
+        summary: $("itinerarySummary").value.trim() || null,
+        published: $("itineraryPublished").checked
+      };
+
+      const days = [
+        ...document.querySelectorAll("#dayEditor .day-entry")
+      ].map(row => ({
+        owner_id: userData.user.id,
+        day_number: Number(row.querySelector(".day-number").value),
+        title: row.querySelector(".day-title").value.trim() || null,
+        description: row.querySelector(".day-description").value.trim() || null,
+        overnight_location: row.querySelector(".day-overnight").value.trim() || null
+      })).filter(d => d.day_number > 0);
+
+      if (!days.length) {
+        throw new Error("Please add at least one itinerary day.");
+      }
+
       let id = editingItineraryId;
 
       if (id) {
         let result = await db.from("itineraries")
-          .update(itinerary).eq("id", id);
+          .update(itinerary)
+          .eq("id", id);
 
         if (result.error) throw result.error;
 
         result = await db.from("itinerary_days")
-          .delete().eq("itinerary_id", id);
+          .delete()
+          .eq("itinerary_id", id);
 
         if (result.error) throw result.error;
+
       } else {
         const result = await db.from("itineraries")
-          .insert(itinerary).select("id").single();
+          .insert(itinerary)
+          .select("id")
+          .single();
 
         if (result.error) throw result.error;
+
         id = result.data.id;
       }
 
       const result = await db.from("itinerary_days").insert(
-        days.map(d => ({ ...d, itinerary_id: id }))
+        days.map(d => ({
+          ...d,
+          itinerary_id: id
+        }))
       );
 
       if (result.error) throw result.error;
 
       $("itineraryForm").close();
       resetItineraryForm();
+
       await load();
+
       alert("Itinerary saved successfully.");
 
-    } catch (err) {
-      alert("Itinerary save error: " + err.message);
+    } catch (error) {
+      alert("Itinerary save error: " + error.message);
+    }
+  });
+}
+
+/* =========================================
+   PAGE BUTTONS
+========================================= */
+
+function bindPageButtons() {
+  document.querySelectorAll("[data-open]").forEach(button => {
+    button.addEventListener("click", () => {
+      show(button.dataset.open);
+    });
+  });
+
+  document.querySelectorAll("[data-close]").forEach(button => {
+    button.addEventListener("click", () => {
+      button.closest("dialog")?.close();
+    });
+  });
+
+  document.querySelectorAll("nav button").forEach(button => {
+    button.addEventListener("click", () => {
+      document.querySelectorAll(".panel").forEach(panel => {
+        panel.classList.toggle(
+          "active",
+          panel.id === button.dataset.tab
+        );
+      });
+
+      document.querySelectorAll("nav button").forEach(navButton => {
+        navButton.classList.toggle("active", navButton === button);
+      });
+    });
+  });
+}
+
+/* =========================================
+   FORMS
+========================================= */
+
+function bindForm(id, table, transform) {
+  const form = $(id);
+  if (!form) return;
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+
+    const obj = Object.fromEntries(new FormData(form));
+
+    Object.keys(obj).forEach(key => {
+      if (obj[key] === "") obj[key] = null;
+    });
+
+    try {
+      await save(table, transform ? transform(obj) : obj);
+
+      form.closest("dialog")?.close();
+      form.reset();
+
+    } catch (error) {
+      alert("Error: " + error.message);
     }
   });
 }
@@ -520,68 +799,91 @@ function bindForms() {
     booking_id: o.booking_id || null
   }));
 
-  $("leadF").addEventListener("submit", async e => {
-    e.preventDefault();
+  const leadForm = $("leadF");
 
-    const form = e.target;
-    const o = Object.fromEntries(new FormData(form));
+  if (leadForm) {
+    leadForm.addEventListener("submit", async e => {
+      e.preventDefault();
 
-    try {
-      const { data: customer, error } = await db.from("customers")
-        .insert({
-          name: o.name,
-          phone: o.phone || null,
-          email: o.email || null
-        }).select("id").single();
+      const form = e.target;
+      const o = Object.fromEntries(new FormData(form));
 
-      if (error) throw error;
+      try {
+        const { data: customer, error } = await db
+          .from("customers")
+          .insert({
+            name: o.name,
+            phone: o.phone || null,
+            email: o.email || null
+          })
+          .select("id")
+          .single();
 
-      const { error: leadError } = await db.from("leads").insert({
-        customer_id: customer.id,
-        destination: o.destination || null,
-        travel_date: o.travel_date || null,
-        travellers: Number(o.travellers) || 1,
-        budget: Number(o.budget) || 0,
-        notes: o.notes || null
-      });
+        if (error) throw error;
 
-      if (leadError) throw leadError;
+        const { error: leadError } = await db
+          .from("leads")
+          .insert({
+            customer_id: customer.id,
+            destination: o.destination || null,
+            travel_date: o.travel_date || null,
+            travellers: Number(o.travellers) || 1,
+            budget: Number(o.budget) || 0,
+            notes: o.notes || null
+          });
 
-      form.closest("dialog").close();
-      form.reset();
-      await load();
+        if (leadError) throw leadError;
 
-    } catch (err) {
-      alert("Error: " + err.message);
-    }
-  });
+        form.closest("dialog")?.close();
+        form.reset();
+
+        await load();
+
+      } catch (error) {
+        alert("Error: " + error.message);
+      }
+    });
+  }
 
   bindItineraryForm();
 }
 
+/* =========================================
+   DASHBOARD ACTIONS
+========================================= */
+
 function bindActions() {
   document.addEventListener("click", async e => {
-    let b = e.target.closest("[data-invoice]");
-    if (b) {
-      bookingPDF(b.dataset.invoice);
+    const target = e.target;
+    if (!(target instanceof Element)) return;
+
+    let button = target.closest("[data-invoice]");
+
+    if (button) {
+      bookingPDF(button.dataset.invoice);
       return;
     }
 
-    b = e.target.closest("[data-receipt]");
-    if (b) {
-      paymentPDF(b.dataset.receipt);
+    button = target.closest("[data-receipt]");
+
+    if (button) {
+      paymentPDF(button.dataset.receipt);
       return;
     }
 
-    b = e.target.closest("[data-edit-itinerary]");
-    if (b) {
-      openEditItinerary(b.dataset.editItinerary);
+    button = target.closest("[data-edit-itinerary]");
+
+    if (button) {
+      openEditItinerary(button.dataset.editItinerary);
       return;
     }
 
-    b = e.target.closest("[data-itinerary-wa]");
-    if (b) {
-      const it = D.itineraries.find(x => String(x.id) === b.dataset.itineraryWa);
+    button = target.closest("[data-itinerary-wa]");
+
+    if (button) {
+      const it = (D.itineraries || []).find(
+        x => String(x.id) === button.dataset.itineraryWa
+      );
 
       if (it) {
         openCustomerWhatsApp(
@@ -592,101 +894,220 @@ function bindActions() {
       return;
     }
 
-    b = e.target.closest("[data-confirm-wa], [data-remind]");
-    if (b) {
-      const id = b.dataset.confirmWa || b.dataset.remind;
+    button = target.closest("[data-confirm-wa], [data-remind]");
+
+    if (button) {
+      const id = button.dataset.confirmWa || button.dataset.remind;
       const booking = getBooking(id);
-      const c = getCustomer(booking);
 
       if (!booking) return;
 
+      const customer = getCustomer(booking);
       const total = Number(booking.total_amount || 0);
       const paid = Number(booking.amount_paid || 0);
       const balance = Math.max(0, total - paid);
-      const reminder = b.dataset.remind !== undefined;
+
+      const reminder = button.dataset.remind !== undefined;
 
       const text = reminder
-        ? `Hello ${c.name || ""}, this is a friendly payment reminder from Himalayan Odyssey Expedition. Your ${booking.destination || "trip"} booking has a pending balance of ${cash(balance)}. Thank you.`
-        : `Hello ${c.name || ""}, your ${booking.destination || "trip"} booking is confirmed with Himalayan Odyssey Expedition. Travel date: ${booking.start_date || "—"}. Total: ${cash(total)}. Received: ${cash(paid)}. Balance: ${cash(balance)}. Thank you!`;
+        ? `Hello ${customer.name || ""}, this is a friendly payment reminder from Himalayan Odyssey Expedition. Your ${booking.destination || "trip"} booking has a pending balance of ${cash(balance)}. Thank you.`
+        : `Hello ${customer.name || ""}, your ${booking.destination || "trip"} booking is confirmed with Himalayan Odyssey Expedition. Travel date: ${booking.start_date || "—"}. Total: ${cash(total)}. Received: ${cash(paid)}. Balance: ${cash(balance)}. Thank you!`;
 
-      openCustomerWhatsApp(c.phone, text);
+      openCustomerWhatsApp(customer.phone, text);
       return;
     }
 
-    b = e.target.closest("[data-del]");
-    if (b) {
-      if (confirm("Delete this record?")) {
-        const { error } = await db.from(b.dataset.del)
-          .delete().eq("id", b.dataset.id);
+    button = target.closest("[data-del]");
 
-        if (error) alert(error.message);
-        else await load();
-      }
-      return;
-    }
+    if (button) {
+      if (!confirm("Delete this record?")) return;
 
-    b = e.target.closest("[data-wa]");
-    if (b) {
-      let phone = String(b.dataset.wa || "").replace(/\D/g, "");
-      phone = phone.startsWith("91") ? phone : "91" + phone;
+      try {
+        const { error } = await db
+          .from(button.dataset.del)
+          .delete()
+          .eq("id", button.dataset.id);
 
-      if (phone.length !== 12) {
-        alert("Please check the customer's mobile number.");
-        return;
+        if (error) throw error;
+
+        await load();
+
+      } catch (error) {
+        alert("Delete error: " + error.message);
       }
 
-      window.open("https://wa.me/" + phone, "_blank");
       return;
     }
 
-    b = e.target.closest("[data-confirm]");
-    if (b) {
-      const lead = D.leads.find(x => x.id == b.dataset.confirm);
+    button = target.closest("[data-wa]");
+
+    if (button) {
+      openCustomerWhatsApp(
+        button.dataset.wa,
+        "Hello, I would like to discuss my travel enquiry."
+      );
+      return;
+    }
+
+    button = target.closest("[data-confirm]");
+
+    if (button) {
+      const lead = (D.leads || []).find(
+        x => String(x.id) === button.dataset.confirm
+      );
+
       if (!lead) return;
 
-      const total = prompt("Total booking amount ₹", lead.budget || "0");
+      const total = prompt(
+        "Total booking amount ₹",
+        lead.budget || "0"
+      );
+
       if (total === null) return;
 
       const paid = prompt("Advance received ₹", "0");
+
       if (paid === null) return;
 
-      const { error } = await db.from("bookings").insert({
-        customer_id: lead.customer_id,
-        destination: lead.destination,
-        start_date: lead.travel_date,
-        travellers: lead.travellers,
-        total_amount: Number(total) || 0,
-        amount_paid: Number(paid) || 0,
-        notes: lead.notes
-      });
+      try {
+        const { error } = await db.from("bookings").insert({
+          customer_id: lead.customer_id,
+          destination: lead.destination,
+          start_date: lead.travel_date,
+          travellers: lead.travellers,
+          total_amount: Number(total) || 0,
+          amount_paid: Number(paid) || 0,
+          notes: lead.notes
+        });
 
-      if (error) {
-        alert(error.message);
-        return;
+        if (error) throw error;
+
+        const { error: deleteError } = await db
+          .from("leads")
+          .delete()
+          .eq("id", lead.id);
+
+        if (deleteError) throw deleteError;
+
+        await load();
+
+      } catch (error) {
+        alert("Booking error: " + error.message);
       }
 
-      const { error: deleteError } = await db.from("leads")
-        .delete().eq("id", lead.id);
-
-      if (deleteError) alert(deleteError.message);
-
-      await load();
       return;
     }
 
-    b = e.target.closest("[data-pay]");
-    if (b) {
-      const booking = D.bookings.find(x => x.id == b.dataset.pay);
+    button = target.closest("[data-pay]");
+
+    if (button) {
+      const booking = (D.bookings || []).find(
+        x => String(x.id) === button.dataset.pay
+      );
+
       if (!booking) return;
 
       const amount = prompt("Payment received ₹");
+
       if (!amount || Number(amount) <= 0) return;
 
-      const { error } = await db.from("transactions").insert({
-        booking_id: booking.id,
-        transaction_type: "Payment",
-        amount: Number(amount),
-        description: "Booking payment"
-      });
+      try {
+        const { error } = await db.from("transactions").insert({
+          booking_id: booking.id,
+          transaction_type: "Payment",
+          amount: Number(amount),
+          description: "Booking payment"
+        });
+
+        if (error) throw error;
+
+        const newPaid =
+          Number(booking.amount_paid || 0) + Number(amount);
+
+        const { error: updateError } = await db
+          .from("bookings")
+          .update({ amount_paid: newPaid })
+          .eq("id", booking.id);
+
+        if (updateError) throw updateError;
+
+        await load();
+
+        alert("Payment recorded successfully.");
+
+      } catch (error) {
+        alert("Payment error: " + error.message);
+      }
+
+      return;
+    }
+  });
+}
+
+/* =========================================
+   STARTUP
+========================================= */
+
+async function initialize() {
+  try {
+    if (
+      !window.supabase ||
+      !window.supabase.createClient
+    ) {
+      throw new Error(
+        "Supabase library did not load. Check your internet connection."
+      );
+    }
+
+    if (
+      !SUPABASE_KEY ||
+      SUPABASE_KEY.includes("PASTE_YOUR")
+    ) {
+      throw new Error(
+        "Please add your actual Supabase publishable key in app.js."
+      );
+    }
+
+    db = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    bindPageButtons();
+    bindForms();
+    bindActions();
+
+    $("login")?.addEventListener("click", login);
+    $("logout")?.addEventListener("click", logout);
+
+    $("refresh")?.addEventListener("click", async () => {
+      try {
+        await load();
+        message("Dashboard refreshed.");
+      } catch (error) {
+        message("Refresh error: " + error.message);
+      }
+    });
+
+    $("password")?.addEventListener("keydown", e => {
+      if (e.key === "Enter") login();
+    });
+
+    message("Ready. Enter your admin login details.");
+
+    const { data, error } = await db.auth.getSession();
+
+    if (error) throw error;
+
+    if (data.session) {
+      await start();
+    }
+
+  } catch (error) {
+    console.error("Startup error:", error);
+    message("App startup error: " + error.message);
+  }
+}
+
+/* THIS MUST BE THE LAST LINE OF THE FILE */
 initialize();
-      if (error) 
