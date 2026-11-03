@@ -9,7 +9,7 @@
 const SUPABASE_URL = "https://ynkoiuyjevclypumnyes.supabase.co";
 
 // IMPORTANT: Replace this with your existing Supabase publishable key.
-const SUPABASE_KEY = "PASTE_YOUR_EXISTING_SUPABASE_PUBLISHABLE_KEY_HERE";
+const SUPABASE_KEY = "sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-";
 
 let db;
 let D = {};
