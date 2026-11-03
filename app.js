@@ -688,5 +688,5 @@ function bindActions() {
         amount: Number(amount),
         description: "Booking payment"
       });
-
+initialize();
       if (error) 
