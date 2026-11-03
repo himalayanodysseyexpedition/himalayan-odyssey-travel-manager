@@ -1,210 +1,280 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#173c36">
+<meta name="theme-color" content="#102b27">
+<title>Himalayan Odyssey Expedition | Explore the Himalayas</title>
+<meta name="description" content="Explore Spiti Valley, Manali and Himachal Pradesh with Himalayan Odyssey Expedition. Discover Himalayan tours and book your next adventure.">
 
-<title>Himalayan Odyssey Expedition – Travel Manager</title>
-
-<link rel="manifest" href="manifest.json">
-<link rel="icon" type="image/png" href="logo.png">
-<link rel="stylesheet" href="style.css">
-
+<link rel="icon" href="logo.png">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f4ef;color:#18332e}
+a{text-decoration:none;color:inherit}
+header{background:#102b27;color:white;padding:15px 6%;display:flex;align-items:center;justify-content:space-between;gap:15px;position:sticky;top:0;z-index:5}
+.brand{display:flex;align-items:center;gap:10px;font-weight:bold}
+.brand img{width:43px;height:43px;object-fit:contain}
+nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}
+nav a:hover{color:#e7bd79}
+.hero{min-height:520px;padding:100px 8%;display:flex;align-items:center;color:white;background:linear-gradient(90deg,rgba(8,30,27,.88),rgba(8,30,27,.25)),url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600') center/cover}
+.hero-content{max-width:650px}
+.hero small{letter-spacing:4px;color:#e9c58d}
+h1{font-size:clamp(38px,7vw,68px);line-height:1.08;margin:18px 0}
+.hero p{font-size:18px;line-height:1.7}
+.btn{display:inline-block;background:#d8a85f;color:#172e28;padding:14px 22px;border-radius:5px;font-weight:bold;margin:8px 5px 8px 0}
+.btn.outline{background:transparent;border:1px solid white;color:white}
+section.content{padding:65px 7%}
+.section-title{text-align:center;margin-bottom:35px}
+.section-title small{color:#a77839;letter-spacing:3px}
+.section-title h2{font-size:34px;margin:10px 0}
+.intro{text-align:center;max-width:760px;margin:0 auto 30px;line-height:1.8;color:#52645e}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:22px}
+.card{background:white;border-radius:10px;overflow:hidden;box-shadow:0 5px 20px #102b2712}
+.card img{width:100%;height:190px;object-fit:cover;background:#dce5df}
+.card-body{padding:20px}
+.card h3{margin:0 0 10px}
+.card p{color:#66736e;line-height:1.6}
+.price{font-size:20px;font-weight:bold;color:#a77839}
+.gallery img{height:220px}
+.info{background:#e9eee9}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.info-box{background:white;padding:25px;border-radius:9px}
+.cta{background:#173c36;color:white;text-align:center;padding:65px 7%}
+.cta p{line-height:1.7}
+footer{background:#102b27;color:#d9e3dc;padding:30px 7%;text-align:center;line-height:2}
+footer a{color:#e7bd79}
+#packageMessage{color:#66736e;text-align:center;padding:20px}
+@media(max-width:650px){
+ header{align-items:flex-start;flex-direction:column}
+ nav{gap:12px}
+ .hero{min-height:460px;padding:65px 7%}
+ section.content{padding:48px 6%}
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <div style="display:flex;align-items:center;gap:10px;">
-    <img src="logo.png"
-    alt="Himalayan Odyssey Expedition"
-    style="width:48px;height:48px;object-fit:contain;border-radius:10px;">
-    <b>Himalayan Odyssey Expedition</b>
+  <div class="brand">
+    <img src="logo.png" alt="Himalayan Odyssey Expedition">
+    <span>HIMALAYAN ODYSSEY EXPEDITION</span>
   </div>
-  <button id="logout" hidden>Sign out</button>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#packages">Packages</a>
+    <a href="#itineraries">Itineraries</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </nav>
 </header>
 
-<main>
-
-<section id="auth" class="card auth">
-  <div style="text-align:center;margin-bottom:15px;">
-    <img src="logo.png"
-    alt="Himalayan Odyssey Expedition Logo"
-    style="width:115px;height:115px;object-fit:contain;">
+<div class="hero" id="home">
+  <div class="hero-content">
+    <small>YOUR HIMALAYAN ADVENTURE BEGINS HERE</small>
+    <h1>Discover the<br>Magic of Himalayas</h1>
+    <p>Journey through magnificent mountains, peaceful valleys and unforgettable Himalayan landscapes.</p>
+    <a class="btn" href="#packages">Explore Packages</a>
+    <a class="btn outline" href="https://wa.me/919816929669">Enquire on WhatsApp</a>
   </div>
-
-  <small>PRIVATE ADMIN WORKSPACE</small>
-  <h1>Travel Manager</h1>
-  <p>Sign in to manage your business.</p>
-
-  <label>Email
-    <input id="email" type="email">
-  </label>
-
-  <label>Password
-    <input id="password" type="password">
-  </label>
-
-  <button id="login">Sign in</button>
-  <p id="msg"></p>
-
-  <small>Create your admin user first in Supabase → Authentication → Users → Add user. No public sign-up is provided.</small>
-</section>
-
-<div id="app" hidden>
-
-<section class="hero">
-  <small>BUSINESS CONTROL CENTRE</small>
-  <h1>Manage every trip<br>in one place.</h1>
-</section>
-
-<nav>
-  <button data-tab="dashboard">Overview</button>
-  <button data-tab="packages">Packages</button>
-  <button data-tab="leads">Leads</button>
-  <button data-tab="bookings">Bookings</button>
-  <button data-tab="vendors">Hotels & Transport</button>
-  <button data-tab="finance">Payments & Expenses</button>
-</nav>
-
-<section id="dashboard" class="panel active">
-  <h2>Overview</h2>
-  <div class="stats">
-    <div class="card">Leads<b id="nLeads">0</b></div>
-    <div class="card">Bookings<b id="nBookings">0</b></div>
-    <div class="card">Received<b id="nPaid">₹0</b></div>
-    <div class="card">Pending<b id="nPending">₹0</b></div>
-  </div>
-  <button data-open="leadForm">＋ Add lead</button>
-  <div class="card">
-    <h3>Recent bookings</h3>
-    <div id="recent">No bookings yet.</div>
-  </div>
-</section>
-
-<section id="packages" class="panel">
-  <h2>Travel packages</h2>
-  <button data-open="packageForm">＋ Add package</button>
-  <div id="packageList"></div>
-</section>
-
-<section id="leads" class="panel">
-  <h2>Leads</h2>
-  <button data-open="leadForm">＋ Add lead</button>
-  <div id="leadList"></div>
-</section>
-
-<section id="bookings" class="panel">
-  <h2>Confirmed bookings</h2>
-  <div id="bookingList"></div>
-</section>
-
-<section id="vendors" class="panel">
-  <h2>Hotels & transport</h2>
-  <button data-open="vendorForm">＋ Add contact</button>
-  <div id="vendorList"></div>
-</section>
-
-<section id="finance" class="panel">
-  <h2>Payments & expenses</h2>
-  <button data-open="financeForm">＋ Add transaction</button>
-  <div class="stats">
-    <div class="card">Received<b id="received">₹0</b></div>
-    <div class="card">Expenses<b id="expenses">₹0</b></div>
-    <div class="card">Net<b id="net">₹0</b></div>
-  </div>
-  <div id="financeList"></div>
-</section>
-
 </div>
-</main>
 
-<dialog id="packageForm">
-<form id="packageF">
-  <h3>Add package</h3>
-  <label>Name<input name="name" required></label>
-  <label>Destination<input name="destination"></label>
-  <label>Duration<input name="duration"></label>
-  <label>Price per person ₹<input name="price_per_person" type="number"></label>
-  <label>Itinerary<textarea name="itinerary"></textarea></label>
-  <label>Inclusions<textarea name="inclusions"></textarea></label>
-  <label>Exclusions<textarea name="exclusions"></textarea></label>
-  <button>Save</button>
-  <button type="button" data-close>Cancel</button>
-</form>
-</dialog>
+<section class="content">
+  <div class="section-title">
+    <small>TRAVEL WITH US</small>
+    <h2>Explore the Himalayas</h2>
+  </div>
+  <p class="intro">
+    From the dramatic landscapes of Spiti Valley to the beautiful mountain towns
+    of Himachal Pradesh, discover journeys designed for adventure and exploration.
+  </p>
+</section>
 
-<dialog id="leadForm">
-<form id="leadF">
-  <h3>Add lead</h3>
-  <label>Customer name<input name="name" required></label>
-  <label>Phone / wa.me<input name="phone"></label>
-  <label>Email<input name="email" type="email"></label>
-  <label>Destination<input name="destination"></label>
-  <label>Travel date<input name="travel_date" type="date"></label>
-  <label>Travellers<input name="travellers" type="number" value="2" min="1"></label>
-  <label>Budget ₹<input name="budget" type="number"></label>
-  <label>Notes<textarea name="notes"></textarea></label>
-  <button>Save lead</button>
-  <button type="button" data-close>Cancel</button>
-</form>
-</dialog>
+<section class="content info" id="packages">
+  <div class="section-title">
+    <small>FIND YOUR NEXT JOURNEY</small>
+    <h2>Our Travel Packages</h2>
+  </div>
+  <div id="packageList" class="cards">
+    <p id="packageMessage">Loading available packages...</p>
+  </div>
+</section>
 
-<dialog id="vendorForm">
-<form id="vendorF">
-  <h3>Add vendor contact</h3>
-  <label>Name<input name="name" required></label>
-  <label>Category
-    <select name="category">
-      <option>Hotel</option>
-      <option>Transport</option>
-      <option>Guide</option>
-      <option>Other</option>
-    </select>
-  </label>
-  <label>Contact person<input name="contact_person"></label>
-  <label>Phone<input name="phone"></label>
-  <label>Location<input name="location"></label>
-  <label>Rate ₹<input name="rates" type="number"></label>
-  <label>Details<textarea name="details"></textarea></label>
-  <button>Save contact</button>
-  <button type="button" data-close>Cancel</button>
-</form>
-</dialog>
+<section class="content" id="itineraries">
+  <div class="section-title">
+    <small>PLAN YOUR JOURNEY</small>
+    <h2>Tour Itineraries</h2>
+  </div>
+  <p class="intro">
+    Explore the itinerary and travel details of our available packages.
+    Contact us to receive a detailed day-wise travel plan.
+  </p>
+  <div id="itineraryList" class="cards">
+    <div class="card card-body">
+      <h3>Plan your Himalayan journey</h3>
+      <p>Ask us for detailed day-wise itineraries, sightseeing stops and travel information.</p>
+      <a class="btn" href="https://wa.me/919816929669?text=Please%20share%20your%20tour%20itineraries">Request Itinerary</a>
+    </div>
+  </div>
+</section>
 
-<dialog id="financeForm">
-<form id="financeF">
-  <h3>Record transaction</h3>
-  <label>Type
-    <select name="transaction_type">
-      <option>Payment</option>
-      <option>Expense</option>
-    </select>
-  </label>
-  <label>Booking
-    <select name="booking_id" id="bookingSelect">
-      <option value="">No linked booking</option>
-    </select>
-  </label>
-  <label>Amount ₹<input name="amount" type="number" min="1" required></label>
-  <label>Date<input name="transaction_date" type="date" required></label>
-  <label>Method<input name="payment_method"></label>
-  <label>Category<input name="category"></label>
-  <label>Description<textarea name="description"></textarea></label>
-  <button>Save transaction</button>
-  <button type="button" data-close>Cancel</button>
-</form>
-</dialog>
+<section class="content info" id="gallery">
+  <div class="section-title">
+    <small>MEMORIES FROM THE MOUNTAINS</small>
+    <h2>Travel Gallery</h2>
+  </div>
+  <p class="intro">A glimpse of the landscapes and experiences waiting for you.</p>
+  <div id="galleryList" class="cards gallery">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800" alt="Mountain landscape">
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800" alt="Himalayan mountains">
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800" alt="Mountain nature">
+    </div>
+  </div>
+</section>
+
+<section class="content">
+  <div class="section-title">
+    <small>TRAVEL SERVICES</small>
+    <h2>More Than Just Tours</h2>
+  </div>
+  <div class="info-grid">
+    <div class="info-box">
+      <h3>Hotel Enquiries</h3>
+      <p>Looking for comfortable stays in the mountains?</p>
+      <a class="btn" href="https://wa.me/919816929669?text=I%20need%20a%20hotel%20enquiry">Enquire Now</a>
+    </div>
+    <div class="info-box">
+      <h3>Cab & Transport</h3>
+      <p>Need a vehicle for your Himachal journey?</p>
+      <a class="btn" href="https://wa.me/919816929669?text=I%20need%20a%20cab%20enquiry">Enquire Now</a>
+    </div>
+    <div class="info-box">
+      <h3>Custom Packages</h3>
+      <p>Tell us your dates, group size and travel preferences.</p>
+      <a class="btn" href="https://wa.me/919816929669?text=I%20want%20a%20custom%20tour%20package">Plan My Trip</a>
+    </div>
+  </div>
+</section>
+
+<div class="cta" id="contact">
+  <small>LET'S PLAN YOUR NEXT ADVENTURE</small>
+  <h2>Ready to Explore the Himalayas?</h2>
+  <p>Contact Himalayan Odyssey Expedition for packages, bookings and travel enquiries.</p>
+  <a class="btn" href="https://wa.me/919816929669?text=Hello%2C%20I%20want%20to%20plan%20a%20Himalayan%20trip.">Chat on WhatsApp</a>
+</div>
 
 <footer>
-  Cloud-connected private workspace
-  <button id="refresh">Refresh</button>
+  <b>HIMALAYAN ODYSSEY EXPEDITION</b><br>
+  Narkanda, Himachal Pradesh<br>
+  WhatsApp: +91 98169 29669<br>
+  <a href="admin.html">Admin Login</a>
+  <p>© 2026 Himalayan Odyssey Expedition. All rights reserved.</p>
 </footer>
 
-<script src="app.js?v=4" defer></script>
+<script>
+const SUPABASE_URL = "https://ynkoiuyjevclypumnyes.supabase.co";
+const SUPABASE_KEY = "sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-";
+
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+function safe(value) {
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  }[c]));
+}
+
+function rupees(value) {
+  return "₹" + Number(value || 0).toLocaleString("en-IN");
+}
+
+async function loadPackages() {
+  const list = document.getElementById("packageList");
+  const itineraryList = document.getElementById("itineraryList");
+
+  try {
+    const { data, error } = await db
+      .from("packages")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+
+    if (!data || !data.length) {
+      list.innerHTML = "<p id='packageMessage'>No packages published yet. Please contact us for upcoming tours.</p>";
+      return;
+    }
+
+    list.innerHTML = data.map(p => {
+      const image = p.image_url || p.cover_image || "";
+      const photo = image
+        ? `<img src="${safe(image)}" alt="${safe(p.name)}" loading="lazy">`
+        : `<div style="height:190px;background:#dce5df;display:grid;place-items:center;color:#52645e">Himalayan Journey</div>`;
+
+      const message = encodeURIComponent(
+        "Hello, I am interested in " + (p.name || "your travel package") +
+        ". Please share details."
+      );
+
+      return `<article class="card">
+        ${photo}
+        <div class="card-body">
+          <h3>${safe(p.name)}</h3>
+          <p>${safe(p.destination)}</p>
+          <p>${safe(p.duration)}</p>
+          <p>${safe(p.inclusions || "")}</p>
+          <div class="price">${rupees(p.price_per_person)} <small>per person</small></div>
+          <a class="btn" href="https://wa.me/919816929669?text=${message}">Book on WhatsApp</a>
+          <button class="btn" type="button" onclick="showItinerary('${safe(p.id)}')">View Itinerary</button>
+        </div>
+      </article>`;
+    }).join("");
+
+    window.publicPackages = data;
+
+  } catch (error) {
+    list.innerHTML = "<p id='packageMessage'>We could not load packages right now. Please contact us on WhatsApp for available tours.</p>";
+    console.error("Package loading error:", error);
+  }
+}
+
+window.showItinerary = function(id) {
+  const p = (window.publicPackages || []).find(x => String(x.id) === String(id));
+  if (!p) return;
+
+  const text = [
+    p.name || "",
+    p.destination || "",
+    p.duration || "",
+    p.itinerary || "",
+    p.inclusions ? "Inclusions: " + p.inclusions : "",
+    p.exclusions ? "Exclusions: " + p.exclusions : ""
+  ].filter(Boolean).join("\n\n");
+
+  const w = window.open("", "_blank");
+  if (!w) {
+    alert("Please allow pop-ups to view the itinerary.");
+    return;
+  }
+
+  const content = text.replace(/[&<>"']/g, c => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  }[c])).replace(/\n/g, "<br>");
+
+  w.document.write("<html><head><title>Tour Itinerary</title><meta name='viewport' content='width=device-width,initial-scale=1'><style>body{font-family:Arial;line-height:1.8;padding:25px;max-width:750px;margin:auto;color:#18332e}</style></head><body><h1>Himalayan Odyssey Expedition</h1><div>" + content + "</div></body></html>");
+  w.document.close();
+};
+
+loadPackages();
+</script>
 
 </body>
 </html>
