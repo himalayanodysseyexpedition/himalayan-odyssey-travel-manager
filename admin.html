@@ -1,209 +1,369 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#173c36">
-
-<title>Himalayan Odyssey Expedition – Travel Manager</title>
-
-<link rel="manifest" href="manifest.json">
-<link rel="icon" type="image/png" href="logo.png">
-<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Himalayan Odyssey Expedition | Admin</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f6f4;color:#183b34}
+header{background:#123e35;color:white;padding:18px}
+header h2{margin:0}
+header p{margin:5px 0 0;color:#c8ddd4;font-size:13px}
+main{max-width:1100px;margin:auto;padding:16px}
+button{border:0;border-radius:7px;padding:11px 15px;background:#176b55;color:white;font-weight:bold;cursor:pointer;margin:3px}
+button:disabled{opacity:.5}
+.danger{background:#a83232}
+.secondary{background:#526b64}
+nav{display:flex;gap:7px;overflow-x:auto;padding:12px 0}
+nav button{white-space:nowrap;background:#dce8e1;color:#174b3d}
+nav button.active{background:#176b55;color:white}
+.panel{display:none}
+.panel.active{display:block}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.stat,.card,article{background:white;padding:15px;border-radius:10px;margin-bottom:12px;box-shadow:0 2px 8px #0000000c}
+.stat strong{display:block;font-size:22px;margin-top:8px}
+article{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+article p{margin:6px 0;font-size:14px;color:#53665f}
+input,textarea,select{width:100%;padding:12px;border:1px solid #cbd8d1;border-radius:7px;margin:6px 0 13px;font-size:15px}
+label{font-size:14px;font-weight:bold}
+form h3{margin-top:5px}
+dialog{border:0;border-radius:12px;width:min(95%,650px);max-height:90vh;overflow:auto;padding:22px}
+dialog::backdrop{background:#0009}
+.day-entry{border:1px solid #d8e4dc;margin:12px 0}
+.day-entry h4{margin-top:0}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+small{color:#61756d}
+#msg{color:#e6bd67;margin-top:10px}
+@media(max-width:600px){
+.stats{grid-template-columns:repeat(2,1fr)}
+main{padding:10px}
+article{display:block}
+article button{margin-top:8px}
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <div style="display:flex;align-items:center;gap:10px;">
-    <img src="logo.png"
-    alt="Himalayan Odyssey Expedition"
-    style="width:150px;height:65px;object-fit:contain;border-radius:0;"
+  <div class="topline">
+    <div>
+      <h2>HIMALAYAN ODYSSEY EXPEDITION</h2>
+      <p>Travel Management Dashboard</p>
+    </div>
+    <button id="logout" hidden class="secondary">Logout</button>
   </div>
-  <button id="logout" hidden>Sign out</button>
+  <div id="msg"></div>
 </header>
 
 <main>
 
-<section id="auth" class="card auth">
-  <div style="text-align:center;margin-bottom:15px;">
-    <img src="logo.png"
-    alt="Himalayan Odyssey Expedition Logo"
-    style="width:240px;height:auto;max-height:100px;object-fit:contain;"
+<!-- LOGIN -->
+<section id="auth">
+  <div class="card">
+    <h2>Admin Login</h2>
+    <label>Email</label>
+    <input id="email" type="email" placeholder="Admin email">
+
+    <label>Password</label>
+    <input id="password" type="password" placeholder="Password">
+
+    <button id="login">Login to Dashboard</button>
   </div>
-
-  <small>PRIVATE ADMIN WORKSPACE</small>
-  <h1>Travel Manager</h1>
-  <p>Sign in to manage your business.</p>
-
-  <label>Email
-    <input id="email" type="email">
-  </label>
-
-  <label>Password
-    <input id="password" type="password">
-  </label>
-
-  <button id="login">Sign in</button>
-  <p id="msg"></p>
-
-  <small>Create your admin user first in Supabase → Authentication → Users → Add user. No public sign-up is provided.</small>
 </section>
 
-<div id="app" hidden>
-
-<section class="hero">
-  <small>BUSINESS CONTROL CENTRE</small>
-  <h1>Manage every trip<br>in one place.</h1>
-</section>
+<!-- DASHBOARD -->
+<section id="app" hidden>
 
 <nav>
-  <button data-tab="dashboard">Overview</button>
+  <button class="active" data-tab="dashboard">Dashboard</button>
   <button data-tab="packages">Packages</button>
+  <button data-tab="itineraries">Itineraries</button>
   <button data-tab="leads">Leads</button>
   <button data-tab="bookings">Bookings</button>
-  <button data-tab="vendors">Hotels & Transport</button>
-  <button data-tab="finance">Payments & Expenses</button>
+  <button data-tab="vendors">Vendors</button>
+  <button data-tab="finance">Finance</button>
 </nav>
 
+<!-- DASHBOARD PANEL -->
 <section id="dashboard" class="panel active">
-  <h2>Overview</h2>
+  <div class="topline">
+    <h2>Dashboard Overview</h2>
+    <button id="refresh" class="secondary">Refresh</button>
+  </div>
+
   <div class="stats">
-    <div class="card">Leads<b id="nLeads">0</b></div>
-    <div class="card">Bookings<b id="nBookings">0</b></div>
-    <div class="card">Received<b id="nPaid">₹0</b></div>
-    <div class="card">Pending<b id="nPending">₹0</b></div>
+    <div class="stat">Total Leads<strong id="nLeads">0</strong></div>
+    <div class="stat">Bookings<strong id="nBookings">0</strong></div>
+    <div class="stat">Received<strong id="nPaid">₹0</strong></div>
+    <div class="stat">Pending<strong id="nPending">₹0</strong></div>
   </div>
-  <button data-open="leadForm">＋ Add lead</button>
-  <div class="card">
-    <h3>Recent bookings</h3>
-    <div id="recent">No bookings yet.</div>
-  </div>
+
+  <h3>Recent Bookings</h3>
+  <div id="recent"></div>
 </section>
 
+<!-- PACKAGES PANEL -->
 <section id="packages" class="panel">
-  <h2>Travel packages</h2>
-  <button data-open="packageForm">＋ Add package</button>
+  <div class="topline">
+    <h2>Travel Packages</h2>
+    <button data-open="packageDialog">+ Add Package</button>
+  </div>
   <div id="packageList"></div>
 </section>
 
+<!-- ITINERARIES PANEL -->
+<section id="itineraries" class="panel">
+  <div class="topline">
+    <div>
+      <h2>Itinerary Management</h2>
+      <small>Create separate day-wise tour itineraries.</small>
+    </div>
+    <button id="newItinerary">+ Add Itinerary</button>
+  </div>
+
+  <div id="itineraryList"></div>
+</section>
+
+<!-- LEADS PANEL -->
 <section id="leads" class="panel">
-  <h2>Leads</h2>
-  <button data-open="leadForm">＋ Add lead</button>
+  <div class="topline">
+    <h2>Customer Leads</h2>
+    <button data-open="leadDialog">+ Add Lead</button>
+  </div>
   <div id="leadList"></div>
 </section>
 
+<!-- BOOKINGS PANEL -->
 <section id="bookings" class="panel">
-  <h2>Confirmed bookings</h2>
+  <div class="topline">
+    <h2>Bookings</h2>
+  </div>
   <div id="bookingList"></div>
 </section>
 
+<!-- VENDORS PANEL -->
 <section id="vendors" class="panel">
-  <h2>Hotels & transport</h2>
-  <button data-open="vendorForm">＋ Add contact</button>
+  <div class="topline">
+    <h2>Hotel & Vendor Contacts</h2>
+    <button data-open="vendorDialog">+ Add Vendor</button>
+  </div>
   <div id="vendorList"></div>
 </section>
 
+<!-- FINANCE PANEL -->
 <section id="finance" class="panel">
-  <h2>Payments & expenses</h2>
-  <button data-open="financeForm">＋ Add transaction</button>
+  <h2>Finance Management</h2>
+
   <div class="stats">
-    <div class="card">Received<b id="received">₹0</b></div>
-    <div class="card">Expenses<b id="expenses">₹0</b></div>
-    <div class="card">Net<b id="net">₹0</b></div>
+    <div class="stat">Received<strong id="received">₹0</strong></div>
+    <div class="stat">Expenses<strong id="expenses">₹0</strong></div>
+    <div class="stat">Net<strong id="net">₹0</strong></div>
   </div>
+
+  <button data-open="financeDialog">+ Add Transaction</button>
   <div id="financeList"></div>
 </section>
 
-</div>
+</section>
 </main>
 
-<dialog id="packageForm">
-<form id="packageF">
-  <h3>Add package</h3>
-  <label>Name<input name="name" required></label>
-  <label>Destination<input name="destination"></label>
-  <label>Duration<input name="duration"></label>
-  <label>Price per person ₹<input name="price_per_person" type="number"></label>
-  <label>Itinerary<textarea name="itinerary"></textarea></label>
-  <label>Inclusions<textarea name="inclusions"></textarea></label>
-  <label>Exclusions<textarea name="exclusions"></textarea></label>
-  <button>Save</button>
-  <button type="button" data-close>Cancel</button>
-</form>
+<!-- PACKAGE FORM -->
+<dialog id="packageDialog">
+  <form id="packageF">
+    <h3>Add Travel Package</h3>
+
+    <label>Package Name</label>
+    <input name="name" required>
+
+    <label>Destination</label>
+    <input name="destination">
+
+    <label>Duration</label>
+    <input name="duration" placeholder="7 Nights / 8 Days">
+
+    <label>Price Per Person (₹)</label>
+    <input name="price_per_person" type="number" min="0">
+
+    <label>Package Itinerary</label>
+    <textarea name="itinerary" rows="4"></textarea>
+
+    <button type="submit">Save Package</button>
+    <button type="button" data-close class="secondary">Cancel</button>
+  </form>
 </dialog>
 
-<dialog id="leadForm">
-<form id="leadF">
-  <h3>Add lead</h3>
-  <label>Customer name<input name="name" required></label>
-  <label>Phone / wa.me<input name="phone"></label>
-  <label>Email<input name="email" type="email"></label>
-  <label>Destination<input name="destination"></label>
-  <label>Travel date<input name="travel_date" type="date"></label>
-  <label>Travellers<input name="travellers" type="number" value="2" min="1"></label>
-  <label>Budget ₹<input name="budget" type="number"></label>
-  <label>Notes<textarea name="notes"></textarea></label>
-  <button>Save lead</button>
-  <button type="button" data-close>Cancel</button>
-</form>
+<!-- LEAD FORM -->
+<dialog id="leadDialog">
+  <form id="leadF">
+    <h3>Add Customer Lead</h3>
+
+    <label>Customer Name</label>
+    <input name="name" required>
+
+    <label>Phone Number</label>
+    <input name="phone">
+
+    <label>Email</label>
+    <input name="email" type="email">
+
+    <label>Destination</label>
+    <input name="destination">
+
+    <label>Travel Date</label>
+    <input name="travel_date" type="date">
+
+    <label>Number of Travellers</label>
+    <input name="travellers" type="number" min="1" value="1">
+
+    <label>Budget (₹)</label>
+    <input name="budget" type="number" min="0">
+
+    <label>Notes</label>
+    <textarea name="notes"></textarea>
+
+    <button type="submit">Save Lead</button>
+    <button type="button" data-close class="secondary">Cancel</button>
+  </form>
 </dialog>
 
-<dialog id="vendorForm">
-<form id="vendorF">
-  <h3>Add vendor contact</h3>
-  <label>Name<input name="name" required></label>
-  <label>Category
+<!-- VENDOR FORM -->
+<dialog id="vendorDialog">
+  <form id="vendorF">
+    <h3>Add Hotel / Vendor</h3>
+
+    <label>Name</label>
+    <input name="name" required>
+
+    <label>Category</label>
     <select name="category">
-      <option>Hotel</option>
-      <option>Transport</option>
-      <option>Guide</option>
-      <option>Other</option>
+      <option value="Hotel">Hotel</option>
+      <option value="Homestay">Homestay</option>
+      <option value="Transport">Transport</option>
+      <option value="Restaurant">Restaurant</option>
+      <option value="Other">Other</option>
     </select>
-  </label>
-  <label>Contact person<input name="contact_person"></label>
-  <label>Phone<input name="phone"></label>
-  <label>Location<input name="location"></label>
-  <label>Rate ₹<input name="rates" type="number"></label>
-  <label>Details<textarea name="details"></textarea></label>
-  <button>Save contact</button>
-  <button type="button" data-close>Cancel</button>
-</form>
+
+    <label>Phone</label>
+    <input name="phone">
+
+    <label>Location</label>
+    <input name="location">
+
+    <label>Details</label>
+    <textarea name="details"></textarea>
+
+    <button type="submit">Save Vendor</button>
+    <button type="button" data-close class="secondary">Cancel</button>
+  </form>
 </dialog>
 
-<dialog id="financeForm">
-<form id="financeF">
-  <h3>Record transaction</h3>
-  <label>Type
-    <select name="transaction_type">
-      <option>Payment</option>
-      <option>Expense</option>
+<!-- FINANCE FORM -->
+<dialog id="financeDialog">
+  <form id="financeF">
+    <h3>Add Finance Transaction</h3>
+
+    <label>Transaction Type</label>
+    <select name="transaction_type" required>
+      <option value="Payment">Payment Received</option>
+      <option value="Expense">Expense</option>
     </select>
-  </label>
-  <label>Booking
+
+    <label>Amount (₹)</label>
+    <input name="amount" type="number" min="1" required>
+
+    <label>Date</label>
+    <input name="transaction_date" type="date">
+
+    <label>Payment Method</label>
+    <select name="payment_method">
+      <option value="Cash">Cash</option>
+      <option value="UPI">UPI</option>
+      <option value="Bank Transfer">Bank Transfer</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <label>Category</label>
+    <input name="category" placeholder="Hotel, Transport, Food etc.">
+
+    <label>Link to Booking</label>
     <select name="booking_id" id="bookingSelect">
       <option value="">No linked booking</option>
     </select>
-  </label>
-  <label>Amount ₹<input name="amount" type="number" min="1" required></label>
-  <label>Date<input name="transaction_date" type="date" required></label>
-  <label>Method<input name="payment_method"></label>
-  <label>Category<input name="category"></label>
-  <label>Description<textarea name="description"></textarea></label>
-  <button>Save transaction</button>
-  <button type="button" data-close>Cancel</button>
-</form>
+
+    <label>Description</label>
+    <textarea name="description"></textarea>
+
+    <button type="submit">Save Transaction</button>
+    <button type="button" data-close class="secondary">Cancel</button>
+  </form>
 </dialog>
 
-<footer>
-  Cloud-connected private workspace
-  <button id="refresh">Refresh</button>
-</footer>
+<!-- ITINERARY FORM -->
+<dialog id="itineraryForm">
+  <form id="itineraryF">
+    <h2 id="itineraryDialogTitle">Add Itinerary</h2>
 
-<script src="app.js?v=4" defer></script>
+    <label>Itinerary Title</label>
+    <input id="itineraryTitle" required
+      placeholder="Winter Spiti Valley Tour">
+
+    <label>Destination</label>
+    <input id="itineraryDestination"
+      placeholder="Spiti Valley, Himachal Pradesh">
+
+    <label>Total Days</label>
+    <input id="itineraryDays" type="number" min="1" required>
+
+    <label>Total Nights</label>
+    <input id="itineraryNights" type="number" min="0">
+
+    <label>Price</label>
+    <input id="itineraryPrice"
+      placeholder="₹15,000 per person / On request">
+
+    <label>Cover Image URL</label>
+    <input id="itineraryCover" type="url"
+      placeholder="https://example.com/image.jpg">
+
+    <label>Short Description</label>
+    <textarea id="itinerarySummary" rows="4"
+      placeholder="Describe the tour and its highlights"></textarea>
+
+    <hr>
+
+    <h3>Day-wise Itinerary</h3>
+    <div id="dayEditor"></div>
+
+    <button type="button" id="addItineraryDay">
+      + Add Another Day
+    </button>
+
+    <hr>
+
+    <label>
+      <input id="itineraryPublished" type="checkbox"
+        style="width:auto">
+      Publish this itinerary on the website
+    </label>
+
+    <div style="margin-top:15px">
+      <button type="submit" id="itinerarySave">
+        Save Itinerary
+      </button>
+
+      <button type="button" data-close class="secondary">
+        Cancel
+      </button>
+    </div>
+  </form>
+</dialog>
+
+<script src="app.js?v=6"></script>
 
 </body>
 </html>
