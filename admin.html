@@ -1,1 +1,210 @@
 
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#173c36">
+
+<title>Himalayan Odyssey Expedition – Travel Manager</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<header>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <img src="logo.png"
+    alt="Himalayan Odyssey Expedition"
+    style="width:48px;height:48px;object-fit:contain;border-radius:10px;">
+    <b>Himalayan Odyssey Expedition</b>
+  </div>
+  <button id="logout" hidden>Sign out</button>
+</header>
+
+<main>
+
+<section id="auth" class="card auth">
+  <div style="text-align:center;margin-bottom:15px;">
+    <img src="logo.png"
+    alt="Himalayan Odyssey Expedition Logo"
+    style="width:115px;height:115px;object-fit:contain;">
+  </div>
+
+  <small>PRIVATE ADMIN WORKSPACE</small>
+  <h1>Travel Manager</h1>
+  <p>Sign in to manage your business.</p>
+
+  <label>Email
+    <input id="email" type="email">
+  </label>
+
+  <label>Password
+    <input id="password" type="password">
+  </label>
+
+  <button id="login">Sign in</button>
+  <p id="msg"></p>
+
+  <small>Create your admin user first in Supabase → Authentication → Users → Add user. No public sign-up is provided.</small>
+</section>
+
+<div id="app" hidden>
+
+<section class="hero">
+  <small>BUSINESS CONTROL CENTRE</small>
+  <h1>Manage every trip<br>in one place.</h1>
+</section>
+
+<nav>
+  <button data-tab="dashboard">Overview</button>
+  <button data-tab="packages">Packages</button>
+  <button data-tab="leads">Leads</button>
+  <button data-tab="bookings">Bookings</button>
+  <button data-tab="vendors">Hotels & Transport</button>
+  <button data-tab="finance">Payments & Expenses</button>
+</nav>
+
+<section id="dashboard" class="panel active">
+  <h2>Overview</h2>
+  <div class="stats">
+    <div class="card">Leads<b id="nLeads">0</b></div>
+    <div class="card">Bookings<b id="nBookings">0</b></div>
+    <div class="card">Received<b id="nPaid">₹0</b></div>
+    <div class="card">Pending<b id="nPending">₹0</b></div>
+  </div>
+  <button data-open="leadForm">＋ Add lead</button>
+  <div class="card">
+    <h3>Recent bookings</h3>
+    <div id="recent">No bookings yet.</div>
+  </div>
+</section>
+
+<section id="packages" class="panel">
+  <h2>Travel packages</h2>
+  <button data-open="packageForm">＋ Add package</button>
+  <div id="packageList"></div>
+</section>
+
+<section id="leads" class="panel">
+  <h2>Leads</h2>
+  <button data-open="leadForm">＋ Add lead</button>
+  <div id="leadList"></div>
+</section>
+
+<section id="bookings" class="panel">
+  <h2>Confirmed bookings</h2>
+  <div id="bookingList"></div>
+</section>
+
+<section id="vendors" class="panel">
+  <h2>Hotels & transport</h2>
+  <button data-open="vendorForm">＋ Add contact</button>
+  <div id="vendorList"></div>
+</section>
+
+<section id="finance" class="panel">
+  <h2>Payments & expenses</h2>
+  <button data-open="financeForm">＋ Add transaction</button>
+  <div class="stats">
+    <div class="card">Received<b id="received">₹0</b></div>
+    <div class="card">Expenses<b id="expenses">₹0</b></div>
+    <div class="card">Net<b id="net">₹0</b></div>
+  </div>
+  <div id="financeList"></div>
+</section>
+
+</div>
+</main>
+
+<dialog id="packageForm">
+<form id="packageF">
+  <h3>Add package</h3>
+  <label>Name<input name="name" required></label>
+  <label>Destination<input name="destination"></label>
+  <label>Duration<input name="duration"></label>
+  <label>Price per person ₹<input name="price_per_person" type="number"></label>
+  <label>Itinerary<textarea name="itinerary"></textarea></label>
+  <label>Inclusions<textarea name="inclusions"></textarea></label>
+  <label>Exclusions<textarea name="exclusions"></textarea></label>
+  <button>Save</button>
+  <button type="button" data-close>Cancel</button>
+</form>
+</dialog>
+
+<dialog id="leadForm">
+<form id="leadF">
+  <h3>Add lead</h3>
+  <label>Customer name<input name="name" required></label>
+  <label>Phone / wa.me<input name="phone"></label>
+  <label>Email<input name="email" type="email"></label>
+  <label>Destination<input name="destination"></label>
+  <label>Travel date<input name="travel_date" type="date"></label>
+  <label>Travellers<input name="travellers" type="number" value="2" min="1"></label>
+  <label>Budget ₹<input name="budget" type="number"></label>
+  <label>Notes<textarea name="notes"></textarea></label>
+  <button>Save lead</button>
+  <button type="button" data-close>Cancel</button>
+</form>
+</dialog>
+
+<dialog id="vendorForm">
+<form id="vendorF">
+  <h3>Add vendor contact</h3>
+  <label>Name<input name="name" required></label>
+  <label>Category
+    <select name="category">
+      <option>Hotel</option>
+      <option>Transport</option>
+      <option>Guide</option>
+      <option>Other</option>
+    </select>
+  </label>
+  <label>Contact person<input name="contact_person"></label>
+  <label>Phone<input name="phone"></label>
+  <label>Location<input name="location"></label>
+  <label>Rate ₹<input name="rates" type="number"></label>
+  <label>Details<textarea name="details"></textarea></label>
+  <button>Save contact</button>
+  <button type="button" data-close>Cancel</button>
+</form>
+</dialog>
+
+<dialog id="financeForm">
+<form id="financeF">
+  <h3>Record transaction</h3>
+  <label>Type
+    <select name="transaction_type">
+      <option>Payment</option>
+      <option>Expense</option>
+    </select>
+  </label>
+  <label>Booking
+    <select name="booking_id" id="bookingSelect">
+      <option value="">No linked booking</option>
+    </select>
+  </label>
+  <label>Amount ₹<input name="amount" type="number" min="1" required></label>
+  <label>Date<input name="transaction_date" type="date" required></label>
+  <label>Method<input name="payment_method"></label>
+  <label>Category<input name="category"></label>
+  <label>Description<textarea name="description"></textarea></label>
+  <button>Save transaction</button>
+  <button type="button" data-close>Cancel</button>
+</form>
+</dialog>
+
+<footer>
+  Cloud-connected private workspace
+  <button id="refresh">Refresh</button>
+</footer>
+
+<script src="app.js?v=4" defer></script>
+
+</body>
+</html>
