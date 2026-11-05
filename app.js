@@ -626,7 +626,22 @@ function openEditItinerary(id) {
 
   show("itineraryForm");
 }
+async function uploadItineraryPdf(file, title) {
+  const safeName = String(title || "itinerary")
+    .replace(/[^a-z0-9]+/gi, "-")
+    .slice(0, 50);
+  const path = Date.now() + "-" + safeName + ".pdf";
 
+  const { error } = await db.storage
+    .from("itinerary-pdfs")
+    .upload(path, file, { contentType: "application/pdf" });
+
+  if (error) throw error;
+
+  return db.storage
+    .from("itinerary-pdfs")
+    .getPublicUrl(path).data.publicUrl;
+}
 function bindItineraryForm() {
   if (!$("itineraryF")) return;
 
