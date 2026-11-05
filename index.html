@@ -70,6 +70,131 @@ footer a{color:#e7bd79}
  section.content{padding:48px 6%}
  .section-title h2{font-size:29px}
 }
+  
+/* HIMALAYAN ODYSSEY PREMIUM THEME */
+:root {
+  --forest: #102d27;
+  --gold: #c9a568;
+  --cream: #f5f2e9;
+}
+
+body {
+  background: var(--cream);
+  color: #263b34;
+  font-family: Georgia, serif;
+}
+
+header {
+  background: rgba(12,35,30,.98);
+  border-bottom: 2px solid var(--gold);
+  box-shadow: 0 5px 25px #0003;
+}
+
+nav {
+  font-family: Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  gap: 25px;
+}
+
+nav a { color: #f5f0e5; }
+nav a:hover { color: var(--gold); }
+
+.hero {
+  min-height: 650px;
+  background:
+    linear-gradient(90deg,rgba(5,25,21,.88),rgba(5,25,21,.25)),
+    url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=2000') center/cover;
+}
+
+.hero h1 {
+  font-family: Georgia, serif;
+  font-weight: normal;
+  text-shadow: 0 3px 15px #0006;
+}
+
+.hero small,
+.cta small { color: #e8d2a7; }
+
+.btn {
+  background: var(--gold);
+  color: #102d27;
+  border: 1px solid var(--gold);
+  border-radius: 3px;
+  letter-spacing: .7px;
+}
+
+.btn:hover { background: #e8d2a7; }
+
+section.content { padding: 80px 7%; }
+
+.section-title h2 {
+  color: var(--forest);
+  font-family: Georgia, serif;
+  font-weight: normal;
+}
+
+.section-title small { color: #a47d43; }
+
+.section-title h2:after {
+  content: "";
+  display: block;
+  width: 65px;
+  height: 2px;
+  background: var(--gold);
+  margin: 16px auto;
+}
+
+.intro { line-height: 1.9; }
+
+.card {
+  border: 1px solid #e8dfce;
+  border-radius: 5px;
+  box-shadow: 0 8px 25px #102d2712;
+  transition: .3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px #102d2725;
+}
+
+.card h3 { color: var(--forest); }
+.price { color: #a47d43; }
+
+.info {
+  background: #e9e9dd;
+}
+
+.info-box {
+  border-bottom: 3px solid var(--gold);
+}
+
+#itineraryList .card > div:first-child {
+  background: linear-gradient(135deg,#102d27,#315c4b) !important;
+  border-bottom: 3px solid var(--gold);
+}
+
+.cta {
+  background:
+    linear-gradient(#102d27e8,#102d27ed),
+    url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600') center/cover;
+  border-top: 3px solid var(--gold);
+}
+
+footer {
+  background: #091f1b;
+  border-top: 1px solid var(--gold);
+}
+
+footer b, footer a { color: #e8d2a7; }
+
+@media(max-width:650px) {
+  .hero { min-height: 500px; }
+  nav { gap: 12px; font-size: 11px; }
+  section.content { padding: 55px 6%; }
+}
+
 </style>
 </head>
 
