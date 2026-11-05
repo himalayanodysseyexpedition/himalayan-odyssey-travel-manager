@@ -16,46 +16,28 @@
 body{margin:0;font-family:Arial,sans-serif;background:#f5f4ef;color:#18332e}
 a{text-decoration:none;color:inherit}
 header{
-  background:#000;
-  color:white;
-  padding:18px 6%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:15px;
-  position:sticky;
-  top:0;
-  z-index:5;
+  background:#000;color:white;padding:18px 6%;
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:15px;position:sticky;top:0;z-index:5
 }
-.brand{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:100%;
-}
-
-.brand img{
-  display:block;
-  width:260px;
-  max-width:85%;
-  height:auto;
-  object-fit:contain;
-}
-.brand img{
-  width:190px;
-  height:auto;
-  max-height:65px;
-  object-fit:contain;
-}
+.brand{display:flex;align-items:center;justify-content:center;width:100%}
+.brand img{display:block;width:190px;max-width:85%;height:auto;max-height:65px;object-fit:contain}
 nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}
 nav a:hover{color:#e7bd79}
-.hero{min-height:520px;padding:100px 8%;display:flex;align-items:center;color:white;background:linear-gradient(90deg,rgba(8,30,27,.88),rgba(8,30,27,.25)),url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600') center/cover}
+.hero{
+  min-height:520px;padding:100px 8%;display:flex;align-items:center;
+  color:white;background:linear-gradient(90deg,rgba(8,30,27,.88),rgba(8,30,27,.25)),url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600') center/cover
+}
 .hero-content{max-width:650px}
 .hero small{letter-spacing:4px;color:#e9c58d}
 h1{font-size:clamp(38px,7vw,68px);line-height:1.08;margin:18px 0}
 .hero p{font-size:18px;line-height:1.7}
-.btn{display:inline-block;background:#d8a85f;color:#172e28;padding:14px 22px;border-radius:5px;font-weight:bold;margin:8px 5px 8px 0}
+.btn{
+  display:inline-block;background:#d8a85f;color:#172e28;
+  padding:13px 20px;border-radius:5px;font-weight:bold;
+  margin:8px 5px 8px 0;border:0;cursor:pointer;font-size:14px
+}
+.btn:hover{background:#edc27f}
 .btn.outline{background:transparent;border:1px solid white;color:white}
 section.content{padding:65px 7%}
 .section-title{text-align:center;margin-bottom:35px}
@@ -77,12 +59,16 @@ section.content{padding:65px 7%}
 .cta p{line-height:1.7}
 footer{background:#102b27;color:#d9e3dc;padding:30px 7%;text-align:center;line-height:2}
 footer a{color:#e7bd79}
-#packageMessage{color:#66736e;text-align:center;padding:20px}
+#packageMessage,#itineraryMessage{color:#66736e;text-align:center;padding:20px}
+.pdf-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.pdf-actions .btn{margin:0}
+.itinerary-meta{font-size:14px;color:#8a704d;font-weight:bold}
 @media(max-width:650px){
- header{align-items:flex-start;flex-direction:column}
- nav{gap:12px}
+ header{align-items:center;flex-direction:column}
+ nav{gap:12px;justify-content:center}
  .hero{min-height:460px;padding:65px 7%}
  section.content{padding:48px 6%}
+ .section-title h2{font-size:29px}
 }
 </style>
 </head>
@@ -91,8 +77,8 @@ footer a{color:#e7bd79}
 
 <header>
   <div class="brand">
-  <img src="logo.png" alt="Himalayan Odyssey Expedition">
-</div>
+    <img src="logo.png" alt="Himalayan Odyssey Expedition">
+  </div>
   <nav>
     <a href="#home">Home</a>
     <a href="#packages">Packages</a>
@@ -139,15 +125,13 @@ footer a{color:#e7bd79}
     <h2>Tour Itineraries</h2>
   </div>
   <p class="intro">
-    Explore the itinerary and travel details of our available packages.
-    Contact us to receive a detailed day-wise travel plan.
+    Explore our detailed tour brochures, including travel routes,
+    sightseeing information and trip details. View or download an itinerary
+    to plan your Himalayan journey.
   </p>
+
   <div id="itineraryList" class="cards">
-    <div class="card card-body">
-      <h3>Plan your Himalayan journey</h3>
-      <p>Ask us for detailed day-wise itineraries, sightseeing stops and travel information.</p>
-      <a class="btn" href="https://wa.me/919816929669?text=Please%20share%20your%20tour%20itineraries">Request Itinerary</a>
-    </div>
+    <p id="itineraryMessage">Loading available itineraries...</p>
   </div>
 </section>
 
@@ -225,9 +209,9 @@ function rupees(value) {
   return "₹" + Number(value || 0).toLocaleString("en-IN");
 }
 
+// LOAD PUBLIC PACKAGES
 async function loadPackages() {
   const list = document.getElementById("packageList");
-  const itineraryList = document.getElementById("itineraryList");
 
   try {
     const { data, error } = await db
@@ -275,6 +259,94 @@ async function loadPackages() {
   }
 }
 
+// LOAD PUBLISHED PDF ITINERARIES
+async function loadItineraries() {
+  const list = document.getElementById("itineraryList");
+
+  try {
+    const { data, error } = await db
+      .from("itineraries")
+      .select("id,title,destination,duration_days,duration_nights,price,summary,pdf_url,published,created_at")
+      .eq("published", true)
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+
+    if (!data || data.length === 0) {
+      list.innerHTML = `
+        <div class="card card-body">
+          <h3>Plan your Himalayan journey</h3>
+          <p>Our detailed tour brochures will appear here. Contact us for itinerary details.</p>
+          <a class="btn" href="https://wa.me/919816929669?text=Please%20share%20your%20tour%20itineraries">Request Itinerary</a>
+        </div>`;
+      return;
+    }
+
+    const available = data.filter(item => item.pdf_url);
+
+    if (!available.length) {
+      list.innerHTML = `
+        <div class="card card-body">
+          <h3>Itineraries Coming Soon</h3>
+          <p>Our detailed PDF brochures are being prepared. Contact us for tour information.</p>
+          <a class="btn" href="https://wa.me/919816929669?text=Please%20share%20your%20tour%20itineraries">Request Itinerary</a>
+        </div>`;
+      return;
+    }
+
+    list.innerHTML = available.map(item => {
+      const duration = [
+        item.duration_days ? item.duration_days + " Days" : "",
+        item.duration_nights ? item.duration_nights + " Nights" : ""
+      ].filter(Boolean).join(" / ");
+
+      const pdfUrl = item.pdf_url;
+      const downloadUrl = pdfUrl +
+        (pdfUrl.includes("?") ? "&" : "?") +
+        "download=" + encodeURIComponent((item.title || "itinerary") + ".pdf");
+
+      const message = encodeURIComponent(
+        "Hello, I am interested in the " +
+        (item.title || "tour itinerary") +
+        ". Please share more details."
+      );
+
+      return `
+        <article class="card">
+          <div style="height:145px;background:linear-gradient(135deg,#173c36,#315e50);display:grid;place-items:center;color:#e9c58d;text-align:center;padding:20px">
+            <div>
+              <div style="font-size:38px">📄</div>
+              <b>HIMALAYAN ODYSSEY EXPEDITION</b>
+              <div style="font-size:13px;margin-top:6px">TOUR BROCHURE</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3>${safe(item.title)}</h3>
+            <p>${safe(item.destination || "Himalayan Tour")}</p>
+            ${duration ? `<p class="itinerary-meta">${safe(duration)}</p>` : ""}
+            ${item.price ? `<div class="price">${rupees(item.price)} <small>per person</small></div>` : ""}
+            ${item.summary ? `<p>${safe(item.summary)}</p>` : ""}
+            <div class="pdf-actions">
+              <a class="btn" href="${safe(pdfUrl)}" target="_blank" rel="noopener">View PDF</a>
+              <a class="btn" href="${safe(downloadUrl)}">Download PDF</a>
+            </div>
+            <a class="btn" href="https://wa.me/919816929669?text=${message}">Enquire on WhatsApp</a>
+          </div>
+        </article>`;
+    }).join("");
+
+  } catch (error) {
+    list.innerHTML = `
+      <div class="card card-body">
+        <h3>Itineraries are temporarily unavailable</h3>
+        <p>Please contact us on WhatsApp for our latest tour brochures.</p>
+        <a class="btn" href="https://wa.me/919816929669?text=Please%20share%20your%20tour%20itineraries">Request Itinerary</a>
+      </div>`;
+    console.error("Itinerary loading error:", error);
+  }
+}
+
+// EXISTING PACKAGE ITINERARY VIEW
 window.showItinerary = function(id) {
   const p = (window.publicPackages || []).find(x => String(x.id) === String(id));
   if (!p) return;
@@ -302,7 +374,9 @@ window.showItinerary = function(id) {
   w.document.close();
 };
 
+// LOAD BOTH SECTIONS
 loadPackages();
+loadItineraries();
 </script>
 
 </body>
