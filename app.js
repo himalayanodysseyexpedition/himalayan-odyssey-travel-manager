@@ -1076,6 +1076,10 @@ async function initialize() {
     bindPageButtons();
     bindForms();
     bindActions();
+     $("newItinerary")?.addEventListener("click", () => {
+  resetItineraryForm();
+  show("itineraryForm");
+});
 
     $("login")?.addEventListener("click", login);
     $("logout")?.addEventListener("click", logout);
