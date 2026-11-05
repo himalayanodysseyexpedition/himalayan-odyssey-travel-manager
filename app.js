@@ -1,14 +1,8 @@
-
 "use strict";
 
-/* =========================================
-   HIMALAYAN ODYSSEY EXPEDITION
-   ADMIN DASHBOARD
-========================================= */
+/* HIMALAYAN ODYSSEY EXPEDITION - ADMIN DASHBOARD */
 
 const SUPABASE_URL = "https://ynkoiuyjevclypumnyes.supabase.co";
-
-// IMPORTANT: Replace this with your existing Supabase publishable key.
 const SUPABASE_KEY = "sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-";
 
 let db;
@@ -17,16 +11,11 @@ let editingItineraryId = null;
 
 const $ = id => document.getElementById(id);
 
-const cash = n =>
-  "₹" + (Number(n) || 0).toLocaleString("en-IN");
+const cash = n => "₹" + (Number(n) || 0).toLocaleString("en-IN");
 
 const esc = s =>
   String(s ?? "").replace(/[&<>"']/g, c => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
   }[c]));
 
 function message(text) {
@@ -37,9 +26,7 @@ function show(id) {
   $(id)?.showModal();
 }
 
-/* =========================================
-   LOGIN / LOGOUT
-========================================= */
+/* LOGIN / LOGOUT */
 
 async function login() {
   const email = $("email")?.value.trim();
@@ -52,23 +39,13 @@ async function login() {
 
   const button = $("login");
   if (button) button.disabled = true;
-
   message("Signing in...");
 
   try {
-    const { data, error } = await db.auth.signInWithPassword({
-      email,
-      password
-    });
-
+    const { data, error } = await db.auth.signInWithPassword({ email, password });
     if (error) throw error;
-
-    if (!data.user) {
-      throw new Error("Login could not be completed.");
-    }
-
+    if (!data.user) throw new Error("Login could not be completed.");
     await start();
-
   } catch (error) {
     message("Login failed: " + error.message);
   } finally {
@@ -80,12 +57,9 @@ async function logout() {
   try {
     const { error } = await db.auth.signOut();
     if (error) throw error;
-
     if ($("app")) $("app").hidden = true;
     if ($("auth")) $("auth").hidden = false;
-
     message("You have been logged out.");
-
   } catch (error) {
     message("Logout error: " + error.message);
   }
@@ -94,67 +68,47 @@ async function logout() {
 async function start() {
   try {
     message("Loading dashboard...");
-
     if ($("auth")) $("auth").hidden = true;
     if ($("app")) $("app").hidden = false;
-
     await load();
-
     message("Dashboard ready.");
-
   } catch (error) {
     console.error(error);
     message("Dashboard error: " + error.message);
-
     if ($("app")) $("app").hidden = true;
     if ($("auth")) $("auth").hidden = false;
   }
 }
 
-/* =========================================
-   DATABASE
-========================================= */
+/* DATABASE */
 
 async function rows(table) {
   const { data, error } = await db
     .from(table)
     .select("*")
     .order("created_at", { ascending: false });
-
   if (error) throw error;
   return data || [];
 }
 
 async function load() {
   const tables = [
-    "packages",
-    "customers",
-    "leads",
-    "bookings",
-    "vendors",
-    "transactions",
-    "itineraries",
-    "itinerary_days"
+    "packages", "customers", "leads", "bookings",
+    "vendors", "transactions", "itineraries", "itinerary_days"
   ];
-
   for (const table of tables) {
     D[table] = await rows(table);
   }
-
   render();
 }
 
 async function save(table, obj) {
   const { error } = await db.from(table).insert(obj);
-
   if (error) throw error;
-
   await load();
 }
 
-/* =========================================
-   COMMON FUNCTIONS
-========================================= */
+/* COMMON FUNCTIONS */
 
 function card(title, lines, buttons = "") {
   return `
@@ -169,19 +123,11 @@ function card(title, lines, buttons = "") {
 }
 
 function del(table, id) {
-  return `
-    <button class="danger"
-      data-del="${table}"
-      data-id="${esc(id)}">
-      Delete
-    </button>
-  `;
+  return `<button class="danger" data-del="${table}" data-id="${esc(id)}">Delete</button>`;
 }
 
 function getBooking(id) {
-  return (D.bookings || []).find(
-    x => String(x.id) === String(id)
-  );
+  return (D.bookings || []).find(x => String(x.id) === String(id));
 }
 
 function getCustomer(booking) {
@@ -190,20 +136,12 @@ function getCustomer(booking) {
   ) || {};
 }
 
-/* =========================================
-   WHATSAPP
-========================================= */
+/* WHATSAPP */
 
 function openCustomerWhatsApp(phone, text) {
   let number = String(phone || "").replace(/\D/g, "");
-
-  if (number.startsWith("0")) {
-    number = number.slice(1);
-  }
-
-  if (number.length === 10) {
-    number = "91" + number;
-  }
+  if (number.startsWith("0")) number = number.slice(1);
+  if (number.length === 10) number = "91" + number;
 
   if (number.length < 11 || number.length > 13) {
     alert("Please check the mobile number.");
@@ -211,15 +149,12 @@ function openCustomerWhatsApp(phone, text) {
   }
 
   window.open(
-    "https://wa.me/" + number +
-    "?text=" + encodeURIComponent(text),
+    "https://wa.me/" + number + "?text=" + encodeURIComponent(text),
     "_blank"
   );
 }
 
-/* =========================================
-   PDF GENERATION
-========================================= */
+/* PDF GENERATION */
 
 function makePDF(title, content) {
   const win = window.open("", "_blank");
@@ -235,27 +170,11 @@ function makePDF(title, content) {
     <head>
       <title>${esc(title)}</title>
       <style>
-        body {
-          font-family: Arial, sans-serif;
-          margin: 30px;
-          color: #173c36;
-        }
+        body { font-family: Arial, sans-serif; margin: 30px; color: #173c36; }
         h1 { font-size: 22px; }
-        .box {
-          border: 1px solid #ccc;
-          padding: 15px;
-          margin: 20px 0;
-          line-height: 1.8;
-        }
-        button {
-          padding: 12px;
-          background: #173c36;
-          color: white;
-          border: 0;
-        }
-        @media print {
-          button { display: none; }
-        }
+        .box { border: 1px solid #ccc; padding: 15px; margin: 20px 0; line-height: 1.8; }
+        button { padding: 12px; background: #173c36; color: white; border: 0; }
+        @media print { button { display: none; } }
       </style>
     </head>
     <body>
@@ -300,7 +219,6 @@ function paymentPDF(id) {
   const transaction = (D.transactions || []).find(
     x => String(x.id) === String(id)
   );
-
   if (!transaction) return;
 
   const booking = getBooking(transaction.booking_id);
@@ -319,9 +237,7 @@ function paymentPDF(id) {
   `);
 }
 
-/* =========================================
-   DASHBOARD RENDERING
-========================================= */
+/* DASHBOARD RENDERING */
 
 function setText(id, value) {
   if ($(id)) $(id).textContent = value;
@@ -337,13 +253,11 @@ function render() {
   );
 
   const leads = (D.leads || []).map(x => ({
-    ...x,
-    c: customers[x.customer_id] || {}
+    ...x, c: customers[x.customer_id] || {}
   }));
 
   const bookings = (D.bookings || []).map(x => ({
-    ...x,
-    c: customers[x.customer_id] || {}
+    ...x, c: customers[x.customer_id] || {}
   }));
 
   const transactions = D.transactions || [];
@@ -358,9 +272,7 @@ function render() {
 
   const pending = (D.bookings || []).reduce(
     (s, x) => s + Math.max(
-      0,
-      Number(x.total_amount || 0) -
-      Number(x.amount_paid || 0)
+      0, Number(x.total_amount || 0) - Number(x.amount_paid || 0)
     ),
     0
   );
@@ -369,12 +281,9 @@ function render() {
   setText("nBookings", bookings.length);
   setText("nPaid", cash(income));
   setText("nPending", cash(pending));
-
   setText("received", cash(income));
   setText("expenses", cash(expenses));
   setText("net", cash(income - expenses));
-
-  /* Packages */
 
   setHTML("packageList",
     (D.packages || []).map(x =>
@@ -387,8 +296,6 @@ function render() {
     ).join("") || "No packages yet."
   );
 
-  /* Leads */
-
   setHTML("leadList",
     leads.map(x =>
       card(x.c.name || "Lead", [
@@ -398,16 +305,12 @@ function render() {
         "Budget " + cash(x.budget)
       ],
       `
-        ${x.c.phone
-          ? `<button data-wa="${esc(x.c.phone)}">WhatsApp</button>`
-          : ""}
+        ${x.c.phone ? `<button data-wa="${esc(x.c.phone)}">WhatsApp</button>` : ""}
         <button data-confirm="${esc(x.id)}">Confirm</button>
         ${del("leads", x.id)}
       `)
     ).join("") || "No leads yet."
   );
-
-  /* Bookings */
 
   setHTML("bookingList",
     bookings.map(x =>
@@ -415,18 +318,13 @@ function render() {
         esc(x.destination || ""),
         esc(x.start_date || ""),
         `Total ${cash(x.total_amount)} • Paid ${cash(x.amount_paid)} • Balance ${cash(
-          Number(x.total_amount || 0) -
-          Number(x.amount_paid || 0)
+          Number(x.total_amount || 0) - Number(x.amount_paid || 0)
         )}`
       ],
       `
         ${x.c.phone ? `
-          <button data-confirm-wa="${esc(x.id)}">
-            Booking WhatsApp
-          </button>
-          <button data-remind="${esc(x.id)}">
-            Payment reminder
-          </button>
+          <button data-confirm-wa="${esc(x.id)}">Booking WhatsApp</button>
+          <button data-remind="${esc(x.id)}">Payment reminder</button>
         ` : ""}
         <button data-invoice="${esc(x.id)}">Invoice PDF</button>
         <button data-pay="${esc(x.id)}">Add payment</button>
@@ -434,8 +332,6 @@ function render() {
       `)
     ).join("") || "No bookings yet."
   );
-
-  /* Recent bookings */
 
   setHTML("recent",
     bookings.slice(0, 4).map(x =>
@@ -446,8 +342,6 @@ function render() {
     ).join("") || "No bookings yet."
   );
 
-  /* Vendors */
-
   setHTML("vendorList",
     (D.vendors || []).map(x =>
       card(x.name, [
@@ -457,15 +351,11 @@ function render() {
         esc(x.details || "")
       ],
       `
-        ${x.phone
-          ? `<a href="tel:${encodeURIComponent(x.phone)}">Call</a>`
-          : ""}
+        ${x.phone ? `<a href="tel:${encodeURIComponent(x.phone)}">Call</a>` : ""}
         ${del("vendors", x.id)}
       `)
     ).join("") || "No vendor contacts yet."
   );
-
-  /* Finance */
 
   setHTML("financeList",
     transactions.map(x =>
@@ -484,23 +374,17 @@ function render() {
     ).join("") || "No transactions yet."
   );
 
-  /* Booking selector */
-
   setHTML("bookingSelect",
     '<option value="">No linked booking</option>' +
     bookings.map(x =>
-      `<option value="${esc(x.id)}">
-        ${esc(x.c.name || "Customer")} — ${esc(x.destination || "Trip")}
-      </option>`
+      `<option value="${esc(x.id)}">${esc(x.c.name || "Customer")} — ${esc(x.destination || "Trip")}</option>`
     ).join("")
   );
 
   renderItineraries();
 }
 
-/* =========================================
-   ITINERARIES
-========================================= */
+/* ITINERARIES */
 
 function renderItineraries() {
   const el = $("itineraryList");
@@ -515,7 +399,7 @@ function renderItineraries() {
       `${esc(it.destination || "")} • ${esc(it.duration_days || "—")} days / ${esc(it.duration_nights ?? "—")} nights`,
       `Price: ${esc(it.price || "On request")} • ${it.published ? "Published" : "Draft"}`,
       esc(it.summary || ""),
-      `${days.length} day(s) added`
+      `${days.length} day(s) added • ${it.pdf_url ? "PDF attached ✓" : "No PDF"}`
     ],
     `
       <button data-edit-itinerary="${esc(it.id)}">Edit</button>
@@ -531,7 +415,6 @@ function addDayRow(day = {}) {
 
   const number = wrap.querySelectorAll(".day-entry").length + 1;
   const row = document.createElement("div");
-
   row.className = "day-entry card";
 
   row.innerHTML = `
@@ -558,9 +441,7 @@ function addDayRow(day = {}) {
         placeholder="e.g. Narkanda">
     </label>
 
-    <button type="button" class="danger remove-day">
-      Remove this day
-    </button>
+    <button type="button" class="danger remove-day">Remove this day</button>
   `;
 
   row.querySelector(".remove-day").addEventListener("click", () => {
@@ -580,12 +461,10 @@ function renumberDayLabels() {
 
 function resetItineraryForm() {
   editingItineraryId = null;
-
   $("itineraryF")?.reset();
+  setHTML("itineraryPdfCurrent", "");
 
-  if ($("dayEditor")) {
-    $("dayEditor").innerHTML = "";
-  }
+  if ($("dayEditor")) $("dayEditor").innerHTML = "";
 
   setText("itineraryDialogTitle", "Add itinerary");
   setText("itinerarySave", "Save itinerary");
@@ -594,10 +473,7 @@ function resetItineraryForm() {
 }
 
 function openEditItinerary(id) {
-  const it = (D.itineraries || []).find(
-    x => String(x.id) === String(id)
-  );
-
+  const it = (D.itineraries || []).find(x => String(x.id) === String(id));
   if (!it) return;
 
   editingItineraryId = it.id;
@@ -614,6 +490,10 @@ function openEditItinerary(id) {
   $("itinerarySummary").value = it.summary || "";
   $("itineraryPublished").checked = !!it.published;
 
+  setHTML("itineraryPdfCurrent", it.pdf_url
+    ? `✓ PDF attached — <a href="${esc(it.pdf_url)}" target="_blank" rel="noopener">view</a>. Choose a new file to replace it.`
+    : "");
+
   $("dayEditor").innerHTML = "";
 
   const days = (D.itinerary_days || [])
@@ -621,11 +501,11 @@ function openEditItinerary(id) {
     .sort((a, b) => Number(a.day_number) - Number(b.day_number));
 
   days.forEach(addDayRow);
-
   if (!days.length) addDayRow();
 
   show("itineraryForm");
 }
+
 async function uploadItineraryPdf(file, title) {
   const safeName = String(title || "itinerary")
     .replace(/[^a-z0-9]+/gi, "-")
@@ -638,31 +518,27 @@ async function uploadItineraryPdf(file, title) {
 
   if (error) throw error;
 
-  return db.storage
-    .from("itinerary-pdfs")
-    .getPublicUrl(path).data.publicUrl;
+  return db.storage.from("itinerary-pdfs").getPublicUrl(path).data.publicUrl;
 }
+
 function bindItineraryForm() {
   if (!$("itineraryF")) return;
 
-  $("addItineraryDay")?.addEventListener("click", () => {
-    addDayRow();
-  });
+  $("addItineraryDay")?.addEventListener("click", () => addDayRow());
 
   $("itineraryF").addEventListener("submit", async e => {
     e.preventDefault();
 
     try {
-      const { data: userData, error: userError } =
-        await db.auth.getUser();
+      const { data: userData, error: userError } = await db.auth.getUser();
 
       if (userError || !userData.user) {
         throw new Error(userError?.message || "Please sign in again.");
       }
 
       const itinerary = {
-  owner_id: userData.user.id,
-  title: $("itineraryTitle").value.trim(),
+        owner_id: userData.user.id,
+        title: $("itineraryTitle").value.trim(),
         destination: $("itineraryDestination").value.trim() || null,
         duration_days: $("itineraryDays").value
           ? Number($("itineraryDays").value) : null,
@@ -673,6 +549,16 @@ function bindItineraryForm() {
         summary: $("itinerarySummary").value.trim() || null,
         published: $("itineraryPublished").checked
       };
+
+      const pdfFile = $("itineraryPdf").files[0];
+      if (pdfFile) {
+        if (pdfFile.size > 10 * 1024 * 1024) {
+          throw new Error("PDF must be under 10 MB.");
+        }
+        message("Uploading PDF...");
+        itinerary.pdf_url =
+          await uploadItineraryPdf(pdfFile, itinerary.title);
+      }
 
       const days = [
         ...document.querySelectorAll("#dayEditor .day-entry")
@@ -694,13 +580,11 @@ function bindItineraryForm() {
         let result = await db.from("itineraries")
           .update(itinerary)
           .eq("id", id);
-
         if (result.error) throw result.error;
 
         result = await db.from("itinerary_days")
           .delete()
           .eq("itinerary_id", id);
-
         if (result.error) throw result.error;
 
       } else {
@@ -708,26 +592,21 @@ function bindItineraryForm() {
           .insert(itinerary)
           .select("id")
           .single();
-
         if (result.error) throw result.error;
 
         id = result.data.id;
       }
 
       const result = await db.from("itinerary_days").insert(
-        days.map(d => ({
-          ...d,
-          itinerary_id: id
-        }))
+        days.map(d => ({ ...d, itinerary_id: id }))
       );
-
       if (result.error) throw result.error;
 
       $("itineraryForm").close();
       resetItineraryForm();
-
       await load();
 
+      message("Itinerary saved.");
       alert("Itinerary saved successfully.");
 
     } catch (error) {
@@ -736,15 +615,11 @@ function bindItineraryForm() {
   });
 }
 
-/* =========================================
-   PAGE BUTTONS
-========================================= */
+/* PAGE BUTTONS */
 
 function bindPageButtons() {
   document.querySelectorAll("[data-open]").forEach(button => {
-    button.addEventListener("click", () => {
-      show(button.dataset.open);
-    });
+    button.addEventListener("click", () => show(button.dataset.open));
   });
 
   document.querySelectorAll("[data-close]").forEach(button => {
@@ -756,12 +631,8 @@ function bindPageButtons() {
   document.querySelectorAll("nav button").forEach(button => {
     button.addEventListener("click", () => {
       document.querySelectorAll(".panel").forEach(panel => {
-        panel.classList.toggle(
-          "active",
-          panel.id === button.dataset.tab
-        );
+        panel.classList.toggle("active", panel.id === button.dataset.tab);
       });
-
       document.querySelectorAll("nav button").forEach(navButton => {
         navButton.classList.toggle("active", navButton === button);
       });
@@ -769,9 +640,7 @@ function bindPageButtons() {
   });
 }
 
-/* =========================================
-   FORMS
-========================================= */
+/* FORMS */
 
 function bindForm(id, table, transform) {
   const form = $(id);
@@ -788,10 +657,8 @@ function bindForm(id, table, transform) {
 
     try {
       await save(table, transform ? transform(obj) : obj);
-
       form.closest("dialog")?.close();
       form.reset();
-
     } catch (error) {
       alert("Error: " + error.message);
     }
@@ -852,7 +719,6 @@ function bindForms() {
 
         form.closest("dialog")?.close();
         form.reset();
-
         await load();
 
       } catch (error) {
@@ -864,9 +730,7 @@ function bindForms() {
   bindItineraryForm();
 }
 
-/* =========================================
-   DASHBOARD ACTIONS
-========================================= */
+/* DASHBOARD ACTIONS */
 
 function bindActions() {
   document.addEventListener("click", async e => {
@@ -874,33 +738,28 @@ function bindActions() {
     if (!(target instanceof Element)) return;
 
     let button = target.closest("[data-invoice]");
-
     if (button) {
       bookingPDF(button.dataset.invoice);
       return;
     }
 
     button = target.closest("[data-receipt]");
-
     if (button) {
       paymentPDF(button.dataset.receipt);
       return;
     }
 
     button = target.closest("[data-edit-itinerary]");
-
     if (button) {
       openEditItinerary(button.dataset.editItinerary);
       return;
     }
 
     button = target.closest("[data-itinerary-wa]");
-
     if (button) {
       const it = (D.itineraries || []).find(
         x => String(x.id) === button.dataset.itineraryWa
       );
-
       if (it) {
         openCustomerWhatsApp(
           "9816929669",
@@ -911,18 +770,15 @@ function bindActions() {
     }
 
     button = target.closest("[data-confirm-wa], [data-remind]");
-
     if (button) {
       const id = button.dataset.confirmWa || button.dataset.remind;
       const booking = getBooking(id);
-
       if (!booking) return;
 
       const customer = getCustomer(booking);
       const total = Number(booking.total_amount || 0);
       const paid = Number(booking.amount_paid || 0);
       const balance = Math.max(0, total - paid);
-
       const reminder = button.dataset.remind !== undefined;
 
       const text = reminder
@@ -934,7 +790,6 @@ function bindActions() {
     }
 
     button = target.closest("[data-del]");
-
     if (button) {
       if (!confirm("Delete this record?")) return;
 
@@ -943,20 +798,15 @@ function bindActions() {
           .from(button.dataset.del)
           .delete()
           .eq("id", button.dataset.id);
-
         if (error) throw error;
-
         await load();
-
       } catch (error) {
         alert("Delete error: " + error.message);
       }
-
       return;
     }
 
     button = target.closest("[data-wa]");
-
     if (button) {
       openCustomerWhatsApp(
         button.dataset.wa,
@@ -966,23 +816,16 @@ function bindActions() {
     }
 
     button = target.closest("[data-confirm]");
-
     if (button) {
       const lead = (D.leads || []).find(
         x => String(x.id) === button.dataset.confirm
       );
-
       if (!lead) return;
 
-      const total = prompt(
-        "Total booking amount ₹",
-        lead.budget || "0"
-      );
-
+      const total = prompt("Total booking amount ₹", lead.budget || "0");
       if (total === null) return;
 
       const paid = prompt("Advance received ₹", "0");
-
       if (paid === null) return;
 
       try {
@@ -995,36 +838,29 @@ function bindActions() {
           amount_paid: Number(paid) || 0,
           notes: lead.notes
         });
-
         if (error) throw error;
 
         const { error: deleteError } = await db
           .from("leads")
           .delete()
           .eq("id", lead.id);
-
         if (deleteError) throw deleteError;
 
         await load();
-
       } catch (error) {
         alert("Booking error: " + error.message);
       }
-
       return;
     }
 
     button = target.closest("[data-pay]");
-
     if (button) {
       const booking = (D.bookings || []).find(
         x => String(x.id) === button.dataset.pay
       );
-
       if (!booking) return;
 
       const amount = prompt("Payment received ₹");
-
       if (!amount || Number(amount) <= 0) return;
 
       try {
@@ -1034,68 +870,50 @@ function bindActions() {
           amount: Number(amount),
           description: "Booking payment"
         });
-
         if (error) throw error;
 
-        const newPaid =
-          Number(booking.amount_paid || 0) + Number(amount);
+        const newPaid = Number(booking.amount_paid || 0) + Number(amount);
 
         const { error: updateError } = await db
           .from("bookings")
           .update({ amount_paid: newPaid })
           .eq("id", booking.id);
-
         if (updateError) throw updateError;
 
         await load();
-
         alert("Payment recorded successfully.");
-
       } catch (error) {
         alert("Payment error: " + error.message);
       }
-
       return;
     }
   });
 }
 
-/* =========================================
-   STARTUP
-========================================= */
+/* STARTUP */
 
 async function initialize() {
   try {
-    if (
-      !window.supabase ||
-      !window.supabase.createClient
-    ) {
+    if (!window.supabase || !window.supabase.createClient) {
       throw new Error(
         "Supabase library did not load. Check your internet connection."
       );
     }
 
-    if (
-      !SUPABASE_KEY ||
-      SUPABASE_KEY.includes("PASTE_YOUR")
-    ) {
-      throw new Error(
-        "Please add your actual Supabase publishable key in app.js."
-      );
+    if (!SUPABASE_KEY || SUPABASE_KEY.includes("PASTE_YOUR")) {
+      throw new Error("Please add your actual Supabase publishable key in app.js.");
     }
 
-    db = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
+    db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     bindPageButtons();
     bindForms();
     bindActions();
-     $("newItinerary")?.addEventListener("click", () => {
-  resetItineraryForm();
-  show("itineraryForm");
-});
+
+    $("newItinerary")?.addEventListener("click", () => {
+      resetItineraryForm();
+      show("itineraryForm");
+    });
 
     $("login")?.addEventListener("click", login);
     $("logout")?.addEventListener("click", logout);
@@ -1116,12 +934,9 @@ async function initialize() {
     message("Ready. Enter your admin login details.");
 
     const { data, error } = await db.auth.getSession();
-
     if (error) throw error;
 
-    if (data.session) {
-      await start();
-    }
+    if (data.session) await start();
 
   } catch (error) {
     console.error("Startup error:", error);
