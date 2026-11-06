@@ -686,6 +686,126 @@ footer p{
   margin-top:20px;
 }
 
+/* PREMIUM HIMALAYAN DESTINATION GALLERY */
+
+.destination-gallery{
+  background:#f6f3eb;
+}
+
+.destination-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
+  max-width:1250px;
+  margin:auto;
+}
+
+.destination-card{
+  position:relative;
+  display:block;
+  height:370px;
+  overflow:hidden;
+  border-radius:4px;
+  background:#173c36;
+  color:white;
+  box-shadow:0 10px 30px rgba(16,45,39,.13);
+}
+
+.destination-card img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  transition:transform .65s ease;
+}
+
+.destination-card:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to top,
+    rgba(5,22,18,.93),
+    rgba(5,22,18,.08) 75%
+  );
+}
+
+.destination-card:hover img{
+  transform:scale(1.09);
+}
+
+.destination-info{
+  position:absolute;
+  z-index:2;
+  left:22px;
+  right:18px;
+  bottom:22px;
+}
+
+.destination-info small{
+  display:block;
+  color:#e8d2a7;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.destination-info h3{
+  font-family:var(--serif);
+  font-size:34px;
+  line-height:1;
+  font-weight:500;
+  margin:8px 0;
+  color:white;
+}
+
+.destination-info span{
+  font-size:11px;
+  letter-spacing:.7px;
+  color:#f2eee5;
+}
+
+.destination-card:hover .destination-info span{
+  color:#e8d2a7;
+}
+
+@media(max-width:900px){
+  .destination-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:520px){
+  .destination-grid{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  .destination-card{
+    height:245px;
+  }
+
+  .destination-info{
+    left:12px;
+    right:10px;
+    bottom:13px;
+  }
+
+  .destination-info h3{
+    font-size:25px;
+  }
+
+  .destination-info small{
+    font-size:8px;
+    letter-spacing:1px;
+  }
+
+  .destination-info span{
+    font-size:9px;
+  }
+}
+
 /* RESPONSIVE DESIGN */
 
 @media(min-width:1100px){
