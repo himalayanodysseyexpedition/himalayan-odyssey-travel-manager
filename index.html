@@ -63,14 +63,7 @@ footer a{color:#e7bd79}
 .pdf-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
 .pdf-actions .btn{margin:0}
 .itinerary-meta{font-size:14px;color:#8a704d;font-weight:bold}
-@media(max-width:650px){
- header{align-items:center;flex-direction:column}
- nav{gap:12px;justify-content:center}
- .hero{min-height:460px;padding:65px 7%}
- section.content{padding:48px 6%}
- .section-title h2{font-size:29px}
-}
-  
+
 /* HIMALAYAN ODYSSEY PREMIUM THEME */
 :root {
   --forest: #102d27;
@@ -189,12 +182,94 @@ footer {
 
 footer b, footer a { color: #e8d2a7; }
 
-@media(max-width:650px) {
-  .hero { min-height: 500px; }
-  nav { gap: 12px; font-size: 11px; }
-  section.content { padding: 55px 6%; }
+/* TRAVEL ENQUIRY FORM */
+.enquiry-section {
+  background: linear-gradient(135deg,#102d27,#244b3e);
+  color: white;
 }
 
+.enquiry-section .section-title h2 {
+  color: white;
+}
+
+.enquiry-section .section-title small {
+  color: #e8d2a7;
+}
+
+.enquiry-box {
+  max-width: 680px;
+  margin: auto;
+  background: #fff;
+  color: #18332e;
+  padding: 30px;
+  border-radius: 8px;
+  border-top: 4px solid #c9a568;
+  box-shadow: 0 10px 35px #0002;
+}
+
+.enquiry-box label {
+  display: block;
+  font-family: Arial,sans-serif;
+  font-weight: bold;
+  margin: 15px 0 7px;
+}
+
+.enquiry-box input,
+.enquiry-box select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #d8ded8;
+  border-radius: 4px;
+  font-size: 15px;
+  background: #fafbf9;
+  color: #18332e;
+}
+
+.enquiry-box input:focus,
+.enquiry-box select:focus {
+  outline: 2px solid #c9a568;
+  border-color: #c9a568;
+}
+
+.enquiry-box .btn {
+  width: 100%;
+  margin: 22px 0 0;
+  padding: 15px;
+  font-size: 15px;
+}
+
+.enquiry-note {
+  text-align: center;
+  color: #64736c;
+  font: 13px Arial,sans-serif;
+  margin-top: 12px;
+}
+
+.optional-label {
+  color: #9a865f;
+  font-weight: normal;
+  font-size: 12px;
+}
+
+.date-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+@media(max-width:650px) {
+  header{align-items:center;flex-direction:column}
+  nav{gap:12px;justify-content:center}
+  .hero{min-height:500px;padding:65px 7%}
+  section.content{padding:55px 6%}
+  .section-title h2{font-size:29px}
+}
+
+@media(max-width:500px) {
+  .enquiry-box { padding:20px; }
+  .date-fields { grid-template-columns:1fr;gap:0; }
+  nav {gap:12px;font-size:11px;}
+}
 </style>
 </head>
 
@@ -207,6 +282,7 @@ footer b, footer a { color: #e8d2a7; }
   <nav>
     <a href="#home">Home</a>
     <a href="#packages">Packages</a>
+    <a href="#travel-enquiry">Plan Your Trip</a>
     <a href="#itineraries">Itineraries</a>
     <a href="#gallery">Gallery</a>
     <a href="#contact">Contact</a>
@@ -241,6 +317,98 @@ footer b, footer a { color: #e8d2a7; }
   </div>
   <div id="packageList" class="cards">
     <p id="packageMessage">Loading available packages...</p>
+  </div>
+</section>
+
+<!-- TRAVEL ENQUIRY FORM -->
+<section class="content enquiry-section" id="travel-enquiry">
+
+  <div class="section-title">
+    <small>YOUR JOURNEY STARTS HERE</small>
+    <h2>Plan Your Himalayan Adventure</h2>
+  </div>
+
+  <p class="intro" style="color:#e0e8e2">
+    Share your travel requirements with us.
+    We will help you plan your perfect Himalayan holiday.
+  </p>
+
+  <div class="enquiry-box">
+    <form id="travelEnquiryForm">
+
+      <label for="guestName">Your Full Name *</label>
+      <input
+        type="text"
+        id="guestName"
+        placeholder="Enter your name"
+        maxlength="100"
+        required
+      >
+
+      <label for="travellers">Number of Persons *</label>
+      <input
+        type="number"
+        id="travellers"
+        min="1"
+        max="100"
+        step="1"
+        placeholder="How many people are travelling?"
+        required
+      >
+
+      <label for="destination">Travel Destination *</label>
+      <input
+        type="text"
+        id="destination"
+        placeholder="e.g. Spiti Valley, Manali, Kinnaur"
+        maxlength="150"
+        required
+      >
+
+      <label for="travelMonth">Travel Month *</label>
+      <select id="travelMonth" required>
+        <option value="">Select travel month</option>
+        <option>January</option>
+        <option>February</option>
+        <option>March</option>
+        <option>April</option>
+        <option>May</option>
+        <option>June</option>
+        <option>July</option>
+        <option>August</option>
+        <option>September</option>
+        <option>October</option>
+        <option>November</option>
+        <option>December</option>
+      </select>
+
+      <div class="date-fields">
+        <div>
+          <label for="startDate">
+            Travel Start Date
+            <span class="optional-label">(Optional)</span>
+          </label>
+          <input type="date" id="startDate">
+        </div>
+
+        <div>
+          <label for="endDate">
+            Travel End Date
+            <span class="optional-label">(Optional)</span>
+          </label>
+          <input type="date" id="endDate">
+        </div>
+      </div>
+
+      <button type="submit" class="btn">
+        Submit Enquiry on WhatsApp
+      </button>
+
+      <p class="enquiry-note">
+        Your travel enquiry will open directly in WhatsApp.
+      </p>
+
+    </form>
   </div>
 </section>
 
@@ -298,7 +466,7 @@ footer b, footer a { color: #e8d2a7; }
     <div class="info-box">
       <h3>Custom Packages</h3>
       <p>Tell us your dates, group size and travel preferences.</p>
-      <a class="btn" href="https://wa.me/919816929669?text=I%20want%20a%20custom%20tour%20package">Plan My Trip</a>
+      <a class="btn" href="#travel-enquiry">Plan My Trip</a>
     </div>
   </div>
 </section>
@@ -498,6 +666,62 @@ window.showItinerary = function(id) {
   w.document.write("<html><head><title>Tour Itinerary</title><meta name='viewport' content='width=device-width,initial-scale=1'><style>body{font-family:Arial;line-height:1.8;padding:25px;max-width:750px;margin:auto;color:#18332e}</style></head><body><h1>Himalayan Odyssey Expedition</h1><div>" + content + "</div></body></html>");
   w.document.close();
 };
+
+// TRAVEL ENQUIRY FORM - WHATSAPP
+document.getElementById("travelEnquiryForm")
+.addEventListener("submit", function(e) {
+
+  e.preventDefault();
+
+  const name = document.getElementById("guestName").value.trim();
+  const persons = document.getElementById("travellers").value;
+  const destination = document.getElementById("destination").value.trim();
+  const month = document.getElementById("travelMonth").value;
+  const startDate = document.getElementById("startDate").value;
+  const endDate = document.getElementById("endDate").value;
+
+  if (!name || !persons || !destination || !month ||
+      !Number.isInteger(Number(persons)) || Number(persons) < 1 ||
+      Number(persons) > 100) {
+    alert("Please enter valid details in all required fields.");
+    return;
+  }
+
+  if (startDate && endDate && endDate < startDate) {
+    alert("End date cannot be earlier than start date.");
+    return;
+  }
+
+  let message =
+`NEW TRAVEL ENQUIRY
+HIMALAYAN ODYSSEY EXPEDITION
+
+Guest Name: ${name}
+Number of Persons: ${persons}
+Destination: ${destination}
+Travel Month: ${month}`;
+
+  if (startDate) {
+    message += `\nTravel Start Date: ${startDate}`;
+  }
+
+  if (endDate) {
+    message += `\nTravel End Date: ${endDate}`;
+  }
+
+  message += "\n\nPlease contact me regarding this trip.";
+
+  const whatsappURL =
+    "https://wa.me/919816929669?text=" +
+    encodeURIComponent(message);
+
+  window.open(whatsappURL, "_blank");
+
+  if (!startDate && !endDate) {
+    // Dates are optional. No further action needed.
+  }
+
+});
 
 // LOAD BOTH SECTIONS
 loadPackages();
