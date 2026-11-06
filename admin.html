@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,6 +40,9 @@ small{color:#61756d}
 .hotel-photo img{width:100%;height:100px;object-fit:cover;border-radius:5px}
 .hotel-photo button{width:100%;margin:5px 0 0;padding:8px;font-size:12px}
 .hotel-status{font-weight:bold;color:#176b55}
+.cab-preview{width:140px;height:95px;object-fit:cover;border-radius:8px;margin-top:8px}
+.form-check{display:flex;align-items:center;gap:8px;margin:14px 0}
+.form-check input{width:auto;margin:0}
 @media(max-width:600px){
 .stats{grid-template-columns:repeat(2,1fr)}
 main{padding:10px}
@@ -80,6 +82,7 @@ article button{margin-top:8px}
   <button data-tab="packages">Packages</button>
   <button data-tab="itineraries">Itineraries</button>
   <button data-tab="hotels">Hotels & Properties</button>
+  <button data-tab="cabs">Cabs</button>
   <button data-tab="leads">Leads</button>
   <button data-tab="bookings">Bookings</button>
   <button data-tab="vendors">Vendors</button>
@@ -120,7 +123,6 @@ article button{margin-top:8px}
   <div id="itineraryList"></div>
 </section>
 
-<!-- HOTEL MANAGEMENT -->
 <section id="hotels" class="panel">
   <div class="topline">
     <div>
@@ -130,6 +132,18 @@ article button{margin-top:8px}
     <button id="newHotel">+ Add Hotel</button>
   </div>
   <div id="hotelList">Loading properties...</div>
+</section>
+
+<!-- CAB MANAGEMENT -->
+<section id="cabs" class="panel">
+  <div class="topline">
+    <div>
+      <h2>Cab Management</h2>
+      <small>Add your vehicles, passenger capacity, daily rental prices and photographs.</small>
+    </div>
+    <button id="newCab">+ Add Cab</button>
+  </div>
+  <div id="cabList">Loading cabs...</div>
 </section>
 
 <section id="leads" class="panel">
@@ -184,33 +198,63 @@ article button{margin-top:8px}
 <dialog id="hotelDialog">
 <form id="hotelF">
 <h3 id="hotelDialogTitle">Add Hotel / Property</h3>
-
 <label>Hotel / Property Name *</label>
 <input id="hotelName" required placeholder="e.g. Himalayan View Homestay">
-
 <label>Location *</label>
 <input id="hotelLocation" required placeholder="e.g. Narkanda, Himachal Pradesh">
-
 <label>Property Description</label>
 <textarea id="hotelDescription" rows="4" placeholder="Describe the property, rooms, views and guest experience"></textarea>
-
 <label>Facilities / Amenities</label>
 <textarea id="hotelFacilities" rows="3" placeholder="Wi-Fi, Parking, Restaurant, Mountain View, Bonfire..."></textarea>
 <small>Separate facilities with commas.</small>
-
 <label>Upload Property Photographs</label>
 <input id="hotelPhotos" type="file" accept="image/jpeg,image/png,image/webp" multiple>
 <small>Choose multiple JPG, PNG or WebP images. Maximum 5 MB per image.</small>
-
 <div id="hotelExistingPhotos"></div>
-
-<label style="display:flex;align-items:center;gap:8px;margin-top:12px">
-<input id="hotelPublished" type="checkbox" style="width:auto;margin:0">
+<label class="form-check">
+<input id="hotelPublished" type="checkbox">
 Publish this property on the guest website
+</label>
+<div style="margin-top:15px">
+<button type="submit" id="hotelSave">Save Property</button>
+<button type="button" data-close class="secondary">Cancel</button>
+</div>
+</form>
+</dialog>
+
+<!-- CAB FORM -->
+<dialog id="cabDialog">
+<form id="cabF">
+<h3 id="cabDialogTitle">Add Cab</h3>
+
+<label>Cab Type / Name *</label>
+<input id="cabName" required placeholder="e.g. Ertiga, Innova Crysta, Swift Dzire">
+
+<label>Model / Variant</label>
+<input id="cabModel" placeholder="e.g. Maruti Ertiga ZXi">
+
+<label>Passenger Capacity *</label>
+<input id="cabSeats" type="number" min="1" max="60" required placeholder="e.g. 6">
+
+<label>Daily Rental Price (₹) *</label>
+<input id="cabPrice" type="number" min="0" step="1" required placeholder="e.g. 6000">
+
+<label>Cab Description</label>
+<textarea id="cabDescription" rows="4" placeholder="Describe the vehicle, luggage capacity, comfort and facilities"></textarea>
+
+<label>Cab Photograph</label>
+<input id="cabPhoto" type="file" accept="image/jpeg,image/png,image/webp">
+<small>Upload one JPG, PNG or WebP image. Maximum 5 MB. A new photo replaces the existing one.</small>
+
+<div id="cabExistingPhoto"></div>
+
+<label class="form-check">
+<input id="cabPublished" type="checkbox">
+Publish this cab on the guest website
 </label>
 
 <div style="margin-top:15px">
-<button type="submit" id="hotelSave">Save Property</button>
+<button type="submit" id="cabSave">Save Cab</button>
 <button type="button" data-close class="secondary">Cancel</button>
 </div>
 </form>
@@ -311,6 +355,6 @@ Publish this property on the guest website
 </form>
 </dialog>
 
-<script src="app.js?v=100"></script>
+<script src="app.js?v=101"></script>
 </body>
 </html>
