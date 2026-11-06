@@ -8,7 +8,7 @@
 
 <title>Himalayan Odyssey Expedition | Explore the Himalayas</title>
 
-<meta name="description" content="Explore Spiti Valley, Manali and Himachal Pradesh with Himalayan Odyssey Expedition. Discover Himalayan tours, hotels and mountain properties.">
+<meta name="description" content="Explore Spiti Valley, Manali and Himachal Pradesh with Himalayan Odyssey Expedition. Discover Himalayan tours, hotels, cabs and mountain properties.">
 
 <link rel="icon" href="logo.png">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -419,6 +419,37 @@ footer b,footer a{color:#e8d2a7}
   background:#dce5df;
 }
 
+/* CAB GALLERY */
+
+.cab-card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  display:block;
+  background:#e1e5df;
+}
+
+.cab-details{
+  color:#66736e;
+  font-size:14px;
+  line-height:1.7;
+}
+
+.cab-empty{
+  grid-column:1/-1;
+  text-align:center;
+  padding:30px;
+  color:#66736e;
+  background:white;
+  border-radius:6px;
+}
+
+.cab-price-note{
+  font-size:12px;
+  color:#66736e;
+  line-height:1.6;
+}
+
 @media(max-width:650px){
   header{align-items:center;flex-direction:column}
   nav{gap:12px;justify-content:center}
@@ -450,8 +481,8 @@ footer b,footer a{color:#e8d2a7}
     <a href="#packages">Packages</a>
     <a href="#travel-enquiry">Plan Your Trip</a>
     <a href="#itineraries">Itineraries</a>
-<a href="#cabs">Cabs</a>
-<a href="#gallery">Hotels</a>
+    <a href="#cabs">Cabs</a>
+    <a href="#gallery">Hotels</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
@@ -649,6 +680,31 @@ footer b,footer a{color:#e8d2a7}
 
 </section>
 
+<!-- CAB AND TRANSPORT GALLERY -->
+
+<section class="content" id="cabs">
+
+  <div class="section-title">
+    <small>TRAVEL IN COMFORT</small>
+    <h2>Our Vehicles & Cabs</h2>
+  </div>
+
+  <p class="intro">
+    Choose from our available vehicles for your Himalayan journey.
+    View vehicle photographs, seating capacity and daily rates.
+    Contact us directly for availability and bookings.
+  </p>
+
+  <div id="cabList" class="cards">
+
+    <div class="cab-empty">
+      Loading available vehicles...
+    </div>
+
+  </div>
+
+</section>
+
 <!-- HOTEL AND PROPERTY GALLERY -->
 
 <section class="content info" id="gallery">
@@ -717,9 +773,8 @@ footer b,footer a{color:#e8d2a7}
       <h3>Cab & Transport</h3>
       <p>Need a vehicle for your Himachal journey?</p>
 
-      <a class="btn"
-         href="https://wa.me/919816929669?text=I%20need%20a%20cab%20enquiry">
-         Enquire Now
+      <a class="btn" href="#cabs">
+         View Available Cabs
       </a>
     </div>
 
@@ -1188,6 +1243,174 @@ window.showItinerary = function(id) {
 
 
 // =======================================
+// LOAD PUBLISHED CABS
+// =======================================
+
+async function loadCabs() {
+
+  const list = document.getElementById("cabList");
+
+  try {
+
+    const { data, error } = await db
+      .from("cabs")
+      .select("*")
+      .eq("published", true)
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+
+    if (!data || data.length === 0) {
+
+      list.innerHTML = `
+        <div class="cab-empty">
+
+          <h3>Vehicles Coming Soon</h3>
+
+          <p>
+            Our available vehicles will appear here shortly.
+            Contact us for current cab availability and rates.
+          </p>
+
+          <a class="btn"
+             href="https://wa.me/919816929669?text=Please%20share%20your%20available%20cabs">
+             Enquire on WhatsApp
+          </a>
+
+        </div>
+      `;
+
+      return;
+    }
+
+    list.innerHTML = data.map(cab => {
+
+      const name = cab.name || "Himalayan Travel Vehicle";
+      const model = cab.model || "";
+      const capacity = cab.seating_capacity || "Contact us";
+      const description = cab.description || "Contact us for vehicle details.";
+      const image = cab.image_url || "";
+
+      const message = encodeURIComponent(
+        "Hello Himalayan Odyssey Expedition,\n\n" +
+        "I am interested in booking this vehicle:\n" +
+        "Vehicle: " + name + "\n" +
+        "Model: " + model + "\n" +
+        "Seating Capacity: " + capacity + "\n" +
+        "Daily Rate: " + (cab.daily_price != null
+          ? "₹" + Number(cab.daily_price).toLocaleString("en-IN")
+          : "Please share rate") +
+        "\n\nPlease share availability and booking details."
+      );
+
+      const photo = image
+        ? `
+          <img
+            src="${safe(image)}"
+            alt="${safe(name)}"
+            loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"
+          >
+          <div style="
+            height:220px;
+            display:none;
+            place-items:center;
+            background:#dce5df;
+            color:#52645e;
+          ">
+            Vehicle photograph unavailable
+          </div>
+        `
+        : `
+          <div style="
+            height:220px;
+            display:grid;
+            place-items:center;
+            background:#dce5df;
+            color:#52645e;
+          ">
+            Vehicle photograph unavailable
+          </div>
+        `;
+
+      const price = cab.daily_price != null && cab.daily_price !== ""
+        ? rupees(cab.daily_price)
+        : "Contact us";
+
+      return `
+        <article class="card cab-card">
+
+          ${photo}
+
+          <div class="card-body">
+
+            <h3>${safe(name)}</h3>
+
+            ${model
+              ? `<p class="cab-details">${safe(model)}</p>`
+              : ""
+            }
+
+            <p class="cab-details">
+              <b>Seating Capacity:</b>
+              ${safe(capacity)}
+              ${cab.seating_capacity ? " passengers" : ""}
+            </p>
+
+            <p>${safe(description)}</p>
+
+            <div class="price">
+              ${price}
+              <small>per day</small>
+            </div>
+
+            <p class="cab-price-note">
+              Please confirm inclusions, route charges and availability
+              with our team before booking.
+            </p>
+
+            <a class="btn"
+               href="https://wa.me/919816929669?text=${message}"
+               target="_blank"
+               rel="noopener">
+              Enquire About This Cab
+            </a>
+
+          </div>
+
+        </article>
+      `;
+
+    }).join("");
+
+  } catch (error) {
+
+    console.error("Cab loading error:", error);
+
+    list.innerHTML = `
+      <div class="cab-empty">
+
+        <h3>Vehicles Temporarily Unavailable</h3>
+
+        <p>
+          We are unable to load vehicle details at the moment.
+          Please contact us directly for cab availability.
+        </p>
+
+        <a class="btn"
+           href="https://wa.me/919816929669?text=Please%20share%20your%20available%20cabs">
+          Contact Us
+        </a>
+
+      </div>
+    `;
+
+  }
+
+}
+
+
+// =======================================
 // HOTEL AND PROPERTY GALLERY
 // =======================================
 
@@ -1215,8 +1438,6 @@ async function loadHotels() {
   const list = document.getElementById("galleryList");
 
   try {
-
-    // FETCH PUBLISHED HOTELS
 
     const { data: hotels, error: hotelError } = await db
       .from("hotels")
@@ -1254,9 +1475,6 @@ async function loadHotels() {
 
     }
 
-
-    // FETCH PHOTOS FOR PUBLISHED HOTELS
-
     const hotelIds = publicHotels.map(h => h.id);
 
     const { data: photos, error: photoError } = await db
@@ -1267,9 +1485,6 @@ async function loadHotels() {
     if (photoError) throw photoError;
 
     publicHotelPhotos = photos || [];
-
-
-    // DISPLAY HOTEL CARDS
 
     list.innerHTML = publicHotels.map(hotel => {
 
@@ -1546,9 +1761,6 @@ document.getElementById("travelEnquiryForm")
 
   const endDate = document.getElementById("endDate").value;
 
-
-  // VALIDATE REQUIRED DETAILS
-
   if (
     !name ||
     !/^[6-9][0-9]{9}$/.test(phone) ||
@@ -1568,9 +1780,6 @@ document.getElementById("travelEnquiryForm")
 
   }
 
-
-  // CHECK DATE ORDER
-
   if (startDate && endDate && endDate < startDate) {
 
     alert("End date cannot be earlier than start date.");
@@ -1578,9 +1787,6 @@ document.getElementById("travelEnquiryForm")
     return;
 
   }
-
-
-  // CREATE WHATSAPP MESSAGE
 
   let message =
 `NEW TRAVEL ENQUIRY
@@ -1606,13 +1812,9 @@ Travel Month: ${month}`;
 
   message += "\n\nPlease contact me regarding this trip.";
 
-
   const whatsappURL =
     "https://wa.me/919816929669?text=" +
     encodeURIComponent(message);
-
-
-  // OPEN WHATSAPP
 
   window.open(whatsappURL, "_blank");
 
@@ -1626,6 +1828,8 @@ Travel Month: ${month}`;
 loadPackages();
 
 loadItineraries();
+
+loadCabs();
 
 loadHotels();
 
