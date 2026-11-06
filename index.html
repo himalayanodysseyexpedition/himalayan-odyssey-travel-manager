@@ -1185,7 +1185,41 @@ target="_blank" rel="noopener noreferrer">Instagram</a>
 <a href="admin.html">Admin Login</a>
 
   <p>© 2026 Himalayan Odyssey Expedition. All rights reserved.</p>  
-</footer>  <script>  
+</footer> 
+<script>
+(function () {
+  function report(message) {
+    var box = document.getElementById("hoe-diagnostic");
+    if (!box) {
+      box = document.createElement("div");
+      box.id = "hoe-diagnostic";
+      box.style.cssText =
+        "position:fixed;top:10px;left:10px;right:10px;" +
+        "z-index:999999;background:#fff0d9;color:#8b2500;" +
+        "padding:15px;border:2px solid #8b2500;border-radius:8px;" +
+        "font-size:14px;overflow-wrap:anywhere;";
+      document.body.appendChild(box);
+    }
+    box.textContent = "Website diagnostic: " + message;
+  }
+
+  report("Diagnostic active. Checking JavaScript...");
+
+  window.addEventListener("error", function (e) {
+    report(e.message || "JavaScript error");
+  });
+
+  window.addEventListener("unhandledrejection", function (e) {
+    report(
+      e.reason && e.reason.message
+        ? e.reason.message
+        : String(e.reason)
+    );
+  });
+})();
+</script>
+
+  <script>  
 "use strict";  
   
 /* =====================================  
