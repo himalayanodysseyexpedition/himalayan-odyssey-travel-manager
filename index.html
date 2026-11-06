@@ -1,1209 +1,728 @@
-<!DOCTYPE html>  <html lang="en">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1">  
-<meta name="theme-color" content="#102b27">  <title>Himalayan Odyssey Expedition | Premium Himalayan Journeys</title>  
-<meta name="description" content="Discover Spiti Valley, Kinnaur and Himachal Pradesh with Himalayan Odyssey Expedition. Explore thoughtfully planned tours, mountain stays, cabs and unforgettable Himalayan experiences.">  <link rel="icon" href="logo.png">  
-<link rel="preconnect" href="https://fonts.googleapis.com">  
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">  
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>  <style>  
-:root{  
-  --forest:#102d27;  
-  --forest-light:#1d453a;  
-  --forest-deep:#091f1b;  
-  --gold:#c9a568;  
-  --gold-light:#e8d2a7;  
-  --cream:#f6f3eb;  
-  --paper:#fffefa;  
-  --ink:#263b34;  
-  --muted:#68756e;  
-  --line:#e6dfd1;  
-  --shadow:0 16px 45px rgba(16,45,39,.10);  
-  --serif:"Cormorant Garamond",Georgia,serif;  
-  --sans:"DM Sans",Arial,sans-serif;  
-}  
-  
-*{box-sizing:border-box}  
-html{scroll-behavior:smooth;scroll-padding-top:125px}  
-body{  
-  margin:0;  
-  font-family:var(--sans);  
-  background:var(--cream);  
-  color:var(--ink);  
-  line-height:1.65;  
-}  
-a{text-decoration:none;color:inherit}  
-button,input,select{font:inherit}  
-button,a{-webkit-tap-highlight-color:transparent}  
-img{max-width:100%}  
-  
-:focus-visible{  
-  outline:3px solid var(--gold);  
-  outline-offset:4px;  
-}  
-  
-header{  
-  position:sticky;  
-  top:0;  
-  z-index:100;  
-  background:rgba(9,31,27,.97);  
-  backdrop-filter:blur(14px);  
-  border-bottom:1px solid rgba(201,165,104,.65);  
-  box-shadow:0 8px 28px rgba(0,0,0,.13);  
-  padding:12px 5%;  
-}  
-  
-.header-inner{  
-  max-width:1400px;  
-  margin:auto;  
-  display:flex;  
-  flex-direction:column;  
-  align-items:center;  
-  gap:9px;  
-}  
-  
-.brand{  
-  display:flex;  
-  justify-content:center;  
-  align-items:center;  
-}  
-  
-.brand img{  
-  display:block;  
-  width:190px;  
-  max-width:75vw;  
-  max-height:62px;  
-  object-fit:contain;  
-}  
-  
-nav{  
-  display:flex;  
-  justify-content:center;  
-  align-items:center;  
-  flex-wrap:wrap;  
-  gap:7px 24px;  
-}  
-  
-nav a{  
-  color:#f4f0e7;  
-  font-size:11px;  
-  font-weight:600;  
-  letter-spacing:1.3px;  
-  text-transform:uppercase;  
-  padding:7px 0;  
-  position:relative;  
-  transition:color .25s ease;  
-}  
-  
-nav a:after{  
-  content:"";  
-  position:absolute;  
-  bottom:0;  
-  left:0;  
-  width:0;  
-  height:1px;  
-  background:var(--gold);  
-  transition:width .25s ease;  
-}  
-  
-nav a:hover{color:var(--gold-light)}  
-nav a:hover:after{width:100%}  
-  
-/* HERO */  
-  
-.hero{  
-  min-height:680px;  
-  padding:110px 8%;  
-  display:flex;  
-  align-items:center;  
-  color:white;  
-  position:relative;  
-  background:  
-    linear-gradient(90deg,rgba(5,24,20,.88) 0%,rgba(5,24,20,.60) 48%,rgba(5,24,20,.12) 100%),  
-    url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=2000") center/cover;  
-}  
-  
-.hero:after{  
-  content:"";  
-  position:absolute;  
-  inset:auto 0 0;  
-  height:100px;  
-  background:linear-gradient(transparent,rgba(9,31,27,.35));  
-  pointer-events:none;  
-}  
-  
-.hero-content{  
-  width:100%;  
-  max-width:720px;  
-  position:relative;  
-  z-index:1;  
-}  
-  
-.eyebrow{  
-  color:var(--gold-light);  
-  font-size:11px;  
-  font-weight:700;  
-  letter-spacing:4px;  
-  text-transform:uppercase;  
-}  
-  
-.hero h1{  
-  font-family:var(--serif);  
-  font-size:clamp(54px,7.5vw,92px);  
-  font-weight:500;  
-  line-height:.98;  
-  letter-spacing:-1.5px;  
-  margin:22px 0;  
-  text-shadow:0 4px 25px rgba(0,0,0,.25);  
-}  
-  
-.hero p{  
-  max-width:570px;  
-  font-size:16px;  
-  line-height:1.9;  
-  color:#f1eee6;  
-  margin-bottom:28px;  
-}  
-  
-.hero-rule{  
-  width:75px;  
-  height:2px;  
-  background:var(--gold);  
-  margin:24px 0;  
-}  
-  
-/* BUTTONS */  
-  
-.btn{  
-  display:inline-flex;  
-  justify-content:center;  
-  align-items:center;  
-  gap:8px;  
-  background:var(--gold);  
-  color:var(--forest-deep);  
-  padding:13px 21px;  
-  min-height:46px;  
-  border:1px solid var(--gold);  
-  border-radius:3px;  
-  cursor:pointer;  
-  font-size:12px;  
-  font-weight:700;  
-  letter-spacing:.7px;  
-  text-transform:uppercase;  
-  transition:background .25s ease,color .25s ease,transform .25s ease,box-shadow .25s ease;  
-  margin:7px 7px 7px 0;  
-}  
-  
-.btn:hover{  
-  background:var(--gold-light);  
-  border-color:var(--gold-light);  
-  transform:translateY(-2px);  
-  box-shadow:0 8px 20px rgba(0,0,0,.12);  
-}  
-  
-.btn.outline{  
-  background:transparent;  
-  border-color:rgba(255,255,255,.8);  
-  color:white;  
-}  
-  
-.btn.outline:hover{  
-  background:white;  
-  color:var(--forest);  
-}  
-  
-/* SECTIONS */  
-  
-section.content{  
-  padding:88px 7%;  
-}  
-  
-.section-inner{  
-  max-width:1250px;  
-  margin:auto;  
-}  
-  
-.section-title{  
-  text-align:center;  
-  margin:0 auto 35px;  
-}  
-  
-.section-title small{  
-  color:#a47d43;  
-  font-size:10px;  
-  font-weight:700;  
-  letter-spacing:3.5px;  
-  text-transform:uppercase;  
-}  
-  
-.section-title h2{  
-  color:var(--forest);  
-  font-family:var(--serif);  
-  font-size:clamp(36px,4vw,49px);  
-  line-height:1.1;  
-  font-weight:500;  
-  margin:10px 0;  
-}  
-  
-.section-title h2:after{  
-  content:"";  
-  display:block;  
-  width:62px;  
-  height:2px;  
-  background:var(--gold);  
-  margin:17px auto 0;  
-}  
-  
-.intro{  
-  text-align:center;  
-  max-width:760px;  
-  margin:0 auto 38px;  
-  line-height:1.95;  
-  color:var(--muted);  
-  font-size:15px;  
-}  
-  
-.info{background:#eeede4}  
-  
-/* CARDS */  
-  
-.cards{  
-  display:grid;  
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));  
-  gap:25px;  
-  max-width:1250px;  
-  margin:auto;  
-}  
-  
-.card{  
-  background:var(--paper);  
-  border:1px solid var(--line);  
-  border-radius:4px;  
-  overflow:hidden;  
-  box-shadow:0 7px 25px rgba(16,45,39,.055);  
-  transition:transform .3s ease,box-shadow .3s ease;  
-  min-width:0;  
-}  
-  
-.card:hover{  
-  transform:translateY(-5px);  
-  box-shadow:var(--shadow);  
-}  
-  
-.card>img{  
-  width:100%;  
-  height:220px;  
-  display:block;  
-  object-fit:cover;  
-  background:#dce5df;  
-  transition:transform .5s ease;  
-}  
-  
-.card:hover>img{transform:scale(1.025)}  
-  
-.card-body{padding:23px}  
-  
-.card h3{  
-  color:var(--forest);  
-  font-family:var(--serif);  
-  font-size:27px;  
-  font-weight:600;  
-  line-height:1.15;  
-  margin:0 0 10px;  
-}  
-  
-.card p{  
-  color:var(--muted);  
-  font-size:13px;  
-  line-height:1.8;  
-  margin:8px 0;  
-}  
-  
-.price{  
-  font-family:var(--serif);  
-  font-size:29px;  
-  font-weight:700;  
-  color:#9b7540;  
-  margin:14px 0;  
-}  
-  
-.price small{  
-  font-family:var(--sans);  
-  font-size:11px;  
-  font-weight:500;  
-  color:var(--muted);  
-}  
-  
-.info-grid{  
-  display:grid;  
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));  
-  gap:22px;  
-  max-width:1150px;  
-  margin:auto;  
-}  
-  
-.info-box{  
-  background:var(--paper);  
-  padding:28px;  
-  border:1px solid var(--line);  
-  border-bottom:3px solid var(--gold);  
-  box-shadow:0 8px 25px rgba(16,45,39,.045);  
-}  
-  
-.info-box h3{  
-  font-family:var(--serif);  
-  font-size:26px;  
-  color:var(--forest);  
-  margin:0 0 8px;  
-}  
-  
-.info-box p{  
-  color:var(--muted);  
-  font-size:13px;  
-  line-height:1.8;  
-}  
-  
-#packageMessage,#itineraryMessage{  
-  color:var(--muted);  
-  text-align:center;  
-  padding:25px;  
-  grid-column:1/-1;  
-}  
-  
-.itinerary-meta{  
-  font-size:12px;  
-  color:#987746;  
-  font-weight:700;  
-}  
-  
-/* ENQUIRY FORM */  
-  
-.enquiry-section{  
-  background:  
-    radial-gradient(circle at 10% 10%,rgba(201,165,104,.11),transparent 30%),  
-    linear-gradient(135deg,#102d27,#1d453a);  
-  color:white;  
-}  
-  
-.enquiry-section .section-title h2{color:white}  
-.enquiry-section .section-title small{color:var(--gold-light)}  
-  
-.enquiry-box{  
-  max-width:690px;  
-  margin:auto;  
-  padding:36px;  
-  background:var(--paper);  
-  color:var(--forest);  
-  border:1px solid rgba(201,165,104,.55);  
-  border-top:4px solid var(--gold);  
-  border-radius:4px;  
-  box-shadow:0 18px 55px rgba(0,0,0,.18);  
-}  
-  
-.enquiry-box label{  
-  display:block;  
-  font-size:12px;  
-  font-weight:700;  
-  margin:17px 0 7px;  
-  color:#28443a;  
-}  
-  
-.enquiry-box input,  
-.enquiry-box select{  
-  width:100%;  
-  min-height:48px;  
-  padding:12px 14px;  
-  border:1px solid #d9ded6;  
-  border-radius:3px;  
-  background:#fbfaf6;  
-  color:var(--forest);  
-  font-size:14px;  
-  transition:border-color .2s,box-shadow .2s;  
-}  
-  
-.enquiry-box input:focus,  
-.enquiry-box select:focus{  
-  outline:none;  
-  border-color:var(--gold);  
-  box-shadow:0 0 0 3px rgba(201,165,104,.17);  
-}  
-  
-.enquiry-box .btn{  
-  width:100%;  
-  margin:24px 0 0;  
-  min-height:51px;  
-}  
-  
-.enquiry-note{  
-  text-align:center;  
-  color:#748078;  
-  font-size:11px;  
-  margin-top:13px;  
-}  
-  
-.optional-label{  
-  color:#9a865f;  
-  font-size:11px;  
-  font-weight:400;  
-}  
-  
-.date-fields{  
-  display:grid;  
-  grid-template-columns:1fr 1fr;  
-  gap:15px;  
-}  
-  
-/* HOTELS */  
-  
-.hotel-card>img,.cab-card>img{  
-  height:225px;  
-  object-fit:cover;  
-}  
-  
-.hotel-location{  
-  color:#987746!important;  
-  font-size:12px!important;  
-  font-weight:700;  
-}  
-  
-.hotel-facilities,.cab-details{  
-  color:var(--muted);  
-  font-size:12px;  
-  line-height:1.8;  
-}  
-  
-.hotel-empty,.cab-empty{  
-  grid-column:1/-1;  
-  text-align:center;  
-  padding:35px 25px;  
-  background:var(--paper);  
-  border:1px solid var(--line);  
-  color:var(--muted);  
-}  
-  
-.hotel-empty h3,.cab-empty h3{  
-  font-family:var(--serif);  
-  color:var(--forest);  
-  font-size:27px;  
-}  
-  
-.hotel-detail-modal{  
-  display:none;  
-  position:fixed;  
-  inset:0;  
-  z-index:1000;  
-  background:rgba(0,0,0,.78);  
-  padding:18px;  
-  overflow-y:auto;  
-}  
-  
-.hotel-detail-content{  
-  background:var(--cream);  
-  max-width:900px;  
-  margin:30px auto;  
-  padding:32px;  
-  border:1px solid var(--gold);  
-  border-radius:5px;  
-  position:relative;  
-  box-shadow:0 20px 70px rgba(0,0,0,.3);  
-}  
-  
-.hotel-close{  
-  position:absolute;  
-  right:15px;  
-  top:15px;  
-  border:0;  
-  background:var(--forest);  
-  color:white;  
-  border-radius:50%;  
-  width:38px;  
-  height:38px;  
-  font-size:24px;  
-  cursor:pointer;  
-}  
-  
-.hotel-detail-content h2{  
-  font-family:var(--serif);  
-  font-size:36px;  
-  color:var(--forest);  
-  padding-right:40px;  
-}  
-  
-.hotel-photo-grid{  
-  display:grid;  
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));  
-  gap:13px;  
-  margin-top:20px;  
-}  
-  
-.hotel-photo-grid img{  
-  width:100%;  
-  height:195px;  
-  object-fit:cover;  
-  border-radius:3px;  
-  background:#dce5df;  
-}  
-  
-/* PDF BROCHURES */  
-  
-.pdf-actions{  
-  display:flex;  
-  flex-wrap:wrap;  
-  gap:7px;  
-  margin-top:15px;  
-}  
-  
-.pdf-actions .btn{margin:0}  
-  
-/* INSTAGRAM */  
-  
-.instagram-section{  
-  background:  
-    radial-gradient(circle at 50% 0%,rgba(201,165,104,.12),transparent 40%),  
-    linear-gradient(135deg,#102d27,#1d453a);  
-  color:white;  
-  text-align:center;  
-}  
-  
-.instagram-section .section-title h2{color:white}  
-.instagram-section .section-title small{color:var(--gold-light)}  
-  
-.instagram-content{  
-  max-width:650px;  
-  margin:auto;  
-}  
-  
-.instagram-logo{  
-  width:76px;  
-  height:76px;  
-  margin:0 auto 20px;  
-  border-radius:22px;  
-  background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);  
-  display:grid;  
-  place-items:center;  
-  color:white;  
-  font-family:Arial,sans-serif;  
-  font-size:52px;  
-}  
-  
-.instagram-content h3{  
-  font-family:var(--serif);  
-  font-size:31px;  
-  margin:10px 0;  
-  color:white;  
-}  
-  
-.instagram-content p{  
-  line-height:1.9;  
-  color:#e0e8e2;  
-  font-size:14px;  
-}  
-  
-.instagram-btn{  
-  display:inline-flex;  
-  align-items:center;  
-  justify-content:center;  
-  margin-top:20px;  
-  padding:14px 28px;  
-  background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf);  
-  color:white;  
-  border-radius:30px;  
-  font-size:12px;  
-  font-weight:700;  
-  letter-spacing:.5px;  
-  transition:transform .25s,box-shadow .25s;  
-}  
-  
-.instagram-btn:hover{  
-  transform:translateY(-3px);  
-  box-shadow:0 8px 20px #0004;  
-}  
-  
-/* CONTACT */  
-  
-.cta{  
-  background:  
-    linear-gradient(rgba(9,31,27,.92),rgba(9,31,27,.94)),  
-    url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600") center/cover;  
-  color:white;  
-  text-align:center;  
-  padding:85px 7%;  
-  border-top:2px solid var(--gold);  
-}  
-  
-.cta small{  
-  color:var(--gold-light);  
-  font-size:10px;  
-  font-weight:700;  
-  letter-spacing:3px;  
-}  
-  
-.cta h2{  
-  font-family:var(--serif);  
-  font-size:clamp(35px,5vw,52px);  
-  font-weight:500;  
-  margin:12px 0;  
-}  
-  
-.cta p{  
-  color:#e0e8e2;  
-  line-height:1.8;  
-  font-size:14px;  
-}  
-  
-/* FOOTER */  
-  
-footer{  
-  background:var(--forest-deep);  
-  border-top:1px solid var(--gold);  
-  color:#d9e3dc;  
-  padding:38px 7%;  
-  text-align:center;  
-  line-height:2;  
-  font-size:13px;  
-}  
-  
-footer b{  
-  color:var(--gold-light);  
-  letter-spacing:2px;  
-  font-size:13px;  
-}  
-  
-footer a{color:var(--gold-light)}  
-footer a:hover{color:white}  
-footer p{  
-  font-size:11px;  
-  color:#aebdb4;  
-  margin-top:20px;  
-}  
-  
-/* PREMIUM HIMALAYAN DESTINATION GALLERY */  
-  
-.destination-gallery{  
-  background:#f6f3eb;  
-}  
-  
-.destination-grid{  
-  display:grid;  
-  grid-template-columns:repeat(4,minmax(0,1fr));  
-  gap:18px;  
-  max-width:1250px;  
-  margin:auto;  
-}  
-  
-.destination-card{  
-  position:relative;  
-  display:block;  
-  height:370px;  
-  overflow:hidden;  
-  border-radius:4px;  
-  background:#173c36;  
-  color:white;  
-  box-shadow:0 10px 30px rgba(16,45,39,.13);  
-}  
-  
-.destination-card img{  
-  width:100%;  
-  height:100%;  
-  display:block;  
-  object-fit:cover;  
-  transition:transform .65s ease;  
-}  
-  
-.destination-card:after{  
-  content:"";  
-  position:absolute;  
-  inset:0;  
-  background:linear-gradient(  
-    to top,  
-    rgba(5,22,18,.93),  
-    rgba(5,22,18,.08) 75%  
-  );  
-}  
-  
-.destination-card:hover img{  
-  transform:scale(1.09);  
-}  
-  
-.destination-info{  
-  position:absolute;  
-  z-index:2;  
-  left:22px;  
-  right:18px;  
-  bottom:22px;  
-}  
-  
-.destination-info small{  
-  display:block;  
-  color:#e8d2a7;  
-  font-size:10px;  
-  font-weight:700;  
-  letter-spacing:2px;  
-  text-transform:uppercase;  
-}  
-  
-.destination-info h3{  
-  font-family:var(--serif);  
-  font-size:34px;  
-  line-height:1;  
-  font-weight:500;  
-  margin:8px 0;  
-  color:white;  
-}  
-  
-.destination-info span{  
-  font-size:11px;  
-  letter-spacing:.7px;  
-  color:#f2eee5;  
-}  
-  
-.destination-card:hover .destination-info span{  
-  color:#e8d2a7;  
-}  
-  
-@media(max-width:900px){  
-  .destination-grid{  
-    grid-template-columns:repeat(2,minmax(0,1fr));  
-  }  
-}  
-  
-@media(max-width:520px){  
-  .destination-grid{  
-    grid-template-columns:1fr 1fr;  
-    gap:10px;  
-  }  
-  
-  .destination-card{  
-    height:245px;  
-  }  
-  
-  .destination-info{  
-    left:12px;  
-    right:10px;  
-    bottom:13px;  
-  }  
-  
-  .destination-info h3{  
-    font-size:25px;  
-  }  
-  
-  .destination-info small{  
-    font-size:8px;  
-    letter-spacing:1px;  
-  }  
-  
-  .destination-info span{  
-    font-size:9px;  
-  }  
-}  
-  
-/* RESPONSIVE DESIGN */  
-  
-@media(min-width:1100px){  
-  .header-inner{  
-    flex-direction:row;  
-    justify-content:space-between;  
-  }  
-  nav{gap:22px}  
-}  
-  
-@media(max-width:800px){  
-  .hero{  
-    min-height:590px;  
-    padding:85px 7%;  
-    background-position:58% center;  
-  }  
-  section.content{padding:70px 6%}  
-  nav{gap:5px 16px}  
-}  
-  
-@media(max-width:600px){  
-  header{padding:10px 4%}  
-  .brand img{width:165px;max-height:52px}  
-  nav{gap:3px 12px}  
-  nav a{  
-    font-size:10px;  
-    letter-spacing:.8px;  
-    padding:5px 0;  
-  }  
-  .hero{  
-    min-height:570px;  
-    padding:70px 7%;  
-    background-position:60% center;  
-  }  
-  .hero h1{font-size:clamp(49px,13vw,68px)}  
-  .hero p{font-size:14px}  
-  section.content{padding:58px 6%}  
-  .section-title h2{font-size:37px}  
-  .intro{font-size:13px}  
-  .cards{grid-template-columns:1fr;gap:19px}  
-  .card>img{height:220px}  
-  .enquiry-box{padding:23px 18px}  
-  .date-fields{grid-template-columns:1fr;gap:0}  
-  .hotel-detail-content{padding:22px 17px;margin:5px auto}  
-  .hotel-detail-content h2{font-size:30px}  
-  .hotel-photo-grid{grid-template-columns:1fr 1fr}  
-  .hotel-photo-grid img{height:145px}  
-  .cta{padding:65px 6%}  
-}  
-  
-@media(prefers-reduced-motion:reduce){  
-  *,*:before,*:after{  
-    scroll-behavior:auto!important;  
-    transition:none!important;  
-    animation:none!important;  
-  }  
-}  
-</style>  </head>  <body>  <!-- HEADER -->  <header>  
-  <div class="header-inner">  
-    <a class="brand" href="#home" aria-label="Himalayan Odyssey Expedition home">  
-      <img src="logo.png" alt="Himalayan Odyssey Expedition">  
-    </a>  <nav aria-label="Main navigation">  
-  <a href="#home">Home</a>  
-  <a href="#packages">Packages</a>  
-  <a href="#travel-enquiry">Plan Your Trip</a>  
-  <a href="#itineraries">Itineraries</a>  
-  <a href="#cabs">Cabs</a>  
-  <a href="#gallery">Hotels</a>  
-  <a href="#contact">Contact</a>  
-  <a href="#instagram">Instagram</a>  
-</nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#102b27">
 
-  </div>  
-</header>  <!-- HERO -->  <div class="hero" id="home">  
-  <div class="hero-content">  
-    <small class="eyebrow">JOURNEYS BEYOND THE ORDINARY</small>  
-    <div class="hero-rule"></div>  <h1>Discover the<br>Magic of the Himalayas</h1>  
+<title>Himalayan Odyssey Expedition | Premium Himalayan Journeys</title>
+<meta name="description" content="Discover Spiti Valley, Kinnaur and Himachal Pradesh with Himalayan Odyssey Expedition. Explore thoughtfully planned tours, mountain stays, cabs and unforgettable Himalayan experiences.">
 
-<p>  
-  Discover the soul of the Himalayas through thoughtfully  
-  crafted journeys, authentic mountain stays and unforgettable  
-  experiences across Himachal Pradesh and Spiti Valley.  
-</p>  
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<a class="btn" href="#packages">Explore Packages</a>  
-<a class="btn outline" href="https://wa.me/919816929669" target="_blank" rel="noopener">  
-  Enquire on WhatsApp  
-</a>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  </div>  
-</div>  <!-- INTRODUCTION -->  <section class="content">  
-  <div class="section-inner">  
-    <div class="section-title">  
-      <small>TRAVEL WITH US</small>  
-      <h2>Explore the Himalayas</h2>  
-    </div>  <p class="intro">  
-  From the dramatic landscapes of Spiti Valley to the beautiful  
-  mountain towns of Himachal Pradesh, discover thoughtfully  
-  planned journeys shaped around local experiences, scenic  
-  routes and the warmth of mountain hospitality.  
-</p>
+<style>
+:root {
+  --forest:#102d27;
+  --forest-light:#1d453a;
+  --forest-deep:#091f1b;
+  --gold:#c9a568;
+  --gold-light:#e8d2a7;
+  --cream:#f6f3eb;
+  --paper:#fffefa;
+  --ink:#263b34;
+  --muted:#68756e;
+  --line:#e6dfd1;
+  --shadow:0 16px 45px rgba(16,45,39,.10);
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --sans:"DM Sans",Arial,sans-serif;
+}
 
-  </div>  
-</section>  <!-- PREMIUM HIMALAYAN DESTINATION GALLERY -->  <section class="content destination-gallery" id="destinations">    <div class="section-inner">  <div class="section-title">  
-  <small>EXPLORE THE MOUNTAINS</small>  
-  <h2>Discover Our Destinations</h2>  
-</div>  
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:125px}
+body{margin:0;font-family:var(--sans);background:var(--cream);color:var(--ink);line-height:1.65}
+a{text-decoration:none;color:inherit}
+button,input,select{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+img{max-width:100%}
 
-<p class="intro">  
-  From remote Himalayan valleys to peaceful mountain retreats,  
-  discover some of the most beautiful destinations of Himachal Pradesh.  
-</p>  
+:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
 
-<div class="destination-grid">  
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(9,31,27,.97);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(201,165,104,.65);
+  box-shadow:0 8px 28px rgba(0,0,0,.13);
+  padding:12px 5%;
+}
 
-  <a class="destination-card"  
-     href="https://wa.me/919816929669?text=Hello%2C%20I%20am%20interested%20in%20a%20Spiti%20Valley%20tour."  
-     target="_blank" rel="noopener">  
+.header-inner{
+  max-width:1400px;margin:auto;
+  display:flex;flex-direction:column;
+  align-items:center;gap:9px;
+}
 
-    <img  
-      src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=900"  
-      alt="Mountain landscape representing a Himalayan adventure"  
-      loading="lazy">  
+.brand{display:flex;justify-content:center;align-items:center}
+.brand img{display:block;width:190px;max-width:75vw;max-height:62px;object-fit:contain}
 
-    <div class="destination-info">  
-      <small>THE MIDDLE LAND</small>  
-      <h3>Spiti Valley</h3>  
-      <span>Explore the journey ↗</span>  
-    </div>  
-  </a>  
+nav{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:7px 24px}
+nav a{
+  color:#f4f0e7;font-size:11px;font-weight:600;
+  letter-spacing:1.3px;text-transform:uppercase;
+  padding:7px 0;position:relative;transition:color .25s;
+}
+nav a:after{
+  content:"";position:absolute;bottom:0;left:0;
+  width:0;height:1px;background:var(--gold);transition:width .25s;
+}
+nav a:hover{color:var(--gold-light)}
+nav a:hover:after{width:100%}
 
-  <a class="destination-card"  
-     href="https://wa.me/919816929669?text=Hello%2C%20I%20am%20interested%20in%20a%20Kinnaur%20tour."  
-     target="_blank" rel="noopener">  
+/* HERO */
 
-    <img  
-      src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=900"  
-      alt="Mountain lake landscape representing Kinnaur"  
-      loading="lazy">  
+.hero{
+  min-height:680px;padding:110px 8%;
+  display:flex;align-items:center;color:white;position:relative;
+  background:
+    linear-gradient(90deg,rgba(5,24,20,.88),rgba(5,24,20,.60) 48%,rgba(5,24,20,.12)),
+    url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=2000") center/cover;
+}
+.hero:after{
+  content:"";position:absolute;inset:auto 0 0;height:100px;
+  background:linear-gradient(transparent,rgba(9,31,27,.35));
+  pointer-events:none;
+}
+.hero-content{width:100%;max-width:720px;position:relative;z-index:1}
+.eyebrow{color:var(--gold-light);font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase}
+.hero h1{
+  font-family:var(--serif);font-size:clamp(54px,7.5vw,92px);
+  font-weight:500;line-height:.98;letter-spacing:-1.5px;
+  margin:22px 0;text-shadow:0 4px 25px rgba(0,0,0,.25);
+}
+.hero p{max-width:570px;font-size:16px;line-height:1.9;color:#f1eee6;margin-bottom:28px}
+.hero-rule{width:75px;height:2px;background:var(--gold);margin:24px 0}
 
-    <div class="destination-info">  
-      <small>LAND OF GODS</small>  
-      <h3>Kinnaur</h3>  
-      <span>Explore the journey ↗</span>  
-    </div>  
-  </a>  
+/* BUTTONS */
 
-  <a class="destination-card"  
-     href="https://wa.me/919816929669?text=Hello%2C%20I%20am%20interested%20in%20a%20Narkanda%20tour."  
-     target="_blank" rel="noopener">  
+.btn{
+  display:inline-flex;justify-content:center;align-items:center;gap:8px;
+  background:var(--gold);color:var(--forest-deep);
+  padding:13px 21px;min-height:46px;
+  border:1px solid var(--gold);border-radius:3px;
+  cursor:pointer;font-size:12px;font-weight:700;
+  letter-spacing:.7px;text-transform:uppercase;
+  transition:background .25s,color .25s,transform .25s,box-shadow .25s;
+  margin:7px 7px 7px 0;
+}
+.btn:hover{background:var(--gold-light);border-color:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.12)}
+.btn.outline{background:transparent;border-color:rgba(255,255,255,.8);color:white}
+.btn.outline:hover{background:white;color:var(--forest)}
 
-    <img  
-      src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=900"  
-      alt="Peaceful mountain scenery representing Narkanda"  
-      loading="lazy">  
+/* SECTIONS */
 
-    <div class="destination-info">  
-      <small>PEACE IN THE MOUNTAINS</small>  
-      <h3>Narkanda</h3>  
-      <span>Explore the journey ↗</span>  
-    </div>  
-  </a>  
+section.content{padding:88px 7%}
+.section-inner{max-width:1250px;margin:auto}
+.section-title{text-align:center;margin:0 auto 35px}
+.section-title small{color:#a47d43;font-size:10px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase}
+.section-title h2{
+  color:var(--forest);font-family:var(--serif);
+  font-size:clamp(36px,4vw,49px);line-height:1.1;
+  font-weight:500;margin:10px 0;
+}
+.section-title h2:after{content:"";display:block;width:62px;height:2px;background:var(--gold);margin:17px auto 0}
+.intro{text-align:center;max-width:760px;margin:0 auto 38px;line-height:1.95;color:var(--muted);font-size:15px}
+.info{background:#eeede4}
 
-  <a class="destination-card"  
-     href="https://wa.me/919816929669?text=Hello%2C%20I%20am%20interested%20in%20a%20Manali%20tour."  
-     target="_blank" rel="noopener">  
+/* CARDS */
 
-    <img  
-      src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900"  
-      alt="Snow-covered Himalayan mountain scenery representing Manali"  
-      loading="lazy">  
+.cards{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;max-width:1250px;margin:auto;
+}
+.card{
+  background:var(--paper);border:1px solid var(--line);
+  border-radius:4px;overflow:hidden;
+  box-shadow:0 7px 25px rgba(16,45,39,.055);
+  transition:transform .3s,box-shadow .3s;min-width:0;
+}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.card>img{width:100%;height:220px;display:block;object-fit:cover;background:#dce5df;transition:transform .5s}
+.card:hover>img{transform:scale(1.025)}
+.card-body{padding:23px}
+.card h3{color:var(--forest);font-family:var(--serif);font-size:27px;font-weight:600;line-height:1.15;margin:0 0 10px}
+.card p{color:var(--muted);font-size:13px;line-height:1.8;margin:8px 0}
+.price{font-family:var(--serif);font-size:29px;font-weight:700;color:#9b7540;margin:14px 0}
+.price small{font-family:var(--sans);font-size:11px;font-weight:500;color:var(--muted)}
 
-    <div class="destination-info">  
-      <small>THE MOUNTAIN ESCAPE</small>  
-      <h3>Manali</h3>  
-      <span>Explore the journey ↗</span>  
-    </div>  
-  </a>  
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;max-width:1150px;margin:auto}
+.info-box{background:var(--paper);padding:28px;border:1px solid var(--line);border-bottom:3px solid var(--gold);box-shadow:0 8px 25px rgba(16,45,39,.045)}
+.info-box h3{font-family:var(--serif);font-size:26px;color:var(--forest);margin:0 0 8px}
+.info-box p{color:var(--muted);font-size:13px;line-height:1.8}
 
+#packageMessage,#itineraryMessage{color:var(--muted);text-align:center;padding:25px;grid-column:1/-1}
+.itinerary-meta{font-size:12px;color:#987746;font-weight:700}
+
+/* ENQUIRY */
+
+.enquiry-section{
+  background:radial-gradient(circle at 10% 10%,rgba(201,165,104,.11),transparent 30%),linear-gradient(135deg,#102d27,#1d453a);
+  color:white;
+}
+.enquiry-section .section-title h2{color:white}
+.enquiry-section .section-title small{color:var(--gold-light)}
+.enquiry-box{
+  max-width:690px;margin:auto;padding:36px;background:var(--paper);
+  color:var(--forest);border:1px solid rgba(201,165,104,.55);
+  border-top:4px solid var(--gold);border-radius:4px;
+  box-shadow:0 18px 55px rgba(0,0,0,.18);
+}
+.enquiry-box label{display:block;font-size:12px;font-weight:700;margin:17px 0 7px;color:#28443a}
+.enquiry-box input,.enquiry-box select{
+  width:100%;min-height:48px;padding:12px 14px;
+  border:1px solid #d9ded6;border-radius:3px;
+  background:#fbfaf6;color:var(--forest);font-size:14px;
+}
+.enquiry-box input:focus,.enquiry-box select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,165,104,.17)}
+.enquiry-box .btn{width:100%;margin:24px 0 0;min-height:51px}
+.enquiry-note{text-align:center;color:#748078;font-size:11px;margin-top:13px}
+.optional-label{color:#9a865f;font-size:11px;font-weight:400}
+.date-fields{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+
+/* HOTELS AND CABS */
+
+.hotel-card>img,.cab-card>img{height:225px;object-fit:cover}
+.hotel-location{color:#987746!important;font-size:12px!important;font-weight:700}
+.hotel-facilities,.cab-details{color:var(--muted);font-size:12px;line-height:1.8}
+.hotel-empty,.cab-empty{
+  grid-column:1/-1;text-align:center;padding:35px 25px;
+  background:var(--paper);border:1px solid var(--line);color:var(--muted);
+}
+.hotel-empty h3,.cab-empty h3{font-family:var(--serif);color:var(--forest);font-size:27px}
+
+/* HOTEL POPUP */
+
+.hotel-detail-modal{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.78);padding:18px;overflow-y:auto}
+.hotel-detail-content{
+  background:var(--cream);max-width:900px;margin:30px auto;padding:32px;
+  border:1px solid var(--gold);border-radius:5px;position:relative;
+  box-shadow:0 20px 70px rgba(0,0,0,.3);
+}
+.hotel-close{
+  position:absolute;right:15px;top:15px;border:0;
+  background:var(--forest);color:white;border-radius:50%;
+  width:38px;height:38px;font-size:24px;cursor:pointer;
+}
+.hotel-detail-content h2{font-family:var(--serif);font-size:36px;color:var(--forest);padding-right:40px}
+.hotel-photo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:13px;margin-top:20px}
+.hotel-photo-grid img{width:100%;height:195px;object-fit:cover;border-radius:3px;background:#dce5df}
+
+/* PDF */
+
+.pdf-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px}
+.pdf-actions .btn{margin:0}
+
+/* DESTINATIONS */
+
+.destination-gallery{background:#f6f3eb}
+.destination-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;max-width:1250px;margin:auto}
+.destination-card{
+  position:relative;display:block;height:370px;overflow:hidden;
+  border-radius:4px;background:#173c36;color:white;
+  box-shadow:0 10px 30px rgba(16,45,39,.13);
+}
+.destination-card img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .65s}
+.destination-card:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(5,22,18,.93),rgba(5,22,18,.08) 75%)}
+.destination-card:hover img{transform:scale(1.09)}
+.destination-info{position:absolute;z-index:2;left:22px;right:18px;bottom:22px}
+.destination-info small{display:block;color:#e8d2a7;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.destination-info h3{font-family:var(--serif);font-size:34px;line-height:1;font-weight:500;margin:8px 0;color:white}
+.destination-info span{font-size:11px;letter-spacing:.7px;color:#f2eee5}
+.destination-card:hover .destination-info span{color:#e8d2a7}
+
+/* INSTAGRAM */
+
+.instagram-section{
+  background:radial-gradient(circle at 50% 0%,rgba(201,165,104,.12),transparent 40%),linear-gradient(135deg,#102d27,#1d453a);
+  color:white;text-align:center;
+}
+.instagram-section .section-title h2{color:white}
+.instagram-section .section-title small{color:var(--gold-light)}
+.instagram-content{max-width:650px;margin:auto}
+.instagram-logo{
+  width:76px;height:76px;margin:0 auto 20px;border-radius:22px;
+  background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
+  display:grid;place-items:center;color:white;font-family:Arial,sans-serif;font-size:52px;
+}
+.instagram-content h3{font-family:var(--serif);font-size:31px;margin:10px 0;color:white}
+.instagram-content p{line-height:1.9;color:#e0e8e2;font-size:14px}
+.instagram-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  margin-top:20px;padding:14px 28px;
+  background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf);
+  color:white;border-radius:30px;font-size:12px;font-weight:700;
+  letter-spacing:.5px;transition:transform .25s,box-shadow .25s;
+}
+.instagram-btn:hover{transform:translateY(-3px);box-shadow:0 8px 20px #0004}
+
+/* CONTACT */
+
+.cta{
+  background:linear-gradient(rgba(9,31,27,.92),rgba(9,31,27,.94)),url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600") center/cover;
+  color:white;text-align:center;padding:85px 7%;border-top:2px solid var(--gold);
+}
+.cta small{color:var(--gold-light);font-size:10px;font-weight:700;letter-spacing:3px}
+.cta h2{font-family:var(--serif);font-size:clamp(35px,5vw,52px);font-weight:500;margin:12px 0}
+.cta p{color:#e0e8e2;line-height:1.8;font-size:14px}
+
+/* FOOTER */
+
+footer{background:var(--forest-deep);border-top:1px solid var(--gold);color:#d9e3dc;padding:38px 7%;text-align:center;line-height:2;font-size:13px}
+footer b{color:var(--gold-light);letter-spacing:2px;font-size:13px}
+footer a{color:var(--gold-light)}
+footer a:hover{color:white}
+footer p{font-size:11px;color:#aebdb4;margin-top:20px}
+
+/* RESPONSIVE */
+
+@media(min-width:1100px){
+  .header-inner{flex-direction:row;justify-content:space-between}
+  nav{gap:22px}
+}
+@media(max-width:900px){
+  .destination-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:800px){
+  .hero{min-height:590px;padding:85px 7%;background-position:58% center}
+  section.content{padding:70px 6%}
+  nav{gap:5px 16px}
+}
+@media(max-width:600px){
+  header{padding:10px 4%}
+  .brand img{width:165px;max-height:52px}
+  nav{gap:3px 12px}
+  nav a{font-size:10px;letter-spacing:.8px;padding:5px 0}
+  .hero{min-height:570px;padding:70px 7%;background-position:60% center}
+  .hero h1{font-size:clamp(49px,13vw,68px)}
+  .hero p{font-size:14px}
+  section.content{padding:58px 6%}
+  .section-title h2{font-size:37px}
+  .intro{font-size:13px}
+  .cards{grid-template-columns:1fr;gap:19px}
+  .card>img{height:220px}
+  .enquiry-box{padding:23px 18px}
+  .date-fields{grid-template-columns:1fr;gap:0}
+  .hotel-detail-content{padding:22px 17px;margin:5px auto}
+  .hotel-detail-content h2{font-size:30px}
+  .hotel-photo-grid{grid-template-columns:1fr 1fr}
+  .hotel-photo-grid img{height:145px}
+  .cta{padding:65px 6%}
+}
+@media(max-width:520px){
+  .destination-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .destination-card{height:245px}
+  .destination-info{left:12px;right:10px;bottom:13px}
+  .destination-info h3{font-size:25px}
+  .destination-info small{font-size:8px;letter-spacing:1px}
+  .destination-info span{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a class="brand" href="#home" aria-label="Himalayan Odyssey Expedition home">
+      <img src="logo.png" alt="Himalayan Odyssey Expedition">
+    </a>
+
+    <nav aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#packages">Packages</a>
+      <a href="#travel-enquiry">Plan Your Trip</a>
+      <a href="#itineraries">Itineraries</a>
+      <a href="#cabs">Cabs</a>
+      <a href="#gallery">Hotels</a>
+      <a href="#contact">Contact</a>
+      <a href="#instagram">Instagram</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero" id="home">
+  <div class="hero-content">
+    <small class="eyebrow">JOURNEYS BEYOND THE ORDINARY</small>
+    <div class="hero-rule"></div>
+
+    <h1>Discover the<br>Magic of the Himalayas</h1>
+
+    <p>
+      Discover the soul of the Himalayas through thoughtfully
+      crafted journeys, authentic mountain stays and unforgettable
+      experiences across Himachal Pradesh and Spiti Valley.
+    </p>
+
+    <a class="btn" href="#packages">Explore Packages</a>
+    <a class="btn outline" href="https://wa.me/919816929669" target="_blank" rel="noopener">
+      Enquire on WhatsApp
+    </a>
+  </div>
 </div>
 
-  </div>  
-</section>  <!-- PACKAGES -->  <section class="content info" id="packages">  
-  <div class="section-inner">  
-    <div class="section-title">  
-      <small>FIND YOUR NEXT JOURNEY</small>  
-      <h2>Our Travel Packages</h2>  
-    </div>  <div id="packageList" class="cards">  
-  <p id="packageMessage">Loading available packages...</p>  
+<!-- INTRODUCTION -->
+<section class="content">
+  <div class="section-inner">
+    <div class="section-title">
+      <small>TRAVEL WITH US</small>
+      <h2>Explore the Himalayas</h2>
+    </div>
+
+    <p class="intro">
+      From the dramatic landscapes of Spiti Valley to the beautiful
+      mountain towns of Himachal Pradesh, discover thoughtfully
+      planned journeys shaped around local experiences, scenic
+      routes and the warmth of mountain hospitality.
+    </p>
+  </div>
+</section>
+
+<!-- DESTINATIONS -->
+<section class="content destination-gallery" id="destinations">
+  <div class="section-inner">
+
+    <div class="section-title">
+      <small>EXPLORE THE MOUNTAINS</small>
+      <h2>Discover Our Destinations</h2>
+    </div>
+
+    <p class="intro">
+      From remote Himalayan valleys to peaceful mountain retreats,
+      discover some of the most beautiful destinations of Himachal Pradesh.
+    </p>
+
+    <div class="destination-grid">
+
+      <a class="destination-card"
+         href="https://wa.me/919816929669?text=Hello%2C%20I%20am%20interested%20in%20a%20Spiti%20Valley%20tour."
+         target="_blank" rel="noopener">
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=900"
+             alt="Himalayan mountain landscape" loading="lazy">
+        <div class="destination-info">
+          <small>THE MIDDLE LAND</small>
+          <h3>Spiti Valley</h3>
+          <span>Explore the journey ↗</span>
+        </div>
+      </a>
+
+      <a class="destination-card"
+         href="https://wa.me/919816929669?text=Hello%2C%20I%20am%20interested%20in%20a%20Kinnaur%20tour."
+         target="_blank" rel="noopener">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=900"
+             alt="Mountain lake landscape" loading="lazy">
+        <div class="destination-info">
+          <small>LAND OF GODS</small>
+          <h3>Kinnaur</h3>
+          <span>Explore the journey ↗</span>
+        </div>
+      </a>
+
+      <a class="destination-card"
+         href="https://wa.me/919816929669?text=Hello%2C%20I%20am%20interested%20in%20a%20Narkanda%20tour."
+         target="_blank" rel="noopener">
+        <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=900"
+             alt="Peaceful mountain scenery" loading="lazy">
+        <div class="destination-info">
+          <small>PEACE IN THE MOUNTAINS</small>
+          <h3>Narkanda</h3>
+          <span>Explore the journey ↗</span>
+        </div>
+      </a>
+
+      <a class="destination-card"
+         href="https://wa.me/919816929669?text=Hello%2C%20I%20am%20interested%20in%20a%20Manali%20tour."
+         target="_blank" rel="noopener">
+        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900"
+             alt="Snow-covered Himalayan mountains" loading="lazy">
+        <div class="destination-info">
+          <small>THE MOUNTAIN ESCAPE</small>
+          <h3>Manali</h3>
+          <span>Explore the journey ↗</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="content info" id="packages">
+  <div class="section-inner">
+    <div class="section-title">
+      <small>FIND YOUR NEXT JOURNEY</small>
+      <h2>Our Travel Packages</h2>
+    </div>
+
+    <div id="packageList" class="cards">
+      <p id="packageMessage">Loading available packages...</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRAVEL ENQUIRY -->
+<section class="content enquiry-section" id="travel-enquiry">
+  <div class="section-inner">
+    <div class="section-title">
+      <small>YOUR JOURNEY STARTS HERE</small>
+      <h2>Plan Your Himalayan Adventure</h2>
+    </div>
+
+    <p class="intro" style="color:#e0e8e2">
+      Share your travel requirements with us.
+      Our team will help you plan a memorable Himalayan holiday.
+    </p>
+
+    <div class="enquiry-box">
+      <form id="travelEnquiryForm">
+
+        <label for="guestName">Your Full Name *</label>
+        <input type="text" id="guestName" placeholder="Enter your name"
+          maxlength="100" autocomplete="name" required>
+
+        <label for="guestPhone">Your Phone Number *</label>
+        <input type="tel" id="guestPhone" placeholder="Enter 10-digit mobile number"
+          inputmode="numeric" pattern="[6-9][0-9]{9}" maxlength="10"
+          minlength="10" autocomplete="tel" required>
+
+        <label for="travellers">Number of Persons *</label>
+        <input type="number" id="travellers" min="1" max="100" step="1"
+          placeholder="How many people are travelling?" required>
+
+        <label for="destination">Travel Destination *</label>
+        <input type="text" id="destination"
+          placeholder="e.g. Spiti Valley, Manali, Kinnaur"
+          maxlength="150" required>
+
+        <label for="travelMonth">Travel Month *</label>
+        <select id="travelMonth" required>
+          <option value="">Select travel month</option>
+          <option>January</option>
+          <option>February</option>
+          <option>March</option>
+          <option>April</option>
+          <option>May</option>
+          <option>June</option>
+          <option>July</option>
+          <option>August</option>
+          <option>September</option>
+          <option>October</option>
+          <option>November</option>
+          <option>December</option>
+        </select>
+
+        <div class="date-fields">
+          <div>
+            <label for="startDate">Travel Start Date <span class="optional-label">(Optional)</span></label>
+            <input type="date" id="startDate">
+          </div>
+
+          <div>
+            <label for="endDate">Travel End Date <span class="optional-label">(Optional)</span></label>
+            <input type="date" id="endDate">
+          </div>
+        </div>
+
+        <button type="submit" class="btn">Submit Enquiry on WhatsApp</button>
+
+        <p class="enquiry-note">
+          Your enquiry will open in WhatsApp. You can review it and press Send.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ITINERARIES -->
+<section class="content" id="itineraries">
+  <div class="section-inner">
+    <div class="section-title">
+      <small>PLAN YOUR JOURNEY</small>
+      <h2>Tour Itineraries</h2>
+    </div>
+
+    <p class="intro">
+      Explore our detailed tour brochures, including travel routes,
+      sightseeing information and trip details. View or download an
+      itinerary to plan your Himalayan journey.
+    </p>
+
+    <div id="itineraryList" class="cards">
+      <p id="itineraryMessage">Loading available itineraries...</p>
+    </div>
+  </div>
+</section>
+
+<!-- CABS -->
+<section class="content" id="cabs">
+  <div class="section-inner">
+    <div class="section-title">
+      <small>TRAVEL IN COMFORT</small>
+      <h2>Our Vehicles & Cabs</h2>
+    </div>
+
+    <p class="intro">
+      Choose from our available vehicles for your Himalayan journey.
+      View vehicle photographs, seating capacity and daily rates.
+      Contact us directly for availability and bookings.
+    </p>
+
+    <div id="cabList" class="cards">
+      <div class="cab-empty">Loading available vehicles...</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOTELS -->
+<section class="content info" id="gallery">
+  <div class="section-inner">
+    <div class="section-title">
+      <small>STAYS IN THE HIMALAYAS</small>
+      <h2>Hotels & Properties</h2>
+    </div>
+
+    <p class="intro">
+      Explore our recommended mountain stays, hotels and homestays.
+      View property details and photographs before planning your journey.
+    </p>
+
+    <div id="galleryList" class="cards">
+      <div class="hotel-empty">Loading hotels and properties...</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOTEL DETAILS POPUP -->
+<div id="hotelDetailModal" class="hotel-detail-modal"
+     role="dialog" aria-modal="true" aria-label="Property details">
+
+  <div class="hotel-detail-content">
+    <button type="button" class="hotel-close" id="closeHotelDetails"
+      aria-label="Close property details">×</button>
+
+    <div id="hotelDetailBody"></div>
+  </div>
 </div>
 
-  </div>  
-</section>  <!-- TRAVEL ENQUIRY -->  <section class="content enquiry-section" id="travel-enquiry">  
-  <div class="section-inner">  
-    <div class="section-title">  
-      <small>YOUR JOURNEY STARTS HERE</small>  
-      <h2>Plan Your Himalayan Adventure</h2>  
-    </div>  <p class="intro" style="color:#e0e8e2">  
-  Share your travel requirements with us.  
-  Our team will help you plan a memorable Himalayan holiday.  
-</p>  
+<!-- OTHER SERVICES -->
+<section class="content">
+  <div class="section-inner">
+    <div class="section-title">
+      <small>TRAVEL SERVICES</small>
+      <h2>More Than Just Tours</h2>
+    </div>
 
-<div class="enquiry-box">  
-  <form id="travelEnquiryForm">  
+    <div class="info-grid">
+      <div class="info-box">
+        <h3>Hotel Enquiries</h3>
+        <p>Looking for comfortable stays in the mountains?</p>
+        <a class="btn" href="https://wa.me/919816929669?text=I%20need%20a%20hotel%20enquiry">Enquire Now</a>
+      </div>
 
-    <label for="guestName">Your Full Name *</label>  
-    <input type="text" id="guestName" placeholder="Enter your name"  
-      maxlength="100" autocomplete="name" required>  
+      <div class="info-box">
+        <h3>Cab & Transport</h3>
+        <p>Need a vehicle for your Himachal journey?</p>
+        <a class="btn" href="#cabs">View Available Cabs</a>
+      </div>
 
-    <label for="guestPhone">Your Phone Number *</label>  
-    <input type="tel" id="guestPhone" placeholder="Enter 10-digit mobile number"  
-      inputmode="numeric" pattern="[6-9][0-9]{9}" maxlength="10"  
-      minlength="10" autocomplete="tel" required>  
+      <div class="info-box">
+        <h3>Custom Packages</h3>
+        <p>Tell us your dates, group size and travel preferences.</p>
+        <a class="btn" href="#travel-enquiry">Plan My Trip</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <label for="travellers">Number of Persons *</label>  
-    <input type="number" id="travellers" min="1" max="100" step="1"  
-      placeholder="How many people are travelling?" required>  
+<!-- CONTACT -->
+<div class="cta" id="contact">
+  <small>LET'S PLAN YOUR NEXT ADVENTURE</small>
+  <h2>Ready to Explore the Himalayas?</h2>
 
-    <label for="destination">Travel Destination *</label>  
-    <input type="text" id="destination"  
-      placeholder="e.g. Spiti Valley, Manali, Kinnaur"  
-      maxlength="150" required>  
+  <p>
+    Contact Himalayan Odyssey Expedition for packages,
+    bookings and travel enquiries.
+  </p>
 
-    <label for="travelMonth">Travel Month *</label>  
-    <select id="travelMonth" required>  
-      <option value="">Select travel month</option>  
-      <option>January</option>  
-      <option>February</option>  
-      <option>March</option>  
-      <option>April</option>  
-      <option>May</option>  
-      <option>June</option>  
-      <option>July</option>  
-      <option>August</option>  
-      <option>September</option>  
-      <option>October</option>  
-      <option>November</option>  
-      <option>December</option>  
-    </select>  
-
-    <div class="date-fields">  
-      <div>  
-        <label for="startDate">Travel Start Date <span class="optional-label">(Optional)</span></label>  
-        <input type="date" id="startDate">  
-      </div>  
-
-      <div>  
-        <label for="endDate">Travel End Date <span class="optional-label">(Optional)</span></label>  
-        <input type="date" id="endDate">  
-      </div>  
-    </div>  
-
-    <button type="submit" class="btn">Submit Enquiry on WhatsApp</button>  
-
-    <p class="enquiry-note">  
-      Your enquiry will open in WhatsApp. You can review it and press Send.  
-    </p>  
-  </form>  
+  <a class="btn"
+    href="https://wa.me/919816929669?text=Hello%2C%20I%20want%20to%20plan%20a%20Himalayan%20trip."
+    target="_blank" rel="noopener">
+    Chat on WhatsApp
+  </a>
 </div>
 
-  </div>  
-</section>  <!-- ITINERARIES -->  <section class="content" id="itineraries">  
-  <div class="section-inner">  
-    <div class="section-title">  
-      <small>PLAN YOUR JOURNEY</small>  
-      <h2>Tour Itineraries</h2>  
-    </div>  <p class="intro">  
-  Explore our detailed tour brochures, including travel routes,  
-  sightseeing information and trip details. View or download an  
-  itinerary to plan your Himalayan journey.  
-</p>  
+<!-- INSTAGRAM -->
+<section class="content instagram-section" id="instagram">
+  <div class="section-inner">
+    <div class="section-title">
+      <small>FOLLOW OUR JOURNEY</small>
+      <h2>Find Us on Instagram</h2>
+    </div>
 
-<div id="itineraryList" class="cards">  
-  <p id="itineraryMessage">Loading available itineraries...</p>  
-</div>
+    <div class="instagram-content">
+      <div class="instagram-logo" aria-label="Instagram">◎</div>
 
-  </div>  
-</section>  <!-- CABS -->  <section class="content" id="cabs">  
-  <div class="section-inner">  
-    <div class="section-title">  
-      <small>TRAVEL IN COMFORT</small>  
-      <h2>Our Vehicles & Cabs</h2>  
-    </div>  <p class="intro">  
-  Choose from our available vehicles for your Himalayan journey.  
-  View vehicle photographs, seating capacity and daily rates.  
-  Contact us directly for availability and bookings.  
-</p>  
+      <h3>@kxnwxrvineet</h3>
 
-<div id="cabList" class="cards">  
-  <div class="cab-empty">Loading available vehicles...</div>  
-</div>
+      <p>
+        Explore our Himalayan adventures, beautiful mountain
+        destinations, travel photographs and unforgettable
+        guest experiences.
+      </p>
 
-  </div>  
-</section>  <!-- HOTELS -->  <section class="content info" id="gallery">  
-  <div class="section-inner">  
-    <div class="section-title">  
-      <small>STAYS IN THE HIMALAYAS</small>  
-      <h2>Hotels & Properties</h2>  
-    </div>  <p class="intro">  
-  Explore our recommended mountain stays, hotels and homestays.  
-  View property details and photographs before planning your journey.  
-</p>  
+      <a class="instagram-btn"
+        href="https://www.instagram.com/kxnwxrvineet/"
+        target="_blank" rel="noopener noreferrer">
+        Follow Us on Instagram ↗
+      </a>
+    </div>
+  </div>
+</section>
 
-<div id="galleryList" class="cards">  
-  <div class="hotel-empty">Loading hotels and properties...</div>  
-</div>
+<!-- FOOTER -->
+<footer>
+  <b>HIMALAYAN ODYSSEY EXPEDITION</b><br>
+  Narkanda, Himachal Pradesh<br>
+  WhatsApp: +91 98169 29669<br>
 
-  </div>  
-</section>  <!-- HOTEL DETAILS POPUP -->  <div id="hotelDetailModal" class="hotel-detail-modal" role="dialog"  
-  aria-modal="true" aria-label="Property details">    <div class="hotel-detail-content">  
-    <button type="button" class="hotel-close" id="closeHotelDetails"  
-      aria-label="Close property details">×</button>  <div id="hotelDetailBody"></div>
+  <a href="https://www.instagram.com/kxnwxrvineet/"
+     target="_blank" rel="noopener noreferrer">Instagram</a>
+  <br>
 
-  </div>  
-</div>  <!-- OTHER SERVICES -->  <section class="content">  
-  <div class="section-inner">  
-    <div class="section-title">  
-      <small>TRAVEL SERVICES</small>  
-      <h2>More Than Just Tours</h2>  
-    </div>  <div class="info-grid">  
-  <div class="info-box">  
-    <h3>Hotel Enquiries</h3>  
-    <p>Looking for comfortable stays in the mountains?</p>  
-    <a class="btn" href="https://wa.me/919816929669?text=I%20need%20a%20hotel%20enquiry">  
-      Enquire Now  
-    </a>  
-  </div>  
+  <a href="admin.html">Admin Login</a>
 
-  <div class="info-box">  
-    <h3>Cab & Transport</h3>  
-    <p>Need a vehicle for your Himachal journey?</p>  
-    <a class="btn" href="#cabs">View Available Cabs</a>  
-  </div>  
+  <p>© 2026 Himalayan Odyssey Expedition. All rights reserved.</p>
+</footer>
 
-  <div class="info-box">  
-    <h3>Custom Packages</h3>  
-    <p>Tell us your dates, group size and travel preferences.</p>  
-    <a class="btn" href="#travel-enquiry">Plan My Trip</a>  
-  </div>  
-</div>
-
-  </div>  
-</section>  <!-- CONTACT -->  <div class="cta" id="contact">  
-  <small>LET'S PLAN YOUR NEXT ADVENTURE</small>  
-  <h2>Ready to Explore the Himalayas?</h2>    <p>  
-    Contact Himalayan Odyssey Expedition for packages,  
-    bookings and travel enquiries.  
-  </p>  <a class="btn"  
-href="https://wa.me/919816929669?text=Hello%2C%20I%20want%20to%20plan%20a%20Himalayan%20trip."  
-target="_blank" rel="noopener">
-Chat on WhatsApp
-</a>
-
-</div>  <!-- INSTAGRAM -->  <section class="content instagram-section" id="instagram">  
-  <div class="section-inner">  
-    <div class="section-title">  
-      <small>FOLLOW OUR JOURNEY</small>  
-      <h2>Find Us on Instagram</h2>  
-    </div>  <div class="instagram-content">  
-  <div class="instagram-logo" aria-label="Instagram">◎</div>  
-
-  <h3>@kxnwxrvineet</h3>  
-
-  <p>  
-    Explore our Himalayan adventures, beautiful mountain  
-    destinations, travel photographs and unforgettable  
-    guest experiences.  
-  </p>  
-
-  <a class="instagram-btn"  
-    href="https://www.instagram.com/kxnwxrvineet/"  
-    target="_blank" rel="noopener noreferrer">  
-    Follow Us on Instagram ↗  
-  </a>  
-</div>
-
-  </div>  
-</section>  <!-- FOOTER -->  <footer>  
-  <b>HIMALAYAN ODYSSEY EXPEDITION</b><br>  
-  Narkanda, Himachal Pradesh<br>  
-  WhatsApp: +91 98169 29669<br>  <a href="https://www.instagram.com/kxnwxrvineet/"  
-target="_blank" rel="noopener noreferrer">Instagram</a>
-<br>
-
-<a href="admin.html">Admin Login</a>
-
-  <p>© 2026 Himalayan Odyssey Expedition. All rights reserved.</p>  
-</footer> 
+<!-- WEBSITE DIAGNOSTIC -->
 <script>
 (function () {
   function report(message) {
     var box = document.getElementById("hoe-diagnostic");
+
     if (!box) {
       box = document.createElement("div");
       box.id = "hoe-diagnostic";
+
       box.style.cssText =
         "position:fixed;top:10px;left:10px;right:10px;" +
         "z-index:999999;background:#fff0d9;color:#8b2500;" +
         "padding:15px;border:2px solid #8b2500;border-radius:8px;" +
         "font-size:14px;overflow-wrap:anywhere;";
+
       document.body.appendChild(box);
     }
+
     box.textContent = "Website diagnostic: " + message;
   }
-
-  report("Diagnostic active. Checking JavaScript...");
 
   window.addEventListener("error", function (e) {
     report(e.message || "JavaScript error");
@@ -1216,628 +735,687 @@ target="_blank" rel="noopener noreferrer">Instagram</a>
         : String(e.reason)
     );
   });
+
+  window.addEventListener("DOMContentLoaded", function () {
+    report("Diagnostic active. Checking website...");
+  });
 })();
 </script>
 
-  <script>  
-"use strict";  
-  
-/* =====================================  
-   SUPABASE CONFIGURATION  
-===================================== */  
-  
-const SUPABASE_URL = "https://ynkoiuyjevclypumnyes.supabase.co";  
-const SUPABASE_KEY = "sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-";  
-  
-const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);  
-  
-  
-/* =====================================  
-   COMMON HELPERS  
-===================================== */  
-  
-function safe(value) {  
-  return String(value ?? "").replace(/[&<>"']/g, c => ({  
-    "&":"&amp;",  
-    "<":"&lt;",  
-    ">":"&gt;",  
-    '"':"&quot;",  
-    "'":"&#39;"  
-  }[c]));  
-}  
-  
-function rupees(value) {  
-  return "₹" + Number(value || 0).toLocaleString("en-IN");  
-}  
-  
-function whatsappLink(message) {  
-  return "https://wa.me/919816929669?text=" + encodeURIComponent(message);  
-}  
-  
-function imageFallback(label, height = 220) {  
-  return `  
-    <div style="  
-      height:${height}px;  
-      display:grid;  
-      place-items:center;  
-      text-align:center;  
-      padding:20px;  
-      background:#dce5df;  
-      color:#52645e;  
-      font-size:13px;  
-    ">${safe(label)}</div>  
-  `;  
-}  
-  
-  
-/* =====================================  
-   LOAD PUBLIC PACKAGES  
-===================================== */  
-  
-async function loadPackages() {  
-  const list = document.getElementById("packageList");  
-  
-  try {  
-    const { data, error } = await db  
-      .from("packages")  
-      .select("*")  
-      .order("created_at", { ascending:false });  
-  
-    if (error) throw error;  
-  
-    if (!data || !data.length) {  
-      list.innerHTML = `  
-        <div class="hotel-empty">  
-          <h3>New Journeys Coming Soon</h3>  
-          <p>Contact us for our latest Himalayan tour packages.</p>  
-          <a class="btn" href="${whatsappLink("Please share your available tour packages")}">Enquire Now</a>  
-        </div>`;  
-      return;  
-    }  
-  
-    window.publicPackages = data;  
-  
-    list.innerHTML = data.map(p => {  
-      const image = p.image_url || p.cover_image || "";  
-      const photo = image  
-        ? `<img src="${safe(image)}" alt="${safe(p.name)}" loading="lazy"  
-             onerror="this.outerHTML=window.imageFallback('Package photograph unavailable',220)">`  
-        : imageFallback("Himalayan Journey",190);  
-  
-      const message = "Hello, I am interested in " +  
-        (p.name || "your travel package") + ". Please share details.";  
-  
-      return `  
-        <article class="card">  
-          ${photo}  
-          <div class="card-body">  
-            <h3>${safe(p.name)}</h3>  
-            <p>${safe(p.destination)}</p>  
-            <p>${safe(p.duration)}</p>  
-            ${p.inclusions ? `<p>${safe(p.inclusions)}</p>` : ""}  
-            <div class="price">  
-              ${rupees(p.price_per_person)}  
-              <small>per person</small>  
-            </div>  
-            <a class="btn" href="${whatsappLink(message)}" target="_blank" rel="noopener">  
-              Book on WhatsApp  
-            </a>  
-            <button class="btn" type="button" data-view-itinerary="${safe(p.id)}">  
-              View Itinerary  
-            </button>  
-          </div>  
-        </article>`;  
-    }).join("");  
-  
-  } catch (error) {  
-    console.error("Package loading error:", error);  
-    list.innerHTML = `  
-      <div class="hotel-empty">  
-        Packages could not be loaded right now.  
-        Please contact us on WhatsApp for available tours.  
-      </div>`;  
-  }  
-}  
-  
-window.imageFallback = imageFallback;  
-  
-  
-/* =====================================  
-   PACKAGE ITINERARY VIEW  
-===================================== */  
-  
-window.showItinerary = function(id) {  
-  const p = (window.publicPackages || []).find(  
-    x => String(x.id) === String(id)  
-  );  
-  
-  if (!p) return;  
-  
-  const content = [  
-    p.name || "",  
-    p.destination || "",  
-    p.duration || "",  
-    p.itinerary || "",  
-    p.inclusions ? "Inclusions: " + p.inclusions : "",  
-    p.exclusions ? "Exclusions: " + p.exclusions : ""  
-  ].filter(Boolean).join("\n\n");  
-  
-  const w = window.open("", "_blank");  
-  
-  if (!w) {  
-    alert("Please allow pop-ups to view the itinerary.");  
-    return;  
-  }  
-  
-  const escaped = safe(content).replace(/\n/g, "<br>");  
-  
-  w.document.write(`  
-    <!DOCTYPE html>  
-    <html>  
-    <head>  
-      <title>Tour Itinerary</title>  
-      <meta name="viewport" content="width=device-width,initial-scale=1">  
-      <style>  
-        body{  
-          font-family:Arial,sans-serif;  
-          line-height:1.8;  
-          padding:25px;  
-          max-width:750px;  
-          margin:auto;  
-          color:#18332e;  
-          background:#f6f3eb;  
-        }  
-        h1{color:#102d27}  
-        hr{border:0;border-top:2px solid #c9a568}  
-      </style>  </head>  
-<body>  
-  <h1>Himalayan Odyssey Expedition</h1>  
-  <hr>  
-  <div>${escaped}</div>  
-</body>  
-</html>
+<!-- MAIN WEBSITE JAVASCRIPT -->
+<script>
+"use strict";
 
-`);
+/* =====================================
+   SUPABASE CONFIGURATION
+===================================== */
 
-w.document.close();
+const SUPABASE_URL = "https://ynkoiuyjevclypumnyes.supabase.co";
+const SUPABASE_KEY = "sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-";
+
+if (!window.supabase) {
+  throw new Error("Supabase library did not load. Please check your internet connection.");
+}
+
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+
+/* =====================================
+   COMMON HELPERS
+===================================== */
+
+function safe(value) {
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[c]));
+}
+
+function rupees(value) {
+  return "₹" + Number(value || 0).toLocaleString("en-IN");
+}
+
+function whatsappLink(message) {
+  return "https://wa.me/919816929669?text=" + encodeURIComponent(message);
+}
+
+function imageFallback(label, height = 220) {
+  return `
+    <div style="
+      height:${height}px;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      padding:20px;
+      background:#dce5df;
+      color:#52645e;
+      font-size:13px;
+    ">${safe(label)}</div>
+  `;
+}
+
+window.imageFallback = imageFallback;
+
+
+/* =====================================
+   LOAD PUBLIC PACKAGES
+===================================== */
+
+async function loadPackages() {
+  const list = document.getElementById("packageList");
+
+  try {
+    const { data, error } = await db
+      .from("packages")
+      .select("*")
+      .order("created_at", { ascending:false });
+
+    if (error) throw error;
+
+    if (!data || !data.length) {
+      list.innerHTML = `
+        <div class="hotel-empty">
+          <h3>New Journeys Coming Soon</h3>
+          <p>Contact us for our latest Himalayan tour packages.</p>
+          <a class="btn" href="${whatsappLink("Please share your available tour packages")}">Enquire Now</a>
+        </div>`;
+      return;
+    }
+
+    window.publicPackages = data;
+
+    list.innerHTML = data.map(p => {
+      const image = p.image_url || p.cover_image || "";
+
+      const photo = image
+        ? `<img src="${safe(image)}" alt="${safe(p.name)}" loading="lazy"
+             onerror="this.outerHTML=window.imageFallback('Package photograph unavailable',220)">`
+        : imageFallback("Himalayan Journey",190);
+
+      const message = "Hello, I am interested in " +
+        (p.name || "your travel package") + ". Please share details.";
+
+      return `
+        <article class="card">
+          ${photo}
+
+          <div class="card-body">
+            <h3>${safe(p.name)}</h3>
+            <p>${safe(p.destination)}</p>
+            <p>${safe(p.duration)}</p>
+
+            ${p.inclusions ? `<p>${safe(p.inclusions)}</p>` : ""}
+
+            <div class="price">
+              ${rupees(p.price_per_person)}
+              <small>per person</small>
+            </div>
+
+            <a class="btn" href="${whatsappLink(message)}" target="_blank" rel="noopener">
+              Book on WhatsApp
+            </a>
+
+            <button class="btn" type="button" data-view-itinerary="${safe(p.id)}">
+              View Itinerary
+            </button>
+          </div>
+        </article>`;
+    }).join("");
+
+  } catch (error) {
+    console.error("Package loading error:", error);
+
+    list.innerHTML = `
+      <div class="hotel-empty">
+        <h3>Packages Temporarily Unavailable</h3>
+        <p>Packages could not be loaded right now. Please contact us on WhatsApp for available tours.</p>
+        <a class="btn" href="${whatsappLink("Please share your available tour packages")}">Contact Us</a>
+      </div>`;
+  }
+}
+
+
+/* =====================================
+   PACKAGE ITINERARY VIEW
+===================================== */
+
+window.showItinerary = function(id) {
+  const p = (window.publicPackages || []).find(
+    x => String(x.id) === String(id)
+  );
+
+  if (!p) return;
+
+  const content = [
+    p.name || "",
+    p.destination || "",
+    p.duration || "",
+    p.itinerary || "",
+    p.inclusions ? "Inclusions: " + p.inclusions : "",
+    p.exclusions ? "Exclusions: " + p.exclusions : ""
+  ].filter(Boolean).join("\n\n");
+
+  const w = window.open("", "_blank");
+
+  if (!w) {
+    alert("Please allow pop-ups to view the itinerary.");
+    return;
+  }
+
+  const escaped = safe(content).replace(/\n/g, "<br>");
+
+  w.document.write(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Tour Itinerary</title>
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <style>
+        body{
+          font-family:Arial,sans-serif;
+          line-height:1.8;
+          padding:25px;
+          max-width:750px;
+          margin:auto;
+          color:#18332e;
+          background:#f6f3eb;
+        }
+        h1{color:#102d27}
+        hr{border:0;border-top:2px solid #c9a568}
+      </style>
+    </head>
+    <body>
+      <h1>Himalayan Odyssey Expedition</h1>
+      <hr>
+      <div>${escaped}</div>
+    </body>
+    </html>
+  `);
+
+  w.document.close();
 };
 
 document.getElementById("packageList").addEventListener("click", function(event) {
-const button = event.target.closest("[data-view-itinerary]");
-if (!button) return;
-window.showItinerary(button.getAttribute("data-view-itinerary"));
+  const button = event.target.closest("[data-view-itinerary]");
+
+  if (!button) return;
+
+  window.showItinerary(button.getAttribute("data-view-itinerary"));
 });
 
+
 /* =====================================
-LOAD PUBLISHED PDF ITINERARIES
+   LOAD PUBLISHED PDF ITINERARIES
 ===================================== */
 
 async function loadItineraries() {
-const list = document.getElementById("itineraryList");
+  const list = document.getElementById("itineraryList");
 
-try {
-const { data, error } = await db
-.from("itineraries")
-.select(  id,   title,   destination,   duration_days,   duration_nights,   price,   summary,   pdf_url,   published,   created_at  )
-.eq("published", true)
-.order("created_at", { ascending:false });
+  try {
+    const { data, error } = await db
+      .from("itineraries")
+      .select("id, title, destination, duration_days, duration_nights, price, summary, pdf_url, published, created_at")
+      .eq("published", true)
+      .order("created_at", { ascending:false });
 
-if (error) throw error;  
+    if (error) throw error;
 
-if (!data || !data.length) {  
-  list.innerHTML = `  
-    <div class="hotel-empty">  
-      <h3>Plan Your Himalayan Journey</h3>  
-      <p>Our detailed tour brochures will appear here. Contact us for itinerary details.</p>  
-      <a class="btn" href="${whatsappLink("Please share your tour itineraries")}">Request Itinerary</a>  
-    </div>`;  
-  return;  
-}  
+    if (!data || !data.length) {
+      list.innerHTML = `
+        <div class="hotel-empty">
+          <h3>Plan Your Himalayan Journey</h3>
+          <p>Our detailed tour brochures will appear here. Contact us for itinerary details.</p>
+          <a class="btn" href="${whatsappLink("Please share your tour itineraries")}">Request Itinerary</a>
+        </div>`;
+      return;
+    }
 
-const available = data.filter(item => item.pdf_url);  
+    const available = data.filter(item => item.pdf_url);
 
-if (!available.length) {  
-  list.innerHTML = `  
-    <div class="hotel-empty">  
-      <h3>Itineraries Coming Soon</h3>  
-      <p>Contact us for tour information and available brochures.</p>  
-      <a class="btn" href="${whatsappLink("Please share your tour itineraries")}">Request Itinerary</a>  
-    </div>`;  
-  return;  
-}  
+    if (!available.length) {
+      list.innerHTML = `
+        <div class="hotel-empty">
+          <h3>Itineraries Coming Soon</h3>
+          <p>Contact us for tour information and available brochures.</p>
+          <a class="btn" href="${whatsappLink("Please share your tour itineraries")}">Request Itinerary</a>
+        </div>`;
+      return;
+    }
 
-list.innerHTML = available.map(item => {  
-  const duration = [  
-    item.duration_days ? item.duration_days + " Days" : "",  
-    item.duration_nights ? item.duration_nights + " Nights" : ""  
-  ].filter(Boolean).join(" / ");  
+    list.innerHTML = available.map(item => {
+      const duration = [
+        item.duration_days ? item.duration_days + " Days" : "",
+        item.duration_nights ? item.duration_nights + " Nights" : ""
+      ].filter(Boolean).join(" / ");
 
-  const pdfUrl = item.pdf_url;  
-  const downloadUrl = pdfUrl +  
-    (pdfUrl.includes("?") ? "&" : "?") +  
-    "download=" + encodeURIComponent((item.title || "itinerary") + ".pdf");  
+      const pdfUrl = item.pdf_url;
 
-  const message = "Hello, I am interested in the " +  
-    (item.title || "tour itinerary") + ". Please share more details.";  
+      const downloadUrl = pdfUrl +
+        (pdfUrl.includes("?") ? "&" : "?") +
+        "download=" + encodeURIComponent((item.title || "itinerary") + ".pdf");
 
-  return `  
-    <article class="card">  
-      <div style="  
-        height:150px;  
-        background:linear-gradient(135deg,#102d27,#315e50);  
-        display:grid;  
-        place-items:center;  
-        color:#e9c58d;  
-        text-align:center;  
-        padding:20px;  
-      ">  
-        <div>  
-          <div style="font-size:38px">📄</div>  
-          <b>HIMALAYAN ODYSSEY EXPEDITION</b>  
-          <div style="font-size:12px;margin-top:6px">TOUR BROCHURE</div>  
-        </div>  
-      </div>  
+      const message = "Hello, I am interested in the " +
+        (item.title || "tour itinerary") + ". Please share more details.";
 
-      <div class="card-body">  
-        <h3>${safe(item.title)}</h3>  
-        <p>${safe(item.destination || "Himalayan Tour")}</p>  
+      return `
+        <article class="card">
 
-        ${duration ? `<p class="itinerary-meta">${safe(duration)}</p>` : ""}  
+          <div style="
+            height:150px;
+            background:linear-gradient(135deg,#102d27,#315e50);
+            display:grid;
+            place-items:center;
+            color:#e9c58d;
+            text-align:center;
+            padding:20px;
+          ">
+            <div>
+              <div style="font-size:38px">📄</div>
+              <b>HIMALAYAN ODYSSEY EXPEDITION</b>
+              <div style="font-size:12px;margin-top:6px">TOUR BROCHURE</div>
+            </div>
+          </div>
 
-        ${item.price ? `  
-          <div class="price">  
-            ${rupees(item.price)}  
-            <small>per person</small>  
-          </div>` : ""}  
+          <div class="card-body">
+            <h3>${safe(item.title)}</h3>
+            <p>${safe(item.destination || "Himalayan Tour")}</p>
 
-        ${item.summary ? `<p>${safe(item.summary)}</p>` : ""}  
+            ${duration ? `<p class="itinerary-meta">${safe(duration)}</p>` : ""}
 
-        <div class="pdf-actions">  
-          <a class="btn" href="${safe(pdfUrl)}" target="_blank" rel="noopener">View PDF</a>  
-          <a class="btn" href="${safe(downloadUrl)}">Download PDF</a>  
-        </div>  
+            ${item.price ? `
+              <div class="price">
+                ${rupees(item.price)}
+                <small>per person</small>
+              </div>` : ""}
 
-        <a class="btn" href="${whatsappLink(message)}" target="_blank" rel="noopener">  
-          Enquire on WhatsApp  
-        </a>  
-      </div>  
-    </article>`;  
-}).join("");
+            ${item.summary ? `<p>${safe(item.summary)}</p>` : ""}
 
-} catch (error) {
-console.error("Itinerary loading error:", error);
-list.innerHTML =    <div class="hotel-empty">   <h3>Itineraries Temporarily Unavailable</h3>   <p>Please contact us on WhatsApp for our latest tour brochures.</p>   <a class="btn" href="${whatsappLink("Please share your tour itineraries")}">Request Itinerary</a>   </div>;
+            <div class="pdf-actions">
+              <a class="btn" href="${safe(pdfUrl)}" target="_blank" rel="noopener">View PDF</a>
+              <a class="btn" href="${safe(downloadUrl)}">Download PDF</a>
+            </div>
+
+            <a class="btn" href="${whatsappLink(message)}" target="_blank" rel="noopener">
+              Enquire on WhatsApp
+            </a>
+          </div>
+        </article>`;
+    }).join("");
+
+  } catch (error) {
+    console.error("Itinerary loading error:", error);
+
+    list.innerHTML = `
+      <div class="hotel-empty">
+        <h3>Itineraries Temporarily Unavailable</h3>
+        <p>Please contact us on WhatsApp for our latest tour brochures.</p>
+        <a class="btn" href="${whatsappLink("Please share your tour itineraries")}">
+          Request Itinerary
+        </a>
+      </div>`;
+  }
 }
-}
+
 
 /* =====================================
-LOAD PUBLISHED CABS
+   LOAD PUBLISHED CABS
 ===================================== */
 
 async function loadCabs() {
-const list = document.getElementById("cabList");
+  const list = document.getElementById("cabList");
 
-try {
-const { data, error } = await db
-.from("cabs")
-.select("*")
-.eq("published", true)
-.order("created_at", { ascending:false });
+  try {
+    const { data, error } = await db
+      .from("cabs")
+      .select("*")
+      .eq("published", true)
+      .order("created_at", { ascending:false });
 
-if (error) throw error;  
+    if (error) throw error;
 
-if (!data || !data.length) {  
-  list.innerHTML = `  
-    <div class="cab-empty">  
-      <h3>Vehicles Coming Soon</h3>  
-      <p>Contact us for current cab availability and rates.</p>  
-      <a class="btn" href="${whatsappLink("Please share your available cabs")}">Enquire on WhatsApp</a>  
-    </div>`;  
-  return;  
-}  
+    if (!data || !data.length) {
+      list.innerHTML = `
+        <div class="cab-empty">
+          <h3>Vehicles Coming Soon</h3>
+          <p>Contact us for current cab availability and rates.</p>
+          <a class="btn" href="${whatsappLink("Please share your available cabs")}">Enquire on WhatsApp</a>
+        </div>`;
+      return;
+    }
 
-list.innerHTML = data.map(cab => {  
-  const name = cab.name || "Himalayan Travel Vehicle";  
-  const model = cab.model || "";  
-  const capacity = cab.seating_capacity || "Contact us";  
-  const description = cab.description || "Contact us for vehicle details.";  
-  const image = cab.image_url || "";  
+    list.innerHTML = data.map(cab => {
+      const name = cab.name || "Himalayan Travel Vehicle";
+      const model = cab.model || "";
+      const capacity = cab.seating_capacity || "Contact us";
+      const description = cab.description || "Contact us for vehicle details.";
+      const image = cab.image_url || "";
 
-  const message =  
-    "Hello Himalayan Odyssey Expedition,\n\n" +  
-    "I am interested in booking this vehicle:\n" +  
-    "Vehicle: " + name + "\n" +  
-    "Model: " + model + "\n" +  
-    "Seating Capacity: " + capacity + "\n" +  
-    "Daily Rate: " + (cab.daily_price != null  
-      ? rupees(cab.daily_price)  
-      : "Please share rate") +  
-    "\n\nPlease share availability and booking details.";  
+      const message =
+        "Hello Himalayan Odyssey Expedition,\n\n" +
+        "I am interested in booking this vehicle:\n" +
+        "Vehicle: " + name + "\n" +
+        "Model: " + model + "\n" +
+        "Seating Capacity: " + capacity + "\n" +
+        "Daily Rate: " + (cab.daily_price != null
+          ? rupees(cab.daily_price)
+          : "Please share rate") +
+        "\n\nPlease share availability and booking details.";
 
-  const photo = image  
-    ? `<img src="${safe(image)}" alt="${safe(name)}" loading="lazy"  
-         onerror="this.outerHTML=window.imageFallback('Vehicle photograph unavailable',220)">`  
-    : imageFallback("Vehicle photograph unavailable",220);  
+      const photo = image
+        ? `<img src="${safe(image)}" alt="${safe(name)}" loading="lazy"
+             onerror="this.outerHTML=window.imageFallback('Vehicle photograph unavailable',220)">`
+        : imageFallback("Vehicle photograph unavailable",220);
 
-  const price = cab.daily_price != null && cab.daily_price !== ""  
-    ? rupees(cab.daily_price)  
-    : "Contact us";  
+      const price = cab.daily_price != null && cab.daily_price !== ""
+        ? rupees(cab.daily_price)
+        : "Contact us";
 
-  return `  
-    <article class="card cab-card">  
-      ${photo}  
-      <div class="card-body">  
-        <h3>${safe(name)}</h3>  
+      return `
+        <article class="card cab-card">
+          ${photo}
 
-        ${model ? `<p class="cab-details">${safe(model)}</p>` : ""}  
+          <div class="card-body">
+            <h3>${safe(name)}</h3>
 
-        <p class="cab-details">  
-          <b>Seating Capacity:</b> ${safe(capacity)}  
-          ${cab.seating_capacity ? " passengers" : ""}  
-        </p>  
+            ${model ? `<p class="cab-details">${safe(model)}</p>` : ""}
 
-        <p>${safe(description)}</p>  
+            <p class="cab-details">
+              <b>Seating Capacity:</b> ${safe(capacity)}
+              ${cab.seating_capacity ? " passengers" : ""}
+            </p>
 
-        <div class="price">${price} <small>per day</small></div>  
+            <p>${safe(description)}</p>
 
-        <p class="cab-details">  
-          Please confirm inclusions, route charges and availability with our team before booking.  
-        </p>  
+            <div class="price">${price} <small>per day</small></div>
 
-        <a class="btn" href="${whatsappLink(message)}" target="_blank" rel="noopener">  
-          Enquire About This Cab  
-        </a>  
-      </div>  
-    </article>`;  
-}).join("");
+            <p class="cab-details">
+              Please confirm inclusions, route charges and availability with our team before booking.
+            </p>
 
-} catch (error) {
-console.error("Cab loading error:", error);
-list.innerHTML =    <div class="cab-empty">   <h3>Vehicles Temporarily Unavailable</h3>   <p>We are unable to load vehicle details at the moment. Please contact us directly.</p>   <a class="btn" href="${whatsappLink("Please share your available cabs")}">Contact Us</a>   </div>;
+            <a class="btn" href="${whatsappLink(message)}" target="_blank" rel="noopener">
+              Enquire About This Cab
+            </a>
+          </div>
+        </article>`;
+    }).join("");
+
+  } catch (error) {
+    console.error("Cab loading error:", error);
+
+    list.innerHTML = `
+      <div class="cab-empty">
+        <h3>Vehicles Temporarily Unavailable</h3>
+        <p>We are unable to load vehicle details at the moment. Please contact us directly.</p>
+        <a class="btn" href="${whatsappLink("Please share your available cabs")}">
+          Contact Us
+        </a>
+      </div>`;
+  }
 }
-}
+
 
 /* =====================================
-HOTEL AND PROPERTY GALLERY
+   HOTEL AND PROPERTY GALLERY
 ===================================== */
 
 let publicHotels = [];
 let publicHotelPhotos = [];
 
 function hotelFacilities(value) {
-if (Array.isArray(value)) {
-return value.filter(Boolean).join(" • ");
-}
-return String(value || "");
+  if (Array.isArray(value)) {
+    return value.filter(Boolean).join(" • ");
+  }
+
+  return String(value || "");
 }
 
 async function loadHotels() {
-const list = document.getElementById("galleryList");
+  const list = document.getElementById("galleryList");
 
-try {
-const { data: hotels, error: hotelError } = await db
-.from("hotels")
-.select("*")
-.eq("published", true)
-.order("created_at", { ascending:false });
+  try {
+    const { data: hotels, error: hotelError } = await db
+      .from("hotels")
+      .select("*")
+      .eq("published", true)
+      .order("created_at", { ascending:false });
 
-if (hotelError) throw hotelError;  
+    if (hotelError) throw hotelError;
 
-publicHotels = hotels || [];  
+    publicHotels = hotels || [];
 
-if (!publicHotels.length) {  
-  list.innerHTML = `  
-    <div class="hotel-empty">  
-      <h3>Our Properties Are Coming Soon</h3>  
-      <p>Our selected hotels and mountain homestays will appear here shortly.</p>  
-      <a class="btn" href="${whatsappLink("Please share your hotel and property details")}">Enquire About Hotels</a>  
-    </div>`;  
-  return;  
-}  
+    if (!publicHotels.length) {
+      list.innerHTML = `
+        <div class="hotel-empty">
+          <h3>Our Properties Are Coming Soon</h3>
+          <p>Our selected hotels and mountain homestays will appear here shortly.</p>
+          <a class="btn" href="${whatsappLink("Please share your hotel and property details")}">Enquire About Hotels</a>
+        </div>`;
+      return;
+    }
 
-const hotelIds = publicHotels.map(h => h.id);  
+    const hotelIds = publicHotels.map(h => h.id);
 
-const { data: photos, error: photoError } = await db  
-  .from("hotel_photos")  
-  .select("*")  
-  .in("hotel_id", hotelIds);  
+    const { data: photos, error: photoError } = await db
+      .from("hotel_photos")
+      .select("*")
+      .in("hotel_id", hotelIds);
 
-if (photoError) throw photoError;  
+    if (photoError) throw photoError;
 
-publicHotelPhotos = photos || [];  
+    publicHotelPhotos = photos || [];
 
-list.innerHTML = publicHotels.map(hotel => {  
-  const hotelPhotos = publicHotelPhotos.filter(  
-    photo => String(photo.hotel_id) === String(hotel.id)  
-  );  
+    list.innerHTML = publicHotels.map(hotel => {
+      const hotelPhotos = publicHotelPhotos.filter(
+        photo => String(photo.hotel_id) === String(hotel.id)
+      );
 
-  const firstPhoto = hotelPhotos.find(photo => photo.photo_url);  
+      const firstPhoto = hotelPhotos.find(photo => photo.photo_url);
 
-  const imageHTML = firstPhoto  
-    ? `<img src="${safe(firstPhoto.photo_url)}"  
-         alt="${safe(hotel.name)}" loading="lazy"  
-         onerror="this.outerHTML=window.imageFallback('Property photograph unavailable',220)">`  
-    : imageFallback("Property photograph unavailable",220);  
+      const imageHTML = firstPhoto
+        ? `<img src="${safe(firstPhoto.photo_url)}"
+             alt="${safe(hotel.name)}" loading="lazy"
+             onerror="this.outerHTML=window.imageFallback('Property photograph unavailable',220)">`
+        : imageFallback("Property photograph unavailable",220);
 
-  const facilities = hotelFacilities(hotel.facilities);  
+      const facilities = hotelFacilities(hotel.facilities);
 
-  const message = "Hello, I would like to enquire about " +  
-    (hotel.name || "your property") + " in " +  
-    (hotel.location || "Himachal Pradesh") + ".";  
+      const message = "Hello, I would like to enquire about " +
+        (hotel.name || "your property") + " in " +
+        (hotel.location || "Himachal Pradesh") + ".";
 
-  return `  
-    <article class="card hotel-card">  
-      ${imageHTML}  
-      <div class="card-body">  
-        <h3>${safe(hotel.name || "Mountain Property")}</h3>  
+      return `
+        <article class="card hotel-card">
+          ${imageHTML}
 
-        <p class="hotel-location">  
-          📍 ${safe(hotel.location || "Himachal Pradesh")}  
-        </p>  
+          <div class="card-body">
+            <h3>${safe(hotel.name || "Mountain Property")}</h3>
 
-        <p>${safe(hotel.description || "Contact us for property details.")}</p>  
+            <p class="hotel-location">
+              📍 ${safe(hotel.location || "Himachal Pradesh")}
+            </p>
 
-        ${facilities ? `  
-          <p class="hotel-facilities">  
-            <b>Facilities:</b> ${safe(facilities)}  
-          </p>` : ""}  
+            <p>${safe(hotel.description || "Contact us for property details.")}</p>
 
-        <p class="hotel-facilities">  
-          ${hotelPhotos.length} photograph(s)  
-        </p>  
+            ${facilities ? `
+              <p class="hotel-facilities">
+                <b>Facilities:</b> ${safe(facilities)}
+              </p>` : ""}
 
-        <button type="button" class="btn" data-view-hotel="${safe(hotel.id)}">  
-          View Property  
-        </button>  
+            <p class="hotel-facilities">
+              ${hotelPhotos.length} photograph(s)
+            </p>
 
-        <a class="btn" href="${whatsappLink(message)}" target="_blank" rel="noopener">  
-          Enquire Now  
-        </a>  
-      </div>  
-    </article>`;  
-}).join("");
+            <button type="button" class="btn" data-view-hotel="${safe(hotel.id)}">
+              View Property
+            </button>
 
-} catch (error) {
-console.error("Hotel gallery loading error:", error);
-list.innerHTML =    <div class="hotel-empty">   <h3>Properties Temporarily Unavailable</h3>   <p>We are unable to load property details at the moment. Please contact us for hotel enquiries.</p>   <a class="btn" href="${whatsappLink("Please share your hotel details")}">Contact Us</a>   </div>;
+            <a class="btn" href="${whatsappLink(message)}" target="_blank" rel="noopener">
+              Enquire Now
+            </a>
+          </div>
+        </article>`;
+    }).join("");
+
+  } catch (error) {
+    console.error("Hotel gallery loading error:", error);
+
+    list.innerHTML = `
+      <div class="hotel-empty">
+        <h3>Properties Temporarily Unavailable</h3>
+        <p>We are unable to load property details at the moment. Please contact us for hotel enquiries.</p>
+        <a class="btn" href="${whatsappLink("Please share your hotel details")}">
+          Contact Us
+        </a>
+      </div>`;
+  }
 }
-}
+
 
 /* =====================================
-OPEN PROPERTY DETAILS
+   OPEN PROPERTY DETAILS
 ===================================== */
 
 function showHotelDetails(hotelId) {
-const hotel = publicHotels.find(
-h => String(h.id) === String(hotelId)
-);
+  const hotel = publicHotels.find(
+    h => String(h.id) === String(hotelId)
+  );
 
-if (!hotel) return;
+  if (!hotel) return;
 
-const photos = publicHotelPhotos.filter(
-photo => String(photo.hotel_id) === String(hotel.id)
-);
+  const photos = publicHotelPhotos.filter(
+    photo => String(photo.hotel_id) === String(hotel.id)
+  );
 
-const facilities = hotelFacilities(hotel.facilities);
+  const facilities = hotelFacilities(hotel.facilities);
 
-const photoHTML = photos
-.filter(photo => photo.photo_url)
-.map(photo =>   <img   src="${safe(photo.photo_url)}"   alt="${safe(photo.caption || hotel.name || "Property photograph")}"   loading="lazy"   onerror="this.style.display='none'"   >  ).join("");
+  const photoHTML = photos
+    .filter(photo => photo.photo_url)
+    .map(photo => `
+      <img
+        src="${safe(photo.photo_url)}"
+        alt="${safe(photo.caption || hotel.name || "Property photograph")}"
+        loading="lazy"
+        onerror="this.style.display='none'"
+      >
+    `).join("");
 
-const message = "Hello, I would like to enquire about " +
-(hotel.name || "your property") + " in " +
-(hotel.location || "Himachal Pradesh") + ".";
+  const message = "Hello, I would like to enquire about " +
+    (hotel.name || "your property") + " in " +
+    (hotel.location || "Himachal Pradesh") + ".";
 
-document.getElementById("hotelDetailBody").innerHTML = `
-<h2>${safe(hotel.name || "Property Details")}</h2>
+  document.getElementById("hotelDetailBody").innerHTML = `
+    <h2>${safe(hotel.name || "Property Details")}</h2>
 
-<p class="hotel-location">  
-  📍 ${safe(hotel.location || "Himachal Pradesh")}  
-</p>  
+    <p class="hotel-location">
+      📍 ${safe(hotel.location || "Himachal Pradesh")}
+    </p>
 
-<p style="line-height:1.9">  
-  ${safe(hotel.description || "Please contact us for more information.")}  
-</p>  
+    <p style="line-height:1.9">
+      ${safe(hotel.description || "Please contact us for more information.")}
+    </p>
 
-${facilities ? `  
-  <h3>Facilities & Amenities</h3>  
-  <p style="line-height:1.9">${safe(facilities)}</p>  
-` : ""}  
+    ${facilities ? `
+      <h3>Facilities & Amenities</h3>
+      <p style="line-height:1.9">${safe(facilities)}</p>
+    ` : ""}
 
-<h3>Property Photographs</h3>  
+    <h3>Property Photographs</h3>
 
-<div class="hotel-photo-grid">  
-  ${photoHTML || `  
-    <div class="hotel-empty">  
-      No photographs have been added for this property yet.  
-    </div>  
-  `}  
-</div>  
+    <div class="hotel-photo-grid">
+      ${photoHTML || `
+        <div class="hotel-empty">
+          No photographs have been added for this property yet.
+        </div>
+      `}
+    </div>
 
-<div style="margin-top:25px">  
-  <a class="btn" href="${whatsappLink(message)}" target="_blank" rel="noopener">  
-    Enquire About This Property  
-  </a>  
-</div>
+    <div style="margin-top:25px">
+      <a class="btn" href="${whatsappLink(message)}" target="_blank" rel="noopener">
+        Enquire About This Property
+      </a>
+    </div>
+  `;
 
-`;
-
-document.getElementById("hotelDetailModal").style.display = "block";
-document.body.style.overflow = "hidden";
+  document.getElementById("hotelDetailModal").style.display = "block";
+  document.body.style.overflow = "hidden";
 }
 
+
 /* =====================================
-CLOSE PROPERTY DETAILS
+   CLOSE PROPERTY DETAILS
 ===================================== */
 
 function closeHotelDetails() {
-document.getElementById("hotelDetailModal").style.display = "none";
-document.body.style.overflow = "";
+  document.getElementById("hotelDetailModal").style.display = "none";
+  document.body.style.overflow = "";
 }
 
 document.getElementById("closeHotelDetails")
-.addEventListener("click", closeHotelDetails);
+  .addEventListener("click", closeHotelDetails);
 
 document.getElementById("hotelDetailModal")
-.addEventListener("click", function(event) {
-if (event.target === this) closeHotelDetails();
-});
+  .addEventListener("click", function(event) {
+    if (event.target === this) closeHotelDetails();
+  });
 
 document.addEventListener("keydown", function(event) {
-if (event.key === "Escape") closeHotelDetails();
+  if (event.key === "Escape") closeHotelDetails();
 });
 
+
 /* =====================================
-PROPERTY CARD BUTTONS
+   PROPERTY CARD BUTTONS
 ===================================== */
 
 document.getElementById("galleryList")
-.addEventListener("click", function(event) {
-const button = event.target.closest("[data-view-hotel]");
-if (!button) return;
+  .addEventListener("click", function(event) {
+    const button = event.target.closest("[data-view-hotel]");
 
-showHotelDetails(button.getAttribute("data-view-hotel"));
+    if (!button) return;
 
-});
+    showHotelDetails(button.getAttribute("data-view-hotel"));
+  });
+
 
 /* =====================================
-TRAVEL ENQUIRY FORM - WHATSAPP
+   TRAVEL ENQUIRY FORM - WHATSAPP
 ===================================== */
 
 document.getElementById("travelEnquiryForm")
-.addEventListener("submit", function(e) {
-e.preventDefault();
+  .addEventListener("submit", function(e) {
+    e.preventDefault();
 
-const name = document.getElementById("guestName").value.trim();  
-const phone = document.getElementById("guestPhone").value.trim();  
-const persons = document.getElementById("travellers").value;  
-const destination = document.getElementById("destination").value.trim();  
-const month = document.getElementById("travelMonth").value;  
-const startDate = document.getElementById("startDate").value;  
-const endDate = document.getElementById("endDate").value;  
+    const name = document.getElementById("guestName").value.trim();
+    const phone = document.getElementById("guestPhone").value.trim();
+    const persons = document.getElementById("travellers").value;
+    const destination = document.getElementById("destination").value.trim();
+    const month = document.getElementById("travelMonth").value;
+    const startDate = document.getElementById("startDate").value;
+    const endDate = document.getElementById("endDate").value;
 
-if (  
-  !name ||  
-  !/^[6-9][0-9]{9}$/.test(phone) ||  
-  !persons ||  
-  !Number.isInteger(Number(persons)) ||  
-  Number(persons) < 1 ||  
-  Number(persons) > 100 ||  
-  !destination ||  
-  !month  
-) {  
-  alert("Please fill in all required details and enter a valid 10-digit Indian mobile number.");  
-  return;  
-}  
+    if (
+      !name ||
+      !/^[6-9][0-9]{9}$/.test(phone) ||
+      !persons ||
+      !Number.isInteger(Number(persons)) ||
+      Number(persons) < 1 ||
+      Number(persons) > 100 ||
+      !destination ||
+      !month
+    ) {
+      alert("Please fill in all required details and enter a valid 10-digit Indian mobile number.");
+      return;
+    }
 
-if (startDate && endDate && endDate < startDate) {  
-  alert("End date cannot be earlier than start date.");  
-  return;  
-}  
+    if (startDate && endDate && endDate < startDate) {
+      alert("End date cannot be earlier than start date.");
+      return;
+    }
 
-let message =
-
-`NEW TRAVEL ENQUIRY
+    let message = `NEW TRAVEL ENQUIRY
 HIMALAYAN ODYSSEY EXPEDITION
 
 Guest Name: ${name}
@@ -1846,17 +1424,17 @@ Number of Persons: ${persons}
 Destination: ${destination}
 Travel Month: ${month}`;
 
-if (startDate) message += `\nTravel Start Date: ${startDate}`;  
-if (endDate) message += `\nTravel End Date: ${endDate}`;  
+    if (startDate) message += `\nTravel Start Date: ${startDate}`;
+    if (endDate) message += `\nTravel End Date: ${endDate}`;
 
-message += "\n\nPlease contact me regarding this trip.";  
+    message += "\n\nPlease contact me regarding this trip.";
 
-window.open(whatsappLink(message), "_blank");
+    window.open(whatsappLink(message), "_blank");
+  });
 
-});
 
 /* =====================================
-LOAD WEBSITE SECTIONS
+   LOAD WEBSITE SECTIONS
 ===================================== */
 
 loadPackages();
@@ -1864,5 +1442,7 @@ loadItineraries();
 loadCabs();
 loadHotels();
 
-</script>  </body>  
+</script>
+
+</body>
 </html>
