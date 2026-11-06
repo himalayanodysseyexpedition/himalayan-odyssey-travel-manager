@@ -1,4 +1,3 @@
-
 "use strict";
 
 /* HIMALAYAN ODYSSEY EXPEDITION - ADMIN DASHBOARD */
@@ -7,12 +6,15 @@ const SUPABASE_URL = "https://ynkoiuyjevclypumnyes.supabase.co";
 const SUPABASE_KEY = "sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-";
 
 const HOTEL_BUCKET = "hotel-photos";
+const CAB_BUCKET = "cab-photos";
 const MAX_HOTEL_PHOTO_SIZE = 5 * 1024 * 1024;
+const MAX_CAB_PHOTO_SIZE = 5 * 1024 * 1024;
 
 let db;
 let D = {};
 let editingItineraryId = null;
 let editingHotelId = null;
+let editingCabId = null;
 
 const $ = id => document.getElementById(id);
 
@@ -103,7 +105,7 @@ async function load() {
   const tables = [
     "packages", "customers", "leads", "bookings",
     "vendors", "transactions", "itineraries",
-    "itinerary_days", "hotels", "hotel_photos"
+    "itinerary_days", "hotels", "hotel_photos", "cabs"
   ];
 
   for (const table of tables) {
@@ -394,6 +396,7 @@ function render() {
 
   renderItineraries();
   renderHotels();
+  renderCabs();
 }
 
 /* HOTEL MANAGEMENT */
@@ -758,6 +761,306 @@ async function deleteHotel(id) {
   }
 }
 
+/* CAB MANAGEMENT */
+
+function renderCabs() {
+  const el = $("cabList");
+  if (!el) return;
+
+  const cabs = D.cabs || [];
+
+  if (!cabs.length) {
+    el.innerHTML = "No cabs added yet. Select Add Cab to add your first vehicle.";
+    return;
+  }
+
+  el.innerHTML = cabs.map(cab => `
+    <article>
+      <div style="flex:1;min-width:220px">
+        <b>${esc(cab.name)}</b>
+        <p>${esc(cab.model || "Model not specified")}</p>
+        <p><b>Passengers:</b> ${esc(cab.seating_capacity)}</p>
+        <p><b>Daily price:</b> ${cash(cab.daily_price)}</p>
+        <p>${esc(cab.description || "No description added.")}</p>
+        <p class="hotel-status">
+          ${cab.published ? "Published on website" : "Draft / Not published"}
+        </p>
+        ${cab.image_url ? `
+          <img class="cab-preview" src="${esc(cab.image_url)}" alt="${esc(cab.name)}">
+        ` : "<small>No cab photograph uploaded.</small>"}
+      </div>
+      <div>
+        <button data-edit-cab="${esc(cab.id)}">Edit</button>
+        <button data-toggle-cab="${esc(cab.id)}">
+          ${cab.published ? "Unpublish" : "Publish"}
+        </button>
+        <button class="danger" data-delete-cab="${esc(cab.id)}">Delete</button>
+      </div>
+    </article>
+  `).join("");
+}
+
+function resetCabForm() {
+  editingCabId = null;
+  $("cabF")?.reset();
+  setText("cabDialogTitle", "Add Cab");
+  setText("cabSave", "Save Cab");
+  setHTML("cabExistingPhoto", "");
+}
+
+function openNewCab() {
+  resetCabForm();
+  show("cabDialog");
+}
+
+function openEditCab(id) {
+  const cab = (D.cabs || []).find(x => String(x.id) === String(id));
+  if (!cab) return;
+
+  editingCabId = cab.id;
+
+  setText("cabDialogTitle", "Edit Cab");
+  setText("cabSave", "Update Cab");
+
+  $("cabName").value = cab.name || "";
+  $("cabModel").value = cab.model || "";
+  $("cabSeats").value = cab.seating_capacity ?? "";
+  $("cabPrice").value = cab.daily_price ?? "";
+  $("cabDescription").value = cab.description || "";
+  $("cabPublished").checked = !!cab.published;
+  $("cabPhoto").value = "";
+
+  if (cab.image_url) {
+    setHTML("cabExistingPhoto", `
+      <h4>Current cab photograph</h4>
+      <img
+        class="cab-preview"
+        src="${esc(cab.image_url)}"
+        alt="${esc(cab.name)}"
+      >
+      <p><small>Upload a new photograph above if you want to replace this one.</small></p>
+    `);
+  } else {
+    setHTML("cabExistingPhoto", "<p>No photograph uploaded yet.</p>");
+  }
+
+  show("cabDialog");
+}
+
+async function uploadCabPhoto(cabId, file) {
+  if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+    throw new Error("Only JPG, PNG and WebP cab photographs are allowed.");
+  }
+
+  if (file.size > MAX_CAB_PHOTO_SIZE) {
+    throw new Error("Cab photograph must be smaller than 5 MB.");
+  }
+
+  const path = cabId + "/" + Date.now() + "-" +
+    Math.random().toString(36).slice(2, 9) + "-" +
+    safeFileName(file.name);
+
+  message("Uploading cab photograph...");
+
+  const { error } = await db.storage
+    .from(CAB_BUCKET)
+    .upload(path, file, {
+      contentType: file.type,
+      upsert: false
+    });
+
+  if (error) throw error;
+
+  const { data } = db.storage
+    .from(CAB_BUCKET)
+    .getPublicUrl(path);
+
+  if (!data?.publicUrl) {
+    await db.storage.from(CAB_BUCKET).remove([path]);
+    throw new Error("Could not create a public cab photograph URL.");
+  }
+
+  return {
+    image_url: data.publicUrl,
+    storage_path: path
+  };
+}
+
+async function saveCabForm(event) {
+  event.preventDefault();
+
+  const button = $("cabSave");
+  button.disabled = true;
+
+  let newPhotoPath = null;
+
+  try {
+    const { data: userData, error: userError } = await db.auth.getUser();
+
+    if (userError || !userData.user) {
+      throw new Error("Your admin session has expired. Please log in again.");
+    }
+
+    const name = $("cabName").value.trim();
+    const model = $("cabModel").value.trim();
+    const seats = Number($("cabSeats").value);
+    const price = Number($("cabPrice").value);
+    const description = $("cabDescription").value.trim();
+    const published = $("cabPublished").checked;
+    const file = $("cabPhoto").files[0];
+
+    if (!name) throw new Error("Please enter the cab type or name.");
+    if (!Number.isInteger(seats) || seats < 1) {
+      throw new Error("Please enter a valid passenger capacity.");
+    }
+    if (!Number.isFinite(price) || price < 0) {
+      throw new Error("Please enter a valid daily rental price.");
+    }
+
+    const cabData = {
+      name,
+      model: model || null,
+      seating_capacity: seats,
+      daily_price: price,
+      description: description || null,
+      published
+    };
+
+    let cabId = editingCabId;
+    let oldStoragePath = null;
+
+    if (cabId) {
+      const oldCab = (D.cabs || []).find(
+        x => String(x.id) === String(cabId)
+      );
+      oldStoragePath = oldCab?.storage_path || null;
+    }
+
+    message("Saving cab details...");
+
+    if (!cabId) {
+      const { data, error } = await db
+        .from("cabs")
+        .insert(cabData)
+        .select("id")
+        .single();
+
+      if (error) throw error;
+      cabId = data.id;
+    } else {
+      const { error } = await db
+        .from("cabs")
+        .update(cabData)
+        .eq("id", cabId);
+
+      if (error) throw error;
+    }
+
+    if (file) {
+      const photo = await uploadCabPhoto(cabId, file);
+      newPhotoPath = photo.storage_path;
+
+      const { error } = await db
+        .from("cabs")
+        .update(photo)
+        .eq("id", cabId);
+
+      if (error) {
+        await db.storage.from(CAB_BUCKET).remove([newPhotoPath]);
+        newPhotoPath = null;
+        throw error;
+      }
+
+      if (oldStoragePath && oldStoragePath !== newPhotoPath) {
+        const { error: removeError } = await db.storage
+          .from(CAB_BUCKET)
+          .remove([oldStoragePath]);
+
+        if (removeError) {
+          console.warn("Old cab photo could not be removed:", removeError);
+        }
+      }
+    }
+
+    $("cabDialog").close();
+    resetCabForm();
+    await load();
+
+    message("Cab saved successfully.");
+    alert("Cab saved successfully.");
+
+  } catch (error) {
+    console.error(error);
+    message("Cab save error: " + error.message);
+    alert("Cab save error: " + error.message);
+  } finally {
+    button.disabled = false;
+  }
+}
+
+async function toggleCabPublished(id) {
+  const cab = (D.cabs || []).find(x => String(x.id) === String(id));
+  if (!cab) return;
+
+  const newStatus = !cab.published;
+  const action = newStatus ? "publish" : "unpublish";
+
+  if (!confirm("Are you sure you want to " + action + " " + cab.name + "?")) {
+    return;
+  }
+
+  try {
+    const { error } = await db
+      .from("cabs")
+      .update({ published: newStatus })
+      .eq("id", id);
+
+    if (error) throw error;
+
+    await load();
+    message("Cab " + (newStatus ? "published" : "unpublished") + ".");
+  } catch (error) {
+    alert("Could not update cab: " + error.message);
+  }
+}
+
+async function deleteCab(id) {
+  const cab = (D.cabs || []).find(x => String(x.id) === String(id));
+  if (!cab) return;
+
+  if (!confirm(
+    "Delete " + cab.name +
+    " permanently? This cannot be undone."
+  )) return;
+
+  try {
+    if (cab.storage_path) {
+      const { error: storageError } = await db.storage
+        .from(CAB_BUCKET)
+        .remove([cab.storage_path]);
+
+      if (storageError) {
+        throw new Error(
+          "Cab photograph could not be removed. Cab was not deleted. " +
+          storageError.message
+        );
+      }
+    }
+
+    const { error } = await db
+      .from("cabs")
+      .delete()
+      .eq("id", id);
+
+    if (error) throw error;
+
+    await load();
+    message("Cab and its photograph deleted.");
+  } catch (error) {
+    alert("Cab delete error: " + error.message);
+  }
+}
+
 /* ITINERARIES */
 
 function renderItineraries() {
@@ -1099,6 +1402,7 @@ function bindForms() {
   bindItineraryForm();
 
   $("hotelF")?.addEventListener("submit", saveHotelForm);
+  $("cabF")?.addEventListener("submit", saveCabForm);
 }
 
 /* DASHBOARD ACTIONS */
@@ -1147,6 +1451,26 @@ function bindActions() {
     button = target.closest("[data-delete-hotel]");
     if (button) {
       await deleteHotel(button.dataset.deleteHotel);
+      return;
+    }
+
+    /* CAB ACTIONS */
+
+    button = target.closest("[data-edit-cab]");
+    if (button) {
+      openEditCab(button.dataset.editCab);
+      return;
+    }
+
+    button = target.closest("[data-toggle-cab]");
+    if (button) {
+      await toggleCabPublished(button.dataset.toggleCab);
+      return;
+    }
+
+    button = target.closest("[data-delete-cab]");
+    if (button) {
+      await deleteCab(button.dataset.deleteCab);
       return;
     }
 
@@ -1311,6 +1635,7 @@ async function initialize() {
     });
 
     $("newHotel")?.addEventListener("click", openNewHotel);
+    $("newCab")?.addEventListener("click", openNewCab);
 
     $("login")?.addEventListener("click", login);
     $("logout")?.addEventListener("click", logout);
