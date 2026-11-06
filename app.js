@@ -1,3 +1,4 @@
+
 "use strict";
 
 /* HIMALAYAN ODYSSEY EXPEDITION - ADMIN DASHBOARD */
@@ -5,9 +6,13 @@
 const SUPABASE_URL = "https://ynkoiuyjevclypumnyes.supabase.co";
 const SUPABASE_KEY = "sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-";
 
+const HOTEL_BUCKET = "hotel-photos";
+const MAX_HOTEL_PHOTO_SIZE = 5 * 1024 * 1024;
+
 let db;
 let D = {};
 let editingItineraryId = null;
+let editingHotelId = null;
 
 const $ = id => document.getElementById(id);
 
@@ -59,6 +64,7 @@ async function logout() {
     if (error) throw error;
     if ($("app")) $("app").hidden = true;
     if ($("auth")) $("auth").hidden = false;
+    if ($("logout")) $("logout").hidden = true;
     message("You have been logged out.");
   } catch (error) {
     message("Logout error: " + error.message);
@@ -70,6 +76,7 @@ async function start() {
     message("Loading dashboard...");
     if ($("auth")) $("auth").hidden = true;
     if ($("app")) $("app").hidden = false;
+    if ($("logout")) $("logout").hidden = false;
     await load();
     message("Dashboard ready.");
   } catch (error) {
@@ -87,6 +94,7 @@ async function rows(table) {
     .from(table)
     .select("*")
     .order("created_at", { ascending: false });
+
   if (error) throw error;
   return data || [];
 }
@@ -94,11 +102,14 @@ async function rows(table) {
 async function load() {
   const tables = [
     "packages", "customers", "leads", "bookings",
-    "vendors", "transactions", "itineraries", "itinerary_days"
+    "vendors", "transactions", "itineraries",
+    "itinerary_days", "hotels", "hotel_photos"
   ];
+
   for (const table of tables) {
     D[table] = await rows(table);
   }
+
   render();
 }
 
@@ -382,6 +393,369 @@ function render() {
   );
 
   renderItineraries();
+  renderHotels();
+}
+
+/* HOTEL MANAGEMENT */
+
+function hotelPhotosFor(hotelId) {
+  return (D.hotel_photos || [])
+    .filter(p => String(p.hotel_id) === String(hotelId))
+    .sort((a, b) => Number(a.sort_order || 0) - Number(b.sort_order || 0));
+}
+
+function renderHotels() {
+  const el = $("hotelList");
+  if (!el) return;
+
+  const hotels = D.hotels || [];
+
+  if (!hotels.length) {
+    el.innerHTML = "No properties added yet. Select Add Hotel to create your first property.";
+    return;
+  }
+
+  el.innerHTML = hotels.map(hotel => {
+    const photos = hotelPhotosFor(hotel.id);
+    const facilities = Array.isArray(hotel.facilities)
+      ? hotel.facilities.join(", ")
+      : "";
+
+    const photoPreview = photos.slice(0, 4).map(photo => `
+      <img
+        src="${esc(photo.photo_url)}"
+        alt="${esc(hotel.name)}"
+        loading="lazy"
+        style="width:75px;height:65px;object-fit:cover;border-radius:6px;margin:3px"
+      >
+    `).join("");
+
+    return `
+      <article>
+        <div style="flex:1;min-width:220px">
+          <b>${esc(hotel.name)}</b>
+          <p>${esc(hotel.location)}</p>
+          <p>${esc(hotel.description || "No description added.")}</p>
+          <p><b>Facilities:</b> ${esc(facilities || "Not added")}</p>
+          <p><b>Photographs:</b> ${photos.length}</p>
+          <p class="hotel-status">${hotel.published ? "Published on website" : "Draft / Not published"}</p>
+          <div>${photoPreview}</div>
+        </div>
+        <div>
+          <button data-edit-hotel="${esc(hotel.id)}">Edit</button>
+          <button data-toggle-hotel="${esc(hotel.id)}">${hotel.published ? "Unpublish" : "Publish"}</button>
+          <button class="danger" data-delete-hotel="${esc(hotel.id)}">Delete</button>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+function resetHotelForm() {
+  editingHotelId = null;
+  $("hotelF")?.reset();
+  setText("hotelDialogTitle", "Add Hotel / Property");
+  setText("hotelSave", "Save Property");
+  setHTML("hotelExistingPhotos", "");
+}
+
+function openNewHotel() {
+  resetHotelForm();
+  show("hotelDialog");
+}
+
+function openEditHotel(id) {
+  const hotel = (D.hotels || []).find(x => String(x.id) === String(id));
+  if (!hotel) return;
+
+  editingHotelId = hotel.id;
+
+  setText("hotelDialogTitle", "Edit Hotel / Property");
+  setText("hotelSave", "Update Property");
+
+  $("hotelName").value = hotel.name || "";
+  $("hotelLocation").value = hotel.location || "";
+  $("hotelDescription").value = hotel.description || "";
+  $("hotelFacilities").value = Array.isArray(hotel.facilities)
+    ? hotel.facilities.join(", ")
+    : "";
+  $("hotelPublished").checked = !!hotel.published;
+  $("hotelPhotos").value = "";
+
+  renderHotelExistingPhotos(id);
+  show("hotelDialog");
+}
+
+function renderHotelExistingPhotos(hotelId) {
+  const photos = hotelPhotosFor(hotelId);
+
+  if (!photos.length) {
+    setHTML("hotelExistingPhotos", "<p>No photographs uploaded yet.</p>");
+    return;
+  }
+
+  setHTML("hotelExistingPhotos", `
+    <h4>Existing photographs</h4>
+    <div class="hotel-photo-grid">
+      ${photos.map(photo => `
+        <div class="hotel-photo">
+          <img src="${esc(photo.photo_url)}" alt="Property photograph">
+          <button type="button" class="danger" data-delete-hotel-photo="${esc(photo.id)}">
+            Remove photo
+          </button>
+        </div>
+      `).join("")}
+    </div>
+  `);
+}
+
+function safeFileName(name) {
+  return String(name || "photo")
+    .normalize("NFKD")
+    .replace(/[^a-zA-Z0-9._-]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(-90) || "photo";
+}
+
+async function uploadHotelPhotos(hotelId, files) {
+  const uploadedPaths = [];
+  const photoRows = [];
+
+  try {
+    for (const file of files) {
+      if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+        throw new Error("Only JPG, PNG and WebP photographs are allowed.");
+      }
+
+      if (file.size > MAX_HOTEL_PHOTO_SIZE) {
+        throw new Error(file.name + " is larger than 5 MB.");
+      }
+
+      const path = hotelId + "/" + Date.now() + "-" +
+        Math.random().toString(36).slice(2, 9) + "-" +
+        safeFileName(file.name);
+
+      message("Uploading " + file.name + "...");
+
+      const { error: uploadError } = await db.storage
+        .from(HOTEL_BUCKET)
+        .upload(path, file, {
+          contentType: file.type,
+          upsert: false
+        });
+
+      if (uploadError) throw uploadError;
+
+      uploadedPaths.push(path);
+
+      const { data } = db.storage
+        .from(HOTEL_BUCKET)
+        .getPublicUrl(path);
+
+      if (!data?.publicUrl) {
+        throw new Error("Could not create a public photograph URL.");
+      }
+
+      photoRows.push({
+        hotel_id: hotelId,
+        photo_url: data.publicUrl,
+        storage_path: path,
+        caption: file.name,
+        sort_order: photoRows.length
+      });
+    }
+
+    if (photoRows.length) {
+      const { error: insertError } = await db
+        .from("hotel_photos")
+        .insert(photoRows);
+
+      if (insertError) throw insertError;
+    }
+
+  } catch (error) {
+    if (uploadedPaths.length) {
+      await db.storage.from(HOTEL_BUCKET).remove(uploadedPaths);
+    }
+    throw error;
+  }
+}
+
+async function saveHotelForm(event) {
+  event.preventDefault();
+
+  const button = $("hotelSave");
+  button.disabled = true;
+
+  try {
+    const { data: userData, error: userError } = await db.auth.getUser();
+
+    if (userError || !userData.user) {
+      throw new Error("Your admin session has expired. Please log in again.");
+    }
+
+    const name = $("hotelName").value.trim();
+    const location = $("hotelLocation").value.trim();
+
+    if (!name || !location) {
+      throw new Error("Hotel name and location are required.");
+    }
+
+    const facilities = $("hotelFacilities").value
+      .split(",")
+      .map(x => x.trim())
+      .filter(Boolean);
+
+    const hotel = {
+      name,
+      location,
+      description: $("hotelDescription").value.trim() || null,
+      facilities,
+      published: $("hotelPublished").checked
+    };
+
+    let hotelId = editingHotelId;
+
+    message("Saving property details...");
+
+    if (hotelId) {
+      const { error } = await db
+        .from("hotels")
+        .update(hotel)
+        .eq("id", hotelId);
+
+      if (error) throw error;
+    } else {
+      const { data, error } = await db
+        .from("hotels")
+        .insert(hotel)
+        .select("id")
+        .single();
+
+      if (error) throw error;
+      hotelId = data.id;
+    }
+
+    const files = Array.from($("hotelPhotos").files || []);
+
+    if (files.length) {
+      await uploadHotelPhotos(hotelId, files);
+    }
+
+    $("hotelDialog").close();
+    resetHotelForm();
+    await load();
+
+    message("Property saved successfully.");
+    alert("Property saved successfully.");
+
+  } catch (error) {
+    console.error(error);
+    alert("Hotel save error: " + error.message);
+    message("Hotel save error: " + error.message);
+  } finally {
+    button.disabled = false;
+  }
+}
+
+async function toggleHotelPublished(id) {
+  const hotel = (D.hotels || []).find(x => String(x.id) === String(id));
+  if (!hotel) return;
+
+  const newStatus = !hotel.published;
+  const action = newStatus ? "publish" : "unpublish";
+
+  if (!confirm("Are you sure you want to " + action + " " + hotel.name + "?")) {
+    return;
+  }
+
+  try {
+    const { error } = await db
+      .from("hotels")
+      .update({ published: newStatus })
+      .eq("id", id);
+
+    if (error) throw error;
+
+    await load();
+    message("Property " + (newStatus ? "published" : "unpublished") + ".");
+  } catch (error) {
+    alert("Could not update property: " + error.message);
+  }
+}
+
+async function deleteHotelPhoto(id) {
+  const photo = (D.hotel_photos || []).find(x => String(x.id) === String(id));
+  if (!photo) return;
+
+  if (!confirm("Remove this photograph permanently?")) return;
+
+  try {
+    if (photo.storage_path) {
+      const { error: storageError } = await db.storage
+        .from(HOTEL_BUCKET)
+        .remove([photo.storage_path]);
+
+      if (storageError) throw storageError;
+    }
+
+    const { error } = await db
+      .from("hotel_photos")
+      .delete()
+      .eq("id", id);
+
+    if (error) throw error;
+
+    await load();
+
+    if (editingHotelId) {
+      renderHotelExistingPhotos(editingHotelId);
+    }
+
+    message("Photograph removed.");
+  } catch (error) {
+    alert("Could not remove photograph: " + error.message);
+  }
+}
+
+async function deleteHotel(id) {
+  const hotel = (D.hotels || []).find(x => String(x.id) === String(id));
+  if (!hotel) return;
+
+  if (!confirm(
+    "Delete " + hotel.name +
+    " and all its photographs? This cannot be undone."
+  )) return;
+
+  try {
+    const photos = hotelPhotosFor(id);
+    const paths = photos.map(p => p.storage_path).filter(Boolean);
+
+    if (paths.length) {
+      const { error: storageError } = await db.storage
+        .from(HOTEL_BUCKET)
+        .remove(paths);
+
+      if (storageError) {
+        throw new Error(
+          "Photographs could not be removed from storage. Hotel was not deleted. " +
+          storageError.message
+        );
+      }
+    }
+
+    const { error } = await db
+      .from("hotels")
+      .delete()
+      .eq("id", id);
+
+    if (error) throw error;
+
+    await load();
+    message("Property and its photographs deleted.");
+  } catch (error) {
+    alert("Delete error: " + error.message);
+  }
 }
 
 /* ITINERARIES */
@@ -419,28 +793,23 @@ function addDayRow(day = {}) {
 
   row.innerHTML = `
     <h4>Day <span class="day-label">${number}</span></h4>
-
     <label>Day number
       <input class="day-number" type="number" min="1"
         value="${esc(day.day_number || number)}" required>
     </label>
-
     <label>Day title
       <input class="day-title" value="${esc(day.title || "")}"
         placeholder="e.g. Delhi to Narkanda">
     </label>
-
     <label>Day description
       <textarea class="day-description" rows="3"
         placeholder="Route, sightseeing and activities">${esc(day.description || "")}</textarea>
     </label>
-
     <label>Overnight location
       <input class="day-overnight"
         value="${esc(day.overnight_location || "")}"
         placeholder="e.g. Narkanda">
     </label>
-
     <button type="button" class="danger remove-day">Remove this day</button>
   `;
 
@@ -728,6 +1097,8 @@ function bindForms() {
   }
 
   bindItineraryForm();
+
+  $("hotelF")?.addEventListener("submit", saveHotelForm);
 }
 
 /* DASHBOARD ACTIONS */
@@ -752,6 +1123,30 @@ function bindActions() {
     button = target.closest("[data-edit-itinerary]");
     if (button) {
       openEditItinerary(button.dataset.editItinerary);
+      return;
+    }
+
+    button = target.closest("[data-edit-hotel]");
+    if (button) {
+      openEditHotel(button.dataset.editHotel);
+      return;
+    }
+
+    button = target.closest("[data-toggle-hotel]");
+    if (button) {
+      await toggleHotelPublished(button.dataset.toggleHotel);
+      return;
+    }
+
+    button = target.closest("[data-delete-hotel-photo]");
+    if (button) {
+      await deleteHotelPhoto(button.dataset.deleteHotelPhoto);
+      return;
+    }
+
+    button = target.closest("[data-delete-hotel]");
+    if (button) {
+      await deleteHotel(button.dataset.deleteHotel);
       return;
     }
 
@@ -914,6 +1309,8 @@ async function initialize() {
       resetItineraryForm();
       show("itineraryForm");
     });
+
+    $("newHotel")?.addEventListener("click", openNewHotel);
 
     $("login")?.addEventListener("click", login);
     $("logout")?.addEventListener("click", logout);
