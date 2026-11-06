@@ -450,6 +450,70 @@ footer b,footer a{color:#e8d2a7}
   line-height:1.6;
 }
 
+/* INSTAGRAM SECTION */
+
+.instagram-section{
+  background:linear-gradient(135deg,#102d27,#244b3e);
+  color:white;
+  text-align:center;
+}
+
+.instagram-section .section-title h2{
+  color:white;
+}
+
+.instagram-section .section-title small{
+  color:#e8d2a7;
+}
+
+.instagram-content{
+  max-width:650px;
+  margin:auto;
+}
+
+.instagram-logo{
+  width:76px;
+  height:76px;
+  margin:0 auto 20px;
+  border-radius:22px;
+  background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
+  display:grid;
+  place-items:center;
+  color:white;
+  font-family:Arial,sans-serif;
+  font-size:52px;
+  font-weight:normal;
+}
+
+.instagram-content h3{
+  font-size:25px;
+  margin:10px 0;
+  color:white;
+}
+
+.instagram-content p{
+  line-height:1.8;
+  color:#e0e8e2;
+}
+
+.instagram-btn{
+  display:inline-block;
+  margin-top:20px;
+  padding:15px 30px;
+  background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf);
+  color:white;
+  border-radius:30px;
+  font-family:Arial,sans-serif;
+  font-weight:bold;
+  text-decoration:none;
+  transition:.3s;
+}
+
+.instagram-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px #0004;
+}
+
 @media(max-width:650px){
   header{align-items:center;flex-direction:column}
   nav{gap:12px;justify-content:center}
@@ -484,6 +548,7 @@ footer b,footer a{color:#e8d2a7}
     <a href="#cabs" onclick="document.getElementById('cabs').scrollIntoView({behavior:'smooth'}); return false;">Cabs</a>
     <a href="#gallery">Hotels</a>
     <a href="#contact">Contact</a>
+    <a href="#instagram">Instagram</a>
   </nav>
 </header>
 
@@ -809,6 +874,45 @@ footer b,footer a{color:#e8d2a7}
 
 </div>
 
+<!-- INSTAGRAM SECTION -->
+
+<section class="content instagram-section" id="instagram">
+
+  <div class="section-title">
+
+    <small>FOLLOW OUR JOURNEY</small>
+
+    <h2>Find Us on Instagram</h2>
+
+  </div>
+
+  <div class="instagram-content">
+
+    <div class="instagram-logo" aria-label="Instagram">
+      ◎
+    </div>
+
+    <h3>@kxnwxrvineet</h3>
+
+    <p>
+      Explore our Himalayan adventures, beautiful mountain
+      destinations, travel photographs and unforgettable
+      guest experiences.
+    </p>
+
+    <a
+      class="instagram-btn"
+      href="https://www.instagram.com/kxnwxrvineet/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Follow Us on Instagram ↗
+    </a>
+
+  </div>
+
+</section>
+
 <!-- FOOTER -->
 
 <footer>
@@ -818,6 +922,13 @@ footer b,footer a{color:#e8d2a7}
   Narkanda, Himachal Pradesh<br>
 
   WhatsApp: +91 98169 29669<br>
+
+  <a href="https://www.instagram.com/kxnwxrvineet/"
+     target="_blank"
+     rel="noopener noreferrer">
+    Instagram
+  </a>
+  <br>
 
   <a href="admin.html">Admin Login</a>
 
