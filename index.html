@@ -851,9 +851,11 @@ window.publicPackages = data.map(p => ({
               Book on WhatsApp
             </a>
 
-            <button class="btn" type="button" data-view-itinerary="${safe(p.id)}">
-              View Itinerary
-            </button>
+            ${p.linkedItineraryPdf ? `
+  <a class="btn" href="${safe(p.linkedItineraryPdf)}" target="_blank" rel="noopener">
+    View Itinerary
+  </a>
+` : ""}
           </div>
         </article>`;
     }).join("");
