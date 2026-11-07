@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,7 @@ header h2{margin:0}
 header p{margin:5px 0 0;color:#c8ddd4;font-size:13px}
 main{max-width:1100px;margin:auto;padding:16px}
 button{border:0;border-radius:7px;padding:11px 15px;background:#176b55;color:white;font-weight:bold;cursor:pointer;margin:3px}
-button:disabled{opacity:.5}
+button:disabled{opacity:.5;cursor:not-allowed}
 .danger{background:#a83232}
 .secondary{background:#526b64}
 nav{display:flex;gap:7px;overflow-x:auto;padding:12px 0}
@@ -24,6 +25,7 @@ nav button.active{background:#176b55;color:white}
 .panel.active{display:block}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .stat,.card,article{background:white;padding:15px;border-radius:10px;margin-bottom:12px;box-shadow:0 2px 8px #0000000c}
+.stat strong{display:block;font-size:22px;margin-top:8px}
 article{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
 article p{margin:6px 0;font-size:14px;color:#53665f}
 input,textarea,select{width:100%;padding:12px;border:1px solid #cbd8d1;border-radius:7px;margin:6px 0 13px;font-size:15px}
@@ -43,6 +45,8 @@ small{color:#61756d}
 .cab-preview{width:140px;height:95px;object-fit:cover;border-radius:8px;margin-top:8px}
 .form-check{display:flex;align-items:center;gap:8px;margin:14px 0}
 .form-check input{width:auto;margin:0}
+.package-preview{width:100%;max-height:240px;object-fit:cover;border-radius:9px;margin-top:8px}
+.package-card-image{width:100%;max-width:300px;height:160px;object-fit:cover;border-radius:8px;margin:8px 0}
 @media(max-width:600px){
 .stats{grid-template-columns:repeat(2,1fr)}
 main{padding:10px}
@@ -134,7 +138,6 @@ article button{margin-top:8px}
   <div id="hotelList">Loading properties...</div>
 </section>
 
-<!-- CAB MANAGEMENT -->
 <section id="cabs" class="panel">
   <div class="topline">
     <div>
@@ -183,13 +186,36 @@ article button{margin-top:8px}
 <!-- PACKAGE FORM -->
 <dialog id="packageDialog">
 <form id="packageF">
-<h3>Add Travel Package</h3>
-<label>Package Name</label><input name="name" required>
-<label>Destination</label><input name="destination">
-<label>Duration</label><input name="duration" placeholder="7 Nights / 8 Days">
-<label>Price Per Person (₹)</label><input name="price_per_person" type="number" min="0">
-<label>Package Itinerary</label><textarea name="itinerary" rows="4"></textarea>
-<button type="submit">Save Package</button>
+<h3 id="packageDialogTitle">Add Travel Package</h3>
+
+<label>Package Name *</label>
+<input name="name" required>
+
+<label>Destination</label>
+<input name="destination">
+
+<label>Duration</label>
+<input name="duration" placeholder="7 Nights / 8 Days">
+
+<label>Price Per Person (₹)</label>
+<input name="price_per_person" type="number" min="0">
+
+<label>Package Poster / Photo</label>
+<input
+  type="file"
+  id="packageImage"
+  accept="image/jpeg,image/png,image/webp"
+>
+<small>Upload JPG, PNG or WebP. Maximum size 5 MB. You can leave this empty when editing to keep the existing poster.</small>
+
+<div id="packageImagePreview">
+  <small>No poster selected</small>
+</div>
+
+<label>Package Itinerary</label>
+<textarea name="itinerary" rows="4"></textarea>
+
+<button type="submit" id="packageSave">Save Package</button>
 <button type="button" data-close class="secondary">Cancel</button>
 </form>
 </dialog>
@@ -334,7 +360,7 @@ Publish this cab on the guest website
   <option value="">No linked package</option>
 </select>
 <small>Choose one package for this PDF. Each package can have only one linked itinerary.</small>
-  <label>Itinerary Title</label>
+<label>Itinerary Title</label>
 <input id="itineraryTitle" required placeholder="Winter Spiti Valley Tour">
 <label>Destination</label>
 <input id="itineraryDestination" placeholder="Spiti Valley, Himachal Pradesh">
@@ -360,6 +386,6 @@ Publish this cab on the guest website
 </form>
 </dialog>
 
-<script src="app.js?v=104"></script>
+<script src="app.js?v=105"></script>
 </body>
 </html>
