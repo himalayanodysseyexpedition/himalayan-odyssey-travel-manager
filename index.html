@@ -799,7 +799,26 @@ async function loadPackages() {
       return;
     }
 
-    window.publicPackages = data;
+    const { data: itineraryPdfs, error: itineraryError } = await db
+  .from("itineraries")
+  .select("package_id, pdf_url")
+  .eq("published", true)
+  .not("package_id", "is", null)
+  .not("pdf_url", "is", null);
+
+if (itineraryError) throw itineraryError;
+
+const pdfByPackage = new Map(
+  (itineraryPdfs || []).map(item => [
+    String(item.package_id),
+    item.pdf_url
+  ])
+);
+
+window.publicPackages = data.map(p => ({
+  ...p,
+  linkedItineraryPdf: pdfByPackage.get(String(p.id)) || null
+}));
 
     list.innerHTML = data.map(p => {
       const image = p.image_url || p.cover_image || "";
