@@ -1765,7 +1765,7 @@ function openEditItinerary(id) {
   $("itineraryCover").value = it.cover_image || "";
   $("itinerarySummary").value = it.summary || "";
   $("itineraryPublished").checked = !!it.published;
-
+populateItineraryPackageOptions(it.package_id || "");
   setHTML(
     "itineraryPdfCurrent",
     it.pdf_url
