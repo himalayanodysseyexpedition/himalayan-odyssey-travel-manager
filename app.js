@@ -1867,8 +1867,9 @@ function bindItineraryForm() {
         }
 
         const itinerary = {
-          owner_id: userData.user.id,
-          title: $("itineraryTitle").value.trim(),
+  owner_id: userData.user.id,
+  package_id: $("itineraryPackage").value || null,
+  title: $("itineraryTitle").value.trim(),
           destination:
             $("itineraryDestination").value.trim() || null,
           duration_days: $("itineraryDays").value
