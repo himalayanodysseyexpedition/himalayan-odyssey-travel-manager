@@ -1702,7 +1702,31 @@ function renumberDayLabels() {
     });
 }
 
+function populateItineraryPackageOptions(selectedId = "") {
+  const select = $("itineraryPackage");
+  if (!select) return;
 
+  const linkedElsewhere = new Set(
+    (D.itineraries || [])
+      .filter(it =>
+        it.package_id &&
+        String(it.id) !== String(editingItineraryId)
+      )
+      .map(it => String(it.package_id))
+  );
+
+  select.innerHTML =
+    '<option value="">No linked package</option>' +
+    (D.packages || []).map(pkg => {
+      const id = String(pkg.id);
+      const alreadyLinked = linkedElsewhere.has(id);
+      const selected = id === String(selectedId) ? " selected" : "";
+      const disabled = alreadyLinked ? " disabled" : "";
+      const suffix = alreadyLinked ? " (already linked)" : "";
+
+      return `<option value="${esc(id)}"${selected}${disabled}>${esc(pkg.name)}${suffix}</option>`;
+    }).join("");
+}
 function resetItineraryForm() {
   editingItineraryId = null;
 
