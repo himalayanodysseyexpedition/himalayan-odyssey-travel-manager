@@ -1731,7 +1731,7 @@ function resetItineraryForm() {
   editingItineraryId = null;
 
   $("itineraryF")?.reset();
-
+populateItineraryPackageOptions("");
   setHTML("itineraryPdfCurrent", "");
 
   if ($("dayEditor")) {
