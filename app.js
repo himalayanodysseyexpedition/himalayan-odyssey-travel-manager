@@ -1,3 +1,4 @@
+
 "use strict";
 
 /* =========================================
@@ -13,14 +14,17 @@ const SUPABASE_KEY = "sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-";
 const HOTEL_BUCKET = "hotel-photos";
 const CAB_BUCKET = "cab-photos";
 const ITINERARY_BUCKET = "itinerary-pdfs";
+const PACKAGE_BUCKET = "package-posters";
 
 const MAX_HOTEL_PHOTO_SIZE = 5 * 1024 * 1024;
 const MAX_CAB_PHOTO_SIZE = 5 * 1024 * 1024;
+const MAX_PACKAGE_IMAGE_SIZE = 5 * 1024 * 1024;
 const MAX_PDF_SIZE = 10 * 1024 * 1024;
 
 let db;
 let D = {};
 
+let editingPackageId = null;
 let editingItineraryId = null;
 let editingHotelId = null;
 let editingCabId = null;
@@ -45,21 +49,15 @@ const esc = value =>
   }[character]));
 
 function message(text) {
-  if ($("msg")) {
-    $("msg").textContent = text;
-  }
+  if ($("msg")) $("msg").textContent = text;
 }
 
 function setText(id, value) {
-  if ($(id)) {
-    $(id).textContent = value ?? "";
-  }
+  if ($(id)) $(id).textContent = value ?? "";
 }
 
 function setHTML(id, value) {
-  if ($(id)) {
-    $(id).innerHTML = value ?? "";
-  }
+  if ($(id)) $(id).innerHTML = value ?? "";
 }
 
 function show(id) {
@@ -105,7 +103,6 @@ async function login() {
   }
 
   const button = $("login");
-
   if (button) button.disabled = true;
 
   message("Signing in...");
@@ -117,10 +114,7 @@ async function login() {
     });
 
     if (error) throw error;
-
-    if (!data.user) {
-      throw new Error("Login could not be completed.");
-    }
+    if (!data.user) throw new Error("Login could not be completed.");
 
     await start();
 
@@ -137,7 +131,6 @@ async function login() {
 async function logout() {
   try {
     const { error } = await db.auth.signOut();
-
     if (error) throw error;
 
     if ($("app")) $("app").hidden = true;
@@ -166,7 +159,6 @@ async function start() {
 
   } catch (error) {
     console.error("Dashboard error:", error);
-
     message("Dashboard error: " + error.message);
 
     if ($("app")) $("app").hidden = true;
@@ -185,11 +177,8 @@ async function rows(table) {
     .select("*")
     .order("created_at", { ascending: false });
 
-  // Fallback for tables without created_at.
   if (result.error && result.error.code === "42703") {
-    result = await db
-      .from(table)
-      .select("*");
+    result = await db.from(table).select("*");
   }
 
   if (result.error) {
@@ -226,12 +215,8 @@ async function load() {
 
 
 async function save(table, obj) {
-  const { error } = await db
-    .from(table)
-    .insert(obj);
-
+  const { error } = await db.from(table).insert(obj);
   if (error) throw error;
-
   await load();
 }
 
@@ -247,7 +232,6 @@ function card(title, lines, buttons = "") {
         <b>${esc(title)}</b>
         ${lines.map(line => `<p>${line}</p>`).join("")}
       </div>
-
       <div>${buttons}</div>
     </article>
   `;
@@ -264,6 +248,402 @@ function del(table, id) {
       Delete
     </button>
   `;
+}
+
+
+/* =========================================
+   PACKAGE POSTER MANAGEMENT
+========================================= */
+
+function resetPackageForm() {
+  editingPackageId = null;
+
+  $("packageF")?.reset();
+
+  setText("packageDialogTitle", "Add Travel Package");
+  setText("packageSave", "Save Package");
+
+  setHTML(
+    "packageImagePreview",
+    "<small>No poster selected</small>"
+  );
+}
+
+
+function openNewPackage() {
+  resetPackageForm();
+  show("packageDialog");
+}
+
+
+function openEditPackage(id) {
+  const item = (D.packages || []).find(
+    pkg => String(pkg.id) === String(id)
+  );
+
+  if (!item) return;
+
+  editingPackageId = item.id;
+
+  const form = $("packageF");
+  if (!form) return;
+
+  form.elements.name.value = item.name || "";
+  form.elements.destination.value = item.destination || "";
+  form.elements.duration.value = item.duration || "";
+  form.elements.price_per_person.value =
+    item.price_per_person ?? "";
+  form.elements.itinerary.value = item.itinerary || "";
+
+  $("packageImage").value = "";
+
+  setText("packageDialogTitle", "Edit Travel Package");
+  setText("packageSave", "Update Package");
+
+  if (item.image_url) {
+    setHTML(
+      "packageImagePreview",
+      `
+        <p><b>Current package poster</b></p>
+        <img
+          class="package-preview"
+          src="${esc(item.image_url)}"
+          alt="${esc(item.name)} poster"
+        >
+        <small>
+          Choose a new image above if you want to replace this poster.
+        </small>
+      `
+    );
+  } else {
+    setHTML(
+      "packageImagePreview",
+      "<small>No poster uploaded for this package yet.</small>"
+    );
+  }
+
+  show("packageDialog");
+}
+
+
+function previewPackageImage() {
+  const file = $("packageImage")?.files?.[0];
+
+  if (!file) {
+    const current = editingPackageId
+      ? (D.packages || []).find(
+          item => String(item.id) === String(editingPackageId)
+        )
+      : null;
+
+    if (current?.image_url) {
+      setHTML(
+        "packageImagePreview",
+        `
+          <p><b>Current package poster</b></p>
+          <img
+            class="package-preview"
+            src="${esc(current.image_url)}"
+            alt="Current package poster"
+          >
+        `
+      );
+    } else {
+      setHTML(
+        "packageImagePreview",
+        "<small>No poster selected</small>"
+      );
+    }
+
+    return;
+  }
+
+  if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+    setHTML(
+      "packageImagePreview",
+      "<p style='color:#a83232'>Only JPG, PNG and WebP images are allowed.</p>"
+    );
+    $("packageImage").value = "";
+    return;
+  }
+
+  if (file.size > MAX_PACKAGE_IMAGE_SIZE) {
+    setHTML(
+      "packageImagePreview",
+      "<p style='color:#a83232'>Image is larger than 5 MB.</p>"
+    );
+    $("packageImage").value = "";
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    setHTML(
+      "packageImagePreview",
+      `
+        <p><b>Poster preview</b></p>
+        <img
+          class="package-preview"
+          src="${reader.result}"
+          alt="Package poster preview"
+        >
+      `
+    );
+  };
+
+  reader.onerror = () => {
+    message("Could not preview this image.");
+  };
+
+  reader.readAsDataURL(file);
+}
+
+
+async function uploadPackageImage(packageId, file) {
+  if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+    throw new Error(
+      "Only JPG, PNG and WebP package posters are allowed."
+    );
+  }
+
+  if (file.size > MAX_PACKAGE_IMAGE_SIZE) {
+    throw new Error("Package poster must be smaller than 5 MB.");
+  }
+
+  const path =
+    packageId + "/" +
+    Date.now() + "-" +
+    Math.random().toString(36).slice(2, 9) + "-" +
+    safeFileName(file.name);
+
+  message("Uploading package poster...");
+
+  const { error: uploadError } = await db.storage
+    .from(PACKAGE_BUCKET)
+    .upload(path, file, {
+      contentType: file.type,
+      upsert: false
+    });
+
+  if (uploadError) throw uploadError;
+
+  const { data } = db.storage
+    .from(PACKAGE_BUCKET)
+    .getPublicUrl(path);
+
+  if (!data?.publicUrl) {
+    await db.storage
+      .from(PACKAGE_BUCKET)
+      .remove([path]);
+
+    throw new Error("Could not create a public package poster URL.");
+  }
+
+  return {
+    image_url: data.publicUrl,
+    storage_path: path
+  };
+}
+
+
+async function savePackageForm(event) {
+  event.preventDefault();
+
+  const button = $("packageSave");
+  if (button) button.disabled = true;
+
+  let newImagePath = null;
+
+  try {
+    const { data: userData, error: userError } =
+      await db.auth.getUser();
+
+    if (userError || !userData.user) {
+      throw new Error(
+        "Your admin session has expired. Please log in again."
+      );
+    }
+
+    const form = $("packageF");
+
+    const name = form.elements.name.value.trim();
+
+    if (!name) {
+      throw new Error("Please enter a package name.");
+    }
+
+    const packageData = {
+      name,
+      destination:
+        form.elements.destination.value.trim() || null,
+      duration:
+        form.elements.duration.value.trim() || null,
+      price_per_person:
+        Number(form.elements.price_per_person.value) || 0,
+      itinerary:
+        form.elements.itinerary.value.trim() || null
+    };
+
+    const file = $("packageImage")?.files?.[0];
+
+    if (file) {
+      if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+        throw new Error("Please select a JPG, PNG or WebP poster.");
+      }
+
+      if (file.size > MAX_PACKAGE_IMAGE_SIZE) {
+        throw new Error("Package poster must be smaller than 5 MB.");
+      }
+    }
+
+    let packageId = editingPackageId;
+    let oldStoragePath = null;
+
+    if (packageId) {
+      const oldPackage = (D.packages || []).find(
+        item => String(item.id) === String(packageId)
+      );
+
+      oldStoragePath = oldPackage?.storage_path || null;
+    }
+
+    message("Saving package details...");
+
+    if (packageId) {
+      const { error } = await db
+        .from("packages")
+        .update(packageData)
+        .eq("id", packageId);
+
+      if (error) throw error;
+
+    } else {
+      const { data, error } = await db
+        .from("packages")
+        .insert(packageData)
+        .select("id")
+        .single();
+
+      if (error) throw error;
+
+      packageId = data.id;
+    }
+
+    if (file) {
+      const image = await uploadPackageImage(packageId, file);
+      newImagePath = image.storage_path;
+
+      const { error: updateError } = await db
+        .from("packages")
+        .update(image)
+        .eq("id", packageId);
+
+      if (updateError) {
+        await db.storage
+          .from(PACKAGE_BUCKET)
+          .remove([newImagePath]);
+
+        newImagePath = null;
+        throw updateError;
+      }
+
+      if (
+        oldStoragePath &&
+        oldStoragePath !== image.storage_path
+      ) {
+        const { error: removeError } = await db.storage
+          .from(PACKAGE_BUCKET)
+          .remove([oldStoragePath]);
+
+        if (removeError) {
+          console.warn(
+            "Old package poster could not be removed:",
+            removeError
+          );
+        }
+      }
+    }
+
+    $("packageDialog")?.close();
+    resetPackageForm();
+
+    await load();
+
+    message(
+      file
+        ? "Package and poster saved successfully."
+        : "Package saved successfully."
+    );
+
+    alert(
+      file
+        ? "Package and poster saved successfully."
+        : "Package saved successfully."
+    );
+
+  } catch (error) {
+    console.error("Package save error:", error);
+
+    if (newImagePath) {
+      await db.storage
+        .from(PACKAGE_BUCKET)
+        .remove([newImagePath]);
+    }
+
+    message("Package save error: " + error.message);
+    alert("Package save error: " + error.message);
+
+  } finally {
+    if (button) button.disabled = false;
+  }
+}
+
+
+async function deletePackage(id) {
+  const item = (D.packages || []).find(
+    pkg => String(pkg.id) === String(id)
+  );
+
+  if (!item) return;
+
+  if (!confirm(
+    "Delete package '" + item.name +
+    "' permanently? This cannot be undone."
+  )) {
+    return;
+  }
+
+  try {
+    if (item.storage_path) {
+      const { error: storageError } = await db.storage
+        .from(PACKAGE_BUCKET)
+        .remove([item.storage_path]);
+
+      if (storageError) {
+        throw new Error(
+          "Package poster could not be removed. " +
+          "Package was not deleted. " +
+          storageError.message
+        );
+      }
+    }
+
+    const { error } = await db
+      .from("packages")
+      .delete()
+      .eq("id", id);
+
+    if (error) throw error;
+
+    await load();
+
+    message("Package and its poster deleted.");
+
+  } catch (error) {
+    console.error(error);
+    alert("Package delete error: " + error.message);
+  }
 }
 
 
@@ -312,25 +692,19 @@ function makePDF(title, content) {
     <head>
       <meta charset="UTF-8">
       <title>${esc(title)}</title>
-
       <style>
         body {
           font-family: Arial, sans-serif;
           margin: 30px;
           color: #173c36;
         }
-
-        h1 {
-          font-size: 22px;
-        }
-
+        h1 { font-size: 22px; }
         .box {
           border: 1px solid #ccc;
           padding: 15px;
           margin: 20px 0;
           line-height: 1.8;
         }
-
         button {
           padding: 12px;
           background: #173c36;
@@ -338,26 +712,17 @@ function makePDF(title, content) {
           border: 0;
           cursor: pointer;
         }
-
         @media print {
-          button {
-            display: none;
-          }
+          button { display: none; }
         }
       </style>
     </head>
-
     <body>
       <h1>HIMALAYAN ODYSSEY EXPEDITION</h1>
       <h2>${esc(title)}</h2>
-
       ${content}
-
       <p>Thank you for choosing Himalayan Odyssey Expedition.</p>
-
-      <button onclick="window.print()">
-        Print / Save as PDF
-      </button>
+      <button onclick="window.print()">Print / Save as PDF</button>
     </body>
     </html>
   `);
@@ -368,7 +733,6 @@ function makePDF(title, content) {
 
 function bookingPDF(id) {
   const booking = getBooking(id);
-
   if (!booking) return;
 
   const customer = getCustomer(booking);
@@ -387,13 +751,11 @@ function bookingPDF(id) {
         Travel date: ${esc(booking.start_date)}<br>
         Travellers: ${esc(booking.travellers)}
       </div>
-
       <div class="box">
         Total amount: ${cash(total)}<br>
         Amount received: ${cash(paid)}<br>
         Balance due: <b>${cash(balance)}</b>
       </div>
-
       <p>Booking reference: ${esc(booking.id)}</p>
     `
   );
@@ -420,9 +782,7 @@ function paymentPDF(id) {
         Payment method: ${esc(transaction.payment_method)}<br>
         Receipt reference: ${esc(transaction.id)}
       </div>
-
       <h2>Amount received: ${cash(transaction.amount)}</h2>
-
       <p>${esc(transaction.description || "Booking payment")}</p>
     `
   );
@@ -452,17 +812,11 @@ function render() {
 
   const income = transactions
     .filter(item => item.transaction_type === "Payment")
-    .reduce(
-      (sum, item) => sum + Number(item.amount || 0),
-      0
-    );
+    .reduce((sum, item) => sum + Number(item.amount || 0), 0);
 
   const expenses = transactions
     .filter(item => item.transaction_type === "Expense")
-    .reduce(
-      (sum, item) => sum + Number(item.amount || 0),
-      0
-    );
+    .reduce((sum, item) => sum + Number(item.amount || 0), 0);
 
   const pending = (D.bookings || []).reduce(
     (sum, item) =>
@@ -488,18 +842,40 @@ function render() {
 
   setHTML(
     "packageList",
-    (D.packages || []).map(item =>
-      card(
-        item.name,
-        [
-          esc(item.destination || ""),
-          esc(item.duration || ""),
-          cash(item.price_per_person),
-          esc(item.itinerary || "")
-        ],
-        del("packages", item.id)
-      )
-    ).join("") || "No packages yet."
+    (D.packages || []).map(item => `
+      <article>
+        <div style="flex:1;min-width:220px">
+          ${
+            item.image_url
+              ? `
+                <img
+                  class="package-card-image"
+                  src="${esc(item.image_url)}"
+                  alt="${esc(item.name)} poster"
+                  loading="lazy"
+                >
+              `
+              : "<small>No package poster uploaded.</small>"
+          }
+
+          <p><b>${esc(item.name)}</b></p>
+          <p>${esc(item.destination || "")}</p>
+          <p>${esc(item.duration || "")}</p>
+          <p><b>${cash(item.price_per_person)} per person</b></p>
+          <p>${esc(item.itinerary || "")}</p>
+        </div>
+
+        <div>
+          <button
+            type="button"
+            data-edit-package="${esc(item.id)}">
+            Edit
+          </button>
+
+          ${del("packages", item.id)}
+        </div>
+      </article>
+    `).join("") || "No packages yet."
   );
 
 
@@ -522,11 +898,7 @@ function render() {
               ? `<button data-wa="${esc(item.c.phone)}">WhatsApp</button>`
               : ""
           }
-
-          <button data-confirm="${esc(item.id)}">
-            Confirm
-          </button>
-
+          <button data-confirm="${esc(item.id)}">Confirm</button>
           ${del("leads", item.id)}
         `
       )
@@ -557,22 +929,14 @@ function render() {
                 <button data-confirm-wa="${esc(item.id)}">
                   Booking WhatsApp
                 </button>
-
                 <button data-remind="${esc(item.id)}">
                   Payment reminder
                 </button>
               `
               : ""
           }
-
-          <button data-invoice="${esc(item.id)}">
-            Invoice PDF
-          </button>
-
-          <button data-pay="${esc(item.id)}">
-            Add payment
-          </button>
-
+          <button data-invoice="${esc(item.id)}">Invoice PDF</button>
+          <button data-pay="${esc(item.id)}">Add payment</button>
           ${del("bookings", item.id)}
         `
       );
@@ -615,7 +979,6 @@ function render() {
               ? `<a href="tel:${encodeURIComponent(item.phone)}">Call</a>`
               : ""
           }
-
           ${del("vendors", item.id)}
         `
       )
@@ -642,7 +1005,6 @@ function render() {
               ? `<button data-receipt="${esc(item.id)}">Payment receipt PDF</button>`
               : ""
           }
-
           ${del("transactions", item.id)}
         `
       )
@@ -667,7 +1029,6 @@ function render() {
     `
   );
 
-
   renderItineraries();
   renderHotels();
   renderCabs();
@@ -680,9 +1041,7 @@ function render() {
 
 function hotelPhotosFor(hotelId) {
   return (D.hotel_photos || [])
-    .filter(
-      photo => String(photo.hotel_id) === String(hotelId)
-    )
+    .filter(photo => String(photo.hotel_id) === String(hotelId))
     .sort(
       (a, b) => Number(a.sort_order || 0) -
                 Number(b.sort_order || 0)
@@ -692,7 +1051,6 @@ function hotelPhotosFor(hotelId) {
 
 function renderHotels() {
   const el = $("hotelList");
-
   if (!el) return;
 
   const hotels = D.hotels || [];
@@ -715,13 +1073,7 @@ function renderHotels() {
         src="${esc(photo.photo_url)}"
         alt="${esc(hotel.name)}"
         loading="lazy"
-        style="
-          width:75px;
-          height:65px;
-          object-fit:cover;
-          border-radius:6px;
-          margin:3px;
-        "
+        style="width:75px;height:65px;object-fit:cover;border-radius:6px;margin:3px"
       >
     `).join("");
 
@@ -729,41 +1081,21 @@ function renderHotels() {
       <article>
         <div style="flex:1;min-width:220px">
           <b>${esc(hotel.name)}</b>
-
           <p>${esc(hotel.location)}</p>
-
-          <p>
-            ${esc(hotel.description || "No description added.")}
-          </p>
-
-          <p>
-            <b>Facilities:</b>
-            ${esc(facilities || "Not added")}
-          </p>
-
+          <p>${esc(hotel.description || "No description added.")}</p>
+          <p><b>Facilities:</b> ${esc(facilities || "Not added")}</p>
           <p><b>Photographs:</b> ${photos.length}</p>
-
           <p class="hotel-status">
-            ${hotel.published
-              ? "Published on website"
-              : "Draft / Not published"}
+            ${hotel.published ? "Published on website" : "Draft / Not published"}
           </p>
-
           <div>${photoPreview}</div>
         </div>
-
         <div>
-          <button data-edit-hotel="${esc(hotel.id)}">
-            Edit
-          </button>
-
+          <button data-edit-hotel="${esc(hotel.id)}">Edit</button>
           <button data-toggle-hotel="${esc(hotel.id)}">
             ${hotel.published ? "Unpublish" : "Publish"}
           </button>
-
-          <button
-            class="danger"
-            data-delete-hotel="${esc(hotel.id)}">
+          <button class="danger" data-delete-hotel="${esc(hotel.id)}">
             Delete
           </button>
         </div>
@@ -775,9 +1107,7 @@ function renderHotels() {
 
 function resetHotelForm() {
   editingHotelId = null;
-
   $("hotelF")?.reset();
-
   setText("hotelDialogTitle", "Add Hotel / Property");
   setText("hotelSave", "Save Property");
   setHTML("hotelExistingPhotos", "");
@@ -814,7 +1144,6 @@ function openEditHotel(id) {
   $("hotelPhotos").value = "";
 
   renderHotelExistingPhotos(id);
-
   show("hotelDialog");
 }
 
@@ -823,10 +1152,7 @@ function renderHotelExistingPhotos(hotelId) {
   const photos = hotelPhotosFor(hotelId);
 
   if (!photos.length) {
-    setHTML(
-      "hotelExistingPhotos",
-      "<p>No photographs uploaded yet.</p>"
-    );
+    setHTML("hotelExistingPhotos", "<p>No photographs uploaded yet.</p>");
     return;
   }
 
@@ -834,15 +1160,10 @@ function renderHotelExistingPhotos(hotelId) {
     "hotelExistingPhotos",
     `
       <h4>Existing photographs</h4>
-
       <div class="hotel-photo-grid">
         ${photos.map(photo => `
           <div class="hotel-photo">
-            <img
-              src="${esc(photo.photo_url)}"
-              alt="Property photograph"
-            >
-
+            <img src="${esc(photo.photo_url)}" alt="Property photograph">
             <button
               type="button"
               class="danger"
@@ -864,9 +1185,7 @@ async function uploadHotelPhotos(hotelId, files) {
   try {
     for (const file of files) {
       if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
-        throw new Error(
-          "Only JPG, PNG and WebP photographs are allowed."
-        );
+        throw new Error("Only JPG, PNG and WebP photographs are allowed.");
       }
 
       if (file.size > MAX_HOTEL_PHOTO_SIZE) {
@@ -897,9 +1216,7 @@ async function uploadHotelPhotos(hotelId, files) {
         .getPublicUrl(path);
 
       if (!data?.publicUrl) {
-        throw new Error(
-          "Could not create a public photograph URL."
-        );
+        throw new Error("Could not create a public photograph URL.");
       }
 
       photoRows.push({
@@ -921,11 +1238,8 @@ async function uploadHotelPhotos(hotelId, files) {
 
   } catch (error) {
     if (uploadedPaths.length) {
-      await db.storage
-        .from(HOTEL_BUCKET)
-        .remove(uploadedPaths);
+      await db.storage.from(HOTEL_BUCKET).remove(uploadedPaths);
     }
-
     throw error;
   }
 }
@@ -935,7 +1249,6 @@ async function saveHotelForm(event) {
   event.preventDefault();
 
   const button = $("hotelSave");
-
   if (button) button.disabled = true;
 
   try {
@@ -943,18 +1256,14 @@ async function saveHotelForm(event) {
       await db.auth.getUser();
 
     if (userError || !userData.user) {
-      throw new Error(
-        "Your admin session has expired. Please log in again."
-      );
+      throw new Error("Your admin session has expired. Please log in again.");
     }
 
     const name = $("hotelName").value.trim();
     const location = $("hotelLocation").value.trim();
 
     if (!name || !location) {
-      throw new Error(
-        "Hotel name and location are required."
-      );
+      throw new Error("Hotel name and location are required.");
     }
 
     const facilities = $("hotelFacilities").value
@@ -965,8 +1274,7 @@ async function saveHotelForm(event) {
     const hotel = {
       name,
       location,
-      description:
-        $("hotelDescription").value.trim() || null,
+      description: $("hotelDescription").value.trim() || null,
       facilities,
       published: $("hotelPublished").checked
     };
@@ -991,22 +1299,17 @@ async function saveHotelForm(event) {
         .single();
 
       if (error) throw error;
-
       hotelId = data.id;
     }
 
-    const files = Array.from(
-      $("hotelPhotos").files || []
-    );
+    const files = Array.from($("hotelPhotos").files || []);
 
     if (files.length) {
       await uploadHotelPhotos(hotelId, files);
     }
 
     $("hotelDialog").close();
-
     resetHotelForm();
-
     await load();
 
     message("Property saved successfully.");
@@ -1014,7 +1317,6 @@ async function saveHotelForm(event) {
 
   } catch (error) {
     console.error(error);
-
     alert("Hotel save error: " + error.message);
     message("Hotel save error: " + error.message);
 
@@ -1034,10 +1336,7 @@ async function toggleHotelPublished(id) {
   const newStatus = !hotel.published;
   const action = newStatus ? "publish" : "unpublish";
 
-  if (!confirm(
-    "Are you sure you want to " +
-    action + " " + hotel.name + "?"
-  )) {
+  if (!confirm("Are you sure you want to " + action + " " + hotel.name + "?")) {
     return;
   }
 
@@ -1050,12 +1349,7 @@ async function toggleHotelPublished(id) {
     if (error) throw error;
 
     await load();
-
-    message(
-      "Property " +
-      (newStatus ? "published" : "unpublished") +
-      "."
-    );
+    message("Property " + (newStatus ? "published" : "unpublished") + ".");
 
   } catch (error) {
     alert("Could not update property: " + error.message);
@@ -1069,10 +1363,7 @@ async function deleteHotelPhoto(id) {
   );
 
   if (!photo) return;
-
-  if (!confirm("Remove this photograph permanently?")) {
-    return;
-  }
+  if (!confirm("Remove this photograph permanently?")) return;
 
   try {
     if (photo.storage_path) {
@@ -1114,16 +1405,11 @@ async function deleteHotel(id) {
   if (!confirm(
     "Delete " + hotel.name +
     " and all its photographs? This cannot be undone."
-  )) {
-    return;
-  }
+  )) return;
 
   try {
     const photos = hotelPhotosFor(id);
-
-    const paths = photos
-      .map(photo => photo.storage_path)
-      .filter(Boolean);
+    const paths = photos.map(photo => photo.storage_path).filter(Boolean);
 
     if (paths.length) {
       const { error: storageError } = await db.storage
@@ -1133,8 +1419,7 @@ async function deleteHotel(id) {
       if (storageError) {
         throw new Error(
           "Photographs could not be removed from storage. " +
-          "Hotel was not deleted. " +
-          storageError.message
+          "Hotel was not deleted. " + storageError.message
         );
       }
     }
@@ -1147,7 +1432,6 @@ async function deleteHotel(id) {
     if (error) throw error;
 
     await load();
-
     message("Property and its photographs deleted.");
 
   } catch (error) {
@@ -1162,7 +1446,6 @@ async function deleteHotel(id) {
 
 function renderCabs() {
   const el = $("cabList");
-
   if (!el) return;
 
   const cabs = D.cabs || [];
@@ -1177,56 +1460,25 @@ function renderCabs() {
     <article>
       <div style="flex:1;min-width:220px">
         <b>${esc(cab.name)}</b>
-
         <p>${esc(cab.model || "Model not specified")}</p>
-
-        <p>
-          <b>Passengers:</b>
-          ${esc(cab.seating_capacity)}
-        </p>
-
-        <p>
-          <b>Daily price:</b>
-          ${cash(cab.daily_price)}
-        </p>
-
-        <p>
-          ${esc(cab.description || "No description added.")}
-        </p>
-
+        <p><b>Passengers:</b> ${esc(cab.seating_capacity)}</p>
+        <p><b>Daily price:</b> ${cash(cab.daily_price)}</p>
+        <p>${esc(cab.description || "No description added.")}</p>
         <p class="hotel-status">
-          ${cab.published
-            ? "Published on website"
-            : "Draft / Not published"}
+          ${cab.published ? "Published on website" : "Draft / Not published"}
         </p>
-
         ${
           cab.image_url
-            ? `
-              <img
-                class="cab-preview"
-                src="${esc(cab.image_url)}"
-                alt="${esc(cab.name)}"
-              >
-            `
+            ? `<img class="cab-preview" src="${esc(cab.image_url)}" alt="${esc(cab.name)}">`
             : "<small>No cab photograph uploaded.</small>"
         }
       </div>
-
       <div>
-        <button data-edit-cab="${esc(cab.id)}">
-          Edit
-        </button>
-
+        <button data-edit-cab="${esc(cab.id)}">Edit</button>
         <button data-toggle-cab="${esc(cab.id)}">
           ${cab.published ? "Unpublish" : "Publish"}
         </button>
-
-        <button
-          class="danger"
-          data-delete-cab="${esc(cab.id)}">
-          Delete
-        </button>
+        <button class="danger" data-delete-cab="${esc(cab.id)}">Delete</button>
       </div>
     </article>
   `).join("");
@@ -1235,9 +1487,7 @@ function renderCabs() {
 
 function resetCabForm() {
   editingCabId = null;
-
   $("cabF")?.reset();
-
   setText("cabDialogTitle", "Add Cab");
   setText("cabSave", "Save Cab");
   setHTML("cabExistingPhoto", "");
@@ -1275,26 +1525,12 @@ function openEditCab(id) {
       "cabExistingPhoto",
       `
         <h4>Current cab photograph</h4>
-
-        <img
-          class="cab-preview"
-          src="${esc(cab.image_url)}"
-          alt="${esc(cab.name)}"
-        >
-
-        <p>
-          <small>
-            Upload a new photograph above if you want to replace this one.
-          </small>
-        </p>
+        <img class="cab-preview" src="${esc(cab.image_url)}" alt="${esc(cab.name)}">
+        <p><small>Upload a new photograph above if you want to replace this one.</small></p>
       `
     );
-
   } else {
-    setHTML(
-      "cabExistingPhoto",
-      "<p>No photograph uploaded yet.</p>"
-    );
+    setHTML("cabExistingPhoto", "<p>No photograph uploaded yet.</p>");
   }
 
   show("cabDialog");
@@ -1303,15 +1539,11 @@ function openEditCab(id) {
 
 async function uploadCabPhoto(cabId, file) {
   if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
-    throw new Error(
-      "Only JPG, PNG and WebP cab photographs are allowed."
-    );
+    throw new Error("Only JPG, PNG and WebP cab photographs are allowed.");
   }
 
   if (file.size > MAX_CAB_PHOTO_SIZE) {
-    throw new Error(
-      "Cab photograph must be smaller than 5 MB."
-    );
+    throw new Error("Cab photograph must be smaller than 5 MB.");
   }
 
   const path =
@@ -1336,13 +1568,8 @@ async function uploadCabPhoto(cabId, file) {
     .getPublicUrl(path);
 
   if (!data?.publicUrl) {
-    await db.storage
-      .from(CAB_BUCKET)
-      .remove([path]);
-
-    throw new Error(
-      "Could not create a public cab photograph URL."
-    );
+    await db.storage.from(CAB_BUCKET).remove([path]);
+    throw new Error("Could not create a public cab photograph URL.");
   }
 
   return {
@@ -1356,7 +1583,6 @@ async function saveCabForm(event) {
   event.preventDefault();
 
   const button = $("cabSave");
-
   if (button) button.disabled = true;
 
   try {
@@ -1364,9 +1590,7 @@ async function saveCabForm(event) {
       await db.auth.getUser();
 
     if (userError || !userData.user) {
-      throw new Error(
-        "Your admin session has expired. Please log in again."
-      );
+      throw new Error("Your admin session has expired. Please log in again.");
     }
 
     const name = $("cabName").value.trim();
@@ -1377,14 +1601,10 @@ async function saveCabForm(event) {
     const published = $("cabPublished").checked;
     const file = $("cabPhoto").files[0];
 
-    if (!name) {
-      throw new Error("Please enter the cab type or name.");
-    }
-
+    if (!name) throw new Error("Please enter the cab type or name.");
     if (!Number.isInteger(seats) || seats < 1) {
       throw new Error("Please enter a valid passenger capacity.");
     }
-
     if (!Number.isFinite(price) || price < 0) {
       throw new Error("Please enter a valid daily rental price.");
     }
@@ -1405,7 +1625,6 @@ async function saveCabForm(event) {
       const oldCab = (D.cabs || []).find(
         item => String(item.id) === String(cabId)
       );
-
       oldStoragePath = oldCab?.storage_path || null;
     }
 
@@ -1419,7 +1638,6 @@ async function saveCabForm(event) {
         .single();
 
       if (error) throw error;
-
       cabId = data.id;
 
     } else {
@@ -1440,34 +1658,23 @@ async function saveCabForm(event) {
         .eq("id", cabId);
 
       if (error) {
-        await db.storage
-          .from(CAB_BUCKET)
-          .remove([photo.storage_path]);
-
+        await db.storage.from(CAB_BUCKET).remove([photo.storage_path]);
         throw error;
       }
 
-      if (
-        oldStoragePath &&
-        oldStoragePath !== photo.storage_path
-      ) {
+      if (oldStoragePath && oldStoragePath !== photo.storage_path) {
         const { error: removeError } = await db.storage
           .from(CAB_BUCKET)
           .remove([oldStoragePath]);
 
         if (removeError) {
-          console.warn(
-            "Old cab photo could not be removed:",
-            removeError
-          );
+          console.warn("Old cab photo could not be removed:", removeError);
         }
       }
     }
 
     $("cabDialog").close();
-
     resetCabForm();
-
     await load();
 
     message("Cab saved successfully.");
@@ -1475,7 +1682,6 @@ async function saveCabForm(event) {
 
   } catch (error) {
     console.error(error);
-
     message("Cab save error: " + error.message);
     alert("Cab save error: " + error.message);
 
@@ -1495,10 +1701,7 @@ async function toggleCabPublished(id) {
   const newStatus = !cab.published;
   const action = newStatus ? "publish" : "unpublish";
 
-  if (!confirm(
-    "Are you sure you want to " +
-    action + " " + cab.name + "?"
-  )) {
+  if (!confirm("Are you sure you want to " + action + " " + cab.name + "?")) {
     return;
   }
 
@@ -1511,12 +1714,7 @@ async function toggleCabPublished(id) {
     if (error) throw error;
 
     await load();
-
-    message(
-      "Cab " +
-      (newStatus ? "published" : "unpublished") +
-      "."
-    );
+    message("Cab " + (newStatus ? "published" : "unpublished") + ".");
 
   } catch (error) {
     alert("Could not update cab: " + error.message);
@@ -1531,10 +1729,7 @@ async function deleteCab(id) {
 
   if (!cab) return;
 
-  if (!confirm(
-    "Delete " + cab.name +
-    " permanently? This cannot be undone."
-  )) {
+  if (!confirm("Delete " + cab.name + " permanently? This cannot be undone.")) {
     return;
   }
 
@@ -1546,8 +1741,7 @@ async function deleteCab(id) {
 
       if (storageError) {
         throw new Error(
-          "Cab photograph could not be removed. " +
-          "Cab was not deleted. " +
+          "Cab photograph could not be removed. Cab was not deleted. " +
           storageError.message
         );
       }
@@ -1561,7 +1755,6 @@ async function deleteCab(id) {
     if (error) throw error;
 
     await load();
-
     message("Cab and its photograph deleted.");
 
   } catch (error) {
@@ -1576,17 +1769,12 @@ async function deleteCab(id) {
 
 function renderItineraries() {
   const el = $("itineraryList");
-
   if (!el) return;
 
   el.innerHTML = (D.itineraries || []).map(it => {
     const days = (D.itinerary_days || [])
-      .filter(
-        day => String(day.itinerary_id) === String(it.id)
-      )
-      .sort(
-        (a, b) => Number(a.day_number) - Number(b.day_number)
-      );
+      .filter(day => String(day.itinerary_id) === String(it.id))
+      .sort((a, b) => Number(a.day_number) - Number(b.day_number));
 
     return card(
       it.title,
@@ -1597,18 +1785,11 @@ function renderItineraries() {
         `${days.length} day(s) added • ${it.pdf_url ? "PDF attached ✓" : "No PDF"}`
       ],
       `
-        <button data-edit-itinerary="${esc(it.id)}">
-          Edit
-        </button>
-
-        <button data-itinerary-wa="${esc(it.id)}">
-          WhatsApp enquiry
-        </button>
-
+        <button data-edit-itinerary="${esc(it.id)}">Edit</button>
+        <button data-itinerary-wa="${esc(it.id)}">WhatsApp enquiry</button>
         ${del("itineraries", it.id)}
       `
     );
-
   }).join("") ||
     "No itineraries yet. Select Add itinerary to create your first one.";
 }
@@ -1616,91 +1797,55 @@ function renderItineraries() {
 
 function addDayRow(day = {}) {
   const wrap = $("dayEditor");
-
   if (!wrap) return;
 
-  const number =
-    wrap.querySelectorAll(".day-entry").length + 1;
-
+  const number = wrap.querySelectorAll(".day-entry").length + 1;
   const row = document.createElement("div");
 
   row.className = "day-entry card";
 
   row.innerHTML = `
-    <h4>
-      Day <span class="day-label">${number}</span>
-    </h4>
+    <h4>Day <span class="day-label">${number}</span></h4>
 
-    <label>
-      Day number
-
-      <input
-        class="day-number"
-        type="number"
-        min="1"
-        value="${esc(day.day_number || number)}"
-        required
-      >
+    <label>Day number
+      <input class="day-number" type="number" min="1"
+        value="${esc(day.day_number || number)}" required>
     </label>
 
-    <label>
-      Day title
-
-      <input
-        class="day-title"
-        value="${esc(day.title || "")}"
-        placeholder="e.g. Delhi to Narkanda"
-      >
+    <label>Day title
+      <input class="day-title" value="${esc(day.title || "")}"
+        placeholder="e.g. Delhi to Narkanda">
     </label>
 
-    <label>
-      Day description
-
-      <textarea
-        class="day-description"
-        rows="3"
-        placeholder="Route, sightseeing and activities"
-      >${esc(day.description || "")}</textarea>
+    <label>Day description
+      <textarea class="day-description" rows="3"
+        placeholder="Route, sightseeing and activities">${esc(day.description || "")}</textarea>
     </label>
 
-    <label>
-      Overnight location
-
-      <input
-        class="day-overnight"
-        value="${esc(day.overnight_location || "")}"
-        placeholder="e.g. Narkanda"
-      >
+    <label>Overnight location
+      <input class="day-overnight" value="${esc(day.overnight_location || "")}"
+        placeholder="e.g. Narkanda">
     </label>
 
-    <button
-      type="button"
-      class="danger remove-day">
-      Remove this day
-    </button>
+    <button type="button" class="danger remove-day">Remove this day</button>
   `;
 
-  row.querySelector(".remove-day").addEventListener(
-    "click",
-    () => {
-      row.remove();
-      renumberDayLabels();
-    }
-  );
+  row.querySelector(".remove-day").addEventListener("click", () => {
+    row.remove();
+    renumberDayLabels();
+  });
 
   wrap.appendChild(row);
-
   renumberDayLabels();
 }
 
 
 function renumberDayLabels() {
-  document
-    .querySelectorAll("#dayEditor .day-entry")
-    .forEach((row, index) => {
-      row.querySelector(".day-label").textContent = index + 1;
-    });
+  document.querySelectorAll("#dayEditor .day-entry").forEach((row, index) => {
+    row.querySelector(".day-label").textContent = index + 1;
+  });
 }
+
 
 function populateItineraryPackageOptions(selectedId = "") {
   const select = $("itineraryPackage");
@@ -1727,16 +1872,16 @@ function populateItineraryPackageOptions(selectedId = "") {
       return `<option value="${esc(id)}"${selected}${disabled}>${esc(pkg.name)}${suffix}</option>`;
     }).join("");
 }
+
+
 function resetItineraryForm() {
   editingItineraryId = null;
-
   $("itineraryF")?.reset();
-populateItineraryPackageOptions("");
+
+  populateItineraryPackageOptions("");
   setHTML("itineraryPdfCurrent", "");
 
-  if ($("dayEditor")) {
-    $("dayEditor").innerHTML = "";
-  }
+  if ($("dayEditor")) $("dayEditor").innerHTML = "";
 
   setText("itineraryDialogTitle", "Add itinerary");
   setText("itinerarySave", "Save itinerary");
@@ -1765,38 +1910,25 @@ function openEditItinerary(id) {
   $("itineraryCover").value = it.cover_image || "";
   $("itinerarySummary").value = it.summary || "";
   $("itineraryPublished").checked = !!it.published;
-populateItineraryPackageOptions(it.package_id || "");
+
+  populateItineraryPackageOptions(it.package_id || "");
+
   setHTML(
     "itineraryPdfCurrent",
     it.pdf_url
-      ? `
-        ✓ PDF attached —
-        <a
-          href="${esc(it.pdf_url)}"
-          target="_blank"
-          rel="noopener">
-          view
-        </a>.
-        Choose a new file to replace it.
-      `
+      ? `✓ PDF attached — <a href="${esc(it.pdf_url)}" target="_blank" rel="noopener">view</a>. Choose a new file to replace it.`
       : ""
   );
 
   $("dayEditor").innerHTML = "";
 
   const days = (D.itinerary_days || [])
-    .filter(
-      day => String(day.itinerary_id) === String(it.id)
-    )
-    .sort(
-      (a, b) => Number(a.day_number) - Number(b.day_number)
-    );
+    .filter(day => String(day.itinerary_id) === String(it.id))
+    .sort((a, b) => Number(a.day_number) - Number(b.day_number));
 
   days.forEach(addDayRow);
 
-  if (!days.length) {
-    addDayRow();
-  }
+  if (!days.length) addDayRow();
 
   show("itineraryForm");
 }
@@ -1815,8 +1947,7 @@ async function uploadItineraryPdf(file, title) {
     .replace(/[^a-z0-9]+/gi, "-")
     .slice(0, 50);
 
-  const path =
-    Date.now() + "-" + safeName + ".pdf";
+  const path = Date.now() + "-" + safeName + ".pdf";
 
   const { error } = await db.storage
     .from(ITINERARY_BUCKET)
@@ -1832,10 +1963,7 @@ async function uploadItineraryPdf(file, title) {
     .getPublicUrl(path);
 
   if (!data?.publicUrl) {
-    await db.storage
-      .from(ITINERARY_BUCKET)
-      .remove([path]);
-
+    await db.storage.from(ITINERARY_BUCKET).remove([path]);
     throw new Error("Could not create the PDF URL.");
   }
 
@@ -1846,140 +1974,111 @@ async function uploadItineraryPdf(file, title) {
 function bindItineraryForm() {
   if (!$("itineraryF")) return;
 
-  $("addItineraryDay")?.addEventListener(
-    "click",
-    () => addDayRow()
-  );
+  $("addItineraryDay")?.addEventListener("click", () => addDayRow());
 
-  $("itineraryF").addEventListener(
-    "submit",
-    async event => {
-      event.preventDefault();
+  $("itineraryF").addEventListener("submit", async event => {
+    event.preventDefault();
 
-      try {
-        const { data: userData, error: userError } =
-          await db.auth.getUser();
+    try {
+      const { data: userData, error: userError } =
+        await db.auth.getUser();
 
-        if (userError || !userData.user) {
-          throw new Error(
-            userError?.message || "Please sign in again."
-          );
-        }
+      if (userError || !userData.user) {
+        throw new Error(userError?.message || "Please sign in again.");
+      }
 
-        const itinerary = {
-  owner_id: userData.user.id,
-  package_id: $("itineraryPackage").value || null,
-  title: $("itineraryTitle").value.trim(),
-          destination:
-            $("itineraryDestination").value.trim() || null,
-          duration_days: $("itineraryDays").value
-            ? Number($("itineraryDays").value)
-            : null,
-          duration_nights: $("itineraryNights").value
-            ? Number($("itineraryNights").value)
-            : null,
-          price: $("itineraryPrice").value.trim() || null,
-          cover_image: $("itineraryCover").value.trim() || null,
-          summary: $("itinerarySummary").value.trim() || null,
-          published: $("itineraryPublished").checked
-        };
+      const itinerary = {
+        owner_id: userData.user.id,
+        package_id: $("itineraryPackage").value || null,
+        title: $("itineraryTitle").value.trim(),
+        destination: $("itineraryDestination").value.trim() || null,
+        duration_days: $("itineraryDays").value
+          ? Number($("itineraryDays").value)
+          : null,
+        duration_nights: $("itineraryNights").value
+          ? Number($("itineraryNights").value)
+          : null,
+        price: $("itineraryPrice").value.trim() || null,
+        cover_image: $("itineraryCover").value.trim() || null,
+        summary: $("itinerarySummary").value.trim() || null,
+        published: $("itineraryPublished").checked
+      };
 
-        if (!itinerary.title) {
-          throw new Error("Please enter an itinerary title.");
-        }
+      if (!itinerary.title) {
+        throw new Error("Please enter an itinerary title.");
+      }
 
-        const pdfFile = $("itineraryPdf").files[0];
+      const pdfFile = $("itineraryPdf").files[0];
 
-        if (pdfFile) {
-          message("Uploading PDF...");
+      if (pdfFile) {
+        message("Uploading PDF...");
+        itinerary.pdf_url = await uploadItineraryPdf(pdfFile, itinerary.title);
+      }
 
-          itinerary.pdf_url =
-            await uploadItineraryPdf(
-              pdfFile,
-              itinerary.title
-            );
-        }
+      const days = [
+        ...document.querySelectorAll("#dayEditor .day-entry")
+      ].map(row => ({
+        owner_id: userData.user.id,
+        day_number: Number(row.querySelector(".day-number").value),
+        title: row.querySelector(".day-title").value.trim() || null,
+        description: row.querySelector(".day-description").value.trim() || null,
+        overnight_location: row.querySelector(".day-overnight").value.trim() || null
+      })).filter(day => day.day_number > 0);
 
-        const days = [
-          ...document.querySelectorAll(
-            "#dayEditor .day-entry"
-          )
-        ].map(row => ({
-          owner_id: userData.user.id,
-          day_number: Number(
-            row.querySelector(".day-number").value
-          ),
-          title:
-            row.querySelector(".day-title").value.trim() || null,
-          description:
-            row.querySelector(".day-description").value.trim() || null,
-          overnight_location:
-            row.querySelector(".day-overnight").value.trim() || null
-        })).filter(day => day.day_number > 0);
+      if (!days.length) {
+        throw new Error("Please add at least one itinerary day.");
+      }
 
-        if (!days.length) {
-          throw new Error(
-            "Please add at least one itinerary day."
-          );
-        }
+      let id = editingItineraryId;
 
-        let id = editingItineraryId;
-
-        if (id) {
-          let result = await db
-            .from("itineraries")
-            .update(itinerary)
-            .eq("id", id);
-
-          if (result.error) throw result.error;
-
-          result = await db
-            .from("itinerary_days")
-            .delete()
-            .eq("itinerary_id", id);
-
-          if (result.error) throw result.error;
-
-        } else {
-          const result = await db
-            .from("itineraries")
-            .insert(itinerary)
-            .select("id")
-            .single();
-
-          if (result.error) throw result.error;
-
-          id = result.data.id;
-        }
-
-        const result = await db
-          .from("itinerary_days")
-          .insert(
-            days.map(day => ({
-              ...day,
-              itinerary_id: id
-            }))
-          );
+      if (id) {
+        let result = await db
+          .from("itineraries")
+          .update(itinerary)
+          .eq("id", id);
 
         if (result.error) throw result.error;
 
-        $("itineraryForm").close();
+        result = await db
+          .from("itinerary_days")
+          .delete()
+          .eq("itinerary_id", id);
 
-        resetItineraryForm();
+        if (result.error) throw result.error;
 
-        await load();
+      } else {
+        const result = await db
+          .from("itineraries")
+          .insert(itinerary)
+          .select("id")
+          .single();
 
-        message("Itinerary saved.");
-        alert("Itinerary saved successfully.");
-
-      } catch (error) {
-        console.error(error);
-
-        alert("Itinerary save error: " + error.message);
-        message("Itinerary save error: " + error.message);
+        if (result.error) throw result.error;
+        id = result.data.id;
       }
+
+      const result = await db
+        .from("itinerary_days")
+        .insert(days.map(day => ({
+          ...day,
+          itinerary_id: id
+        })));
+
+      if (result.error) throw result.error;
+
+      $("itineraryForm").close();
+      resetItineraryForm();
+      await load();
+
+      message("Itinerary saved.");
+      alert("Itinerary saved successfully.");
+
+    } catch (error) {
+      console.error(error);
+      alert("Itinerary save error: " + error.message);
+      message("Itinerary save error: " + error.message);
     }
-  );
+  });
 }
 
 
@@ -1990,7 +2089,14 @@ function bindItineraryForm() {
 function bindPageButtons() {
   document.querySelectorAll("[data-open]").forEach(button => {
     button.addEventListener("click", () => {
-      show(button.dataset.open);
+      const dialogId = button.dataset.open;
+
+      if (dialogId === "packageDialog") {
+        openNewPackage();
+        return;
+      }
+
+      show(dialogId);
     });
   });
 
@@ -2003,17 +2109,11 @@ function bindPageButtons() {
   document.querySelectorAll("nav button").forEach(button => {
     button.addEventListener("click", () => {
       document.querySelectorAll(".panel").forEach(panel => {
-        panel.classList.toggle(
-          "active",
-          panel.id === button.dataset.tab
-        );
+        panel.classList.toggle("active", panel.id === button.dataset.tab);
       });
 
       document.querySelectorAll("nav button").forEach(navButton => {
-        navButton.classList.toggle(
-          "active",
-          navButton === button
-        );
+        navButton.classList.toggle("active", navButton === button);
       });
     });
   });
@@ -2026,30 +2126,21 @@ function bindPageButtons() {
 
 function bindForm(id, table, transform) {
   const form = $(id);
-
   if (!form) return;
 
   form.addEventListener("submit", async event => {
     event.preventDefault();
 
-    const obj = Object.fromEntries(
-      new FormData(form)
-    );
+    const obj = Object.fromEntries(new FormData(form));
 
     Object.keys(obj).forEach(key => {
-      if (obj[key] === "") {
-        obj[key] = null;
-      }
+      if (obj[key] === "") obj[key] = null;
     });
 
     try {
-      await save(
-        table,
-        transform ? transform(obj) : obj
-      );
+      await save(table, transform ? transform(obj) : obj);
 
       form.closest("dialog")?.close();
-
       form.reset();
 
     } catch (error) {
@@ -2060,14 +2151,17 @@ function bindForm(id, table, transform) {
 
 
 function bindForms() {
-  bindForm(
-    "packageF",
-    "packages",
-    obj => ({
-      ...obj,
-      price_per_person: Number(obj.price_per_person) || 0
-    })
+  /* PACKAGE FORM - CUSTOM IMAGE HANDLER */
+
+  $("packageF")?.addEventListener("submit", savePackageForm);
+
+  $("packageImage")?.addEventListener(
+    "change",
+    previewPackageImage
   );
+
+
+  /* VENDOR FORM */
 
   bindForm(
     "vendorF",
@@ -2077,6 +2171,9 @@ function bindForms() {
       rates: obj.rates ? Number(obj.rates) : null
     })
   );
+
+
+  /* FINANCE FORM */
 
   bindForm(
     "financeF",
@@ -2098,9 +2195,7 @@ function bindForms() {
       event.preventDefault();
 
       const form = event.target;
-      const obj = Object.fromEntries(
-        new FormData(form)
-      );
+      const obj = Object.fromEntries(new FormData(form));
 
       try {
         const { data: customer, error } = await db
@@ -2129,9 +2224,7 @@ function bindForms() {
         if (leadError) throw leadError;
 
         form.closest("dialog")?.close();
-
         form.reset();
-
         await load();
 
       } catch (error) {
@@ -2142,15 +2235,8 @@ function bindForms() {
 
   bindItineraryForm();
 
-  $("hotelF")?.addEventListener(
-    "submit",
-    saveHotelForm
-  );
-
-  $("cabF")?.addEventListener(
-    "submit",
-    saveCabForm
-  );
+  $("hotelF")?.addEventListener("submit", saveHotelForm);
+  $("cabF")?.addEventListener("submit", saveCabForm);
 }
 
 
@@ -2161,10 +2247,19 @@ function bindForms() {
 function bindActions() {
   document.addEventListener("click", async event => {
     const target = event.target;
-
     if (!(target instanceof Element)) return;
 
     let button;
+
+
+    /* EDIT PACKAGE */
+
+    button = target.closest("[data-edit-package]");
+
+    if (button) {
+      openEditPackage(button.dataset.editPackage);
+      return;
+    }
 
 
     /* INVOICE PDF */
@@ -2267,8 +2362,7 @@ function bindActions() {
 
     if (button) {
       const it = (D.itineraries || []).find(
-        item => String(item.id) ===
-          String(button.dataset.itineraryWa)
+        item => String(item.id) === String(button.dataset.itineraryWa)
       );
 
       if (it) {
@@ -2286,15 +2380,10 @@ function bindActions() {
 
     /* BOOKING WHATSAPP / PAYMENT REMINDER */
 
-    button = target.closest(
-      "[data-confirm-wa], [data-remind]"
-    );
+    button = target.closest("[data-confirm-wa], [data-remind]");
 
     if (button) {
-      const id =
-        button.dataset.confirmWa ||
-        button.dataset.remind;
-
+      const id = button.dataset.confirmWa || button.dataset.remind;
       const booking = getBooking(id);
 
       if (!booking) return;
@@ -2305,15 +2394,13 @@ function bindActions() {
       const paid = Number(booking.amount_paid || 0);
       const balance = Math.max(0, total - paid);
 
-      const reminder =
-        button.dataset.remind !== undefined;
+      const reminder = button.dataset.remind !== undefined;
 
       const text = reminder
         ? `Hello ${customer.name || ""}, this is a friendly payment reminder from Himalayan Odyssey Expedition. Your ${booking.destination || "trip"} booking has a pending balance of ${cash(balance)}. Thank you.`
         : `Hello ${customer.name || ""}, your ${booking.destination || "trip"} booking is confirmed with Himalayan Odyssey Expedition. Travel date: ${booking.start_date || "—"}. Total: ${cash(total)}. Received: ${cash(paid)}. Balance: ${cash(balance)}. Thank you!`;
 
       openCustomerWhatsApp(customer.phone, text);
-
       return;
     }
 
@@ -2323,13 +2410,21 @@ function bindActions() {
     button = target.closest("[data-del]");
 
     if (button) {
+      const table = button.dataset.del;
+      const id = button.dataset.id;
+
+      if (table === "packages") {
+        await deletePackage(id);
+        return;
+      }
+
       if (!confirm("Delete this record?")) return;
 
       try {
         const { error } = await db
-          .from(button.dataset.del)
+          .from(table)
           .delete()
-          .eq("id", button.dataset.id);
+          .eq("id", id);
 
         if (error) throw error;
 
@@ -2352,7 +2447,6 @@ function bindActions() {
         button.dataset.wa,
         "Hello, I would like to discuss my travel enquiry."
       );
-
       return;
     }
 
@@ -2363,24 +2457,15 @@ function bindActions() {
 
     if (button) {
       const lead = (D.leads || []).find(
-        item => String(item.id) ===
-          String(button.dataset.confirm)
+        item => String(item.id) === String(button.dataset.confirm)
       );
 
       if (!lead) return;
 
-      const total = prompt(
-        "Total booking amount ₹",
-        lead.budget || "0"
-      );
-
+      const total = prompt("Total booking amount ₹", lead.budget || "0");
       if (total === null) return;
 
-      const paid = prompt(
-        "Advance received ₹",
-        "0"
-      );
-
+      const paid = prompt("Advance received ₹", "0");
       if (paid === null) return;
 
       try {
@@ -2406,7 +2491,6 @@ function bindActions() {
         if (deleteError) throw deleteError;
 
         await load();
-
         alert("Lead converted into booking successfully.");
 
       } catch (error) {
@@ -2423,8 +2507,7 @@ function bindActions() {
 
     if (button) {
       const booking = (D.bookings || []).find(
-        item => String(item.id) ===
-          String(button.dataset.pay)
+        item => String(item.id) === String(button.dataset.pay)
       );
 
       if (!booking) return;
@@ -2446,8 +2529,7 @@ function bindActions() {
         if (error) throw error;
 
         const newPaid =
-          Number(booking.amount_paid || 0) +
-          Number(amount);
+          Number(booking.amount_paid || 0) + Number(amount);
 
         const { error: updateError } = await db
           .from("bookings")
@@ -2457,7 +2539,6 @@ function bindActions() {
         if (updateError) throw updateError;
 
         await load();
-
         alert("Payment recorded successfully.");
 
       } catch (error) {
@@ -2483,10 +2564,7 @@ async function initialize() {
       );
     }
 
-    if (
-      !SUPABASE_KEY ||
-      SUPABASE_KEY.includes("PASTE_YOUR")
-    ) {
+    if (!SUPABASE_KEY || SUPABASE_KEY.includes("PASTE_YOUR")) {
       throw new Error(
         "Please add your actual Supabase publishable key in app.js."
       );
@@ -2512,62 +2590,42 @@ async function initialize() {
 
     /* NEW HOTEL */
 
-    $("newHotel")?.addEventListener(
-      "click",
-      openNewHotel
-    );
+    $("newHotel")?.addEventListener("click", openNewHotel);
 
 
     /* NEW CAB */
 
-    $("newCab")?.addEventListener(
-      "click",
-      openNewCab
-    );
+    $("newCab")?.addEventListener("click", openNewCab);
 
 
     /* LOGIN */
 
-    $("login")?.addEventListener(
-      "click",
-      login
-    );
+    $("login")?.addEventListener("click", login);
 
 
     /* LOGOUT */
 
-    $("logout")?.addEventListener(
-      "click",
-      logout
-    );
+    $("logout")?.addEventListener("click", logout);
 
 
     /* REFRESH */
 
-    $("refresh")?.addEventListener(
-      "click",
-      async () => {
-        try {
-          await load();
-          message("Dashboard refreshed.");
+    $("refresh")?.addEventListener("click", async () => {
+      try {
+        await load();
+        message("Dashboard refreshed.");
 
-        } catch (error) {
-          message("Refresh error: " + error.message);
-        }
+      } catch (error) {
+        message("Refresh error: " + error.message);
       }
-    );
+    });
 
 
     /* ENTER KEY LOGIN */
 
-    $("password")?.addEventListener(
-      "keydown",
-      event => {
-        if (event.key === "Enter") {
-          login();
-        }
-      }
-    );
+    $("password")?.addEventListener("keydown", event => {
+      if (event.key === "Enter") login();
+    });
 
 
     message("Ready. Enter your admin login details.");
@@ -2585,7 +2643,6 @@ async function initialize() {
 
   } catch (error) {
     console.error("Startup error:", error);
-
     message("App startup error: " + error.message);
   }
 }
