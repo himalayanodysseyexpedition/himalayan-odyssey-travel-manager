@@ -329,7 +329,12 @@ Publish this cab on the guest website
 <dialog id="itineraryForm">
 <form id="itineraryF">
 <h2 id="itineraryDialogTitle">Add Itinerary</h2>
-<label>Itinerary Title</label>
+<label>Link to Travel Package</label>
+<select id="itineraryPackage">
+  <option value="">No linked package</option>
+</select>
+<small>Choose one package for this PDF. Each package can have only one linked itinerary.</small>
+  <label>Itinerary Title</label>
 <input id="itineraryTitle" required placeholder="Winter Spiti Valley Tour">
 <label>Destination</label>
 <input id="itineraryDestination" placeholder="Spiti Valley, Himachal Pradesh">
