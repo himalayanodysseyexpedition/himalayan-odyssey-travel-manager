@@ -2184,7 +2184,7 @@ document.getElementById("galleryList")
 
 /* TRAVEL ENQUIRY FORM - WHATSAPP */
 document.getElementById("travelEnquiryForm")
-  .addEventListener("submit",function(e) {
+  .addEventListener("submit",async function(e) {
 
     e.preventDefault();
 
@@ -2217,6 +2217,8 @@ document.getElementById("travelEnquiryForm")
 
     const submitButton = this.querySelector('button[type="submit"]');
     if (submitButton) submitButton.disabled = true;
+    // Open synchronously within the user gesture so iPhone Safari permits WhatsApp.
+    const waWindow = window.open("about:blank", "_blank");
 
     let databaseSaved = false;
     let saveMessage = "";
@@ -2273,7 +2275,7 @@ Travel Month: ${month}`;
 
     message += "\n\nPlease contact me regarding this trip.";
 
-    const waWindow = window.open(whatsappLink(message), "_blank");
+    if (waWindow) waWindow.location.href = whatsappLink(message);
     if (!waWindow) {
       alert("Your enquiry " + (databaseSaved ? "was saved to the CRM." : "could not be saved automatically.") + " Please allow pop-ups to continue to WhatsApp.");
     } else if (!databaseSaved) {
