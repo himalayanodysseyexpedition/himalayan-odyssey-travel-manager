@@ -977,6 +977,58 @@ footer{padding-bottom:55px}
   .scroll-progress{display:none}
 }
 
+
+/* =========================================
+   HIMALAYAN ODYSSEY — PREMIUM MOTION POLISH
+   Lightweight, touch-aware and accessible
+========================================= */
+:root{
+  --motion-ease:cubic-bezier(.22,.68,0,1);
+  --motion-fast:220ms;
+  --motion-medium:520ms;
+}
+html{scroll-behavior:smooth}
+.hero-content{animation:heroReveal 1s var(--motion-ease) both}
+.hero-rule{
+  transform-origin:left center;
+  animation:ruleReveal 850ms 180ms var(--motion-ease) both;
+}
+@keyframes ruleReveal{
+  from{opacity:0;transform:scaleX(.35)}
+  to{opacity:1;transform:scaleX(1)}
+}
+/* Gentle scroll reveals using compositor-friendly properties. */
+.reveal{
+  opacity:0;
+  transform:translate3d(0,22px,0);
+  transition:opacity 650ms var(--motion-ease),transform 650ms var(--motion-ease);
+}
+.reveal.visible{opacity:1;transform:translate3d(0,0,0)}
+.cards>.reveal:nth-child(2),.destination-grid>.reveal:nth-child(2){transition-delay:70ms}
+.cards>.reveal:nth-child(3),.destination-grid>.reveal:nth-child(3){transition-delay:130ms}
+.cards>.reveal:nth-child(4),.destination-grid>.reveal:nth-child(4){transition-delay:190ms}
+/* Hover interactions only on devices that actually support hover. */
+@media(hover:hover) and (pointer:fine){
+  .btn{transition:transform var(--motion-fast) var(--motion-ease),background-color var(--motion-fast) ease,border-color var(--motion-fast) ease,box-shadow var(--motion-fast) ease}
+  .card,.destination-card,.info-box{transition:transform 420ms var(--motion-ease),box-shadow 420ms ease,border-color 320ms ease}
+}
+.btn:active,.footer-contact-btn:active{transform:translateY(1px) scale(.985)}
+@media(hover:none){
+  .card:hover,.destination-card:hover,.info-box:hover{transform:none}
+  .card:hover>img,.destination-card:hover img{transform:none;filter:none}
+}
+/* Reduced-motion users see all content without entrance effects. */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+  .reveal,.reveal.visible{
+    opacity:1!important;transform:none!important;transition:none!important;animation:none!important;
+  }
+  .hero-content,.hero-rule{animation:none!important}
+  .card,.destination-card,.destination-card img,.card>img,.btn,.info-box{
+    transition:none!important;transform:none!important;
+  }
+}
+
 </style>
 
 <script type="application/ld+json">
