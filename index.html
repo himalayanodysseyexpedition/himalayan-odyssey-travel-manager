@@ -48,6 +48,7 @@
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:115px}
+#plan-your-himalayan-adventure{scroll-margin-top:130px}
 body{
   margin:0;
   background:var(--cream);
@@ -1714,12 +1715,25 @@ function showLoadingError(element, title, message, enquiry) {
     </div>`;
 }
 
+/* Keep direct enquiry links aligned after asynchronous package cards change page height. */
+function settleEnquiryAnchor() {
+  if (window.location.hash !== "#plan-your-himalayan-adventure") return;
+  const target = document.getElementById("plan-your-himalayan-adventure");
+  if (!target) return;
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      target.scrollIntoView({behavior:"auto",block:"start"});
+    });
+  });
+}
+
 /* LOAD PUBLIC PACKAGES */
 async function loadPackages() {
   const list = document.getElementById("packageList");
 
   if (!db) {
     showLoadingError(list,"Packages Temporarily Unavailable","The website connection could not be started.","Please share your available tour packages.");
+    settleEnquiryAnchor();
     return;
   }
 
@@ -1809,6 +1823,8 @@ async function loadPackages() {
     console.error("Package loading error:",error);
 
     showLoadingError(list,"Packages Temporarily Unavailable","Packages could not be loaded right now. Please contact us for available tours.","Please share your available tour packages.");
+  } finally {
+    settleEnquiryAnchor();
   }
 }
 
