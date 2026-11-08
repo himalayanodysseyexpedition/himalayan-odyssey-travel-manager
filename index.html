@@ -860,6 +860,113 @@ footer p{font-size:11px;color:#aebdb4;margin-top:20px}
     transition:none;
   }
 }
+
+/* =========================================
+   PREMIUM EDITORIAL REDESIGN — 2026
+========================================= */
+:root{
+  --forest:#0b211d;
+  --forest2:#173d33;
+  --gold:#cbb080;
+  --gold-light:#f0dfbd;
+  --cream:#f7f5ef;
+  --paper:#fffdf8;
+  --ink:#1e332d;
+}
+html{scroll-padding-top:130px}
+body{letter-spacing:.005em}
+header{
+  background:rgba(8,27,23,.88);
+  border-bottom:1px solid rgba(203,176,128,.35);
+  box-shadow:0 10px 40px rgba(0,0,0,.12);
+}
+.header-inner{padding-top:13px;padding-bottom:13px}
+nav a{font-size:10px;letter-spacing:1.55px}
+nav a:focus-visible{color:var(--gold-light)}
+.hero{
+  min-height:min(850px,92svh);
+  background-image:
+    linear-gradient(90deg,rgba(3,17,14,.88) 0%,rgba(3,17,14,.62) 47%,rgba(3,17,14,.08) 100%),
+    linear-gradient(0deg,rgba(3,17,14,.46),transparent 45%),
+    url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=2200&q=90");
+  background-position:center,center,center 48%;
+}
+.hero-content{max-width:790px}
+.hero .eyebrow{letter-spacing:5px}
+.hero h1{font-size:clamp(64px,9vw,118px);letter-spacing:-2.8px}
+.hero p{font-size:15px;max-width:590px;color:rgba(255,255,255,.88)}
+.btn{border-radius:3px;min-height:50px;padding:14px 24px;letter-spacing:1px}
+.btn:not(.outline){box-shadow:0 9px 25px rgba(198,163,106,.18)}
+section.content{padding-top:100px;padding-bottom:100px}
+.section-title h2{letter-spacing:-.7px}
+.section-title small{letter-spacing:4.5px}
+.intro{max-width:720px;font-size:14px}
+.destination-gallery{background:linear-gradient(180deg,#f8f6f0 0%,#eeece3 100%)}
+.destination-card{border-radius:3px}
+.destination-info h3{font-size:clamp(32px,3vw,43px)}
+.card{border-radius:3px}
+.card-body{padding:26px}
+.enquiry-box{border-radius:3px}
+.info-box{border-radius:3px}
+.cta{position:relative;overflow:hidden}
+footer{padding-bottom:55px}
+.footer-contact-bar{
+  right:26px;bottom:26px;width:auto;min-width:174px;
+  grid-template-columns:1fr;gap:7px;padding:8px;
+  border-radius:16px;background:rgba(8,27,23,.82);
+  border:1px solid rgba(234,214,174,.4);
+  box-shadow:0 16px 45px rgba(0,0,0,.22);
+}
+.footer-contact-btn{border-radius:10px;min-height:46px}
+.footer-call{background:rgba(198,163,106,.28)}
+.footer-whatsapp{background:rgba(22,141,81,.38)}
+/* Elegant review discovery panel; no unverified score or testimonials are shown. */
+.review-panel{
+  max-width:1120px;margin:0 auto;padding:clamp(30px,5vw,62px);
+  display:grid;grid-template-columns:1.1fr .9fr;gap:35px;align-items:center;
+  color:#f7f3e9;background:
+    radial-gradient(ellipse at 90% 10%,rgba(203,176,128,.18),transparent 42%),
+    linear-gradient(135deg,#0b211d,#1a4035);
+  border:1px solid rgba(203,176,128,.55);
+  box-shadow:0 24px 65px rgba(11,33,29,.15);
+}
+.review-kicker{color:var(--gold-light);font-size:10px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase}
+.review-panel h2{font:500 clamp(36px,4.5vw,54px)/1.02 var(--serif);margin:12px 0;color:#fff}
+.review-panel p{font-size:13px;line-height:1.9;color:#d6e0d9;max-width:560px}
+.review-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.review-actions .btn{margin:0}
+.review-points{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.review-point{padding:18px;border:1px solid rgba(234,214,174,.25);background:rgba(255,255,255,.045)}
+.review-point strong{display:block;color:var(--gold-light);font:600 22px var(--serif);margin-bottom:5px}
+.review-point span{font-size:11px;color:#d6e0d9;line-height:1.6}
+.scroll-progress{
+  position:fixed;top:0;left:0;height:3px;width:0;z-index:1100;
+  background:linear-gradient(90deg,#b68e55,#f0dfbd);
+  box-shadow:0 0 12px rgba(203,176,128,.5);
+}
+@media(max-width:760px){
+  section.content{padding-top:72px;padding-bottom:72px}
+  .hero{min-height: min(760px,88svh);background-position:center,center,58% center}
+  .hero h1{font-size:clamp(56px,13vw,78px)}
+  .review-panel{grid-template-columns:1fr;gap:24px;padding:28px 22px}
+  .review-points{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .footer-contact-bar{
+    left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));
+    width:auto;min-width:0;grid-template-columns:1fr 1fr;
+    padding:7px;gap:7px;border-radius:15px;
+  }
+  .footer-contact-btn{min-height:47px;font-size:10px}
+  body{padding-bottom:76px}
+  .hero{min-height:690px}
+  .hero .eyebrow{font-size:9px;letter-spacing:3px}
+  .review-point{padding:14px 12px}
+}
+@media(prefers-reduced-motion:reduce){
+  .scroll-progress{display:none}
+}
+
 </style>
 
 <script type="application/ld+json">
@@ -883,6 +990,7 @@ footer p{font-size:11px;color:#aebdb4;margin-top:20px}
 </head>
 
 <body>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <!-- HEADER -->
 <header>
@@ -1238,6 +1346,29 @@ footer p{font-size:11px;color:#aebdb4;margin-top:20px}
      href="tel:+919816929669">Call Us: +91 98169 29669</a>
 
 </div>
+
+<!-- TRAVELLER REVIEWS / GOOGLE DISCOVERY -->
+<section class="content" id="reviews">
+  <div class="section-inner">
+    <div class="review-panel reveal">
+      <div>
+        <span class="review-kicker">TRAVELLER STORIES & FEEDBACK</span>
+        <h2>Every journey is better when shared.</h2>
+        <p>Planning a Himalayan escape should feel personal from the very first conversation. Explore our business profile and guest feedback, or tell us about the journey you have in mind.</p>
+        <div class="review-actions">
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Himalayan+Odyssey+Expedition+Narkanda" target="_blank" rel="noopener noreferrer">Find us on Google ↗</a>
+          <a class="btn outline" href="https://wa.me/919816929669?text=Hello%20Himalayan%20Odyssey%20Expedition%2C%20I%20would%20like%20to%20plan%20a%20trip." target="_blank" rel="noopener noreferrer">Talk to our team</a>
+        </div>
+      </div>
+      <div class="review-points" aria-label="Our travel approach">
+        <div class="review-point"><strong>Local</strong><span>Mountain knowledge and regional experience</span></div>
+        <div class="review-point"><strong>Personal</strong><span>Journeys shaped around your group</span></div>
+        <div class="review-point"><strong>Thoughtful</strong><span>Clear planning before you travel</span></div>
+        <div class="review-point"><strong>Connected</strong><span>Direct support from our team</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- INSTAGRAM -->
 <section class="content instagram-section" id="instagram">
@@ -1943,6 +2074,19 @@ if (footerContactBar && siteFooter) {
 
   /* Set correct visibility immediately when page loads */
   updateFloatingButtons();
+}
+
+/* SCROLL PROGRESS */
+const progressBar = document.getElementById("scrollProgress");
+if (progressBar) {
+  const updateScrollProgress = () => {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+    progressBar.style.width = Math.min(100, Math.max(0, progress)) + "%";
+  };
+  window.addEventListener("scroll", updateScrollProgress, { passive: true });
+  window.addEventListener("resize", updateScrollProgress);
+  updateScrollProgress();
 }
 
 /* LOAD WEBSITE SECTIONS */
