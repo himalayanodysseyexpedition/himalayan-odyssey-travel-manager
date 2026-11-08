@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0b211d">
+<title>Himalayan Tour Packages & Group Departures | Himalayan Odyssey Expedition</title>
+<meta name="description" content="Browse current Himalayan Odyssey Expedition tour packages for Spiti Valley, Kinnaur and Himachal Pradesh. Enquire about group departures and private road trips.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://himalayanexpedition.co.in/packages/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Himalayan Odyssey Expedition"><meta property="og:title" content="Himalayan Tour Packages | Himalayan Odyssey Expedition"><meta property="og:description" content="Explore current Spiti Valley, Kinnaur and Himachal Pradesh tour packages."><meta property="og:url" content="https://himalayanexpedition.co.in/packages/"><meta property="og:image" content="https://himalayanexpedition.co.in/spiti.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Himalayan Tour Packages | Himalayan Odyssey Expedition"><meta name="twitter:description" content="Explore current Spiti Valley, Kinnaur and Himachal Pradesh tour packages."><meta name="twitter:image" content="https://himalayanexpedition.co.in/spiti.jpg">
+<link rel="icon" href="/logo.png"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--forest:#0b211d;--gold:#c6a36a;--cream:#f8f6f0;--paper:#fffefa;--muted:#718078;--serif:"Cormorant Garamond",Georgia,serif;--sans:"DM Sans",Arial,sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:#263b34;font:16px/1.8 var(--sans)}a{text-decoration:none;color:inherit}.top{background:#081b17;color:#f4f0e7;padding:15px 6%;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.top a{color:#ead6ae}.hero{padding:80px 7%;background:linear-gradient(90deg,#041310ed,#0413108c),url('/spiti.jpg') center/cover;color:white}.hero h1{font:500 clamp(44px,7vw,76px)/1 var(--serif);margin:12px 0}.hero p{max-width:720px}.wrap{max-width:1200px;margin:auto;padding:55px 6%}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}.card{background:var(--paper);border:1px solid #e8e1d5;padding:22px}.card img{width:100%;height:190px;object-fit:cover}.card h2{font:600 28px var(--serif);color:var(--forest);margin:10px 0}.card p{font-size:14px;color:var(--muted)}.price{font-weight:bold;color:#987342}.btn{display:inline-block;background:var(--gold);padding:12px 17px;color:var(--forest);font-size:12px;font-weight:bold;text-transform:uppercase;margin:6px 6px 0 0}.status{text-align:center;padding:30px;color:var(--muted)}footer{background:var(--forest);color:white;padding:25px 7%;font-size:13px}@media(max-width:600px){.hero{padding:55px 7%}.wrap{padding:40px 5%}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Himalayan Tour Packages","url":"https://himalayanexpedition.co.in/packages/","about":{"@type":"TouristDestination","name":"Himachal Pradesh"}}</script>
+</head><body>
+<header class="top"><b>HIMALAYAN ODYSSEY EXPEDITION</b><nav><a href="/">Home</a>　<a href="/spiti-valley-tours/">Spiti Valley</a>　<a href="/#contact">Contact</a></nav></header>
+<section class="hero"><small>FIND YOUR NEXT JOURNEY</small><h1>Himalayan tour packages</h1><p>Explore current group departures and private journeys across Spiti Valley, Kinnaur and Himachal Pradesh. Package details, inclusions, rates and dates are confirmed directly with our team.</p><a class="btn" href="https://wa.me/919816929669?text=Hello%2C%20please%20share%20your%20current%20Himalayan%20tour%20packages." target="_blank" rel="noopener noreferrer">Ask for current departures</a></section>
+<main class="wrap"><h2>Available journeys</h2><p>Our current published packages are shown below. If the list is temporarily unavailable, contact us on WhatsApp for updated availability. Prices and dates are taken from the live package manager rather than being hard-coded on this page.</p><div id="packageList" class="cards"><p class="status">Loading currently published packages…</p></div><p><a class="btn" href="/">Return to main website</a></p></main>
+<footer>HIMALAYAN ODYSSEY EXPEDITION · Narkanda, Himachal Pradesh · <a href="tel:+919816929669" style="color:#ead6ae">+91 98169 29669</a></footer>
+<script>
+"use strict";
+const db=window.supabase?.createClient("https://ynkoiuyjevclypumnyes.supabase.co","sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-");
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const wa=t=>"https://wa.me/919816929669?text="+encodeURIComponent(t);
+(async()=>{
+ const list=document.getElementById("packageList");
+ try{
+  if(!db)throw new Error("Package connection unavailable");
+  const {data,error}=await db.from("packages").select("*").order("created_at",{ascending:false});
+  if(error)throw error;
+  if(!data?.length){list.innerHTML='<p class="status">No packages are currently published. Please contact our team for upcoming departures.</p>';return;}
+  list.innerHTML=data.map(p=>'<article class="card">'+(p.image_url||p.cover_image?'<img src="'+esc(p.image_url||p.cover_image)+'" alt="'+esc(p.name||"Himalayan tour")+'" loading="lazy">':'')+'<h2>'+esc(p.name||"Himalayan Tour")+'</h2><p>'+esc(p.destination||"Himachal Pradesh")+'</p><p>'+esc(p.duration||"")+'</p>'+(p.inclusions?'<p>'+esc(p.inclusions)+'</p>':'')+(p.price_per_person!=null&&p.price_per_person!==""?'<p class="price">₹'+Number(p.price_per_person).toLocaleString("en-IN")+' per person</p>':'')+'<a class="btn" href="'+wa("Hello, I am interested in "+(p.name||"your Himalayan package")+". Please share dates and details.")+'" target="_blank" rel="noopener noreferrer">Enquire on WhatsApp</a></article>').join("");
+ }catch(e){console.error("Package directory error",e);list.innerHTML='<p class="status">We could not load the latest package list. <a href="'+wa("Hello, please share your current Himalayan tour packages.")+'">Contact us on WhatsApp</a> for current availability.</p>';}
+})();
+</script></body></html>
