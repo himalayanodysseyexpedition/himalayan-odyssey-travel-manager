@@ -1,0 +1,53 @@
+name: Optimize website logo asset
+
+on:
+  push:
+    branches:
+      - performance/website-conversion-seo
+    paths:
+      - .github/workflows/optimize-site-assets.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  optimize-logo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out website improvement branch
+        uses: actions/checkout@v4
+        with:
+          ref: performance/website-conversion-seo
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install image processor
+        run: npm install --no-save --package-lock=false sharp
+      - name: Create optimized WebP logo
+        run: |
+          node --input-type=module <<'NODE'
+          import sharp from 'sharp';
+          import fs from 'node:fs/promises';
+          const input = 'logo.png';
+          const output = 'logo.webp';
+          const before = await fs.stat(input);
+          await sharp(input)
+            .resize({ width: 512, height: 512, fit: 'inside', withoutEnlargement: true })
+            .webp({ quality: 82, alphaQuality: 90, effort: 5 })
+            .toFile(output);
+          const after = await fs.stat(output);
+          console.log(`logo.png: ${(before.size / 1024).toFixed(1)} KB -> logo.webp: ${(after.size / 1024).toFixed(1)} KB (${(100 - after.size / before.size * 100).toFixed(1)}% smaller)`);
+          NODE
+      - name: Commit optimized logo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add logo.webp
+          if git diff --cached --quiet; then
+            echo "No logo changes to commit."
+          else
+            git commit -m "Optimize site logo as WebP"
+            git push origin HEAD:performance/website-conversion-seo
+          fi
