@@ -1047,6 +1047,21 @@ footer{padding-bottom:55px}
 }
 @media(prefers-reduced-motion:reduce){.hero-feature img{transition:none}}
 
+
+.faq-section{background:#f8f6f0}
+.faq-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,7vw,100px);align-items:start}
+.faq-heading h2{font:500 clamp(43px,5vw,66px)/.98 var(--serif);color:#173a30;letter-spacing:-1px;margin:15px 0}
+.faq-heading h2 em{color:#9c7a48;font-weight:400}
+.faq-heading>p{font-size:13px;line-height:1.9;color:#718078;max-width:390px}
+.faq-list details{border-bottom:1px solid #dcd7cb;padding:20px 0}
+.faq-list details:first-child{border-top:1px solid #dcd7cb}
+.faq-list summary{cursor:pointer;list-style:none;padding-right:35px;position:relative;font:600 23px/1.2 var(--serif);color:#193a30}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary:after{content:"+";position:absolute;right:2px;top:-3px;font:400 27px var(--sans);color:#a28555}
+.faq-list details[open] summary:after{content:"−"}
+.faq-list details p{font-size:12px;line-height:1.9;color:#718078;max-width:620px;margin:13px 35px 2px 0}
+@media(max-width:700px){.faq-layout{grid-template-columns:1fr;gap:20px}.faq-list summary{font-size:21px}}
+
 </style>
 
 <script type="application/ld+json">
@@ -1082,11 +1097,13 @@ footer{padding-bottom:55px}
     <nav aria-label="Main navigation">
       <a href="#home">Home</a>
       <a href="#destinations">Destinations</a>
-      <a href="#packages">Packages</a>
+      <a href="#packages">Trips</a>
+      <a href="#why-us">Why Us</a>
       <a href="#travel-enquiry">Plan Your Trip</a>
       <a href="#itineraries">Itineraries</a>
       <a href="#cabs">Cabs</a>
       <a href="#gallery">Hotels</a>
+      <a href="#reviews">Reviews</a>
       <a href="#contact">Contact</a>
       <a href="#instagram">Instagram</a>
     </nav>
@@ -1213,10 +1230,10 @@ footer{padding-bottom:55px}
 
     <div class="section-title reveal">
       <small>FIND YOUR NEXT JOURNEY</small>
-      <h2>Our Travel Packages</h2>
+      <h2>Find Your Next Journey</h2>
     </div>
 
-    <p class="intro reveal">Discover thoughtfully planned Himalayan holidays and find the journey that feels right for you.</p>
+    <p class="intro reveal">Explore available journeys, compare the details, and message our team to shape the right Himalayan trip for you.</p>
 
     <div id="packageList" class="cards">
       <p id="packageMessage">Loading available packages...</p>
@@ -1474,6 +1491,21 @@ footer{padding-bottom:55px}
         <div class="review-point"><strong>Personal</strong><span>Journeys shaped around your group</span></div>
         <div class="review-point"><strong>Thoughtful</strong><span>Clear planning before you travel</span></div>
         <div class="review-point"><strong>Connected</strong><span>Direct support from our team</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK QUESTIONS -->
+<section class="content faq-section" id="questions">
+  <div class="section-inner">
+    <div class="faq-layout">
+      <div class="faq-heading reveal"><small class="eyebrow-dark">GOOD TO KNOW</small><h2>Before you<br><em>head for the hills.</em></h2><p>Have a question about routes, timing or the right trip? Start here, or message our team for advice tailored to your plans.</p><a class="btn" href="https://wa.me/919816929669?text=Hello%2C%20I%20have%20a%20question%20about%20planning%20a%20Himalayan%20trip." target="_blank" rel="noopener">Ask us on WhatsApp ↗</a></div>
+      <div class="faq-list reveal">
+        <details><summary>Can you customise a trip for our group?</summary><p>Yes. Share your travel dates, group size, preferred destinations and budget with our team so we can discuss a suitable route.</p></details>
+        <details><summary>Which destinations can I explore?</summary><p>We focus on Himalayan journeys including Spiti Valley, Kinnaur, Narkanda, Manali and other destinations in Himachal Pradesh. Ask us about your preferred route and season.</p></details>
+        <details><summary>Can you help arrange a cab or stay?</summary><p>Browse the available vehicles and properties on this website, or contact us with your dates and requirements to check current options.</p></details>
+        <details><summary>How do I enquire or book?</summary><p>Use the trip enquiry form or WhatsApp us directly. Our team can help you understand the itinerary, inclusions and next steps before you confirm.</p></details>
       </div>
     </div>
   </div>
