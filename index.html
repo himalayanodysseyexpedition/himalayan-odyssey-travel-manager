@@ -1029,6 +1029,87 @@ html{scroll-behavior:smooth}
   }
 }
 
+
+
+/* ROAMORA-INSPIRED HOMEPAGE POLISH */
+.header-inner{gap:14px}
+.header-cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:40px;padding:10px 16px;border:1px solid var(--gold);
+  background:var(--gold);color:var(--forest);font-size:10px;
+  font-weight:700;letter-spacing:.8px;text-transform:uppercase;
+  white-space:nowrap;transition:background .25s,transform .25s;
+}
+.header-cta:hover{background:var(--gold-light);transform:translateY(-2px)}
+.hero{min-height:min(820px,90vh);background-position:center 52%}
+.hero-content{max-width:790px}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:12px}
+.hero .eyebrow:before{content:"";width:28px;height:1px;background:var(--gold)}
+.hero h1{max-width:780px}
+.hero p{font-size:clamp(14px,1.25vw,17px);max-width:610px}
+.hero-note{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:25px;color:#f4eee2;font-size:11px;letter-spacing:.8px}
+.hero-note span{display:inline-flex;align-items:center;gap:8px}
+.hero-note span:before{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold)}
+.journey-strip{
+  position:relative;z-index:3;display:grid;grid-template-columns:repeat(3,1fr);
+  max-width:1120px;margin:-34px auto 0;padding:0 22px;
+}
+.journey-item{
+  min-height:105px;display:flex;flex-direction:column;justify-content:center;
+  align-items:center;text-align:center;padding:20px 14px;
+  background:var(--paper);border:1px solid var(--line);
+  box-shadow:0 14px 38px rgba(11,33,29,.09);
+}
+.journey-item+.journey-item{border-left:0}
+.journey-item strong{font-family:var(--serif);font-size:25px;font-weight:600;color:var(--forest);line-height:1.1}
+.journey-item span{margin-top:7px;color:var(--muted);font-size:10px;letter-spacing:1px;text-transform:uppercase}
+.local-intro{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:45px;align-items:center;
+  max-width:1120px;margin:0 auto;padding:28px 0;
+}
+.local-intro-copy h2{font-family:var(--serif);font-size:clamp(36px,4vw,52px);line-height:1.05;color:var(--forest);font-weight:500;margin:10px 0 16px}
+.local-intro-copy p{font-size:14px;line-height:2;color:var(--muted)}
+.local-intro-panel{
+  padding:30px;background:linear-gradient(145deg,#0b211d,#244d40);
+  color:#f7f2e8;border:1px solid rgba(198,163,106,.65);box-shadow:var(--shadow)
+}
+.local-intro-panel small{color:var(--gold-light);font-size:10px;letter-spacing:2px;text-transform:uppercase}
+.local-intro-panel h3{font-family:var(--serif);font-size:32px;font-weight:500;line-height:1.1;margin:12px 0}
+.local-intro-panel p{font-size:13px;color:#e1e9e2;line-height:1.9;margin:0}
+.faq-section{background:#eeede5}
+.faq-list{max-width:900px;margin:0 auto;display:grid;gap:12px}
+.faq-list details{background:var(--paper);border:1px solid var(--line);padding:0 22px;transition:border-color .25s,box-shadow .25s}
+.faq-list details[open]{border-color:rgba(198,163,106,.8);box-shadow:0 10px 28px rgba(11,33,29,.06)}
+.faq-list summary{
+  list-style:none;cursor:pointer;position:relative;padding:20px 35px 20px 0;
+  color:var(--forest);font-family:var(--serif);font-size:23px;font-weight:600;line-height:1.25
+}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary:after{content:"+";position:absolute;right:2px;top:17px;color:#987342;font:26px var(--sans)}
+.faq-list details[open] summary:after{content:"−"}
+.faq-list details p{margin:0;padding:0 0 20px;color:var(--muted);font-size:13px;line-height:1.9}
+.section-action{text-align:center;margin-top:32px}
+.section-action .btn{margin:5px}
+@media(max-width:900px){
+  .local-intro{grid-template-columns:1fr;gap:22px}
+  .journey-strip{margin:-20px 18px 0;padding:0}
+}
+@media(max-width:600px){
+  .header-inner{gap:8px}
+  .header-cta{min-height:36px;padding:8px 12px;font-size:9px}
+  .journey-strip{grid-template-columns:1fr;margin:0;padding:0}
+  .journey-item{min-height:78px;padding:13px}
+  .journey-item+.journey-item{border-left:1px solid var(--line);border-top:0}
+  .journey-item strong{font-size:22px}
+  .local-intro{padding:8px 0}
+  .local-intro-panel{padding:23px}
+  .faq-list details{padding:0 16px}
+  .faq-list summary{font-size:21px;padding:17px 30px 17px 0}
+}
+@media(prefers-reduced-motion:reduce){
+  .header-cta,.faq-list details{transition:none}
+}
+
 </style>
 
 <script type="application/ld+json">
@@ -1071,6 +1152,8 @@ html{scroll-behavior:smooth}
       <a href="#gallery">Hotels</a>
       <a href="#contact">Contact</a>
       <a href="#instagram">Instagram</a>
+      <a href="#faq">FAQs</a>
+      <a class="header-cta" href="https://wa.me/919816929669?text=Hello%2C%20I%20would%20like%20to%20plan%20a%20Himalayan%20trip." target="_blank" rel="noopener noreferrer">Plan on WhatsApp ↗</a>
     </nav>
   </div>
 </header>
@@ -1088,10 +1171,20 @@ html{scroll-behavior:smooth}
     <a class="btn" href="#packages">Explore Our Journeys</a>
 
     <a class="btn outline"
-       href="https://wa.me/919816929669"
+       href="https://wa.me/919816929669?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20Himalayan%20tours."
        target="_blank"
-       rel="noopener">Enquire on WhatsApp</a>
+       rel="noopener noreferrer">Enquire on WhatsApp</a>
+    <div class="hero-note" aria-label="Destinations">
+      <span>Spiti Valley</span><span>Kinnaur</span><span>Narkanda</span>
+    </div>
   </div>
+</div>
+
+<!-- QUICK TRUST / SERVICE STRIP -->
+<div class="journey-strip" aria-label="Himalayan Odyssey travel services">
+  <div class="journey-item"><strong>Local Roots</strong><span>Based in Narkanda, Himachal</span></div>
+  <div class="journey-item"><strong>Made for You</strong><span>Group and private trip enquiries</span></div>
+  <div class="journey-item"><strong>Direct Support</strong><span>Speak with our team on WhatsApp</span></div>
 </div>
 
 <!-- INTRODUCTION -->
@@ -1103,6 +1196,24 @@ html{scroll-behavior:smooth}
     </div>
 
     <p class="intro">From the dramatic landscapes of Spiti Valley to the peaceful mountain towns of Himachal Pradesh, discover journeys shaped around scenic routes, local experiences and the warmth of mountain hospitality.</p>
+  </div>
+
+</section>
+
+<!-- LOCAL TRAVEL APPROACH -->
+<section class="content" id="our-approach">
+  <div class="section-inner local-intro">
+    <div class="local-intro-copy reveal">
+      <small class="eyebrow" style="color:#987342">A LOCAL HIMALAYAN PERSPECTIVE</small>
+      <h2>Thoughtful journeys, shaped around the mountains.</h2>
+      <p>Himalayan Odyssey Expedition is based in Narkanda, Himachal Pradesh. We help travellers explore Spiti Valley, Kinnaur and the wider region with trip planning and direct assistance. Tell us your dates, group size and travel preferences, and our team can discuss a suitable route and package with you.</p>
+      <a class="btn" href="#travel-enquiry">Plan Your Journey</a>
+    </div>
+    <div class="local-intro-panel reveal">
+      <small>Start with a conversation</small>
+      <h3>Your route. Your pace. Your Himalayan trip.</h3>
+      <p>Ask us about available packages, private travel, transport, stays and itinerary options. We’ll confirm current details with you before you book.</p>
+    </div>
   </div>
 </section>
 
@@ -1428,6 +1539,47 @@ html{scroll-behavior:smooth}
         <div class="review-point"><strong>Thoughtful</strong><span>Clear planning before you travel</span></div>
         <div class="review-point"><strong>Connected</strong><span>Direct support from our team</span></div>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FREQUENTLY ASKED QUESTIONS -->
+<section class="content faq-section" id="faq">
+  <div class="section-inner">
+    <div class="section-title reveal">
+      <small>BEFORE YOU TRAVEL</small>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <p class="intro reveal">A few useful starting points. Our team can confirm the current package details for your dates and group.</p>
+    <div class="faq-list reveal">
+      <details>
+        <summary>How do I enquire about a Spiti Valley tour?</summary>
+        <p>Browse the packages on this website or submit the trip enquiry form. It opens WhatsApp with your details so you can review and send the enquiry directly to our team.</p>
+      </details>
+      <details>
+        <summary>Do you arrange group and private trips?</summary>
+        <p>You can contact us about both group departures and private Himalayan road trips. Share your preferred dates and number of travellers so we can discuss the available options.</p>
+      </details>
+      <details>
+        <summary>What is included in a tour package?</summary>
+        <p>Inclusions vary by package. Please check the package details and ask our team to confirm transport, accommodation, meals, sightseeing and any exclusions for your selected trip before making a payment.</p>
+      </details>
+      <details>
+        <summary>Can you help with hotels and local transport?</summary>
+        <p>Yes, you can enquire separately about mountain stays and vehicles through the Hotels and Cabs sections. Availability, route suitability and rates should be confirmed with our team for your travel dates.</p>
+      </details>
+      <details>
+        <summary>What should I share when planning my trip?</summary>
+        <p>Share your destination, tentative travel dates or month, number of travellers, pickup preference and approximate budget. This helps our team suggest relevant options.</p>
+      </details>
+      <details>
+        <summary>Are routes and travel plans affected by weather?</summary>
+        <p>Mountain road and weather conditions can change. Routes, access and sightseeing plans may need adjustment; please confirm the latest conditions and practical itinerary with our team before departure.</p>
+      </details>
+    </div>
+    <div class="section-action reveal">
+      <a class="btn" href="https://wa.me/919816929669?text=Hello%2C%20I%20have%20a%20question%20about%20your%20Himalayan%20tour%20packages." target="_blank" rel="noopener noreferrer">Ask us on WhatsApp</a>
     </div>
   </div>
 </section>
