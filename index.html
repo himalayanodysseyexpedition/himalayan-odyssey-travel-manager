@@ -1715,16 +1715,33 @@ function showLoadingError(element, title, message, enquiry) {
     </div>`;
 }
 
-/* Keep direct enquiry links aligned after asynchronous package cards change page height. */
+/* Keep direct destination enquiries on the form, not the package cards.
+   Package cards are inserted asynchronously, so re-align after their layout settles. */
 function settleEnquiryAnchor() {
-  if (window.location.hash !== "#plan-your-himalayan-adventure") return;
-  const target = document.getElementById("plan-your-himalayan-adventure");
+  const hash = window.location.hash;
+  if (
+    hash !== "#travel-enquiry" &&
+    hash !== "#plan-your-himalayan-adventure" &&
+    new URLSearchParams(window.location.search).get("enquiry") !== "1"
+  ) return;
+
+  const target = document.getElementById("travel-enquiry");
   if (!target) return;
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      target.scrollIntoView({behavior:"auto",block:"start"});
-    });
-  });
+
+  const alignForm = () => {
+    const header = document.querySelector("header");
+    const headerHeight = header ? header.getBoundingClientRect().height : 0;
+    const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
+    window.scrollTo({top:Math.max(0,top),behavior:"auto"});
+  };
+
+  requestAnimationFrame(() => requestAnimationFrame(alignForm));
+
+  // Re-align after web fonts settle; this prevents text wrapping changes above
+  // the form from leaving visitors beside the package cards on mobile Safari.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => requestAnimationFrame(alignForm));
+  }
 }
 
 /* LOAD PUBLIC PACKAGES */
