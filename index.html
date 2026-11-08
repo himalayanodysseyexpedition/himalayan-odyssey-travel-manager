@@ -15,7 +15,10 @@
 <meta property="og:title" content="Spiti Valley Tour Packages 2026–27 | Himalayan Odyssey Expedition">
 <meta property="og:description" content="Explore winter and summer Spiti Valley tours, Kinnaur and custom Himalayan road trips with a local Himachal travel team.">
 <meta property="og:url" content="https://himalayanexpedition.co.in/">
-<meta property="og:image" content="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&amp;q=85">
+<meta property="og:image" content="https://himalayanexpedition.co.in/spiti.jpg">
+<meta property="og:image:alt" content="Himalayan mountain landscape in Spiti Valley">
+<meta name="twitter:image" content="https://himalayanexpedition.co.in/spiti.jpg">
+<meta name="twitter:image:alt" content="Spiti Valley Himalayan landscape">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Spiti Valley Tour Packages 2026–27 | Himalayan Odyssey Expedition">
 <meta name="twitter:description" content="Explore winter and summer Spiti Valley tours, Kinnaur and custom Himalayan road trips.">
@@ -1231,7 +1234,7 @@ html{scroll-behavior:smooth}
     <div class="destination-grid">
 
       <a class="destination-card reveal"
-         href="https://wa.me/919816929669?text=Hello%2C%20I%20am%20interested%20in%20a%20Spiti%20Valley%20tour."
+         href="/spiti-valley-tours/"
          target="_blank" rel="noopener">
 
         <img src="spiti.jpg" alt="Spiti Valley" loading="lazy" decoding="async">
@@ -1244,7 +1247,7 @@ html{scroll-behavior:smooth}
       </a>
 
       <a class="destination-card reveal"
-         href="https://wa.me/919816929669?text=Hello%2C%20I%20am%20interested%20in%20a%20Kinnaur%20tour."
+         href="/kinnaur-tours/"
          target="_blank" rel="noopener">
 
         <img src="kinnaur.jpg" alt="Kinnaur Himalayas" loading="lazy" decoding="async">
@@ -1257,7 +1260,7 @@ html{scroll-behavior:smooth}
       </a>
 
       <a class="destination-card reveal"
-         href="https://wa.me/919816929669?text=Hello%2C%20I%20am%20interested%20in%20a%20Narkanda%20tour."
+         href="/narkanda-tours/"
          target="_blank" rel="noopener">
 
         <img src="narkanda.jpg" alt="Narkanda mountains" loading="lazy" decoding="async">
@@ -2212,7 +2215,48 @@ document.getElementById("travelEnquiryForm")
       return;
     }
 
-    let message = `NEW TRAVEL ENQUIRY
+    const submitButton = this.querySelector('button[type="submit"]');
+    if (submitButton) submitButton.disabled = true;
+
+    let databaseSaved = false;
+    let saveMessage = "";
+
+    try {
+      if (!db) throw new Error("Database client is unavailable.");
+
+      // Match the existing CRM relationship: create a customer, then a lead.
+      const { data: customer, error: customerError } = await db
+        .from("customers")
+        .insert({ name, phone })
+        .select("id")
+        .single();
+
+      if (customerError) throw customerError;
+      if (!customer?.id) throw new Error("Customer record was not returned.");
+
+      const { error: leadError } = await db
+        .from("leads")
+        .insert({
+          customer_id: customer.id,
+          destination,
+          travel_date: startDate || null,
+          travellers: Number(persons),
+          budget: 0,
+          notes: [
+            "Website enquiry",
+            "Travel month: " + month,
+            endDate ? "Travel end date: " + endDate : ""
+          ].filter(Boolean).join(" | ")
+        });
+
+      if (leadError) throw leadError;
+      databaseSaved = true;
+    } catch (saveError) {
+      console.error("Website enquiry CRM save failed:", saveError);
+      saveMessage = saveError.message || "Unknown database error";
+    }
+
+    let message = `NEW WEBSITE TRAVEL ENQUIRY
 HIMALAYAN ODYSSEY EXPEDITION
 
 Guest Name: ${name}
@@ -2222,12 +2266,21 @@ Destination: ${destination}
 Travel Month: ${month}`;
 
     if (startDate) message += `\nTravel Start Date: ${startDate}`;
-
     if (endDate) message += `\nTravel End Date: ${endDate}`;
+    message += databaseSaved
+      ? "\nCRM Status: Saved to website leads."
+      : "\nCRM Status: Please record this enquiry manually; automatic save was unsuccessful.";
 
     message += "\n\nPlease contact me regarding this trip.";
 
-    window.open(whatsappLink(message),"_blank");
+    const waWindow = window.open(whatsappLink(message), "_blank");
+    if (!waWindow) {
+      alert("Your enquiry " + (databaseSaved ? "was saved to the CRM." : "could not be saved automatically.") + " Please allow pop-ups to continue to WhatsApp.");
+    } else if (!databaseSaved) {
+      alert("WhatsApp is ready. Automatic CRM saving did not work, so please record this enquiry manually. Error: " + saveMessage);
+    }
+
+    if (submitButton) submitButton.disabled = false;
   });
 
 /* SCROLL REVEAL ANIMATIONS */
