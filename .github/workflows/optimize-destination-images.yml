@@ -1,0 +1,73 @@
+name: Optimize destination images
+
+on:
+  push:
+    branches:
+      - performance/optimize-destination-images
+    paths:
+      - .github/workflows/optimize-destination-images.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out optimization branch
+        uses: actions/checkout@v4
+        with:
+          ref: performance/optimize-destination-images
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install image processor
+        run: npm install --no-save --package-lock=false sharp
+      - name: Compress destination JPGs
+        run: |
+          node --input-type=module <<'NODE'
+          import sharp from 'sharp';
+          import fs from 'node:fs/promises';
+          import path from 'node:path';
+
+          const files = ['kinnaur.jpg', 'spiti.jpg', 'narkanda.jpg', 'manali.jpg'];
+          let changed = 0;
+          for (const file of files) {
+            try {
+              const before = await fs.stat(file);
+              const temp = path.join('.image-opt-temp', file);
+              await fs.mkdir(path.dirname(temp), { recursive: true });
+              await sharp(file)
+                .rotate()
+                .resize({ width: 2000, height: 2000, fit: 'inside', withoutEnlargement: true })
+                .jpeg({ quality: 80, mozjpeg: true, progressive: true })
+                .toFile(temp);
+              const after = await fs.stat(temp);
+              if (after.size < before.size) {
+                await fs.rename(temp, file);
+                changed++;
+                console.log(`${file}: ${(before.size / 1024 / 1024).toFixed(2)} MB -> ${(after.size / 1024 / 1024).toFixed(2)} MB (${(100 - after.size / before.size * 100).toFixed(1)}% smaller)`);
+              } else {
+                await fs.rm(temp, { force: true });
+                console.log(`${file}: kept original (optimized version was not smaller)`);
+              }
+            } catch (error) {
+              if (error.code === 'ENOENT') console.log(`${file}: not present at repository root; skipped`);
+              else throw error;
+            }
+          }
+          if (!changed) console.log('No image files needed replacement.');
+          NODE
+      - name: Commit optimized images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- '*.jpg'
+          if git diff --cached --quiet; then
+            echo "No optimized image changes to commit."
+          else
+            git commit -m "Optimize destination JPG images for faster loading"
+            git push origin HEAD:performance/optimize-destination-images
+          fi
