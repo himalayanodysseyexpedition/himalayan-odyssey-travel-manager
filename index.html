@@ -49,6 +49,7 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:115px}
 #plan-your-himalayan-adventure{scroll-margin-top:130px}
+#travel-enquiry{scroll-margin-top:130px}
 body{
   margin:0;
   background:var(--cream);
@@ -1715,34 +1716,38 @@ function showLoadingError(element, title, message, enquiry) {
     </div>`;
 }
 
-/* Keep direct destination enquiries on the form, not the package cards.
-   Package cards are inserted asynchronously, so re-align after their layout settles. */
+/* Keep direct destination enquiries aligned with the actual enquiry section.
+   Recheck after asynchronous package rendering and font/layout shifts on mobile Safari. */
 function settleEnquiryAnchor() {
-  const hash = window.location.hash;
-  if (
-    hash !== "#travel-enquiry" &&
-    hash !== "#plan-your-himalayan-adventure" &&
-    new URLSearchParams(window.location.search).get("enquiry") !== "1"
-  ) return;
+  const isEnquiryLink = () =>
+    window.location.hash === "#travel-enquiry" ||
+    window.location.hash === "#plan-your-himalayan-adventure" ||
+    new URLSearchParams(window.location.search).get("enquiry") === "1";
+
+  if (!isEnquiryLink()) return;
 
   const target = document.getElementById("travel-enquiry");
   if (!target) return;
 
   const alignForm = () => {
+    if (!isEnquiryLink()) return;
     const header = document.querySelector("header");
     const headerHeight = header ? header.getBoundingClientRect().height : 0;
     const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
-    window.scrollTo({top:Math.max(0,top),behavior:"auto"});
+    window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
   };
 
   requestAnimationFrame(() => requestAnimationFrame(alignForm));
+  [250, 700, 1400].forEach(delay => window.setTimeout(alignForm, delay));
 
-  // Re-align after web fonts settle; this prevents text wrapping changes above
-  // the form from leaving visitors beside the package cards on mobile Safari.
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(() => requestAnimationFrame(alignForm));
   }
 }
+
+/* Re-align on browser restoration and once the page's initial assets finish loading. */
+window.addEventListener("pageshow", settleEnquiryAnchor);
+window.addEventListener("load", settleEnquiryAnchor);
 
 /* LOAD PUBLIC PACKAGES */
 async function loadPackages() {
