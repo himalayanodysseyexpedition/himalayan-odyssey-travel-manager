@@ -210,7 +210,8 @@ async function load() {
     "supplier_profiles",
     "supplier_listings",
     "supplier_submissions",
-    "supplier_enquiries"
+    "supplier_enquiries",
+    "supplier_payment_entries"
   ];
 
   for (const table of tables) {
@@ -1077,6 +1078,50 @@ function render() {
     ).join("") || "No other transactions yet."
   );
 
+
+  /* SERVICE PROVIDER PAYMENT LEDGER */
+  const providerEntries = D.supplier_payment_entries || [];
+  const providerGroups = Object.values(providerEntries.reduce((groups, entry) => {
+    const key = entry.group_id || entry.id;
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(entry);
+    return groups;
+  }, {}));
+  const providerAgreed = providerGroups.reduce((sum, group) => sum + Math.max(0, ...group.map(row => Number(row.agreed_total || 0))), 0);
+  const providerPaid = providerEntries.reduce((sum, row) => sum + Number(row.amount || 0), 0);
+  const providerDue = providerGroups.reduce((sum, group) => {
+    const agreed = Math.max(0, ...group.map(row => Number(row.agreed_total || 0)));
+    return sum + Math.max(0, agreed - group.reduce((paid, row) => paid + Number(row.amount || 0), 0));
+  }, 0);
+  setText("providerPaymentGroups", providerGroups.length);
+  setText("providerAgreedTotal", cash(providerAgreed));
+  setText("providerPaidTotal", cash(providerPaid));
+  setText("providerDueTotal", cash(providerDue));
+  const providerById = Object.fromEntries((D.vendors || []).map(v => [v.id, v]));
+  const bookingById = Object.fromEntries(bookings.map(b => [b.id, b]));
+  setHTML("providerPaymentList", providerGroups.map(group => {
+    const ordered = group.slice().sort((a,b) => new Date(a.payment_date || a.created_at) - new Date(b.payment_date || b.created_at));
+    const first = ordered[0];
+    const totalAgreed = Math.max(0, ...group.map(row => Number(row.agreed_total || 0)));
+    const totalPaid = group.reduce((sum,row) => sum + Number(row.amount || 0),0);
+    const due = Math.max(0,totalAgreed-totalPaid);
+    const booking = bookingById[first.booking_id] || {};
+    const customer = booking.c || {};
+    return `<article class="provider-payment-group">
+      <h4>${esc(first.supplier_name || providerById[first.vendor_id]?.name || "Service Provider")}</h4>
+      <p class="provider-payment-meta">${esc(first.service_name || "Service not specified")} · ${esc(booking.destination || "No package linked")} ${customer.name ? "· " + esc(customer.name) : ""}</p>
+      <div class="provider-payment-totals">
+        <div><small>Agreed amount</small><strong>${cash(totalAgreed)}</strong></div>
+        <div><small>Total paid</small><strong>${cash(totalPaid)}</strong></div>
+        <div><small>Balance due</small><strong>${cash(due)}</strong></div>
+      </div>
+      <p class="provider-payment-linked">${group.length} LINKED PAYMENT ${group.length === 1 ? "ENTRY" : "ENTRIES"}</p>
+      ${ordered.map(row => `<div class="provider-payment-row"><div><b>${esc(row.payment_stage)}</b> · ${esc(row.payment_date || "")}<small>${esc(row.payment_method || "Method not set")} · ${esc(row.description || "No note")}</small>${row.linked_entry_id ? '<small class="provider-payment-linked">CONNECTED TO AN EARLIER ENTRY</small>' : ""}</div><strong>${cash(row.amount)}</strong></div>`).join("")}
+    </article>`;
+  }).join("") || "No service provider payments recorded yet. Add an advance or full payment to start a provider ledger.");
+  setHTML("providerVendorSelect", '<option value="">Enter provider manually</option>' + (D.vendors || []).map(v => `<option value="${esc(v.id)}">${esc(v.name)} · ${esc(v.category || "Vendor")}</option>`).join(""));
+  setHTML("providerBookingSelect", '<option value="">No linked booking</option>' + bookings.map(item => `<option value="${esc(item.id)}">${esc(item.c.name || "Customer")} — ${esc(item.destination || "Trip")}</option>`).join(""));
+  setHTML("providerLinkedEntry", '<option value="">Create a new payment group</option>' + providerEntries.map(row => `<option value="${esc(row.id)}">${esc(row.supplier_name)} · ${esc(row.service_name || "Service")} · ${cash(row.amount)} · ${esc(row.payment_date || "")}</option>`).join(""));
 
   /* BOOKING SELECT */
 
@@ -2281,6 +2326,47 @@ function bindForms() {
     })
   );
 
+  $("providerPaymentF")?.addEventListener("submit", async event => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const obj = Object.fromEntries(new FormData(form));
+    const linked = (D.supplier_payment_entries || []).find(row => String(row.id) === String(obj.linked_entry_id || ""));
+    const amount = Number(obj.amount);
+    const agreed = Number(obj.agreed_total);
+    if (!obj.supplier_name.trim() || !Number.isFinite(amount) || amount <= 0 || !Number.isFinite(agreed) || agreed < 0) {
+      alert("Enter a provider name, a valid payment amount and agreed total.");
+      return;
+    }
+    if (linked && linked.supplier_name && obj.supplier_name.trim().toLowerCase() !== linked.supplier_name.trim().toLowerCase()) {
+      if (!confirm("The selected linked entry belongs to " + linked.supplier_name + ". Connect this payment to that same provider?")) return;
+    }
+    try {
+      const payload = {
+        supplier_name: obj.supplier_name.trim(),
+        vendor_id: obj.vendor_id || linked?.vendor_id || null,
+        service_name: obj.service_name.trim() || linked?.service_name || null,
+        booking_id: obj.booking_id || linked?.booking_id || null,
+        agreed_total: agreed,
+        amount,
+        payment_stage: obj.payment_stage,
+        payment_date: obj.payment_date || null,
+        payment_method: obj.payment_method || null,
+        description: obj.description.trim() || null,
+        ...(linked ? {group_id: linked.group_id, linked_entry_id: linked.id} : {})
+      };
+      const { error } = await db.from("supplier_payment_entries").insert(payload);
+      if (error) throw error;
+      form.closest("dialog")?.close();
+      form.reset();
+      await load();
+      alert("Provider payment saved and linked successfully.");
+    } catch (error) {
+      alert("Could not save provider payment: " + error.message);
+    }
+  });
+
+
+
 
   /* LEAD FORM */
 
@@ -2328,6 +2414,23 @@ function bindForms() {
       }
     });
   }
+
+  $("providerVendorSelect")?.addEventListener("change", event => {
+    const vendor = (D.vendors || []).find(row => String(row.id) === String(event.target.value));
+    if (vendor && $("providerPaymentF")?.elements.supplier_name) $("providerPaymentF").elements.supplier_name.value = vendor.name || "";
+  });
+  $("providerLinkedEntry")?.addEventListener("change", event => {
+    const entry = (D.supplier_payment_entries || []).find(row => String(row.id) === String(event.target.value));
+    if (!entry) return;
+    const form = $("providerPaymentF");
+    if (form) {
+      form.elements.supplier_name.value = entry.supplier_name || "";
+      form.elements.vendor_id.value = entry.vendor_id || "";
+      form.elements.service_name.value = entry.service_name || "";
+      form.elements.booking_id.value = entry.booking_id || "";
+      form.elements.agreed_total.value = entry.agreed_total ?? "";
+    }
+  });
 
   bindItineraryForm();
 
@@ -2416,7 +2519,12 @@ function bindActions() {
 
     let button;
 
-
+    button = target.closest("#newProviderPayment");
+    if (button) {
+      $("providerPaymentF")?.reset();
+      show("providerPaymentDialog");
+      return;
+    }
 
     button = target.closest("[data-submission-action]");
     if (button) {
