@@ -1194,9 +1194,23 @@ html{scroll-behavior:smooth}
 .guide-card-copy>small{color:#e5c995;font-size:9px;font-weight:700;letter-spacing:2px}
 .guide-card-copy h3{font:500 clamp(27px,2.6vw,36px)/1.05 var(--serif);color:#fff;margin:12px 0}
 .guide-card-copy p{color:rgba(255,255,255,.78);font-size:12px;line-height:1.8;margin:0 0 22px}
-.guide-card-copy a{display:inline-flex;align-items:center;gap:12px;padding-bottom:5px;border-bottom:1px solid rgba(240,223,189,.6);color:#f0dfbd;font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase}
-.guide-card-copy a b{font-size:16px;font-weight:400;transition:transform .2s}
-.guide-card-copy a:hover b{transform:translate(3px,-3px)}
+.guide-card-copy a{
+  position:relative;display:inline-flex;align-items:center;justify-content:center;gap:15px;
+  min-height:46px;margin-top:2px;padding:0 19px;
+  border:1px solid rgba(234,214,174,.72);border-radius:2px;
+  background:linear-gradient(135deg,rgba(234,214,174,.16),rgba(234,214,174,.045));
+  color:#f4dfb8;font-size:9px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;
+  text-decoration:none;box-shadow:0 7px 20px rgba(0,0,0,.12);
+  transition:background .3s ease,border-color .3s ease,transform .3s ease,box-shadow .3s ease
+}
+.guide-card-copy a:after{content:"";position:absolute;inset:3px;border:1px solid rgba(234,214,174,.13);pointer-events:none}
+.guide-card-copy a b{font-size:16px;font-weight:400;line-height:1;transition:transform .3s ease}
+.guide-card-copy a:hover,.guide-card-copy a:focus-visible{
+  background:linear-gradient(135deg,#e8d3aa,#c5a36d);border-color:#f2dfba;
+  color:#142f27;transform:translateY(-2px);box-shadow:0 11px 25px rgba(0,0,0,.2)
+}
+.guide-card-copy a:hover b,.guide-card-copy a:focus-visible b{transform:translate(3px,-2px)}
+.guide-card-copy a:focus-visible{outline:2px solid #f4dfb8;outline-offset:4px}
 .guide-winter{background:linear-gradient(145deg,#526d7c,#152f3b)}
 .guide-valley{background:linear-gradient(145deg,#66877c,#173c34)}
 .guide-cost{background:linear-gradient(145deg,#806b4b,#342c20)}
