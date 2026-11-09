@@ -16,9 +16,23 @@
 :root{--forest:#0b211d;--forest2:#173d33;--gold:#c6a36a;--gold-light:#ead6ae;--cream:#f8f6f0;--paper:#fffefa;--ink:#263b34;--muted:#718078;--line:#e8e1d5;--shadow:0 18px 50px rgba(11,33,29,.11);--serif:"Cormorant Garamond",Georgia,serif;--sans:"DM Sans",Arial,sans-serif}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:110px}
 body{margin:0;background:radial-gradient(ellipse at 50% 0%,rgba(198,163,106,.09),transparent 45%),var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.65;min-height:100vh}
-header{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(115deg,rgba(8,27,23,.98),rgba(23,61,51,.96));color:#f7f3e9;padding:22px max(20px,calc((100% - 1280px)/2));border-bottom:1px solid rgba(198,163,106,.65);box-shadow:0 12px 35px rgba(11,33,29,.17)}
-header:after{content:"";position:absolute;z-index:-1;right:-80px;top:-170px;width:420px;height:420px;border:1px solid rgba(234,214,174,.13);border-radius:50%;box-shadow:0 0 0 28px rgba(234,214,174,.025),0 0 0 58px rgba(234,214,174,.02)}
-header h2{margin:0;font-family:var(--serif);font-size:clamp(27px,4vw,38px);font-weight:600;letter-spacing:.6px;color:#fff}header p{margin:2px 0 0;color:var(--gold-light);font-size:11px;letter-spacing:2.2px;text-transform:uppercase}
+header{position:sticky;top:0;z-index:100;isolation:isolate;overflow:hidden;background:rgba(8,27,23,.94);backdrop-filter:blur(18px) saturate(155%);-webkit-backdrop-filter:blur(18px) saturate(155%);color:#f7f3e9;padding:12px max(20px,calc((100% - 1320px)/2));border-bottom:1px solid rgba(198,163,106,.58);box-shadow:0 10px 32px rgba(11,33,29,.2)}
+header:after{content:"";position:absolute;z-index:-1;right:-80px;top:-170px;width:420px;height:420px;border:1px solid rgba(234,214,174,.13);border-radius:50%;box-shadow:0 0 0 28px rgba(234,214,174,.025),0 0 0 58px rgba(234,214,174,.02);pointer-events:none}
+header .topline{position:relative;z-index:1;max-width:1320px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:nowrap}
+.admin-brand{position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;padding:6px 15px;border-radius:16px;overflow:visible;background:radial-gradient(ellipse at 50% 55%,rgba(234,214,174,.13),transparent 68%),repeating-linear-gradient(145deg,rgba(234,214,174,.025) 0 1px,transparent 1px 9px);box-shadow:0 8px 30px rgba(0,0,0,.18),inset 0 0 22px rgba(198,163,106,.07);transition:transform .45s cubic-bezier(.2,.75,.25,1),filter .45s ease}
+.admin-brand:before{content:"";position:absolute;inset:0;border:1px solid rgba(198,163,106,.38);border-radius:inherit;pointer-events:none;background:linear-gradient(110deg,transparent 15%,rgba(234,214,174,.24) 48%,transparent 78%);background-size:220% 100%;animation:adminBrandSheen 7s ease-in-out infinite}
+.admin-brand:after{content:"";position:absolute;inset:-8px -13px;z-index:-1;border-radius:25px;background:radial-gradient(circle at 8% 22%,rgba(234,214,174,.65) 0 1px,transparent 2px),radial-gradient(circle at 91% 76%,rgba(234,214,174,.55) 0 1px,transparent 2px),radial-gradient(ellipse at 50% 50%,rgba(198,163,106,.13),transparent 70%);opacity:.72;animation:adminBrandGlow 5s ease-in-out infinite alternate;pointer-events:none}
+.admin-brand img{position:relative;z-index:1;display:block;width:205px;max-height:68px;object-fit:contain;filter:drop-shadow(0 3px 9px rgba(0,0,0,.24));animation:adminBrandFloat 6s ease-in-out infinite}
+.admin-brand:hover{transform:translateY(-2px);filter:brightness(1.08)}
+@keyframes adminBrandSheen{0%,65%,100%{background-position:130% 0}82%{background-position:-130% 0}}
+@keyframes adminBrandGlow{from{opacity:.38;transform:scale(.985)}to{opacity:.9;transform:scale(1.025)}}
+@keyframes adminBrandFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+.admin-header-copy{min-width:0;flex:1;padding-left:4px}
+header h2{margin:0;font-family:var(--serif);font-size:clamp(23px,3vw,34px);font-weight:600;letter-spacing:.6px;color:#fff}header p{margin:2px 0 0;color:var(--gold-light);font-size:10px;letter-spacing:2px;text-transform:uppercase}
+#msg{position:relative;z-index:1;max-width:1320px;margin:5px auto 0}
+@keyframes adminPageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+body{animation:adminPageIn .65s cubic-bezier(.2,.72,.22,1) both}
+@media(prefers-reduced-motion:reduce){.admin-brand,.admin-brand:before,.admin-brand:after,.admin-brand img{animation:none!important;transition:none!important}body{animation:none!important}}
 main{max-width:1320px;margin:auto;padding:28px 24px 70px}
 button{border:1px solid var(--gold);border-radius:3px;padding:11px 17px;background:var(--gold);color:var(--forest);font:700 11px var(--sans);letter-spacing:.55px;text-transform:uppercase;cursor:pointer;margin:3px;transition:transform .25s,background .25s,box-shadow .25s}
 button:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 9px 22px rgba(11,33,29,.12)}button:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
@@ -81,13 +95,36 @@ a{color:#987746}hr{border:0;border-top:1px solid var(--line);margin:22px 0}
 .provider-payment-linked{font-size:10px;color:#547565;font-weight:700;letter-spacing:.4px}
 @media(max-width:760px){.provider-payment-totals{grid-template-columns:repeat(2,minmax(0,1fr))}.provider-payment-row{align-items:flex-start}}
 
+/* Guest-site visual language: refined motion, glass navigation and premium hover states */
+nav{background:rgba(8,27,23,.92);border-color:rgba(198,163,106,.48);box-shadow:0 14px 36px rgba(11,33,29,.17)}
+nav button{border-radius:3px;position:relative;overflow:hidden}
+nav button.active{background:linear-gradient(135deg,#ead6ae,#c6a36a);border-color:#ead6ae;box-shadow:0 7px 20px rgba(198,163,106,.22)}
+.stat,.card,article,.finance-entry,.provider-payment-group{transition:transform .4s cubic-bezier(.2,.72,.22,1),box-shadow .4s ease,border-color .35s ease}
+.stat:hover,.card:hover,article:hover,.finance-entry:hover,.provider-payment-group:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(11,33,29,.12);border-color:rgba(198,163,106,.72)}
+.panel.active{animation:panelIn .48s cubic-bezier(.2,.72,.22,1) both}
+button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline-offset:3px}
+@media(max-width:760px){
+ header{padding:10px 14px}
+ header .topline{gap:10px;flex-wrap:wrap}
+ .admin-brand{padding:5px 9px}
+ .admin-brand img{width:145px;max-height:54px}
+ .admin-header-copy{flex-basis:calc(100% - 170px)}
+ header h2{font-size:22px;line-height:1.05}
+ header p{font-size:8px;letter-spacing:1.1px}
+ #logout{margin-left:auto}
+}
+@media(prefers-reduced-motion:reduce){.stat,.card,article,.finance-entry,.provider-payment-group{transition:none!important}}
+
 </style>
 </head>
 
 <body>
 <header>
   <div class="topline">
-    <div>
+    <a class="admin-brand" href="/" aria-label="Himalayan Odyssey Expedition guest website">
+      <img src="/logo.webp" alt="Himalayan Odyssey Expedition">
+    </a>
+    <div class="admin-header-copy">
       <h2>HIMALAYAN ODYSSEY EXPEDITION</h2>
       <p>Travel Management Dashboard</p>
     </div>
