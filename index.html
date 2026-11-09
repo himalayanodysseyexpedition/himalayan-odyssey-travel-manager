@@ -2221,7 +2221,24 @@ function settleEnquiryAnchor() {
 window.addEventListener("pageshow", settleEnquiryAnchor);
 window.addEventListener("load", settleEnquiryAnchor);
 
-/* LOAD PUBLIC PACKAGES */
+/* Match each package to a destination photograph when no custom cover is saved. */
+function packageImageFor(pkg) {
+  const destination = String(pkg.destination || "").toLowerCase();
+  const details = [pkg.name,pkg.destination,pkg.description,pkg.Description,pkg.itinerary].filter(Boolean).join(" ").toLowerCase();
+  const photos = [
+    {keys:["spiti","kaza","tabo","pin valley","dhankar","langza","kibber"],src:"/spiti.jpg",alt:"Spiti Valley Himalayan landscape"},
+    {keys:["kinnaur","sangla","chitkul","kalpa","reckong"],src:"/kinnaur.jpg",alt:"Kinnaur mountain valley"},
+    {keys:["narkanda","hatu peak","theog"],src:"/narkanda.jpg",alt:"Narkanda mountain landscape"},
+    {keys:["manali","solang","atal tunnel","sissu"],src:"/manali.jpg",alt:"Manali Himalayan mountain landscape"},
+    {keys:["kasol","parvati","manikaran","pulga","tosh"],src:"https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/The_Parbati_River%2C_Kasol%2C_Himachal_Pradesh.jpg/960px-The_Parbati_River%2C_Kasol%2C_Himachal_Pradesh.jpg",alt:"Parvati River in Kasol"},
+    {keys:["jibhi","tirthan","jalori","serolsar"],src:"https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Jibhi_Waterfall%2C_Jibhi%2C_Himachal_Pradesh.jpg/960px-Jibhi_Waterfall%2C_Jibhi%2C_Himachal_Pradesh.jpg",alt:"Jibhi forest waterfall"},
+    {keys:["shimla","kufri","mall road"],src:"https://staticimg.amarujala.com/assets/images/2021/02/17/christ-church-shimla_1613564278.jpeg",alt:"Shimla heritage town"}
+  ];
+  const match = photos.find(photo => photo.keys.some(key => destination.includes(key))) ||
+    photos.find(photo => photo.keys.some(key => details.includes(key)));
+  return match || {src:"/spiti.jpg",alt:"Himalayan mountain journey"};
+}
+
 async function loadPackages() {
   const list = document.getElementById("packageList");
 
@@ -2267,11 +2284,9 @@ async function loadPackages() {
 
     list.innerHTML = publicPackages.map(p => {
 
-      const image = p.image_url || p.cover_image || "";
-
-      const photo = image
-        ? `<img src="${safe(image)}" alt="${safe(p.name)}" loading="lazy" onerror="this.outerHTML=window.imageFallback('Package photograph unavailable',220)">`
-        : imageFallback("Himalayan Journey",220);
+      const relatedPhoto = packageImageFor(p);
+      const image = p.image_url || p.cover_image || relatedPhoto.src;
+      const photo = `<img class="package-photo" src="${safe(image)}" data-fallback-src="${safe(relatedPhoto.src)}" alt="${safe(p.name || relatedPhoto.alt)}" loading="lazy" decoding="async" onerror="if(this.dataset.fallbackSrc && this.src!==this.dataset.fallbackSrc){this.src=this.dataset.fallbackSrc;this.dataset.fallbackSrc='';}else{this.outerHTML=window.imageFallback('Himalayan landscape',220)}">`;
 
       const message = "Hello, I am interested in " +
         (p.name || "your travel package") +
