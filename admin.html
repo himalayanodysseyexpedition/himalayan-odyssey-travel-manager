@@ -90,6 +90,7 @@ article button{margin-top:8px}
   <button data-tab="leads">Leads</button>
   <button data-tab="bookings">Bookings</button>
   <button data-tab="vendors">Vendors</button>
+  <button data-tab="suppliers">Supplier Network</button>
   <button data-tab="finance">Finance</button>
   <a href="research.html" style="display:inline-flex;align-items:center;padding:11px 15px;border-radius:7px;background:#c6a36a;color:#173c36;font-weight:700;text-decoration:none;white-space:nowrap">Research Centre ↗</a>
 </nav>
@@ -169,6 +170,18 @@ article button{margin-top:8px}
     <button data-open="vendorDialog">+ Add Vendor</button>
   </div>
   <div id="vendorList"></div>
+</section>
+
+<section id="suppliers" class="panel">
+  <div class="topline"><h2>Supplier Network</h2><a href="/marketplace/" target="_blank" rel="noopener">View public marketplace ↗</a></div>
+  <div class="stats">
+    <div class="stat">Suppliers<strong id="supplierCount">0</strong></div>
+    <div class="stat">Listings<strong id="supplierListingCount">0</strong></div>
+    <div class="stat">Enquiries<strong id="supplierEnquiryCount">0</strong></div>
+  </div>
+  <h3>Supplier registrations & private contact details</h3><div id="supplierProfiles"></div>
+  <h3>Listings awaiting review</h3><div id="supplierListings"></div>
+  <h3>Marketplace enquiries</h3><div id="supplierEnquiries"></div>
 </section>
 
 <section id="finance" class="panel">
