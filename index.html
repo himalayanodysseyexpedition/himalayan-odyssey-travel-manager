@@ -1540,6 +1540,7 @@ header nav .header-cta:hover{background:linear-gradient(135deg,#f3dfb5,#d1ab70);
       <div class="nav-dropdown">
         <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="servicesMenu">Services <span aria-hidden="true">⌄</span></button>
         <div class="nav-dropdown-menu" id="servicesMenu">
+          <a href="/services/">All Services</a>
           <a href="#cabs">Vehicles &amp; Cabs</a>
           <a href="#gallery">Hotels &amp; Properties</a>
           <a href="/marketplace/">Explore Supplier Listings</a>
@@ -2169,7 +2170,6 @@ header nav .header-cta:hover{background:linear-gradient(135deg,#f3dfb5,#d1ab70);
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 "use strict";
 
@@ -2382,7 +2382,7 @@ async function loadItineraries() {
   try {
     const {data,error} = await db
       .from("itineraries")
-      .select("id,title,destination,duration_days,duration_nights,price,summary,published,created_at,gallery_images")
+      .select("id,title,destination,duration_days,duration_nights,price,summary,published,created_at,gallery_images,pdf_url")
       .eq("published",true)
       .order("created_at",{ascending:false});
 
@@ -2429,9 +2429,12 @@ async function loadItineraries() {
 
             ${item.summary ? `<p>${safe(item.summary)}</p>` : ""}
 
-            <a class="btn" href="${safe(pdfUrl)}" target="_blank" rel="noopener">View PDF</a>
-              <a class="btn" href="${safe(downloadUrl)}">Download PDF</a>
-            </div>` : `<p class="itinerary-meta">Photo gallery and PDF brochure will be added soon.</p>`}
+            ${item.pdf_url ? `
+              <div class="pdf-actions">
+                <a class="btn" href="${safe(item.pdf_url)}" target="_blank" rel="noopener">View PDF</a>
+                <a class="btn" href="${safe(item.pdf_url)}" download>Download PDF</a>
+              </div>
+            ` : `<p class="itinerary-meta">PDF brochure will be added soon. Contact us for this itinerary.</p>`}
 
             <a class="btn"
                href="${whatsappLink(message)}"
@@ -3086,6 +3089,6 @@ loadHotels();
 </script>
 
   <script src="/site-motion.js?v=1" defer></script>
-  <script src="/site-motion.js?v=1" defer></script>
+  </script>
 </body>
 </html>
