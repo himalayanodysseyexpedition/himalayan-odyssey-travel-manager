@@ -2354,6 +2354,66 @@ header .header-inner > .header-cta:focus-visible{
 header .header-inner > nav[aria-label="Main navigation"]::after{content:none!important;display:none!important}
 
 
+
+/* MOBILE NAV FINAL: all four navigation items stay on a single line */
+@media(max-width:640px){
+  header .header-inner > nav.glass-nav[aria-label="Main navigation"]{
+    display:flex!important;
+    flex-direction:row!important;
+    flex-wrap:nowrap!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    gap:3px!important;
+    padding:3px 0 5px!important;
+    overflow-x:visible!important;
+    white-space:nowrap!important;
+  }
+  header .header-inner > nav.glass-nav[aria-label="Main navigation"] > a,
+  header .header-inner > nav.glass-nav[aria-label="Main navigation"] > .nav-dropdown{
+    display:flex!important;
+    flex:1 1 0!important;
+    min-width:0!important;
+    max-width:none!important;
+    width:auto!important;
+    justify-content:center!important;
+    white-space:nowrap!important;
+  }
+  header .header-inner > nav.glass-nav[aria-label="Main navigation"] > a,
+  header .header-inner > nav.glass-nav[aria-label="Main navigation"] > .nav-dropdown > .nav-dropdown-toggle{
+    box-sizing:border-box!important;
+    width:100%!important;
+    min-width:0!important;
+    min-height:33px!important;
+    padding:7px 2px!important;
+    gap:2px!important;
+    font-size:clamp(6px,1.85vw,7.5px)!important;
+    line-height:1!important;
+    letter-spacing:0!important;
+    text-align:center!important;
+    white-space:nowrap!important;
+  }
+  header .header-inner > nav.glass-nav[aria-label="Main navigation"] .services-chevron{
+    flex:0 0 12px!important;
+    width:12px!important;
+    height:12px!important;
+    margin:0!important;
+    font-size:10px!important;
+  }
+}
+@media(max-width:360px){
+  header .header-inner > nav.glass-nav[aria-label="Main navigation"] > a,
+  header .header-inner > nav.glass-nav[aria-label="Main navigation"] > .nav-dropdown > .nav-dropdown-toggle{
+    font-size:6px!important;
+    padding:6px 1px!important;
+  }
+  header .header-inner > nav.glass-nav[aria-label="Main navigation"] .services-chevron{
+    flex-basis:10px!important;width:10px!important;height:10px!important;
+  }
+}
+
 </style>
 
 
