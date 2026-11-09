@@ -2100,6 +2100,11 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
 .enquiry-dropdown[open]>summary{margin-bottom:20px}
 .enquiry-dropdown .enquiry-box{max-width:none;margin:0}
 @media(prefers-reduced-motion:reduce){.header-cta span,.enquiry-dropdown-icon{transition:none}}
+
+/* Keep the primary links on one swipeable row, including narrow phones */
+.header-inner nav{flex-wrap:nowrap;white-space:nowrap;max-width:100%;overflow-x:auto;overflow-y:visible;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.header-inner nav::-webkit-scrollbar{display:none}
+@media(max-width:760px){.header-inner nav{justify-content:flex-start;padding:0 4px}}
 </style>
 
 
