@@ -1991,6 +1991,13 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
 .group-departures-empty{text-align:center;padding:36px 20px;background:rgba(255,255,255,.55);color:#607066}
 @media(max-width:760px){.group-departures-head{display:block}.group-departures-head .intro{margin-top:14px}.group-departures-rail{grid-auto-columns:minmax(260px,84%);gap:14px}.group-departure-photo{height:175px}.group-departure-body{padding:17px}}
 @media(min-width:761px) and (max-width:1050px){.group-departures-rail{grid-auto-columns:minmax(270px,calc((100% - 21px)/2))}}
+.itinerary-cover-link{display:block;color:inherit}
+.itinerary-slide .itinerary-cover{height:175px!important;min-height:175px;overflow:hidden;background:#0b211d}
+.itinerary-slide .itinerary-cover>img{display:block;width:100%;height:100%;object-fit:cover}
+.itinerary-cover-placeholder{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;color:#ead6ae;letter-spacing:1.6px;text-align:center;font-size:11px}
+.itinerary-cover-placeholder span{font-size:38px}
+.itinerary-cover-placeholder small{font-size:9px;letter-spacing:2px}
+.itinerary-slide .card-body .btn{margin-top:7px}
 </style>
 
 
@@ -2297,7 +2304,7 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
       <h2>Tour Itineraries</h2>
     </div>
 
-    <p class="intro reveal">Explore our detailed tour brochures, travel routes, sightseeing information and trip details. View or download an itinerary before planning your Himalayan journey.</p>
+    <p class="intro reveal">Explore detailed day-wise Himalayan journeys, routes, photographs and travel information before planning your trip.</p>
 
     <div id="itineraryList" class="packages-carousel itineraries-carousel" tabindex="0" aria-label="Tour itineraries carousel">
       <p id="itineraryMessage">Loading available itineraries...</p>
@@ -2707,25 +2714,17 @@ async function loadPackages() {
       return;
     }
 
-    const {data:itineraryPdfs,error:pdfError} = await db
+    const {data:linkedItineraries,error:itineraryError} = await db
       .from("itineraries")
-      .select("package_id,pdf_url")
+      .select("id,package_id")
       .eq("published",true)
-      .not("package_id","is",null)
-      .not("pdf_url","is",null);
-
-    if (pdfError) throw pdfError;
-
-    const pdfByPackage = new Map(
-      (itineraryPdfs || []).map(item => [
-        String(item.package_id),
-        item.pdf_url
-      ])
-    );
-
+      .not("package_id","is",null);
+    if (itineraryError) throw itineraryError;
+    const itineraryPageByPackage = new Map((linkedItineraries || []).map(item => [
+      String(item.package_id), "/itinerary.html?id=" + encodeURIComponent(item.id)
+    ]));
     const publicPackages = data.map(p => ({
-      ...p,
-      linkedItineraryPdf:pdfByPackage.get(String(p.id)) || null
+      ...p, linkedItineraryPage:itineraryPageByPackage.get(String(p.id)) || null
     }));
 
     list.innerHTML = publicPackages.map(p => {
@@ -2763,11 +2762,8 @@ async function loadPackages() {
                target="_blank"
                rel="noopener">Book on WhatsApp</a>
 
-            ${p.linkedItineraryPdf ? `
-              <a class="btn"
-                 href="${safe(p.linkedItineraryPdf)}"
-                 target="_blank"
-                 rel="noopener">View Itinerary</a>
+            ${p.linkedItineraryPage ? `
+              <a class="btn" href="${safe(p.linkedItineraryPage)}">Explore Full Itinerary</a>
             ` : ""}
 
           </div>
@@ -2785,88 +2781,26 @@ async function loadPackages() {
   }
 }
 
-/* LOAD PUBLISHED PDF ITINERARIES */
+/* LOAD PUBLISHED ITINERARY WEBPAGES */
 async function loadItineraries() {
-  const list = document.getElementById("itineraryList");
-
-  if (!db) {
-    showLoadingError(list,"Itineraries Temporarily Unavailable","The website connection could not be started.","Please share your tour itineraries.");
-    return;
-  }
-
-  try {
-    const {data,error} = await db
-      .from("itineraries")
-      .select("id,title,destination,duration_days,duration_nights,price,summary,published,created_at,gallery_images,pdf_url")
-      .eq("published",true)
-      .order("created_at",{ascending:false});
-
-    if (error) throw error;
-
-    const available = data || [];
-
-    if (!available.length) {
-      showLoadingError(list,"Itineraries Coming Soon","Our curated Himalayan journeys will be listed here shortly.","Please share your tour itineraries.");
-      return;
-    }
-
-    list.innerHTML = available.map(item => {
-
-      const duration = [
-        item.duration_days ? item.duration_days + " Days" : "",
-        item.duration_nights ? item.duration_nights + " Nights" : ""
-      ].filter(Boolean).join(" / ");
-
-      const message = "Hello, I am interested in the " +
-        (item.title || "tour itinerary") +
-        ". Please share more details.";
-
-      return `
-        <article class="card package-slide itinerary-slide reveal">
-
-          <div class="itinerary-cover" style="height:155px;background:linear-gradient(135deg,#0b211d,#315e50);display:grid;place-items:center;color:#e9c58d;text-align:center;padding:20px;overflow:hidden">
-            ${Array.isArray(item.gallery_images) && item.gallery_images.length
-              ? `<div style="display:flex;gap:8px;width:100%;height:100%;overflow-x:auto;scroll-snap-type:x mandatory">${item.gallery_images.map((photo,index)=>`<img src="${safe(photo.url)}" alt="${safe(item.title || "Tour itinerary")} photograph ${index+1}" loading="lazy" style="flex:0 0 100%;width:100%;height:100%;object-fit:cover;scroll-snap-align:start;border-radius:5px">`).join("")}</div>`
-              : `<div><div style="font-size:40px">✧</div><b>HIMALAYAN ODYSSEY EXPEDITION</b><div style="font-size:11px;margin-top:6px;letter-spacing:2px">CURATED HIMALAYAN JOURNEY</div></div>`}
-          </div>
-
-          <div class="card-body">
-
-            <h3>${safe(item.title || "Himalayan Tour")}</h3>
-
-            <p>${safe(item.destination || "Himalayan Tour")}</p>
-
-            ${duration ? `<p class="itinerary-meta">${safe(duration)}</p>` : ""}
-
-            ${item.price != null && item.price !== "" ? `
-              <div class="price">${rupees(item.price)} <small>per person</small></div>
-            ` : ""}
-
-            ${item.summary ? `<p>${safe(item.summary)}</p>` : ""}
-
-            ${item.pdf_url ? `
-              <div class="pdf-actions">
-                <a class="btn" href="${safe(item.pdf_url)}" target="_blank" rel="noopener">View PDF</a>
-                <a class="btn" href="${safe(item.pdf_url)}" download>Download PDF</a>
-              </div>
-            ` : `<p class="itinerary-meta">PDF brochure will be added soon. Contact us for this itinerary.</p>`}
-
-            <a class="btn"
-               href="${whatsappLink(message)}"
-               target="_blank"
-               rel="noopener">Enquire on WhatsApp</a>
-
-          </div>
-        </article>`;
+  const list=document.getElementById("itineraryList");
+  if(!db){showLoadingError(list,"Itineraries Temporarily Unavailable","The website connection could not be started.","Please share your tour itineraries.");return;}
+  try{
+    const {data,error}=await db.from("itineraries").select("id,title,destination,duration_days,duration_nights,price,summary,published,created_at,gallery_images,cover_image").eq("published",true).order("created_at",{ascending:false});
+    if(error)throw error;
+    const available=data||[];
+    if(!available.length){showLoadingError(list,"Itineraries Coming Soon","Our curated Himalayan journeys will be listed here shortly.","Please share your tour itineraries.");return;}
+    list.innerHTML=available.map(item=>{
+      const duration=[item.duration_days?item.duration_days+" Days":"",item.duration_nights?item.duration_nights+" Nights":""].filter(Boolean).join(" / ");
+      const message="Hello, I am interested in the "+(item.title||"tour itinerary")+". Please share more details.";
+      const gallery=Array.isArray(item.gallery_images)?item.gallery_images:[];
+      const cover=item.cover_image||(gallery[0]&&gallery[0].url)||"";
+      const pageUrl="/itinerary.html?id="+encodeURIComponent(item.id);
+      const coverHtml=cover?'<img src="'+safe(cover)+'" alt="'+safe(item.title||"Himalayan tour")+'" loading="lazy" decoding="async">':'<div class="itinerary-cover-placeholder"><span>✧</span><b>HIMALAYAN ODYSSEY EXPEDITION</b><small>CURATED HIMALAYAN JOURNEY</small></div>';
+      return '<article class="card package-slide itinerary-slide reveal"><a class="itinerary-cover-link" href="'+safe(pageUrl)+'"><div class="itinerary-cover">'+coverHtml+'</div></a><div class="card-body"><h3>'+safe(item.title||"Himalayan Tour")+'</h3><p>'+safe(item.destination||"Himalayan Tour")+'</p>'+(duration?'<p class="itinerary-meta">'+safe(duration)+'</p>':"")+(item.price!=null&&item.price!==""?'<div class="price">'+rupees(item.price)+' <small>per person</small></div>':"")+(item.summary?'<p>'+safe(item.summary)+'</p>':"")+'<a class="btn" href="'+safe(pageUrl)+'">Explore Full Itinerary</a><a class="btn" href="'+whatsappLink(message)+'" target="_blank" rel="noopener">Enquire on WhatsApp</a></div></article>';
     }).join("");
-
     observeReveals();
-
-  } catch (error) {
-    console.error("Itinerary loading error:",error);
-
-    showLoadingError(list,"Itineraries Temporarily Unavailable","Please contact us on WhatsApp for current tour details.","Please share your tour itineraries.");
-  }
+  }catch(error){console.error("Itinerary loading error:",error);showLoadingError(list,"Itineraries Temporarily Unavailable","Please contact us on WhatsApp for current tour details.","Please share your tour itineraries.");}
 }
 
 /* LOAD PUBLISHED CABS */
