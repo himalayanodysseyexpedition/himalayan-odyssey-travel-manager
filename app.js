@@ -294,6 +294,7 @@ function openEditPackage(id) {
   form.elements.name.value = item.name || "";
   form.elements.destination.value = item.destination || "";
   form.elements.duration.value = item.duration || "";
+  form.elements.departure_dates.value = item.departure_dates || "";
   form.elements.price_per_person.value =
     item.price_per_person ?? "";
   form.elements.itinerary.value = item.itinerary || "";
@@ -483,7 +484,9 @@ async function savePackageForm(event) {
       duration:
         form.elements.duration.value.trim() || null,
       price_per_person:
-        Number(form.elements.price_per_person.value) || 0,
+        form.elements.price_per_person.value.trim() === "" ? null : Number(form.elements.price_per_person.value),
+      departure_dates:
+        form.elements.departure_dates.value.trim() || null,
       itinerary:
         form.elements.itinerary.value.trim() || null
     };
