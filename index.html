@@ -2105,6 +2105,21 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
 .header-inner nav{flex-wrap:nowrap;white-space:nowrap;max-width:100%;overflow-x:auto;overflow-y:visible;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .header-inner nav::-webkit-scrollbar{display:none}
 @media(max-width:760px){.header-inner nav{justify-content:flex-start;padding:0 4px}}
+
+/* One-line mobile navigation without clipping the Services dropdown */
+.header-inner nav{overflow:visible;overflow-x:visible;overflow-y:visible;gap:5px clamp(8px,1.5vw,18px)}
+@media(max-width:760px){
+  .header-inner nav{justify-content:center;gap:4px 9px;padding:0}
+  .header-inner nav>a:not(.header-cta){font-size:8px;letter-spacing:.45px}
+  .nav-dropdown-toggle{font-size:8px;letter-spacing:.45px;padding:5px 8px;gap:6px}
+  .header-cta{font-size:8px;padding:7px 9px;min-height:33px;letter-spacing:.5px}
+}
+@media(max-width:360px){
+  .header-inner nav{gap:3px 6px}
+  .header-inner nav>a:not(.header-cta){font-size:7px;letter-spacing:.2px}
+  .nav-dropdown-toggle{font-size:7px;padding:5px 6px;letter-spacing:.2px}
+  .header-cta{font-size:7px;padding:6px 7px}
+}
 </style>
 
 
