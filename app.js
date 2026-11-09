@@ -206,7 +206,10 @@ async function load() {
     "itinerary_days",
     "hotels",
     "hotel_photos",
-    "cabs"
+    "cabs",
+    "supplier_profiles",
+    "supplier_listings",
+    "supplier_enquiries"
   ];
 
   for (const table of tables) {
@@ -1038,6 +1041,7 @@ function render() {
   renderItineraries();
   renderHotels();
   renderCabs();
+  renderSupplierNetwork();
 }
 
 
@@ -2275,6 +2279,58 @@ function bindForms() {
 }
 
 
+
+/* =========================================
+   SUPPLIER NETWORK ADMIN
+========================================= */
+function renderSupplierNetwork() {
+  const profiles = D.supplier_profiles || [];
+  const listings = D.supplier_listings || [];
+  const enquiries = D.supplier_enquiries || [];
+  setText("supplierCount", profiles.length);
+  setText("supplierListingCount", listings.length);
+  setText("supplierEnquiryCount", enquiries.length);
+  const profileById = Object.fromEntries(profiles.map(p => [p.id,p]));
+  setHTML("supplierProfiles", profiles.map(p => card(
+    p.business_name || "Supplier",
+    [
+      "Contact: " + esc(p.contact_person),
+      "Verified mobile: " + esc(p.phone),
+      "Category: " + esc(p.supplier_type),
+      "Location: " + esc([p.city,p.state].filter(Boolean).join(", ")),
+      "Email: " + esc(p.email || "—"),
+      "GST: " + esc(p.gst_number || "—"),
+      "Status: <b>" + esc(p.verification_status) + "</b>"
+    ],
+    (p.verification_status !== "approved" ? '<button data-supplier-status="approved" data-supplier-id="'+esc(p.id)+'">Approve supplier</button>' : '<button class="secondary" data-supplier-status="suspended" data-supplier-id="'+esc(p.id)+'">Suspend</button>') +
+    '<button class="danger" data-supplier-status="rejected" data-supplier-id="'+esc(p.id)+'">Reject</button>'
+  )).join("") || "No supplier registrations yet.");
+  setHTML("supplierListings", listings.map(l => {
+    const p = profileById[l.supplier_id] || {};
+    return card(l.title, [
+      "Type: " + esc(l.listing_type) + " · " + esc(l.destination) + " · " + esc(l.location),
+      "Supplier: " + esc(p.business_name || p.contact_person || "Unknown"),
+      "Private mobile: " + esc(p.phone || "—"),
+      "Price: " + (l.price ? cash(l.price) + " " + esc(l.price_unit || "") : "On request"),
+      "Status: <b>" + esc(l.status) + "</b>"
+    ],
+    (l.status !== "approved" ? '<button data-listing-status="approved" data-listing-id="'+esc(l.id)+'">Publish listing</button>' : '<button class="secondary" data-listing-status="suspended" data-listing-id="'+esc(l.id)+'">Unpublish</button>') +
+    '<button class="danger" data-listing-status="rejected" data-listing-id="'+esc(l.id)+'">Reject</button>')
+  }).join("") || "No supplier listings submitted yet.");
+  setHTML("supplierEnquiries", enquiries.map(e => {
+    const l = listings.find(x => String(x.id) === String(e.listing_id)) || {};
+    return card(e.traveller_name, [
+      "Mobile: " + esc(e.traveller_phone),
+      "Email: " + esc(e.traveller_email || "—"),
+      "Listing: " + esc(l.title || "General enquiry"),
+      "Travel date: " + esc(e.travel_date || "—") + " · Travellers/rooms: " + esc(e.travellers || "—"),
+      "Message: " + esc(e.message || "—"),
+      "Status: <b>" + esc(e.status) + "</b>"
+    ], '<button data-enquiry-status="contacted" data-enquiry-id="'+esc(e.id)+'">Mark contacted</button><button data-enquiry-status="quoted" data-enquiry-id="'+esc(e.id)+'">Mark quoted</button><button data-enquiry-status="closed" data-enquiry-id="'+esc(e.id)+'">Close enquiry</button>')
+  }).join("") || "No marketplace enquiries yet.");
+}
+
+
 /* =========================================
    DASHBOARD ACTIONS
 ========================================= */
@@ -2286,6 +2342,28 @@ function bindActions() {
 
     let button;
 
+
+
+    button = target.closest("[data-supplier-status]");
+    if (button) {
+      const { error } = await db.from("supplier_profiles").update({verification_status:button.dataset.supplierStatus}).eq("id",button.dataset.supplierId);
+      if (error) { alert("Supplier update failed: " + error.message); return; }
+      await load(); return;
+    }
+
+    button = target.closest("[data-listing-status]");
+    if (button) {
+      const { error } = await db.from("supplier_listings").update({status:button.dataset.listingStatus}).eq("id",button.dataset.listingId);
+      if (error) { alert("Listing update failed: " + error.message); return; }
+      await load(); return;
+    }
+
+    button = target.closest("[data-enquiry-status]");
+    if (button) {
+      const { error } = await db.from("supplier_enquiries").update({status:button.dataset.enquiryStatus}).eq("id",button.dataset.enquiryId);
+      if (error) { alert("Enquiry update failed: " + error.message); return; }
+      await load(); return;
+    }
 
     /* EDIT PACKAGE */
 
