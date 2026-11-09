@@ -2368,7 +2368,7 @@ async function loadItineraries() {
 
     if (error) throw error;
 
-    const available = (data || []).filter(item => item.pdf_url);
+    const available = data || [];
 
     if (!available.length) {
       showLoadingError(list,"Itineraries Coming Soon","Contact us for tour information and available brochures.","Please share your tour itineraries.");
@@ -2415,17 +2415,10 @@ async function loadItineraries() {
 
             ${item.summary ? `<p>${safe(item.summary)}</p>` : ""}
 
-            <div class="pdf-actions">
-
-              <a class="btn"
-                 href="${safe(pdfUrl)}"
-                 target="_blank"
-                 rel="noopener">View PDF</a>
-
-              <a class="btn"
-                 href="${safe(downloadUrl)}">Download PDF</a>
-
-            </div>
+            ${pdfUrl ? `<div class="pdf-actions">
+              <a class="btn" href="${safe(pdfUrl)}" target="_blank" rel="noopener">View PDF</a>
+              <a class="btn" href="${safe(downloadUrl)}">Download PDF</a>
+            </div>` : `<p class="itinerary-meta">Photo gallery and PDF brochure will be added soon.</p>`}
 
             <a class="btn"
                href="${whatsappLink(message)}"
