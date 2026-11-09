@@ -2728,8 +2728,8 @@ async function loadPackages() {
       const normalize = value => String(value || "").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
       const packageDestination = normalize(p.destination);
       const duration = String(p.duration || "").toLowerCase();
-      const dayMatch = duration.match(/(\\d+)\\s*days?/);
-      const nightMatch = duration.match(/(\\d+)\\s*nights?/);
+      const dayMatch = duration.match(/(\d+)\s*days?/);
+      const nightMatch = duration.match(/(\d+)\s*nights?/);
       const candidates = rows.filter(item => {
         const destination = normalize(item.destination);
         const sameDestination = destination && packageDestination &&
