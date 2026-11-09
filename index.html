@@ -1498,6 +1498,127 @@ header nav .header-cta:hover{background:linear-gradient(135deg,#f3dfb5,#d1ab70);
 
 /* LIVE JOURNEY COST CALCULATOR */
 .cost-helper{font-size:11px;color:#718078;line-height:1.6;margin:5px 0 12px}.stay-destination-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.enquiry-box .stay-option{display:flex;align-items:center;gap:9px;margin:0;padding:11px;border:1px solid #d9ded6;background:#fbfaf6;cursor:pointer;min-width:0}.stay-option:has(input[type=checkbox]:checked){border-color:#b8955f;background:#f5f0e5;box-shadow:0 0 0 1px #b8955f}.enquiry-box .stay-option input[type=checkbox]{width:17px;height:17px;min-height:17px;flex:0 0 17px;accent-color:#173d33}.stay-option span{display:flex;flex-direction:column;flex:1;min-width:0}.stay-option strong{font-size:12px;color:#173d33}.stay-option small{font-size:10px;color:#8b7654;line-height:1.4}.enquiry-box .stay-option .stay-nights{width:48px;min-height:36px;padding:5px;text-align:center;font-size:12px;flex:0 0 48px}.stay-option .stay-nights:disabled{opacity:.35;background:#eee}.journey-estimate{margin-top:22px;padding:20px;background:#edf1eb;border:1px solid #d2ddcf;color:#173d33}.estimate-heading{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.estimate-heading span{font-size:11px;font-weight:800;letter-spacing:1.2px}.estimate-heading small{font-size:10px;color:#78877e}.estimate-lines{display:grid;gap:8px;font-size:12px}.estimate-line{display:flex;justify-content:space-between;gap:12px}.estimate-total{border-top:1px solid #c5d0c5;margin-top:12px;padding-top:12px;display:flex;justify-content:space-between;gap:12px;align-items:end}.estimate-total strong{font-family:var(--serif);font-size:27px;color:#173d33}.estimate-total span{font-size:10px;color:#64736b}.estimate-note{font-size:10px;color:#6f7e75;line-height:1.6;margin:12px 0 0}@media(max-width:520px){.stay-destination-grid{grid-template-columns:1fr}.enquiry-box .stay-option{padding:10px}.estimate-total strong{font-size:23px}}
+
+/* APPLE-INSPIRED LIQUID GLASS QUICK NAV — translucent over page imagery */
+.footer-contact-bar{
+  isolation:isolate;
+  overflow:visible;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,.13) 42%,rgba(220,237,229,.18) 100%),
+    rgba(17,42,35,.34) !important;
+  border:1px solid rgba(255,255,255,.48) !important;
+  box-shadow:
+    0 18px 48px rgba(4,18,14,.22),
+    0 4px 14px rgba(4,18,14,.12),
+    inset 0 1px 0 rgba(255,255,255,.66),
+    inset 0 -1px 0 rgba(255,255,255,.12),
+    inset 1px 0 0 rgba(255,255,255,.16),
+    inset -1px 0 0 rgba(255,255,255,.16) !important;
+  -webkit-backdrop-filter:blur(28px) saturate(185%) contrast(105%);
+  backdrop-filter:blur(28px) saturate(185%) contrast(105%);
+  transform-style:preserve-3d;
+}
+.footer-contact-bar:before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  z-index:-1;
+  border-radius:inherit;
+  pointer-events:none;
+  background:
+    linear-gradient(112deg,rgba(255,255,255,.30),transparent 34%,rgba(255,255,255,.06) 70%,rgba(255,255,255,.19)),
+    radial-gradient(ellipse at 50% 0%,rgba(255,255,255,.20),transparent 68%);
+  opacity:.9;
+}
+.footer-contact-bar:after{
+  content:"";
+  position:absolute;
+  left:9%;
+  right:9%;
+  top:1px;
+  height:1px;
+  border-radius:50%;
+  pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.88),transparent);
+  filter:blur(.3px);
+}
+.footer-contact-bar .quick-nav-item{
+  position:relative;
+  z-index:1;
+  color:rgba(248,252,249,.94);
+  text-shadow:0 1px 8px rgba(4,18,14,.28);
+  transition:color .25s ease,transform .3s cubic-bezier(.2,.75,.25,1),filter .25s ease;
+}
+.footer-contact-bar .quick-nav-item svg{
+  filter:drop-shadow(0 1px 4px rgba(0,0,0,.18));
+}
+.footer-contact-bar .quick-nav-item:hover,
+.footer-contact-bar .quick-nav-item:focus-visible{
+  color:#fff;
+  transform:translateY(-2px);
+  filter:drop-shadow(0 3px 9px rgba(255,255,255,.22));
+}
+.footer-contact-bar .quick-nav-book{
+  color:#f3dfbd;
+}
+.footer-contact-bar .quick-nav-whatsapp{
+  position:relative;
+  z-index:2;
+  color:#fff;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.50),rgba(255,255,255,.10)),
+    linear-gradient(145deg,rgba(38,151,94,.88),rgba(14,91,57,.82)) !important;
+  border:1px solid rgba(255,255,255,.62) !important;
+  box-shadow:
+    0 7px 20px rgba(0,0,0,.20),
+    inset 0 1px 0 rgba(255,255,255,.62),
+    inset 0 -1px 0 rgba(0,0,0,.12) !important;
+  -webkit-backdrop-filter:blur(18px) saturate(180%);
+  backdrop-filter:blur(18px) saturate(180%);
+  transition:transform .35s cubic-bezier(.2,.75,.25,1),box-shadow .35s ease;
+}
+.footer-contact-bar .quick-nav-whatsapp:hover{
+  transform:translateY(-3px) scale(1.045);
+  box-shadow:0 11px 25px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.7) !important;
+}
+.quick-nav-menu{
+  background:linear-gradient(145deg,rgba(255,255,255,.54),rgba(255,255,255,.20)),rgba(15,39,32,.70) !important;
+  border:1px solid rgba(255,255,255,.48) !important;
+  box-shadow:0 18px 42px rgba(4,18,14,.22),inset 0 1px 0 rgba(255,255,255,.55) !important;
+  -webkit-backdrop-filter:blur(28px) saturate(180%);
+  backdrop-filter:blur(28px) saturate(180%);
+}
+.quick-nav-menu a{
+  color:#f7fbf8 !important;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.055);
+  transition:background .22s ease,border-color .22s ease,transform .22s ease;
+}
+.quick-nav-menu a:hover,.quick-nav-menu a:focus-visible{
+  color:#fff !important;
+  background:rgba(255,255,255,.18) !important;
+  border-color:rgba(255,255,255,.32);
+  transform:translateY(-1px);
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .footer-contact-bar{background:rgba(20,48,39,.94) !important}
+  .quick-nav-menu{background:rgba(20,48,39,.96) !important}
+}
+@media(max-width:600px){
+  .footer-contact-bar{
+    background:
+      linear-gradient(145deg,rgba(255,255,255,.32),rgba(255,255,255,.12)),
+      rgba(17,42,35,.38) !important;
+    -webkit-backdrop-filter:blur(26px) saturate(190%) contrast(105%);
+    backdrop-filter:blur(26px) saturate(190%) contrast(105%);
+  }
+}
+@media(prefers-reduced-transparency:reduce){
+  .footer-contact-bar{background:rgba(20,48,39,.94) !important}
+  .quick-nav-menu{background:rgba(20,48,39,.97) !important}
+  .footer-contact-bar .quick-nav-item{color:#fff}
+}
+
 </style>
 
 <script type="application/ld+json">
