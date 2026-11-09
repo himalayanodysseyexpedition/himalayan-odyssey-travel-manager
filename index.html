@@ -2153,6 +2153,17 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
   }
 }
 
+
+/* Place the primary booking CTA on its own centered row below navigation */
+header nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;white-space:normal;overflow:visible}
+header nav::after{content:"";display:block;flex:0 0 100%;order:1;height:0}
+header nav .header-cta{order:2;flex:0 0 auto;width:max-content;max-width:100%;margin:8px auto 0;box-sizing:border-box;white-space:nowrap}
+@media(max-width:760px){
+  header nav{flex-wrap:wrap;justify-content:center;gap:4px 9px;overflow:visible}
+  header nav .header-cta{margin:7px auto 0;padding:8px 16px;font-size:9px;letter-spacing:.35px}
+}
+@media(max-width:360px){header nav .header-cta{padding:7px 13px;font-size:8px}}
+
 </style>
 
 
