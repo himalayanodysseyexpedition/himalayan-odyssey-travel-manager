@@ -2380,7 +2380,7 @@ async function loadItineraries() {
   try {
     const {data,error} = await db
       .from("itineraries")
-      .select("id,title,destination,duration_days,duration_nights,price,summary,pdf_url,published,created_at,gallery_images")
+      .select("id,title,destination,duration_days,duration_nights,price,summary,published,created_at,gallery_images")
       .eq("published",true)
       .order("created_at",{ascending:false});
 
@@ -2389,7 +2389,7 @@ async function loadItineraries() {
     const available = data || [];
 
     if (!available.length) {
-      showLoadingError(list,"Itineraries Coming Soon","Contact us for tour information and available brochures.","Please share your tour itineraries.");
+      showLoadingError(list,"Itineraries Coming Soon","Our curated Himalayan journeys will be listed here shortly.","Please share your tour itineraries.");
       return;
     }
 
@@ -2399,13 +2399,6 @@ async function loadItineraries() {
         item.duration_days ? item.duration_days + " Days" : "",
         item.duration_nights ? item.duration_nights + " Nights" : ""
       ].filter(Boolean).join(" / ");
-
-      const pdfUrl = item.pdf_url;
-
-      const downloadUrl = pdfUrl
-        ? pdfUrl + (pdfUrl.includes("?") ? "&" : "?") +
-          "download=" + encodeURIComponent((item.title || "itinerary") + ".pdf")
-        : "";
 
       const message = "Hello, I am interested in the " +
         (item.title || "tour itinerary") +
@@ -2417,7 +2410,7 @@ async function loadItineraries() {
           <div class="itinerary-cover" style="height:155px;background:linear-gradient(135deg,#0b211d,#315e50);display:grid;place-items:center;color:#e9c58d;text-align:center;padding:20px;overflow:hidden">
             ${Array.isArray(item.gallery_images) && item.gallery_images.length
               ? `<div style="display:flex;gap:8px;width:100%;height:100%;overflow-x:auto;scroll-snap-type:x mandatory">${item.gallery_images.map((photo,index)=>`<img src="${safe(photo.url)}" alt="${safe(item.title || "Tour itinerary")} photograph ${index+1}" loading="lazy" style="flex:0 0 100%;width:100%;height:100%;object-fit:cover;scroll-snap-align:start;border-radius:5px">`).join("")}</div>`
-              : `<div><div style="font-size:40px">✧</div><b>HIMALAYAN ODYSSEY EXPEDITION</b><div style="font-size:11px;margin-top:6px;letter-spacing:2px">TOUR BROCHURE</div></div>`}
+              : `<div><div style="font-size:40px">✧</div><b>HIMALAYAN ODYSSEY EXPEDITION</b><div style="font-size:11px;margin-top:6px;letter-spacing:2px">CURATED HIMALAYAN JOURNEY</div></div>`}
           </div>
 
           <div class="card-body">
@@ -2434,8 +2427,7 @@ async function loadItineraries() {
 
             ${item.summary ? `<p>${safe(item.summary)}</p>` : ""}
 
-            ${pdfUrl ? `<div class="pdf-actions">
-              <a class="btn" href="${safe(pdfUrl)}" target="_blank" rel="noopener">View PDF</a>
+            <a class="btn" href="${safe(pdfUrl)}" target="_blank" rel="noopener">View PDF</a>
               <a class="btn" href="${safe(downloadUrl)}">Download PDF</a>
             </div>` : `<p class="itinerary-meta">Photo gallery and PDF brochure will be added soon.</p>`}
 
@@ -2453,7 +2445,7 @@ async function loadItineraries() {
   } catch (error) {
     console.error("Itinerary loading error:",error);
 
-    showLoadingError(list,"Itineraries Temporarily Unavailable","Please contact us on WhatsApp for our latest tour brochures.","Please share your tour itineraries.");
+    showLoadingError(list,"Itineraries Temporarily Unavailable","Please contact us on WhatsApp for current tour details.","Please share your tour itineraries.");
   }
 }
 
