@@ -422,16 +422,24 @@ Publish this cab on the guest website
 <!-- LEAD FORM -->
 <dialog id="leadDialog">
 <form id="leadF">
-<h3>Add Customer Lead</h3>
-<label>Customer Name</label><input name="name" required>
-<label>Phone Number</label><input name="phone">
+<h3>Add Guest Lead</h3>
+<p>Record enquiries from your website, Instagram, Facebook, WhatsApp, Google and referrals in one place.</p>
+<label>Guest Name *</label><input name="name" required>
+<label>WhatsApp / Phone Number</label><input name="phone" type="tel">
 <label>Email</label><input name="email" type="email">
-<label>Destination</label><input name="destination">
+<label>Lead Source *</label>
+<select name="source" required>
+<option value="Manual">Manual / Other</option><option>Website</option><option>Instagram</option><option>Facebook</option><option>WhatsApp</option><option>Google</option><option>Tripoto</option><option>Referral</option><option>Other</option>
+</select>
+<label>Source Details (optional)</label><input name="source_details" placeholder="Ad campaign, Reel, post, referral name, etc.">
+<label>Destination</label><input name="destination" placeholder="Spiti, Kinnaur, Manali...">
 <label>Travel Date</label><input name="travel_date" type="date">
 <label>Number of Travellers</label><input name="travellers" type="number" min="1" value="1">
-<label>Budget (₹)</label><input name="budget" type="number" min="0">
-<label>Notes</label><textarea name="notes"></textarea>
-<button type="submit">Save Lead</button>
+<label>Estimated Budget (₹)</label><input name="budget" type="number" min="0">
+<label>Lead Status</label>
+<select name="status"><option>New</option><option>Contacted</option><option>Quotation Sent</option><option>Follow-up</option><option>Confirmed</option><option>Lost</option></select>
+<label>Notes / Follow-up details</label><textarea name="notes" rows="3"></textarea>
+<button type="submit">Save Guest Lead</button>
 <button type="button" data-close class="secondary">Cancel</button>
 </form>
 </dialog>
