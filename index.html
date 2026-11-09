@@ -716,8 +716,20 @@ footer p{font-size:11px;color:#aebdb4;margin-top:20px}
 
 .footer-contact-bar.visible{
   opacity:1;
-  transform:translateY(0);
+  transform:translateY(0) scale(1);
   pointer-events:auto;
+}
+
+.footer-contact-bar.scroll-hidden{
+  opacity:0;
+  transform:translateY(22px) scale(.96);
+  pointer-events:none;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .footer-contact-bar{
+    transition:none;
+  }
 }
 
 .footer-contact-btn{
@@ -2774,29 +2786,44 @@ function observeReveals() {
 /* FLOATING CONTACT BUTTONS - HIDE WHEN FOOTER IS REACHED */
 const footerContactBar = document.getElementById("footerContactBar");
 const siteFooter = document.getElementById("siteFooter");
+const quickMenuToggleForBar = document.getElementById("quickMenuToggle");
 
 if (footerContactBar && siteFooter) {
+  let lastScrollY = Math.max(0, window.scrollY);
+  let scrollDirection = "up";
+  let scrollTicking = false;
 
   function updateFloatingButtons() {
+    const currentY = Math.max(0, window.scrollY);
+    const delta = currentY - lastScrollY;
 
-    const footerPosition = siteFooter.getBoundingClientRect();
+    if (Math.abs(delta) >= 7) {
+      scrollDirection = delta > 0 ? "down" : "up";
+      lastScrollY = currentY;
+    }
 
-    /* Show buttons until the footer enters the visible screen */
-    const footerReached = footerPosition.top < window.innerHeight;
+    const footerReached = siteFooter.getBoundingClientRect().top < window.innerHeight;
+    const menuOpen = quickMenuToggleForBar?.getAttribute("aria-expanded") === "true";
+    const atTop = currentY < 80;
+    const shouldShow = !footerReached && (atTop || scrollDirection === "up" || menuOpen);
 
-    footerContactBar.classList.toggle(
-      "visible",
-      !footerReached
-    );
+    footerContactBar.classList.toggle("visible", shouldShow);
+    footerContactBar.classList.toggle("scroll-hidden", !shouldShow);
+    scrollTicking = false;
   }
 
-  window.addEventListener("scroll",updateFloatingButtons,{
-    passive:true
-  });
+  function requestFloatingButtonUpdate() {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    window.requestAnimationFrame(updateFloatingButtons);
+  }
 
-  window.addEventListener("resize",updateFloatingButtons);
+  window.addEventListener("scroll", requestFloatingButtonUpdate, { passive: true });
+  window.addEventListener("resize", requestFloatingButtonUpdate);
+  quickMenuToggleForBar?.addEventListener("click", requestFloatingButtonUpdate);
 
-  /* Set correct visibility immediately when page loads */
+  /* Show the bar on initial load; then follow scroll direction. */
+  footerContactBar.classList.add("visible");
   updateFloatingButtons();
 }
 
