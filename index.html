@@ -1841,6 +1841,28 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
   .quick-nav-menu a,.nav-dropdown-toggle{transition:none!important}
 }
 
+
+/* Fine-tune quick menu transparency: subtle option pills, readable content */
+.quick-nav-menu{
+  background:rgba(6,31,25,.78)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(135%)!important;
+  backdrop-filter:blur(24px) saturate(135%)!important;
+  border-color:rgba(218,190,143,.48)!important;
+}
+.quick-nav-menu a{
+  background:rgba(255,255,255,.018)!important;
+  border-color:rgba(218,190,143,.20)!important;
+  color:rgba(248,244,234,.90)!important;
+}
+.quick-nav-menu a::before,
+.quick-nav-menu a::after{opacity:.90!important}
+.quick-nav-menu a:hover,
+.quick-nav-menu a:focus-visible{
+  background:rgba(198,163,106,.09)!important;
+  border-color:rgba(230,205,160,.48)!important;
+  color:rgba(248,229,195,.95)!important;
+}
+
 </style>
 </head>
 
