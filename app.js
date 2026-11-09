@@ -14,18 +14,21 @@ const SUPABASE_KEY = "sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-";
 const HOTEL_BUCKET = "hotel-photos";
 const CAB_BUCKET = "cab-photos";
 const ITINERARY_BUCKET = "itinerary-pdfs";
+const ITINERARY_PHOTO_BUCKET = "itinerary-photos";
 const PACKAGE_BUCKET = "package-posters";
 
 const MAX_HOTEL_PHOTO_SIZE = 5 * 1024 * 1024;
 const MAX_CAB_PHOTO_SIZE = 5 * 1024 * 1024;
 const MAX_PACKAGE_IMAGE_SIZE = 5 * 1024 * 1024;
 const MAX_PDF_SIZE = 10 * 1024 * 1024;
+const MAX_ITINERARY_PHOTO_SIZE = 5 * 1024 * 1024;
 
 let db;
 let D = {};
 
 let editingPackageId = null;
 let editingItineraryId = null;
+let itineraryGalleryImages = [];
 let editingHotelId = null;
 let editingCabId = null;
 
@@ -1782,7 +1785,7 @@ function renderItineraries() {
         `${esc(it.destination || "")} • ${esc(it.duration_days || "—")} days / ${esc(it.duration_nights ?? "—")} nights`,
         `Price: ${esc(it.price || "On request")} • ${it.published ? "Published" : "Draft"}`,
         esc(it.summary || ""),
-        `${days.length} day(s) added • ${it.pdf_url ? "PDF attached ✓" : "No PDF"}`
+        `${days.length} day(s) added • ${Array.isArray(it.gallery_images) ? it.gallery_images.length : 0} photo(s) • ${it.pdf_url ? "PDF attached ✓" : "No PDF"}`
       ],
       `
         <button data-edit-itinerary="${esc(it.id)}">Edit</button>
@@ -1880,6 +1883,9 @@ function resetItineraryForm() {
 
   populateItineraryPackageOptions("");
   setHTML("itineraryPdfCurrent", "");
+  itineraryGalleryImages = [];
+  if ($("itineraryPhotos")) $("itineraryPhotos").value = "";
+  setHTML("itineraryGalleryExisting", "");
 
   if ($("dayEditor")) $("dayEditor").innerHTML = "";
 
@@ -1909,6 +1915,9 @@ function openEditItinerary(id) {
   $("itineraryPrice").value = it.price || "";
   $("itineraryCover").value = it.cover_image || "";
   $("itinerarySummary").value = it.summary || "";
+  itineraryGalleryImages = Array.isArray(it.gallery_images) ? [...it.gallery_images] : [];
+  $("itineraryPhotos").value = "";
+  renderItineraryGalleryExisting();
   $("itineraryPublished").checked = !!it.published;
 
   populateItineraryPackageOptions(it.package_id || "");
@@ -1933,6 +1942,45 @@ function openEditItinerary(id) {
   show("itineraryForm");
 }
 
+
+function renderItineraryGalleryExisting() {
+  const target = $("itineraryGalleryExisting");
+  if (!target) return;
+  if (!itineraryGalleryImages.length) {
+    target.innerHTML = "<small>No itinerary photos added yet.</small>";
+    return;
+  }
+  target.innerHTML = itineraryGalleryImages.map((photo, index) => `
+    <div class="hotel-photo">
+      <img src="${esc(photo.url)}" alt="Itinerary photo ${index + 1}">
+      <small>Photo ${index + 1}</small>
+      <button type="button" class="danger" data-remove-itinerary-photo="${index}">Remove photo</button>
+    </div>
+  `).join("");
+}
+
+async function uploadItineraryPhoto(file, itineraryId) {
+  if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+    throw new Error("Only JPG, PNG and WebP itinerary photos are allowed.");
+  }
+  if (file.size > MAX_ITINERARY_PHOTO_SIZE) {
+    throw new Error("Each itinerary photo must be smaller than 5 MB.");
+  }
+  const path = itineraryId + "/" + Date.now() + "-" +
+    Math.random().toString(36).slice(2, 8) + "-" + safeFileName(file.name);
+  const { error } = await db.storage.from(ITINERARY_PHOTO_BUCKET).upload(path, file, {
+    contentType: file.type,
+    cacheControl: "3600",
+    upsert: false
+  });
+  if (error) throw error;
+  const { data } = db.storage.from(ITINERARY_PHOTO_BUCKET).getPublicUrl(path);
+  if (!data?.publicUrl) {
+    await db.storage.from(ITINERARY_PHOTO_BUCKET).remove([path]);
+    throw new Error("Could not create a public itinerary photo URL.");
+  }
+  return { url: data.publicUrl, storage_path: path };
+}
 
 async function uploadItineraryPdf(file, title) {
   if (file.type !== "application/pdf") {
@@ -1975,6 +2023,14 @@ function bindItineraryForm() {
   if (!$("itineraryF")) return;
 
   $("addItineraryDay")?.addEventListener("click", () => addDayRow());
+  $("itineraryGalleryExisting")?.addEventListener("click", event => {
+    const button = event.target.closest("[data-remove-itinerary-photo]");
+    if (!button) return;
+    const index = Number(button.dataset.removeItineraryPhoto);
+    if (!Number.isInteger(index) || index < 0 || index >= itineraryGalleryImages.length) return;
+    itineraryGalleryImages.splice(index, 1);
+    renderItineraryGalleryExisting();
+  });
 
   $("itineraryF").addEventListener("submit", async event => {
     event.preventDefault();
@@ -2009,6 +2065,12 @@ function bindItineraryForm() {
       }
 
       const pdfFile = $("itineraryPdf").files[0];
+      const photoFiles = [...($("itineraryPhotos")?.files || [])];
+      for (const file of photoFiles) {
+        if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) throw new Error("Only JPG, PNG and WebP itinerary photos are allowed.");
+        if (file.size > MAX_ITINERARY_PHOTO_SIZE) throw new Error("Each itinerary photo must be smaller than 5 MB.");
+      }
+      const originalGallery = (D.itineraries || []).find(item => String(item.id) === String(editingItineraryId))?.gallery_images || [];
 
       if (pdfFile) {
         message("Uploading PDF...");
@@ -2055,6 +2117,27 @@ function bindItineraryForm() {
 
         if (result.error) throw result.error;
         id = result.data.id;
+      }
+
+      if (photoFiles.length) {
+        message("Uploading itinerary photos...");
+        const uploadedPhotos = [];
+        for (const file of photoFiles) uploadedPhotos.push(await uploadItineraryPhoto(file, id));
+        itineraryGalleryImages = [...itineraryGalleryImages, ...uploadedPhotos];
+      }
+
+      const galleryResult = await db.from("itineraries")
+        .update({ gallery_images: itineraryGalleryImages })
+        .eq("id", id);
+      if (galleryResult.error) throw galleryResult.error;
+
+      const removedPhotos = originalGallery.filter(oldPhoto =>
+        !itineraryGalleryImages.some(current => current.storage_path && current.storage_path === oldPhoto.storage_path)
+      );
+      const removedPaths = removedPhotos.map(photo => photo.storage_path).filter(Boolean);
+      if (removedPaths.length) {
+        const { error: removeError } = await db.storage.from(ITINERARY_PHOTO_BUCKET).remove(removedPaths);
+        if (removeError) console.warn("Some removed itinerary photos remain in storage:", removeError);
       }
 
       const result = await db
