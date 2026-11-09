@@ -2538,6 +2538,7 @@ header .header-inner > nav[aria-label="Main navigation"] > .header-cta:after{dis
       <div class="enquiry-box">
 
       <form id="travelEnquiryForm">
+        <div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden"><label for="website">Leave this field empty</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
 
         <label for="guestName">Your Full Name *</label>
         <input type="text"
@@ -3476,13 +3477,24 @@ document.getElementById("travelEnquiryForm").addEventListener("submit",async fun
  if(!name||! /^[6-9][0-9]{9}$/.test(phone)||!Number.isInteger(persons)||persons<1||persons>100||!month||!estimate){alert("Please enter your details, select at least one stay, number of persons and trip days, and review your estimate.");return}
  if(startDate&&endDate&&endDate<startDate){alert("End date cannot be earlier than start date.");return}
  const button=this.querySelector('button[type="submit"]');if(button)button.disabled=true;const waWindow=window.open("about:blank","_blank");let saved=false,saveErrorText="";
+ const costNote="Stay/person "+money(estimate.stayTotal)+"; "+(estimate.cab?"Cab "+estimate.cab.name+" total "+money(estimate.cabTotal)+"; cab/person "+money(estimate.cabShare):"Cab not selected")+"; Total/person "+money(estimate.total)+"; Group "+money(estimate.total*persons);
+ const packageNote=selectedPackage?"Selected package: "+packageName+"; Advertised package price: "+(selectedPackage.price_per_person!=null?money(selectedPackage.price_per_person)+" per person":"Not listed")+"; Itinerary: "+(selectedPackage.linkedItineraryPage||"No linked itinerary found"):"Custom itinerary / general enquiry";
  try{
-  if(!db)throw Error("Database client unavailable");
-  const {data:customer,error:customerError}=await db.from("customers").insert({name,phone}).select("id").single();if(customerError)throw customerError;if(!customer?.id)throw Error("Customer record was not returned");
-  const costNote="Stay/person "+money(estimate.stayTotal)+"; "+(estimate.cab?"Cab "+estimate.cab.name+" total "+money(estimate.cabTotal)+"; cab/person "+money(estimate.cabShare):"Cab not selected")+"; Total/person "+money(estimate.total)+"; Group "+money(estimate.total*persons);
-  const packageNote=selectedPackage?"Selected package: "+packageName+"; Advertised package price: "+(selectedPackage.price_per_person!=null?money(selectedPackage.price_per_person)+" per person":"Not listed")+"; Itinerary: "+(selectedPackage.linkedItineraryPage||"No linked itinerary found"):"Custom itinerary / general enquiry";
-  const {error}=await db.from("leads").insert({customer_id:customer.id,destination,travel_date:startDate||null,travellers:persons,budget:Math.round(estimate.total*persons),source:"Website",source_details:selectedPackage?"Website package enquiry: "+packageName:(enquiryTopic?"Website enquiry: "+enquiryTopic:"Website journey calculator"),notes:["Website enquiry form","Enquiry topic: "+(enquiryTopic||"General trip enquiry"),packageNote,"Month: "+month,"Trip days: "+estimate.days,"Stays: "+estimate.stays.map(x=>x.name+" "+x.nights+" night(s) @ ₹"+x.rate).join(", "),costNote,endDate?"End date: "+endDate:""].filter(Boolean).join(" | ")});
-  if(error)throw error;saved=true;
+  const intakeResponse=await fetch(SUPABASE_URL+"/functions/v1/submit-website-enquiry",{
+   method:"POST",
+   headers:{apikey:SUPABASE_KEY,"Content-Type":"application/json"},
+   body:JSON.stringify({
+    name,phone,persons,destination,
+    travelDate:startDate||null,
+    budget:Math.round(estimate.total*persons),
+    sourceDetails:selectedPackage?"Website package enquiry: "+packageName:(enquiryTopic?"Website enquiry: "+enquiryTopic:"Website journey calculator"),
+    notes:["Website enquiry form","Enquiry topic: "+(enquiryTopic||"General trip enquiry"),packageNote,"Month: "+month,"Trip days: "+estimate.days,"Stays: "+estimate.stays.map(x=>x.name+" "+x.nights+" night(s) @ ₹"+x.rate).join(", "),costNote,endDate?"End date: "+endDate:""].filter(Boolean).join(" | "),
+    website:document.getElementById("website")?.value||""
+   })
+  });
+  const intakeResult=await intakeResponse.json().catch(()=>({}));
+  if(!intakeResponse.ok||!intakeResult.saved)throw Error(intakeResult.message||"CRM save unavailable");
+  saved=true;
  }catch(err){console.error("CRM save failed",err);saveErrorText=err.message||"Unknown error"}
  let message="NEW WEBSITE TRAVEL ENQUIRY\nHIMALAYAN ODYSSEY EXPEDITION\n\nGuest: "+name+"\nPhone: "+phone+"\nEnquiry: "+(enquiryTopic||"General trip enquiry")+"\nSelected package: "+(packageName||"Custom itinerary / general enquiry")+"\nPersons: "+persons+"\nDestinations: "+destination+"\nMonth: "+month+"\nTrip duration: "+estimate.days+" days\n\nSTAY & MEALS: "+money(estimate.stayTotal)+" per person\n"+estimate.stays.map(x=>"• "+x.name+": "+x.nights+" night(s) × "+money(x.rate)+" = "+money(x.rate*x.nights)+" per person").join("\n")+"\n"+(estimate.cab?"Cab: "+estimate.cab.name+" · "+money(estimate.cab.daily_price)+"/day × "+estimate.days+" days = "+money(estimate.cabTotal)+" group total; "+money(estimate.cabShare)+" per person":"Cab: Not selected") +"\n\nESTIMATED TOTAL PER PERSON: "+money(estimate.total)+"\nESTIMATED GROUP TOTAL: "+money(estimate.total*persons)+"\n"+(selectedPackage?.price_per_person!=null?"Advertised package price: "+money(selectedPackage.price_per_person)+" per person (separate from custom estimate)\n":"")+"\nEstimate excludes unconfirmed tolls, parking, permits, driver allowance and route charges.";
  if(startDate)message+="\nStart date: "+startDate;if(endDate)message+="\nEnd date: "+endDate;message+=saved?"\nCRM: Saved.":"\nCRM: Please record manually; automatic save failed.";message+="\n\nPlease confirm availability and final quotation.";
