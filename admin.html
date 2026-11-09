@@ -115,7 +115,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
 }
 @media(prefers-reduced-motion:reduce){.stat,.card,article,.finance-entry,.provider-payment-group{transition:none!important}}
 
-</style>
+\n.wa-info{border-left:3px solid var(--gold);max-width:900px}.wa-info p{font-size:13px;color:var(--muted);margin:8px 0}.wa-template-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.wa-template-card{display:block;margin:0}.wa-template-card h3{margin:0 0 10px}.wa-template-card textarea{min-height:130px;resize:vertical}.wa-template-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:18px 0}.wa-template-actions small{width:100%}@media(max-width:760px){.wa-template-grid{grid-template-columns:1fr}}\n</style>
 </head>
 
 <body>
@@ -157,6 +157,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
   <button data-tab="vendors">Vendors</button>
   <button data-tab="suppliers">Supplier Network</button>
   <button data-tab="finance">Finance</button>
+  <button data-tab="whatsapp">WhatsApp Automation</button>
   <a href="research.html" style="display:inline-flex;align-items:center;padding:11px 15px;border-radius:7px;background:#c6a36a;color:#173c36;font-weight:700;text-decoration:none;white-space:nowrap">Research Centre ↗</a>
 </nav>
 
@@ -279,6 +280,34 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
     <button data-open="financeDialog">+ Add Transaction</button>
   </div>
   <div id="financeTransactions"></div>
+</section>
+
+<section id="whatsapp" class="panel">
+  <div class="topline">
+    <div>
+      <h2>WhatsApp Automation</h2>
+      <small>Six free, personalised message workflows for your leads and bookings.</small>
+    </div>
+  </div>
+  <div class="card wa-info">
+    <b>How it works</b>
+    <p>Choose a message button on a lead or booking to open WhatsApp with the customer's details already filled in. Review the message and tap Send in WhatsApp. No API, Twilio or monthly subscription is required.</p>
+    <p><b>Important:</b> This is one-tap message preparation, not unattended auto-sending. WhatsApp requires an approved API for messages to be sent automatically in the background.</p>
+    <p>Template edits are saved in this browser on this device. Use the same device and browser to keep your custom wording.</p>
+  </div>
+  <div class="wa-template-grid">
+    <article class="wa-template-card"><h3>1. New enquiry reply</h3><label for="wa-template-enquiry">Message template</label><textarea id="wa-template-enquiry" rows="5"></textarea><small>Available: {name}, {destination}, {travel_date}, {travellers}, {budget}</small></article>
+    <article class="wa-template-card"><h3>2. Booking confirmation</h3><label for="wa-template-confirmation">Message template</label><textarea id="wa-template-confirmation" rows="5"></textarea><small>Available: {name}, {destination}, {start_date}, {end_date}, {reference}, {total}, {paid}, {balance}</small></article>
+    <article class="wa-template-card"><h3>3. Advance payment request</h3><label for="wa-template-advance">Message template</label><textarea id="wa-template-advance" rows="5"></textarea><small>Available: {name}, {destination}, {start_date}, {end_date}, {reference}, {total}, {paid}, {balance}</small></article>
+    <article class="wa-template-card"><h3>4. Payment reminder</h3><label for="wa-template-payment">Message template</label><textarea id="wa-template-payment" rows="5"></textarea><small>Available: {name}, {destination}, {start_date}, {end_date}, {reference}, {total}, {paid}, {balance}</small></article>
+    <article class="wa-template-card"><h3>5. Trip reminder</h3><label for="wa-template-trip">Message template</label><textarea id="wa-template-trip" rows="5"></textarea><small>Available: {name}, {destination}, {start_date}, {end_date}, {reference}, {total}, {paid}, {balance}</small></article>
+    <article class="wa-template-card"><h3>6. Post-trip feedback</h3><label for="wa-template-feedback">Message template</label><textarea id="wa-template-feedback" rows="5"></textarea><small>Available: {name}, {destination}, {start_date}, {end_date}, {reference}, {total}, {paid}, {balance}</small></article>
+  </div>
+  <div class="wa-template-actions">
+    <button type="button" id="saveWhatsAppTemplates">Save all templates</button>
+    <button type="button" id="resetWhatsAppTemplates" class="secondary">Restore defaults</button>
+    <small id="waTemplateStatus" aria-live="polite"></small>
+  </div>
 </section>
 </section>
 </main>
@@ -510,5 +539,6 @@ Publish this cab on the guest website
 </dialog>
 
 <script src="app.js?v=110"></script>
+<script src="whatsapp-automation.js?v=1"></script>
 </body>
 </html>
