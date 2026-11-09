@@ -1932,9 +1932,10 @@ function renderItineraries() {
         `${esc(it.destination || "")} • ${esc(it.duration_days || "—")} days / ${esc(it.duration_nights ?? "—")} nights`,
         `Price: ${esc(it.price || "On request")} • ${it.published ? "Published" : "Draft"}`,
         esc(it.summary || ""),
-        `${days.length} day(s) added • ${Array.isArray(it.gallery_images) ? it.gallery_images.length : 0} photo(s) • ${it.pdf_url ? "PDF attached ✓" : "No PDF"}`
+        `${days.length} day(s) added • ${Array.isArray(it.gallery_images) ? it.gallery_images.length : 0} photo(s) • Dedicated itinerary webpage`
       ],
       `
+        <a href="https://himalayanexpedition.co.in/itinerary.html?id=${encodeURIComponent(it.id)}" target="_blank" rel="noopener">Preview page</a>
         <button data-edit-itinerary="${esc(it.id)}">Edit</button>
         <button data-itinerary-wa="${esc(it.id)}">WhatsApp enquiry</button>
         ${del("itineraries", it.id)}
