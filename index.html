@@ -1263,6 +1263,54 @@ html{scroll-behavior:smooth}
 }
 @media(prefers-reduced-motion:reduce){.guides-carousel{scroll-behavior:auto}.guide-card,.guide-arrow{transition:none}}
 
+
+/* RELIABLE TOUCH CAROUSEL OVERRIDES */
+#travel-guides .guides-carousel{
+  display:flex !important;
+  flex-flow:row nowrap !important;
+  align-items:stretch;
+  gap:22px !important;
+  width:100%;
+  max-width:100%;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-x pan-y;
+  overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;
+  scroll-padding-inline:2px;
+  scrollbar-width:none;
+  cursor:grab;
+}
+#travel-guides .guides-carousel:active{cursor:grabbing}
+#travel-guides .guides-carousel::-webkit-scrollbar{display:none}
+#travel-guides .guide-card{
+  display:flex !important;
+  flex:0 0 calc((100% - 44px)/3) !important;
+  width:calc((100% - 44px)/3) !important;
+  min-width:0 !important;
+  scroll-snap-align:start;
+}
+@media(max-width:900px){
+  #travel-guides .guide-card{
+    flex-basis:calc((100% - 22px)/2) !important;
+    width:calc((100% - 22px)/2) !important;
+  }
+}
+@media(max-width:600px){
+  #travel-guides .guides-carousel{
+    gap:13px !important;
+    width:calc(100% + 6vw);
+    padding:4px 6vw 16px 2px;
+    margin-right:-6vw;
+  }
+  #travel-guides .guide-card{
+    flex:0 0 84% !important;
+    width:84% !important;
+    min-height:365px;
+  }
+}
+
 </style>
 
 <script type="application/ld+json">
@@ -2641,8 +2689,9 @@ if (footerContactBar && siteFooter) {
   };
   const move=direction=>{
     const card=cards[0];
-    const gap=parseFloat(getComputedStyle(rail).columnGap)||0;
-    rail.scrollBy({left:direction*(card.getBoundingClientRect().width+gap),behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+    const gap=parseFloat(getComputedStyle(rail).gap)||0;
+    if(!card)return;
+    rail.scrollBy({left:direction*(card.getBoundingClientRect().width+gap),behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
   };
   prev?.addEventListener("click",()=>move(-1));
   next?.addEventListener("click",()=>move(1));
