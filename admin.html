@@ -150,6 +150,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
   <button class="active" data-tab="dashboard">Dashboard</button>
   <button data-tab="packages">Packages</button>
   <button data-tab="itineraries">Itineraries</button>
+  <button data-tab="destinations">Destinations</button>
   <button data-tab="hotels">Hotels & Properties</button>
   <button data-tab="cabs">Cabs</button>
   <button data-tab="leads">Guest Leads</button>
@@ -193,6 +194,11 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
     <button id="newItinerary">+ Add Itinerary</button>
   </div>
   <div id="itineraryList"></div>
+</section>
+
+<section id="destinations" class="panel">
+  <div class="topline"><div><h2>Destination Photos</h2><small>Add, edit, remove and publish the photos shown in the guest website’s “Discover Our Destinations” section.</small></div><button id="newDestination">+ Add Destination</button></div>
+  <div id="destinationList">Loading destinations...</div>
 </section>
 
 <section id="hotels" class="panel">
@@ -508,6 +514,20 @@ Publish this cab on the guest website
 <small>Add a separate entry every time you pay this provider, including small advances, part-payments and final settlements. Link it to an earlier entry to keep the full transaction history and running balance together. Existing entries can be edited later.</small>
 <label>Notes / Reference</label><textarea name="description" rows="3" placeholder="Booking reference, UPI reference, room or vehicle details"></textarea>
 <button type="submit" id="providerPaymentSave">Save Provider Payment</button><button type="button" data-close class="secondary">Cancel</button>
+</form></dialog>
+
+<!-- DESTINATION FORM -->
+<dialog id="destinationForm"><form id="destinationF">
+<h2 id="destinationDialogTitle">Add Destination</h2>
+<label>Destination Name</label><input id="destinationTitle" required placeholder="e.g. Spiti Valley">
+<label>Small Heading / Tagline</label><input id="destinationTagline" placeholder="e.g. THE MIDDLE LAND">
+<label>Destination Page Link</label><input id="destinationLink" type="text" placeholder="/spiti-valley-tours/">
+<label>Display Order</label><input id="destinationOrder" type="number" min="1" step="1" value="1">
+<label>Destination Photo</label><input id="destinationPhoto" type="file" accept="image/jpeg,image/png,image/webp">
+<small>Upload a landscape JPG, PNG or WebP photo (maximum 5 MB). Uploading a new photo replaces the current one.</small>
+<div id="destinationPhotoPreview" class="hotel-photo-grid"></div>
+<label><input id="destinationPublished" type="checkbox" style="width:auto" checked> Show this destination on the guest website</label>
+<div style="margin-top:15px"><button type="submit" id="destinationSave">Save Destination</button><button type="button" data-close class="secondary">Cancel</button></div>
 </form></dialog>
 
 <!-- ITINERARY FORM -->
