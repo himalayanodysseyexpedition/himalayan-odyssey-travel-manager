@@ -122,6 +122,34 @@
   }
 
   document.addEventListener("click", event => {
+    if (!(event.target instanceof Element)) return;
+
+    // Route the existing booking buttons through the editable templates.
+    const existingButton = event.target.closest("[data-confirm-wa], [data-remind]");
+    if (existingButton) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      const id = existingButton.dataset.confirmWa || existingButton.dataset.remind;
+      const booking = (D.bookings || []).find(item => String(item.id) === String(id));
+      if (!booking) { alert("Booking not found. Refresh the dashboard and try again."); return; }
+      const customer = (D.customers || []).find(item => String(item.id) === String(booking.customer_id)) || {};
+      const total = Number(booking.total_amount || 0);
+      const paid = Number(booking.amount_paid || 0);
+      const data = {
+        name: customer.name || "there",
+        destination: booking.destination || "Himalayan",
+        start_date: booking.start_date || "to be confirmed",
+        end_date: booking.end_date || "to be confirmed",
+        reference: booking.booking_reference || booking.id,
+        total: indianMoney(total),
+        paid: indianMoney(paid),
+        balance: indianMoney(Math.max(0, total - paid))
+      };
+      const key = existingButton.dataset.remind !== undefined ? "payment" : "confirmation";
+      openWhatsApp(customer.phone, fill(templates[key] || defaults[key], data));
+      return;
+    }
+
     const button = event.target.closest("[data-wa-automation]");
     if (!button) return;
 
@@ -160,7 +188,7 @@
     }
 
     openWhatsApp(customer.phone, fill(templates[key] || defaults[key], data));
-  });
+  }, true);
 
   setupEditor();
   addCardActions();
