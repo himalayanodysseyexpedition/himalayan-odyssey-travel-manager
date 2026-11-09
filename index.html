@@ -2402,9 +2402,10 @@ async function loadItineraries() {
 
       const pdfUrl = item.pdf_url;
 
-      const downloadUrl = pdfUrl +
-        (pdfUrl.includes("?") ? "&" : "?") +
-        "download=" + encodeURIComponent((item.title || "itinerary") + ".pdf");
+      const downloadUrl = pdfUrl
+        ? pdfUrl + (pdfUrl.includes("?") ? "&" : "?") +
+          "download=" + encodeURIComponent((item.title || "itinerary") + ".pdf")
+        : "";
 
       const message = "Hello, I am interested in the " +
         (item.title || "tour itinerary") +
