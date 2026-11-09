@@ -2357,6 +2357,45 @@ header .header-inner > nav[aria-label="Main navigation"] > .header-cta:after{dis
   header .header-inner > nav[aria-label="Main navigation"] > .header-cta{min-height:41px!important;padding:10px 23px!important;font-size:10px!important}
 }
 
+
+/* CTA is a sibling of nav in the actual header markup */
+header .header-inner > .header-cta{
+  display:inline-flex!important;
+  flex:0 0 auto!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:auto!important;
+  max-width:100%!important;
+  min-height:43px!important;
+  margin:2px auto 1px!important;
+  padding:11px 28px!important;
+  border:1px solid rgba(240,220,181,.95)!important;
+  border-radius:999px!important;
+  color:#10251f!important;
+  background:linear-gradient(135deg,#f5e4c1,#c6a36a)!important;
+  box-shadow:0 7px 22px rgba(198,163,106,.3),inset 0 1px 0 rgba(255,255,255,.55)!important;
+  font:800 11px/1.2 var(--sans)!important;
+  letter-spacing:1.2px!important;
+  text-transform:uppercase!important;
+  white-space:nowrap!important;
+}
+header .header-inner > .header-cta:hover,
+header .header-inner > .header-cta:focus-visible{
+  color:#10251f!important;
+  background:linear-gradient(135deg,#fff0d3,#d4b17b)!important;
+  transform:translateY(-2px)!important;
+  outline:2px solid rgba(229,199,141,.45)!important;
+  outline-offset:3px!important;
+}
+@media(max-width:640px){
+  header .header-inner > .header-cta{
+    min-height:41px!important;
+    margin:2px auto 1px!important;
+    padding:10px 24px!important;
+    font-size:10px!important;
+  }
+}
+
 </style>
 
 
