@@ -1126,6 +1126,51 @@ html{scroll-behavior:smooth}
   .header-cta,.faq-list details{transition:none}
 }
 
+
+/* REFERENCE-INSPIRED FLOATING QUICK NAV BAR */
+.footer-contact-bar{
+  position:fixed;left:50%;right:auto;bottom:18px;z-index:999;
+  width:min(620px,calc(100% - 32px));min-height:84px;
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;
+  gap:2px;padding:8px 12px;
+  background:rgba(255,253,248,.94);border:1px solid rgba(255,255,255,.82);
+  border-radius:42px;box-shadow:0 12px 38px rgba(12,28,23,.22);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  opacity:0;transform:translate(-50%,22px);pointer-events:none;
+  transition:opacity .35s ease,transform .35s ease;
+}
+.footer-contact-bar.visible{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.quick-nav-item{
+  min-width:0;min-height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;padding:5px 2px;border:0;background:transparent;color:#53635b;
+  font:500 11px var(--sans);letter-spacing:.5px;cursor:pointer;
+}
+.quick-nav-item svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.quick-nav-whatsapp{
+  width:66px;height:66px;justify-self:center;display:grid;place-items:center;
+  color:#10251d;background:linear-gradient(145deg,#f4d99f,#c6a36a);
+  border:1px solid #e9c987;border-radius:50%;box-shadow:0 5px 18px rgba(198,163,106,.35);
+}
+.quick-nav-whatsapp svg{width:34px;height:34px;fill:currentColor}
+.quick-nav-item:hover{color:#987342}
+.quick-nav-whatsapp:hover{transform:translateY(-2px)}
+.quick-nav-menu{
+  position:absolute;right:8px;bottom:calc(100% + 12px);width:205px;padding:10px;
+  background:rgba(255,253,248,.98);border:1px solid #e8dfcf;border-radius:18px;
+  box-shadow:0 12px 35px rgba(12,28,23,.2);
+}
+.quick-nav-menu[hidden]{display:none}
+.quick-nav-menu a{display:block;padding:10px 12px;border-radius:10px;color:#29443a;font-size:12px;font-weight:600}
+.quick-nav-menu a:hover{background:#f0eadf;color:#987342}
+@media(max-width:600px){
+  .footer-contact-bar{left:50%;right:auto;bottom:max(12px,env(safe-area-inset-bottom));width:calc(100% - 28px);min-height:82px;padding:7px 9px;border-radius:42px;gap:0}
+  .quick-nav-item{min-height:62px;font-size:10px;letter-spacing:.2px}
+  .quick-nav-item svg{width:24px;height:24px}
+  .quick-nav-whatsapp{width:62px;height:62px}
+  .quick-nav-whatsapp svg{width:32px;height:32px}
+  body{padding-bottom:100px}
+}
+
 </style>
 
 <script type="application/ld+json">
@@ -1687,45 +1732,36 @@ html{scroll-behavior:smooth}
 
   <a href="admin.html">Admin Login</a>
 
-  <!-- FLOATING CONTACT BUTTONS -->
-  <div class="footer-contact-bar"
-       id="footerContactBar"
-       aria-label="Contact Himalayan Odyssey Expedition">
-
-    <a class="footer-contact-btn footer-package"
-       href="https://wa.me/919816929669?text=Hello%20Himalayan%20Odyssey%20Expedition%2C%20I%20want%20to%20book%20the%20Winter%20Spiti%20Group%20Tour%20from%2026%20December%202026%20to%202%20January%202027.%20The%20price%20is%20%E2%82%B917%2C000%20per%20person.%20Please%20share%20the%20booking%20process."
-       target="_blank"
-       rel="noopener noreferrer"
-       aria-label="Book Winter Spiti tour, 26 December to 2 January, only 8 seats remaining">
-      <span class="package-btn-copy"><strong>BOOK WINTER SPITI</strong><small>26 DEC – 2 JAN · 8 SEATS LEFT</small></span>
+  <!-- FLOATING MOBILE-STYLE QUICK NAVIGATION -->
+  <div class="footer-contact-bar" id="footerContactBar" aria-label="Quick navigation">
+    <a class="quick-nav-item" href="#home" aria-label="Home">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.8 12 3l9 7.8v9.7a.5.5 0 0 1-.5.5h-6v-6h-5v6h-6a.5.5 0 0 1-.5-.5z"/></svg>
+      <span>Home</span>
     </a>
-
-    <a class="footer-contact-btn footer-call"
-       href="tel:+919816929669"
-       aria-label="Call Himalayan Odyssey Expedition">
-
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.56 3.57.56a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"/>
-      </svg>
-
-      Call Now
-
+    <a class="quick-nav-item" href="#packages" aria-label="Trips and packages">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2.5 18 6.2-9 4.1 5 3.1-4 5.6 8z"/></svg>
+      <span>Trips</span>
     </a>
-
-    <a class="footer-contact-btn footer-whatsapp"
-       href="https://wa.me/919816929669?text=Hello%20Himalayan%20Odyssey%20Expedition%2C%20I%20am%20interested%20in%20booking%20a%20Himalayan%20tour.%20Please%20share%20available%20packages."
-       target="_blank"
-       rel="noopener noreferrer"
-       aria-label="Contact us on WhatsApp">
-
-      <svg viewBox="0 0 32 32" aria-hidden="true">
-        <path d="M16 .7A15.1 15.1 0 0 0 3.1 23.7L1 31l7.5-2A15.2 15.2 0 1 0 16 .7zm0 27.6c-2.4 0-4.7-.7-6.7-2l-.5-.3-4.4 1.2 1.2-4.3-.3-.5A12.5 12.5 0 1 1 16 28.3zm6.9-9.4c-.4-.2-2.3-1.1-2.7-1.2-.4-.2-.6-.2-.9.2-.3.4-1 1.2-1.2 1.4-.2.3-.5.3-.9.1-.4-.2-1.7-.6-3.2-2-1.2-1.1-2-2.4-2.2-2.8-.2-.4 0-.6.2-.8l.6-.7c.2-.2.3-.4.4-.7.1-.3 0-.5 0-.7l-1.2-2.9c-.3-.7-.6-.6-.9-.6h-.8c-.3 0-.7.1-1.1.5-.4.4-1.4 1.3-1.4 3.2s1.4 3.7 1.6 4c.2.3 2.8 4.3 6.8 6 .9.4 1.6.6 2.1.7.9.3 1.8.2 2.4.1.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.7.2-1.8-.1-.2-.4-.3-.8-.5z"/>
-      </svg>
-
-      WhatsApp
-
+    <a class="quick-nav-whatsapp" href="https://wa.me/919816929669?text=Hello%20Himalayan%20Odyssey%20Expedition%2C%20I%20want%20to%20book%20the%20Winter%20Spiti%20Group%20Tour%20from%2026%20December%202026%20to%202%20January%202027%20at%20%E2%82%B917%2C000%20per%20person.%20Please%20share%20the%20booking%20process." target="_blank" rel="noopener noreferrer" aria-label="Book the Winter Spiti tour on WhatsApp">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 .7A15.1 15.1 0 0 0 3.1 23.7L1 31l7.5-2A15.2 15.2 0 1 0 16 .7zm0 27.6c-2.4 0-4.7-.7-6.7-2l-.5-.3-4.4 1.2 1.2-4.3-.3-.5A12.5 12.5 0 1 1 16 28.3zm6.9-9.4c-.4-.2-2.3-1.1-2.7-1.2-.4-.2-.6-.2-.9.2-.3.4-1 1.2-1.2 1.4-.2.3-.5.3-.9.1-.4-.2-1.7-.6-3.2-2-1.2-1.1-2-2.4-2.2-2.8-.2-.4 0-.6.2-.8l.6-.7c.2-.2.3-.3.4-.7.1-.3 0-.5 0-.7l-1.2-2.9c-.3-.7-.6-.6-.9-.6h-.8c-.3 0-.7.1-1.1.5-.4.4-1.4 1.3-1.4 3.2s1.4 3.7 1.6 4c.2.3 2.8 4.3 6.8 6 .9.4 1.6.6 2.1.7.9.3 1.8.2 2.4.1.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.7.2-1.8-.1-.2-.4-.3-.8-.5z"/></svg>
     </a>
-
+    <a class="quick-nav-item" href="tel:+919816929669" aria-label="Call Himalayan Odyssey Expedition">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 2.8 9.5 2l2 4.8-2.2 1.8a15 15 0 0 0 6.1 6.1l1.8-2.2 4.8 2-.8 2.9a3 3 0 0 1-3.3 2.2A18.5 18.5 0 0 1 4.4 7.1a3 3 0 0 1 2.2-4.3z"/></svg>
+      <span>Call</span>
+    </a>
+    <button class="quick-nav-item quick-menu-toggle" id="quickMenuToggle" type="button" aria-expanded="false" aria-controls="quickNavMenu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <span>Menu</span>
+    </button>
+    <div class="quick-nav-menu" id="quickNavMenu" hidden>
+      <a href="#destinations">Destinations</a>
+      <a href="#travel-enquiry">Plan Your Trip</a>
+      <a href="#itineraries">Itineraries</a>
+      <a href="#cabs">Cabs</a>
+      <a href="#gallery">Hotels</a>
+      <a href="#contact">Contact</a>
+      <a href="#faq">FAQs</a>
+    </div>
   </div>
 
   <p>© 2026 Himalayan Odyssey Expedition. All rights reserved.</p>
@@ -2447,6 +2483,29 @@ if (footerContactBar && siteFooter) {
 
   /* Set correct visibility immediately when page loads */
   updateFloatingButtons();
+}
+
+/* FLOATING QUICK NAV MENU */
+const quickMenuToggle = document.getElementById("quickMenuToggle");
+const quickNavMenu = document.getElementById("quickNavMenu");
+if (quickMenuToggle && quickNavMenu) {
+  quickMenuToggle.addEventListener("click", () => {
+    const isOpen = quickMenuToggle.getAttribute("aria-expanded") === "true";
+    quickMenuToggle.setAttribute("aria-expanded", String(!isOpen));
+    quickNavMenu.hidden = isOpen;
+  });
+  quickNavMenu.addEventListener("click", event => {
+    if (event.target.closest("a")) {
+      quickNavMenu.hidden = true;
+      quickMenuToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+  document.addEventListener("click", event => {
+    if (!event.target.closest("#footerContactBar")) {
+      quickNavMenu.hidden = true;
+      quickMenuToggle.setAttribute("aria-expanded", "false");
+    }
+  });
 }
 
 /* SCROLL PROGRESS */
