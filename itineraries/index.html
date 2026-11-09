@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b211d">
+<title>Himachal Tour Itineraries | Himalayan Odyssey Expedition</title>
+<meta name="description" content="Browse published Himalayan Odyssey Expedition tour itineraries for Spiti Valley, Kinnaur and Himachal Pradesh. View trip details and PDF brochures.">
+<link rel="canonical" href="https://himalayanexpedition.co.in/itineraries/">
+<meta property="og:title" content="Himalayan Tour Itineraries | Himalayan Odyssey Expedition">
+<meta property="og:description" content="Explore detailed Himalayan tour routes, trip durations and PDF brochures.">
+<meta property="og:url" content="https://himalayanexpedition.co.in/itineraries/">
+<link rel="icon" href="/logo.webp"><link rel="preconnect" href="https://ynkoiuyjevclypumnyes.supabase.co"><link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--forest:#0b211d;--green:#173d33;--gold:#c6a36a;--cream:#f8f6f0;--ink:#263b34;--muted:#718078;--serif:"Cormorant Garamond",Georgia,serif;--sans:"DM Sans",Arial,sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:15px/1.75 var(--sans)}a{text-decoration:none;color:inherit}.top{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;padding:14px 6%;background:rgba(8,27,23,.97);color:#f4f0e7;border-bottom:1px solid #c6a36a88}.top strong{font-size:12px;letter-spacing:1.5px}.top nav{display:flex;gap:18px;flex-wrap:wrap}.top nav a{color:#ead6ae;font-size:11px;letter-spacing:1px;text-transform:uppercase}.hero{padding:75px 7%;background:linear-gradient(100deg,#071b17ed,#071b1799),url('/spiti.jpg') center/cover;color:white}.hero small{color:#ead6ae;letter-spacing:4px;font-weight:700}.hero h1{font:500 clamp(44px,7vw,72px)/1 var(--serif);margin:12px 0}.hero p{max-width:650px;color:#e1e9e3}.wrap{max-width:1200px;margin:auto;padding:48px 6%}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}.card{min-width:0;background:#fffefa;border:1px solid #e8e1d5;box-shadow:0 12px 34px #0b211d0c;overflow:hidden}.cover{height:185px;background:linear-gradient(135deg,#0b211d,#315e50);color:#ead6ae;display:grid;place-items:center;text-align:center;padding:18px}.cover img{width:100%;height:100%;object-fit:cover}.body{padding:22px}.tag{color:#987342;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase}.card h2{font:600 29px/1.1 var(--serif);color:var(--forest);margin:8px 0}.muted{color:var(--muted);font-size:13px}.price{font-weight:700;color:#987342;margin:12px 0}.btn{display:inline-flex;align-items:center;justify-content:center;padding:11px 15px;margin:6px 6px 0 0;background:var(--gold);color:var(--forest);font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase}.btn.alt{background:transparent;border:1px solid #bdc8c0;color:var(--green)}.status{padding:32px;text-align:center;background:#fffefa;border:1px solid #e8e1d5;color:var(--muted)}footer{padding:28px;text-align:center;background:var(--forest);color:#d9e3dc;font-size:12px}footer a{color:#ead6ae}@media(max-width:650px){.hero{padding:55px 7%}.wrap{padding:35px 5%}.top nav{gap:10px}.top nav a{font-size:10px}}
+</style>
+</head>
+<body>
+<header class="top"><a href="/"><strong>HIMALAYAN ODYSSEY <span style="color:#c6a36a">EXPEDITION</span></strong></a><nav aria-label="Main navigation"><a href="/">Home</a><a href="/packages/">Packages</a><a href="/services/">Services</a><a href="/marketplace/">Cabs & Stays</a></nav></header>
+<section class="hero"><small>PLAN WITH CLARITY</small><h1>Himalayan Tour Itineraries</h1><p>Explore trip routes, destinations, durations and brochure PDFs for journeys curated by Himalayan Odyssey Expedition.</p></section>
+<main class="wrap"><div id="itineraryResults" class="grid"><div class="status">Loading published itineraries…</div></div></main>
+<footer>© 2026 Himalayan Odyssey Expedition · <a href="https://wa.me/919816929669">Ask us on WhatsApp</a></footer>
+<script>
+"use strict";
+const SUPABASE_URL="https://ynkoiuyjevclypumnyes.supabase.co";
+const SUPABASE_KEY="sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-";
+const root=document.getElementById("itineraryResults");
+const esc=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const money=value=>"₹"+Number(value||0).toLocaleString("en-IN");
+const wa=title=>"https://wa.me/919816929669?text="+encodeURIComponent("Hello Himalayan Odyssey Expedition, please share details about "+title+".");
+function showError(message){root.innerHTML='<div class="status" style="grid-column:1/-1">'+esc(message)+'<p><a class="btn" href="'+wa("your available itineraries")+'">Ask on WhatsApp</a></p></div>';}
+async function loadItineraries(){
+ if(!window.supabase){showError("The itinerary service could not start. Please contact our team for current routes.");return;}
+ try{
+  const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+  const {data,error}=await db.from("itineraries").select("id,title,destination,duration_days,duration_nights,price,summary,pdf_url,gallery_images,published,created_at").eq("published",true).order("created_at",{ascending:false});
+  if(error)throw error;
+  if(!data?.length){showError("No published itineraries are available right now. Contact us for current tour routes.");return;}
+  root.innerHTML=data.map(item=>{
+   const duration=[item.duration_days?item.duration_days+" days":"",item.duration_nights?item.duration_nights+" nights":""].filter(Boolean).join(" / ");
+   const first=Array.isArray(item.gallery_images)&&item.gallery_images.length?item.gallery_images[0]:null;
+   const image=first?.url||first?.photo_url||"";
+   const cover=image?'<div class="cover"><img src="'+esc(image)+'" alt="'+esc(item.title||"Himalayan tour")+'" loading="lazy"></div>':'<div class="cover"><div><div style="font-size:36px">✧</div><b>HIMALAYAN ODYSSEY</b><div style="font-size:10px;letter-spacing:2px">CURATED JOURNEY</div></div></div>';
+   return '<article class="card">'+cover+'<div class="body"><div class="tag">Himalayan journey</div><h2>'+esc(item.title||"Himalayan Tour")+'</h2><p class="muted">'+esc(item.destination||"Himachal Pradesh")+(duration?" · "+esc(duration):"")+'</p>'+(item.summary?'<p>'+esc(item.summary)+'</p>':"")+(item.price!=null?'<div class="price">'+money(item.price)+' <span class="muted">per person</span></div>':"")+(item.pdf_url?'<a class="btn" href="'+esc(item.pdf_url)+'" target="_blank" rel="noopener">View PDF</a><a class="btn alt" href="'+esc(item.pdf_url)+'" download>Download</a>':"")+'<a class="btn alt" href="'+wa(item.title||"this itinerary")+'" target="_blank" rel="noopener">Enquire on WhatsApp</a></div></article>';
+  }).join("");
+ }catch(error){console.error("Itinerary page error:",error);showError("We couldn’t load itineraries just now. Please try again or contact us on WhatsApp.");}
+}
+loadItineraries();
+</script>
+</body></html>
