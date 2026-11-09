@@ -1495,6 +1495,9 @@ header nav .header-cta:hover{background:linear-gradient(135deg,#f3dfb5,#d1ab70);
 .quick-nav-menu a:hover,.quick-nav-menu a:focus-visible{background:#f4ecdd;border-color:rgba(189,149,89,.5);color:#806034;transform:translateY(-1px);outline:none}
 @media(max-width:600px){.header-inner{gap:9px;padding:10px 4% 12px}.brand{padding:5px 14px;border-radius:15px}.brand img{width:176px;max-height:62px}header nav{gap:6px;padding:1px 0}header nav a:not(.header-cta){padding:8px 10px;font-size:9px;letter-spacing:.75px}header nav .header-cta{min-height:35px;padding:8px 13px;font-size:9px}.quick-nav-menu{right:2px;bottom:calc(100% + 10px);width:min(290px,calc(100vw - 34px));padding:11px;gap:5px}.quick-nav-menu a{min-height:40px;padding:9px 10px;font-size:10px}}
 @media(prefers-reduced-motion:reduce){.brand,header nav a,.quick-menu-toggle,.quick-menu-toggle svg,.quick-nav-menu,.quick-nav-menu a{transition:none}}
+
+/* LIVE JOURNEY COST CALCULATOR */
+.cost-helper{font-size:11px;color:#718078;line-height:1.6;margin:5px 0 12px}.stay-destination-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.enquiry-box .stay-option{display:flex;align-items:center;gap:9px;margin:0;padding:11px;border:1px solid #d9ded6;background:#fbfaf6;cursor:pointer;min-width:0}.stay-option:has(input[type=checkbox]:checked){border-color:#b8955f;background:#f5f0e5;box-shadow:0 0 0 1px #b8955f}.enquiry-box .stay-option input[type=checkbox]{width:17px;height:17px;min-height:17px;flex:0 0 17px;accent-color:#173d33}.stay-option span{display:flex;flex-direction:column;flex:1;min-width:0}.stay-option strong{font-size:12px;color:#173d33}.stay-option small{font-size:10px;color:#8b7654;line-height:1.4}.enquiry-box .stay-option .stay-nights{width:48px;min-height:36px;padding:5px;text-align:center;font-size:12px;flex:0 0 48px}.stay-option .stay-nights:disabled{opacity:.35;background:#eee}.journey-estimate{margin-top:22px;padding:20px;background:#edf1eb;border:1px solid #d2ddcf;color:#173d33}.estimate-heading{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.estimate-heading span{font-size:11px;font-weight:800;letter-spacing:1.2px}.estimate-heading small{font-size:10px;color:#78877e}.estimate-lines{display:grid;gap:8px;font-size:12px}.estimate-line{display:flex;justify-content:space-between;gap:12px}.estimate-total{border-top:1px solid #c5d0c5;margin-top:12px;padding-top:12px;display:flex;justify-content:space-between;gap:12px;align-items:end}.estimate-total strong{font-family:var(--serif);font-size:27px;color:#173d33}.estimate-total span{font-size:10px;color:#64736b}.estimate-note{font-size:10px;color:#6f7e75;line-height:1.6;margin:12px 0 0}@media(max-width:520px){.stay-destination-grid{grid-template-columns:1fr}.enquiry-box .stay-option{padding:10px}.estimate-total strong{font-size:23px}}
 </style>
 
 <script type="application/ld+json">
@@ -1827,12 +1830,29 @@ header nav .header-cta:hover{background:linear-gradient(135deg,#f3dfb5,#d1ab70);
                placeholder="How many people are travelling?"
                required>
 
-        <label for="destination">Travel Destination *</label>
-        <input type="text"
-               id="destination"
-               placeholder="e.g. Spiti Valley, Manali, Kinnaur"
-               maxlength="150"
-               required>
+        <label>Choose Your Destinations & Number of Nights *</label>
+        <p class="cost-helper">Select every place you want to stay. Rates include one night of stay, breakfast and dinner per person.</p>
+        <div id="stayDestinationOptions" class="stay-destination-grid">
+          <div class="stay-option"><input type="checkbox" value="Narkanda" data-rate="1300" aria-label="Add Narkanda to journey"><span><strong>Narkanda</strong><small>₹1,300 / person / night</small></span><input class="stay-nights" type="number" min="1" max="30" value="1" aria-label="Narkanda nights" disabled></div>
+          <div class="stay-option"><input type="checkbox" value="Shimla" data-rate="1300" aria-label="Add Shimla to journey"><span><strong>Shimla</strong><small>₹1,300 / person / night</small></span><input class="stay-nights" type="number" min="1" max="30" value="1" aria-label="Shimla nights" disabled></div>
+          <div class="stay-option"><input type="checkbox" value="Kufri" data-rate="1300" aria-label="Add Kufri to journey"><span><strong>Kufri</strong><small>₹1,300 / person / night</small></span><input class="stay-nights" type="number" min="1" max="30" value="1" aria-label="Kufri nights" disabled></div>
+          <div class="stay-option"><input type="checkbox" value="Sangla" data-rate="1600" aria-label="Add Sangla to journey"><span><strong>Sangla</strong><small>₹1,600 / person / night</small></span><input class="stay-nights" type="number" min="1" max="30" value="1" aria-label="Sangla nights" disabled></div>
+          <div class="stay-option"><input type="checkbox" value="Kalpa" data-rate="1500" aria-label="Add Kalpa to journey"><span><strong>Kalpa</strong><small>₹1,500 / person / night</small></span><input class="stay-nights" type="number" min="1" max="30" value="1" aria-label="Kalpa nights" disabled></div>
+          <div class="stay-option"><input type="checkbox" value="Tabo" data-rate="1600" aria-label="Add Tabo to journey"><span><strong>Tabo</strong><small>₹1,600 / person / night</small></span><input class="stay-nights" type="number" min="1" max="30" value="1" aria-label="Tabo nights" disabled></div>
+          <div class="stay-option"><input type="checkbox" value="Kaza" data-rate="1500" aria-label="Add Kaza to journey"><span><strong>Kaza</strong><small>₹1,500 / person / night</small></span><input class="stay-nights" type="number" min="1" max="30" value="1" aria-label="Kaza nights" disabled></div>
+          <div class="stay-option"><input type="checkbox" value="Manali" data-rate="1300" aria-label="Add Manali to journey"><span><strong>Manali</strong><small>₹1,300 / person / night</small></span><input class="stay-nights" type="number" min="1" max="30" value="1" aria-label="Manali nights" disabled></div>
+          <div class="stay-option"><input type="checkbox" value="Jibhi" data-rate="1400" aria-label="Add Jibhi to journey"><span><strong>Jibhi</strong><small>₹1,400 / person / night</small></span><input class="stay-nights" type="number" min="1" max="30" value="1" aria-label="Jibhi nights" disabled></div>
+          <div class="stay-option"><input type="checkbox" value="Kasol" data-rate="1300" aria-label="Add Kasol to journey"><span><strong>Kasol</strong><small>₹1,300 / person / night</small></span><input class="stay-nights" type="number" min="1" max="30" value="1" aria-label="Kasol nights" disabled></div>
+        </div>
+        <label for="tripDays">Total Trip Days *</label>
+        <input type="number" id="tripDays" min="1" max="60" step="1" placeholder="Enter total number of travel days" required>
+        <label for="tripCab">Choose Your Cab</label>
+        <select id="tripCab"><option value="">Loading available cabs...</option></select>
+        <p class="cost-helper">Cab share = listed daily cab price × trip days ÷ number of travellers. Final route charges and availability will be confirmed by our team.</p>
+        <div id="journeyEstimate" class="journey-estimate" aria-live="polite">
+          <div class="estimate-heading"><span>YOUR LIVE TRIP ESTIMATE</span><small>Updates as you plan</small></div>
+          <p>Select destinations and enter your group size to see your estimate.</p>
+        </div>
 
         <label for="travelMonth">Travel Month *</label>
         <select id="travelMonth" required>
@@ -2726,108 +2746,45 @@ document.getElementById("galleryList")
     showHotelDetails(button.getAttribute("data-view-hotel"));
   });
 
-/* TRAVEL ENQUIRY FORM - WHATSAPP */
-document.getElementById("travelEnquiryForm")
-  .addEventListener("submit",async function(e) {
-
-    e.preventDefault();
-
-    const name = document.getElementById("guestName").value.trim();
-    const phone = document.getElementById("guestPhone").value.trim();
-    const persons = document.getElementById("travellers").value;
-    const destination = document.getElementById("destination").value.trim();
-    const month = document.getElementById("travelMonth").value;
-    const startDate = document.getElementById("startDate").value;
-    const endDate = document.getElementById("endDate").value;
-
-    if (
-      !name ||
-      !/^[6-9][0-9]{9}$/.test(phone) ||
-      !persons ||
-      !Number.isInteger(Number(persons)) ||
-      Number(persons) < 1 ||
-      Number(persons) > 100 ||
-      !destination ||
-      !month
-    ) {
-      alert("Please fill in all required details and enter a valid 10-digit Indian mobile number.");
-      return;
-    }
-
-    if (startDate && endDate && endDate < startDate) {
-      alert("End date cannot be earlier than start date.");
-      return;
-    }
-
-    const submitButton = this.querySelector('button[type="submit"]');
-    if (submitButton) submitButton.disabled = true;
-    // Open synchronously within the user gesture so iPhone Safari permits WhatsApp.
-    const waWindow = window.open("about:blank", "_blank");
-
-    let databaseSaved = false;
-    let saveMessage = "";
-
-    try {
-      if (!db) throw new Error("Database client is unavailable.");
-
-      // Match the existing CRM relationship: create a customer, then a lead.
-      const { data: customer, error: customerError } = await db
-        .from("customers")
-        .insert({ name, phone })
-        .select("id")
-        .single();
-
-      if (customerError) throw customerError;
-      if (!customer?.id) throw new Error("Customer record was not returned.");
-
-      const { error: leadError } = await db
-        .from("leads")
-        .insert({
-          customer_id: customer.id,
-          destination,
-          travel_date: startDate || null,
-          travellers: Number(persons),
-          budget: 0,
-          notes: [
-            "Website enquiry",
-            "Travel month: " + month,
-            endDate ? "Travel end date: " + endDate : ""
-          ].filter(Boolean).join(" | ")
-        });
-
-      if (leadError) throw leadError;
-      databaseSaved = true;
-    } catch (saveError) {
-      console.error("Website enquiry CRM save failed:", saveError);
-      saveMessage = saveError.message || "Unknown database error";
-    }
-
-    let message = `NEW WEBSITE TRAVEL ENQUIRY
-HIMALAYAN ODYSSEY EXPEDITION
-
-Guest Name: ${name}
-Guest Phone Number: ${phone}
-Number of Persons: ${persons}
-Destination: ${destination}
-Travel Month: ${month}`;
-
-    if (startDate) message += `\nTravel Start Date: ${startDate}`;
-    if (endDate) message += `\nTravel End Date: ${endDate}`;
-    message += databaseSaved
-      ? "\nCRM Status: Saved to website leads."
-      : "\nCRM Status: Please record this enquiry manually; automatic save was unsuccessful.";
-
-    message += "\n\nPlease contact me regarding this trip.";
-
-    if (waWindow) waWindow.location.href = whatsappLink(message);
-    if (!waWindow) {
-      alert("Your enquiry " + (databaseSaved ? "was saved to the CRM." : "could not be saved automatically.") + " Please allow pop-ups to continue to WhatsApp.");
-    } else if (!databaseSaved) {
-      alert("WhatsApp is ready. Automatic CRM saving did not work, so please record this enquiry manually. Error: " + saveMessage);
-    }
-
-    if (submitButton) submitButton.disabled = false;
-  });
+/* LIVE JOURNEY COST ESTIMATE + WHATSAPP ENQUIRY */
+const stayOptions=[...document.querySelectorAll("#stayDestinationOptions .stay-option")];
+const travellersInput=document.getElementById("travellers"),tripDaysInput=document.getElementById("tripDays"),tripCabSelect=document.getElementById("tripCab"),estimateBox=document.getElementById("journeyEstimate");
+let availableTripCabs=[];
+function money(value){return "₹"+Math.round(Number(value)||0).toLocaleString("en-IN")}
+function selectedStays(){return stayOptions.filter(x=>x.querySelector('[type=checkbox]').checked).map(x=>({name:x.querySelector('[type=checkbox]').value,rate:Number(x.querySelector('[type=checkbox]').dataset.rate),nights:Math.max(1,Math.min(30,Number(x.querySelector('.stay-nights').value)||1))}))}
+function calculateJourneyEstimate(){
+ const persons=Number(travellersInput.value),days=Number(tripDaysInput.value),stays=selectedStays(),stayTotal=stays.reduce((n,x)=>n+x.rate*x.nights,0),cab=availableTripCabs.find(x=>String(x.id)===tripCabSelect.value),cabTotal=cab&&days>0?Number(cab.daily_price||0)*days:0,cabShare=persons>0?cabTotal/persons:0,total=stayTotal+cabShare;
+ if(!(persons>0&&days>0&&stays.length)){estimateBox.innerHTML='<div class="estimate-heading"><span>YOUR LIVE TRIP ESTIMATE</span><small>Updates as you plan</small></div><p>Select at least one destination, number of persons and trip days.</p>';return null}
+ const nights=stays.reduce((n,x)=>n+x.nights,0);
+ const rows=stays.map(x=>'<div class="estimate-line"><span>'+x.name+' · '+x.nights+' night(s) × '+money(x.rate)+'</span><strong>'+money(x.rate*x.nights)+'</strong></div>').join("");
+ const cabRows=cab?'<div class="estimate-line"><span>'+cab.name+' · '+days+' days × '+money(cab.daily_price)+'/day</span><strong>'+money(cabTotal)+'</strong></div><div class="estimate-line"><span>Cab share per person ('+persons+' travellers)</span><strong>'+money(cabShare)+'</strong></div>':'<div class="estimate-line"><span>Cab</span><strong>Not selected</strong></div>';
+ estimateBox.innerHTML='<div class="estimate-heading"><span>YOUR LIVE TRIP ESTIMATE</span><small>'+nights+' stay night(s) · '+days+' travel day(s)</small></div><div class="estimate-lines"><strong>Stay & meals per person: '+money(stayTotal)+'</strong>'+rows+cabRows+'</div><div class="estimate-total"><div><span>ESTIMATED TOTAL / PERSON</span><br><strong>'+money(total)+'</strong></div><span>'+persons+' traveller(s)<br>Group total: '+money(total*persons)+'</span></div><p class="estimate-note">Stay prices include accommodation, breakfast and dinner. Cab share is divided equally among travellers. Tolls, parking, permits, driver allowance, route restrictions and extra charges are excluded unless confirmed. Estimate only; not a confirmed booking.</p>';
+ return {persons,days,stays,cab,stayTotal,cabTotal,cabShare,total,nights};
+}
+stayOptions.forEach(x=>{const check=x.querySelector('[type=checkbox]'),nights=x.querySelector('.stay-nights');check.addEventListener('change',()=>{nights.disabled=!check.checked;calculateJourneyEstimate()});nights.addEventListener('input',calculateJourneyEstimate)});
+[travellersInput,tripDaysInput,tripCabSelect].forEach(x=>x.addEventListener('input',calculateJourneyEstimate));
+tripCabSelect.addEventListener('change',calculateJourneyEstimate);
+async function loadTripCostCabs(){try{if(!db)throw Error("Database unavailable");const {data,error}=await db.from("cabs").select("id,name,model,daily_price").eq("published",true).order("created_at",{ascending:false});if(error)throw error;availableTripCabs=data||[];tripCabSelect.innerHTML='<option value="">No cab selected — stays only</option>'+availableTripCabs.map(x=>'<option value="'+safe(x.id)+'">'+safe(x.name)+(x.model?' · '+safe(x.model):'')+' · '+rupees(x.daily_price)+'/day</option>').join("");}catch(e){console.warn("Cab prices unavailable for calculator",e);availableTripCabs=[];tripCabSelect.innerHTML='<option value="">Cab rates unavailable — enquire</option>'}calculateJourneyEstimate()}
+loadTripCostCabs();
+function syncTripDays(){const a=document.getElementById("startDate").value,b=document.getElementById("endDate").value;if(!a||!b||b<a)return;tripDaysInput.value=Math.max(1,Math.round((new Date(b+"T00:00:00")-new Date(a+"T00:00:00"))/86400000)+1);calculateJourneyEstimate()}
+document.getElementById("startDate").addEventListener("change",syncTripDays);document.getElementById("endDate").addEventListener("change",syncTripDays);
+document.getElementById("travelEnquiryForm").addEventListener("submit",async function(e){
+ e.preventDefault();const name=document.getElementById("guestName").value.trim(),phone=document.getElementById("guestPhone").value.trim(),persons=Number(travellersInput.value),month=document.getElementById("travelMonth").value,startDate=document.getElementById("startDate").value,endDate=document.getElementById("endDate").value,estimate=calculateJourneyEstimate();
+ const destination=estimate?estimate.stays.map(x=>x.name+" ("+x.nights+" night(s))").join(", "):"";
+ if(!name||! /^[6-9][0-9]{9}$/.test(phone)||!Number.isInteger(persons)||persons<1||persons>100||!month||!estimate){alert("Please enter your details, select at least one stay, number of persons and trip days, and review your estimate.");return}
+ if(startDate&&endDate&&endDate<startDate){alert("End date cannot be earlier than start date.");return}
+ const button=this.querySelector('button[type="submit"]');if(button)button.disabled=true;const waWindow=window.open("about:blank","_blank");let saved=false,saveErrorText="";
+ try{
+  if(!db)throw Error("Database client unavailable");
+  const {data:customer,error:customerError}=await db.from("customers").insert({name,phone}).select("id").single();if(customerError)throw customerError;if(!customer?.id)throw Error("Customer record was not returned");
+  const costNote="Stay/person "+money(estimate.stayTotal)+"; "+(estimate.cab?"Cab "+estimate.cab.name+" total "+money(estimate.cabTotal)+"; cab/person "+money(estimate.cabShare):"Cab not selected")+"; Total/person "+money(estimate.total)+"; Group "+money(estimate.total*persons);
+  const {error}=await db.from("leads").insert({customer_id:customer.id,destination,travel_date:startDate||null,travellers:persons,budget:Math.round(estimate.total*persons),notes:["Website journey calculator","Month: "+month,"Trip days: "+estimate.days,"Stays: "+estimate.stays.map(x=>x.name+" "+x.nights+" night(s) @ ₹"+x.rate).join(", "),costNote,endDate?"End date: "+endDate:""].filter(Boolean).join(" | ")});
+  if(error)throw error;saved=true;
+ }catch(err){console.error("CRM save failed",err);saveErrorText=err.message||"Unknown error"}
+ let message="NEW WEBSITE TRAVEL ENQUIRY\nHIMALAYAN ODYSSEY EXPEDITION\n\nGuest: "+name+"\nPhone: "+phone+"\nPersons: "+persons+"\nDestinations: "+destination+"\nMonth: "+month+"\nTrip duration: "+estimate.days+" days\n\nSTAY & MEALS: "+money(estimate.stayTotal)+" per person\n"+estimate.stays.map(x=>"• "+x.name+": "+x.nights+" night(s) × "+money(x.rate)+" = "+money(x.rate*x.nights)+" per person").join("\n")+"\n"+(estimate.cab?"Cab: "+estimate.cab.name+" · "+money(estimate.cab.daily_price)+"/day × "+estimate.days+" days = "+money(estimate.cabTotal)+" group total; "+money(estimate.cabShare)+" per person":"Cab: Not selected") +"\n\nESTIMATED TOTAL PER PERSON: "+money(estimate.total)+"\nESTIMATED GROUP TOTAL: "+money(estimate.total*persons)+"\n\nEstimate excludes unconfirmed tolls, parking, permits, driver allowance and route charges.";
+ if(startDate)message+="\nStart date: "+startDate;if(endDate)message+="\nEnd date: "+endDate;message+=saved?"\nCRM: Saved.":"\nCRM: Please record manually; automatic save failed.";message+="\n\nPlease confirm availability and final quotation.";
+ if(waWindow)waWindow.location.href=whatsappLink(message);else alert("Please allow pop-ups to continue to WhatsApp.");if(waWindow&&!saved)alert("WhatsApp is ready, but CRM saving failed. Please record this enquiry manually. "+saveErrorText);if(button)button.disabled=false;
+});
 
 /* SCROLL REVEAL ANIMATIONS */
 let revealObserver;
