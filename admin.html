@@ -46,6 +46,26 @@ a{color:#987746}hr{border:0;border-top:1px solid var(--line);margin:22px 0}
 @media(max-width:420px){.topline{align-items:flex-start}.topline>button{margin-left:0}#auth{margin-top:4vh}#auth .card{padding:23px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){nav{background:#0b211d}}
+
+.finance-intro{max-width:850px;color:var(--muted);font-size:13px}
+.finance-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+.finance-entry{display:block;border-left:3px solid var(--gold);padding:20px}
+.finance-entry-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.finance-entry-head b{font:600 24px var(--serif);color:var(--forest)}
+.finance-quantity{background:#e9e2d2;color:var(--forest);padding:6px 10px;font-size:10px;font-weight:700;letter-spacing:1px}
+.finance-breakdown{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0}
+.finance-breakdown>div{background:#f5f2e9;border:1px solid var(--line);padding:11px 13px}
+.finance-breakdown small{display:block;font-size:10px;letter-spacing:.4px}
+.finance-breakdown strong{display:block;color:var(--forest);font:600 21px var(--serif);margin-top:3px}
+.finance-profit-line{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 15px;background:#e9eee7;border:1px solid #d6e0d4}
+.finance-profit-line>span{font-size:12px;font-weight:700;color:var(--forest)}
+.finance-profit-line small{display:block;font-weight:400}
+.finance-profit-line>strong{font:700 24px var(--serif);color:#176b55;white-space:nowrap}
+.finance-supplier-notes{font-size:12px;color:var(--muted);white-space:pre-wrap}
+.finance-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.finance-stats .stat small{display:block;text-transform:none;letter-spacing:0;font-weight:500;margin-top:3px}
+@media(max-width:760px){.finance-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.finance-breakdown{grid-template-columns:repeat(2,minmax(0,1fr))}.finance-profit-line{align-items:flex-start;flex-direction:column}}
+
 </style>
 </head>
 
@@ -180,14 +200,24 @@ a{color:#987746}hr{border:0;border-top:1px solid var(--line);margin:22px 0}
 </section>
 
 <section id="finance" class="panel">
-  <h2>Finance Management</h2>
-  <div class="stats">
-    <div class="stat">Received<strong id="received">₹0</strong></div>
-    <div class="stat">Expenses<strong id="expenses">₹0</strong></div>
-    <div class="stat">Net<strong id="net">₹0</strong></div>
+  <h2>Package Finance & Profit Ledger</h2>
+  <p class="finance-intro">Every customer booking is listed separately. Profit is calculated from package revenue minus supplier/service costs. Advance payments are tracked separately and only reduce the amount left to collect.</p>
+  <div class="stats finance-stats">
+    <div class="stat">Packages Sold<strong id="financePackagesSold">0</strong></div>
+    <div class="stat">Package Revenue<strong id="financeSales">₹0</strong></div>
+    <div class="stat">Supplier Costs<strong id="financeSupplierCosts">₹0</strong></div>
+    <div class="stat">Calculated Profit<strong id="financeProfit">₹0</strong><small id="financeProfitNote"></small></div>
+    <div class="stat">Advance Received<strong id="financeAdvance">₹0</strong></div>
+    <div class="stat">Left to Collect<strong id="financeBalance">₹0</strong></div>
   </div>
-  <button data-open="financeDialog">+ Add Transaction</button>
+  <h3>Customer-wise package ledger</h3>
   <div id="financeList"></div>
+  <hr>
+  <div class="topline">
+    <h3>Other transactions & receipts</h3>
+    <button data-open="financeDialog">+ Add Transaction</button>
+  </div>
+  <div id="financeTransactions"></div>
 </section>
 </section>
 </main>
@@ -400,6 +430,6 @@ Publish this cab on the guest website
 </form>
 </dialog>
 
-<script src="app.js?v=108"></script>
+<script src="app.js?v=109"></script>
 </body>
 </html>
