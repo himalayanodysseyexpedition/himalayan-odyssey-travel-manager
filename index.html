@@ -2231,6 +2231,9 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
                placeholder="How many people are travelling?"
                required>
 
+        <label for="selectedPackage">Selected Tour Package</label>
+        <select id="selectedPackage"><option value="">Custom itinerary / General enquiry</option></select>
+        <p class="cost-helper">If you opened this form from a package, your selected tour will appear here automatically.</p>
         <label>Choose Your Destinations & Number of Nights *</label>
         <p class="cost-helper">Select every place you want to stay. Rates include one night of stay, breakfast and dinner per person.</p>
         <div id="stayDestinationOptions" class="stay-destination-grid">
@@ -2749,6 +2752,14 @@ async function loadPackages() {
     const publicPackages = data.map(p => ({
       ...p, linkedItineraryPage:itineraryPageFor(p)
     }));
+    window.hoePackageRecords = publicPackages;
+    const packageSelect = document.getElementById("selectedPackage");
+    if (packageSelect) {
+      packageSelect.innerHTML = '<option value="">Custom itinerary / General enquiry</option>' +
+        publicPackages.map(p => '<option value="' + safe(p.id) + '">' + safe(p.name || p.destination || "Himalayan Tour") + '</option>').join("");
+      const requestedPackage = new URLSearchParams(window.location.search).get("package");
+      if (requestedPackage && publicPackages.some(p => String(p.id) === requestedPackage)) packageSelect.value = requestedPackage;
+    }
 
     list.innerHTML = publicPackages.map(p => {
 
@@ -2780,10 +2791,7 @@ async function loadPackages() {
               <div class="price">${rupees(p.price_per_person)} <small>per person</small></div>
             ` : ""}
 
-            <a class="btn"
-               href="${whatsappLink(message)}"
-               target="_blank"
-               rel="noopener">Book on WhatsApp</a>
+            <a class="btn" href="/?package=${encodeURIComponent(p.id)}#travel-enquiry">Enquire About This Package</a>
 
             ${p.linkedItineraryPage ? `
               <a class="btn" href="${safe(p.linkedItineraryPage)}">Explore Full Itinerary</a>
@@ -3121,7 +3129,8 @@ function syncTripDays(){const a=document.getElementById("startDate").value,b=doc
 document.getElementById("startDate").addEventListener("change",syncTripDays);document.getElementById("endDate").addEventListener("change",syncTripDays);
 document.getElementById("travelEnquiryForm").addEventListener("submit",async function(e){
  e.preventDefault();const name=document.getElementById("guestName").value.trim(),phone=document.getElementById("guestPhone").value.trim(),persons=Number(travellersInput.value),month=document.getElementById("travelMonth").value,startDate=document.getElementById("startDate").value,endDate=document.getElementById("endDate").value,estimate=calculateJourneyEstimate();
- const destination=estimate?estimate.stays.map(x=>x.name+" ("+x.nights+" night(s))").join(", "):"";
+ const packageId=document.getElementById("selectedPackage")?.value||"",selectedPackage=(window.hoePackageRecords||[]).find(p=>String(p.id)===String(packageId))||null,packageName=selectedPackage?.name||"";
+ const stayDestination=estimate?estimate.stays.map(x=>x.name+" ("+x.nights+" night(s))").join(", "):"",destination=[packageName,stayDestination].filter(Boolean).join(" — ")||"Custom Himalayan trip";
  if(!name||! /^[6-9][0-9]{9}$/.test(phone)||!Number.isInteger(persons)||persons<1||persons>100||!month||!estimate){alert("Please enter your details, select at least one stay, number of persons and trip days, and review your estimate.");return}
  if(startDate&&endDate&&endDate<startDate){alert("End date cannot be earlier than start date.");return}
  const button=this.querySelector('button[type="submit"]');if(button)button.disabled=true;const waWindow=window.open("about:blank","_blank");let saved=false,saveErrorText="";
@@ -3129,12 +3138,18 @@ document.getElementById("travelEnquiryForm").addEventListener("submit",async fun
   if(!db)throw Error("Database client unavailable");
   const {data:customer,error:customerError}=await db.from("customers").insert({name,phone}).select("id").single();if(customerError)throw customerError;if(!customer?.id)throw Error("Customer record was not returned");
   const costNote="Stay/person "+money(estimate.stayTotal)+"; "+(estimate.cab?"Cab "+estimate.cab.name+" total "+money(estimate.cabTotal)+"; cab/person "+money(estimate.cabShare):"Cab not selected")+"; Total/person "+money(estimate.total)+"; Group "+money(estimate.total*persons);
-  const {error}=await db.from("leads").insert({customer_id:customer.id,destination,travel_date:startDate||null,travellers:persons,budget:Math.round(estimate.total*persons),source:"Website",source_details:"Website journey calculator",notes:["Website journey calculator","Month: "+month,"Trip days: "+estimate.days,"Stays: "+estimate.stays.map(x=>x.name+" "+x.nights+" night(s) @ ₹"+x.rate).join(", "),costNote,endDate?"End date: "+endDate:""].filter(Boolean).join(" | ")});
+  const packageNote=selectedPackage?"Selected package: "+packageName+"; Advertised package price: "+(selectedPackage.price_per_person!=null?money(selectedPackage.price_per_person)+" per person":"Not listed")+"; Itinerary: "+(selectedPackage.linkedItineraryPage||"No linked itinerary found"):"Custom itinerary / general enquiry";
+  const {error}=await db.from("leads").insert({customer_id:customer.id,destination,travel_date:startDate||null,travellers:persons,budget:Math.round(estimate.total*persons),source:"Website",source_details:selectedPackage?"Website package enquiry: "+packageName:"Website journey calculator",notes:["Website enquiry form",packageNote,"Month: "+month,"Trip days: "+estimate.days,"Stays: "+estimate.stays.map(x=>x.name+" "+x.nights+" night(s) @ ₹"+x.rate).join(", "),costNote,endDate?"End date: "+endDate:""].filter(Boolean).join(" | ")});
   if(error)throw error;saved=true;
  }catch(err){console.error("CRM save failed",err);saveErrorText=err.message||"Unknown error"}
- let message="NEW WEBSITE TRAVEL ENQUIRY\nHIMALAYAN ODYSSEY EXPEDITION\n\nGuest: "+name+"\nPhone: "+phone+"\nPersons: "+persons+"\nDestinations: "+destination+"\nMonth: "+month+"\nTrip duration: "+estimate.days+" days\n\nSTAY & MEALS: "+money(estimate.stayTotal)+" per person\n"+estimate.stays.map(x=>"• "+x.name+": "+x.nights+" night(s) × "+money(x.rate)+" = "+money(x.rate*x.nights)+" per person").join("\n")+"\n"+(estimate.cab?"Cab: "+estimate.cab.name+" · "+money(estimate.cab.daily_price)+"/day × "+estimate.days+" days = "+money(estimate.cabTotal)+" group total; "+money(estimate.cabShare)+" per person":"Cab: Not selected") +"\n\nESTIMATED TOTAL PER PERSON: "+money(estimate.total)+"\nESTIMATED GROUP TOTAL: "+money(estimate.total*persons)+"\n\nEstimate excludes unconfirmed tolls, parking, permits, driver allowance and route charges.";
+ let message="NEW WEBSITE TRAVEL ENQUIRY\nHIMALAYAN ODYSSEY EXPEDITION\n\nGuest: "+name+"\nPhone: "+phone+"\nSelected package: "+(packageName||"Custom itinerary / general enquiry")+"\nPersons: "+persons+"\nDestinations: "+destination+"\nMonth: "+month+"\nTrip duration: "+estimate.days+" days\n\nSTAY & MEALS: "+money(estimate.stayTotal)+" per person\n"+estimate.stays.map(x=>"• "+x.name+": "+x.nights+" night(s) × "+money(x.rate)+" = "+money(x.rate*x.nights)+" per person").join("\n")+"\n"+(estimate.cab?"Cab: "+estimate.cab.name+" · "+money(estimate.cab.daily_price)+"/day × "+estimate.days+" days = "+money(estimate.cabTotal)+" group total; "+money(estimate.cabShare)+" per person":"Cab: Not selected") +"\n\nESTIMATED TOTAL PER PERSON: "+money(estimate.total)+"\nESTIMATED GROUP TOTAL: "+money(estimate.total*persons)+"\n"+(selectedPackage?.price_per_person!=null?"Advertised package price: "+money(selectedPackage.price_per_person)+" per person (separate from custom estimate)\n":"")+"\nEstimate excludes unconfirmed tolls, parking, permits, driver allowance and route charges.";
  if(startDate)message+="\nStart date: "+startDate;if(endDate)message+="\nEnd date: "+endDate;message+=saved?"\nCRM: Saved.":"\nCRM: Please record manually; automatic save failed.";message+="\n\nPlease confirm availability and final quotation.";
- if(waWindow)waWindow.location.href=whatsappLink(message);else alert("Please allow pop-ups to continue to WhatsApp.");if(waWindow&&!saved)alert("WhatsApp is ready, but CRM saving failed. Please record this enquiry manually. "+saveErrorText);if(button)button.disabled=false;
+ if(selectedPackage?.linkedItineraryPage)message+="\n\nSelected itinerary: https://himalayanexpedition.co.in"+selectedPackage.linkedItineraryPage;
+ if(waWindow)waWindow.location.href=whatsappLink(message);else alert("Please allow pop-ups to continue to WhatsApp.");
+ if(waWindow&&!saved)alert("WhatsApp is ready, but CRM saving failed. Please record this enquiry manually. "+saveErrorText);
+ if(button)button.disabled=false;
+ if(selectedPackage?.linkedItineraryPage){window.location.assign(selectedPackage.linkedItineraryPage);}
+ else if(selectedPackage){window.location.assign("/#itineraries");}
 });
 
 /* SCROLL REVEAL ANIMATIONS */
