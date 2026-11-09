@@ -2304,6 +2304,8 @@ async function loadPackages() {
 
             <p>${safe(p.duration || "")}</p>
 
+            ${p.departure_dates ? `<p class="package-dates">${safe(p.departure_dates)}</p>` : ""}
+
             ${p.inclusions ? `<p>${safe(p.inclusions)}</p>` : ""}
 
             ${p.price_per_person != null && p.price_per_person !== "" ? `
