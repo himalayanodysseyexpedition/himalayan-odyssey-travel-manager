@@ -23,7 +23,7 @@ main{max-width:1100px;margin:auto;padding:34px 5% 80px}.back{display:inline-flex
  const safe=v=>String(v==null?"":v).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]});
  const money=v=>{const n=Number(v);return Number.isFinite(n)?"₹"+n.toLocaleString("en-IN"):safe(v)};
  const wa=t=>"https://wa.me/919816929669?text="+encodeURIComponent("Hello Himalayan Odyssey Expedition, I am interested in "+t+". Please share availability and booking details.");
- function fail(){root.innerHTML='<div class="status"><h2>Itinerary not available</h2><p>This itinerary may have been unpublished or the link is incorrect. Please contact our team for the latest tour details.</p><a class="btn" href="'+wa("your Himalayan tours")+'" target="_blank" rel="noopener">Ask on WhatsApp</a></div>'}
+ function fail(){const robots=document.querySelector('meta[name="robots"]');if(robots)robots.content="noindex,follow";root.innerHTML='<div class="status"><h2>Itinerary not available</h2><p>This itinerary may have been unpublished or the link is incorrect. Please contact our team for the latest tour details.</p><a class="btn" href="'+wa("your Himalayan tours")+'" target="_blank" rel="noopener">Ask on WhatsApp</a></div>'}
  if(!id){fail();return}
  (async function(){
   try{
