@@ -1175,6 +1175,16 @@ html{scroll-behavior:smooth}
   transition:opacity .35s ease,transform .35s ease;
 }
 .footer-contact-bar.visible{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+/* Keep the bar horizontally centred and animate it vertically off the bottom edge. */
+.footer-contact-bar.scroll-hidden{
+  opacity:0;
+  transform:translate(-50%,calc(100% + 36px));
+  pointer-events:none;
+}
+.footer-contact-bar{
+  transition:opacity .38s ease,transform .52s cubic-bezier(.22,.75,.25,1);
+  will-change:transform,opacity;
+}
 .quick-nav-item{
   min-width:0;min-height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:4px;padding:5px 2px;border:0;background:transparent;color:#53635b;
