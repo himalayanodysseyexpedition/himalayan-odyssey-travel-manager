@@ -2597,8 +2597,9 @@ if (footerContactBar && siteFooter) {
   const prev=document.getElementById("guidesPrev");
   const next=document.getElementById("guidesNext");
   const update=()=>{
-    const first=cards.findIndex(card=>card.offsetLeft+card.offsetWidth>rail.scrollLeft+rail.offsetLeft+8);
-    const index=Math.max(0,first);
+    const gap=parseFloat(getComputedStyle(rail).columnGap)||0;
+    const step=(cards[0]?.getBoundingClientRect().width||1)+gap;
+    const index=Math.min(cards.length-1,Math.max(0,Math.round(rail.scrollLeft/step)));
     if(count)count.innerHTML=String(index+1).padStart(2,"0")+' <i>/</i> '+String(cards.length).padStart(2,"0");
     if(progress)progress.style.width=((index+1)/cards.length*100)+"%";
   };
