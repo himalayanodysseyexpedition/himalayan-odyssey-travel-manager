@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0b211d">
 
 <title>Spiti Valley & Himachal Tour Packages | Himalayan Odyssey</title>
-<meta name="description" content="Explore Spiti Valley tour packages, Kinnaur and Himachal holidays with a Narkanda-based team. Compare group departures, private trips and mountain stays.">
+<meta name="description" content="Explore Spiti Valley tour packages, Kinnaur and Himachal holidays with a Narkanda-based team. Explore upcoming tour packages, private trips and mountain stays across Himachal Pradesh.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="google-site-verification" content="TZngYBR086cduLd7-R6Yqo64Tk2Ae0E5MwU1wuSj9RE">
 <link rel="canonical" href="https://himalayanexpedition.co.in/">
@@ -2110,10 +2110,10 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
    <div class="section-title reveal"><small>FIND YOUR NEXT HIMALAYAN ESCAPE</small><h2>Upcoming Packages</h2></div>
    <p class="intro reveal">Explore our upcoming Himalayan packages, compare departure dates and prices, and see how many travellers have already joined each journey.</p>
   </div>
-  <div class="group-departures-rail" id="groupDeparturesCarousel" tabindex="0" aria-label="Swipe through upcoming group departures">
+  <div class="group-departures-rail" id="groupDeparturesCarousel" tabindex="0" aria-label="Swipe through upcoming packages">
    <div class="group-departures-empty">Loading upcoming group departures…</div>
   </div>
-  <div class="group-departures-controls"><span id="groupDeparturesCount" aria-live="polite">GROUP DEPARTURES</span><button type="button" id="groupDeparturesPrev" aria-label="Previous departures">←</button><button type="button" id="groupDeparturesNext" aria-label="Next departures">→</button></div>
+  <div class="group-departures-controls"><span id="groupDeparturesCount" aria-live="polite">UPCOMING PACKAGES</span><button type="button" id="groupDeparturesPrev" aria-label="Previous departures">←</button><button type="button" id="groupDeparturesNext" aria-label="Next departures">→</button></div>
   <p class="guides-swipe-hint">SWIPE TO EXPLORE <span>·</span> OR USE THE ARROWS</p>
  </div>
 </section>
@@ -3516,7 +3516,7 @@ loadHotels();
   const {data,error}=await client.from("group_departures").select("id,title,destination,start_date,end_date,duration,price_per_person,joined_count,max_travellers,image_url,highlights,status").in("status",["published","full"]).order("start_date",{ascending:true});
   if(error)throw error;
   const rail=document.getElementById("groupDeparturesCarousel");if(!rail)return;
-  if(!data?.length){rail.innerHTML='<div class="group-departures-empty">New group departures are being planned. Contact us to get notified about the next journey.</div>';return;}
+  if(!data?.length){rail.innerHTML='<div class="group-departures-empty">New Himalayan packages are being planned. Contact us to hear about the next journey.</div>';return;}
   const money=n=>"₹"+Number(n||0).toLocaleString("en-IN");
   const date=d=>new Date(d+"T00:00:00").toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"});
   const safe=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -3530,9 +3530,9 @@ loadHotels();
   const step=()=>{const card=rail.querySelector(".group-departure-card");return card?card.getBoundingClientRect().width+parseFloat(getComputedStyle(rail).gap||0):280;};
   document.getElementById("groupDeparturesPrev")?.addEventListener("click",()=>rail.scrollBy({left:-step(),behavior:"smooth"}));
   document.getElementById("groupDeparturesNext")?.addEventListener("click",()=>rail.scrollBy({left:step(),behavior:"smooth"}));
-  const update=()=>{if(!count)return;const index=Math.min(data.length,Math.max(1,Math.round(rail.scrollLeft/step())+1));count.textContent=String(index).padStart(2,"0")+" / "+String(data.length).padStart(2,"0")+" DEPARTURES";};
+  const update=()=>{if(!count)return;const index=Math.min(data.length,Math.max(1,Math.round(rail.scrollLeft/step())+1));count.textContent=String(index).padStart(2,"0")+" / "+String(data.length).padStart(2,"0")+" PACKAGES";};
   rail.addEventListener("scroll",()=>requestAnimationFrame(update),{passive:true});update();
- }catch(error){console.warn("Group departures could not be loaded:",error);const rail=document.getElementById("groupDeparturesCarousel");if(rail)rail.innerHTML='<div class="group-departures-empty">Group departures are temporarily unavailable. Please contact us for current dates.</div>';}
+ }catch(error){console.warn("Group departures could not be loaded:",error);const rail=document.getElementById("groupDeparturesCarousel");if(rail)rail.innerHTML='<div class="group-departures-empty">Upcoming packages are temporarily unavailable. Please contact us for current dates.</div>';}
 })();
 </script>
 
