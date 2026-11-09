@@ -2350,7 +2350,7 @@ function bindForms() {
         agreed_total: agreed,
         amount,
         payment_stage: obj.payment_stage,
-        payment_date: obj.payment_date || null,
+        ...(obj.payment_date ? {payment_date: obj.payment_date} : {}),
         payment_method: obj.payment_method || null,
         description: obj.description.trim() || null,
         ...(linked ? {group_id: linked.group_id, linked_entry_id: linked.id} : {})
