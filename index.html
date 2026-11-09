@@ -135,6 +135,20 @@ nav a:after{
 }
 nav a:hover{color:var(--gold-light)}
 nav a:hover:after{width:100%}
+/* Compact premium Services dropdown */
+.nav-dropdown{position:relative;display:flex;align-items:center}
+.nav-dropdown-toggle{display:inline-flex;align-items:center;gap:7px;padding:7px 0;border:0;background:transparent;color:#f4f0e7;font:700 10px var(--sans);letter-spacing:1.4px;text-transform:uppercase;cursor:pointer;transition:color .25s}
+.nav-dropdown-toggle span{color:var(--gold-light);font-size:15px;transition:transform .28s ease}
+.nav-dropdown.open .nav-dropdown-toggle,.nav-dropdown-toggle:hover{color:var(--gold-light)}
+.nav-dropdown.open .nav-dropdown-toggle span{transform:rotate(180deg)}
+.nav-dropdown-menu{position:absolute;top:calc(100% + 13px);left:50%;min-width:220px;padding:9px;background:rgba(8,27,23,.98);border:1px solid rgba(198,163,106,.5);box-shadow:0 16px 38px rgba(0,0,0,.28);border-radius:4px;opacity:0;visibility:hidden;pointer-events:none;transform:translate(-50%,-8px) scale(.97);transform-origin:top center;transition:opacity .22s ease,transform .22s ease,visibility .22s;z-index:150}
+.nav-dropdown.open .nav-dropdown-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0) scale(1)}
+.nav-dropdown-menu a{display:block;padding:12px 13px;color:#f4f0e7;font-size:10px;letter-spacing:1px;border-radius:3px;white-space:nowrap}
+.nav-dropdown-menu a:after{display:none}
+.nav-dropdown-menu a:hover,.nav-dropdown-menu a:focus-visible{background:rgba(198,163,106,.14);color:var(--gold-light)}
+@media(max-width:640px){.header-inner{gap:5px}nav{gap:3px 13px}.nav-dropdown-menu{left:auto;right:-35px;transform:translateY(-8px) scale(.97)}.nav-dropdown.open .nav-dropdown-menu{transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.nav-dropdown-menu,.nav-dropdown-toggle span{transition:none}}
+
 
 /* HERO */
 .hero{
@@ -1523,11 +1537,14 @@ header nav .header-cta:hover{background:linear-gradient(135deg,#f3dfb5,#d1ab70);
       <a href="#packages">Packages</a>
       <a href="#travel-enquiry">Plan Your Trip</a>
       <a href="#itineraries">Itineraries</a>
-      <a href="#cabs">Cabs</a>
-      <a href="#gallery">Hotels</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="servicesMenu">Services <span aria-hidden="true">⌄</span></button>
+        <div class="nav-dropdown-menu" id="servicesMenu">
+          <a href="#cabs">Vehicles &amp; Cabs</a>
+          <a href="#gallery">Hotels &amp; Properties</a>
+        </div>
+      </div>
       <a href="#contact">Contact</a>
-      <a href="#instagram">Instagram</a>
-      <a href="#faq">FAQs</a>
       <a class="header-cta" href="https://wa.me/919816929669?text=Hello%2C%20I%20would%20like%20to%20plan%20a%20Himalayan%20trip." target="_blank" rel="noopener noreferrer">Plan on WhatsApp ↗</a>
     </nav>
   </div>
@@ -2987,6 +3004,18 @@ if (footerContactBar && siteFooter) {
   update();
 })();
 
+
+/* Accessible Services menu */
+(() => {
+  const dropdown=document.querySelector('.nav-dropdown');
+  const toggle=document.querySelector('.nav-dropdown-toggle');
+  if(!dropdown||!toggle)return;
+  const close=()=>{dropdown.classList.remove('open');toggle.setAttribute('aria-expanded','false')};
+  toggle.addEventListener('click',()=>{const open=!dropdown.classList.contains('open');dropdown.classList.toggle('open',open);toggle.setAttribute('aria-expanded',String(open))});
+  document.addEventListener('click',event=>{if(!dropdown.contains(event.target))close()});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'){close();toggle.focus()}});
+  dropdown.querySelectorAll('a').forEach(link=>link.addEventListener('click',close));
+})();
 /* FLOATING QUICK NAV MENU */
 const quickMenuToggle = document.getElementById("quickMenuToggle");
 const quickNavMenu = document.getElementById("quickNavMenu");
