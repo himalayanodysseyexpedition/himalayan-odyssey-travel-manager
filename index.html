@@ -1970,7 +1970,7 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
           <a href="/suppliers/">List Your Vehicle or Property</a>
         </div>
       </div>
-      <a class="header-cta" href="#travel-enquiry">Plan Your Trip <span aria-hidden="true">↗</span></a>
+      <a class="header-cta" href="#travel-enquiry">Plan Your Trip</a>
     </nav>
   </div>
 </header>
@@ -2120,6 +2120,39 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
   .nav-dropdown-toggle{font-size:7px;padding:5px 6px;letter-spacing:.2px}
   .header-cta{font-size:7px;padding:6px 7px}
 }
+
+/* Final CTA fit fix: clean text-only button that stays inside the header */
+.header-inner nav .header-cta{
+  box-sizing:border-box;
+  flex:0 1 auto;
+  min-width:0;
+  max-width:100%;
+  width:max-content;
+  white-space:nowrap;
+  gap:0;
+  padding:8px clamp(8px,1vw,14px);
+  font-size:clamp(7px,.72vw,10px);
+  letter-spacing:.35px;
+  line-height:1.2;
+}
+.header-cta span{display:none!important}
+@media(max-width:760px){
+  .header-inner nav .header-cta{
+    flex:0 1 auto;
+    max-width:100%;
+    padding:7px clamp(7px,1.5vw,10px);
+    font-size:clamp(7px,2vw,9px);
+    letter-spacing:.2px;
+  }
+}
+@media(max-width:360px){
+  .header-inner nav .header-cta{
+    padding:6px 6px;
+    font-size:7px;
+    letter-spacing:0;
+  }
+}
+
 </style>
 
 
