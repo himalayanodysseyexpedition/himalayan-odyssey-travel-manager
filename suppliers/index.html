@@ -1,11 +1,86 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b211d"><title>Supplier Registration | Himalayan Odyssey Expedition</title><meta name="description" content="Register as a verified cab operator, driver, hotel or homestay partner with Himalayan Odyssey Expedition."><link rel="icon" href="/logo.webp"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b211d">
+<title>List Your Cab or Property | Himalayan Odyssey Expedition</title>
+<meta name="description" content="Submit your cab, hotel or homestay details to join the Himalayan Odyssey Expedition local service network. No account or OTP required.">
+<link rel="canonical" href="https://himalayanexpedition.co.in/suppliers/">
+<link rel="icon" href="/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{--forest:#0b211d;--green:#173d33;--gold:#c6a36a;--cream:#f8f6f0;--ink:#243a33;--muted:#738078}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:15px 'DM Sans',sans-serif;line-height:1.6}header{background:var(--forest);color:#fff;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}header a{color:#f2dfbd;text-decoration:none;font-size:12px;letter-spacing:1px}main{max-width:900px;margin:38px auto;padding:0 16px}.intro{padding:32px;border-radius:16px;background:linear-gradient(120deg,#102c25,#244d3f);color:white;margin-bottom:22px}.intro small{color:#e5c994;letter-spacing:3px}.intro h1{font:600 clamp(34px,6vw,54px)/1.05 'Cormorant Garamond',serif;margin:10px 0}.panel{background:#fff;border:1px solid #e8e1d5;border-radius:14px;padding:24px;margin:18px 0;box-shadow:0 12px 35px #102c2510}.panel h2{font:600 30px 'Cormorant Garamond',serif;margin:0 0 12px}label{display:block;font-weight:700;font-size:13px;margin:12px 0 5px}input,select,textarea{width:100%;border:1px solid #d6ded8;border-radius:8px;padding:12px;font:inherit;background:#fff;color:var(--ink)}textarea{min-height:90px}button,.button{border:0;border-radius:7px;background:var(--green);color:white;padding:12px 18px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;margin:12px 6px 0 0}button.secondary{background:#e8eee9;color:var(--green)}button:disabled{opacity:.5}.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}.note{font-size:12px;color:var(--muted)}.status{padding:12px;background:#f4f1e9;border-radius:8px;margin:12px 0;color:#43554c}.hidden{display:none!important}.listing{border:1px solid #e4e9e5;padding:15px;border-radius:10px;margin:12px 0}.listing img{width:100%;max-height:170px;object-fit:cover;border-radius:7px}.pill{font-size:11px;background:#eee7d9;padding:4px 8px;border-radius:20px;color:#594b31}@media(max-width:600px){.grid{grid-template-columns:1fr}.panel{padding:18px}.intro{padding:24px}}
-</style></head><body>
-<header><strong>HIMALAYAN ODYSSEY <span style="color:#c6a36a">EXPEDITION</span></strong><a href="/marketplace/">EXPLORE LISTINGS ↗</a></header>
-<main><section class="intro"><small>PARTNER WITH US</small><h1>List your cab or mountain stay.</h1><p>Join our supplier network. Travellers discover your service on our website, while all enquiries are coordinated by Himalayan Odyssey Expedition. Your phone number stays private.</p></section>
-<section class="panel" id="authPanel"><h2>Mobile verification</h2><p class="note">Enter your mobile number with country code. We will send a one-time SMS code to verify it.</p><label>Mobile number</label><input id="phone" type="tel" inputmode="tel" placeholder="+91 98765 43210" autocomplete="tel"><button id="sendOtp">Send SMS OTP</button><div id="otpArea" class="hidden"><label>6-digit OTP</label><input id="otp" inputmode="numeric" maxlength="6" placeholder="Enter OTP"><button id="verifyOtp">Verify & continue</button><button class="secondary" id="resendOtp">Resend OTP</button></div><div id="authStatus" class="status" aria-live="polite">Your number is used for supplier verification and private coordination only.</div></section>
-<section class="panel hidden" id="profilePanel"><h2>Supplier details</h2><p class="note">Your verified phone number is saved privately. These details are only visible to our admin team.</p><form id="profileForm"><div class="grid"><div><label>Contact person *</label><input id="contactPerson" required></div><div><label>Business / property name *</label><input id="businessName" required></div><div><label>Supplier category *</label><select id="supplierType"><option value="driver">Driver / Cab operator</option><option value="property">Hotel / Homestay / Property owner</option><option value="both">Both</option></select></div><div><label>Email (optional)</label><input id="supplierEmail" type="email"></div><div><label>City / Town</label><input id="supplierCity" placeholder="e.g. Narkanda"></div><div><label>State</label><input id="supplierState" value="Himachal Pradesh"></div></div><label>Business address (optional)</label><textarea id="supplierAddress"></textarea><label>GST number (optional)</label><input id="supplierGst" placeholder="GSTIN"><button type="submit">Save supplier profile</button></form><div id="profileStatus" class="status"></div></section>
-<section class="panel hidden" id="listingPanel"><div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap"><h2>Your listings</h2><button class="secondary" id="signOut">Sign out</button></div><p class="note">Every new or edited listing is reviewed before appearing publicly. No phone number, email or direct contact link is shown to visitors.</p><form id="listingForm"><input type="hidden" id="listingId"><label>What are you listing? *</label><select id="listingType"><option value="cab">Vehicle / Cab</option><option value="property">Hotel / Homestay / Property</option></select><div class="grid"><div><label>Listing title *</label><input id="listingTitle" required placeholder="e.g. Innova Crysta / Mountain View Homestay"></div><div><label>Destination *</label><input id="listingDestination" required placeholder="e.g. Spiti Valley"></div><div><label>Location *</label><input id="listingLocation" required placeholder="e.g. Kaza, Himachal Pradesh"></div><div><label>Price</label><input id="listingPrice" type="number" min="0" placeholder="₹"></div><div><label>Price unit</label><select id="priceUnit"><option value="per day">Per day</option><option value="per night">Per night</option><option value="per room">Per room</option><option value="on request">On request</option></select></div></div><div id="cabFields"><div class="grid"><div><label>Vehicle model / variant</label><input id="vehicleModel" placeholder="e.g. Toyota Innova Crysta"></div><div><label>Seating capacity</label><input id="seats" type="number" min="1" max="60" placeholder="Including driver? Specify in description"></div></div><label>Vehicle features (comma separated)</label><input id="vehicleFeatures" placeholder="4x4, AC, luggage carrier"></div><div id="propertyFields" class="hidden"><label>Property type</label><select id="propertyType"><option>Hotel</option><option>Homestay</option><option>Guest House</option><option>Resort</option><option>Camp</option></select><label>Room types (comma separated)</label><input id="roomTypes" placeholder="Deluxe room, Family room, Dormitory"><label>Amenities (comma separated)</label><input id="amenities" placeholder="Parking, Wi-Fi, Meals, Bonfire"></div><label>Description</label><textarea id="listingDescription" placeholder="Describe your service, facilities, inclusions and operating areas"></textarea><label>Photos (JPG, PNG or WebP, max 5 MB each)</label><input id="listingPhotos" type="file" accept="image/jpeg,image/png,image/webp" multiple><div id="photoStatus" class="note"></div><button type="submit" id="saveListing">Submit listing for approval</button><button type="button" class="secondary hidden" id="cancelEdit">Cancel edit</button></form><div id="listingStatus" class="status"></div><div id="myListings"></div></section></main>
-<script src="/suppliers/app.js?v=1"></script></body></html>
+:root{--forest:#0b211d;--green:#173d33;--gold:#c6a36a;--cream:#f8f6f0;--ink:#243a33;--muted:#738078;--line:#e8e1d5}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:15px 'DM Sans',sans-serif;line-height:1.65}
+header{background:var(--forest);color:#fff;padding:17px 5%;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+header a{color:#f2dfbd;text-decoration:none;font-size:12px;letter-spacing:1px}
+main{max-width:920px;margin:38px auto;padding:0 16px}
+.intro{padding:34px;border-radius:14px;background:linear-gradient(120deg,#102c25,#244d3f);color:white;margin-bottom:22px}
+.intro small{color:#e5c994;letter-spacing:3px}.intro h1{font:600 clamp(36px,6vw,58px)/1.03 'Cormorant Garamond',serif;margin:10px 0}.intro p{max-width:680px;color:#e1e9e3}
+.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:25px;margin:18px 0;box-shadow:0 12px 35px #102c2510}
+.panel h2{font:600 30px 'Cormorant Garamond',serif;margin:0 0 10px;color:var(--forest)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+label{display:block;font-weight:700;font-size:12px;margin:13px 0 5px}
+input,select,textarea{width:100%;border:1px solid #d6ded8;border-radius:7px;padding:12px;font:inherit;background:#fff;color:var(--ink)}
+textarea{min-height:90px;resize:vertical}
+button,.button{border:0;border-radius:7px;background:var(--green);color:white;padding:13px 19px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;margin:16px 6px 0 0}
+button:disabled{opacity:.55;cursor:wait}
+.note{font-size:12px;color:var(--muted)}
+.status{padding:13px;background:#f4f1e9;border-radius:8px;margin:14px 0;color:#43554c}
+.hidden{display:none!important}.success{border-left:4px solid #4e8b62}
+footer{padding:28px;text-align:center;color:#fff;background:var(--forest);margin-top:48px;font-size:12px}
+@media(max-width:620px){.grid{grid-template-columns:1fr}.panel{padding:18px}.intro{padding:25px}}
+</style>
+</head>
+<body>
+<header><strong>HIMALAYAN ODYSSEY <span style="color:#c6a36a">EXPEDITION</span></strong><a href="/marketplace/">EXPLORE SERVICES ↗</a></header>
+<main>
+<section class="intro"><small>PARTNER WITH US</small><h1>List your cab or mountain stay.</h1><p>Share your details once. Our team will review your submission and contact you directly. Your mobile number, WhatsApp number and business contact details are kept private and never shown on public listings.</p></section>
+<section class="panel" id="formPanel">
+<h2>Service owner submission</h2>
+<p class="note">No account, password, OTP or SMS verification required. All fields marked * are required.</p>
+<form id="supplierSubmissionForm">
+<h3>Contact & business details</h3>
+<div class="grid">
+<div><label for="contactPerson">Contact person *</label><input id="contactPerson" required minlength="2" maxlength="100" autocomplete="name"></div>
+<div><label for="businessName">Business / property name *</label><input id="businessName" required minlength="2" maxlength="150"></div>
+<div><label for="phone">Mobile number *</label><input id="phone" type="tel" required inputmode="tel" autocomplete="tel" placeholder="+91 98765 43210"></div>
+<div><label for="whatsapp">WhatsApp number *</label><input id="whatsapp" type="tel" required inputmode="tel" placeholder="+91 98765 43210"></div>
+<div><label for="supplierType">Your service category *</label><select id="supplierType" required><option value="driver">Driver / Cab operator</option><option value="property">Hotel / Homestay / Property owner</option><option value="both">Both</option></select></div>
+<div><label for="supplierEmail">Email (optional)</label><input id="supplierEmail" type="email" autocomplete="email"></div>
+<div><label for="supplierCity">City / Town</label><input id="supplierCity" placeholder="e.g. Narkanda"></div>
+<div><label for="supplierState">State</label><input id="supplierState" value="Himachal Pradesh"></div>
+</div>
+<label for="supplierAddress">Business address (optional)</label><textarea id="supplierAddress"></textarea>
+<label for="supplierGst">GST number (optional)</label><input id="supplierGst" maxlength="20" placeholder="GSTIN">
+<hr style="border:0;border-top:1px solid #e8e1d5;margin:25px 0">
+<h3>Service listing details</h3>
+<div class="grid">
+<div><label for="listingType">What are you listing? *</label><select id="listingType" required><option value="cab">Vehicle / Cab</option><option value="property">Hotel / Homestay / Property</option></select></div>
+<div><label for="listingTitle">Listing title *</label><input id="listingTitle" required minlength="3" maxlength="150" placeholder="e.g. Toyota Innova Crysta"></div>
+<div><label for="listingDestination">Destination served *</label><input id="listingDestination" required placeholder="e.g. Spiti Valley"></div>
+<div><label for="listingLocation">Base location *</label><input id="listingLocation" required placeholder="e.g. Kaza, Himachal Pradesh"></div>
+<div><label for="listingPrice">Price (optional)</label><input id="listingPrice" type="number" min="0" step="0.01" placeholder="₹"></div>
+<div><label for="priceUnit">Price unit</label><select id="priceUnit"><option value="per day">Per day</option><option value="per night">Per night</option><option value="per room">Per room</option><option value="on request">On request</option></select></div>
+</div>
+<div id="cabFields">
+<div class="grid"><div><label for="vehicleModel">Vehicle model / variant</label><input id="vehicleModel" placeholder="e.g. Toyota Innova Crysta"></div><div><label for="seats">Seating capacity</label><input id="seats" type="number" min="1" max="60"></div></div>
+<label for="vehicleFeatures">Vehicle features (comma separated)</label><input id="vehicleFeatures" placeholder="4x4, AC, luggage carrier">
+</div>
+<div id="propertyFields" class="hidden">
+<label for="propertyType">Property type</label><select id="propertyType"><option>Hotel</option><option>Homestay</option><option>Guest House</option><option>Resort</option><option>Camp</option></select>
+<label for="roomTypes">Room types (comma separated)</label><input id="roomTypes" placeholder="Deluxe room, Family room, Dormitory">
+<label for="amenities">Amenities (comma separated)</label><input id="amenities" placeholder="Parking, Wi-Fi, Meals, Bonfire">
+</div>
+<label for="listingDescription">Description & facilities</label><textarea id="listingDescription" maxlength="3000" placeholder="Describe your vehicle, property, facilities, routes, availability and services."></textarea>
+<div class="status">By submitting, you allow Himalayan Odyssey Expedition to contact you about this listing. Your contact details are private. Listings are published only after our admin team approves them.</div>
+<button type="submit" id="submitSupplier">Submit details for review</button>
+</form>
+<div id="submissionStatus" class="note" role="status" aria-live="polite"></div>
+</section>
+<section class="panel hidden success" id="successPanel"><h2>Thank you for partnering with us.</h2><p>Your details have been submitted successfully. Himalayan Odyssey Expedition will review your information and contact you on the number provided. Your listing will not appear publicly until approved.</p><a class="button" href="/marketplace/">Explore the marketplace</a></section>
+</main>
+<footer>© 2026 Himalayan Odyssey Expedition · Local Himalayan service network</footer>
+<script src="/suppliers/app.js?v=2"></script>
+</body></html>
