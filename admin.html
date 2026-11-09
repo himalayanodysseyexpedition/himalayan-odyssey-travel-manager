@@ -151,6 +151,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
   <button data-tab="packages">Packages</button>
   <button data-tab="itineraries">Itineraries</button>
   <button data-tab="destinations">Destinations</button>
+  <button data-tab="groupDepartures">Group Departures</button>
   <button data-tab="hotels">Hotels & Properties</button>
   <button data-tab="cabs">Cabs</button>
   <button data-tab="leads">Guest Leads</button>
@@ -199,6 +200,11 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
 <section id="destinations" class="panel">
   <div class="topline"><div><h2>Destination Photos</h2><small>Add, edit, remove and publish the photos shown in the guest website’s “Discover Our Destinations” section.</small></div><button id="newDestination">+ Add Destination</button></div>
   <div id="destinationList">Loading destinations...</div>
+</section>
+
+<section id="groupDepartures" class="panel">
+  <div class="topline"><div><h2>Group Departures</h2><small>Manage upcoming group tours, joined travellers, seat limits, prices and photos shown to guests.</small></div><button id="newGroupDeparture">+ Add Departure</button></div>
+  <div id="groupDepartureList">Loading group departures...</div>
 </section>
 
 <section id="hotels" class="panel">
@@ -528,6 +534,24 @@ Publish this cab on the guest website
 <div id="destinationPhotoPreview" class="hotel-photo-grid"></div>
 <label><input id="destinationPublished" type="checkbox" style="width:auto" checked> Show this destination on the guest website</label>
 <div style="margin-top:15px"><button type="submit" id="destinationSave">Save Destination</button><button type="button" data-close class="secondary">Cancel</button></div>
+</form></dialog>
+
+
+<!-- GROUP DEPARTURE FORM -->
+<dialog id="groupDepartureForm"><form id="groupDepartureF">
+<h2 id="groupDepartureDialogTitle">Add Group Departure</h2>
+<label>Tour / Package Name</label><input id="gdTitle" required placeholder="e.g. Winter Spiti Group Expedition">
+<label>Destination</label><input id="gdDestination" required placeholder="e.g. Spiti Valley">
+<div class="form-grid"><div><label>Departure Date</label><input id="gdStartDate" type="date" required></div><div><label>Return Date</label><input id="gdEndDate" type="date"></div></div>
+<label>Duration</label><input id="gdDuration" placeholder="7 Nights / 8 Days">
+<div class="form-grid"><div><label>Price per person (₹)</label><input id="gdPrice" type="number" min="0" step="1" required placeholder="15999"></div><div><label>Maximum group size</label><input id="gdCapacity" type="number" min="1" step="1" value="12" required></div></div>
+<label>People already joined</label><input id="gdJoined" type="number" min="0" step="1" value="0" required>
+<label>Highlights / Route</label><textarea id="gdHighlights" rows="3" placeholder="Narkanda · Sangla · Tabo · Kaza · Kalpa"></textarea>
+<label>Departure Photo</label><input id="gdPhoto" type="file" accept="image/jpeg,image/png,image/webp"><small>Landscape JPG, PNG or WebP, maximum 5 MB. Leave blank to keep the existing photo.</small>
+<div id="gdPhotoPreview" class="hotel-photo-grid"></div>
+<label>Visibility</label><select id="gdStatus"><option value="published">Published — visible to guests</option><option value="draft">Draft — hidden from guests</option><option value="full">Full — show as fully booked</option><option value="completed">Completed</option><option value="cancelled">Cancelled</option></select>
+<label>Display order</label><input id="gdOrder" type="number" min="0" step="1" value="0">
+<div style="margin-top:15px"><button type="submit" id="gdSave">Save Departure</button><button type="button" data-close class="secondary">Cancel</button></div>
 </form></dialog>
 
 <!-- ITINERARY FORM -->
