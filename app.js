@@ -1105,7 +1105,8 @@ function render() {
     const totalAgreed = Math.max(0, ...group.map(row => Number(row.agreed_total || 0)));
     const totalPaid = group.reduce((sum,row) => sum + Number(row.amount || 0),0);
     const due = Math.max(0,totalAgreed-totalPaid);
-    const booking = bookingById[first.booking_id] || {};
+    const linkedBookingId = group.find(row => row.booking_id)?.booking_id;
+    const booking = bookingById[linkedBookingId] || {};
     const customer = booking.c || {};
     return `<article class="provider-payment-group">
       <h4>${esc(first.supplier_name || providerById[first.vendor_id]?.name || "Service Provider")}</h4>
@@ -2342,7 +2343,7 @@ function bindForms() {
     }
     try {
       const payload = {
-        supplier_name: obj.supplier_name.trim(),
+        supplier_name: linked?.supplier_name || obj.supplier_name.trim(),
         vendor_id: obj.vendor_id || linked?.vendor_id || null,
         service_name: obj.service_name.trim() || linked?.service_name || null,
         booking_id: obj.booking_id || linked?.booking_id || null,
