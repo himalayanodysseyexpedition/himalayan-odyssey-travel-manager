@@ -1,0 +1,4 @@
+project_id = "ynkoiuyjevclypumnyes"
+
+[functions.submit-website-enquiry]
+verify_jwt = false
