@@ -17,6 +17,9 @@ const ITINERARY_BUCKET = "itinerary-pdfs";
 const ITINERARY_PHOTO_BUCKET = "itinerary-photos";
 const PACKAGE_BUCKET = "package-posters";
 const DESTINATION_BUCKET = "destination-photos";
+const GROUP_DEPARTURE_BUCKET = "group-departure-photos";
+const MAX_GROUP_DEPARTURE_PHOTO_SIZE = 5 * 1024 * 1024;
+let editingGroupDepartureId = null;
 const MAX_DESTINATION_PHOTO_SIZE = 5 * 1024 * 1024;
 let editingDestinationId = null;
 
@@ -208,6 +211,7 @@ async function load() {
     "transactions",
     "itineraries",
     "destinations",
+    "group_departures",
     "itinerary_days",
     "hotels",
     "hotel_photos",
@@ -225,6 +229,7 @@ async function load() {
 
   render();
   renderDestinationAdmin();
+  renderGroupDepartureAdmin();
 }
 
 
@@ -3154,6 +3159,82 @@ async function deleteDestination(id){
   }catch(error){alert("Could not delete destination: "+error.message);}
 }
 
+
+/* GROUP DEPARTURE MANAGEMENT */
+function renderGroupDepartureAdmin(){
+  const target=$("groupDepartureList");if(!target)return;
+  const items=[...(D.group_departures||[])].sort((a,b)=>new Date(a.start_date)-new Date(b.start_date));
+  if(!items.length){target.innerHTML="<p>No group departures yet. Add your first departure.</p>";return;}
+  target.innerHTML=items.map(item=>{
+    const pct=Math.min(100,Math.round(Number(item.joined_count||0)/Math.max(1,Number(item.max_travellers||1))*100));
+    return card(item.title,[
+      esc(item.destination)+" · "+esc(item.start_date)+(item.end_date?" to "+esc(item.end_date):""),
+      esc(item.duration||"Duration not set")+" · "+cash(item.price_per_person)+" per person",
+      "Joined: <b>"+Number(item.joined_count||0)+" / "+Number(item.max_travellers||0)+" travellers</b> · "+pct+"% full",
+      "Status: <b>"+esc(item.status||"draft")+"</b>",
+      item.highlights?esc(item.highlights):""
+    ],`<button type="button" data-edit-group-departure="${esc(item.id)}">Edit</button><button type="button" class="danger" data-delete-group-departure="${esc(item.id)}">Delete</button>`);
+  }).join("");
+}
+function resetGroupDepartureForm(){
+  editingGroupDepartureId=null;$("groupDepartureF")?.reset();
+  $("groupDepartureDialogTitle").textContent="Add Group Departure";
+  $("gdCapacity").value="12";$("gdJoined").value="0";$("gdOrder").value=String((D.group_departures||[]).length);
+  $("gdStatus").value="published";setHTML("gdPhotoPreview","");
+}
+function openEditGroupDeparture(id){
+  const item=(D.group_departures||[]).find(x=>String(x.id)===String(id));if(!item)return;
+  editingGroupDepartureId=item.id;$("groupDepartureDialogTitle").textContent="Edit Group Departure";
+  $("gdTitle").value=item.title||"";$("gdDestination").value=item.destination||"";
+  $("gdStartDate").value=item.start_date||"";$("gdEndDate").value=item.end_date||"";
+  $("gdDuration").value=item.duration||"";$("gdPrice").value=item.price_per_person??0;
+  $("gdCapacity").value=item.max_travellers??12;$("gdJoined").value=item.joined_count??0;
+  $("gdHighlights").value=item.highlights||"";$("gdStatus").value=item.status||"draft";
+  $("gdOrder").value=item.sort_order??0;$("gdPhoto").value="";
+  setHTML("gdPhotoPreview",item.image_url?`<div class="hotel-photo"><img src="${esc(item.image_url)}" alt="Current group departure photo"><small>Current photo. Upload a new photo to replace it.</small></div>`:"");
+  show("groupDepartureForm");
+}
+async function saveGroupDeparture(event){
+  event.preventDefault();const button=$("gdSave");if(button)button.disabled=true;let uploadedPath=null;
+  try{
+    const title=$("gdTitle").value.trim(),destination=$("gdDestination").value.trim();
+    const startDate=$("gdStartDate").value,endDate=$("gdEndDate").value||null;
+    const joined=Number($("gdJoined").value),capacity=Number($("gdCapacity").value),price=Number($("gdPrice").value);
+    if(!title||!destination||!startDate)throw new Error("Enter the tour name, destination and departure date.");
+    if(endDate&&endDate<startDate)throw new Error("Return date cannot be before departure date.");
+    if(!Number.isInteger(joined)||joined<0||!Number.isInteger(capacity)||capacity<1||joined>capacity)throw new Error("Joined travellers must be between 0 and the maximum group size.");
+    if(!Number.isFinite(price)||price<0)throw new Error("Enter a valid price per person.");
+    const existing=(D.group_departures||[]).find(x=>String(x.id)===String(editingGroupDepartureId));
+    const payload={title,destination,start_date:startDate,end_date:endDate,duration:$("gdDuration").value.trim()||null,price_per_person:price,joined_count:joined,max_travellers:capacity,highlights:$("gdHighlights").value.trim()||null,status:$("gdStatus").value,sort_order:Number($("gdOrder").value)||0,updated_at:new Date().toISOString()};
+    const file=$("gdPhoto").files?.[0];
+    if(file){
+      if(!["image/jpeg","image/png","image/webp"].includes(file.type))throw new Error("Only JPG, PNG and WebP photos are allowed.");
+      if(file.size>MAX_GROUP_DEPARTURE_PHOTO_SIZE)throw new Error("Photo must be smaller than 5 MB.");
+      const id=editingGroupDepartureId||crypto.randomUUID();
+      uploadedPath=id+"/"+Date.now()+"-"+safeFileName(file.name);
+      const {error}=await db.storage.from(GROUP_DEPARTURE_BUCKET).upload(uploadedPath,file,{contentType:file.type,upsert:false});if(error)throw error;
+      payload.storage_path=uploadedPath;payload.image_url=db.storage.from(GROUP_DEPARTURE_BUCKET).getPublicUrl(uploadedPath).data.publicUrl;
+    }
+    if(editingGroupDepartureId){
+      const {error}=await db.from("group_departures").update(payload).eq("id",editingGroupDepartureId);if(error)throw error;
+    }else{
+      const {error}=await db.from("group_departures").insert(payload);if(error)throw error;
+    }
+    if(file&&existing?.storage_path&&existing.storage_path!==uploadedPath)await db.storage.from(GROUP_DEPARTURE_BUCKET).remove([existing.storage_path]);
+    $("groupDepartureForm").close();await load();message("Group departure saved and guest website updated.");
+  }catch(error){if(uploadedPath)await db.storage.from(GROUP_DEPARTURE_BUCKET).remove([uploadedPath]);alert("Could not save group departure: "+error.message);}
+  finally{if(button)button.disabled=false;}
+}
+async function deleteGroupDeparture(id){
+  const item=(D.group_departures||[]).find(x=>String(x.id)===String(id));
+  if(!item||!confirm("Delete the "+item.title+" departure permanently?"))return;
+  try{
+    const {error}=await db.from("group_departures").delete().eq("id",id);if(error)throw error;
+    if(item.storage_path)await db.storage.from(GROUP_DEPARTURE_BUCKET).remove([item.storage_path]);
+    await load();message("Group departure deleted.");
+  }catch(error){alert("Could not delete departure: "+error.message);}
+}
+
 /* =========================================
    STARTUP
 ========================================= */
@@ -3180,6 +3261,19 @@ async function initialize() {
     bindPageButtons();
     bindForms();
     bindActions();
+    $("newGroupDeparture")?.addEventListener("click",()=>{resetGroupDepartureForm();show("groupDepartureForm");});
+    $("groupDepartureF")?.addEventListener("submit",saveGroupDeparture);
+    $("groupDepartureList")?.addEventListener("click",event=>{
+      const edit=event.target.closest("[data-edit-group-departure]");
+      const del=event.target.closest("[data-delete-group-departure]");
+      if(edit)openEditGroupDeparture(edit.dataset.editGroupDeparture);
+      if(del)deleteGroupDeparture(del.dataset.deleteGroupDeparture);
+    });
+    $("gdPhoto")?.addEventListener("change",()=>{
+      const file=$("gdPhoto").files?.[0];if(!file)return;
+      const url=URL.createObjectURL(file);
+      setHTML("gdPhotoPreview",`<div class="hotel-photo"><img src="${url}" alt="New group departure photo"><small>New photo preview</small></div>`);
+    });
     $("newDestination")?.addEventListener("click",()=>{resetDestinationForm();show("destinationForm");});
     $("destinationF")?.addEventListener("submit",saveDestination);
     $("destinationList")?.addEventListener("click",event=>{
