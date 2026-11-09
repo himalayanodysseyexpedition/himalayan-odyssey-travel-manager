@@ -1171,6 +1171,60 @@ html{scroll-behavior:smooth}
   body{padding-bottom:100px}
 }
 
+
+/* PREMIUM HORIZONTAL TRAVEL GUIDE CAROUSEL */
+.travel-guides-premium{overflow:hidden;background:linear-gradient(180deg,#f7f5ef 0%,#eeece4 100%)}
+.guides-heading-row{display:flex;align-items:end;justify-content:space-between;gap:28px;margin-bottom:30px}
+.guides-heading-row .intro{margin-bottom:0}
+.guides-controls{display:flex;align-items:center;gap:9px;flex-shrink:0;padding-bottom:5px}
+.guides-count{margin-right:9px;color:#6d7a72;font-size:11px;letter-spacing:1.4px;font-weight:700;font-variant-numeric:tabular-nums}
+.guides-count i{font-style:normal;color:#b9a47e;margin:0 4px}
+.guide-arrow{width:43px;height:43px;border:1px solid #c9b995;border-radius:50%;background:#fffdf8;color:#173d33;font-size:21px;cursor:pointer;transition:background .25s,color .25s,transform .25s}
+.guide-arrow:hover{background:#173d33;color:#fff;transform:translateY(-2px)}
+.guides-carousel{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 44px)/3);gap:22px;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 18px;scrollbar-width:none}
+.guides-carousel::-webkit-scrollbar{display:none}
+.guide-card{position:relative;isolation:isolate;min-height:390px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;scroll-snap-align:start;padding:25px 26px 27px;border:1px solid rgba(255,255,255,.42);border-radius:5px;color:#fff;background:linear-gradient(155deg,#274b40,#0b211d);box-shadow:0 12px 30px rgba(11,33,29,.11);transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s}
+.guide-card:before,.guide-card:after{content:"";position:absolute;z-index:-1;pointer-events:none}
+.guide-card:before{inset:0;background:radial-gradient(ellipse at 85% 15%,rgba(234,214,174,.25),transparent 42%),linear-gradient(180deg,rgba(5,20,16,.04),rgba(5,20,16,.78))}
+.guide-card:after{width:260px;height:260px;right:-100px;top:65px;border:1px solid rgba(240,223,189,.22);border-radius:50%;box-shadow:0 0 0 25px rgba(240,223,189,.035),0 0 0 52px rgba(240,223,189,.025)}
+.guide-card:hover{transform:translateY(-7px);box-shadow:0 22px 45px rgba(11,33,29,.2)}
+.guide-card-top{display:flex;justify-content:space-between;align-items:center;color:#f0dfbd;font-size:9px;font-weight:700;letter-spacing:2px}
+.guide-mark{font-family:Georgia,serif;font-size:32px;font-weight:400;opacity:.8}
+.guide-card-copy{max-width:360px}
+.guide-card-copy>small{color:#e5c995;font-size:9px;font-weight:700;letter-spacing:2px}
+.guide-card-copy h3{font:500 clamp(27px,2.6vw,36px)/1.05 var(--serif);color:#fff;margin:12px 0}
+.guide-card-copy p{color:rgba(255,255,255,.78);font-size:12px;line-height:1.8;margin:0 0 22px}
+.guide-card-copy a{display:inline-flex;align-items:center;gap:12px;padding-bottom:5px;border-bottom:1px solid rgba(240,223,189,.6);color:#f0dfbd;font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase}
+.guide-card-copy a b{font-size:16px;font-weight:400;transition:transform .2s}
+.guide-card-copy a:hover b{transform:translate(3px,-3px)}
+.guide-winter{background:linear-gradient(145deg,#526d7c,#152f3b)}
+.guide-valley{background:linear-gradient(145deg,#66877c,#173c34)}
+.guide-cost{background:linear-gradient(145deg,#806b4b,#342c20)}
+.guide-kinnaur{background:linear-gradient(145deg,#647b69,#1e392e)}
+.guide-himachal{background:linear-gradient(145deg,#647c83,#263e43)}
+.guide-narkanda{background:linear-gradient(145deg,#60775b,#1c392b)}
+.guide-manali{background:linear-gradient(145deg,#6b8291,#263c4b)}
+.guide-kasol{background:linear-gradient(145deg,#4e8179,#173d39)}
+.guide-jibhi{background:linear-gradient(145deg,#71866c,#263b2b)}
+.guide-shimla{background:linear-gradient(145deg,#8a7564,#40342d)}
+.guides-progress{height:2px;background:#ddd5c6;margin:5px 0 0;overflow:hidden}
+.guides-progress span{display:block;width:9.09%;height:100%;background:#b48e55;transition:width .3s ease}
+.guides-swipe-hint{margin:13px 0 0;text-align:right;color:#8a8b7e;font-size:8px;font-weight:700;letter-spacing:2px}
+.guides-swipe-hint span{padding:0 5px;color:#b48e55}
+@media(max-width:900px){.guides-carousel{grid-auto-columns:calc((100% - 22px)/2)}}
+@media(max-width:600px){
+ .guides-heading-row{align-items:end;gap:12px;margin-bottom:22px}
+ .guides-heading-row .section-title h2{font-size:34px}
+ .guides-controls{gap:6px}
+ .guides-count{font-size:9px;margin-right:2px}
+ .guide-arrow{width:36px;height:36px;font-size:18px}
+ .guides-carousel{grid-auto-columns:84%;gap:13px;padding-bottom:14px;margin-right:-6%;padding-right:6%}
+ .guide-card{min-height:365px;padding:22px 21px 24px}
+ .guide-card-copy h3{font-size:34px}
+ .guides-swipe-hint{font-size:7px;letter-spacing:1.6px}
+}
+@media(prefers-reduced-motion:reduce){.guides-carousel{scroll-behavior:auto}.guide-card,.guide-arrow{transition:none}}
+
 </style>
 
 <script type="application/ld+json">
@@ -1360,23 +1414,70 @@ html{scroll-behavior:smooth}
 
 
 <!-- HIMALAYAN TRAVEL GUIDES -->
-<section class="content info" id="travel-guides">
-<div class="section-inner">
-<div class="section-title reveal"><small>PLAN WITH CONFIDENCE</small><h2>Himalayan Travel Guides</h2></div>
-<p class="intro reveal">Explore practical destination information before choosing your route. Check seasonal travel considerations, compare regions and ask our Narkanda-based team about current trips.</p>
-<div class="info-grid">
-<article class="info-box reveal"><h3>Spiti Tour from Chandigarh</h3><p>Explore the common Shimla–Kinnaur route, suggested trip duration and key checks before planning your Spiti road trip.</p><a href="/spiti-tour-from-chandigarh/" style="color:#987342;text-decoration:underline;font-weight:700">Plan a Spiti tour from Chandigarh →</a></article>
-<article class="info-box reveal"><h3>Winter Spiti Tours</h3><p>Understand winter route planning, cold-weather preparation, accommodation questions and road contingencies.</p><a href="/winter-spiti-tours/" style="color:#987342;text-decoration:underline;font-weight:700">Winter Spiti travel guide →</a></article>
-<article class="info-box reveal"><h3>Spiti Valley Travel Guide</h3><p>Read about route choices, seasons, acclimatisation, packing and responsible travel.</p><a href="/spiti-valley-travel-guide/" style="color:#987342;text-decoration:underline;font-weight:700">Read the Spiti guide →</a></article>
-<article class="info-box reveal"><h3>Spiti Tour Cost Guide</h3><p>Understand the main price factors, compare inclusions and prepare the right questions before requesting a quote.</p><a href="/spiti-tour-cost/" style="color:#987342;text-decoration:underline;font-weight:700">Understand Spiti tour costs →</a></article>
-<article class="info-box reveal"><h3>Kinnaur Road Trips</h3><p>Explore Sangla, Chitkul and Kalpa, with practical notes for connecting Kinnaur and Spiti.</p><a href="/kinnaur-tours/" style="color:#987342;text-decoration:underline;font-weight:700">Explore Kinnaur tours →</a></article>
-<article class="info-box reveal"><h3>Himachal Pradesh Tours</h3><p>Compare Narkanda, Kinnaur, Spiti and Manali journeys and choose a route that fits your days.</p><a href="/himachal-pradesh-tours/" style="color:#987342;text-decoration:underline;font-weight:700">Explore Himachal tours →</a></article>
-<article class="info-box reveal"><h3>Narkanda Holidays & Mountain Escapes</h3><p>Discover quiet cedar forests, apple orchards, Hatu Peak and scenic village stays in and around Narkanda. Use this guide to plan seasons, local sightseeing and road trips towards Shimla, Kinnaur and Spiti.</p><a href="/narkanda-tours/" style="color:#987342;text-decoration:underline;font-weight:700">Explore Narkanda travel guide →</a></article>
-<article class="info-box reveal"><h3>Manali Travel Guide</h3><p>Plan a Manali holiday with ideas for Old Manali, Solang Valley, Atal Tunnel and nearby mountain viewpoints. Compare the best seasons, allow time for changing road conditions and shape a trip around your group and interests.</p><a href="/manali-tours/" style="color:#987342;text-decoration:underline;font-weight:700">Explore Manali tours →</a></article>
-<article class="info-box reveal"><h3>Kasol & Parvati Valley Guide</h3><p>Explore riverside walks, cafés and village experiences around Kasol, with nearby options such as Manikaran and quieter Parvati Valley hamlets. Find practical advice on trip duration, transport, weather and planning a relaxed mountain break.</p><a href="/kasol-tours/" style="color:#987342;text-decoration:underline;font-weight:700">Explore Kasol travel guide →</a></article>
-<article class="info-box reveal"><h3>Jibhi & Tirthan Valley Guide</h3><p>Plan a peaceful escape among forested hills, wooden homes and riverside stays. Learn how to combine Jibhi with Jalori Pass, Serolsar Lake and the wider Tirthan Valley, while checking seasonal access and local trail conditions.</p><a href="/jibhi-tours/" style="color:#987342;text-decoration:underline;font-weight:700">Explore Jibhi travel guide →</a></article>
-<article class="info-box reveal"><h3>Shimla Holidays & Sightseeing</h3><p>Discover the Ridge, Mall Road and heritage corners of Shimla, with optional day trips towards Kufri and Narkanda. Use the guide to choose a comfortable stay length, plan local transport and connect Shimla with a wider Himachal road trip.</p><a href="/shimla-tours/" style="color:#987342;text-decoration:underline;font-weight:700">Explore Shimla travel guide →</a></article>
-</div></div></section>
+<section class="content info travel-guides-premium" id="travel-guides">
+  <div class="section-inner">
+    <div class="guides-heading-row">
+      <div>
+        <div class="section-title reveal"><small>PLAN WITH CONFIDENCE</small><h2>Himalayan Travel Guides</h2></div>
+        <p class="intro reveal">Thoughtful local insights for choosing the right Himalayan route, season and experience.</p>
+      </div>
+      <div class="guides-controls" aria-label="Travel guide carousel controls">
+        <span class="guides-count" id="guidesCount" aria-live="polite">01 <i>/</i> 11</span>
+        <button type="button" class="guide-arrow" id="guidesPrev" aria-label="Previous travel guides">←</button>
+        <button type="button" class="guide-arrow" id="guidesNext" aria-label="Next travel guides">→</button>
+      </div>
+    </div>
+    <div class="guides-carousel" id="guidesCarousel" tabindex="0" aria-label="Swipe through Himalayan travel guides">
+      <article class="guide-card guide-spiti">
+        <div class="guide-card-top"><span>01 / SPITI</span><span class="guide-mark">✳</span></div>
+        <div class="guide-card-copy"><small>ROUTE PLANNING</small><h3>Spiti Tour from Chandigarh</h3><p>Explore the Shimla–Kinnaur approach, suggested trip duration and essential checks before setting out.</p><a href="/spiti-tour-from-chandigarh/">Plan your route <b>↗</b></a></div>
+      </article>
+      <article class="guide-card guide-winter">
+        <div class="guide-card-top"><span>02 / WINTER</span><span class="guide-mark">❄</span></div>
+        <div class="guide-card-copy"><small>SEASONAL KNOW-HOW</small><h3>Winter Spiti Tours</h3><p>Prepare for cold-weather travel, winter stays, changing road conditions and practical backup plans.</p><a href="/winter-spiti-tours/">Read winter guide <b>↗</b></a></div>
+      </article>
+      <article class="guide-card guide-valley">
+        <div class="guide-card-top"><span>03 / SPITI</span><span class="guide-mark">⌁</span></div>
+        <div class="guide-card-copy"><small>DESTINATION GUIDE</small><h3>Spiti Valley Travel Guide</h3><p>Compare route options, travel seasons, acclimatisation basics, packing and responsible travel tips.</p><a href="/spiti-valley-travel-guide/">Explore Spiti <b>↗</b></a></div>
+      </article>
+      <article class="guide-card guide-cost">
+        <div class="guide-card-top"><span>04 / PLANNING</span><span class="guide-mark">₹</span></div>
+        <div class="guide-card-copy"><small>BUDGET & VALUE</small><h3>Spiti Tour Cost Guide</h3><p>Understand the factors behind tour pricing, compare inclusions and know what to ask before booking.</p><a href="/spiti-tour-cost/">Plan your budget <b>↗</b></a></div>
+      </article>
+      <article class="guide-card guide-kinnaur">
+        <div class="guide-card-top"><span>05 / KINNAUR</span><span class="guide-mark">◇</span></div>
+        <div class="guide-card-copy"><small>VALLEYS & VILLAGES</small><h3>Kinnaur Road Trips</h3><p>Discover Sangla, Chitkul and Kalpa, and learn how to connect Kinnaur with a longer Spiti journey.</p><a href="/kinnaur-tours/">Explore Kinnaur <b>↗</b></a></div>
+      </article>
+      <article class="guide-card guide-himachal">
+        <div class="guide-card-top"><span>06 / HIMACHAL</span><span class="guide-mark">⌁</span></div>
+        <div class="guide-card-copy"><small>FIND YOUR REGION</small><h3>Himachal Pradesh Tours</h3><p>Compare mountain regions and shape a trip around your available days, interests and travel style.</p><a href="/himachal-pradesh-tours/">Explore Himachal <b>↗</b></a></div>
+      </article>
+      <article class="guide-card guide-narkanda">
+        <div class="guide-card-top"><span>07 / NARKANDA</span><span class="guide-mark">✧</span></div>
+        <div class="guide-card-copy"><small>CEDAR FORESTS & VIEWS</small><h3>Narkanda Holidays</h3><p>Find ideas for Hatu Peak, apple orchards, village stays and scenic drives towards Shimla and Kinnaur.</p><a href="/narkanda-tours/">Discover Narkanda <b>↗</b></a></div>
+      </article>
+      <article class="guide-card guide-manali">
+        <div class="guide-card-top"><span>08 / MANALI</span><span class="guide-mark">△</span></div>
+        <div class="guide-card-copy"><small>CLASSIC MOUNTAIN ESCAPE</small><h3>Manali Travel Guide</h3><p>Plan around Old Manali, Solang Valley, Atal Tunnel and nearby viewpoints with seasonal road advice.</p><a href="/manali-tours/">Explore Manali <b>↗</b></a></div>
+      </article>
+      <article class="guide-card guide-kasol">
+        <div class="guide-card-top"><span>09 / KASOL</span><span class="guide-mark">≈</span></div>
+        <div class="guide-card-copy"><small>PARVATI VALLEY</small><h3>Kasol & Parvati Valley</h3><p>Explore riverside walks, cafés, Manikaran and quieter valley hamlets for a relaxed mountain break.</p><a href="/kasol-tours/">Discover Kasol <b>↗</b></a></div>
+      </article>
+      <article class="guide-card guide-jibhi">
+        <div class="guide-card-top"><span>10 / JIBHI</span><span class="guide-mark">♧</span></div>
+        <div class="guide-card-copy"><small>FOREST & RIVERSIDE STAYS</small><h3>Jibhi & Tirthan Valley</h3><p>Plan forest stays, Jalori Pass and Serolsar Lake, while checking seasonal access and trail conditions.</p><a href="/jibhi-tours/">Explore Jibhi <b>↗</b></a></div>
+      </article>
+      <article class="guide-card guide-shimla">
+        <div class="guide-card-top"><span>11 / SHIMLA</span><span class="guide-mark">⌂</span></div>
+        <div class="guide-card-copy"><small>HERITAGE & HILLS</small><h3>Shimla Holidays</h3><p>Discover the Ridge, Mall Road, heritage corners and easy connections towards Kufri and Narkanda.</p><a href="/shimla-tours/">Explore Shimla <b>↗</b></a></div>
+      </article>
+    </div>
+    <div class="guides-progress" aria-hidden="true"><span id="guidesProgress"></span></div>
+    <p class="guides-swipe-hint">SWIPE TO EXPLORE <span>·</span> OR USE THE ARROWS</p>
+  </div>
+</section>
+
 <!-- PACKAGES -->
 <section class="content info" id="packages">
   <div class="section-inner">
@@ -2484,6 +2585,37 @@ if (footerContactBar && siteFooter) {
   /* Set correct visibility immediately when page loads */
   updateFloatingButtons();
 }
+
+
+/* HIMALAYAN TRAVEL GUIDE CAROUSEL */
+(() => {
+  const rail=document.getElementById("guidesCarousel");
+  if(!rail)return;
+  const cards=[...rail.querySelectorAll(".guide-card")];
+  const count=document.getElementById("guidesCount");
+  const progress=document.getElementById("guidesProgress");
+  const prev=document.getElementById("guidesPrev");
+  const next=document.getElementById("guidesNext");
+  const update=()=>{
+    const first=cards.findIndex(card=>card.offsetLeft+card.offsetWidth>rail.scrollLeft+rail.offsetLeft+8);
+    const index=Math.max(0,first);
+    if(count)count.innerHTML=String(index+1).padStart(2,"0")+' <i>/</i> '+String(cards.length).padStart(2,"0");
+    if(progress)progress.style.width=((index+1)/cards.length*100)+"%";
+  };
+  const move=direction=>{
+    const card=cards[0];
+    const gap=parseFloat(getComputedStyle(rail).columnGap)||0;
+    rail.scrollBy({left:direction*(card.getBoundingClientRect().width+gap),behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+  };
+  prev?.addEventListener("click",()=>move(-1));
+  next?.addEventListener("click",()=>move(1));
+  rail.addEventListener("scroll",()=>requestAnimationFrame(update),{passive:true});
+  rail.addEventListener("keydown",event=>{
+    if(event.key==="ArrowRight"){event.preventDefault();move(1)}
+    if(event.key==="ArrowLeft"){event.preventDefault();move(-1)}
+  });
+  update();
+})();
 
 /* FLOATING QUICK NAV MENU */
 const quickMenuToggle = document.getElementById("quickMenuToggle");
