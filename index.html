@@ -1952,17 +1952,14 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
 <!-- HEADER -->
 <header>
   <div class="header-inner">
-    <a class="brand" href="#home" aria-label="Himalayan Odyssey Expedition home">
+    <a class="brand" href="/" aria-label="Himalayan Odyssey Expedition — Home">
       <img src="logo.webp" alt="Himalayan Odyssey Expedition">
     </a>
 
     <nav aria-label="Main navigation">
-      <a href="#home">Home</a>
       <a href="#destinations">Destinations</a>
-      <a href="#packages">Packages</a>
-      <a href="#group-departures">Group Departures</a>
-      <a href="#travel-enquiry">Plan Your Trip</a>
-      <a href="#itineraries">Itineraries</a>
+      <a href="#upcoming-packages">Upcoming Packages</a>
+      <a href="#itineraries">Itinerary</a>
       <div class="nav-dropdown">
         <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="servicesMenu">Services <span aria-hidden="true">⌄</span></button>
         <div class="nav-dropdown-menu" id="servicesMenu">
@@ -1973,7 +1970,7 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
           <a href="/suppliers/">List Your Vehicle or Property</a>
         </div>
       </div>
-      <a class="header-cta" href="/?topic=General%20Himalayan%20trip%20planning#travel-enquiry">Plan Your Trip ↗</a>
+      <a class="header-cta" href="#travel-enquiry">Plan Your Trip <span aria-hidden="true">↗</span></a>
     </nav>
   </div>
 </header>
@@ -2077,15 +2074,41 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
 .itinerary-cover-placeholder span{font-size:38px}
 .itinerary-cover-placeholder small{font-size:9px;letter-spacing:2px}
 .itinerary-slide .card-body .btn{margin-top:7px}
+
+/* Compact navigation hierarchy: destinations first, booking CTA unmistakable */
+.header-inner{gap:11px}
+.header-inner nav{gap:5px clamp(12px,2vw,25px)}
+.header-inner nav>a:not(.header-cta){font-size:10px;letter-spacing:1.25px}
+.header-cta{gap:9px;min-height:42px;padding:11px 19px;border-radius:3px;box-shadow:0 5px 18px rgba(198,163,106,.20);letter-spacing:1px}
+.header-cta span{font-size:15px;line-height:1;transition:transform .25s}
+.header-cta:hover span{transform:translate(2px,-2px)}
+@media(max-width:760px){
+  .header-inner{padding:9px 3% 11px;gap:8px}
+  .header-inner nav{width:100%;gap:4px 13px;justify-content:center}
+  .header-inner nav>a:not(.header-cta){font-size:9px;letter-spacing:.8px;padding:6px 0}
+  .header-cta{min-height:36px;padding:8px 13px;font-size:9px}
+  .nav-dropdown-toggle{min-height:32px;padding:6px 10px;font-size:9px;letter-spacing:.8px}
+}
+@media(max-width:390px){.header-inner nav{gap:3px 9px}.header-inner nav>a:not(.header-cta){font-size:8px}.header-cta{font-size:8px;padding:7px 10px}}
+/* The enquiry form stays tucked away until a guest chooses to open it */
+.enquiry-dropdown{max-width:700px;margin:0 auto}
+.enquiry-dropdown>summary{list-style:none;display:flex;align-items:center;justify-content:center;gap:18px;min-height:58px;padding:14px 22px;border:1px solid rgba(234,214,174,.78);border-radius:3px;background:linear-gradient(115deg,#d4b47d,#c6a36a 55%,#e3c994);color:#0b211d;font-size:12px;font-weight:700;letter-spacing:1.15px;text-transform:uppercase;cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,.18);transition:filter .25s,transform .25s,box-shadow .25s}
+.enquiry-dropdown>summary::-webkit-details-marker{display:none}
+.enquiry-dropdown>summary:hover{filter:brightness(1.07);transform:translateY(-2px);box-shadow:0 16px 34px rgba(0,0,0,.23)}
+.enquiry-dropdown-icon{display:grid;place-items:center;width:25px;height:25px;border:1px solid rgba(11,33,29,.45);border-radius:50%;font-size:18px;line-height:1;transition:transform .25s}
+.enquiry-dropdown[open] .enquiry-dropdown-icon{transform:rotate(180deg)}
+.enquiry-dropdown[open]>summary{margin-bottom:20px}
+.enquiry-dropdown .enquiry-box{max-width:none;margin:0}
+@media(prefers-reduced-motion:reduce){.header-cta span,.enquiry-dropdown-icon{transition:none}}
 </style>
 
 
-<!-- UPCOMING GROUP DEPARTURES -->
-<section class="content group-departures-section" id="group-departures">
+<!-- UPCOMING PACKAGES -->
+<section class="content group-departures-section" id="upcoming-packages">
  <div class="section-inner">
   <div class="group-departures-head">
-   <div class="section-title reveal"><small>TRAVEL TOGETHER · MAKE MEMORIES</small><h2>Upcoming Group Departures</h2></div>
-   <p class="intro reveal">Join a planned Himalayan journey. Check departure dates, package prices and how many travellers have already joined your group.</p>
+   <div class="section-title reveal"><small>FIND YOUR NEXT HIMALAYAN ESCAPE</small><h2>Upcoming Packages</h2></div>
+   <p class="intro reveal">Explore our upcoming Himalayan packages, compare departure dates and prices, and see how many travellers have already joined each journey.</p>
   </div>
   <div class="group-departures-rail" id="groupDeparturesCarousel" tabindex="0" aria-label="Swipe through upcoming group departures">
    <div class="group-departures-empty">Loading upcoming group departures…</div>
@@ -2278,7 +2301,12 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
 
     <p class="intro" style="color:#e0e8e2">Tell us a little about your travel plans. We'll help you shape a memorable mountain holiday.</p>
 
-    <div class="enquiry-box reveal">
+    <details class="enquiry-dropdown reveal">
+      <summary>
+        <span>Open the trip enquiry form</span>
+        <span class="enquiry-dropdown-icon" aria-hidden="true">⌄</span>
+      </summary>
+      <div class="enquiry-box">
 
       <form id="travelEnquiryForm">
 
@@ -2375,7 +2403,8 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
         <p class="enquiry-note">Your enquiry opens in WhatsApp. Review the message and press Send.</p>
 
       </form>
-    </div>
+      </div>
+    </details>
   </div>
 </section>
 
