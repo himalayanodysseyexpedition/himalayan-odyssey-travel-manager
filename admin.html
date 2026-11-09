@@ -420,7 +420,7 @@ Publish this cab on the guest website
 
 <!-- SERVICE PROVIDER PAYMENT FORM -->
 <dialog id="providerPaymentDialog"><form id="providerPaymentF">
-<h3>Record Service Provider Payment</h3>
+<h3 id="providerPaymentDialogTitle">Record Service Provider Payment</h3>
 <label>Service Provider</label><select name="vendor_id" id="providerVendorSelect"><option value="">Enter provider manually</option></select>
 <label>Provider / Business Name *</label><input name="supplier_name" required placeholder="Hotel, driver, homestay or supplier name">
 <label>Service</label><input name="service_name" placeholder="Stay, cab, food, permits etc.">
@@ -431,9 +431,9 @@ Publish this cab on the guest website
 <label>Payment Date</label><input name="payment_date" type="date">
 <label>Payment Method</label><select name="payment_method"><option value="Cash">Cash</option><option value="UPI">UPI</option><option value="Bank Transfer">Bank Transfer</option><option value="Other">Other</option></select>
 <label>Connect this entry to an existing provider payment</label><select name="linked_entry_id" id="providerLinkedEntry"><option value="">Create a new payment group</option></select>
-<small>Choose an earlier entry to connect this payment to the same provider/service. The dashboard combines all linked entries.</small>
+<small>Add a separate entry every time you pay this provider, including small advances, part-payments and final settlements. Link it to an earlier entry to keep the full transaction history and running balance together. Existing entries can be edited later.</small>
 <label>Notes / Reference</label><textarea name="description" rows="3" placeholder="Booking reference, UPI reference, room or vehicle details"></textarea>
-<button type="submit">Save Provider Payment</button><button type="button" data-close class="secondary">Cancel</button>
+<button type="submit" id="providerPaymentSave">Save Provider Payment</button><button type="button" data-close class="secondary">Cancel</button>
 </form></dialog>
 
 <!-- ITINERARY FORM -->
