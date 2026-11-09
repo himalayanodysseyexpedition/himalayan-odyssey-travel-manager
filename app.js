@@ -1885,7 +1885,6 @@ function resetItineraryForm() {
   $("itineraryF")?.reset();
 
   populateItineraryPackageOptions("");
-  setHTML("itineraryPdfCurrent", "");
   itineraryGalleryImages = [];
   if ($("itineraryPhotos")) $("itineraryPhotos").value = "";
   setHTML("itineraryGalleryExisting", "");
@@ -1924,13 +1923,6 @@ function openEditItinerary(id) {
   $("itineraryPublished").checked = !!it.published;
 
   populateItineraryPackageOptions(it.package_id || "");
-
-  setHTML(
-    "itineraryPdfCurrent",
-    it.pdf_url
-      ? `✓ PDF attached — <a href="${esc(it.pdf_url)}" target="_blank" rel="noopener">view</a>. Choose a new file to replace it.`
-      : ""
-  );
 
   $("dayEditor").innerHTML = "";
 
@@ -1985,43 +1977,6 @@ async function uploadItineraryPhoto(file, itineraryId) {
   return { url: data.publicUrl, storage_path: path };
 }
 
-async function uploadItineraryPdf(file, title) {
-  if (file.type !== "application/pdf") {
-    throw new Error("Please select a PDF file.");
-  }
-
-  if (file.size > MAX_PDF_SIZE) {
-    throw new Error("PDF must be under 10 MB.");
-  }
-
-  const safeName = String(title || "itinerary")
-    .replace(/[^a-z0-9]+/gi, "-")
-    .slice(0, 50);
-
-  const path = Date.now() + "-" + safeName + ".pdf";
-
-  const { error } = await db.storage
-    .from(ITINERARY_BUCKET)
-    .upload(path, file, {
-      contentType: "application/pdf",
-      upsert: false
-    });
-
-  if (error) throw error;
-
-  const { data } = db.storage
-    .from(ITINERARY_BUCKET)
-    .getPublicUrl(path);
-
-  if (!data?.publicUrl) {
-    await db.storage.from(ITINERARY_BUCKET).remove([path]);
-    throw new Error("Could not create the PDF URL.");
-  }
-
-  return data.publicUrl;
-}
-
-
 function bindItineraryForm() {
   if (!$("itineraryF")) return;
 
@@ -2067,18 +2022,12 @@ function bindItineraryForm() {
         throw new Error("Please enter an itinerary title.");
       }
 
-      const pdfFile = $("itineraryPdf").files[0];
       const photoFiles = [...($("itineraryPhotos")?.files || [])];
       for (const file of photoFiles) {
         if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) throw new Error("Only JPG, PNG and WebP itinerary photos are allowed.");
         if (file.size > MAX_ITINERARY_PHOTO_SIZE) throw new Error("Each itinerary photo must be smaller than 5 MB.");
       }
       const originalGallery = (D.itineraries || []).find(item => String(item.id) === String(editingItineraryId))?.gallery_images || [];
-
-      if (pdfFile) {
-        message("Uploading PDF...");
-        itinerary.pdf_url = await uploadItineraryPdf(pdfFile, itinerary.title);
-      }
 
       const days = [
         ...document.querySelectorAll("#dayEditor .day-entry")
