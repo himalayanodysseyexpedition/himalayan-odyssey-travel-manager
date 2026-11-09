@@ -36,6 +36,7 @@ main{max-width:1100px;margin:auto;padding:34px 5% 80px}.back{display:inline-flex
    const dayHtml=days.map(x=>'<article class="day"><div class="day-number">DAY '+safe(x.day_number)+'</div><div class="day-content"><h3>'+safe(x.title||"Explore the journey")+'</h3><p>'+safe(x.description||"Details for this day will be confirmed by our travel team.")+'</p>'+(x.overnight_location?'<span class="overnight">Overnight · '+safe(x.overnight_location)+'</span>':"")+'</div></article>').join("");
    const gallery=photos.length?'<section style="margin-top:38px"><div class="section-kicker">A GLIMPSE OF THE JOURNEY</div><h2>Journey Gallery</h2><div class="gallery">'+photos.map((p,i)=>'<img src="'+safe(p.url)+'" alt="'+title+' photograph '+(i+1)+'" loading="lazy">').join("")+'</div></section>':"";
    document.title=(item.title||"Tour Itinerary")+" | Himalayan Odyssey Expedition";
+   const canonical=document.querySelector('link[rel="canonical"]');if(canonical)canonical.href=location.origin+"/itinerary.html?id="+encodeURIComponent(id);
    document.querySelector('meta[name="description"]').content=(item.summary||"Explore the day-wise Himalayan tour itinerary with Himalayan Odyssey Expedition.").slice(0,155);
    document.querySelector('meta[property="og:title"]').content=(item.title||"Tour Itinerary")+" | Himalayan Odyssey Expedition";
    document.querySelector('meta[property="og:description"]').content=(item.summary||"Explore this Himalayan tour itinerary.").slice(0,200);
