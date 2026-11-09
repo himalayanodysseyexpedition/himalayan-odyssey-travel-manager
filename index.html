@@ -295,33 +295,47 @@ nav a:hover:after{width:100%}
 @media(prefers-reduced-motion:reduce){.nav-dropdown-menu,.nav-dropdown-toggle span{transition:none}}
 
 
-/* APPLE-INSPIRED FROSTED GLASS NAVIGATION */
+/* APPLE-INSPIRED INDIVIDUAL FROSTED GLASS NAV PILLS */
 .header-inner{gap:10px}
 .glass-nav{
   display:flex;flex-wrap:nowrap;justify-content:center;align-items:center;
-  gap:clamp(5px,1.25vw,18px);width:max-content;max-width:100%;
-  padding:7px 13px;border:1px solid rgba(255,255,255,.22);border-radius:999px;
-  background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.055));
-  -webkit-backdrop-filter:blur(24px) saturate(170%);backdrop-filter:blur(24px) saturate(170%);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 9px 28px rgba(0,0,0,.18);
-  overflow-x:auto;scrollbar-width:none;animation:glassNavEnter .75s cubic-bezier(.2,.8,.2,1) both;
+  gap:clamp(7px,1.15vw,15px);width:max-content;max-width:100%;
+  padding:3px 2px;background:transparent;border:0;border-radius:0;
+  box-shadow:none;overflow-x:auto;scrollbar-width:none;
+  animation:glassNavEnter .75s cubic-bezier(.2,.8,.2,1) both;
 }
 .glass-nav::-webkit-scrollbar{display:none}
 .glass-nav>a,.glass-nav .nav-dropdown-toggle{
-  flex:0 0 auto;white-space:nowrap;color:rgba(255,255,255,.88);
-  font:700 10px var(--sans);letter-spacing:1.15px;text-transform:uppercase;
-  padding:9px 10px;border:0;border-radius:999px;background:transparent;
-  transition:color .25s ease,background .25s ease,transform .25s ease,box-shadow .25s ease;
+  flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  gap:8px;white-space:nowrap;color:rgba(255,255,255,.94);
+  font:700 10px var(--sans);letter-spacing:1.05px;text-transform:uppercase;
+  padding:10px 16px;min-height:38px;
+  border:1px solid rgba(255,255,255,.28);border-radius:999px;
+  background:linear-gradient(135deg,rgba(255,255,255,.17),rgba(255,255,255,.065));
+  -webkit-backdrop-filter:blur(22px) saturate(175%);backdrop-filter:blur(22px) saturate(175%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 4px 14px rgba(0,0,0,.13);
+  transition:color .25s ease,border-color .25s ease,background .25s ease,
+    transform .25s ease,box-shadow .25s ease;
 }
 .glass-nav>a:after{display:none}
 .glass-nav>a:hover,.glass-nav .nav-dropdown-toggle:hover,
 .glass-nav>a:focus-visible,.glass-nav .nav-dropdown.open .nav-dropdown-toggle{
-  color:#fff;background:rgba(255,255,255,.15);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 3px 12px rgba(0,0,0,.12);
-  transform:translateY(-1px)
+  color:#fff;border-color:rgba(255,255,255,.58);
+  background:linear-gradient(135deg,rgba(255,255,255,.25),rgba(255,255,255,.11));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.32),0 7px 20px rgba(0,0,0,.2),0 0 14px rgba(234,214,174,.09);
+  transform:translateY(-2px)
 }
-.glass-nav .nav-dropdown{flex:0 0 auto}
+.glass-nav .nav-dropdown{position:relative;display:flex;align-items:center;flex:0 0 auto}
 .glass-nav .nav-dropdown-toggle{cursor:pointer}
+.glass-nav .services-chevron{
+  display:inline-grid;place-items:center;width:17px;height:17px;margin-left:1px;
+  border:1px solid rgba(255,255,255,.38);border-radius:50%;
+  color:#f0ddb8;font-size:14px;line-height:1;
+  transition:transform .25s ease,background .25s ease;
+}
+.glass-nav .nav-dropdown.open .services-chevron{
+  transform:rotate(180deg);background:rgba(255,255,255,.13)
+}
 .glass-nav .nav-dropdown-menu{top:calc(100% + 12px)}
 .header-cta{
   display:inline-flex;align-items:center;justify-content:center;min-height:39px;
@@ -337,13 +351,14 @@ nav a:hover:after{width:100%}
 @keyframes ctaSoftPulse{0%,100%{box-shadow:0 5px 18px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.55)}50%{box-shadow:0 7px 22px rgba(0,0,0,.24),0 0 17px rgba(234,214,174,.16),inset 0 1px 0 rgba(255,255,255,.6)}}
 @media(max-width:640px){
   .header-inner{padding:8px 3%;gap:8px}
-  .glass-nav{width:100%;justify-content:flex-start;gap:2px;padding:6px 7px}
-  .glass-nav>a,.glass-nav .nav-dropdown-toggle{font-size:8px;letter-spacing:.55px;padding:9px 7px}
+  .glass-nav{width:100%;justify-content:flex-start;gap:5px;padding:3px 1px}
+  .glass-nav>a,.glass-nav .nav-dropdown-toggle{font-size:8px;letter-spacing:.4px;padding:9px 10px;min-height:35px;gap:5px}
+  .glass-nav .services-chevron{width:14px;height:14px;font-size:12px}
   .header-cta{min-height:37px;padding:8px 22px;font-size:9px}
 }
 @media(prefers-reduced-motion:reduce){
   .glass-nav,.header-cta{animation:none!important}
-  .glass-nav>a,.glass-nav .nav-dropdown-toggle,.header-cta{transition:none!important}
+  .glass-nav>a,.glass-nav .nav-dropdown-toggle,.glass-nav .services-chevron,.header-cta{transition:none!important}
 }
 /* END APPLE-INSPIRED FROSTED GLASS NAVIGATION */
 
@@ -2038,10 +2053,10 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
 
     <nav class="glass-nav" aria-label="Main navigation">
       <a href="#destinations">Destinations</a>
-      <a href="#upcoming-packages">Upcoming Packages</a>
+      <a href="#upcoming-packages">Upcoming Tours</a>
       <a href="#itineraries">Itinerary</a>
       <div class="nav-dropdown">
-        <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="servicesMenu">Services</button>
+        <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="servicesMenu">Services <span class="services-chevron" aria-hidden="true">⌄</span></button>
         <div class="nav-dropdown-menu" id="servicesMenu">
           <a href="/services/">All Services</a>
           <a href="#cabs">Vehicles &amp; Cabs</a>
