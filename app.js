@@ -821,9 +821,31 @@ function render() {
 
   const transactions = D.transactions || [];
 
-  const income = transactions
-    .filter(item => item.transaction_type === "Payment")
+  // Count booking receipts even when an older booking has no matching
+  // Payment transaction row. If both sources exist, use the larger
+  // cumulative booking total rather than adding them and double-counting.
+  const paymentTransactionsByBooking = transactions
+    .filter(item => item.transaction_type === "Payment" && item.booking_id)
+    .reduce((totals, item) => {
+      const bookingId = String(item.booking_id);
+      totals[bookingId] = (totals[bookingId] || 0) + Number(item.amount || 0);
+      return totals;
+    }, {});
+
+  const bookingIncome = bookings.reduce((sum, item) => {
+    const recordedOnBooking = Number(item.amount_paid || 0);
+    const recordedAsTransactions =
+      paymentTransactionsByBooking[String(item.id)] || 0;
+    return sum + Math.max(recordedOnBooking, recordedAsTransactions);
+  }, 0);
+
+  const unlinkedPaymentIncome = transactions
+    .filter(item =>
+      item.transaction_type === "Payment" && !item.booking_id
+    )
     .reduce((sum, item) => sum + Number(item.amount || 0), 0);
+
+  const income = bookingIncome + unlinkedPaymentIncome;
 
   const expenses = transactions
     .filter(item => item.transaction_type === "Expense")
