@@ -3153,7 +3153,8 @@ document.getElementById("travelEnquiryForm").addEventListener("submit",async fun
  if(waWindow)waWindow.location.href=whatsappLink(message);else alert("Please allow pop-ups to continue to WhatsApp.");
  if(waWindow&&!saved)alert("WhatsApp is ready, but CRM saving failed. Please record this enquiry manually. "+saveErrorText);
  if(button)button.disabled=false;
- if(requestedItinerary){window.location.assign("/itinerary.html?id="+encodeURIComponent(requestedItinerary));}\n else if(selectedPackage?.linkedItineraryPage){window.location.assign(selectedPackage.linkedItineraryPage);}
+ if(requestedItinerary){window.location.assign("/itinerary.html?id="+encodeURIComponent(requestedItinerary));}
+ else if(selectedPackage?.linkedItineraryPage){window.location.assign(selectedPackage.linkedItineraryPage);}
  else if(selectedPackage){window.location.assign("/#itineraries");}
 });
 
