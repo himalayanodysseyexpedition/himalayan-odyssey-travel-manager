@@ -2154,7 +2154,7 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
 }
 
 
-/* Stable responsive header navigation: keep every destination link visible */
+/* Header navigation: links first, prominent booking button on its own row */
 .header-inner{gap:8px}
 header nav{
   width:100%;
@@ -2163,29 +2163,57 @@ header nav{
   align-items:center;
   justify-content:center;
   gap:6px 14px;
-  padding:3px 0 2px;
+  padding:3px 0 4px;
   overflow:visible;
 }
-header nav>a:not(.header-cta){
-  flex:0 0 auto;
-  white-space:nowrap;
+header nav>a:not(.header-cta),
+header nav>.nav-dropdown{order:0;flex:0 0 auto}
+header nav>a:not(.header-cta){white-space:nowrap}
+header nav::after{
+  content:"";
+  display:block;
+  flex:0 0 100%;
+  order:1;
+  height:0;
 }
-header nav>.nav-dropdown{flex:0 0 auto}
 header nav>.header-cta{
-  order:0;
+  order:2;
+  display:inline-flex;
   flex:0 0 auto;
+  align-items:center;
+  justify-content:center;
   width:auto;
   max-width:100%;
-  margin:2px 0;
+  min-height:42px;
+  margin:5px auto 2px;
+  padding:11px 25px;
+  border:1px solid #e5c78d;
+  border-radius:999px;
+  background:linear-gradient(135deg,#f0d8a6,#c49a5c);
+  color:#172b23;
+  box-shadow:0 7px 20px rgba(198,163,106,.28);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:1px;
+  line-height:1.2;
+  text-transform:uppercase;
   white-space:nowrap;
 }
+header nav>.header-cta:hover,
+header nav>.header-cta:focus-visible{
+  background:linear-gradient(135deg,#f7e5bf,#d3ad70);
+  color:#10251d;
+  transform:translateY(-2px);
+  outline:2px solid rgba(229,199,141,.35);
+  outline-offset:3px;
+}
+header nav>.header-cta:after{display:none}
 @media(max-width:640px){
   .header-inner{gap:5px;padding:8px 4% 10px}
   header nav{gap:5px 9px}
   header nav>a:not(.header-cta){padding:7px 8px;font-size:9px;letter-spacing:.55px}
-  header nav>.header-cta{min-height:34px;padding:7px 11px;font-size:9px}
+  header nav>.header-cta{min-height:40px;margin:6px auto 2px;padding:10px 22px;font-size:10px}
 }
-
 </style>
 
 
