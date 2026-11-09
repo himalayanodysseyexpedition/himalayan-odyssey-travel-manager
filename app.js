@@ -209,6 +209,7 @@ async function load() {
     "cabs",
     "supplier_profiles",
     "supplier_listings",
+    "supplier_submissions",
     "supplier_enquiries"
   ];
 
@@ -2287,10 +2288,27 @@ function renderSupplierNetwork() {
   const profiles = D.supplier_profiles || [];
   const listings = D.supplier_listings || [];
   const enquiries = D.supplier_enquiries || [];
+  const submissions = D.supplier_submissions || [];
+  setText("supplierSubmissionCount", submissions.filter(s => s.status === "pending").length);
   setText("supplierCount", profiles.length);
   setText("supplierListingCount", listings.length);
   setText("supplierEnquiryCount", enquiries.length);
   const profileById = Object.fromEntries(profiles.map(p => [p.id,p]));
+  setHTML("supplierSubmissions", submissions.map(s => card(
+    s.business_name || s.title || "New service owner",
+    [
+      "Contact person: " + esc(s.contact_person),
+      "Private mobile: " + esc(s.phone) + " · WhatsApp: " + esc(s.whatsapp),
+      "Email: " + esc(s.email || "—"),
+      "Category: " + esc(s.supplier_type) + " · Listing: " + esc(s.listing_type),
+      "Service: " + esc(s.title) + " · " + esc(s.destination) + " · " + esc(s.location),
+      "Price: " + (s.price ? cash(s.price) + " " + esc(s.price_unit || "") : "On request"),
+      "Address: " + esc(s.business_address || [s.city,s.state].filter(Boolean).join(", ") || "—"),
+      "Details: " + esc(s.description || "—"),
+      "Submission status: <b>" + esc(s.status) + "</b>"
+    ],
+    (s.status === "pending" ? '<button data-submission-action="publish" data-submission-id="'+esc(s.id)+'">Approve & publish listing</button><button class="danger" data-submission-action="reject" data-submission-id="'+esc(s.id)+'">Reject</button>' : '<span class="muted">Reviewed</span>')
+  )).join("") || "No new service-owner submissions yet.");
   setHTML("supplierProfiles", profiles.map(p => card(
     p.business_name || "Supplier",
     [
@@ -2343,6 +2361,48 @@ function bindActions() {
     let button;
 
 
+
+    button = target.closest("[data-submission-action]");
+    if (button) {
+      const submission = (D.supplier_submissions || []).find(s => String(s.id) === String(button.dataset.submissionId));
+      if (!submission) { alert("This submission could not be found. Refresh the dashboard."); return; }
+      button.disabled = true;
+      try {
+        if (button.dataset.submissionAction === "publish") {
+          const { error: listingError } = await db.from("supplier_listings").insert({
+            supplier_id: null,
+            listing_type: submission.listing_type,
+            title: submission.title,
+            destination: submission.destination,
+            location: submission.location,
+            description: submission.description,
+            price: submission.price,
+            price_unit: submission.price_unit,
+            vehicle_model: submission.vehicle_model,
+            seating_capacity: submission.seating_capacity,
+            vehicle_features: submission.vehicle_features || [],
+            property_type: submission.property_type,
+            room_types: submission.room_types || [],
+            amenities: submission.amenities || [],
+            images: [],
+            status: "approved",
+            is_active: true
+          });
+          if (listingError) throw listingError;
+          const { error: updateError } = await db.from("supplier_submissions").update({status:"approved"}).eq("id", submission.id);
+          if (updateError) throw updateError;
+          alert("Submission approved and listing published. Owner contact details remain private in the admin dashboard.");
+        } else {
+          const { error } = await db.from("supplier_submissions").update({status:"rejected"}).eq("id", submission.id);
+          if (error) throw error;
+        }
+        await load();
+      } catch (error) {
+        alert("Could not update supplier submission: " + error.message);
+        button.disabled = false;
+      }
+      return;
+    }
 
     button = target.closest("[data-supplier-status]");
     if (button) {
