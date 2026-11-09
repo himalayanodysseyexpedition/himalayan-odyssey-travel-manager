@@ -1311,6 +1311,24 @@ html{scroll-behavior:smooth}
   }
 }
 
+
+/* PREMIUM TRAVEL PACKAGE CAROUSEL — MATCHES THE GUIDE EXPERIENCE */
+.packages-carousel{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 44px)/3);gap:22px;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:5px 2px 20px;scrollbar-width:none;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y}
+.packages-carousel::-webkit-scrollbar{display:none}
+.package-slide{min-width:0;scroll-snap-align:start;overflow:hidden;display:flex;flex-direction:column;background:#fffefa;border:1px solid #e4dac7;border-radius:5px;box-shadow:0 12px 32px rgba(11,33,29,.10);transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s}
+.package-slide:hover{transform:translateY(-7px);box-shadow:0 22px 44px rgba(11,33,29,.17)}
+.package-slide>img,.package-slide>.image-fallback{width:100%;height:215px;min-height:215px;object-fit:cover;display:block}
+.package-slide .card-body{display:flex;flex:1;flex-direction:column;align-items:flex-start;padding:23px 22px 25px}
+.package-slide .card-body h3{font:500 29px/1.08 var(--serif);color:var(--forest);margin:0 0 10px}
+.package-slide .card-body p{font-size:13px;color:#68766e;line-height:1.75;margin:5px 0}
+.package-slide .price{margin:12px 0;color:#8c6a37;font-weight:700}
+.package-slide .btn{margin-top:auto;margin-right:7px}
+.packages-controls{margin-top:20px}
+.packages-progress{max-width:180px;margin-top:12px}
+@media(max-width:900px){.packages-carousel{grid-auto-columns:calc((100% - 22px)/2)}}
+@media(max-width:600px){.packages-carousel{grid-auto-columns:88%;gap:14px;padding-right:8vw}.package-slide>img,.package-slide>.image-fallback{height:205px;min-height:205px}.package-slide .card-body{padding:20px 18px 22px}.package-slide .card-body h3{font-size:27px}.packages-controls{margin-top:14px}.packages-controls .guide-arrow{width:40px;height:40px}}
+@media(prefers-reduced-motion:reduce){.packages-carousel{scroll-behavior:auto}.package-slide{transition:none}}
+
 </style>
 
 <script type="application/ld+json">
@@ -1573,9 +1591,16 @@ html{scroll-behavior:smooth}
 
     <p class="intro reveal">Discover thoughtfully planned Himalayan holidays and find the journey that feels right for you. <a href="/packages/" style="color:#987342;text-decoration:underline">Browse all current packages</a>.</p>
 
-    <div id="packageList" class="cards">
+    <div id="packageList" class="packages-carousel" tabindex="0" aria-label="Travel packages carousel">
       <p id="packageMessage">Loading available packages...</p>
     </div>
+    <div class="guides-controls packages-controls" aria-label="Travel package carousel controls">
+      <span class="guides-count" id="packagesCount" aria-live="polite">01 <i>/</i> 01</span>
+      <button type="button" class="guide-arrow" id="packagesPrev" aria-label="Previous travel packages">←</button>
+      <button type="button" class="guide-arrow" id="packagesNext" aria-label="Next travel packages">→</button>
+    </div>
+    <div class="guides-progress packages-progress" aria-hidden="true"><span id="packagesProgress"></span></div>
+    <p class="guides-swipe-hint">SWIPE TO EXPLORE <span>·</span> OR USE THE ARROWS</p>
 
   </div>
 </section>
@@ -2093,7 +2118,7 @@ async function loadPackages() {
         ". Please share details.";
 
       return `
-        <article class="card reveal">
+        <article class="card package-slide reveal">
           ${photo}
 
           <div class="card-body">
@@ -2700,6 +2725,27 @@ if (footerContactBar && siteFooter) {
     if(event.key==="ArrowRight"){event.preventDefault();move(1)}
     if(event.key==="ArrowLeft"){event.preventDefault();move(-1)}
   });
+  update();
+})();
+
+
+/* TRAVEL PACKAGE CAROUSEL CONTROLS */
+(() => {
+  const rail=document.getElementById("packageList");
+  if(!rail)return;
+  const count=document.getElementById("packagesCount");
+  const progress=document.getElementById("packagesProgress");
+  const prev=document.getElementById("packagesPrev");
+  const next=document.getElementById("packagesNext");
+  const cards=()=>[...rail.querySelectorAll(".package-slide")];
+  const step=()=>{const card=cards()[0];if(!card)return 1;const gap=parseFloat(getComputedStyle(rail).gap)||0;return card.getBoundingClientRect().width+gap;};
+  const update=()=>{const items=cards();if(!items.length)return;const index=Math.min(items.length-1,Math.max(0,Math.round(rail.scrollLeft/step())));if(count)count.innerHTML=String(index+1).padStart(2,"0")+' <i>/</i> '+String(items.length).padStart(2,"0");if(progress)progress.style.width=((index+1)/items.length*100)+"%";};
+  const move=direction=>rail.scrollBy({left:direction*step(),behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+  prev?.addEventListener("click",()=>move(-1));
+  next?.addEventListener("click",()=>move(1));
+  rail.addEventListener("scroll",()=>requestAnimationFrame(update),{passive:true});
+  rail.addEventListener("keydown",event=>{if(event.key==="ArrowRight"){event.preventDefault();move(1)}if(event.key==="ArrowLeft"){event.preventDefault();move(-1)}});
+  new MutationObserver(()=>requestAnimationFrame(update)).observe(rail,{childList:true});
   update();
 })();
 
