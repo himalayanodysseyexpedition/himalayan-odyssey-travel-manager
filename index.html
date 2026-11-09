@@ -923,6 +923,29 @@ nav a:focus-visible{color:var(--gold-light)}
 .hero p{font-size:15px;max-width:590px;color:rgba(255,255,255,.88)}
 .btn{border-radius:3px;min-height:50px;padding:14px 24px;letter-spacing:1px}
 .btn:not(.outline){box-shadow:0 9px 25px rgba(198,163,106,.18)}
+/* PREMIUM ACTIONS — package, itinerary, cab and property cards */
+.card-body .btn,.hotel-detail-content .btn{
+  position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  min-height:46px;margin:9px 9px 2px 0;padding:0 19px;
+  border:1px solid rgba(198,163,106,.82);border-radius:2px;
+  background:linear-gradient(135deg,#173d34,#0b211d);
+  color:#f0dfbd;font-size:9px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;
+  text-decoration:none;box-shadow:0 7px 20px rgba(16,45,39,.14);
+  transition:background .3s ease,border-color .3s ease,color .3s ease,transform .3s ease,box-shadow .3s ease
+}
+.card-body .btn:after,.hotel-detail-content .btn:after{
+  content:"";position:absolute;inset:3px;border:1px solid rgba(234,214,174,.15);pointer-events:none
+}
+.card-body .btn:hover,.card-body .btn:focus-visible,
+.hotel-detail-content .btn:hover,.hotel-detail-content .btn:focus-visible{
+  background:linear-gradient(135deg,#e8d3aa,#c5a36d);border-color:#f2dfba;
+  color:#142f27;transform:translateY(-2px);box-shadow:0 11px 25px rgba(16,45,39,.2)
+}
+.card-body .btn:focus-visible,.hotel-detail-content .btn:focus-visible{
+  outline:2px solid #987342;outline-offset:4px
+}
+.card-body .pdf-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
+.card-body .pdf-actions .btn{margin:0}
 section.content{padding-top:100px;padding-bottom:100px}
 .section-title h2{letter-spacing:-.7px}
 .section-title small{letter-spacing:4.5px}
