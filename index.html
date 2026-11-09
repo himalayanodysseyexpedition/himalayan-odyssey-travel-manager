@@ -1619,6 +1619,48 @@ header nav .header-cta:hover{background:linear-gradient(135deg,#f3dfb5,#d1ab70);
   .footer-contact-bar .quick-nav-item{color:#fff}
 }
 
+
+/* HORIZONTAL FLOATING MENU — single-line, swipeable on narrow screens */
+.quick-nav-menu{
+  display:flex;
+  flex-wrap:nowrap;
+  align-items:center;
+  justify-content:flex-start;
+  gap:8px;
+  width:min(620px,calc(100vw - 36px));
+  max-width:calc(100vw - 36px);
+  right:50%;
+  padding:10px 12px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+  transform:translate(50%,10px) scale(.97);
+  transform-origin:bottom center;
+}
+.quick-nav-menu::-webkit-scrollbar{display:none}
+.quick-nav-menu.open{transform:translate(50%,0) scale(1)}
+.quick-nav-menu a{
+  display:inline-flex;
+  flex:0 0 auto;
+  align-items:center;
+  min-height:40px;
+  white-space:nowrap;
+  padding:9px 13px;
+  border-radius:999px;
+}
+.quick-nav-menu a:before{width:5px;height:5px;flex:0 0 5px}
+@media(max-width:600px){
+  .quick-nav-menu{
+    width:calc(100vw - 36px);
+    max-width:calc(100vw - 36px);
+    right:50%;
+    gap:7px;
+    padding:9px 10px;
+  }
+  .quick-nav-menu a{min-height:38px;padding:8px 11px;font-size:10px}
+}
+
 </style>
 
 <script type="application/ld+json">
