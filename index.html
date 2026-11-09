@@ -2763,7 +2763,7 @@ async function loadPackages() {
       if (requestedPackage && publicPackages.some(p => String(p.id) === requestedPackage)) packageSelect.value = requestedPackage;
       packageSelect.addEventListener("change",()=>{
         const chosen=publicPackages.find(p=>String(p.id)===String(packageSelect.value));
-        const durationMatch=String(chosen?.duration||"").match(/(\\d+)\\s*days?/i);
+        const durationMatch=String(chosen?.duration||"").match(/(\d+)\s*days?/i);
         if(durationMatch){tripDaysInput.value=Number(durationMatch[1]);calculateJourneyEstimate();}
       });
       if(packageSelect.value)packageSelect.dispatchEvent(new Event("change"));
