@@ -27,6 +27,7 @@ let db;
 let D = {};
 
 let editingPackageId = null;
+let editingProviderPaymentId = null;
 let editingItineraryId = null;
 let itineraryGalleryImages = [];
 let editingHotelId = null;
@@ -1139,7 +1140,7 @@ function render() {
         <div><small>Balance due</small><strong>${cash(due)}</strong></div>
       </div>
       <p class="provider-payment-linked">${group.length} LINKED PAYMENT ${group.length === 1 ? "ENTRY" : "ENTRIES"}</p>
-      ${ordered.map(row => `<div class="provider-payment-row"><div><b>${esc(row.payment_stage)}</b> · ${esc(row.payment_date || "")}<small>${esc(row.payment_method || "Method not set")} · ${esc(row.description || "No note")}</small>${row.linked_entry_id ? '<small class="provider-payment-linked">CONNECTED TO AN EARLIER ENTRY</small>' : ""}</div><strong>${cash(row.amount)}</strong></div>`).join("")}
+      ${ordered.map(row => `<div class="provider-payment-row"><div><b>${esc(row.payment_stage)}</b> · ${esc(row.payment_date || "")}<small>${esc(row.payment_method || "Method not set")} · ${esc(row.description || "No note")}</small>${row.linked_entry_id ? '<small class="provider-payment-linked">CONNECTED TO AN EARLIER ENTRY</small>' : ""}</div><div class="provider-payment-row-actions"><strong>${cash(row.amount)}</strong><button type="button" class="secondary" data-edit-provider-payment="${esc(row.id)}">Edit</button></div></div>`).join("")}
     </article>`;
   }).join("") || "No service provider payments recorded yet. Add an advance or full payment to start a provider ledger.");
   setHTML("providerVendorSelect", '<option value="">Enter provider manually</option>' + (D.vendors || []).map(v => `<option value="${esc(v.id)}">${esc(v.name)} · ${esc(v.category || "Vendor")}</option>`).join(""));
@@ -2372,17 +2373,26 @@ function bindForms() {
         agreed_total: agreed,
         amount,
         payment_stage: obj.payment_stage,
-        ...(obj.payment_date ? {payment_date: obj.payment_date} : {}),
+        payment_date: obj.payment_date || null,
         payment_method: obj.payment_method || null,
         description: obj.description.trim() || null,
-        ...(linked ? {group_id: linked.group_id, linked_entry_id: linked.id} : {})
+        ...(linked ? {group_id: linked.group_id || linked.id, linked_entry_id: linked.id} : {})
       };
-      const { error } = await db.from("supplier_payment_entries").insert(payload);
-      if (error) throw error;
+      const isEditing = Boolean(editingProviderPaymentId);
+      let result;
+      if (editingProviderPaymentId) {
+        result = await db.from("supplier_payment_entries").update(payload).eq("id", editingProviderPaymentId);
+      } else {
+        result = await db.from("supplier_payment_entries").insert(payload);
+      }
+      if (result.error) throw result.error;
       form.closest("dialog")?.close();
       form.reset();
+      editingProviderPaymentId = null;
+      setText("providerPaymentDialogTitle", "Record Service Provider Payment");
+      setText("providerPaymentSave", "Save Provider Payment");
       await load();
-      alert("Provider payment saved and linked successfully.");
+      alert(isEditing ? "Provider transaction updated." : "Provider transaction saved.");
     } catch (error) {
       alert("Could not save provider payment: " + error.message);
     }
@@ -2544,7 +2554,35 @@ function bindActions() {
 
     button = target.closest("#newProviderPayment");
     if (button) {
+      editingProviderPaymentId = null;
       $("providerPaymentF")?.reset();
+      setText("providerPaymentDialogTitle", "Record Service Provider Payment");
+      setText("providerPaymentSave", "Save Provider Payment");
+      show("providerPaymentDialog");
+      return;
+    }
+
+    button = target.closest("[data-edit-provider-payment]");
+    if (button) {
+      const entry = (D.supplier_payment_entries || []).find(row => String(row.id) === String(button.dataset.editProviderPayment));
+      if (!entry) { alert("This provider transaction could not be found. Refresh the dashboard."); return; }
+      const form = $("providerPaymentF");
+      if (!form) return;
+      editingProviderPaymentId = entry.id;
+      form.reset();
+      form.elements.vendor_id.value = entry.vendor_id || "";
+      form.elements.supplier_name.value = entry.supplier_name || "";
+      form.elements.service_name.value = entry.service_name || "";
+      form.elements.booking_id.value = entry.booking_id || "";
+      form.elements.agreed_total.value = entry.agreed_total ?? "";
+      form.elements.amount.value = entry.amount ?? "";
+      form.elements.payment_stage.value = entry.payment_stage || "Other";
+      form.elements.payment_date.value = entry.payment_date || "";
+      form.elements.payment_method.value = entry.payment_method || "Other";
+      form.elements.linked_entry_id.value = "";
+      form.elements.description.value = entry.description || "";
+      setText("providerPaymentDialogTitle", "Edit Provider Transaction");
+      setText("providerPaymentSave", "Update Transaction");
       show("providerPaymentDialog");
       return;
     }
