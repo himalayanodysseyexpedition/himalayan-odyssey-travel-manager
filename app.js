@@ -16,6 +16,9 @@ const CAB_BUCKET = "cab-photos";
 const ITINERARY_BUCKET = "itinerary-pdfs";
 const ITINERARY_PHOTO_BUCKET = "itinerary-photos";
 const PACKAGE_BUCKET = "package-posters";
+const DESTINATION_BUCKET = "destination-photos";
+const MAX_DESTINATION_PHOTO_SIZE = 5 * 1024 * 1024;
+let editingDestinationId = null;
 
 const MAX_HOTEL_PHOTO_SIZE = 5 * 1024 * 1024;
 const MAX_CAB_PHOTO_SIZE = 5 * 1024 * 1024;
@@ -204,6 +207,7 @@ async function load() {
     "vendors",
     "transactions",
     "itineraries",
+    "destinations",
     "itinerary_days",
     "hotels",
     "hotel_photos",
@@ -220,6 +224,7 @@ async function load() {
   }
 
   render();
+  renderDestinationAdmin();
 }
 
 
@@ -3052,6 +3057,103 @@ document.addEventListener("click", async event => {
 }
 
 
+
+/* DESTINATION PHOTO MANAGEMENT */
+function renderDestinationAdmin() {
+  const target=$("destinationList");
+  if(!target)return;
+  const items=[...(D.destinations||[])].sort((a,b)=>(a.sort_order||0)-(b.sort_order||0));
+  if(!items.length){target.innerHTML="<p>No destinations yet. Add your first destination photo.</p>";return;}
+  target.innerHTML='<div class="hotel-photo-grid">'+items.map(item=>`
+    <article class="hotel-photo" style="min-width:220px">
+      ${item.image_url?`<img src="${esc(item.image_url)}" alt="${esc(item.title)}">`:'<div style="height:100px;display:grid;place-items:center;background:#edf1eb">No photo</div>'}
+      <strong>${esc(item.title)}</strong><small>${esc(item.tagline||"")}</small>
+      <small>Order: ${Number(item.sort_order)||0} · ${item.is_active?"Published":"Hidden"}</small>
+      <button type="button" data-edit-destination="${esc(item.id)}">Edit</button>
+      <button type="button" class="danger" data-delete-destination="${esc(item.id)}">Delete</button>
+    </article>`).join("")+'</div>';
+}
+function resetDestinationForm(){
+  editingDestinationId=null;
+  $("destinationF")?.reset();
+  $("destinationDialogTitle").textContent="Add Destination";
+  $("destinationOrder").value=String((D.destinations||[]).length+1);
+  $("destinationPublished").checked=true;
+  setHTML("destinationPhotoPreview","");
+}
+function openEditDestination(id){
+  const item=(D.destinations||[]).find(x=>String(x.id)===String(id));
+  if(!item)return;
+  editingDestinationId=item.id;
+  $("destinationDialogTitle").textContent="Edit Destination";
+  $("destinationTitle").value=item.title||"";
+  $("destinationTagline").value=item.tagline||"";
+  $("destinationLink").value=item.link_url||"";
+  $("destinationOrder").value=String(item.sort_order||1);
+  $("destinationPublished").checked=!!item.is_active;
+  $("destinationPhoto").value="";
+  setHTML("destinationPhotoPreview",item.image_url?`<div class="hotel-photo"><img src="${esc(item.image_url)}" alt="Current destination photo"><small>Current photo — upload a new one to replace it.</small></div>`:"");
+  show("destinationForm");
+}
+async function saveDestination(event){
+  event.preventDefault();
+  const button=$("destinationSave");
+  if(button)button.disabled=true;
+  let uploadedPath=null;
+  try{
+    const title=$("destinationTitle").value.trim();
+    if(!title)throw new Error("Enter a destination name.");
+    const existing=(D.destinations||[]).find(x=>String(x.id)===String(editingDestinationId));
+    const payload={
+      title,
+      tagline:$("destinationTagline").value.trim()||null,
+      slug:title.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""),
+      link_url:$("destinationLink").value.trim()||null,
+      sort_order:Math.max(1,Number($("destinationOrder").value)||1),
+      is_active:$("destinationPublished").checked,
+      updated_at:new Date().toISOString()
+    };
+    const file=$("destinationPhoto").files?.[0];
+    if(file){
+      if(!["image/jpeg","image/png","image/webp"].includes(file.type))throw new Error("Only JPG, PNG and WebP images are allowed.");
+      if(file.size>MAX_DESTINATION_PHOTO_SIZE)throw new Error("Photo must be smaller than 5 MB.");
+      const id=editingDestinationId||crypto.randomUUID();
+      uploadedPath=id+"/"+Date.now()+"-"+safeFileName(file.name);
+      const {error:uploadError}=await db.storage.from(DESTINATION_BUCKET).upload(uploadedPath,file,{contentType:file.type,upsert:false});
+      if(uploadError)throw uploadError;
+      const {data}=db.storage.from(DESTINATION_BUCKET).getPublicUrl(uploadedPath);
+      payload.image_url=data.publicUrl;payload.storage_path=uploadedPath;
+    }
+    if(editingDestinationId){
+      const {error}=await db.from("destinations").update(payload).eq("id",editingDestinationId);
+      if(error)throw error;
+    }else{
+      if(!payload.image_url)throw new Error("Please upload a destination photo.");
+      const {error}=await db.from("destinations").insert(payload);
+      if(error)throw error;
+    }
+    if(file&&existing?.storage_path&&existing.storage_path!==uploadedPath){
+      await db.storage.from(DESTINATION_BUCKET).remove([existing.storage_path]);
+    }
+    $("destinationForm").close();
+    await load();
+    message("Destination saved and website list refreshed.");
+  }catch(error){
+    if(uploadedPath)await db.storage.from(DESTINATION_BUCKET).remove([uploadedPath]);
+    alert("Could not save destination: "+error.message);
+  }finally{if(button)button.disabled=false;}
+}
+async function deleteDestination(id){
+  const item=(D.destinations||[]).find(x=>String(x.id)===String(id));
+  if(!item||!confirm("Delete "+item.title+" and its photo permanently?"))return;
+  try{
+    const {error}=await db.from("destinations").delete().eq("id",id);
+    if(error)throw error;
+    if(item.storage_path){const {error:storageError}=await db.storage.from(DESTINATION_BUCKET).remove([item.storage_path]);if(storageError)console.warn(storageError);}
+    await load();message("Destination deleted.");
+  }catch(error){alert("Could not delete destination: "+error.message);}
+}
+
 /* =========================================
    STARTUP
 ========================================= */
@@ -3078,6 +3180,20 @@ async function initialize() {
     bindPageButtons();
     bindForms();
     bindActions();
+    $("newDestination")?.addEventListener("click",()=>{resetDestinationForm();show("destinationForm");});
+    $("destinationF")?.addEventListener("submit",saveDestination);
+    $("destinationList")?.addEventListener("click",event=>{
+      const edit=event.target.closest("[data-edit-destination]");
+      const del=event.target.closest("[data-delete-destination]");
+      if(edit)openEditDestination(edit.dataset.editDestination);
+      if(del)deleteDestination(del.dataset.deleteDestination);
+    });
+    $("destinationPhoto")?.addEventListener("change",()=>{
+      const file=$("destinationPhoto").files?.[0];
+      if(!file)return;
+      const url=URL.createObjectURL(file);
+      setHTML("destinationPhotoPreview",`<div class="hotel-photo"><img src="${url}" alt="New destination photo"><small>New photo preview</small></div>`);
+    });
 
 
     /* NEW ITINERARY */
