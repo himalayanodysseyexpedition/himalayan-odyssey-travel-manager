@@ -2716,15 +2716,38 @@ async function loadPackages() {
 
     const {data:linkedItineraries,error:itineraryError} = await db
       .from("itineraries")
-      .select("id,package_id")
-      .eq("published",true)
-      .not("package_id","is",null);
+      .select("id,package_id,title,destination,duration_days,duration_nights")
+      .eq("published",true);
     if (itineraryError) throw itineraryError;
-    const itineraryPageByPackage = new Map((linkedItineraries || []).map(item => [
-      String(item.package_id), "/itinerary.html?id=" + encodeURIComponent(item.id)
-    ]));
+
+    const itineraryPageFor = p => {
+      const rows = linkedItineraries || [];
+      const exact = rows.find(item => String(item.package_id || "") === String(p.id));
+      if (exact) return "/itinerary.html?id=" + encodeURIComponent(exact.id);
+
+      const normalize = value => String(value || "").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
+      const packageDestination = normalize(p.destination);
+      const duration = String(p.duration || "").toLowerCase();
+      const dayMatch = duration.match(/(\\d+)\\s*days?/);
+      const nightMatch = duration.match(/(\\d+)\\s*nights?/);
+      const candidates = rows.filter(item => {
+        const destination = normalize(item.destination);
+        const sameDestination = destination && packageDestination &&
+          (destination === packageDestination || destination.includes(packageDestination) || packageDestination.includes(destination));
+        const sameDays = !dayMatch || Number(item.duration_days) === Number(dayMatch[1]);
+        const sameNights = !nightMatch || Number(item.duration_nights) === Number(nightMatch[1]);
+        return sameDestination && sameDays && sameNights;
+      });
+      const packageName = normalize(p.name);
+      const preferred = packageName.includes("4 people")
+        ? candidates.find(item => normalize(item.title).includes("4 people"))
+        : candidates.find(item => normalize(item.title).includes("all cab options"));
+      const match = preferred || candidates[0];
+      return match ? "/itinerary.html?id=" + encodeURIComponent(match.id) : null;
+    };
+
     const publicPackages = data.map(p => ({
-      ...p, linkedItineraryPage:itineraryPageByPackage.get(String(p.id)) || null
+      ...p, linkedItineraryPage:itineraryPageFor(p)
     }));
 
     list.innerHTML = publicPackages.map(p => {
