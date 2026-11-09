@@ -1329,6 +1329,22 @@ html{scroll-behavior:smooth}
 @media(max-width:600px){.packages-carousel{grid-auto-columns:88%;gap:14px;padding-right:8vw}.package-slide>img,.package-slide>.image-fallback{height:205px;min-height:205px}.package-slide .card-body{padding:20px 18px 22px}.package-slide .card-body h3{font-size:27px}.packages-controls{margin-top:14px}.packages-controls .guide-arrow{width:40px;height:40px}}
 @media(prefers-reduced-motion:reduce){.packages-carousel{scroll-behavior:auto}.package-slide{transition:none}}
 
+
+/* TOUR ITINERARIES CAROUSEL */
+.itineraries-carousel{margin-top:4px}
+.itinerary-slide{min-height:100%;animation:itineraryCardIn .55s both}
+.itinerary-slide .itinerary-cover{height:175px!important;min-height:175px;display:grid;place-items:center}
+.itinerary-slide .card-body{gap:4px}
+.itinerary-slide .card-body h3{font:500 28px/1.1 var(--serif);color:var(--forest)}
+.itinerary-slide .itinerary-meta{color:#987342;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.itinerary-slide .pdf-actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.itinerary-slide .card-body>.btn{margin-top:8px}
+.itineraries-controls{margin-top:20px}
+@keyframes itineraryCardIn{from{opacity:.65;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:900px){.itineraries-carousel{grid-auto-columns:calc((100% - 22px)/2)}}
+@media(max-width:600px){.itineraries-carousel{grid-auto-columns:88%;gap:14px;padding-right:8vw}.itinerary-slide .itinerary-cover{height:165px!important;min-height:165px}.itinerary-slide .card-body{padding:20px 18px 22px}.itinerary-slide .card-body h3{font-size:26px}.itineraries-controls{margin-top:14px}}
+@media(prefers-reduced-motion:reduce){.itinerary-slide{animation:none}}
+
 </style>
 
 <script type="application/ld+json">
@@ -1706,9 +1722,16 @@ html{scroll-behavior:smooth}
 
     <p class="intro reveal">Explore our detailed tour brochures, travel routes, sightseeing information and trip details. View or download an itinerary before planning your Himalayan journey.</p>
 
-    <div id="itineraryList" class="cards">
+    <div id="itineraryList" class="packages-carousel itineraries-carousel" tabindex="0" aria-label="Tour itineraries carousel">
       <p id="itineraryMessage">Loading available itineraries...</p>
     </div>
+    <div class="guides-controls itineraries-controls" aria-label="Tour itinerary carousel controls">
+      <span class="guides-count" id="itinerariesCount" aria-live="polite">01 <i>/</i> 01</span>
+      <button type="button" class="guide-arrow" id="itinerariesPrev" aria-label="Previous itineraries">←</button>
+      <button type="button" class="guide-arrow" id="itinerariesNext" aria-label="Next itineraries">→</button>
+    </div>
+    <div class="guides-progress packages-progress" aria-hidden="true"><span id="itinerariesProgress"></span></div>
+    <p class="guides-swipe-hint">SWIPE TO EXPLORE <span>·</span> OR USE THE ARROWS</p>
 
   </div>
 </section>
@@ -2205,9 +2228,9 @@ async function loadItineraries() {
         ". Please share more details.";
 
       return `
-        <article class="card reveal">
+        <article class="card package-slide itinerary-slide reveal">
 
-          <div style="height:155px;background:linear-gradient(135deg,#0b211d,#315e50);display:grid;place-items:center;color:#e9c58d;text-align:center;padding:20px">
+          <div class="itinerary-cover" style="height:155px;background:linear-gradient(135deg,#0b211d,#315e50);display:grid;place-items:center;color:#e9c58d;text-align:center;padding:20px">
 
             <div>
               <div style="font-size:40px">✧</div>
@@ -2738,6 +2761,27 @@ if (footerContactBar && siteFooter) {
   const prev=document.getElementById("packagesPrev");
   const next=document.getElementById("packagesNext");
   const cards=()=>[...rail.querySelectorAll(".package-slide")];
+  const step=()=>{const card=cards()[0];if(!card)return 1;const gap=parseFloat(getComputedStyle(rail).gap)||0;return card.getBoundingClientRect().width+gap;};
+  const update=()=>{const items=cards();if(!items.length)return;const index=Math.min(items.length-1,Math.max(0,Math.round(rail.scrollLeft/step())));if(count)count.innerHTML=String(index+1).padStart(2,"0")+' <i>/</i> '+String(items.length).padStart(2,"0");if(progress)progress.style.width=((index+1)/items.length*100)+"%";};
+  const move=direction=>rail.scrollBy({left:direction*step(),behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+  prev?.addEventListener("click",()=>move(-1));
+  next?.addEventListener("click",()=>move(1));
+  rail.addEventListener("scroll",()=>requestAnimationFrame(update),{passive:true});
+  rail.addEventListener("keydown",event=>{if(event.key==="ArrowRight"){event.preventDefault();move(1)}if(event.key==="ArrowLeft"){event.preventDefault();move(-1)}});
+  new MutationObserver(()=>requestAnimationFrame(update)).observe(rail,{childList:true});
+  update();
+})();
+
+
+/* TOUR ITINERARY CAROUSEL CONTROLS */
+(() => {
+  const rail=document.getElementById("itineraryList");
+  if(!rail)return;
+  const count=document.getElementById("itinerariesCount");
+  const progress=document.getElementById("itinerariesProgress");
+  const prev=document.getElementById("itinerariesPrev");
+  const next=document.getElementById("itinerariesNext");
+  const cards=()=>[...rail.querySelectorAll(".itinerary-slide")];
   const step=()=>{const card=cards()[0];if(!card)return 1;const gap=parseFloat(getComputedStyle(rail).gap)||0;return card.getBoundingClientRect().width+gap;};
   const update=()=>{const items=cards();if(!items.length)return;const index=Math.min(items.length-1,Math.max(0,Math.round(rail.scrollLeft/step())));if(count)count.innerHTML=String(index+1).padStart(2,"0")+' <i>/</i> '+String(items.length).padStart(2,"0");if(progress)progress.style.width=((index+1)/items.length*100)+"%";};
   const move=direction=>rail.scrollBy({left:direction*step(),behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
