@@ -2396,6 +2396,12 @@ header .header-inner > .header-cta:focus-visible{
   }
 }
 
+
+/* Prevent the legacy flex spacer from becoming an extra CSS-grid item */
+header .header-inner > nav[aria-label="Main navigation"]::after{
+  content:none!important;
+  display:none!important;
+}
 </style>
 
 
