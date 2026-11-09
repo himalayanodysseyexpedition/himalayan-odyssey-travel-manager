@@ -1174,9 +1174,9 @@ html{scroll-behavior:smooth}
 
 /* PREMIUM HORIZONTAL TRAVEL GUIDE CAROUSEL */
 .travel-guides-premium{overflow:hidden;background:linear-gradient(180deg,#f7f5ef 0%,#eeece4 100%)}
-.guides-heading-row{display:flex;align-items:end;justify-content:space-between;gap:28px;margin-bottom:30px}
-.guides-heading-row .intro{margin-bottom:0}
-.guides-controls{display:flex;align-items:center;gap:9px;flex-shrink:0;padding-bottom:5px}
+.guides-heading-row{display:block;text-align:center;margin:0 auto 30px}
+.guides-heading-row .intro{margin:0 auto 0;text-align:center}
+.guides-controls{display:flex;align-items:center;justify-content:center;gap:9px;flex-shrink:0;width:100%;margin:16px auto 0;padding:0}
 .guides-count{margin-right:9px;color:#6d7a72;font-size:11px;letter-spacing:1.4px;font-weight:700;font-variant-numeric:tabular-nums}
 .guides-count i{font-style:normal;color:#b9a47e;margin:0 4px}
 .guide-arrow{width:43px;height:43px;border:1px solid #c9b995;border-radius:50%;background:#fffdf8;color:#173d33;font-size:21px;cursor:pointer;transition:background .25s,color .25s,transform .25s}
@@ -1213,10 +1213,11 @@ html{scroll-behavior:smooth}
 .guides-swipe-hint span{padding:0 5px;color:#b48e55}
 @media(max-width:900px){.guides-carousel{grid-auto-columns:calc((100% - 22px)/2)}}
 @media(max-width:600px){
- .guides-heading-row{align-items:end;gap:12px;margin-bottom:22px}
+ .guides-heading-row{display:block;text-align:center;margin:0 auto 22px}
  .guides-heading-row .section-title h2{font-size:34px}
- .guides-controls{gap:6px}
- .guides-count{font-size:9px;margin-right:2px}
+ .guides-heading-row .intro{margin:0 auto;text-align:center}
+ .guides-controls{justify-content:center;gap:7px;margin-top:14px}
+ .guides-count{font-size:10px;margin-right:4px}
  .guide-arrow{width:36px;height:36px;font-size:18px}
  .guides-carousel{grid-auto-columns:84%;gap:13px;padding-bottom:14px;margin-right:-6%;padding-right:6%}
  .guide-card{min-height:365px;padding:22px 21px 24px}
@@ -1417,23 +1418,16 @@ html{scroll-behavior:smooth}
 <section class="content info travel-guides-premium" id="travel-guides">
   <div class="section-inner">
     <div class="guides-heading-row">
-      <div>
-        <div class="section-title reveal"><small>PLAN WITH CONFIDENCE</small><h2>Himalayan Travel Guides</h2></div>
-        <p class="intro reveal">Thoughtful local insights for choosing the right Himalayan route, season and experience.</p>
-      </div>
-      <div class="guides-controls" aria-label="Travel guide carousel controls">
-        <span class="guides-count" id="guidesCount" aria-live="polite">01 <i>/</i> 11</span>
-        <button type="button" class="guide-arrow" id="guidesPrev" aria-label="Previous travel guides">←</button>
-        <button type="button" class="guide-arrow" id="guidesNext" aria-label="Next travel guides">→</button>
-      </div>
+      <div class="section-title reveal"><small>PLAN WITH CONFIDENCE</small><h2>Himalayan Travel Guides</h2></div>
+      <p class="intro reveal">Thoughtful local insights for choosing the right Himalayan route, season and experience.</p>
     </div>
     <div class="guides-carousel" id="guidesCarousel" tabindex="0" aria-label="Swipe through Himalayan travel guides">
       <article class="guide-card guide-spiti">
-        <div class="guide-card-top"><span>01 / SPITI</span><span class="guide-mark">✳</span></div>
+        <div class="guide-card-top"><span>01 / SPITI</span><span class="guide-mark" aria-label="Mountain route">🏔️</span></div>
         <div class="guide-card-copy"><small>ROUTE PLANNING</small><h3>Spiti Tour from Chandigarh</h3><p>Explore the Shimla–Kinnaur approach, suggested trip duration and essential checks before setting out.</p><a href="/spiti-tour-from-chandigarh/">Plan your route <b>↗</b></a></div>
       </article>
       <article class="guide-card guide-winter">
-        <div class="guide-card-top"><span>02 / WINTER</span><span class="guide-mark">❄</span></div>
+        <div class="guide-card-top"><span>02 / WINTER</span><span class="guide-mark" aria-label="Winter snow">❄️</span></div>
         <div class="guide-card-copy"><small>SEASONAL KNOW-HOW</small><h3>Winter Spiti Tours</h3><p>Prepare for cold-weather travel, winter stays, changing road conditions and practical backup plans.</p><a href="/winter-spiti-tours/">Read winter guide <b>↗</b></a></div>
       </article>
       <article class="guide-card guide-valley">
@@ -1472,6 +1466,11 @@ html{scroll-behavior:smooth}
         <div class="guide-card-top"><span>11 / SHIMLA</span><span class="guide-mark">⌂</span></div>
         <div class="guide-card-copy"><small>HERITAGE & HILLS</small><h3>Shimla Holidays</h3><p>Discover the Ridge, Mall Road, heritage corners and easy connections towards Kufri and Narkanda.</p><a href="/shimla-tours/">Explore Shimla <b>↗</b></a></div>
       </article>
+    </div>
+    <div class="guides-controls" aria-label="Travel guide carousel controls">
+      <span class="guides-count" id="guidesCount" aria-live="polite">01 <i>/</i> 11</span>
+      <button type="button" class="guide-arrow" id="guidesPrev" aria-label="Previous travel guides">←</button>
+      <button type="button" class="guide-arrow" id="guidesNext" aria-label="Next travel guides">→</button>
     </div>
     <div class="guides-progress" aria-hidden="true"><span id="guidesProgress"></span></div>
     <p class="guides-swipe-hint">SWIPE TO EXPLORE <span>·</span> OR USE THE ARROWS</p>
