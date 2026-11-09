@@ -3,20 +3,63 @@ const SUPABASE_URL="https://ynkoiuyjevclypumnyes.supabase.co";
 const SUPABASE_KEY="sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-";
 const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const $=id=>document.getElementById(id);
-let currentUser=null,profile=null;
-const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const csv=v=>v.split(",").map(x=>x.trim()).filter(Boolean);
-function status(id,msg){$(id).textContent=msg;}
-function phoneE164(v){let n=v.replace(/[^0-9+]/g,"");if(n.startsWith("00"))n="+"+n.slice(2);if(!n.startsWith("+"))n="+91"+n.replace(/^0/,"");return n;}
-async function sendOtp(){const phone=phoneE164($("phone").value);if(!/^\+[1-9]\d{7,14}$/.test(phone)){status("authStatus","Enter a valid mobile number with country code, for example +91 9876543210.");return;}$("sendOtp").disabled=true;try{const {error}=await db.auth.signInWithOtp({phone,options:{shouldCreateUser:true}});if(error)throw error;$("phone").value=phone;$("otpArea").classList.remove("hidden");status("authStatus","OTP sent by SMS. Enter the code received on "+phone+".");}catch(e){status("authStatus","Could not send SMS OTP: "+e.message);}finally{$("sendOtp").disabled=false;}}
-async function verifyOtp(){const phone=phoneE164($("phone").value),token=$("otp").value.trim();if(!/^\d{6}$/.test(token)){status("authStatus","Enter the 6-digit OTP.");return;}$("verifyOtp").disabled=true;try{const {data,error}=await db.auth.verifyOtp({phone,token,type:"sms"});if(error)throw error;currentUser=data.user;await loadSupplier();}catch(e){status("authStatus","Verification failed: "+e.message);}finally{$("verifyOtp").disabled=false;}}
-async function loadSupplier(){if(!currentUser)return;const {data,error}=await db.from("supplier_profiles").select("*").eq("id",currentUser.id).maybeSingle();if(error)throw error;profile=data;$("authPanel").classList.add("hidden");$("profilePanel").classList.remove("hidden");if(profile){$("contactPerson").value=profile.contact_person||"";$("businessName").value=profile.business_name||"";$("supplierType").value=profile.supplier_type||"driver";$("supplierEmail").value=profile.email||"";$("supplierCity").value=profile.city||"";$("supplierState").value=profile.state||"Himachal Pradesh";$("supplierAddress").value=profile.business_address||"";$("supplierGst").value=profile.gst_number||"";status("profileStatus","Profile status: "+profile.verification_status+". You can update your details below.");if(profile.verification_status==="approved")$("listingPanel").classList.remove("hidden");else status("profileStatus","Your supplier profile is "+profile.verification_status+". Our team will review it. You can still save your profile; listing tools unlock after approval.");}else{status("profileStatus","Complete your supplier profile to submit it for approval.");}}
-async function saveProfile(e){e.preventDefault();try{const payload={id:currentUser.id,phone:currentUser.phone,phone_verified:!!currentUser.phone_confirmed_at,contact_person:$("contactPerson").value.trim(),business_name:$("businessName").value.trim(),supplier_type:$("supplierType").value,email:$("supplierEmail").value.trim()||null,city:$("supplierCity").value.trim()||null,state:$("supplierState").value.trim()||"Himachal Pradesh",business_address:$("supplierAddress").value.trim()||null,gst_number:$("supplierGst").value.trim()||null};if(!payload.phone_verified)throw new Error("Your mobile number is not verified yet.");const {error}=await db.from("supplier_profiles").upsert(payload);if(error)throw error;status("profileStatus","Supplier profile submitted. Our team will review and approve it.");await loadSupplier();}catch(e){status("profileStatus","Could not save profile: "+e.message);}}
-function resetListing(){ $("listingForm").reset();$("listingId").value="";$("listingType").value="cab";$("priceUnit").value="per day";$("cabFields").classList.remove("hidden");$("propertyFields").classList.add("hidden");$("saveListing").textContent="Submit listing for approval";$("cancelEdit").classList.add("hidden");}
-async function uploadPhotos(files){const urls=[];for(const file of files){if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>5242880)throw new Error("Each photo must be JPG, PNG or WebP and under 5 MB.");const path=currentUser.id+"/"+crypto.randomUUID()+"-"+file.name.replace(/[^a-zA-Z0-9._-]/g,"-");const {error}=await db.storage.from("supplier-listing-photos").upload(path,file,{contentType:file.type,upsert:false});if(error)throw error;const {data}=db.storage.from("supplier-listing-photos").getPublicUrl(path);urls.push(data.publicUrl);}return urls;}
-async function saveListing(e){e.preventDefault();if(profile?.verification_status!=="approved"){status("listingStatus","Your supplier account must be approved before listings can be submitted.");return;}const btn=$("saveListing");btn.disabled=true;try{const id=$("listingId").value;let images=[];const files=[...$("listingPhotos").files];if(files.length)images=await uploadPhotos(files);if(id&&!images.length){const old=(await db.from("supplier_listings").select("images").eq("id",id).single());if(old.error)throw old.error;images=old.data.images||[];}const type=$("listingType").value;const payload={supplier_id:currentUser.id,listing_type:type,title:$("listingTitle").value.trim(),destination:$("listingDestination").value.trim(),location:$("listingLocation").value.trim(),description:$("listingDescription").value.trim()||null,price:$("listingPrice").value?Number($("listingPrice").value):null,price_unit:$("priceUnit").value,vehicle_model:type==="cab"?$("vehicleModel").value.trim()||null:null,seating_capacity:type==="cab"&&$("seats").value?Number($("seats").value):null,vehicle_features:type==="cab"?csv($("vehicleFeatures").value):[],property_type:type==="property"?$("propertyType").value:null,room_types:type==="property"?csv($("roomTypes").value):[],amenities:type==="property"?csv($("amenities").value):[],images,status:"pending",is_active:true};const result=id?await db.from("supplier_listings").update(payload).eq("id",id):await db.from("supplier_listings").insert(payload);if(result.error)throw result.error;resetListing();status("listingStatus","Listing submitted for admin approval. It will appear publicly after approval.");await loadListings();}catch(e){status("listingStatus","Could not save listing: "+e.message);}finally{btn.disabled=false;}}
-async function loadListings(){const {data,error}=await db.from("supplier_listings").select("*").eq("supplier_id",currentUser.id).order("created_at",{ascending:false});if(error)throw error;$("myListings").innerHTML=data.length?data.map(x=>'<div class="listing"><strong>'+esc(x.title)+'</strong> <span class="pill">'+esc(x.status)+'</span><p>'+esc(x.destination)+' · '+esc(x.location)+'</p><p>'+esc(x.listing_type)+' · '+(x.price?'₹'+Number(x.price).toLocaleString("en-IN")+' '+esc(x.price_unit||""):"Price on request")+'</p><button class="secondary" data-edit="'+x.id+'">Edit</button></div>').join(""):"<p class='note'>No listings yet. Add your first cab or property above.</p>";}
-async function editListing(id){const {data,error}=await db.from("supplier_listings").select("*").eq("id",id).single();if(error){status("listingStatus",error.message);return;}const x=data;$("listingId").value=x.id;$("listingType").value=x.listing_type;$("listingTitle").value=x.title;$("listingDestination").value=x.destination;$("listingLocation").value=x.location;$("listingDescription").value=x.description||"";$("listingPrice").value=x.price||"";$("priceUnit").value=x.price_unit||"on request";$("vehicleModel").value=x.vehicle_model||"";$("seats").value=x.seating_capacity||"";$("vehicleFeatures").value=(x.vehicle_features||[]).join(", ");$("propertyType").value=x.property_type||"Hotel";$("roomTypes").value=(x.room_types||[]).join(", ");$("amenities").value=(x.amenities||[]).join(", ");$("listingPhotos").value="";$("cabFields").classList.toggle("hidden",x.listing_type!=="cab");$("propertyFields").classList.toggle("hidden",x.listing_type!=="property");$("saveListing").textContent="Save changes for review";$("cancelEdit").classList.remove("hidden");window.scrollTo({top:$("listingForm").getBoundingClientRect().top+window.scrollY-20,behavior:"smooth"});}
-async function signOut(){await db.auth.signOut();location.reload();}
-$("sendOtp").addEventListener("click",sendOtp);$("resendOtp").addEventListener("click",sendOtp);$("verifyOtp").addEventListener("click",verifyOtp);$("profileForm").addEventListener("submit",saveProfile);$("listingForm").addEventListener("submit",saveListing);$("signOut").addEventListener("click",signOut);$("cancelEdit").addEventListener("click",resetListing);$("listingType").addEventListener("change",()=>{$("cabFields").classList.toggle("hidden",$("listingType").value!=="cab");$("propertyFields").classList.toggle("hidden",$("listingType").value!=="property");});$("myListings").addEventListener("click",e=>{const b=e.target.closest("[data-edit]");if(b)editListing(b.dataset.edit);});
-db.auth.getSession().then(async({data})=>{if(data.session){currentUser=data.session.user;try{await loadSupplier();if(profile?.verification_status==="approved"){ $("listingPanel").classList.remove("hidden");await loadListings();}}catch(e){status("authStatus","Account could not load: "+e.message);}}});
+const status=(id,msg)=>{$(id).textContent=msg;};
+const phoneValue=v=>v.trim().replace(/[()\s.-]/g,"");
+function toggleListingFields(){
+ const cab=$("listingType").value==="cab";
+ $("cabFields").classList.toggle("hidden",!cab);
+ $("propertyFields").classList.toggle("hidden",cab);
+}
+async function submitSupplier(e){
+ e.preventDefault();
+ const btn=$("submitSupplier");
+ btn.disabled=true;
+ status("submissionStatus","Submitting your details securely...");
+ try{
+  const phone=phoneValue($("phone").value);
+  const whatsapp=phoneValue($("whatsapp").value);
+  const validPhone=v=>/^\+?[0-9]{10,15}$/.test(v);
+  if(!validPhone(phone)||!validPhone(whatsapp))throw new Error("Enter valid mobile and WhatsApp numbers, including country code where needed.");
+  const type=$("listingType").value;
+  const price=$("listingPrice").value.trim();
+  const payload={
+   contact_person:$("contactPerson").value.trim(),
+   business_name:$("businessName").value.trim(),
+   phone,whatsapp,
+   email:$("supplierEmail").value.trim()||null,
+   supplier_type:$("supplierType").value,
+   city:$("supplierCity").value.trim()||null,
+   state:$("supplierState").value.trim()||"Himachal Pradesh",
+   business_address:$("supplierAddress").value.trim()||null,
+   gst_number:$("supplierGst").value.trim()||null,
+   listing_type:type,
+   title:$("listingTitle").value.trim(),
+   destination:$("listingDestination").value.trim(),
+   location:$("listingLocation").value.trim(),
+   description:$("listingDescription").value.trim()||null,
+   price:price===""?null:Number(price),
+   price_unit:$("priceUnit").value,
+   vehicle_model:type==="cab"?$("vehicleModel").value.trim()||null:null,
+   seating_capacity:type==="cab"&&$("seats").value?Number($("seats").value):null,
+   vehicle_features:type==="cab"?csv($("vehicleFeatures").value):[],
+   property_type:type==="property"?$("propertyType").value:null,
+   room_types:type==="property"?csv($("roomTypes").value):[],
+   amenities:type==="property"?csv($("amenities").value):[]
+  };
+  if(price!==""&&(!Number.isFinite(payload.price)||payload.price<0))throw new Error("Enter a valid non-negative price.");
+  const {error}=await db.from("supplier_submissions").insert(payload);
+  if(error)throw error;
+  $("supplierSubmissionForm").reset();
+  $("supplierState").value="Himachal Pradesh";
+  toggleListingFields();
+  $("formPanel").classList.add("hidden");
+  $("successPanel").classList.remove("hidden");
+ }catch(err){
+  console.error("Supplier submission failed:",err);
+  status("submissionStatus","Could not submit your details: "+err.message);
+ }finally{btn.disabled=false;}
+}
+$("listingType").addEventListener("change",toggleListingFields);
+$("supplierSubmissionForm").addEventListener("submit",submitSupplier);
+toggleListingFields();
