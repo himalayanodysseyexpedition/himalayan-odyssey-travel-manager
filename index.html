@@ -1894,7 +1894,7 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
           <a href="/suppliers/">List Your Vehicle or Property</a>
         </div>
       </div>
-      <a class="header-cta" href="https://wa.me/919816929669?text=Hello%2C%20I%20would%20like%20to%20plan%20a%20Himalayan%20trip." target="_blank" rel="noopener noreferrer">Plan on WhatsApp ↗</a>
+      <a class="header-cta" href="/?topic=General%20Himalayan%20trip%20planning#travel-enquiry">Plan Your Trip ↗</a>
     </nav>
   </div>
 </header>
@@ -1912,7 +1912,7 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
     <a class="btn" href="#packages">Explore Our Journeys</a>
 
     <a class="btn outline"
-       href="https://wa.me/919816929669?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20Himalayan%20tours."
+       href="/?topic=General%20Himalayan%20tour%20enquiry#travel-enquiry"
        target="_blank"
        rel="noopener noreferrer">Enquire on WhatsApp</a>
     <div class="hero-note" aria-label="Destinations we offer">
@@ -2402,7 +2402,7 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
         <h3>Hotel Enquiries</h3>
         <p>Looking for comfortable stays in the mountains?</p>
         <a class="btn"
-           href="https://wa.me/919816929669?text=I%20need%20a%20hotel%20enquiry"
+           href="/?topic=Hotel%20or%20stay%20enquiry#travel-enquiry"
            target="_blank" rel="noopener">Enquire Now</a>
       </div>
 
@@ -2450,7 +2450,7 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
         <p>Planning a Himalayan escape should feel personal from the very first conversation. Our Google Business Profile currently shows a <strong>5.0/5 rating from 7 reviews</strong>. Read traveller feedback or tell us about the journey you have in mind.</p>
         <div class="review-actions">
           <a class="btn" href="https://maps.google.com/maps?cid=3907406288341631942" target="_blank" rel="noopener noreferrer">Find us on Google ↗</a>
-          <a class="btn outline" href="https://wa.me/919816929669?text=Hello%20Himalayan%20Odyssey%20Expedition%2C%20I%20would%20like%20to%20plan%20a%20trip." target="_blank" rel="noopener noreferrer">Talk to our team</a>
+          <a class="btn outline" href="/?topic=Talk%20to%20the%20Himalayan%20Odyssey%20team#travel-enquiry">Talk to our team</a>
         </div>
       </div>
       <div class="review-points" aria-label="Our travel approach">
@@ -2499,7 +2499,7 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
       </details>
     </div>
     <div class="section-action reveal">
-      <a class="btn" href="https://wa.me/919816929669?text=Hello%2C%20I%20have%20a%20question%20about%20your%20Himalayan%20tour%20packages." target="_blank" rel="noopener noreferrer">Ask us on WhatsApp</a>
+      <a class="btn" href="/?topic=Question%20about%20Himalayan%20tour%20packages#travel-enquiry">Ask a Question</a>
     </div>
   </div>
 </section>
@@ -2761,6 +2761,12 @@ async function loadPackages() {
         publicPackages.map(p => '<option value="' + safe(p.id) + '">' + safe(p.name || p.destination || "Himalayan Tour") + '</option>').join("");
       const requestedPackage = new URLSearchParams(window.location.search).get("package");
       if (requestedPackage && publicPackages.some(p => String(p.id) === requestedPackage)) packageSelect.value = requestedPackage;
+      packageSelect.addEventListener("change",()=>{
+        const chosen=publicPackages.find(p=>String(p.id)===String(packageSelect.value));
+        const durationMatch=String(chosen?.duration||"").match(/(\\d+)\\s*days?/i);
+        if(durationMatch){tripDaysInput.value=Number(durationMatch[1]);calculateJourneyEstimate();}
+      });
+      if(packageSelect.value)packageSelect.dispatchEvent(new Event("change"));
     }
     const topicInput=document.getElementById("enquiryTopic");
     const queryTopic=new URLSearchParams(window.location.search).get("topic");
@@ -3407,7 +3413,7 @@ loadHotels();
    const joined=Number(item.joined_count||0),capacity=Math.max(1,Number(item.max_travellers||1)),pct=Math.min(100,Math.round(joined/capacity*100)),full=item.status==="full"||joined>=capacity;
    const msg=encodeURIComponent("Hello Himalayan Odyssey Expedition, I am interested in joining the "+item.title+" to "+item.destination+" departing on "+date(item.start_date)+". Please share booking details.");
    const image=item.image_url||"https://himalayanexpedition.co.in/spiti.jpg";
-   return '<article class="group-departure-card"><div class="group-departure-photo"><img src="'+safe(image)+'" alt="'+safe(item.destination)+' group tour" loading="lazy" decoding="async"><span class="group-departure-status">'+(full?"GROUP FULL":"OPEN FOR BOOKINGS")+'</span></div><div class="group-departure-body"><small>'+safe(item.destination)+'</small><h3>'+safe(item.title)+'</h3><div class="group-departure-date">'+date(item.start_date)+(item.end_date?" – "+date(item.end_date):"")+(item.duration?" · "+safe(item.duration):"")+'</div><div class="group-departure-meta"><span>Package price</span><strong>'+money(item.price_per_person)+' / person</strong></div><div class="group-occupancy"><div class="group-occupancy-label"><span>Travellers joined</span><strong>'+joined+' / '+capacity+'</strong></div><div class="group-occupancy-track"><span style="width:'+pct+'%"></span></div></div><p class="group-departure-highlights">'+safe(item.highlights||"A memorable Himalayan group journey with local support.")+'</p><a class="group-departure-cta" href="https://wa.me/919816929669?text='+msg+'" target="_blank" rel="noopener">'+(full?"Ask About Next Departure":"Enquire / Book This Group")+'</a></div></article>';
+   return '<article class="group-departure-card"><div class="group-departure-photo"><img src="'+safe(image)+'" alt="'+safe(item.destination)+' group tour" loading="lazy" decoding="async"><span class="group-departure-status">'+(full?"GROUP FULL":"OPEN FOR BOOKINGS")+'</span></div><div class="group-departure-body"><small>'+safe(item.destination)+'</small><h3>'+safe(item.title)+'</h3><div class="group-departure-date">'+date(item.start_date)+(item.end_date?" – "+date(item.end_date):"")+(item.duration?" · "+safe(item.duration):"")+'</div><div class="group-departure-meta"><span>Package price</span><strong>'+money(item.price_per_person)+' / person</strong></div><div class="group-occupancy"><div class="group-occupancy-label"><span>Travellers joined</span><strong>'+joined+' / '+capacity+'</strong></div><div class="group-occupancy-track"><span style="width:'+pct+'%"></span></div></div><p class="group-departure-highlights">'+safe(item.highlights||"A memorable Himalayan group journey with local support.")+'</p><a class="group-departure-cta" href="/?topic='+encodeURIComponent("Group departure: "+item.title+" · "+date(item.start_date))+'#travel-enquiry">'+(full?"Ask About Next Departure":"Enquire / Book This Group")+'</a></div></article>';
   }).join("");
   const count=document.getElementById("groupDeparturesCount");
   const step=()=>{const card=rail.querySelector(".group-departure-card");return card?card.getBoundingClientRect().width+parseFloat(getComputedStyle(rail).gap||0):280;};
