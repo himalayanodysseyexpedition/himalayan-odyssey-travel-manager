@@ -2249,68 +2249,8 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
 }
 
 
-/* Header navigation: links first, prominent booking button on its own row */
-.header-inner{gap:8px}
-header nav{
-  width:100%;
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  justify-content:center;
-  gap:6px 14px;
-  padding:3px 0 4px;
-  overflow:visible;
-}
-header nav>a:not(.header-cta),
-header nav>.nav-dropdown{order:0;flex:0 0 auto}
-header nav>a:not(.header-cta){white-space:nowrap}
-header nav::after{
-  content:"";
-  display:block;
-  flex:0 0 100%;
-  order:1;
-  height:0;
-}
-header nav>.header-cta{
-  order:2;
-  display:inline-flex;
-  flex:0 0 auto;
-  align-items:center;
-  justify-content:center;
-  width:auto;
-  max-width:100%;
-  min-height:42px;
-  margin:5px auto 2px;
-  padding:11px 25px;
-  border:1px solid #e5c78d;
-  border-radius:999px;
-  background:linear-gradient(135deg,#f0d8a6,#c49a5c);
-  color:#172b23;
-  box-shadow:0 7px 20px rgba(198,163,106,.28);
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:1px;
-  line-height:1.2;
-  text-transform:uppercase;
-  white-space:nowrap;
-}
-header nav>.header-cta:hover,
-header nav>.header-cta:focus-visible{
-  background:linear-gradient(135deg,#f7e5bf,#d3ad70);
-  color:#10251d;
-  transform:translateY(-2px);
-  outline:2px solid rgba(229,199,141,.35);
-  outline-offset:3px;
-}
-header nav>.header-cta:after{display:none}
-@media(max-width:640px){
-  .header-inner{gap:5px;padding:8px 4% 10px}
-  header nav{gap:5px 9px}
-  header nav>a:not(.header-cta){padding:7px 8px;font-size:9px;letter-spacing:.55px}
-  header nav>.header-cta{min-height:40px;margin:6px auto 2px;padding:10px 22px;font-size:10px}
-}
 
-/* FINAL HEADER OVERRIDE — keep the full navigation visible across breakpoints */
+/* FINAL NAVIGATION FIX — four frosted pills in one horizontal row; CTA below */
 header .header-inner{
   display:flex!important;
   flex-direction:column!important;
@@ -2320,60 +2260,31 @@ header .header-inner{
 }
 header .header-inner > .brand{flex:0 0 auto!important}
 header .header-inner > nav[aria-label="Main navigation"]{
-  width:100%!important;
-  max-width:100%!important;
-  display:grid!important;
-  grid-template-columns:repeat(4,max-content)!important;
-  grid-auto-flow:row!important;
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
   align-items:center!important;
   justify-content:center!important;
-  justify-items:center!important;
-  gap:7px 18px!important;
+  gap:clamp(5px,1.15vw,14px)!important;
+  width:100%!important;
+  max-width:100%!important;
+  padding:3px 2px 5px!important;
   overflow:visible!important;
-  padding:3px 0 5px!important;
+  white-space:nowrap!important;
 }
-header .header-inner > nav[aria-label="Main navigation"] > a:not(.header-cta),
+header .header-inner > nav[aria-label="Main navigation"] > a,
 header .header-inner > nav[aria-label="Main navigation"] > .nav-dropdown{
   display:flex!important;
+  flex:0 0 auto!important;
   min-width:0!important;
   white-space:nowrap!important;
 }
-header .header-inner > nav[aria-label="Main navigation"] > .header-cta{
-  grid-column:1/-1!important;
-  justify-self:center!important;
-  display:inline-flex!important;
-  width:auto!important;
-  max-width:100%!important;
-  min-height:42px!important;
-  margin:3px 0 1px!important;
-  padding:11px 26px!important;
-  border:1px solid #e5c78d!important;
-  border-radius:999px!important;
-  background:linear-gradient(135deg,#f0d8a6,#c49a5c)!important;
-  color:#172b23!important;
-  box-shadow:0 7px 20px rgba(198,163,106,.28)!important;
-  font-size:11px!important;
-  font-weight:800!important;
-  letter-spacing:1px!important;
-  line-height:1.2!important;
-  text-transform:uppercase!important;
-  white-space:nowrap!important;
+header .header-inner > nav[aria-label="Main navigation"] > a{
+  padding:10px 13px!important;
 }
-header .header-inner > nav[aria-label="Main navigation"] > .header-cta:after{display:none!important}
-@media(max-width:640px){
-  header .header-inner{padding:8px 3% 10px!important;gap:6px!important}
-  header .header-inner > .brand img{width:180px!important;max-height:60px!important}
-  header .header-inner > nav[aria-label="Main navigation"]{
-    grid-template-columns:repeat(2,max-content)!important;
-    gap:6px 16px!important;
-  }
-  header .header-inner > nav[aria-label="Main navigation"] > a:not(.header-cta){font-size:9px!important;letter-spacing:.65px!important;padding:5px 2px!important}
-  header .header-inner > nav[aria-label="Main navigation"] > .nav-dropdown-toggle{font-size:9px!important;padding:6px 9px!important}
-  header .header-inner > nav[aria-label="Main navigation"] > .header-cta{min-height:41px!important;padding:10px 23px!important;font-size:10px!important}
+header .header-inner > nav[aria-label="Main navigation"] > .nav-dropdown > .nav-dropdown-toggle{
+  padding:10px 13px!important;
 }
-
-
-/* CTA is a sibling of nav in the actual header markup */
 header .header-inner > .header-cta{
   display:inline-flex!important;
   flex:0 0 auto!important;
@@ -2382,7 +2293,7 @@ header .header-inner > .header-cta{
   width:auto!important;
   max-width:100%!important;
   min-height:43px!important;
-  margin:2px auto 1px!important;
+  margin:0 auto 1px!important;
   padding:11px 28px!important;
   border:1px solid rgba(240,220,181,.95)!important;
   border-radius:999px!important;
@@ -2403,20 +2314,46 @@ header .header-inner > .header-cta:focus-visible{
   outline-offset:3px!important;
 }
 @media(max-width:640px){
+  header .header-inner{padding:8px 2% 10px!important;gap:6px!important}
+  header .header-inner > .brand img{width:180px!important;max-height:60px!important}
+  header .header-inner > nav[aria-label="Main navigation"]{
+    justify-content:center!important;
+    gap:5px!important;
+  }
+  header .header-inner > nav[aria-label="Main navigation"] > a{
+    font-size:clamp(7px,2.1vw,9px)!important;
+    letter-spacing:.2px!important;
+    padding:8px clamp(6px,1.7vw,10px)!important;
+    min-height:34px!important;
+  }
+  header .header-inner > nav[aria-label="Main navigation"] > .nav-dropdown > .nav-dropdown-toggle{
+    font-size:clamp(7px,2.1vw,9px)!important;
+    letter-spacing:.2px!important;
+    padding:8px clamp(6px,1.7vw,10px)!important;
+    min-height:34px!important;
+    gap:4px!important;
+  }
+  header .header-inner > nav[aria-label="Main navigation"] .services-chevron{
+    width:13px!important;height:13px!important;font-size:11px!important;
+  }
   header .header-inner > .header-cta{
     min-height:41px!important;
-    margin:2px auto 1px!important;
+    margin:0 auto 1px!important;
     padding:10px 24px!important;
     font-size:10px!important;
   }
 }
-
-
-/* Prevent the legacy flex spacer from becoming an extra CSS-grid item */
-header .header-inner > nav[aria-label="Main navigation"]::after{
-  content:none!important;
-  display:none!important;
+@media(max-width:360px){
+  header .header-inner > nav[aria-label="Main navigation"]{gap:3px!important}
+  header .header-inner > nav[aria-label="Main navigation"] > a,
+  header .header-inner > nav[aria-label="Main navigation"] > .nav-dropdown > .nav-dropdown-toggle{
+    font-size:7px!important;padding:7px 5px!important;letter-spacing:0!important;
+  }
 }
+/* The booking CTA is a sibling of the navigation, never a fifth nav item. */
+header .header-inner > nav[aria-label="Main navigation"]::after{content:none!important;display:none!important}
+
+
 </style>
 
 
