@@ -930,7 +930,7 @@ function render() {
         [
           esc(item.destination || ""),
           esc(item.start_date || ""),
-          `Total ${cash(total)} • Paid ${cash(paid)} • Balance ${cash(balance)}`
+          `${Math.max(1, Number(item.package_quantity || 1))} package(s) • Total ${cash(total)} • Advance ${cash(paid)} • Balance ${cash(balance)}`
         ],
         `
           ${
@@ -996,10 +996,66 @@ function render() {
   );
 
 
-  /* FINANCE */
+  /* CUSTOMER-WISE PACKAGE FINANCE LEDGER */
 
+  const financeBookings = bookings;
+  const packageUnits = financeBookings.reduce((sum, item) => sum + Math.max(1, Number(item.package_quantity || 1)), 0);
+  const packageSales = financeBookings.reduce((sum, item) => sum + Number(item.total_amount || 0), 0);
+  const supplierCosts = financeBookings.reduce((sum, item) => sum + (item.supplier_cost_per_package == null ? 0 : Number(item.supplier_cost_per_package || 0) * Math.max(1, Number(item.package_quantity || 1))), 0);
+  const costedBookings = financeBookings.filter(item => item.supplier_cost_per_package !== null && item.supplier_cost_per_package !== undefined);
+  const calculatedProfit = costedBookings.reduce((sum, item) => sum + Number(item.package_profit || 0), 0);
+  const advances = financeBookings.reduce((sum, item) => sum + Number(item.amount_paid || 0), 0);
+  const outstanding = financeBookings.reduce((sum, item) => sum + Math.max(0, Number(item.total_amount || 0) - Number(item.amount_paid || 0)), 0);
+
+  setText("financePackagesSold", packageUnits);
+  setText("financeSales", cash(packageSales));
+  setText("financeSupplierCosts", cash(supplierCosts));
+  setText("financeProfit", cash(calculatedProfit));
+  setText("financeProfitNote", costedBookings.length === financeBookings.length ? "All bookings costed" : (financeBookings.length - costedBookings.length) + " booking(s) awaiting supplier cost");
+  setText("financeAdvance", cash(advances));
+  setText("financeBalance", cash(outstanding));
+
+  setHTML("financeList", financeBookings.map(item => {
+    const qty = Math.max(1, Number(item.package_quantity || 1));
+    const salePerPackage = Number(item.total_amount || 0) / qty;
+    const supplierPerPackage = item.supplier_cost_per_package == null ? null : Number(item.supplier_cost_per_package || 0);
+    const supplierTotal = supplierPerPackage == null ? null : supplierPerPackage * qty;
+    const balance = Math.max(0, Number(item.total_amount || 0) - Number(item.amount_paid || 0));
+    const customer = item.c || {};
+    const profit = item.package_profit == null ? null : Number(item.package_profit);
+    return `
+      <article class="finance-entry">
+        <div class="finance-entry-head">
+          <div>
+            <b>${esc(customer.name || "Customer")}</b>
+            <p>${esc(customer.phone || "No phone")} · ${esc(item.destination || "Package booking")} · ${esc(item.start_date || "Date not set")}</p>
+          </div>
+          <span class="finance-quantity">${qty} ${qty === 1 ? "PACKAGE" : "PACKAGES"}</span>
+        </div>
+        <div class="finance-breakdown">
+          <div><small>Selling price / package</small><strong>${cash(salePerPackage)}</strong></div>
+          <div><small>Total package revenue</small><strong>${cash(item.total_amount)}</strong></div>
+          <div><small>Supplier cost / package</small><strong>${supplierPerPackage == null ? "Not entered" : cash(supplierPerPackage)}</strong></div>
+          <div><small>Total supplier cost</small><strong>${supplierTotal == null ? "Awaiting cost" : cash(supplierTotal)}</strong></div>
+          <div><small>Advance received</small><strong>${cash(item.amount_paid)}</strong></div>
+          <div><small>Left to collect</small><strong>${cash(balance)}</strong></div>
+        </div>
+        <div class="finance-profit-line">
+          <span>Calculated package profit <small>(revenue − supplier cost; advance excluded)</small></span>
+          <strong>${profit == null ? "Enter supplier cost" : cash(profit)}</strong>
+        </div>
+        ${item.supplier_details ? `<p class="finance-supplier-notes"><b>Supplier services:</b> ${esc(item.supplier_details)}</p>` : ""}
+        <div class="finance-actions">
+          <button data-edit-booking-finance="${esc(item.id)}">Edit package & supplier costs</button>
+          <button data-pay="${esc(item.id)}">Record advance / payment</button>
+        </div>
+      </article>
+    `;
+  }).join("") || "No customer bookings yet. Confirm a lead to create the first finance entry.");
+
+  /* OTHER TRANSACTIONS AND RECEIPTS */
   setHTML(
-    "financeList",
+    "financeTransactions",
     transactions.map(item =>
       card(
         item.transaction_type + " • " + cash(item.amount),
@@ -1018,7 +1074,7 @@ function render() {
           ${del("transactions", item.id)}
         `
       )
-    ).join("") || "No transactions yet."
+    ).join("") || "No other transactions yet."
   );
 
 
@@ -2435,6 +2491,48 @@ function bindActions() {
     }
 
 
+    /* EDIT PACKAGE QUANTITY, SELLING PRICE AND SUPPLIER COSTS */
+    button = target.closest("[data-edit-booking-finance]");
+    if (button) {
+      const booking = getBooking(button.dataset.editBookingFinance);
+      if (!booking) return;
+      const currentQuantity = Math.max(1, Number(booking.package_quantity || 1));
+      const quantityInput = prompt("Number of packages sold", String(currentQuantity));
+      if (quantityInput === null) return;
+      const quantity = Number(quantityInput);
+      if (!Number.isInteger(quantity) || quantity < 1) { alert("Enter a whole package quantity of at least 1."); return; }
+
+      const currentUnitPrice = Number(booking.total_amount || 0) / currentQuantity;
+      const priceInput = prompt("Selling price for ONE package ₹", String(currentUnitPrice));
+      if (priceInput === null) return;
+      const unitPrice = Number(priceInput);
+      if (!Number.isFinite(unitPrice) || unitPrice < 0) { alert("Enter a valid selling price."); return; }
+
+      const currentSupplierCost = booking.supplier_cost_per_package == null ? "" : String(booking.supplier_cost_per_package);
+      const supplierInput = prompt("Total supplier/service cost for ONE package ₹ (blank = not entered)", currentSupplierCost);
+      if (supplierInput === null) return;
+      const supplierCost = supplierInput.trim() === "" ? null : Number(supplierInput);
+      if (supplierCost !== null && (!Number.isFinite(supplierCost) || supplierCost < 0)) { alert("Enter a valid supplier cost or leave it blank."); return; }
+
+      const detailsInput = prompt("Supplier/service breakdown (hotel, cab, food etc.)", booking.supplier_details || "");
+      if (detailsInput === null) return;
+
+      try {
+        const { error } = await db.from("bookings").update({
+          package_quantity: quantity,
+          total_amount: unitPrice * quantity,
+          supplier_cost_per_package: supplierCost,
+          supplier_details: detailsInput.trim() || null
+        }).eq("id", booking.id);
+        if (error) throw error;
+        await load();
+        alert("Package finance updated. Profit is recalculated automatically; advance received was not changed.");
+      } catch (error) {
+        alert("Could not update package finance: " + error.message);
+      }
+      return;
+    }
+
     /* INVOICE PDF */
 
     button = target.closest("[data-invoice]");
@@ -2635,11 +2733,40 @@ function bindActions() {
 
       if (!lead) return;
 
-      const total = prompt("Total booking amount ₹", lead.budget || "0");
-      if (total === null) return;
+      const quantityInput = prompt("How many packages has this customer booked?", "1");
+      if (quantityInput === null) return;
+      const quantity = Number(quantityInput);
+      if (!Number.isInteger(quantity) || quantity < 1) {
+        alert("Package quantity must be a whole number of at least 1.");
+        return;
+      }
 
-      const paid = prompt("Advance received ₹", "0");
+      const unitPriceInput = prompt("Selling price for ONE package ₹", lead.budget || "0");
+      if (unitPriceInput === null) return;
+      const unitPrice = Number(unitPriceInput);
+      if (!Number.isFinite(unitPrice) || unitPrice < 0) {
+        alert("Please enter a valid package selling price.");
+        return;
+      }
+
+      const supplierCostInput = prompt("Supplier/service cost for ONE package ₹ (leave blank if not known yet)", "");
+      if (supplierCostInput === null) return;
+      const supplierCost = supplierCostInput.trim() === "" ? null : Number(supplierCostInput);
+      if (supplierCost !== null && (!Number.isFinite(supplierCost) || supplierCost < 0)) {
+        alert("Please enter a valid supplier cost, or leave it blank.");
+        return;
+      }
+
+      const supplierDetails = prompt("Supplier/service cost breakdown (hotel, cab, food etc.)", "") ;
+      if (supplierDetails === null) return;
+
+      const paid = prompt("Advance received ₹ (this reduces only the balance due, not profit)", "0");
       if (paid === null) return;
+      const advance = Number(paid);
+      if (!Number.isFinite(advance) || advance < 0) {
+        alert("Please enter a valid advance amount.");
+        return;
+      }
 
       try {
         const { error } = await db
@@ -2649,8 +2776,11 @@ function bindActions() {
             destination: lead.destination,
             start_date: lead.travel_date,
             travellers: lead.travellers,
-            total_amount: Number(total) || 0,
-            amount_paid: Number(paid) || 0,
+            package_quantity: quantity,
+            total_amount: unitPrice * quantity,
+            supplier_cost_per_package: supplierCost,
+            supplier_details: supplierDetails.trim() || null,
+            amount_paid: advance,
             notes: lead.notes
           });
 
