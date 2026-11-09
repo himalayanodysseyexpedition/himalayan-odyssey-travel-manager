@@ -89,6 +89,17 @@ header{
   align-items:center;
   gap:8px;
 }
+/* Original logo enhancement — decorative layers only; logo.webp remains untouched */
+.brand{position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;padding:7px 18px;border-radius:20px;overflow:visible;background:radial-gradient(ellipse at 50% 55%,rgba(234,214,174,.13),transparent 68%),repeating-linear-gradient(145deg,rgba(234,214,174,.025) 0 1px,transparent 1px 9px);box-shadow:0 8px 30px rgba(0,0,0,.18),inset 0 0 22px rgba(198,163,106,.07);transition:transform .45s cubic-bezier(.2,.75,.25,1),filter .45s ease}
+.brand:before{content:"";position:absolute;inset:0;border:1px solid rgba(198,163,106,.38);border-radius:inherit;pointer-events:none;background:linear-gradient(110deg,transparent 15%,rgba(234,214,174,.24) 48%,transparent 78%);background-size:220% 100%;animation:brandSheen 7s ease-in-out infinite}
+.brand:after{content:"";position:absolute;inset:-8px -13px;z-index:-1;border-radius:25px;background:radial-gradient(circle at 8% 22%,rgba(234,214,174,.65) 0 1px,transparent 2px),radial-gradient(circle at 91% 76%,rgba(234,214,174,.55) 0 1px,transparent 2px),radial-gradient(ellipse at 50% 50%,rgba(198,163,106,.13),transparent 70%);opacity:.72;animation:brandGlow 5s ease-in-out infinite alternate;pointer-events:none}
+.brand img{position:relative;z-index:1;display:block;width:215px;max-height:75px;object-fit:contain;filter:drop-shadow(0 3px 9px rgba(0,0,0,.24));animation:brandFloat 6s ease-in-out infinite}
+.brand:hover{transform:translateY(-2px);filter:brightness(1.08)}
+@keyframes brandSheen{0%,65%,100%{background-position:130% 0}82%{background-position:-130% 0}}
+@keyframes brandGlow{from{opacity:.38;transform:scale(.985)}to{opacity:.9;transform:scale(1.025)}}
+@keyframes brandFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@media(prefers-reduced-motion:reduce){.brand,.brand:before,.brand:after,.brand img{animation:none!important;transition:none!important}}
+
 .brand img{
   display:block;
   width:215px;
