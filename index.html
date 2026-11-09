@@ -3149,12 +3149,14 @@ document.getElementById("travelEnquiryForm").addEventListener("submit",async fun
  let message="NEW WEBSITE TRAVEL ENQUIRY\nHIMALAYAN ODYSSEY EXPEDITION\n\nGuest: "+name+"\nPhone: "+phone+"\nEnquiry: "+(enquiryTopic||"General trip enquiry")+"\nSelected package: "+(packageName||"Custom itinerary / general enquiry")+"\nPersons: "+persons+"\nDestinations: "+destination+"\nMonth: "+month+"\nTrip duration: "+estimate.days+" days\n\nSTAY & MEALS: "+money(estimate.stayTotal)+" per person\n"+estimate.stays.map(x=>"• "+x.name+": "+x.nights+" night(s) × "+money(x.rate)+" = "+money(x.rate*x.nights)+" per person").join("\n")+"\n"+(estimate.cab?"Cab: "+estimate.cab.name+" · "+money(estimate.cab.daily_price)+"/day × "+estimate.days+" days = "+money(estimate.cabTotal)+" group total; "+money(estimate.cabShare)+" per person":"Cab: Not selected") +"\n\nESTIMATED TOTAL PER PERSON: "+money(estimate.total)+"\nESTIMATED GROUP TOTAL: "+money(estimate.total*persons)+"\n"+(selectedPackage?.price_per_person!=null?"Advertised package price: "+money(selectedPackage.price_per_person)+" per person (separate from custom estimate)\n":"")+"\nEstimate excludes unconfirmed tolls, parking, permits, driver allowance and route charges.";
  if(startDate)message+="\nStart date: "+startDate;if(endDate)message+="\nEnd date: "+endDate;message+=saved?"\nCRM: Saved.":"\nCRM: Please record manually; automatic save failed.";message+="\n\nPlease confirm availability and final quotation.";
  if(selectedPackage?.linkedItineraryPage)message+="\n\nSelected itinerary: https://himalayanexpedition.co.in"+selectedPackage.linkedItineraryPage;
+ const redirectUrl=requestedItinerary
+   ? "/itinerary.html?id="+encodeURIComponent(requestedItinerary)
+   : (selectedPackage?.linkedItineraryPage || (selectedPackage ? "/#itineraries" : ""));
+ if(button)button.disabled=false;
+ // Initiate the main-tab itinerary navigation before handing WhatsApp to iOS.
+ if(redirectUrl)window.location.assign(redirectUrl);
  if(waWindow)waWindow.location.href=whatsappLink(message);else alert("Please allow pop-ups to continue to WhatsApp.");
  if(waWindow&&!saved)alert("WhatsApp is ready, but CRM saving failed. Please record this enquiry manually. "+saveErrorText);
- if(button)button.disabled=false;
- if(requestedItinerary){window.location.assign("/itinerary.html?id="+encodeURIComponent(requestedItinerary));}
- else if(selectedPackage?.linkedItineraryPage){window.location.assign(selectedPackage.linkedItineraryPage);}
- else if(selectedPackage){window.location.assign("/#itineraries");}
 });
 
 /* SCROLL REVEAL ANIMATIONS */
