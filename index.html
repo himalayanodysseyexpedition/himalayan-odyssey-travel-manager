@@ -2214,6 +2214,69 @@ header nav>.header-cta:after{display:none}
   header nav>a:not(.header-cta){padding:7px 8px;font-size:9px;letter-spacing:.55px}
   header nav>.header-cta{min-height:40px;margin:6px auto 2px;padding:10px 22px;font-size:10px}
 }
+
+/* FINAL HEADER OVERRIDE — keep the full navigation visible across breakpoints */
+header .header-inner{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+}
+header .header-inner > .brand{flex:0 0 auto!important}
+header .header-inner > nav[aria-label="Main navigation"]{
+  width:100%!important;
+  max-width:100%!important;
+  display:grid!important;
+  grid-template-columns:repeat(4,max-content)!important;
+  grid-auto-flow:row!important;
+  align-items:center!important;
+  justify-content:center!important;
+  justify-items:center!important;
+  gap:7px 18px!important;
+  overflow:visible!important;
+  padding:3px 0 5px!important;
+}
+header .header-inner > nav[aria-label="Main navigation"] > a:not(.header-cta),
+header .header-inner > nav[aria-label="Main navigation"] > .nav-dropdown{
+  display:flex!important;
+  min-width:0!important;
+  white-space:nowrap!important;
+}
+header .header-inner > nav[aria-label="Main navigation"] > .header-cta{
+  grid-column:1/-1!important;
+  justify-self:center!important;
+  display:inline-flex!important;
+  width:auto!important;
+  max-width:100%!important;
+  min-height:42px!important;
+  margin:3px 0 1px!important;
+  padding:11px 26px!important;
+  border:1px solid #e5c78d!important;
+  border-radius:999px!important;
+  background:linear-gradient(135deg,#f0d8a6,#c49a5c)!important;
+  color:#172b23!important;
+  box-shadow:0 7px 20px rgba(198,163,106,.28)!important;
+  font-size:11px!important;
+  font-weight:800!important;
+  letter-spacing:1px!important;
+  line-height:1.2!important;
+  text-transform:uppercase!important;
+  white-space:nowrap!important;
+}
+header .header-inner > nav[aria-label="Main navigation"] > .header-cta:after{display:none!important}
+@media(max-width:640px){
+  header .header-inner{padding:8px 3% 10px!important;gap:6px!important}
+  header .header-inner > .brand img{width:180px!important;max-height:60px!important}
+  header .header-inner > nav[aria-label="Main navigation"]{
+    grid-template-columns:repeat(2,max-content)!important;
+    gap:6px 16px!important;
+  }
+  header .header-inner > nav[aria-label="Main navigation"] > a:not(.header-cta){font-size:9px!important;letter-spacing:.65px!important;padding:5px 2px!important}
+  header .header-inner > nav[aria-label="Main navigation"] > .nav-dropdown-toggle{font-size:9px!important;padding:6px 9px!important}
+  header .header-inner > nav[aria-label="Main navigation"] > .header-cta{min-height:41px!important;padding:10px 23px!important;font-size:10px!important}
+}
+
 </style>
 
 
