@@ -66,6 +66,21 @@ a{color:#987746}hr{border:0;border-top:1px solid var(--line);margin:22px 0}
 .finance-stats .stat small{display:block;text-transform:none;letter-spacing:0;font-weight:500;margin-top:3px}
 @media(max-width:760px){.finance-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.finance-breakdown{grid-template-columns:repeat(2,minmax(0,1fr))}.finance-profit-line{align-items:flex-start;flex-direction:column}}
 
+.provider-payment-stats{margin:14px 0}
+#providerPaymentList{display:grid;gap:12px}
+.provider-payment-group{display:block;border-left:3px solid #496d5c;padding:18px}
+.provider-payment-group h4{font:600 22px var(--serif);color:var(--forest);margin:0 0 5px}
+.provider-payment-meta{color:var(--muted);font-size:12px}
+.provider-payment-totals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:13px 0}
+.provider-payment-totals>div{background:#f5f2e9;border:1px solid var(--line);padding:10px}
+.provider-payment-totals small{display:block;font-size:10px}
+.provider-payment-totals strong{display:block;font:600 20px var(--serif);color:var(--forest)}
+.provider-payment-row{display:flex;justify-content:space-between;gap:12px;align-items:center;border-top:1px solid var(--line);padding:10px 0;font-size:12px}
+.provider-payment-row small{display:block}
+.provider-payment-row strong{white-space:nowrap;color:var(--forest)}
+.provider-payment-linked{font-size:10px;color:#547565;font-weight:700;letter-spacing:.4px}
+@media(max-width:760px){.provider-payment-totals{grid-template-columns:repeat(2,minmax(0,1fr))}.provider-payment-row{align-items:flex-start}}
+
 </style>
 </head>
 
@@ -212,6 +227,15 @@ a{color:#987746}hr{border:0;border-top:1px solid var(--line);margin:22px 0}
   </div>
   <h3>Customer-wise package ledger</h3>
   <div id="financeList"></div>
+  <hr>
+  <div class="topline"><div><h3>Service Provider Payments</h3><p class="finance-intro">Record advances, full payments and later balances to hotels, drivers and other suppliers. Link entries to the same payment group to see the combined paid amount and balance due.</p></div><button type="button" id="newProviderPayment">+ Add Provider Payment</button></div>
+  <div class="stats finance-stats provider-payment-stats">
+    <div class="stat">Payment Groups<strong id="providerPaymentGroups">0</strong></div>
+    <div class="stat">Agreed Provider Cost<strong id="providerAgreedTotal">₹0</strong></div>
+    <div class="stat">Paid to Providers<strong id="providerPaidTotal">₹0</strong></div>
+    <div class="stat">Provider Balance Due<strong id="providerDueTotal">₹0</strong></div>
+  </div>
+  <div id="providerPaymentList"></div>
   <hr>
   <div class="topline">
     <h3>Other transactions & receipts</h3>
@@ -394,6 +418,24 @@ Publish this cab on the guest website
 </form>
 </dialog>
 
+<!-- SERVICE PROVIDER PAYMENT FORM -->
+<dialog id="providerPaymentDialog"><form id="providerPaymentF">
+<h3>Record Service Provider Payment</h3>
+<label>Service Provider</label><select name="vendor_id" id="providerVendorSelect"><option value="">Enter provider manually</option></select>
+<label>Provider / Business Name *</label><input name="supplier_name" required placeholder="Hotel, driver, homestay or supplier name">
+<label>Service</label><input name="service_name" placeholder="Stay, cab, food, permits etc.">
+<label>Connect to Package Booking</label><select name="booking_id" id="providerBookingSelect"><option value="">No linked booking</option></select>
+<label>Total agreed amount for this provider / service (₹)</label><input name="agreed_total" type="number" min="0" step="0.01" required placeholder="e.g. 18000">
+<label>Amount paid in this entry (₹)</label><input name="amount" type="number" min="0.01" step="0.01" required placeholder="e.g. 5000">
+<label>Payment Type</label><select name="payment_stage" required><option value="Advance">Advance</option><option value="Full">Full Payment</option><option value="Balance">Balance Payment</option><option value="Other">Other</option></select>
+<label>Payment Date</label><input name="payment_date" type="date">
+<label>Payment Method</label><select name="payment_method"><option value="Cash">Cash</option><option value="UPI">UPI</option><option value="Bank Transfer">Bank Transfer</option><option value="Other">Other</option></select>
+<label>Connect this entry to an existing provider payment</label><select name="linked_entry_id" id="providerLinkedEntry"><option value="">Create a new payment group</option></select>
+<small>Choose an earlier entry to connect this payment to the same provider/service. The dashboard combines all linked entries.</small>
+<label>Notes / Reference</label><textarea name="description" rows="3" placeholder="Booking reference, UPI reference, room or vehicle details"></textarea>
+<button type="submit">Save Provider Payment</button><button type="button" data-close class="secondary">Cancel</button>
+</form></dialog>
+
 <!-- ITINERARY FORM -->
 <dialog id="itineraryForm">
 <form id="itineraryF">
@@ -430,6 +472,6 @@ Publish this cab on the guest website
 </form>
 </dialog>
 
-<script src="app.js?v=109"></script>
+<script src="app.js?v=110"></script>
 </body>
 </html>
