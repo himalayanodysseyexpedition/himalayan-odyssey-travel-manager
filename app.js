@@ -913,30 +913,34 @@ function render() {
   );
 
 
-  /* LEADS */
+  /* GUEST LEADS */
 
   setHTML(
     "leadList",
     leads.map(item =>
       card(
-        item.c.name || "Lead",
+        item.c.name || "Guest lead",
         [
-          esc(item.c.phone || ""),
-          esc(item.destination || ""),
-          esc(item.travel_date || ""),
-          "Budget " + cash(item.budget)
+          "Source: <b>" + esc(item.source || "Website") + "</b>" + (item.source_details ? " · " + esc(item.source_details) : ""),
+          "Status: <b>" + esc(item.status || "New") + "</b>",
+          esc(item.c.phone || "No phone number") + (item.c.email ? " · " + esc(item.c.email) : ""),
+          "Destination: " + esc(item.destination || "Not specified"),
+          "Travel date: " + esc(item.travel_date || "Flexible / not decided") + " · Travellers: " + esc(item.travellers || 1),
+          "Budget: " + cash(item.budget),
+          "Notes: " + esc(item.notes || "—")
         ],
         `
-          ${
-            item.c.phone
-              ? `<button data-wa="${esc(item.c.phone)}">WhatsApp</button>`
-              : ""
-          }
-          <button data-confirm="${esc(item.id)}">Confirm</button>
+          <label class="lead-status-label">Update status
+            <select data-lead-status="${esc(item.id)}">
+              ${["New","Contacted","Quotation Sent","Follow-up","Confirmed","Lost"].map(status => `<option value="${status}" ${(item.status || "New") === status ? "selected" : ""}>${status}</option>`).join("")}
+            </select>
+          </label>
+          ${item.c.phone ? `<button data-wa="${esc(item.c.phone)}">WhatsApp</button>` : ""}
+          <button data-confirm="${esc(item.id)}">Convert to Booking</button>
           ${del("leads", item.id)}
         `
       )
-    ).join("") || "No leads yet."
+    ).join("") || "No guest leads yet. Add leads from Instagram, Facebook, WhatsApp, Google, referrals or the website."
   );
 
 
@@ -2433,7 +2437,10 @@ function bindForms() {
             travel_date: obj.travel_date || null,
             travellers: Number(obj.travellers) || 1,
             budget: Number(obj.budget) || 0,
-            notes: obj.notes || null
+            notes: obj.notes || null,
+            source: obj.source || "Manual",
+            source_details: obj.source_details || null,
+            status: obj.status || "New"
           });
 
         if (leadError) throw leadError;
@@ -2546,7 +2553,28 @@ function renderSupplierNetwork() {
 ========================================= */
 
 function bindActions() {
-  document.addEventListener("click", async event => {
+  document.addEventListener("change", async event => {
+  const target = event.target;
+  if (!(target instanceof HTMLSelectElement)) return;
+  const leadId = target.dataset.leadStatus;
+  if (!leadId) return;
+  const nextStatus = target.value;
+  target.disabled = true;
+  try {
+    const { error } = await db.from("leads").update({ status: nextStatus }).eq("id", leadId);
+    if (error) throw error;
+    const lead = (D.leads || []).find(item => String(item.id) === String(leadId));
+    if (lead) lead.status = nextStatus;
+    message("Lead status updated.");
+  } catch (error) {
+    alert("Could not update lead status: " + error.message);
+    await load();
+  } finally {
+    target.disabled = false;
+  }
+});
+
+document.addEventListener("click", async event => {
     const target = event.target;
     if (!(target instanceof Element)) return;
 
