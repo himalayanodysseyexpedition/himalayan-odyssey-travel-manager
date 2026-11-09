@@ -1620,45 +1620,43 @@ header nav .header-cta:hover{background:linear-gradient(135deg,#f3dfb5,#d1ab70);
 }
 
 
-/* HORIZONTAL FLOATING MENU — single-line, swipeable on narrow screens */
+/* VERTICAL FLOATING MENU — neatly stacked, right-aligned above the glass nav */
 .quick-nav-menu{
   display:flex;
+  flex-direction:column;
   flex-wrap:nowrap;
-  align-items:center;
+  align-items:stretch;
   justify-content:flex-start;
-  gap:8px;
-  width:min(620px,calc(100vw - 36px));
+  gap:7px;
+  width:min(238px,calc(100vw - 36px));
   max-width:calc(100vw - 36px);
-  right:50%;
-  padding:10px 12px;
-  overflow-x:auto;
-  overflow-y:hidden;
-  scrollbar-width:none;
-  -webkit-overflow-scrolling:touch;
-  transform:translate(50%,10px) scale(.97);
-  transform-origin:bottom center;
+  right:8px;
+  padding:11px;
+  overflow:visible;
+  transform:translateY(10px) scale(.97);
+  transform-origin:bottom right;
 }
-.quick-nav-menu::-webkit-scrollbar{display:none}
-.quick-nav-menu.open{transform:translate(50%,0) scale(1)}
+.quick-nav-menu.open{transform:translateY(0) scale(1)}
 .quick-nav-menu a{
-  display:inline-flex;
+  display:flex;
   flex:0 0 auto;
   align-items:center;
-  min-height:40px;
+  width:100%;
+  min-height:42px;
   white-space:nowrap;
-  padding:9px 13px;
-  border-radius:999px;
+  padding:10px 13px;
+  border-radius:13px;
 }
 .quick-nav-menu a:before{width:5px;height:5px;flex:0 0 5px}
 @media(max-width:600px){
   .quick-nav-menu{
-    width:calc(100vw - 36px);
-    max-width:calc(100vw - 36px);
-    right:50%;
-    gap:7px;
-    padding:9px 10px;
+    width:min(238px,calc(100vw - 34px));
+    max-width:calc(100vw - 34px);
+    right:2px;
+    gap:6px;
+    padding:10px;
   }
-  .quick-nav-menu a{min-height:38px;padding:8px 11px;font-size:10px}
+  .quick-nav-menu a{min-height:40px;padding:9px 11px;font-size:10px}
 }
 
 </style>
