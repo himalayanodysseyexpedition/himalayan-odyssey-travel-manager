@@ -3375,7 +3375,7 @@ loadHotels();
     const {data,error}=await client.from("destinations").select("title,tagline,image_url,link_url,sort_order").eq("is_active",true).order("sort_order",{ascending:true});
     if(error||!data?.length)return;
     const rail=document.getElementById("destinationsCarousel");if(!rail)return;
-    rail.innerHTML=data.map(item=>{const safe=v=>String(v??"").replace(/[&<>"\']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;", "\\'":"&#39;"}[c]));return `<a class="destination-card reveal" href="${safe(item.link_url||"#travel-enquiry")}"><img src="${safe(item.image_url||"")}" alt="${safe(item.title)}" loading="lazy" decoding="async"><div class="destination-info"><small>${safe(item.tagline||"EXPLORE HIMACHAL")}</small><h3>${safe(item.title)}</h3><span>Explore the journey ↗</span></div></a>`;}).join("");
+    rail.innerHTML=data.map(item=>{const safe=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));return `<a class="destination-card reveal" href="${safe(item.link_url||"#travel-enquiry")}"><img src="${safe(item.image_url||"")}" alt="${safe(item.title)}" loading="lazy" decoding="async"><div class="destination-info"><small>${safe(item.tagline||"EXPLORE HIMACHAL")}</small><h3>${safe(item.title)}</h3><span>Explore the journey ↗</span></div></a>`;}).join("");
     rail.querySelectorAll(".reveal").forEach(el=>el.classList.add("is-visible"));
     const count=document.getElementById("destinationsCount");if(count)count.innerHTML="01 <i>/</i> "+String(data.length).padStart(2,"0");
   }catch(error){console.warn("Destination cards could not be refreshed:",error);}
