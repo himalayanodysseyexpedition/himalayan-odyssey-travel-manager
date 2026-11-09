@@ -2154,15 +2154,37 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
 }
 
 
-/* Place the primary booking CTA on its own centered row below navigation */
-header nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;white-space:normal;overflow:visible}
-header nav::after{content:"";display:block;flex:0 0 100%;order:1;height:0}
-header nav .header-cta{order:2;flex:0 0 auto;width:max-content;max-width:100%;margin:8px auto 0;box-sizing:border-box;white-space:nowrap}
-@media(max-width:760px){
-  header nav{flex-wrap:wrap;justify-content:center;gap:4px 9px;overflow:visible}
-  header nav .header-cta{margin:7px auto 0;padding:8px 16px;font-size:9px;letter-spacing:.35px}
+/* Stable responsive header navigation: keep every destination link visible */
+.header-inner{gap:8px}
+header nav{
+  width:100%;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:6px 14px;
+  padding:3px 0 2px;
+  overflow:visible;
 }
-@media(max-width:360px){header nav .header-cta{padding:7px 13px;font-size:8px}}
+header nav>a:not(.header-cta){
+  flex:0 0 auto;
+  white-space:nowrap;
+}
+header nav>.nav-dropdown{flex:0 0 auto}
+header nav>.header-cta{
+  order:0;
+  flex:0 0 auto;
+  width:auto;
+  max-width:100%;
+  margin:2px 0;
+  white-space:nowrap;
+}
+@media(max-width:640px){
+  .header-inner{gap:5px;padding:8px 4% 10px}
+  header nav{gap:5px 9px}
+  header nav>a:not(.header-cta){padding:7px 8px;font-size:9px;letter-spacing:.55px}
+  header nav>.header-cta{min-height:34px;padding:7px 11px;font-size:9px}
+}
 
 </style>
 
