@@ -131,9 +131,9 @@
     let data = {};
 
     if (key === "enquiry") {
-      const lead = (window.D?.leads || []).find(item => String(item.id) === String(id));
+      const lead = (D?.leads || []).find(item => String(item.id) === String(id));
       if (!lead) { alert("Lead not found. Refresh the dashboard and try again."); return; }
-      customer = (window.D?.customers || []).find(item => String(item.id) === String(lead.customer_id)) || {};
+      customer = (D?.customers || []).find(item => String(item.id) === String(lead.customer_id)) || {};
       data = {
         name: customer.name || "there",
         destination: lead.destination || "Himachal",
@@ -142,9 +142,9 @@
         budget: indianMoney(lead.budget)
       };
     } else {
-      const booking = (window.D?.bookings || []).find(item => String(item.id) === String(id));
+      const booking = (D?.bookings || []).find(item => String(item.id) === String(id));
       if (!booking) { alert("Booking not found. Refresh the dashboard and try again."); return; }
-      customer = (window.D?.customers || []).find(item => String(item.id) === String(booking.customer_id)) || {};
+      customer = (D?.customers || []).find(item => String(item.id) === String(booking.customer_id)) || {};
       const total = Number(booking.total_amount || 0);
       const paid = Number(booking.amount_paid || 0);
       data = {
