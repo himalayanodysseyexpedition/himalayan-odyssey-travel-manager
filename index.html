@@ -2144,7 +2144,7 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
 <!-- HERO -->
 <div class="hero" id="home">
   <div class="hero-content">
-    <h1>The Himalayas<br>Are Calling.</h1>
+    <h1 class="hero-animated-heading">The <span class="hero-word-slot"><span id="heroRotatingWord" class="hero-word-rotator word-himalaya" aria-label="Himalaya">Himalaya</span></span> is calling<span class="hero-heading-period">.</span></h1>
 
     <div class="hero-service-icons" aria-label="Our services">
       <div class="hero-service-icon" aria-hidden="true">
@@ -4078,6 +4078,34 @@ loadHotels();
     }));
   });
   mutationObserver.observe(document.body, { childList: true, subtree: true });
+})();
+</script>
+
+
+<script id="hero-word-shuffle-animation">
+(() => {
+  const word = document.getElementById("heroRotatingWord");
+  if (!word) return;
+  const words = [
+    { text: "Himalaya", className: "word-himalaya" },
+    { text: "Himachal", className: "word-himachal" },
+    { text: "Spiti", className: "word-spiti" },
+    { text: "Adventure", className: "word-adventure" }
+  ];
+  const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion) return;
+  let index = 0;
+  window.setInterval(() => {
+    word.classList.add("is-shuffling-out");
+    window.setTimeout(() => {
+      index = (index + 1) % words.length;
+      word.textContent = words[index].text;
+      word.className = "hero-word-rotator " + words[index].className + " is-shuffling-in";
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => word.classList.remove("is-shuffling-in"));
+      });
+    }, 260);
+  }, 2400);
 })();
 </script>
 
