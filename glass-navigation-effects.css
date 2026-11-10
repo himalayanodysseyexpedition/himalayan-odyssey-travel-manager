@@ -137,3 +137,58 @@ header .header-inner > nav.glass-nav .nav-dropdown.open .services-chevron {
     animation: none !important;
   }
 }
+
+
+/* Reset legacy dropdown span styling so the Services label matches peer nav labels. */
+header .header-inner > nav.glass-nav > .nav-dropdown > .nav-dropdown-toggle > span:not(.services-chevron) {
+  display: inline !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: inherit !important;
+  font: inherit !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+  text-transform: inherit !important;
+  transform: none !important;
+}
+
+header .header-inner > nav.glass-nav > .nav-dropdown > .nav-dropdown-toggle > .services-chevron {
+  display: inline-grid !important;
+  position: static !important;
+  flex: 0 0 17px !important;
+  place-items: center !important;
+  width: 17px !important;
+  height: 17px !important;
+  margin: 0 0 0 1px !important;
+  padding: 0 !important;
+  border: 1px solid rgba(255,255,255,.38) !important;
+  border-radius: 50% !important;
+  background: rgba(255,255,255,.04) !important;
+  color: #f2d89b !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+}
+
+@media (max-width: 700px) {
+  header .header-inner > nav.glass-nav > .nav-dropdown > .nav-dropdown-toggle > .services-chevron {
+    position: absolute !important;
+    right: 3px !important;
+    top: 3px !important;
+    flex: 0 0 9px !important;
+    width: 9px !important;
+    height: 9px !important;
+    margin: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    font-size: 8px !important;
+    line-height: 9px !important;
+  }
+}
