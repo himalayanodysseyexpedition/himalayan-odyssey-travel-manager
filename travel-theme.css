@@ -148,7 +148,7 @@ footer a:hover,.site-footer a:hover{color:var(--tour-champagne)}
    Apply the booking-button palette and Montserrat ExtraBold
    to every button outside the site header, on every page.
    ========================================================== */
-html body :is(button,input[type="button"],input[type="submit"],input[type="reset"],.btn,.button,.submit-btn,.header-cta,.hero-build-cta,.group-departure-cta,[role="button"],a[role="button"]):not(header *){
+html body :is(button,input[type="button"],input[type="submit"],input[type="reset"],.btn,.button,.submit-btn,.header-cta,.hero-build-cta,.group-departure-cta,[role="button"],a[role="button"],a[class*="btn"],a[class*="button"],a[class*="cta"]):not(header *){
   background:#E4FEB5!important;
   color:#243E2C!important;
   border:1px solid #E4FEB5!important;
@@ -157,17 +157,17 @@ html body :is(button,input[type="button"],input[type="submit"],input[type="reset
   font-weight:800!important;
   box-shadow:0 8px 22px rgba(36,62,44,.12),inset 0 1px 0 rgba(255,255,255,.48)!important;
 }
-html body :is(button,input[type="button"],input[type="submit"],input[type="reset"],.btn,.button,.submit-btn,.header-cta,.hero-build-cta,.group-departure-cta,[role="button"],a[role="button"]):not(header *):hover{
+html body :is(button,input[type="button"],input[type="submit"],input[type="reset"],.btn,.button,.submit-btn,.header-cta,.hero-build-cta,.group-departure-cta,[role="button"],a[role="button"],a[class*="btn"],a[class*="button"],a[class*="cta"]):not(header *):hover{
   background:#E4FEB5!important;
   color:#243E2C!important;
   border-color:#E4FEB5!important;
   filter:brightness(1.035);
 }
-html body :is(button,input[type="button"],input[type="submit"],input[type="reset"],.btn,.button,.submit-btn,.header-cta,.hero-build-cta,.group-departure-cta,[role="button"],a[role="button"]):not(header *):disabled{
+html body :is(button,input[type="button"],input[type="submit"],input[type="reset"],.btn,.button,.submit-btn,.header-cta,.hero-build-cta,.group-departure-cta,[role="button"],a[role="button"],a[class*="btn"],a[class*="button"],a[class*="cta"]):not(header *):disabled{
   opacity:.58!important;
   cursor:not-allowed!important;
 }
-html body :is(button,input[type="button"],input[type="submit"],input[type="reset"],.btn,.button,.submit-btn,[role="button"],a[role="button"]):not(header *):focus-visible{
+html body :is(button,input[type="button"],input[type="submit"],input[type="reset"],.btn,.button,.submit-btn,[role="button"],a[role="button"],a[class*="btn"],a[class*="button"],a[class*="cta"]):not(header *):focus-visible{
   outline:2px solid #243E2C!important;
   outline-offset:3px!important;
 }
