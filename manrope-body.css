@@ -1,0 +1,8 @@
+/* Himalayan Odyssey — Manrope for descriptive/body copy only.
+   Manrope is distributed under the SIL Open Font License 1.1.
+   Display headings, hero typography, navigation, buttons and branding remain unchanged. */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap");
+
+:where(p, li, blockquote, figcaption, .intro, .description, [class*="description"], [class*="intro"], [class*="summary"], [class*="copy"]) {
+  font-family: "Manrope", sans-serif !important;
+}
