@@ -721,3 +721,27 @@ html body>header .header-inner>nav.glass-nav .nav-dropdown-menu{
     transition:none!important;
   }
 }
+
+
+/* NAVIGATION TYPOGRAPHY REFINEMENT — Tiempos Text; no outer nav frame */
+html body>header .header-inner>nav.glass-nav{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+}
+html body>header .header-inner>nav.glass-nav>a,
+html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+  font-family:"Tiempos Text",Georgia,serif!important;
+  font-weight:500!important;
+  letter-spacing:.045em!important;
+  text-transform:uppercase!important;
+}
+@media(max-width:760px){
+  html body>header .header-inner>nav.glass-nav>a,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+    font-family:"Tiempos Text",Georgia,serif!important;
+    font-size:clamp(8px,2.15vw,9.5px)!important;
+    letter-spacing:.015em!important;
+  }
+}
