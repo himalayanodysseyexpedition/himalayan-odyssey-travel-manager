@@ -2,7 +2,19 @@
 const SUPABASE_URL="https://ynkoiuyjevclypumnyes.supabase.co";
 const SUPABASE_KEY="sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-";
 const WHATSAPP_NUMBER="919816929669";
-const db=window.supabase?.createClient ? window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY) : null;
+const REST_HEADERS={apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY};
+async function apiRequest(path,options={}){
+ const controller=new AbortController();
+ const timer=setTimeout(()=>controller.abort(),options.timeout||15000);
+ try{
+  const method=options.method||"GET";
+  const response=await fetch(SUPABASE_URL+"/rest/v1/"+path,{method,headers:{...REST_HEADERS,"Content-Type":"application/json",...(method==="POST"?{Prefer:"return=minimal"}:{})},body:options.body===undefined?undefined:JSON.stringify(options.body),signal:controller.signal});
+  const raw=await response.text();
+  if(!response.ok)throw new Error("Supabase API "+response.status+": "+(raw||response.statusText).slice(0,260));
+  return raw?JSON.parse(raw):null;
+ }catch(error){if(error.name==="AbortError")throw new Error("The catalogue request timed out. Please retry.");throw error;}
+ finally{clearTimeout(timer);}
+}
 const $=id=>document.getElementById(id);
 const money=value=>"₹"+(Number(value)||0).toLocaleString("en-IN",{maximumFractionDigits:0});
 const esc=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -58,25 +70,15 @@ function enquiryText(name,phone,date,total){
 }
 async function load(){
  const container=$("serviceCards");
- container.innerHTML='<div class="empty">Loading available services…</div>';
+ container.innerHTML='<div class="empty" role="status">Loading available services…</div>';
  try{
-  if(!db)throw new Error("The Supabase client library did not load. Please check your connection and retry.");
-  const request=db.from("marketplace_services")
-   .select("id,category,title,destination,description,price,price_unit,inventory,capacity,image_url,sort_order,created_at")
-   .eq("is_active",true)
-   .order("sort_order",{ascending:true})
-   .order("created_at",{ascending:false});
-  const result=await Promise.race([
-   request,
-   new Promise((_,reject)=>setTimeout(()=>reject(new Error("The catalogue request timed out. Please retry.")),15000))
-  ]);
-  if(result.error)throw result.error;
-  services=Array.isArray(result.data)?result.data:[];
+  const rows=await apiRequest("marketplace_services?select=id,category,title,destination,description,price,price_unit,inventory,capacity,image_url,sort_order,created_at&is_active=eq.true&order=sort_order.asc,created_at.desc");
+  services=Array.isArray(rows)?rows:[];
   renderServices();
   if(!services.length)container.innerHTML='<div class="empty">No services are published yet. Please contact us on WhatsApp and we will help plan your trip.</div>';
  }catch(error){
   console.error("Build Your Trip catalogue failed:",error);
-  container.innerHTML='<div class="empty"><strong>We could not load the service catalogue.</strong><p>Please check your internet connection and try again.</p><button type="button" class="primary" data-retry-catalogue>Retry loading services</button><p><a href="https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent("Hello Himalayan Odyssey Expedition, please share your available cabs and tour packages.")+'" target="_blank" rel="noopener">Or enquire on WhatsApp</a></p></div>';
+  container.innerHTML='<div class="empty"><strong>We could not load the service catalogue.</strong><p>'+esc(error.message||"Please try again.")+'</p><button type="button" class="primary" data-retry-catalogue>Retry loading services</button><p><a href="https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent("Hello Himalayan Odyssey Expedition, please share your available cabs and tour packages.")+'" target="_blank" rel="noopener">Or enquire on WhatsApp</a></p></div>';
  }
 }
 $("serviceCards").addEventListener("click",e=>{if(e.target.closest("[data-retry-catalogue]"))load();});
@@ -90,11 +92,10 @@ $("guestForm").addEventListener("submit",async e=>{
  if(!cart.length){status.textContent="Please add at least one service to your trip.";return;}
  const name=$("guestName").value.trim(),phone=$("guestPhone").value.trim(),date=$("travelDate").value,total=currentTotal();
  if(!/^[+0-9 ()-]{10,18}$/.test(phone)){status.textContent="Please enter a valid mobile number.";return;}
- const selections=cart.map(line=>{const s=services.find(x=>x.id===line.id);return {service_id:s.id,category:s.category,title:s.title,destination:s.destination,unit_price:Number(s.price),price_unit:s.price_unit,days:line.days,nights:line.nights,people:line.people,vehicles:line.quantity,days:line.days,line_total:priceFor(s,line)};});
+ const selections=cart.map(line=>{const s=services.find(x=>x.id===line.id);return {service_id:s.id,category:s.category,title:s.title,destination:s.destination,unit_price:Number(s.price),price_unit:s.price_unit,days:line.days,nights:line.nights,people:line.people,vehicles:line.quantity,line_total:priceFor(s,line)};});
  button.disabled=true;status.textContent="Saving your enquiry…";
  try{
-  const {error}=await db.from("marketplace_enquiries").insert({guest_name:name,guest_phone:phone,travel_date:date||null,guest_count:Math.max(1,...selections.map(x=>x.people||1)),selections,estimated_total:total,source:"build-your-trip"});
-  if(error)throw error;
+  await apiRequest("marketplace_enquiries",{method:"POST",body:{guest_name:name,guest_phone:phone,travel_date:date||null,guest_count:Math.max(1,...selections.map(x=>x.people||1)),selections,estimated_total:total,source:"build-your-trip"}});
   status.textContent="Enquiry saved. Opening WhatsApp…";
   const url="https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(enquiryText(name,phone,date,total));
   window.location.href=url;
