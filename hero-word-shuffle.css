@@ -81,3 +81,27 @@
     margin-inline: 0.045em !important;
   }
 }
+
+
+/* Premium champagne-gold gradient for every hero word, including shuffle states. */
+.hero .hero-animated-heading .hero-word-rotator,
+.hero .hero-animated-heading .hero-word-rotator.word-himalaya,
+.hero .hero-animated-heading .hero-word-rotator.word-himachal,
+.hero .hero-animated-heading .hero-word-rotator.word-spiti,
+.hero .hero-animated-heading .hero-word-rotator.word-adventure,
+.hero .hero-animated-heading .hero-word-rotator.is-shuffling-out,
+.hero .hero-animated-heading .hero-word-rotator.is-shuffling-in {
+  background: linear-gradient(
+    105deg,
+    #fff4bd 0%,
+    #ffe58a 22%,
+    #f2c94c 48%,
+    #fff0a6 68%,
+    #d99b22 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  text-shadow: none !important;
+}
