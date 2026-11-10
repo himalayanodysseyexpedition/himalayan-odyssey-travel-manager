@@ -2,7 +2,7 @@
 const SUPABASE_URL="https://ynkoiuyjevclypumnyes.supabase.co";
 const SUPABASE_KEY="sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-";
 const WHATSAPP_NUMBER="919816929669";
-const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const db=window.supabase?.createClient ? window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY) : null;
 const $=id=>document.getElementById(id);
 const money=value=>"₹"+(Number(value)||0).toLocaleString("en-IN",{maximumFractionDigits:0});
 const esc=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -57,10 +57,29 @@ function enquiryText(name,phone,date,total){
  return ["Hello Himalayan Odyssey Expedition!","I would like to enquire about these selected services.","","Name: "+name,"Phone: "+phone,"Preferred travel date: "+(date||"Not specified"),"","SELECTED SERVICES",...lines,"","ESTIMATED TOTAL: "+money(total),"Please confirm availability, inclusions and final booking details."].join("\n");
 }
 async function load(){
- const {data,error}=await db.from("marketplace_services").select("id,category,title,destination,description,price,price_unit,inventory,capacity,image_url,sort_order").eq("is_active",true).order("sort_order",{ascending:true}).order("created_at",{ascending:false});
- if(error){$("serviceCards").innerHTML='<div class="empty">Our service catalogue is temporarily unavailable. Please contact us on WhatsApp.</div>';console.error(error);return;}
- services=data||[];renderServices();
+ const container=$("serviceCards");
+ container.innerHTML='<div class="empty">Loading available services…</div>';
+ try{
+  if(!db)throw new Error("The Supabase client library did not load. Please check your connection and retry.");
+  const request=db.from("marketplace_services")
+   .select("id,category,title,destination,description,price,price_unit,inventory,capacity,image_url,sort_order,created_at")
+   .eq("is_active",true)
+   .order("sort_order",{ascending:true})
+   .order("created_at",{ascending:false});
+  const result=await Promise.race([
+   request,
+   new Promise((_,reject)=>setTimeout(()=>reject(new Error("The catalogue request timed out. Please retry.")),15000))
+  ]);
+  if(result.error)throw result.error;
+  services=Array.isArray(result.data)?result.data:[];
+  renderServices();
+  if(!services.length)container.innerHTML='<div class="empty">No services are published yet. Please contact us on WhatsApp and we will help plan your trip.</div>';
+ }catch(error){
+  console.error("Build Your Trip catalogue failed:",error);
+  container.innerHTML='<div class="empty"><strong>We could not load the service catalogue.</strong><p>Please check your internet connection and try again.</p><button type="button" class="primary" data-retry-catalogue>Retry loading services</button><p><a href="https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent("Hello Himalayan Odyssey Expedition, please share your available cabs and tour packages.")+'" target="_blank" rel="noopener">Or enquire on WhatsApp</a></p></div>';
+ }
 }
+$("serviceCards").addEventListener("click",e=>{if(e.target.closest("[data-retry-catalogue]"))load();});
 $("tabs").addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(!b)return;category=b.dataset.category;$("tabs").querySelectorAll("button").forEach(x=>x.classList.toggle("active",x===b));renderServices();});
 $("search").addEventListener("input",renderServices);
 $("serviceCards").addEventListener("click",e=>{const step=e.target.closest("[data-day-step]");if(step){const id=step.dataset.dayStep;const next=Math.max(1,Math.min(100,(Number(serviceDays[id])||1)+Number(step.dataset.dir)));serviceDays[id]=next;const card=step.closest(".service");card.querySelector("[data-day-value]").textContent=next;card.querySelectorAll("[data-day-step]").forEach(x=>{if(x.dataset.dir==="-1")x.disabled=next===1;});card.querySelector("[data-add]").dataset.days=next;return;}const b=e.target.closest("[data-add]");if(b){serviceDays[b.dataset.add]=Number(b.dataset.days)||1;addToCart(b.dataset.add);}});
