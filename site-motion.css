@@ -196,3 +196,22 @@ body{animation:siteFadeIn .65s var(--motion-ease) both}
 @media (prefers-reduced-motion:reduce){
   .hero-animated-heading .hero-word-rotator{transition:none!important;filter:none!important;transform:none!important;opacity:1!important}
 }
+
+
+/* DISTINCTIVE DISPLAY TYPOGRAPHY FOR THE INTRO HERO */
+.hero > .hero-content > h1.hero-animated-heading{
+  font-family:'Cinzel',Georgia,serif!important;
+  font-weight:700!important;
+  letter-spacing:-.025em!important;
+  text-shadow:0 2px 22px rgba(0,0,0,.16);
+}
+.hero-animated-heading .hero-word-rotator{
+  font-family:inherit!important;
+  font-weight:800!important;
+}
+@media (max-width:760px){
+  .hero > .hero-content > h1.hero-animated-heading{
+    letter-spacing:-.02em!important;
+    line-height:1.12!important;
+  }
+}
