@@ -479,3 +479,22 @@
     margin-top:0!important;
   }
 }
+
+
+/* MOBILE ONLY — show the hero photograph cleanly, without a glass pane or blur. */
+@media screen and (max-width:760px){
+  body>.hero,
+  body>.hero::before,
+  body>.hero::after{
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+  }
+  body>.hero::before,
+  body>.hero::after{
+    display:none!important;
+    content:none!important;
+    border:0!important;
+    background:none!important;
+    box-shadow:none!important;
+  }
+}
