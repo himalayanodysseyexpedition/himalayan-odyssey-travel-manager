@@ -59,6 +59,8 @@ create policy "Guests can submit marketplace enquiries"
     and jsonb_typeof(selections) = 'array'
     and jsonb_array_length(selections) between 1 and 40
     and estimated_total >= 0
+    and status = 'new'
+    and source = 'build-your-trip'
   );
 drop policy if exists "Admin manages marketplace enquiries" on public.marketplace_enquiries;
 create policy "Admin manages marketplace enquiries"
