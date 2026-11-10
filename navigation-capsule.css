@@ -288,3 +288,150 @@ body>header .header-inner>nav.glass-nav{
   body>header{transition:none!important}
   body>header.is-hidden{transform:none!important}
 }
+
+
+/* FINAL HEADER LAYOUT OVERRIDE — desktop horizontal, mobile compact one-row nav.
+   This intentionally comes last to neutralize legacy grid/stacking and icon-nav rules. */
+@media (min-width: 761px) {
+  html body>header .header-inner {
+    display:grid!important;
+    grid-template-columns:minmax(145px,205px) minmax(0,1fr) auto!important;
+    grid-template-rows:auto!important;
+    flex-direction:initial!important;
+    align-items:center!important;
+    justify-items:stretch!important;
+    gap:clamp(10px,1.5vw,22px)!important;
+    width:100%!important;
+    max-width:1480px!important;
+    min-height:88px!important;
+    margin:0 auto!important;
+    padding:9px clamp(16px,3vw,44px)!important;
+    box-sizing:border-box!important;
+  }
+  html body>header .header-inner>a.brand {
+    grid-column:1!important;grid-row:1!important;
+    justify-self:start!important;align-self:center!important;
+    width:max-content!important;max-width:100%!important;
+    margin:0!important;padding:0!important;
+  }
+  html body>header .header-inner>a.brand img {
+    width:clamp(120px,13vw,174px)!important;max-height:58px!important;
+  }
+  html body>header .header-inner>nav.glass-nav {
+    grid-column:2!important;grid-row:1!important;
+    justify-self:center!important;align-self:center!important;
+    width:max-content!important;max-width:100%!important;
+    min-width:0!important;overflow:visible!important;
+    flex-direction:row!important;flex-wrap:nowrap!important;
+    justify-content:center!important;gap:clamp(3px,.45vw,7px)!important;
+    padding:4px!important;
+  }
+  html body>header .header-inner>nav.glass-nav>a,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle {
+    min-height:38px!important;height:38px!important;
+    padding:0 clamp(8px,.85vw,14px)!important;
+    font-size:clamp(8px,.68vw,10px)!important;
+    letter-spacing:.025em!important;white-space:nowrap!important;
+    flex-direction:row!important;gap:5px!important;
+  }
+  html body>header .header-inner>nav.glass-nav .nav-glass-icon {display:none!important}
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown {flex:0 0 auto!important;width:auto!important}
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle {width:auto!important}
+  html body>header .header-inner>.header-cta {
+    grid-column:3!important;grid-row:1!important;
+    justify-self:end!important;align-self:center!important;
+    margin:0!important;min-height:40px!important;
+    padding:0 17px!important;font-size:9px!important;
+    white-space:nowrap!important;
+  }
+  html body>header .header-inner>nav.glass-nav .services-chevron {
+    position:static!important;display:inline-grid!important;
+    width:15px!important;height:15px!important;flex:0 0 15px!important;
+    margin:0 0 0 2px!important;font-size:12px!important;
+  }
+  .hero {padding-top:clamp(125px,16vh,165px)!important}
+}
+@media (max-width: 760px) {
+  html body>header .header-inner {
+    display:flex!important;flex-direction:column!important;
+    align-items:center!important;justify-content:center!important;
+    width:100%!important;max-width:100%!important;
+    min-height:0!important;gap:7px!important;
+    padding:7px 10px 9px!important;margin:0!important;
+    box-sizing:border-box!important;
+  }
+  html body>header .header-inner>a.brand {
+    order:0!important;display:flex!important;
+    flex-direction:column!important;align-items:center!important;
+    justify-content:center!important;width:max-content!important;
+    max-width:100%!important;margin:0 auto!important;padding:0!important;
+  }
+  html body>header .header-inner>a.brand img {
+    width:clamp(112px,31vw,145px)!important;
+    max-height:43px!important;object-fit:contain!important;
+  }
+  html body>header .header-inner>a.brand .brand-wordmark {
+    margin-top:1px!important;font-size:8px!important;
+    letter-spacing:3px!important;line-height:1!important;
+  }
+  html body>header .header-inner>nav.glass-nav {
+    order:1!important;display:flex!important;
+    flex-direction:row!important;flex-wrap:nowrap!important;
+    align-items:center!important;justify-content:space-between!important;
+    width:100%!important;max-width:520px!important;min-width:0!important;
+    gap:3px!important;padding:3px!important;
+    overflow-x:auto!important;overflow-y:visible!important;
+    scrollbar-width:none!important;-webkit-overflow-scrolling:touch!important;
+    border-radius:999px!important;box-sizing:border-box!important;
+  }
+  html body>header .header-inner>nav.glass-nav::-webkit-scrollbar {display:none!important}
+  html body>header .header-inner>nav.glass-nav>a,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown {
+    display:flex!important;flex:1 1 0!important;
+    width:0!important;min-width:0!important;max-width:none!important;
+    align-items:center!important;justify-content:center!important;
+    box-sizing:border-box!important;
+  }
+  html body>header .header-inner>nav.glass-nav>a,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle {
+    flex-direction:row!important;gap:2px!important;
+    min-width:0!important;width:100%!important;max-width:100%!important;
+    min-height:34px!important;height:34px!important;
+    padding:0 3px!important;border-radius:999px!important;
+    font-size:clamp(7px,2.05vw,9px)!important;
+    line-height:1!important;letter-spacing:0!important;
+    white-space:nowrap!important;text-align:center!important;
+  }
+  html body>header .header-inner>nav.glass-nav .nav-glass-icon {display:none!important}
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown {
+    position:relative!important;overflow:visible!important;gap:0!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle {
+    display:flex!important;flex:1 1 100%!important;
+    align-items:center!important;justify-content:center!important;
+  }
+  html body>header .header-inner>nav.glass-nav .services-chevron {
+    position:static!important;display:inline-grid!important;
+    flex:0 0 10px!important;width:10px!important;height:14px!important;
+    margin:0!important;padding:0!important;border:0!important;
+    background:transparent!important;font-size:11px!important;line-height:1!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown-menu {
+    position:absolute!important;top:calc(100% + 9px)!important;
+    left:auto!important;right:0!important;z-index:1200!important;
+    min-width:205px!important;max-width:min(82vw,280px)!important;
+  }
+  html body>header .header-inner>.header-cta {
+    order:2!important;display:inline-flex!important;
+    align-self:center!important;justify-self:center!important;
+    position:static!important;margin:1px auto 0!important;
+    min-height:34px!important;padding:0 19px!important;
+    font-size:9px!important;white-space:nowrap!important;
+  }
+  html body>header.is-scrolled .header-inner {gap:5px!important;padding-top:5px!important;padding-bottom:6px!important}
+  .hero {padding-top:clamp(150px,21vh,178px)!important}
+}
+@media (prefers-reduced-motion: reduce) {
+  html body>header {transition:none!important}
+  html body>header.is-hidden {transform:none!important}
+}
