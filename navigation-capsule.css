@@ -1129,3 +1129,29 @@ html body #footerContactBar.footer-contact-bar{
     pointer-events:auto!important;
   }
 }
+
+
+/* DESKTOP DESTINATIONS NAV — match the neutral glass treatment of sibling links,
+   including active/current states; retain the shared hover treatment. */
+@media(min-width:761px){
+  html body>header .header-inner>nav.glass-nav>a:first-child,
+  html body>header .header-inner>nav.glass-nav>a:first-child:visited,
+  html body>header .header-inner>nav.glass-nav>a:first-child:active,
+  html body>header .header-inner>nav.glass-nav>a:first-child[aria-current],
+  html body>header .header-inner>nav.glass-nav>a:first-child.active,
+  html body>header .header-inner>nav.glass-nav>a:first-child.is-active{
+    color:rgba(255,252,244,.94)!important;
+    background:transparent!important;
+    border-color:transparent!important;
+    box-shadow:none!important;
+    filter:none!important;
+  }
+  html body>header .header-inner>nav.glass-nav>a:first-child:hover,
+  html body>header .header-inner>nav.glass-nav>a:first-child:focus-visible{
+    color:var(--hoe-nav-gold-light)!important;
+    background:rgba(213,180,119,.13)!important;
+    border-color:rgba(213,180,119,.38)!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 13px rgba(213,180,119,.08)!important;
+    outline:none!important;
+  }
+}
