@@ -514,3 +514,11 @@
     margin-bottom:12px!important;
   }
 }
+
+
+/* MOBILE ONLY — reduce the supporting “and you must go” line. */
+@media screen and (max-width:760px){
+  html body>.hero>.hero-content>.hero-go-line{
+    font-size:clamp(23px,6.2vw,32px)!important;
+  }
+}
