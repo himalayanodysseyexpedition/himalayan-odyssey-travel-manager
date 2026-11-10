@@ -627,13 +627,16 @@ body > .hero::before,
 }
 
 
-/* Desktop hero font restoration: keep the original General Sans + Boska pairing. */
+/* Desktop hero font restoration.
+   Match the specificity of the earlier site-motion.css Cinzel override. */
 @media (min-width:761px){
-  .hero h1.hero-animated-heading,
-  .hero h1.hero-animated-heading .hero-heading-static{
+  .hero > .hero-content > h1.hero-animated-heading{
     font-family:"General Sans",Arial,sans-serif!important;
   }
-  .hero h1.hero-animated-heading .hero-word-rotator{
+  .hero > .hero-content > h1.hero-animated-heading .hero-heading-static{
+    font-family:"General Sans",Arial,sans-serif!important;
+  }
+  .hero > .hero-content > h1.hero-animated-heading .hero-word-rotator{
     font-family:"Boska",Georgia,serif!important;
   }
 }
