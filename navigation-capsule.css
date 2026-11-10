@@ -1,0 +1,128 @@
+/* Himalayan Odyssey Expedition — Concept 14: single floating glass capsule */
+:root{
+  --hoe-nav-gold:#d5b477;
+  --hoe-nav-gold-light:#f0d8a7;
+  --hoe-nav-forest:rgba(12,43,35,.68);
+}
+header .header-inner>nav.glass-nav{
+  width:max-content!important;
+  max-width:min(100%,900px)!important;
+  min-width:0!important;
+  display:flex!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:clamp(3px,.55vw,8px)!important;
+  padding:5px!important;
+  border:1px solid rgba(213,180,119,.88)!important;
+  border-radius:999px!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.105),rgba(10,39,32,.48) 52%,rgba(255,255,255,.035))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 8px 26px rgba(0,0,0,.16),0 0 16px rgba(213,180,119,.07)!important;
+  -webkit-backdrop-filter:blur(25px) saturate(165%)!important;
+  backdrop-filter:blur(25px) saturate(165%)!important;
+  overflow:visible!important;
+}
+header .header-inner>nav.glass-nav>a,
+header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:40px!important;
+  padding:0 clamp(13px,1.3vw,21px)!important;
+  border:1px solid transparent!important;
+  border-radius:999px!important;
+  background:transparent!important;
+  color:rgba(255,252,244,.94)!important;
+  font-size:clamp(9px,.72vw,11px)!important;
+  font-weight:650!important;
+  letter-spacing:.045em!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+  text-decoration:none!important;
+  transition:background .32s ease,border-color .32s ease,color .32s ease,box-shadow .32s ease,transform .32s ease!important;
+}
+header .header-inner>nav.glass-nav .nav-glass-icon{display:none!important}
+header .header-inner>nav.glass-nav>a:after{display:none!important}
+header .header-inner>nav.glass-nav>a:first-child{
+  color:#173c36!important;
+  background:linear-gradient(135deg,#f0d9a8 0%,#d5ad68 100%)!important;
+  border-color:rgba(255,235,194,.76)!important;
+  box-shadow:0 3px 12px rgba(213,180,119,.19),inset 0 1px 0 rgba(255,255,255,.52)!important;
+}
+header .header-inner>nav.glass-nav>a:not(:first-child):hover,
+header .header-inner>nav.glass-nav>a:not(:first-child):focus-visible,
+header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:hover,
+header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle,
+header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:focus-visible{
+  color:var(--hoe-nav-gold-light)!important;
+  background:rgba(213,180,119,.13)!important;
+  border-color:rgba(213,180,119,.38)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 13px rgba(213,180,119,.08)!important;
+  transform:translateY(-1px);
+  outline:none!important;
+}
+header .header-inner>nav.glass-nav>.nav-dropdown{flex:0 0 auto!important;align-items:center!important}
+header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{width:auto!important;cursor:pointer!important}
+header .header-inner>nav.glass-nav .services-chevron{
+  color:var(--hoe-nav-gold-light)!important;
+  margin-left:-10px!important;
+  margin-right:7px!important;
+  font-size:15px!important;
+  transition:transform .3s ease,color .3s ease!important;
+}
+header .header-inner>nav.glass-nav>.nav-dropdown.open .services-chevron{transform:rotate(180deg)!important}
+header .header-inner>.header-cta{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:44px!important;
+  padding:0 23px!important;
+  border:1px solid #d5b477!important;
+  border-radius:999px!important;
+  background:rgba(9,36,29,.34)!important;
+  color:#e8c486!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 5px 18px rgba(0,0,0,.12)!important;
+  font-size:11px!important;
+  font-weight:700!important;
+  letter-spacing:.02em!important;
+  white-space:nowrap!important;
+  text-decoration:none!important;
+  transition:background .32s ease,border-color .32s ease,color .32s ease,box-shadow .32s ease,transform .32s ease!important;
+  -webkit-backdrop-filter:blur(16px)!important;
+  backdrop-filter:blur(16px)!important;
+}
+header .header-inner>.header-cta:hover,
+header .header-inner>.header-cta:focus-visible{
+  background:rgba(213,180,119,.13)!important;
+  border-color:#f0d8a7!important;
+  color:#f5dfb7!important;
+  box-shadow:0 0 20px rgba(213,180,119,.16),inset 0 1px 0 rgba(255,255,255,.12)!important;
+  transform:translateY(-2px)!important;
+  outline:none!important;
+}
+@media(max-width:1050px){
+  header .header-inner>nav.glass-nav{width:max-content!important;max-width:100%!important}
+}
+@media(max-width:640px){
+  header .header-inner>nav.glass-nav{
+    width:100%!important;max-width:100%!important;min-width:0!important;
+    justify-content:space-between!important;gap:2px!important;padding:3px!important;
+    overflow-x:auto!important;overflow-y:visible!important;scrollbar-width:none!important;
+    -webkit-overflow-scrolling:touch!important;
+  }
+  header .header-inner>nav.glass-nav::-webkit-scrollbar{display:none!important}
+  header .header-inner>nav.glass-nav>a,
+  header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+    flex:0 0 auto!important;width:auto!important;min-width:0!important;
+    min-height:34px!important;padding:0 clamp(7px,2.1vw,12px)!important;
+    font-size:clamp(7px,2.05vw,9px)!important;letter-spacing:0!important;
+  }
+  header .header-inner>nav.glass-nav>.nav-dropdown{flex:0 0 auto!important}
+  header .header-inner>nav.glass-nav .services-chevron{margin-left:-7px!important;margin-right:5px!important;font-size:13px!important}
+  header .header-inner>.header-cta{min-height:36px!important;padding:0 20px!important;font-size:9px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  header .header-inner>nav.glass-nav,
+  header .header-inner>nav.glass-nav *,
+  header .header-inner>.header-cta{transition:none!important;animation:none!important}
+}
