@@ -273,3 +273,91 @@ header .header-inner > nav.glass-nav > .nav-dropdown > .nav-dropdown-toggle > .s
     order: 2 !important;
   }
 }
+
+
+/* SERVICES CHEVRON OUTSIDE THE PILL; KEEP THE PILL DIMENSIONS IDENTICAL. */
+header .header-inner > nav.glass-nav > .nav-dropdown {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  gap: 5px !important;
+}
+header .header-inner > nav.glass-nav > .nav-dropdown > .nav-dropdown-toggle {
+  box-sizing: border-box !important;
+  min-height: 42px !important;
+  height: 42px !important;
+  padding: 9px 15px !important;
+  gap: 8px !important;
+}
+header .header-inner > nav.glass-nav > .nav-dropdown > .services-chevron {
+  position: static !important;
+  display: inline-grid !important;
+  flex: 0 0 13px !important;
+  place-items: center !important;
+  width: 13px !important;
+  height: 18px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #f2d89b !important;
+  font-size: 16px !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  transition: transform .28s ease !important;
+}
+header .header-inner > nav.glass-nav > .nav-dropdown.open > .services-chevron {
+  transform: rotate(180deg) !important;
+}
+@media (max-width: 700px) {
+  header .header-inner > nav.glass-nav > .nav-dropdown {
+    gap: 3px !important;
+    min-width: 0 !important;
+  }
+  header .header-inner > nav.glass-nav > .nav-dropdown > .nav-dropdown-toggle {
+    min-height: 49px !important;
+    height: 49px !important;
+    padding: 5px 1px !important;
+    flex: 1 1 auto !important;
+    width: 100% !important;
+  }
+  header .header-inner > nav.glass-nav > .nav-dropdown > .services-chevron {
+    flex: 0 0 9px !important;
+    width: 9px !important;
+    height: 18px !important;
+    font-size: 13px !important;
+  }
+}
+
+/* Keep the mobile Services pill the same full column width as its peers;
+   place its disclosure chevron just outside the pill without taking layout space. */
+@media (max-width: 700px) {
+  header .header-inner > nav.glass-nav > .nav-dropdown {
+    position: relative !important;
+    display: flex !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    gap: 0 !important;
+  }
+  header .header-inner > nav.glass-nav > .nav-dropdown > .nav-dropdown-toggle {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  header .header-inner > nav.glass-nav > .nav-dropdown > .services-chevron {
+    position: absolute !important;
+    left: calc(100% + 1px) !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 5 !important;
+    pointer-events: none !important;
+  }
+  header .header-inner > nav.glass-nav > .nav-dropdown.open > .services-chevron {
+    transform: translateY(-50%) rotate(180deg) !important;
+  }
+}
