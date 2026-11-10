@@ -750,3 +750,11 @@ body>header .header-inner>.brand img{
     -webkit-overflow-scrolling: touch;
   }
 }
+
+
+/* Desktop: keep the hero headline clearly below the overlaid navigation. */
+@media (min-width: 1101px) {
+  .hero {
+    padding-top: clamp(280px, 30vh, 350px) !important;
+  }
+}
