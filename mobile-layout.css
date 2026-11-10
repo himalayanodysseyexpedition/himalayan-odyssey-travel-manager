@@ -449,3 +449,21 @@
     font-size:clamp(28px,7.9vw,40px)!important;
   }
 }
+
+/* MOBILE ONLY — match the rotating hero words to the neon-lime “and you must go” accent. Desktop hero colours remain unchanged. */
+@media screen and (max-width:760px){
+  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator,
+  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.word-himalaya,
+  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.word-himachal,
+  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.word-spiti,
+  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.word-adventure,
+  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.is-shuffling-out,
+  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.is-shuffling-in{
+    color:#c5f36a!important;
+    background:linear-gradient(100deg,#eaffc2 0%,#c5f36a 48%,#a8e7a0 100%)!important;
+    -webkit-background-clip:text!important;
+    background-clip:text!important;
+    -webkit-text-fill-color:transparent!important;
+    text-shadow:0 0 14px rgba(197,243,106,.22)!important;
+  }
+}
