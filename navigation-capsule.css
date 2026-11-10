@@ -1456,3 +1456,35 @@ html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-me
     white-space:nowrap!important;
   }
 }
+
+
+/* MOBILE ONLY — remove the navigation capsule's glass treatment; keep desktop unchanged. */
+@media(max-width:760px){
+  html body>header .header-inner>nav.glass-nav,
+  html body>header.is-scrolled .header-inner>nav.glass-nav,
+  html body>header:not(.is-scrolled) .header-inner>nav.glass-nav{
+    background:transparent!important;
+    background-image:none!important;
+    border:0!important;
+    outline:0!important;
+    box-shadow:none!important;
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+  }
+  html body>header .header-inner>nav.glass-nav:before,
+  html body>header .header-inner>nav.glass-nav:after{
+    content:none!important;
+    display:none!important;
+    background:none!important;
+    box-shadow:none!important;
+  }
+  html body>header .header-inner>nav.glass-nav>a,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+    background:transparent!important;
+    background-image:none!important;
+    border:0!important;
+    box-shadow:none!important;
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+  }
+}
