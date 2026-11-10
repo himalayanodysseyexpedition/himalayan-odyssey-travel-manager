@@ -2845,6 +2845,36 @@ header .header-inner > nav[aria-label="Main navigation"]::after{content:none!imp
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/homepage-editorial-refresh.css?v=1">
+<style id="logo-wordmark-below-logo">
+/* Keep the original logo artwork; place the ODYSSEY wordmark beneath it. */
+header .header-inner > a.brand{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:2px!important;
+  padding:7px 14px 6px!important;
+}
+header .header-inner > a.brand .brand-wordmark{
+  display:block!important;
+  position:relative!important;
+  z-index:1!important;
+  margin:0!important;
+  padding:0!important;
+  color:#ead6ae!important;
+  font-family:"DM Sans",sans-serif!important;
+  font-size:10px!important;
+  font-weight:700!important;
+  line-height:1!important;
+  letter-spacing:4px!important;
+  text-align:center!important;
+  text-indent:4px!important;
+}
+@media(max-width:700px){
+  header .header-inner > a.brand{gap:1px!important;padding:5px 12px 5px!important}
+  header .header-inner > a.brand .brand-wordmark{font-size:9px!important;letter-spacing:3.5px!important;text-indent:3.5px!important}
+}
+</style>
 </head>
 
 <body>
