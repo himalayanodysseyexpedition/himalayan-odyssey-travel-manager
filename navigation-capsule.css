@@ -1102,3 +1102,30 @@ html body #footerContactBar.footer-contact-bar{
     font-size:clamp(9px,.76vw,11px)!important;
   }
 }
+
+
+/* DESKTOP DROPDOWN LAYER FIX — keep the static header in normal flow,
+   while placing its floating Services menu above header content and page sections. */
+@media(min-width:761px){
+  html body>header,
+  html body>header.is-scrolled,
+  html body>header.is-hidden{
+    position:relative!important;
+    z-index:10000!important;
+    isolation:isolate!important;
+  }
+  html body>header .header-inner,
+  html body>header .header-inner>nav.glass-nav{
+    position:relative!important;
+    z-index:10001!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown{
+    position:relative!important;
+    z-index:10002!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu{
+    z-index:10003!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
+  }
+}
