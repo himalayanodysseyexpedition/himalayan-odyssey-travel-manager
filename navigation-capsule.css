@@ -1209,3 +1209,12 @@ html body #footerContactBar.footer-contact-bar{
     opacity:0!important;
   }
 }
+
+
+/* DESKTOP NAV LABEL SIZE — one step larger while preserving the capsule fit. */
+@media(min-width:761px){
+  html body>header .header-inner>nav.glass-nav>a,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+    font-size:clamp(10px,.82vw,12px)!important;
+  }
+}
