@@ -89,7 +89,7 @@ header .nav-dropdown-menu{background:rgba(5,24,18,.97)!important;border:1px soli
   linear-gradient(90deg,rgba(4,17,14,.78) 0%,rgba(4,17,14,.48) 43%,rgba(4,17,14,.08) 100%),
   linear-gradient(0deg,rgba(3,13,11,.75) 0%,rgba(3,13,11,.06) 48%,rgba(3,13,11,.16) 100%),
   url("/spiti.jpg")!important;
- background-position:center,center,center 48%!important;background-size:cover,cover,cover!important;
+ background-position:center,center,center calc(48% + var(--story-hero-shift,0px))!important;background-size:cover,cover,cover!important;
  background-attachment:scroll!important;
  box-shadow:0 22px 70px rgba(5,24,18,.16)!important;
 }
