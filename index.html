@@ -4206,6 +4206,59 @@ loadHotels();
   }
 }
 </style>
+
+<style id="hero-heading-single-line-final">
+/* Keep the fixed hero words and every rotating phrase on one uninterrupted line. */
+.hero .hero-animated-heading{
+  display:flex!important;
+  flex-flow:row nowrap!important;
+  align-items:baseline!important;
+  justify-content:center!important;
+  gap:0!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin-inline:auto!important;
+  white-space:nowrap!important;
+  text-wrap:nowrap!important;
+  font-size:clamp(18px,5.2vw,72px)!important;
+  letter-spacing:-.045em!important;
+}
+.hero .hero-heading-prefix,
+.hero .hero-heading-suffix,
+.hero .hero-heading-period{
+  display:inline-block!important;
+  flex:0 0 auto!important;
+  white-space:nowrap!important;
+}
+.hero .hero-word-slot{
+  display:inline-flex!important;
+  flex:0 0 7.5em!important;
+  width:7.5em!important;
+  min-width:7.5em!important;
+  align-items:baseline!important;
+  justify-content:center!important;
+  white-space:nowrap!important;
+}
+.hero #heroRotatingWord{
+  display:inline-block!important;
+  width:100%!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+}
+@media(max-width:700px){
+  .hero .hero-animated-heading{
+    font-size:clamp(15px,5.15vw,26px)!important;
+    letter-spacing:-.055em!important;
+    line-height:1.15!important;
+  }
+  .hero .hero-word-slot{
+    flex-basis:7.25em!important;
+    width:7.25em!important;
+    min-width:7.25em!important;
+  }
+}
+</style>
+
 </body>
 </html>
 
