@@ -6,7 +6,7 @@ const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const $=id=>document.getElementById(id);
 const money=value=>"₹"+(Number(value)||0).toLocaleString("en-IN",{maximumFractionDigits:0});
 const esc=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-let services=[],cart=[],category="all";
+let services=[],cart=[],category="all",serviceDays={};
 const unitLabel={per_vehicle_day:"per vehicle / day",per_person_night:"per person / night",per_person:"per person"};
 const categoryLabel={cab:"Cab",hotel:"Hotel / Homestay",package:"Tour Package"};
 function priceFor(service,line){
@@ -20,7 +20,7 @@ function serviceCard(x){
  const soldOut=available<1;
  const specs=[x.destination,x.capacity?x.capacity+" seats":null].filter(Boolean).join(" · ");
  return '<article class="service">'+(x.image_url?'<img src="'+esc(x.image_url)+'" alt="'+esc(x.title)+'" loading="lazy">':'<div style="height:190px;display:grid;place-items:center;background:#e9eee8;color:#718078">Himalayan Odyssey Expedition</div>')+
- '<div class="service-body"><div class="tag">'+esc(categoryLabel[x.category])+'</div><h3>'+esc(x.title)+'</h3><div class="muted">'+esc(specs)+'</div><p class="desc">'+esc(x.description||"A curated Himalayan travel service.")+'</p><div class="price">'+money(x.price)+' <span class="muted">'+esc(unitLabel[x.price_unit]||"")+'</span></div><p class="muted">'+(soldOut?"Currently unavailable":(x.category==="cab"?"Vehicle quantity can be requested (final availability confirmed)":"Group size: up to "+(x.capacity||available)+" guests"))+'</p><button data-add="'+x.id+'" '+(soldOut?"disabled":"")+'>＋ Add to trip</button></div></article>';
+ '<div class="service-body"><div class="tag">'+esc(categoryLabel[x.category])+'</div><h3>'+esc(x.title)+'</h3><div class="muted">'+esc(specs)+'</div><p class="desc">'+esc(x.description||"A curated Himalayan travel service.")+'</p><div class="price">'+money(x.price)+' <span class="muted">'+esc(unitLabel[x.price_unit]||"")+'</span></div><p class="muted">'+(soldOut?"Currently unavailable":(x.category==="cab"?"Vehicle quantity can be requested (final availability confirmed)":"Group size: up to "+(x.capacity||available)+" guests"))+'</p><div class="card-actions"><div class="duration-control"><span>'+(x.category==="hotel"?"Nights":"Days")+'</span><div class="stepper"><button type="button" data-day-step="'+x.id+'" data-dir="-1" disabled>−</button><output data-day-value="'+x.id+'">1</output><button type="button" data-day-step="'+x.id+'" data-dir="1">＋</button></div></div><button data-add="'+x.id+'" data-days="1" '+(soldOut?"disabled":"")+'>Add to trip</button></div></div></article>';
 }
 function renderServices(){
  const query=$("search").value.trim().toLowerCase();
@@ -29,7 +29,7 @@ function renderServices(){
 }
 function addToCart(id){
  const service=services.find(x=>x.id===id);if(!service)return;
- cart.push({key:(crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random()),id:service.id,days:1,nights:1,people:1,quantity:1});
+ const days=Math.max(1,Math.min(100,Number(serviceDays[id])||1));cart.push({key:(crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random()),id:service.id,days,nights:days,people:1,quantity:1});
  renderCart();
 }
 function changeLine(key,field,value){
@@ -63,7 +63,7 @@ async function load(){
 }
 $("tabs").addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(!b)return;category=b.dataset.category;$("tabs").querySelectorAll("button").forEach(x=>x.classList.toggle("active",x===b));renderServices();});
 $("search").addEventListener("input",renderServices);
-$("serviceCards").addEventListener("click",e=>{const b=e.target.closest("[data-add]");if(b)addToCart(b.dataset.add);});
+$("serviceCards").addEventListener("click",e=>{const step=e.target.closest("[data-day-step]");if(step){const id=step.dataset.dayStep;const next=Math.max(1,Math.min(100,(Number(serviceDays[id])||1)+Number(step.dataset.dir)));serviceDays[id]=next;const card=step.closest(".service");card.querySelector("[data-day-value]").textContent=next;card.querySelectorAll("[data-day-step]").forEach(x=>{if(x.dataset.dir==="-1")x.disabled=next===1;});card.querySelector("[data-add]").dataset.days=next;return;}const b=e.target.closest("[data-add]");if(b){serviceDays[b.dataset.add]=Number(b.dataset.days)||1;addToCart(b.dataset.add);}});
 $("cartItems").addEventListener("click",e=>{const b=e.target.closest("[data-remove]");if(b){cart=cart.filter(x=>x.key!==b.dataset.remove);renderCart();}});
 $("cartItems").addEventListener("change",e=>{const input=e.target.closest("[data-line][data-field]");if(input)changeLine(input.dataset.line,input.dataset.field,input.value);});
 $("guestForm").addEventListener("submit",async e=>{
@@ -71,7 +71,7 @@ $("guestForm").addEventListener("submit",async e=>{
  if(!cart.length){status.textContent="Please add at least one service to your trip.";return;}
  const name=$("guestName").value.trim(),phone=$("guestPhone").value.trim(),date=$("travelDate").value,total=currentTotal();
  if(!/^[+0-9 ()-]{10,18}$/.test(phone)){status.textContent="Please enter a valid mobile number.";return;}
- const selections=cart.map(line=>{const s=services.find(x=>x.id===line.id);return {service_id:s.id,category:s.category,title:s.title,destination:s.destination,unit_price:Number(s.price),price_unit:s.price_unit,days:line.days,nights:line.nights,people:line.people,vehicles:line.quantity,line_total:priceFor(s,line)};});
+ const selections=cart.map(line=>{const s=services.find(x=>x.id===line.id);return {service_id:s.id,category:s.category,title:s.title,destination:s.destination,unit_price:Number(s.price),price_unit:s.price_unit,days:line.days,nights:line.nights,people:line.people,vehicles:line.quantity,days:line.days,line_total:priceFor(s,line)};});
  button.disabled=true;status.textContent="Saving your enquiry…";
  try{
   const {error}=await db.from("marketplace_enquiries").insert({guest_name:name,guest_phone:phone,travel_date:date||null,guest_count:Math.max(1,...selections.map(x=>x.people||1)),selections,estimated_total:total,source:"build-your-trip"});
