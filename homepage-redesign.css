@@ -640,3 +640,24 @@ body > .hero::before,
     font-family:"General Sans",Arial,sans-serif!important;
   }
 }
+
+/* Desktop hero: Cormorant rotating phrase with a true bottom-to-top entrance. */
+@media (min-width:761px){
+  .hero > .hero-content > h1.hero-animated-heading .hero-word-rotator{
+    font-family:"Cormorant Garamond",Georgia,serif!important;
+    transition:opacity .38s cubic-bezier(.22,.7,.2,1),
+               transform .38s cubic-bezier(.22,.7,.2,1),
+               filter .38s ease!important;
+    will-change:opacity,transform;
+  }
+  .hero > .hero-content > h1.hero-animated-heading .hero-word-rotator.is-shuffling-out{
+    opacity:0!important;
+    transform:translateY(-.22em)!important;
+    filter:blur(2px)!important;
+  }
+  .hero > .hero-content > h1.hero-animated-heading .hero-word-rotator.is-shuffling-in{
+    opacity:0!important;
+    transform:translateY(.42em)!important;
+    filter:blur(2px)!important;
+  }
+}
