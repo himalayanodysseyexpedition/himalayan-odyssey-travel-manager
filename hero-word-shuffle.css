@@ -105,3 +105,37 @@
   color: transparent !important;
   text-shadow: none !important;
 }
+
+
+/* MOBILE HERO HEADLINE: match the exact width of the three service cards. */
+@media screen and (max-width: 760px) {
+  .hero .hero-content > .hero-animated-heading {
+    display: block !important;
+    box-sizing: border-box !important;
+    width: min(100%, 540px) !important;
+    max-width: 540px !important;
+    min-width: 0 !important;
+    margin: 0 auto 19px !important;
+    padding: 0 !important;
+    font-size: clamp(18px, 5.4vw, 25px) !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.025em !important;
+    text-align: justify !important;
+    text-align-last: justify !important;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+  }
+
+  .hero .hero-content > .hero-service-icons {
+    box-sizing: border-box !important;
+    width: min(100%, 540px) !important;
+    max-width: 540px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .hero .hero-animated-heading .hero-word-slot {
+    margin-inline: 0.035em !important;
+  }
+}
