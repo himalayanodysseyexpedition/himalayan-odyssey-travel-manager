@@ -459,3 +459,50 @@ body>header .header-inner>nav.glass-nav{
   -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
 }
 body>header .header-inner>.header-cta{box-shadow:0 8px 24px rgba(0,0,0,.16)!important}
+
+
+/* BORDERLESS CINEMATIC HEADER — final refinement */
+body>header,
+body>header.is-scrolled{
+  border:0!important;
+  border-radius:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:linear-gradient(180deg,rgba(3,17,13,.58),rgba(3,17,13,0))!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+body>header:before,
+body>header:after{display:none!important;content:none!important}
+body>header .header-inner,
+body>header .header-inner>.brand,
+body>header .header-inner>nav.glass-nav{
+  border:0!important;
+  border-radius:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+}
+body>header .header-inner>.brand{
+  padding:0!important;
+  background:transparent!important;
+}
+body>header .header-inner>.brand:before,
+body>header .header-inner>.brand:after{
+  display:none!important;
+  content:none!important;
+  animation:none!important;
+}
+body>header .header-inner>.brand img{
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,.35))!important;
+}
+/* The header must never become a framed or tinted sticky panel on scroll. */
+body>header.is-scrolled{
+  position:absolute!important;
+  background:linear-gradient(180deg,rgba(3,17,13,.58),rgba(3,17,13,0))!important;
+}
+@media(max-width:760px){
+  body>header,
+  body>header.is-scrolled{
+    border:0!important;border-radius:0!important;box-shadow:none!important;
+  }
+}
