@@ -4445,6 +4445,21 @@ header .header-inner > a.brand .brand-wordmark{
 }
 </style>
 
+
+<style id="mobile-hero-word-spacing-final">
+/* MOBILE ONLY — increase the gaps between “The”, the rotating phrase, and “calling”. */
+@media screen and (max-width:760px){
+  html body>.hero>.hero-content>h1.hero-animated-heading{
+    column-gap:.12em!important;
+  }
+  html body>.hero>.hero-content>h1.hero-animated-heading>.hero-heading-prefix{
+    margin-right:.06em!important;
+  }
+  html body>.hero>.hero-content>h1.hero-animated-heading>.hero-heading-suffix{
+    margin-left:.06em!important;
+  }
+}
+</style>
 </body>
 </html>
 
