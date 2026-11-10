@@ -1218,3 +1218,11 @@ html body #footerContactBar.footer-contact-bar{
     font-size:clamp(10px,.82vw,12px)!important;
   }
 }
+
+
+/* DESKTOP PLAN YOUR TRIP CTA — match the navigation typography. */
+@media(min-width:761px){
+  html body>header .header-inner>.header-cta{
+    font-family:"General Sans",Arial,sans-serif!important;
+  }
+}
