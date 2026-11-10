@@ -29,7 +29,7 @@
 <link rel="preconnect" href="https://ynkoiuyjevclypumnyes.supabase.co">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
 
 <script type="application/ld+json">
@@ -3096,6 +3096,19 @@ const db = window.supabase
   ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
   : null;
 
+/* Share the published itinerary request between the package and itinerary sections. */
+let publishedItinerariesRequest;
+function getPublishedItineraries() {
+  if (!publishedItinerariesRequest) {
+    publishedItinerariesRequest = db
+      .from("itineraries")
+      .select("id,package_id,title,destination,duration_days,duration_nights,price,summary,published,created_at,gallery_images,cover_image")
+      .eq("published", true)
+      .order("created_at", { ascending: false });
+  }
+  return publishedItinerariesRequest;
+}
+
 /* COMMON FUNCTIONS */
 function safe(value) {
   return String(value ?? "").replace(/[&<>"']/g, c => ({
@@ -3203,10 +3216,7 @@ async function loadPackages() {
       return;
     }
 
-    const {data:linkedItineraries,error:itineraryError} = await db
-      .from("itineraries")
-      .select("id,package_id,title,destination,duration_days,duration_nights")
-      .eq("published",true);
+    const {data:linkedItineraries,error:itineraryError} = await getPublishedItineraries();
     if (itineraryError) throw itineraryError;
 
     const itineraryPageFor = p => {
@@ -3312,7 +3322,7 @@ async function loadItineraries() {
   const list=document.getElementById("itineraryList");
   if(!db){showLoadingError(list,"Itineraries Temporarily Unavailable","The website connection could not be started.","Please share your tour itineraries.");return;}
   try{
-    const {data,error}=await db.from("itineraries").select("id,title,destination,duration_days,duration_nights,price,summary,published,created_at,gallery_images,cover_image").eq("published",true).order("created_at",{ascending:false});
+    const {data,error}=await getPublishedItineraries();
     if(error)throw error;
     const available=data||[];
     if(!available.length){showLoadingError(list,"Itineraries Coming Soon","Our curated Himalayan journeys will be listed here shortly.","Please share your tour itineraries.");return;}
@@ -3893,7 +3903,7 @@ loadHotels();
 </script>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <script>
 /* Live group departure carousel */
