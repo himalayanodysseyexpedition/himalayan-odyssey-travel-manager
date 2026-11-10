@@ -625,3 +625,15 @@ body > .hero::before,
 .hero::before{
   inset:0!important;
 }
+
+
+/* Desktop hero font restoration: keep the original General Sans + Boska pairing. */
+@media (min-width:761px){
+  .hero h1.hero-animated-heading,
+  .hero h1.hero-animated-heading .hero-heading-static{
+    font-family:"General Sans",Arial,sans-serif!important;
+  }
+  .hero h1.hero-animated-heading .hero-word-rotator{
+    font-family:"Boska",Georgia,serif!important;
+  }
+}
