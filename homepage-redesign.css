@@ -1125,3 +1125,32 @@ body > .hero::before,
     transform:none!important;
   }
 }
+
+
+/* FROSTED GREEN HEADER — replace any remaining opaque forest-green header
+   fill with a translucent green glass surface on desktop and mobile.
+   Navigation controls, logo, spacing, dimensions and CTA are not changed. */
+html body>header{
+  background:rgba(24,76,58,.24)!important;
+  border-bottom:1px solid rgba(218,244,224,.16)!important;
+  box-shadow:0 8px 28px rgba(0,0,0,.10)!important;
+  -webkit-backdrop-filter:blur(30px) saturate(160%)!important;
+  backdrop-filter:blur(30px) saturate(160%)!important;
+}
+html body>header .header-inner{
+  background:rgba(35,91,68,.12)!important;
+  border:0!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:blur(30px) saturate(160%)!important;
+  backdrop-filter:blur(30px) saturate(160%)!important;
+}
+@media(max-width:760px){
+  html body>header,
+  html body>header.is-scrolled,
+  html body>header.is-hidden{
+    background:rgba(24,76,58,.24)!important;
+  }
+  html body>header .header-inner{
+    background:rgba(35,91,68,.12)!important;
+  }
+}
