@@ -2881,6 +2881,72 @@ header .header-inner > a.brand .brand-wordmark{
 
 
 
+
+<!-- FINAL MOBILE HEADER ROW: logo | navigation | Plan Your Trip -->
+<style id="mobile-header-single-row-final">
+@media (max-width:760px){
+  html body>header .header-inner{
+    display:grid!important;
+    grid-template-columns:minmax(68px,21vw) minmax(0,1fr) auto!important;
+    grid-template-rows: minmax(48px,auto)!important;
+    align-items:center!important;justify-content:stretch!important;
+    column-gap:clamp(4px,1.2vw,9px)!important;row-gap:0!important;
+    width:100%!important;max-width:100%!important;min-height:56px!important;
+    padding:5px 8px!important;box-sizing:border-box!important;
+  }
+  html body>header .header-inner>a.brand{
+    grid-column:1!important;grid-row:1!important;order:0!important;
+    display:flex!important;align-items:center!important;justify-content:flex-start!important;
+    justify-self:start!important;align-self:center!important;
+    width:100%!important;min-width:0!important;max-width:100%!important;
+    margin:0!important;padding:0!important;
+  }
+  html body>header .header-inner>a.brand>img{
+    display:block!important;width:100%!important;max-width:100%!important;
+    max-height:35px!important;height:auto!important;object-fit:contain!important;
+  }
+  html body>header .header-inner>a.brand .brand-wordmark{display:none!important}
+  html body>header .header-inner>nav.glass-nav{
+    grid-column:2!important;grid-row:1!important;order:1!important;
+    display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;
+    align-items:center!important;justify-content:space-between!important;
+    width:100%!important;min-width:0!important;max-width:none!important;
+    gap:clamp(3px,.8vw,7px)!important;padding:0!important;margin:0!important;
+    overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none!important;
+    border:0!important;border-radius:0!important;background:transparent!important;
+    box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+  }
+  html body>header .header-inner>nav.glass-nav::-webkit-scrollbar{display:none!important}
+  html body>header .header-inner>nav.glass-nav>a,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+    display:inline-flex!important;flex:0 0 auto!important;flex-direction:row!important;
+    align-items:center!important;justify-content:center!important;width:auto!important;
+    min-width:0!important;max-width:none!important;height:30px!important;min-height:30px!important;
+    padding:0!important;gap:2px!important;border:0!important;border-radius:0!important;
+    background:transparent!important;box-shadow:none!important;white-space:nowrap!important;
+    font-size:clamp(6px,1.65vw,8px)!important;letter-spacing:0!important;line-height:1!important;
+  }
+  html body>header .header-inner>nav.glass-nav .nav-glass-icon{
+    display:inline-block!important;flex:0 0 9px!important;width:9px!important;height:9px!important;
+    min-width:9px!important;stroke:currentColor!important;fill:none!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown{
+    display:flex!important;flex:0 0 auto!important;width:auto!important;min-width:0!important;
+  }
+  html body>header .header-inner>nav.glass-nav .services-chevron{
+    display:inline-flex!important;flex:0 0 7px!important;width:7px!important;height:10px!important;
+    margin:0!important;font-size:8px!important;
+  }
+  html body>header .header-inner>.header-cta{
+    grid-column:3!important;grid-row:1!important;order:2!important;
+    display:inline-flex!important;visibility:visible!important;opacity:1!important;
+    justify-self:end!important;align-self:center!important;position:static!important;
+    width:auto!important;min-width:0!important;min-height:30px!important;height:30px!important;
+    margin:0!important;padding:0 clamp(6px,1.6vw,10px)!important;
+    font-size:clamp(6px,1.65vw,8px)!important;letter-spacing:0!important;white-space:nowrap!important;
+  }
+}
+</style>
 </head>
 
 <body>
