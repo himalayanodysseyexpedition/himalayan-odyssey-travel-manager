@@ -188,3 +188,8 @@ html body :is(button:not(.nav-dropdown-toggle),.btn,.button,.submit-btn,[role="b
   outline:2px solid #c5f36a!important;
   outline-offset:3px!important;
 }
+
+/* Every button uses the browser's generic sans-serif font, independent of its colour or role. */
+html body :is(button,input[type="button"],input[type="submit"],input[type="reset"],.btn,.button,.submit-btn,.header-cta,.hero-build-cta,.group-departure-cta,.nav-dropdown-toggle,[role="button"],a[role="button"]){
+  font-family:sans-serif!important;
+}
