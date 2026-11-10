@@ -1226,3 +1226,26 @@ html body #footerContactBar.footer-contact-bar{
     font-family:"General Sans",Arial,sans-serif!important;
   }
 }
+
+
+/* DESKTOP MOUNTAIN MIST — soft translucent Himalayan fog drifts behind
+   the original logo artwork; existing sparkle animation remains untouched. */
+@media(min-width:761px){
+  html body>header .header-inner>a.brand{
+    background-image:
+      radial-gradient(ellipse 34% 24% at 12% 78%,rgba(222,238,220,.22) 0%,rgba(190,218,202,.10) 42%,transparent 76%),
+      radial-gradient(ellipse 38% 22% at 88% 28%,rgba(226,239,225,.18) 0%,rgba(181,211,195,.08) 48%,transparent 78%),
+      radial-gradient(ellipse 48% 18% at 48% 92%,rgba(205,226,211,.13) 0%,transparent 75%)!important;
+    background-size:190% 155%,185% 150%,210% 160%!important;
+    background-position:-65% 100%,165% 0%,50% 140%!important;
+    background-repeat:no-repeat!important;
+    animation:hoe-mountain-mist 13s ease-in-out infinite!important;
+  }
+}
+@keyframes hoe-mountain-mist{
+  0%,100%{background-position:-65% 100%,165% 0%,50% 140%;filter:drop-shadow(0 0 0 rgba(205,226,211,0))}
+  50%{background-position:35% 15%,65% 100%,50% 15%;filter:drop-shadow(0 0 5px rgba(205,226,211,.12))}
+}
+@media(min-width:761px) and (prefers-reduced-motion:reduce){
+  html body>header .header-inner>a.brand{animation:none!important}
+}
