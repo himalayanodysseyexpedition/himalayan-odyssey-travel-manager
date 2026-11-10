@@ -488,3 +488,27 @@ button:focus-visible,a:focus-visible{outline:3px solid #a9d86c!important;outline
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+
+/* Keep the hero headline close beneath the navigation */
+.hero{
+  align-items:flex-start!important;
+  justify-content:flex-start!important;
+  padding-top:clamp(24px,3.2vw,42px)!important;
+}
+.hero-content{
+  margin-top:0!important;
+  padding-top:0!important;
+  transform:none!important;
+}
+.hero-animated-heading{
+  margin-top:0!important;
+}
+@media(max-width:900px){
+  .hero{padding-top:24px!important;align-items:flex-start!important;justify-content:flex-start!important}
+}
+@media(max-width:600px){
+  .hero{padding-top:17px!important}
+  .hero-content{margin-top:0!important;padding-top:0!important}
+  .hero-animated-heading{margin-top:0!important}
+}
