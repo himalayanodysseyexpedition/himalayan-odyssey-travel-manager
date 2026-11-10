@@ -661,3 +661,14 @@ body > .hero::before,
     filter:blur(2px)!important;
   }
 }
+
+
+/* DESKTOP HERO WORD SPACING — add breathing room around the rotating phrase. */
+@media(min-width:761px){
+  .hero > .hero-content > h1.hero-animated-heading .hero-word-slot{
+    margin-inline:.24em!important;
+  }
+  .hero > .hero-content > h1.hero-animated-heading .hero-word-rotator{
+    font-family:"Cinzel",Georgia,serif!important;
+  }
+}
