@@ -938,3 +938,16 @@ body #footerContactBar .quick-nav-whatsapp{
     width:17px!important;height:17px!important;flex-basis:17px!important;
   }
 }
+
+
+/* FLOATING BAR CENTERING FIX — center by equal fixed-position side insets,
+   not a translate transform, so the existing show/hide animation stays intact. */
+html body #footerContactBar.footer-contact-bar{
+  position:fixed!important;
+  left:0!important;
+  right:0!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  translate:none!important;
+  transform-origin:center bottom!important;
+}
