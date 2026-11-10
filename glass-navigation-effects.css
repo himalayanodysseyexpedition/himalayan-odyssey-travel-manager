@@ -330,3 +330,34 @@ header .header-inner > nav.glass-nav > .nav-dropdown.open > .services-chevron {
     font-size: 13px !important;
   }
 }
+
+/* Keep the mobile Services pill the same full column width as its peers;
+   place its disclosure chevron just outside the pill without taking layout space. */
+@media (max-width: 700px) {
+  header .header-inner > nav.glass-nav > .nav-dropdown {
+    position: relative !important;
+    display: flex !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    gap: 0 !important;
+  }
+  header .header-inner > nav.glass-nav > .nav-dropdown > .nav-dropdown-toggle {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  header .header-inner > nav.glass-nav > .nav-dropdown > .services-chevron {
+    position: absolute !important;
+    left: calc(100% + 1px) !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 5 !important;
+    pointer-events: none !important;
+  }
+  header .header-inner > nav.glass-nav > .nav-dropdown.open > .services-chevron {
+    transform: translateY(-50%) rotate(180deg) !important;
+  }
+}
