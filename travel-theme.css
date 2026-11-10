@@ -1,0 +1,141 @@
+/* Himalayan Odyssey Expedition — travel & tourism visual refresh
+   Warm alpine editorial palette, destination-led cards and clear booking actions.
+   Additive overrides only: existing page structure, data and booking logic stay intact. */
+:root{
+  --tour-forest:#173c36;
+  --tour-deep:#0b211d;
+  --tour-moss:#557565;
+  --tour-gold:#c6a36a;
+  --tour-champagne:#ead6ae;
+  --tour-cream:#f6f3eb;
+  --tour-paper:#fffefa;
+  --tour-ink:#263b34;
+  --tour-muted:#748078;
+  --tour-line:#e7e1d5;
+  --tour-shadow:0 18px 46px rgba(16,43,34,.11);
+  --tour-radius:18px;
+}
+html{background:var(--tour-cream);scroll-behavior:smooth}
+body{background:var(--tour-cream)!important;color:var(--tour-ink)!important}
+::selection{background:var(--tour-gold);color:var(--tour-deep)}
+/* Clear editorial hierarchy */
+.content,.section-inner{color:var(--tour-ink)}
+.section-title small,.eyebrow,.section-kicker{color:#9a7846!important;letter-spacing:2.8px!important;font-weight:700}
+.section-title h2,.content h2,.section-inner h2{
+  color:var(--tour-forest)!important;
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-weight:600!important;
+  letter-spacing:-.025em;
+}
+.section-title h2{font-size:clamp(34px,4.2vw,54px)!important;line-height:1.04!important}
+.intro,.content p{color:#66766d}
+.content{padding-top:clamp(48px,6vw,86px);padding-bottom:clamp(48px,6vw,86px)}
+/* Hero: immersive mountain photography with legible, centered copy */
+.hero{
+  background-color:var(--tour-deep);
+  background-position:center;
+  background-size:cover;
+}
+.hero:before{pointer-events:none}
+.hero-content{max-width:920px}
+.hero .hero-animated-heading{
+  text-shadow:0 4px 24px rgba(0,0,0,.28);
+  letter-spacing:-.035em;
+}
+.hero .hero-content>p{color:rgba(255,255,255,.88);line-height:1.85}
+.hero-service-icon{
+  border:1px solid rgba(234,214,174,.42)!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.17),rgba(255,255,255,.055))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 10px 26px rgba(0,0,0,.15)!important;
+  -webkit-backdrop-filter:blur(14px) saturate(145%);
+  backdrop-filter:blur(14px) saturate(145%);
+}
+.hero-service-icon svg{stroke:var(--tour-champagne)!important}
+.hero-service-icon span{color:#fff!important}
+.hero-build-cta,.btn{
+  border-radius:999px!important;
+  background:linear-gradient(135deg,#f0ddb8,#c6a36a)!important;
+  color:#132c25!important;
+  border:1px solid rgba(255,255,255,.28)!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.45);
+  font-weight:800!important;
+  letter-spacing:1.15px!important;
+}
+.hero-build-cta:hover,.btn:hover{filter:brightness(1.06);transform:translateY(-2px);box-shadow:0 13px 28px rgba(0,0,0,.2)}
+.hero-note span{border-color:rgba(234,214,174,.35)!important;color:#f4ead6!important}
+/* A neat reassurance strip beneath the hero */
+.journey-strip{
+  background:var(--tour-paper)!important;
+  border:1px solid var(--tour-line)!important;
+  border-radius:0 0 18px 18px;
+  box-shadow:0 12px 34px rgba(18,48,37,.06);
+}
+.journey-item strong{color:var(--tour-forest)!important;font-family:"Cormorant Garamond",Georgia,serif;font-size:23px}
+.journey-item span{color:var(--tour-muted)!important}
+/* Destination and travel cards */
+.destination-card,.guide-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card{
+  border:1px solid rgba(23,60,54,.11)!important;
+  border-radius:var(--tour-radius)!important;
+  background:var(--tour-paper)!important;
+  box-shadow:0 8px 28px rgba(18,48,37,.07)!important;
+  overflow:hidden;
+}
+.destination-card:hover,.guide-card:hover,.package-slide:hover,.itinerary-slide:hover,.cab-card:hover,.hotel-card:hover,.card:hover{
+  border-color:rgba(198,163,106,.65)!important;
+  box-shadow:var(--tour-shadow)!important;
+}
+.destination-card img,.guide-card img,.package-slide img,.itinerary-slide img,.cab-card img,.hotel-card img{
+  filter:saturate(.94) contrast(1.02);
+}
+.destination-info,.destination-card .destination-info{
+  background:linear-gradient(180deg,transparent 0%,rgba(5,24,19,.88) 100%);
+}
+.destination-info small,.destination-info span{color:#f0ddb8!important}
+.destination-info h3{font-family:"Cormorant Garamond",Georgia,serif!important;font-size:clamp(25px,2.5vw,34px)!important}
+.package-slide h3,.guide-card h3,.itinerary-slide h3,.cab-card h3,.hotel-card h3,.card h3{
+  color:var(--tour-forest)!important;font-family:"Cormorant Garamond",Georgia,serif!important;
+}
+.package-slide p,.guide-card p,.itinerary-slide p,.cab-card p,.hotel-card p,.card p{color:var(--tour-muted)}
+/* Featured group departures */
+.group-departures-section{background:linear-gradient(180deg,#f8f6f0,#e9eee7)!important}
+.group-departure-card{border-radius:var(--tour-radius)!important;border:1px solid var(--tour-line)!important;box-shadow:0 12px 34px rgba(20,45,35,.08)!important;overflow:hidden}
+.group-departure-photo img{transition:transform .7s ease}
+.group-departure-card:hover .group-departure-photo img{transform:scale(1.045)}
+.group-departure-cta{border-radius:999px;background:var(--tour-forest)!important}
+.group-departure-cta:hover{background:var(--tour-gold)!important;color:var(--tour-deep)!important}
+/* Dark storytelling panels stay atmospheric, but use the warmer gold accent */
+.local-intro-panel,.feature-panel,.testimonial-section,.instagram-section{
+  border-color:rgba(198,163,106,.22);
+}
+.local-intro-panel h3,.feature-panel h3{font-family:"Cormorant Garamond",Georgia,serif}
+/* FAQ, forms and interactive controls */
+.faq-list details,.faq-item,.form-card,.enquiry-card,.contact-card{
+  background:var(--tour-paper)!important;border:1px solid var(--tour-line)!important;border-radius:14px!important;
+  box-shadow:0 8px 24px rgba(18,48,37,.045);
+}
+input,select,textarea{
+  border-color:#d9ded5!important;border-radius:10px!important;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--tour-gold)!important;box-shadow:0 0 0 3px rgba(198,163,106,.14)!important;outline:none;
+}
+button:not(.nav-dropdown-toggle),.button,.submit-btn{border-radius:999px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--tour-gold)!important;outline-offset:3px}
+/* Footer */
+footer,.site-footer{
+  background:linear-gradient(145deg,#0b211d,#173c36)!important;
+  color:#e9e5da!important;border-top:1px solid rgba(198,163,106,.32);
+}
+footer h2,footer h3,footer h4,.site-footer h2,.site-footer h3,.site-footer h4{color:var(--tour-champagne)!important}
+footer a,.site-footer a{color:rgba(245,241,230,.82)}
+footer a:hover,.site-footer a:hover{color:var(--tour-champagne)}
+/* Mobile keeps existing navigation dimensions and page-specific layouts */
+@media(max-width:760px){
+  .content{padding-top:48px;padding-bottom:48px}
+  .section-title h2{font-size:clamp(30px,8vw,40px)!important}
+  .journey-strip{border-radius:0 0 14px 14px}
+  .destination-card,.guide-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card{border-radius:14px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .destination-card img,.guide-card img,.package-slide img,.itinerary-slide img,.cab-card img,.hotel-card img{transition:none!important}
+}
