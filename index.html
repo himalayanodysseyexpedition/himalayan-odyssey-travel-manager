@@ -1928,6 +1928,16 @@ header nav .header-cta:hover{background:linear-gradient(135deg,#f3dfb5,#d1ab70);
   .quick-nav-menu a{min-height:40px;padding:9px 11px;font-size:10px}
 }
 
+/* DESKTOP ONLY: create clear separation between the header navigation and hero headline */
+@media (min-width: 1101px) {
+  header {
+    margin-bottom: clamp(30px, 4vh, 48px) !important;
+  }
+  .hero {
+    margin-top: 0 !important;
+  }
+}
+
 </style>
 
 
