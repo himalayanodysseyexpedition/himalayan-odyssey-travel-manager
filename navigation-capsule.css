@@ -951,3 +951,26 @@ html body #footerContactBar.footer-contact-bar{
   translate:none!important;
   transform-origin:center bottom!important;
 }
+
+
+/* DEFINITIVE FLOATING BAR CENTER FIX.
+   The original visibility animation already includes translateX(-50%).
+   Pair it with left:50% and remove the separate translate property so the
+   horizontal offset is applied exactly once. Keep all Y/scale animation states. */
+html body #footerContactBar.footer-contact-bar{
+  position:fixed!important;
+  left:50%!important;
+  right:auto!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  width:min(600px,calc(100vw - 28px))!important;
+  max-width:calc(100vw - 28px)!important;
+  box-sizing:border-box!important;
+  translate:none!important;
+}
+@media(max-width:520px){
+  html body #footerContactBar.footer-contact-bar{
+    width:calc(100vw - 20px)!important;
+    max-width:calc(100vw - 20px)!important;
+  }
+}
