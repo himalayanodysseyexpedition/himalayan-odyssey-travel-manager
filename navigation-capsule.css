@@ -1560,3 +1560,26 @@ html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-me
     white-space:nowrap!important;
   }
 }
+
+/* MOBILE ONLY — ensure every main navigation button visibly carries its own icon. */
+@media screen and (max-width:760px){
+  html body>header .header-inner>nav.glass-nav>a,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+    display:inline-flex!important;
+    flex-direction:row!important;
+    align-items:center!important;
+    gap:clamp(3px,1vw,5px)!important;
+  }
+  html body>header .header-inner>nav.glass-nav>a>.nav-glass-icon,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>.nav-glass-icon{
+    display:inline-block!important;
+    visibility:visible!important;
+    opacity:1!important;
+    flex:0 0 12px!important;
+    width:12px!important;
+    height:12px!important;
+    min-width:12px!important;
+    stroke:currentColor!important;
+    fill:none!important;
+  }
+}
