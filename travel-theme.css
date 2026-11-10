@@ -141,9 +141,10 @@ footer a:hover,.site-footer a:hover{color:var(--tour-champagne)}
 }
 
 
+
 /* ==========================================================
    HIMALAYAN ODYSSEY — SHARED BRAND CONSISTENCY
-   One button palette and one heading family across public pages.
+   Neon-lime buttons and unified heading typography.
    ========================================================== */
 html body :is(h1,h2,h3,h4,h5,h6){
   font-family:"Cormorant Garamond",Georgia,serif!important;
@@ -160,20 +161,20 @@ html body :is(button:not(.nav-dropdown-toggle):not([class*="whatsapp"]):not([cla
   input[type="button"],input[type="submit"],input[type="reset"],
   .btn,.button,.submit-btn,.header-cta,.hero-build-cta,.group-departure-cta,
   a[role="button"]):not([class*="whatsapp"]):not([class*="wa-"]){
-  background:linear-gradient(135deg,#ead6ae 0%,#c6a36a 100%)!important;
-  color:#102b24!important;
-  border:1px solid rgba(198,163,106,.88)!important;
+  background:linear-gradient(135deg,#e0ff91 0%,#c5f36a 52%,#a9dc4f 100%)!important;
+  color:#123b32!important;
+  border:1px solid rgba(214,255,120,.94)!important;
   font-family:"Manrope","DM Sans",Arial,sans-serif!important;
   font-weight:750!important;
-  box-shadow:0 8px 22px rgba(16,43,34,.14),inset 0 1px 0 rgba(255,255,255,.48)!important;
+  box-shadow:0 8px 22px rgba(105,151,45,.20),0 0 13px rgba(198,255,92,.18),inset 0 1px 0 rgba(255,255,255,.48)!important;
 }
 html body :is(button:not(.nav-dropdown-toggle):not([class*="whatsapp"]):not([class*="wa-"]),
   input[type="button"],input[type="submit"],input[type="reset"],
   .btn,.button,.submit-btn,.header-cta,.hero-build-cta,.group-departure-cta,
   a[role="button"]):not([class*="whatsapp"]):not([class*="wa-"]):hover{
-  background:linear-gradient(135deg,#f1e2c4 0%,#d4b77f 100%)!important;
-  color:#102b24!important;
-  border-color:#d8bd8b!important;
+  background:linear-gradient(135deg,#eaffb0 0%,#d6ff78 52%,#b8eb60 100%)!important;
+  color:#123b32!important;
+  border-color:#e0ff91!important;
   filter:brightness(1.02);
 }
 html body :is(button:not(.nav-dropdown-toggle):not([class*="whatsapp"]):not([class*="wa-"]),
@@ -184,6 +185,6 @@ html body :is(button:not(.nav-dropdown-toggle):not([class*="whatsapp"]):not([cla
   cursor:not-allowed!important;
 }
 html body :is(button:not(.nav-dropdown-toggle),.btn,.button,.submit-btn,[role="button"]):focus-visible{
-  outline:2px solid var(--tour-gold)!important;
+  outline:2px solid #c5f36a!important;
   outline-offset:3px!important;
 }
