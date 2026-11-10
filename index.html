@@ -2913,7 +2913,7 @@ header .header-inner > a.brand .brand-wordmark{
 <!-- HERO -->
 <div class="hero" id="home">
   <div class="hero-content">
-    <h1 class="hero-animated-heading"><span class="hero-heading-static">The</span> <span class="hero-word-slot"><span id="heroRotatingWord" class="hero-word-rotator word-himalaya" aria-label="Himalaya">Himalaya</span></span> <span class="hero-heading-static">is calling</span><span class="hero-heading-period">.</span></h1>
+    <h1 class="hero-animated-heading"><span class="hero-heading-static hero-heading-prefix">The</span><span class="hero-word-slot"><span id="heroRotatingWord" class="hero-word-rotator word-himalayas" aria-label="Himalayas are">Himalayas are</span></span><span class="hero-heading-static hero-heading-suffix">calling</span><span class="hero-heading-period">.</span></h1>
 
     <div class="hero-service-icons" aria-label="Our services">
       <div class="hero-service-icon" aria-hidden="true">
@@ -4145,10 +4145,10 @@ loadHotels();
   const word = document.getElementById("heroRotatingWord");
   if (!word) return;
   const words = [
-    { text: "Himalaya", className: "word-himalaya" },
-    { text: "Himachal", className: "word-himachal" },
-    { text: "Spiti", className: "word-spiti" },
-    { text: "Adventure", className: "word-adventure" }
+    { text: "Himalayas are", className: "word-himalayas" },
+    { text: "Himachal is", className: "word-himachal" },
+    { text: "Spiti is", className: "word-spiti" },
+    { text: "Adventure is", className: "word-adventure" }
   ];
   const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduceMotion) return;
@@ -4173,6 +4173,39 @@ loadHotels();
   <link rel="stylesheet" href="/navigation-capsule.css?v=9">
 <link rel="stylesheet" href="/mobile-layout.css?v=1">
 <script src="/header-scroll.js?v=1" defer></script>
+
+
+<style id="hero-centered-fixed-phrases">
+/* Keep the opening and closing words anchored while the middle phrase changes. */
+.hero .hero-animated-heading{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,6.4em) minmax(0,1fr) auto!important;
+  align-items:baseline!important;
+  justify-content:center!important;
+  gap:0!important;
+  width:min(100%,1000px)!important;
+  max-width:100%!important;
+  margin-inline:auto!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+}
+.hero .hero-heading-prefix{grid-column:1;text-align:right!important}
+.hero .hero-word-slot{
+  grid-column:2;display:flex!important;align-items:baseline!important;
+  justify-content:center!important;width:100%!important;min-width:0!important;
+  text-align:center!important;white-space:nowrap!important;
+}
+.hero #heroRotatingWord{display:inline-block!important;width:100%!important;text-align:center!important}
+.hero .hero-heading-suffix{grid-column:3;text-align:left!important}
+.hero .hero-heading-period{grid-column:4}
+@media(max-width:700px){
+  .hero .hero-animated-heading{
+    grid-template-columns:minmax(0,.72fr) minmax(0,2.35fr) minmax(0,1.12fr) auto!important;
+    font-size:clamp(28px,7.8vw,48px)!important;
+    letter-spacing:-.8px!important;
+  }
+}
+</style>
 </body>
 </html>
 
