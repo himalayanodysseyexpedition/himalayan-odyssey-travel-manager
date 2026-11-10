@@ -587,3 +587,33 @@ body > .hero .hero-note{
 .hero-service-icon:nth-child(1){
   animation:odysseyFloat 5s ease-in-out 0s infinite;
 }
+
+
+/* ODYSSEY wordmark: span the same visual width as the original logo artwork. */
+header .header-inner > a.brand .brand-wordmark{
+  display:block!important;
+  width:clamp(130px,14vw,184px)!important;
+  box-sizing:border-box!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+  font-size:13px!important;
+  letter-spacing:5px!important;
+  text-indent:5px!important;
+  line-height:1.1!important;
+}
+@media(max-width:900px){
+  header .header-inner > a.brand .brand-wordmark{
+    width:130px!important;
+    font-size:12px!important;
+    letter-spacing:4.5px!important;
+    text-indent:4.5px!important;
+  }
+}
+@media(max-width:600px){
+  header .header-inner > a.brand .brand-wordmark{
+    width:118px!important;
+    font-size:11px!important;
+    letter-spacing:4px!important;
+    text-indent:4px!important;
+  }
+}
