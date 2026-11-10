@@ -1094,3 +1094,11 @@ html body #footerContactBar.footer-contact-bar{
     outline:none!important;
   }
 }
+
+/* DESKTOP NAV LABEL SIZE — slightly larger for clearer hierarchy. */
+@media(min-width:761px){
+  html body>header .header-inner>nav.glass-nav>a,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+    font-size:clamp(9px,.76vw,11px)!important;
+  }
+}
