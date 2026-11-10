@@ -530,3 +530,15 @@
     font-size:clamp(18px,5.3vw,27px)!important;
   }
 }
+
+
+/* MOBILE ONLY — add breathing room below the Cabs / Hotels / Packages icons,
+   then separate the hero introduction from the Build Your Trip button. */
+@media screen and (max-width:760px){
+  body>.hero>.hero-content>.hero-build-cta-wrap{
+    margin-top:30px!important;
+  }
+  body>.hero>.hero-content>.hero-build-cta-wrap+p{
+    margin-top:28px!important;
+  }
+}
