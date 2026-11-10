@@ -569,3 +569,19 @@
     animation:none!important;
   }
 }
+
+
+/* MOBILE ONLY — use equal vertical spacing from “and you must go” to the service icons,
+   and from the service icons to the Build Your Trip button. */
+@media screen and (max-width:760px){
+  html body>.hero>.hero-content>.hero-go-line{
+    margin-bottom:0!important;
+  }
+  html body>.hero>.hero-content>.hero-service-icons{
+    margin-top:48px!important;
+    margin-bottom:0!important;
+  }
+  html body>.hero>.hero-content>.hero-build-cta-wrap{
+    margin-top:48px!important;
+  }
+}
