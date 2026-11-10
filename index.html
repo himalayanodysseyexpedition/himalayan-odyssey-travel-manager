@@ -3935,5 +3935,53 @@ loadHotels();
 }
 </style>
 
+
+<style id="desktop-hero-spacing-fix">
+/* Desktop-only: keep the hero title, service icons and actions visually separated */
+@media (min-width: 1101px) {
+  .hero {
+    padding-top: 72px !important;
+    padding-bottom: 88px !important;
+  }
+  .hero-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: min(100%, 980px) !important;
+    max-width: 980px !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    gap: 0 !important;
+  }
+  .hero-content > h1 {
+    width: 100% !important;
+    max-width: 900px !important;
+    margin: 0 auto 34px !important;
+    text-align: center !important;
+    line-height: 1.02 !important;
+  }
+  .hero-content > .hero-service-icons {
+    margin: 0 auto 26px !important;
+  }
+  .hero-content > .hero-build-cta-wrap {
+    margin: 0 auto 28px !important;
+  }
+  .hero-content > p {
+    max-width: 720px !important;
+    margin: 0 auto 24px !important;
+    text-align: center !important;
+  }
+  .hero-content > a.btn.outline {
+    margin: 0 auto !important;
+  }
+  .hero-content > .hero-note {
+    justify-content: center !important;
+    margin: 26px auto 0 !important;
+    text-align: center !important;
+  }
+}
+</style>
+
 </body>
 </html>
