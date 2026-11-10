@@ -10,6 +10,13 @@
   let direction = "up";
 
   const render = () => {
+    // On mobile, keep the header sticky and unchanged; desktop scroll behaviour stays intact.
+    if (window.matchMedia("(max-width: 760px)").matches) {
+      header.classList.remove("is-scrolled", "is-hidden");
+      ticking = false;
+      return;
+    }
+
     const y = Math.max(0, window.scrollY);
     const delta = y - lastY;
 
