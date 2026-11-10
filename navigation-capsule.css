@@ -1416,3 +1416,43 @@ html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-me
     margin:0!important;
   }
 }
+
+
+/* MOBILE NAV ICONS — give every navigation control its own matching symbol,
+   including Services, while keeping the links in one compact horizontal row. */
+@media(max-width:760px){
+  html body>header .header-inner>nav.glass-nav>a,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+    display:inline-flex!important;
+    flex-direction:row!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:clamp(3px,1vw,6px)!important;
+  }
+  html body>header .header-inner>nav.glass-nav .nav-glass-icon{
+    display:inline-block!important;
+    flex:0 0 13px!important;
+    width:13px!important;
+    height:13px!important;
+    min-width:13px!important;
+    stroke:currentColor!important;
+    fill:none!important;
+    stroke-width:1.7!important;
+    stroke-linecap:round!important;
+    stroke-linejoin:round!important;
+    opacity:.92!important;
+  }
+  html body>header .header-inner>nav.glass-nav .services-chevron{
+    flex:0 0 9px!important;
+    width:9px!important;
+    height:12px!important;
+    margin-left:1px!important;
+    font-size:10px!important;
+  }
+  html body>header .header-inner>nav.glass-nav>a span,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>span:not(.services-chevron){
+    display:inline-block!important;
+    min-width:0!important;
+    white-space:nowrap!important;
+  }
+}
