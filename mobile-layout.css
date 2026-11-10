@@ -498,3 +498,19 @@
     box-shadow:none!important;
   }
 }
+
+
+/* MOBILE ONLY — position “The Himalayas are calling” immediately below the header. */
+@media screen and (max-width:760px){
+  body>.hero{
+    padding-top:2px!important;
+  }
+  body>.hero>.hero-content{
+    margin-top:0!important;
+    padding-top:0!important;
+  }
+  body>.hero>.hero-content>.hero-animated-heading{
+    margin-top:0!important;
+    margin-bottom:12px!important;
+  }
+}
