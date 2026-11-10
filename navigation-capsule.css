@@ -1648,3 +1648,31 @@ html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu a 
     font-size:calc(clamp(6.5px,1.85vw,8px) - 2px)!important;
   }
 }
+
+
+/* MOBILE ONLY — keep Services label identical in size to the other nav labels,
+   and show a clear dropdown arrow without changing desktop navigation. */
+@media screen and (max-width:760px){
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+    position:relative!important;
+    padding-left:2px!important;
+    padding-right:9px!important;
+    font-size:calc(clamp(6.5px,1.85vw,8px) - 2px)!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>span:not(.services-chevron){
+    font-size:calc(clamp(6.5px,1.85vw,8px) - 2px)!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>.services-chevron{
+    display:inline-block!important;
+    position:absolute!important;
+    right:0!important;
+    bottom:4px!important;
+    width:auto!important;
+    height:auto!important;
+    min-width:0!important;
+    margin:0!important;
+    font-size:8px!important;
+    line-height:1!important;
+    opacity:.9!important;
+  }
+}
