@@ -1645,6 +1645,6 @@ html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu a 
   html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle,
   html body>header .header-inner>nav.glass-nav>a>span,
   html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>span:not(.services-chevron){
-    font-size:calc(clamp(6.5px,1.85vw,8px) - 1px)!important;
+    font-size:calc(clamp(6.5px,1.85vw,8px) - 2px)!important;
   }
 }
