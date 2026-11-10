@@ -1629,3 +1629,13 @@ html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-me
     margin-right:clamp(8px,2.5vw,14px)!important;
   }
 }
+
+
+/* MOBILE ONLY — lower Build Your Trip slightly below the navigation icons; keep the icon row above with a visible vertical gap. */
+@media screen and (max-width:760px){
+  html body>header .header-inner>.header-cta{
+    align-self:end!important;
+    margin:0 0 2px!important;
+    transform:translateY(2px)!important;
+  }
+}
