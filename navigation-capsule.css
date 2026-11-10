@@ -156,3 +156,69 @@ header .header-inner>nav.glass-nav>a:first-child:focus-visible{
   border-color:rgba(213,180,119,.38)!important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 13px rgba(213,180,119,.08)!important;
 }
+
+
+/* Final refinement: clearly outlined Plan Your Trip pill and a premium Services arrow control */
+header .header-inner>.header-cta{
+  min-height:44px!important;
+  padding:0 25px!important;
+  border:1.5px solid rgba(240,216,167,.98)!important;
+  border-radius:999px!important;
+  background:linear-gradient(135deg,rgba(213,180,119,.16),rgba(9,36,29,.52))!important;
+  color:#f0d8a7!important;
+  box-shadow:
+    0 0 0 3px rgba(213,180,119,.10),
+    inset 0 1px 0 rgba(255,255,255,.16),
+    0 7px 22px rgba(0,0,0,.22)!important;
+}
+header .header-inner>.header-cta:hover,
+header .header-inner>.header-cta:focus-visible{
+  border-color:#fff0cf!important;
+  background:linear-gradient(135deg,rgba(213,180,119,.28),rgba(9,36,29,.68))!important;
+  box-shadow:
+    0 0 0 4px rgba(213,180,119,.14),
+    0 0 24px rgba(213,180,119,.22),
+    inset 0 1px 0 rgba(255,255,255,.22)!important;
+}
+header .header-inner>nav.glass-nav .services-chevron{
+  flex:0 0 20px!important;
+  width:20px!important;
+  height:20px!important;
+  margin:0 0 0 5px!important;
+  display:inline-grid!important;
+  place-items:center!important;
+  border:1px solid rgba(240,216,167,.78)!important;
+  border-radius:50%!important;
+  background:linear-gradient(145deg,rgba(240,216,167,.22),rgba(213,180,119,.07))!important;
+  color:#f5dfb7!important;
+  font-size:15px!important;
+  font-weight:800!important;
+  line-height:1!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.24),0 2px 8px rgba(0,0,0,.18)!important;
+  transition:transform .32s cubic-bezier(.2,.8,.2,1),background .32s ease,border-color .32s ease,box-shadow .32s ease!important;
+}
+header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:hover .services-chevron,
+header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:focus-visible .services-chevron,
+header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle .services-chevron{
+  border-color:#fff0cf!important;
+  background:linear-gradient(145deg,rgba(240,216,167,.34),rgba(213,180,119,.16))!important;
+  box-shadow:0 0 12px rgba(213,180,119,.24),inset 0 1px 0 rgba(255,255,255,.3)!important;
+}
+header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle .services-chevron{
+  transform:rotate(180deg)!important;
+}
+@media(max-width:640px){
+  header .header-inner>.header-cta{
+    min-height:38px!important;
+    padding:0 20px!important;
+    border-width:1.4px!important;
+    box-shadow:0 0 0 2px rgba(213,180,119,.10),0 5px 16px rgba(0,0,0,.2)!important;
+  }
+  header .header-inner>nav.glass-nav .services-chevron{
+    flex-basis:17px!important;width:17px!important;height:17px!important;
+    margin-left:3px!important;font-size:13px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  header .header-inner>nav.glass-nav .services-chevron{transition:none!important}
+}
