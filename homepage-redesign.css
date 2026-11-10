@@ -1156,8 +1156,9 @@ html body>header .header-inner{
 }
 
 
-/* APPLE-STYLE GLASS HEADER — extend the frosted material across the full
-   logo/navigation header area, ending at the fine champagne-gold baseline. */
+/* DESKTOP ONLY — Apple-style glass across the full logo/navigation header,
+   ending at the fine champagne-gold baseline. Mobile header styling is unchanged. */
+@media(min-width:761px){
 html body>header,
 html body>header.is-scrolled,
 html body>header.is-hidden{
@@ -1173,4 +1174,6 @@ html body>header .header-inner{
   box-shadow:inset 0 1px 0 rgba(255,255,255,.12)!important;
   -webkit-backdrop-filter:blur(28px) saturate(175%)!important;
   backdrop-filter:blur(28px) saturate(175%)!important;
+}
+
 }
