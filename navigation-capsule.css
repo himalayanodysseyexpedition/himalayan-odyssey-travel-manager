@@ -984,3 +984,31 @@ html body #footerContactBar.footer-contact-bar{
     font-weight:600!important;
   }
 }
+
+
+/* DESKTOP SERVICES DROPDOWN ARROW — vertically centered at the right edge. */
+@media(min-width:761px){
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+    position:relative!important;
+    padding-right:34px!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle .services-chevron{
+    position:absolute!important;
+    right:11px!important;
+    top:50%!important;
+    margin:0!important;
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:14px!important;
+    height:14px!important;
+    border:0!important;
+    border-radius:0!important;
+    font-size:17px!important;
+    line-height:1!important;
+    transform:translateY(-50%)!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle .services-chevron{
+    transform:translateY(-50%) rotate(180deg)!important;
+  }
+}
