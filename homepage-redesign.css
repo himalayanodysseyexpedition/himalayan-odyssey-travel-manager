@@ -509,20 +509,18 @@ button:focus-visible,a:focus-visible{outline:3px solid #a9d86c!important;outline
 }
 
 
-/* Homepage hero typography: General Sans + Boska from Fontshare.
-   General Sans is reserved for the static words; Boska is used only
-   for the rotating destination/adventure word. */
+/* Homepage hero typography: one consistent Cormorant Garamond family
+   across the fixed words and every rotating phrase. */
 .hero .hero-animated-heading,
-.hero .hero-heading-static{
-  font-family:"General Sans",sans-serif!important;
-  font-weight:700!important;
+.hero .hero-heading-static,
+.hero .hero-word-rotator{
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-weight:600!important;
 }
 .hero .hero-heading-static{
-  letter-spacing:-.045em!important;
+  letter-spacing:-.035em!important;
 }
 .hero .hero-word-rotator{
-  font-family:"Boska",Georgia,serif!important;
-  font-weight:600!important;
   font-style:normal!important;
   text-transform:uppercase!important;
   font-variant-ligatures:common-ligatures discretionary-ligatures!important;
