@@ -920,3 +920,21 @@ body > .hero::before,
     backdrop-filter:blur(28px) saturate(165%)!important;
   }
 }
+
+
+/* DESKTOP HERO TAGLINE — enlarge the cursive line to balance the headline
+   and keep it precisely centered beneath the full heading. */
+@media(min-width:761px){
+  .hero > .hero-content > .hero-go-line{
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    font-size:clamp(56px,6vw,82px)!important;
+    line-height:.98!important;
+    letter-spacing:.01em!important;
+    text-align:center!important;
+    white-space:nowrap!important;
+  }
+}
