@@ -437,3 +437,15 @@
     margin:0!important;
   }
 }
+
+
+/* MOBILE HERO TYPOGRAPHY REFINEMENT — lift the headline slightly and
+   scale the supporting cursive line down a touch for clearer hierarchy. */
+@media(max-width:760px){
+  .hero > .hero-content > h1.hero-animated-heading{
+    font-size:clamp(15px,4.65vw,24px)!important;
+  }
+  .hero > .hero-content > .hero-go-line{
+    font-size:clamp(28px,7.9vw,40px)!important;
+  }
+}
