@@ -1583,3 +1583,38 @@ html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-me
     fill:none!important;
   }
 }
+
+/* MOBILE ONLY — stack each navigation icon centered above its heading. */
+@media screen and (max-width:760px){
+  html body>header .header-inner>nav.glass-nav>a,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+    display:inline-flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:4px!important;
+    text-align:center!important;
+    min-height:38px!important;
+    height:auto!important;
+    padding:3px 2px!important;
+  }
+  html body>header .header-inner>nav.glass-nav>a>.nav-glass-icon,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>.nav-glass-icon{
+    display:block!important;
+    flex:0 0 14px!important;
+    width:14px!important;
+    height:14px!important;
+    min-width:14px!important;
+    margin:0 auto!important;
+  }
+  html body>header .header-inner>nav.glass-nav>a>span,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>span:not(.services-chevron){
+    display:block!important;
+    width:100%!important;
+    text-align:center!important;
+    line-height:1.1!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>.services-chevron{
+    display:none!important;
+  }
+}
