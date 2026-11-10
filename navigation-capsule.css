@@ -1629,3 +1629,11 @@ html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-me
     margin-right:clamp(8px,2.5vw,14px)!important;
   }
 }
+
+
+/* SERVICES DROPDOWN — use the General Sans family consistently for every menu item. */
+html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu,
+html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu a,
+html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu a *{
+  font-family:"General Sans",Arial,sans-serif!important;
+}
