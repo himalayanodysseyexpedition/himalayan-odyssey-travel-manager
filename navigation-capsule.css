@@ -1249,3 +1249,56 @@ html body #footerContactBar.footer-contact-bar{
 @media(min-width:761px) and (prefers-reduced-motion:reduce){
   html body>header .header-inner>a.brand{animation:none!important}
 }
+
+
+/* DESKTOP HIMALAYAN LIGHT SWEEP — replace Mountain Mist/Spark with one
+   refined travelling highlight across the unchanged original logo artwork. */
+@media(min-width:761px){
+  html body>header .header-inner>a.brand{
+    background-image:none!important;
+    background-size:auto!important;
+    background-position:initial!important;
+    animation:none!important;
+  }
+  html body>header .header-inner>a.brand::before{
+    content:""!important;
+    position:absolute!important;
+    inset:0!important;
+    z-index:3!important;
+    display:block!important;
+    width:auto!important;
+    height:auto!important;
+    border:0!important;
+    border-radius:inherit!important;
+    pointer-events:none!important;
+    opacity:0!important;
+    background:linear-gradient(108deg,
+      transparent 0%,
+      transparent 38%,
+      rgba(234,255,220,.04) 44%,
+      rgba(255,255,244,.72) 49%,
+      rgba(214,255,185,.25) 53%,
+      transparent 61%,
+      transparent 100%)!important;
+    box-shadow:none!important;
+    transform:translateX(-115%) skewX(-12deg)!important;
+    animation:hoe-himalayan-light-sweep 8.5s ease-in-out infinite!important;
+  }
+  html body>header .header-inner>a.brand::after{
+    content:none!important;
+    display:none!important;
+    animation:none!important;
+  }
+}
+@keyframes hoe-himalayan-light-sweep{
+  0%,62%{opacity:0;transform:translateX(-115%) skewX(-12deg)}
+  67%{opacity:.9}
+  79%{opacity:.72;transform:translateX(115%) skewX(-12deg)}
+  84%,100%{opacity:0;transform:translateX(115%) skewX(-12deg)}
+}
+@media(min-width:761px) and (prefers-reduced-motion:reduce){
+  html body>header .header-inner>a.brand::before{
+    animation:none!important;
+    opacity:0!important;
+  }
+}
