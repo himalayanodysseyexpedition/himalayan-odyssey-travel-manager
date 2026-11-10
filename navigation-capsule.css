@@ -557,3 +557,19 @@ html body>.hero{
     min-height:0!important;
   }
 }
+
+
+/* BRAND CONSISTENCY — use the same deep-green glass header at page top
+   and while scrolling; remove the white initial header appearance. */
+html body>header,
+html body>header:not(.is-scrolled){
+  background:rgba(8,30,24,.88)!important;
+  border-bottom:1px solid rgba(213,180,119,.42)!important;
+  box-shadow:0 8px 28px rgba(0,0,0,.16)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(150%)!important;
+  backdrop-filter:blur(22px) saturate(150%)!important;
+}
+html body>header:not(.is-scrolled) .header-inner>nav.glass-nav{
+  background:rgba(255,255,255,.055)!important;
+  border-color:rgba(240,223,189,.34)!important;
+}
