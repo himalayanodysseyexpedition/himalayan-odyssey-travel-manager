@@ -3006,6 +3006,9 @@ header .header-inner > a.brand .brand-wordmark{
     </div>
 
     <p>From the high-altitude wilderness of Spiti to the quiet valleys of Kinnaur and the cedar forests of Narkanda, discover journeys shaped by the mountains and made memorable by the people you meet along the way.</p>
+    <div class="hero-destination-list" aria-label="Destinations we offer">
+      <span>Spiti Valley</span><i aria-hidden="true">·</i><span>Kinnaur</span><i aria-hidden="true">·</i><span>Narkanda</span><i aria-hidden="true">·</i><span>Shimla</span><i aria-hidden="true">·</i><span>Manali</span><i aria-hidden="true">·</i><span>Kasol</span><i aria-hidden="true">·</i><span>Jibhi</span>
+    </div>
 
     
   </div>
@@ -4493,6 +4496,42 @@ header .header-inner > a.brand .brand-wordmark{
   }
 }
 </style>
+
+<style id="mobile-hero-destination-list">
+/* MOBILE ONLY — one-line destination list below the hero introduction. */
+@media screen and (max-width:760px){
+  html body>.hero>.hero-content>.hero-destination-list{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    flex-wrap:nowrap!important;
+    gap:8px!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin:16px auto 0!important;
+    padding:0 2px 5px!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    white-space:nowrap!important;
+    scrollbar-width:none!important;
+    -webkit-overflow-scrolling:touch!important;
+    color:rgba(255,248,233,.92)!important;
+    font-size:10px!important;
+    line-height:1.5!important;
+    letter-spacing:.35px!important;
+    text-align:center!important;
+  }
+  html body>.hero>.hero-content>.hero-destination-list::-webkit-scrollbar{display:none!important}
+  html body>.hero>.hero-content>.hero-destination-list i{
+    flex:0 0 auto!important;
+    color:#d8bd86!important;
+    font-style:normal!important;
+    font-size:13px!important;
+  }
+  html body>.hero>.hero-content>.hero-destination-list span{flex:0 0 auto!important}
+}
+</style>
+
 </body>
 </html>
 
