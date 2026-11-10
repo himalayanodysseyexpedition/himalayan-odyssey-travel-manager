@@ -1618,3 +1618,14 @@ html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-me
     display:none!important;
   }
 }
+
+
+/* MOBILE ONLY — add two lines of breathing room before the Build Your Trip CTA. */
+@media screen and (max-width:760px){
+  html body>header .header-inner{
+    column-gap:clamp(14px,4vw,22px)!important;
+  }
+  html body>header .header-inner>nav.glass-nav{
+    margin-right:clamp(8px,2.5vw,14px)!important;
+  }
+}
