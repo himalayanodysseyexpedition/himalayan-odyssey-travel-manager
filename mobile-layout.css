@@ -553,3 +553,19 @@
     margin-top:40px!important;
   }
 }
+
+
+/* MOBILE ONLY — keep the header stationary and visually unchanged during page scrolling. */
+@media screen and (max-width:760px){
+  html body>header,
+  html body>header.is-scrolled,
+  html body>header.is-hidden{
+    position:sticky!important;
+    top:0!important;
+    transform:none!important;
+    opacity:1!important;
+    visibility:visible!important;
+    transition:none!important;
+    animation:none!important;
+  }
+}
