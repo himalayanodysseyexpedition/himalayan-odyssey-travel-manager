@@ -430,9 +430,19 @@ nav a:hover:after{width:100%}
   margin:0;
   text-shadow:0 5px 28px #0005;
 }
+.hero-build-cta-wrap{
+  width:min(540px,100%);
+  display:flex;
+  justify-content:center;
+  margin:16px 0 0;
+}
 .hero-build-cta{
   display:inline-flex;
-  margin:30px 0 0;
+  min-height:38px;
+  padding:9px 17px;
+  margin:0;
+  font-size:9px;
+  letter-spacing:1px;
 }
 .hero-service-icons{
   display:flex;
@@ -2126,8 +2136,6 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
   <div class="hero-content">
     <h1>The Himalayas<br>Are Calling.</h1>
 
-    <a class="btn hero-build-cta" href="/build-your-trip/">Build Your Trip</a>
-
     <div class="hero-service-icons" aria-label="Our services">
       <div class="hero-service-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24"><path d="M5 17h14l1-5-2-5H6l-2 5 1 5Z"/><path d="M7 17v2m10-2v2M4 12h16M7 7l1-3h8l1 3"/><circle cx="7.5" cy="15" r="1"/><circle cx="16.5" cy="15" r="1"/></svg>
@@ -2141,6 +2149,10 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
         <svg viewBox="0 0 24 24"><path d="m3 19 7-13 4 7 2-3 5 9H3Z"/><path d="m8 19 4-7 4 7M10 6l1.5 2.5L13 6"/></svg>
         <span>Packages</span>
       </div>
+    </div>
+
+    <div class="hero-build-cta-wrap">
+      <a class="btn hero-build-cta" href="/build-your-trip/">Build Your Trip</a>
     </div>
 
     <p>From the high-altitude wilderness of Spiti to the quiet valleys of Kinnaur and the cedar forests of Narkanda, discover journeys shaped by the mountains and made memorable by the people you meet along the way.</p>
