@@ -672,3 +672,15 @@ body > .hero::before,
     font-family:"Cinzel",Georgia,serif!important;
   }
 }
+
+
+/* DESKTOP HERO ROTATING WORD — match the neon-lime Cabs / Hotels / Packages identity. */
+@media(min-width:761px){
+  html body .hero > .hero-content > h1.hero-animated-heading .hero-word-slot .hero-word-rotator{
+    color:#d8ff8c!important;
+    background:linear-gradient(100deg,#eaffc2 0%,#c5f36a 48%,#a8e7a0 100%)!important;
+    background-clip:text!important;
+    -webkit-background-clip:text!important;
+    -webkit-text-fill-color:transparent!important;
+  }
+}
