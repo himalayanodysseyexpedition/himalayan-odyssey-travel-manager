@@ -905,3 +905,18 @@ body > .hero::before,
     margin-top:-7px!important;
   }
 }
+
+
+/* DESKTOP HEADER GLASS BACKGROUND — remove the curved frame and visible outline.
+   Keep only the translucent forest-green frosted-glass surface. */
+@media(min-width:761px){
+  html body>header .header-inner{
+    border:0!important;
+    border-radius:0!important;
+    outline:0!important;
+    box-shadow:none!important;
+    background:linear-gradient(135deg,rgba(17,67,53,.42),rgba(10,43,35,.30) 52%,rgba(28,83,61,.38))!important;
+    -webkit-backdrop-filter:blur(28px) saturate(165%)!important;
+    backdrop-filter:blur(28px) saturate(165%)!important;
+  }
+}
