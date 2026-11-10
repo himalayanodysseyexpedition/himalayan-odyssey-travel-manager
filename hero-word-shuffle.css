@@ -1,0 +1,53 @@
+/* Hero headline word shuffle: keep the changing word visually centered without reserving blank width. */
+.hero .hero-content > .hero-animated-heading {
+  text-align: center;
+}
+
+.hero .hero-animated-heading .hero-word-slot {
+  display: inline-flex;
+  justify-content: center;
+  align-items: baseline;
+  width: auto;
+  min-width: 0;
+  margin-inline: 0.08em;
+  padding: 0;
+  text-align: center;
+  vertical-align: baseline;
+}
+
+.hero .hero-animated-heading .hero-word-rotator {
+  display: inline-block;
+  width: auto;
+  min-width: 0;
+  color: #f2d36b !important;
+  text-align: center;
+  white-space: nowrap;
+  transition: opacity 260ms ease, transform 260ms ease, filter 260ms ease;
+}
+
+.hero .hero-animated-heading .hero-word-rotator.word-himalaya,
+.hero .hero-animated-heading .hero-word-rotator.word-himachal,
+.hero .hero-animated-heading .hero-word-rotator.word-spiti,
+.hero .hero-animated-heading .hero-word-rotator.word-adventure {
+  color: #f2d36b !important;
+}
+
+.hero .hero-animated-heading .hero-word-rotator.is-shuffling-out {
+  color: #f2d36b !important;
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateY(-0.18em);
+}
+
+.hero .hero-animated-heading .hero-word-rotator.is-shuffling-in {
+  color: #f2d36b !important;
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .hero-animated-heading .hero-word-rotator {
+    transition: none;
+  }
+}
