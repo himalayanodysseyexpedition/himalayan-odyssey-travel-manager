@@ -2561,6 +2561,42 @@ header .header-inner > nav[aria-label="Main navigation"]::after{content:none!imp
   }
 }
 
+
+/* DESKTOP HERO ALIGNMENT: center the complete hero content stack without changing mobile */
+@media (min-width: 1101px) {
+  .hero {
+    justify-content: center;
+  }
+  .hero-content {
+    width: min(100%, 900px);
+    max-width: 900px;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .hero h1,
+  .hero p {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  .hero-service-icons {
+    width: min(100%, 540px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-build-cta-wrap {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-content > .btn {
+    margin-left: 7px;
+    margin-right: 7px;
+  }
+  .hero-note {
+    justify-content: center;
+    text-align: center;
+  }
+}
 </style>
 
 
