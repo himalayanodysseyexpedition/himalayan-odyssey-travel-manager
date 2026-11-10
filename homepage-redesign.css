@@ -792,3 +792,17 @@ body > .hero::before,
     box-shadow:0 13px 30px rgba(0,0,0,.18),0 0 24px rgba(197,243,106,.24),inset 0 1px 0 rgba(255,255,255,.7)!important;
   }
 }
+
+
+/* DESKTOP HEADER — return to normal document flow; do not stick or follow page scroll. */
+@media(min-width:761px){
+  html body>header{
+    position:static!important;
+    top:auto!important;
+    right:auto!important;
+    bottom:auto!important;
+    left:auto!important;
+    inset:auto!important;
+    transform:none!important;
+  }
+}
