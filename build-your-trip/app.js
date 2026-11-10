@@ -1,0 +1,85 @@
+"use strict";
+const SUPABASE_URL="https://ynkoiuyjevclypumnyes.supabase.co";
+const SUPABASE_KEY="sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-";
+const WHATSAPP_NUMBER="919816929669";
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const $=id=>document.getElementById(id);
+const money=value=>"₹"+(Number(value)||0).toLocaleString("en-IN",{maximumFractionDigits:0});
+const esc=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let services=[],cart=[],category="all";
+const unitLabel={per_vehicle_day:"per vehicle / day",per_person_night:"per person / night",per_person:"per person"};
+const categoryLabel={cab:"Cab",hotel:"Hotel / Homestay",package:"Tour Package"};
+function priceFor(service,line){
+ const price=Number(service.price)||0;
+ if(service.category==="cab")return price*line.days*line.quantity;
+ if(service.category==="hotel")return price*line.nights*line.people;
+ return price*line.people;
+}
+function serviceCard(x){
+ const available=Number(x.inventory)||0;
+ const soldOut=available<1;
+ const specs=[x.destination,x.capacity?x.capacity+" seats":null].filter(Boolean).join(" · ");
+ return '<article class="service">'+(x.image_url?'<img src="'+esc(x.image_url)+'" alt="'+esc(x.title)+'" loading="lazy">':'<div style="height:190px;display:grid;place-items:center;background:#e9eee8;color:#718078">Himalayan Odyssey Expedition</div>')+
+ '<div class="service-body"><div class="tag">'+esc(categoryLabel[x.category])+'</div><h3>'+esc(x.title)+'</h3><div class="muted">'+esc(specs)+'</div><p class="desc">'+esc(x.description||"A curated Himalayan travel service.")+'</p><div class="price">'+money(x.price)+' <span class="muted">'+esc(unitLabel[x.price_unit]||"")+'</span></div><p class="muted">'+(soldOut?"Currently unavailable":(x.category==="package"?"Seats / units available: ":"Availability: ")+available)+'</p><button data-add="'+x.id+'" '+(soldOut?"disabled":"")+'>＋ Add to trip</button></div></article>';
+}
+function renderServices(){
+ const query=$("search").value.trim().toLowerCase();
+ const filtered=services.filter(x=>(category==="all"||x.category===category)&&(!query||(x.title+" "+x.destination+" "+x.description).toLowerCase().includes(query)));
+ $("serviceCards").innerHTML=filtered.length?filtered.map(serviceCard).join(""):'<div class="empty">No services match this search yet. Try another category or destination.</div>';
+}
+function addToCart(id){
+ const service=services.find(x=>x.id===id);if(!service)return;
+ cart.push({key:(crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random()),id:service.id,days:1,nights:1,people:1,quantity:1});
+ renderCart();
+}
+function changeLine(key,field,value){
+ const line=cart.find(x=>x.key===key);if(!line)return;
+ const number=Math.max(1,Math.min(100,Number(value)||1));
+ line[field]=number;renderCart();
+}
+function renderCart(){
+ if(!cart.length){$("cartItems").innerHTML='<div class="cart-empty">Your cart is empty. Add a service to get started.</div>';$("grandTotal").textContent=money(0);return;}
+ let total=0;
+ $("cartItems").innerHTML=cart.map(line=>{
+  const s=services.find(x=>x.id===line.id);if(!s)return "";
+  const amount=priceFor(s,line);total+=amount;
+  let fields="";
+  if(s.category==="cab")fields='<div class="controls"><label>Days<input type="number" min="1" max="100" value="'+line.days+'" data-line="'+line.key+'" data-field="days"></label><label>Vehicles<input type="number" min="1" max="'+Math.max(1,Number(s.inventory)||1)+'" value="'+line.quantity+'" data-line="'+line.key+'" data-field="quantity"></label></div>';
+  if(s.category==="hotel")fields='<div class="controls"><label>Nights<input type="number" min="1" max="100" value="'+line.nights+'" data-line="'+line.key+'" data-field="nights"></label><label>Guests<input type="number" min="1" max="100" value="'+line.people+'" data-line="'+line.key+'" data-field="people"></label></div>';
+  if(s.category==="package")fields='<div class="controls"><label>Guests<input type="number" min="1" max="'+Math.max(1,Number(s.inventory)||1)+'" value="'+line.people+'" data-line="'+line.key+'" data-field="people"></label></div>';
+  return '<div class="cart-line"><div class="line-head"><b>'+esc(s.title)+'</b><button type="button" class="remove" data-remove="'+line.key+'">Remove</button></div><div class="muted">'+esc(s.destination||categoryLabel[s.category])+' · '+money(s.price)+' '+esc(unitLabel[s.price_unit])+'</div>'+fields+'<div class="line-total">'+money(amount)+'</div></div>';
+ }).join("");
+ $("grandTotal").textContent=money(total);
+}
+function currentTotal(){return cart.reduce((sum,line)=>{const s=services.find(x=>x.id===line.id);return sum+(s?priceFor(s,line):0);},0);}
+function enquiryText(name,phone,date,total){
+ const lines=cart.map((line,i)=>{const s=services.find(x=>x.id===line.id);if(!s)return "";let detail=s.category==="cab"?line.days+" day(s), "+line.quantity+" vehicle(s)":s.category==="hotel"?line.nights+" night(s), "+line.people+" guest(s)":line.people+" guest(s)";return (i+1)+". "+s.title+" ("+s.destination+") — "+detail+" — "+money(priceFor(s,line));});
+ return ["Hello Himalayan Odyssey Expedition!","I would like to enquire about these selected services.","","Name: "+name,"Phone: "+phone,"Preferred travel date: "+(date||"Not specified"),"","SELECTED SERVICES",...lines,"","ESTIMATED TOTAL: "+money(total),"Please confirm availability, inclusions and final booking details."].join("\n");
+}
+async function load(){
+ const {data,error}=await db.from("marketplace_services").select("id,category,title,destination,description,price,price_unit,inventory,capacity,image_url,sort_order").eq("is_active",true).order("sort_order",{ascending:true}).order("created_at",{ascending:false});
+ if(error){$("serviceCards").innerHTML='<div class="empty">Our service catalogue is temporarily unavailable. Please contact us on WhatsApp.</div>';console.error(error);return;}
+ services=data||[];renderServices();
+}
+$("tabs").addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(!b)return;category=b.dataset.category;$("tabs").querySelectorAll("button").forEach(x=>x.classList.toggle("active",x===b));renderServices();});
+$("search").addEventListener("input",renderServices);
+$("serviceCards").addEventListener("click",e=>{const b=e.target.closest("[data-add]");if(b)addToCart(b.dataset.add);});
+$("cartItems").addEventListener("click",e=>{const b=e.target.closest("[data-remove]");if(b){cart=cart.filter(x=>x.key!==b.dataset.remove);renderCart();}});
+$("cartItems").addEventListener("change",e=>{const input=e.target.closest("[data-line][data-field]");if(input)changeLine(input.dataset.line,input.dataset.field,input.value);});
+$("guestForm").addEventListener("submit",async e=>{
+ e.preventDefault();const button=$("submitEnquiry"),status=$("status");
+ if(!cart.length){status.textContent="Please add at least one service to your trip.";return;}
+ const name=$("guestName").value.trim(),phone=$("guestPhone").value.trim(),date=$("travelDate").value,total=currentTotal();
+ if(!/^[+0-9 ()-]{10,18}$/.test(phone)){status.textContent="Please enter a valid mobile number.";return;}
+ const selections=cart.map(line=>{const s=services.find(x=>x.id===line.id);return {service_id:s.id,category:s.category,title:s.title,destination:s.destination,unit_price:Number(s.price),price_unit:s.price_unit,days:line.days,nights:line.nights,people:line.people,vehicles:line.quantity,line_total:priceFor(s,line)};});
+ button.disabled=true;status.textContent="Saving your enquiry…";
+ try{
+  const {error}=await db.from("marketplace_enquiries").insert({guest_name:name,guest_phone:phone,travel_date:date||null,guest_count:Math.max(1,...selections.map(x=>x.people||1)),selections,estimated_total:total,source:"build-your-trip"});
+  if(error)throw error;
+  status.textContent="Enquiry saved. Opening WhatsApp…";
+  const url="https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(enquiryText(name,phone,date,total));
+  window.location.href=url;
+ }catch(error){console.error(error);status.textContent="We couldn't save your enquiry. Please try again or contact us directly on WhatsApp.";}
+ finally{button.disabled=false;}
+});
+load();
