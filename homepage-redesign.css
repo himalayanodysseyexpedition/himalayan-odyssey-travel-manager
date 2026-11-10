@@ -760,3 +760,35 @@ body > .hero::before,
     transition:none!important;
   }
 }
+
+
+/* DESKTOP CTA COLOUR SYSTEM — replace champagne/gold button fills with the hero neon-lime. */
+@media(min-width:761px){
+  html body>header .header-inner>.header-cta,
+  html body>header.is-scrolled .header-inner>.header-cta,
+  html body>header .header-inner>nav.glass-nav>a:first-child,
+  html body .footer-package,
+  html body .enquiry-dropdown>summary,
+  html body .hero .hero-build-cta,
+  html body .btn,
+  html body a.btn,
+  html body button.btn{
+    background:linear-gradient(110deg,#eaffc2 0%,#c5f36a 48%,#a8e7a0 100%)!important;
+    color:#123b32!important;
+    border-color:rgba(220,255,154,.9)!important;
+    box-shadow:0 8px 24px rgba(0,0,0,.14),0 0 16px rgba(197,243,106,.13),inset 0 1px 0 rgba(255,255,255,.58)!important;
+  }
+  html body>header .header-inner>.header-cta:hover,
+  html body>header.is-scrolled .header-inner>.header-cta:hover,
+  html body>header .header-inner>nav.glass-nav>a:first-child:hover,
+  html body .footer-package:hover,
+  html body .enquiry-dropdown>summary:hover,
+  html body .btn:hover,
+  html body a.btn:hover,
+  html body button.btn:hover{
+    background:linear-gradient(110deg,#f2ffd9 0%,#dcff9a 48%,#bdf0b4 100%)!important;
+    color:#123b32!important;
+    border-color:#efffd7!important;
+    box-shadow:0 13px 30px rgba(0,0,0,.18),0 0 24px rgba(197,243,106,.24),inset 0 1px 0 rgba(255,255,255,.7)!important;
+  }
+}
