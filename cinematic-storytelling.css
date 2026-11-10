@@ -535,3 +535,48 @@ body>header .header-inner>.brand img{
     max-height:58px!important;
   }
 }
+
+
+/* MOBILE VIEWPORT + BRAND SCALE REPAIR
+   Prevent oversized sections/carousels from widening the document on phones. */
+html{
+  width:100%!important;
+  max-width:100%!important;
+  overflow-x:hidden!important;
+}
+body{
+  width:100%!important;
+  max-width:100%!important;
+  overflow-x:hidden!important;
+}
+body>*{max-width:100%}
+*,*::before,*::after{box-sizing:border-box}
+img,video,iframe{max-width:100%}
+
+/* Give the original brand mark enough visual space on small screens. */
+body>header .header-inner>.brand img{
+  width:clamp(210px,19vw,260px)!important;
+  max-width:100%!important;
+  max-height:100px!important;
+  height:auto!important;
+  object-fit:contain!important;
+}
+@media(max-width:760px){
+  body>header .header-inner>.brand{
+    max-width:100%!important;
+    min-width:0!important;
+  }
+  body>header .header-inner>.brand img{
+    width:220px!important;
+    max-width:min(62vw,220px)!important;
+    max-height:84px!important;
+    height:auto!important;
+  }
+}
+@media(max-width:370px){
+  body>header .header-inner>.brand img{
+    width:190px!important;
+    max-width:58vw!important;
+    max-height:76px!important;
+  }
+}
