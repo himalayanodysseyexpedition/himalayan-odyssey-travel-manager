@@ -507,3 +507,24 @@ button:focus-visible,a:focus-visible{outline:3px solid #a9d86c!important;outline
     margin-top:0!important;
   }
 }
+
+
+/* Homepage hero typography: free commercial-use Google Fonts.
+   Scope is limited to the hero headline; all other site typography is unchanged. */
+.hero .hero-animated-heading{
+  font-family:"Outfit",sans-serif!important;
+  font-weight:700!important;
+}
+.hero .hero-heading-static{
+  font-family:"Outfit",sans-serif!important;
+  font-weight:700!important;
+  letter-spacing:-.045em!important;
+}
+.hero .hero-word-rotator{
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-weight:700!important;
+  font-style:italic!important;
+  font-variant-ligatures:common-ligatures discretionary-ligatures!important;
+  font-feature-settings:"liga" 1,"dlig" 1!important;
+  letter-spacing:-.025em!important;
+}
