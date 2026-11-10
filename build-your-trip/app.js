@@ -20,7 +20,7 @@ function serviceCard(x){
  const soldOut=available<1;
  const specs=[x.destination,x.capacity?x.capacity+" seats":null].filter(Boolean).join(" · ");
  return '<article class="service">'+(x.image_url?'<img src="'+esc(x.image_url)+'" alt="'+esc(x.title)+'" loading="lazy">':'<div style="height:190px;display:grid;place-items:center;background:#e9eee8;color:#718078">Himalayan Odyssey Expedition</div>')+
- '<div class="service-body"><div class="tag">'+esc(categoryLabel[x.category])+'</div><h3>'+esc(x.title)+'</h3><div class="muted">'+esc(specs)+'</div><p class="desc">'+esc(x.description||"A curated Himalayan travel service.")+'</p><div class="price">'+money(x.price)+' <span class="muted">'+esc(unitLabel[x.price_unit]||"")+'</span></div><p class="muted">'+(soldOut?"Currently unavailable":(x.category==="package"?"Seats / units available: ":"Availability: ")+available)+'</p><button data-add="'+x.id+'" '+(soldOut?"disabled":"")+'>＋ Add to trip</button></div></article>';
+ '<div class="service-body"><div class="tag">'+esc(categoryLabel[x.category])+'</div><h3>'+esc(x.title)+'</h3><div class="muted">'+esc(specs)+'</div><p class="desc">'+esc(x.description||"A curated Himalayan travel service.")+'</p><div class="price">'+money(x.price)+' <span class="muted">'+esc(unitLabel[x.price_unit]||"")+'</span></div><p class="muted">'+(soldOut?"Currently unavailable":(x.category==="cab"?"Vehicle quantity can be requested (final availability confirmed)":"Group size: up to "+(x.capacity||available)+" guests"))+'</p><button data-add="'+x.id+'" '+(soldOut?"disabled":"")+'>＋ Add to trip</button></div></article>';
 }
 function renderServices(){
  const query=$("search").value.trim().toLowerCase();
@@ -44,7 +44,7 @@ function renderCart(){
   const s=services.find(x=>x.id===line.id);if(!s)return "";
   const amount=priceFor(s,line);total+=amount;
   let fields="";
-  if(s.category==="cab")fields='<div class="controls"><label>Days<input type="number" min="1" max="100" value="'+line.days+'" data-line="'+line.key+'" data-field="days"></label><label>Vehicles<input type="number" min="1" max="'+Math.max(1,Number(s.inventory)||1)+'" value="'+line.quantity+'" data-line="'+line.key+'" data-field="quantity"></label></div>';
+  if(s.category==="cab")fields='<div class="controls"><label>Days<input type="number" min="1" max="100" value="'+line.days+'" data-line="'+line.key+'" data-field="days"></label><label>Vehicles<input type="number" min="1" max="10" value="'+line.quantity+'" data-line="'+line.key+'" data-field="quantity"></label></div>';
   if(s.category==="hotel")fields='<div class="controls"><label>Nights<input type="number" min="1" max="100" value="'+line.nights+'" data-line="'+line.key+'" data-field="nights"></label><label>Guests<input type="number" min="1" max="100" value="'+line.people+'" data-line="'+line.key+'" data-field="people"></label></div>';
   if(s.category==="package")fields='<div class="controls"><label>Guests<input type="number" min="1" max="'+Math.max(1,Number(s.inventory)||1)+'" value="'+line.people+'" data-line="'+line.key+'" data-field="people"></label></div>';
   return '<div class="cart-line"><div class="line-head"><b>'+esc(s.title)+'</b><button type="button" class="remove" data-remove="'+line.key+'">Remove</button></div><div class="muted">'+esc(s.destination||categoryLabel[s.category])+' · '+money(s.price)+' '+esc(unitLabel[s.price_unit])+'</div>'+fields+'<div class="line-total">'+money(amount)+'</div></div>';
