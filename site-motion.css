@@ -138,3 +138,61 @@ body{animation:siteFadeIn .65s var(--motion-ease) both}
     will-change: auto !important;
   }
 }
+
+
+/* HERO WORD SHUFFLE — single-line desktop headline */
+.hero-animated-heading .hero-word-slot{
+  display:inline-block;
+  white-space:nowrap;
+  vertical-align:baseline;
+}
+.hero-animated-heading .hero-word-rotator{
+  display:inline-block;
+  white-space:nowrap;
+  font-style:inherit;
+  transition:color .35s ease,filter .28s ease,transform .28s ease,opacity .28s ease;
+  will-change:transform,filter,opacity;
+}
+.hero-animated-heading .word-himalaya{color:#e6c77f}
+.hero-animated-heading .word-himachal{color:#a9d6bd}
+.hero-animated-heading .word-spiti{color:#9bd8e8}
+.hero-animated-heading .word-adventure{color:#f2a96b}
+.hero-animated-heading .hero-word-rotator.is-shuffling-out{
+  opacity:0;
+  filter:blur(7px);
+  transform:translateY(-.24em) rotateX(55deg);
+}
+.hero-animated-heading .hero-word-rotator.is-shuffling-in{
+  opacity:0;
+  filter:blur(7px);
+  transform:translateY(.24em) rotateX(-45deg);
+}
+@media (min-width:761px){
+  .hero > .hero-content > h1.hero-animated-heading{
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    white-space:nowrap!important;
+    text-align:center!important;
+    font-size:clamp(38px,5.15vw,82px)!important;
+    line-height:1.08!important;
+    letter-spacing:-.045em!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+  .hero-animated-heading .hero-word-slot{
+    min-width:5.9em;
+    text-align:left;
+  }
+}
+@media (max-width:760px){
+  .hero > .hero-content > h1.hero-animated-heading{
+    white-space:normal;
+    text-wrap:balance;
+    font-size:clamp(38px,10vw,58px);
+    line-height:1.02;
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  .hero-animated-heading .hero-word-rotator{transition:none!important;filter:none!important;transform:none!important;opacity:1!important}
+}
