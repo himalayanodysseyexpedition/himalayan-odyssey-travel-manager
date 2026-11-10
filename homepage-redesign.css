@@ -160,3 +160,331 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--hoe-gold)!important
  footer#siteFooter,footer,.site-footer{padding:36px 18px!important}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+
+/* =========================================================
+   BOOK BEFIKAR-INSPIRED VISUAL SYSTEM — HIMALAYAN ODYSSEY
+   Editorial travel layout, confident type, image-led cards,
+   soft surfaces and restrained motion. Existing content and
+   booking components remain untouched.
+   ========================================================= */
+:root{
+  --forest:#123b32!important;
+  --forest-deep:#09251f!important;
+  --gold:#c5f36a!important;
+  --gold-light:#dcff9a!important;
+  --paper:#fbfaf6!important;
+  --muted:#65746c!important;
+  --line:rgba(18,59,50,.12)!important;
+  --shadow:0 22px 60px rgba(9,37,31,.12)!important;
+  --sans:Inter,"Avenir Next",Avenir,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+  --serif:Inter,"Avenir Next",Avenir,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{
+  background:#f7f8f4!important;
+  color:#152a24!important;
+  font-family:Inter,"Avenir Next",Avenir,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+  -webkit-font-smoothing:antialiased;
+}
+a,button{ -webkit-tap-highlight-color:transparent }
+::selection{background:#c5f36a;color:#123b32}
+
+/* Clean floating glass header */
+header{
+  position:sticky!important;top:0!important;z-index:1000!important;
+  background:rgba(250,251,247,.86)!important;
+  border-bottom:1px solid rgba(18,59,50,.09)!important;
+  box-shadow:0 8px 30px rgba(9,37,31,.045)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(1.35)!important;
+  backdrop-filter:blur(22px) saturate(1.35)!important;
+}
+.header-inner{
+  max-width:1440px!important;min-height:82px!important;
+  padding:10px clamp(18px,4vw,58px)!important;
+  display:flex!important;align-items:center!important;gap:clamp(16px,2.4vw,34px)!important;
+}
+.brand img{width:auto!important;max-height:58px!important;object-fit:contain}
+.header-tagline{
+  color:#66786d!important;font-size:9px!important;font-weight:750!important;
+  letter-spacing:2px!important;line-height:1.5!important;
+}
+.glass-nav{
+  margin-left:auto!important;gap:5px!important;padding:6px!important;
+  border:1px solid rgba(18,59,50,.10)!important;border-radius:999px!important;
+  background:rgba(255,255,255,.62)!important;
+  box-shadow:inset 0 1px 0 #fff,0 6px 20px rgba(9,37,31,.055)!important;
+  -webkit-backdrop-filter:blur(18px)!important;backdrop-filter:blur(18px)!important;
+}
+.glass-nav>a,.glass-nav .nav-dropdown-toggle{
+  min-height:42px!important;padding:0 15px!important;border:0!important;
+  border-radius:999px!important;background:transparent!important;
+  color:#28443a!important;font-size:10px!important;font-weight:800!important;
+  letter-spacing:.7px!important;text-transform:uppercase!important;
+  transition:background .25s ease,color .25s ease,transform .25s ease!important;
+}
+.glass-nav>a:hover,.glass-nav .nav-dropdown-toggle:hover,
+.glass-nav>a:focus-visible,.glass-nav .nav-dropdown-toggle:focus-visible{
+  background:#eaf3df!important;color:#123b32!important;transform:translateY(-1px)
+}
+.nav-glass-icon{width:15px!important;height:15px!important;stroke:#47715c!important}
+.services-chevron{color:#47715c!important;margin-left:2px!important}
+.nav-dropdown-menu{
+  border:1px solid rgba(18,59,50,.12)!important;border-radius:18px!important;
+  padding:9px!important;background:rgba(251,252,248,.97)!important;
+  box-shadow:0 20px 55px rgba(9,37,31,.16)!important;
+  -webkit-backdrop-filter:blur(20px)!important;backdrop-filter:blur(20px)!important;
+}
+.nav-dropdown-menu a{
+  border-radius:11px!important;padding:12px 14px!important;color:#23463a!important;
+  font-size:12px!important;transition:background .2s ease!important;
+}
+.nav-dropdown-menu a:hover{background:#edf4e6!important}
+
+/* Immersive hero, with a clear editorial headline */
+.hero{
+  min-height:min(780px,calc(100svh - 80px))!important;
+  display:flex!important;align-items:center!important;
+  padding:clamp(72px,9vw,130px) clamp(22px,8vw,120px)!important;
+  background-color:#0b2b24!important;
+  background-image:linear-gradient(90deg,rgba(5,25,21,.82) 0%,rgba(5,25,21,.55) 48%,rgba(5,25,21,.18) 100%),linear-gradient(0deg,rgba(5,25,21,.38),transparent 50%),url('/spiti.jpg')!important;
+  background-position:center!important;background-size:cover!important;
+  isolation:isolate!important;overflow:hidden!important;
+}
+.hero:before{
+  content:"";position:absolute;inset:18px;z-index:-1;pointer-events:none;
+  border:1px solid rgba(235,255,220,.23);border-radius:24px;
+}
+.hero-content{
+  width:min(100%,1180px)!important;max-width:1180px!important;
+  margin:0 auto!important;position:relative!important;
+  animation:odysseyRise .9s cubic-bezier(.2,.75,.25,1) both;
+}
+.hero-animated-heading{
+  max-width:980px!important;margin:0 0 26px!important;
+  color:#fff!important;font-family:Inter,"Avenir Next",system-ui,sans-serif!important;
+  font-size:clamp(48px,7.3vw,100px)!important;font-weight:850!important;
+  line-height:.98!important;letter-spacing:-.065em!important;
+  text-wrap:balance!important;text-shadow:0 8px 35px rgba(0,0,0,.22)!important;
+}
+.hero-word-slot{display:inline-block!important;min-width:0!important}
+.hero-word-rotator{
+  color:#d8ff8c!important;
+  background:linear-gradient(100deg,#f2ffcf 0%,#c5f36a 45%,#a8e7a0 100%)!important;
+  -webkit-background-clip:text!important;background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+}
+.hero p{
+  max-width:660px!important;color:rgba(255,255,255,.9)!important;
+  font-size:clamp(15px,1.35vw,18px)!important;line-height:1.8!important;
+  margin:22px 0 24px!important;
+}
+.hero-note{gap:9px!important;margin-top:24px!important}
+.hero-note span{
+  padding:8px 13px!important;border:1px solid rgba(255,255,255,.22)!important;
+  border-radius:999px!important;background:rgba(255,255,255,.10)!important;
+  color:#f6f8ef!important;font-size:10px!important;letter-spacing:.35px!important;
+  -webkit-backdrop-filter:blur(10px)!important;backdrop-filter:blur(10px)!important;
+}
+.hero-note span:before{width:5px!important;height:5px!important;background:#c5f36a!important}
+.hero-service-icons{gap:12px!important;max-width:530px!important;margin:28px 0 0!important}
+.hero-service-icon{
+  min-height:82px!important;border-radius:17px!important;
+  border:1px solid rgba(238,255,230,.24)!important;
+  background:rgba(255,255,255,.13)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 12px 32px rgba(0,0,0,.12)!important;
+  -webkit-backdrop-filter:blur(16px)!important;backdrop-filter:blur(16px)!important;
+  transition:transform .35s ease,border-color .35s ease,background .35s ease!important;
+}
+.hero-service-icon:hover{transform:translateY(-5px)!important;background:rgba(255,255,255,.2)!important;border-color:#d8ff8c!important}
+.hero-service-icon svg{stroke:#d8ff8c!important}
+.hero-service-icon span{font-size:10px!important;letter-spacing:1.1px!important}
+.hero-build-cta-wrap{margin:18px 0 0!important;max-width:530px!important}
+.hero-build-cta,.btn{
+  min-height:48px!important;padding:0 24px!important;border:1px solid #c5f36a!important;
+  border-radius:999px!important;background:#c5f36a!important;color:#123b32!important;
+  font-size:11px!important;font-weight:850!important;letter-spacing:.75px!important;
+  box-shadow:0 9px 24px rgba(0,0,0,.12)!important;
+  transition:transform .25s ease,box-shadow .25s ease,background .25s ease!important;
+}
+.hero-build-cta:hover,.btn:hover{
+  transform:translateY(-3px)!important;background:#dcff9a!important;
+  box-shadow:0 15px 32px rgba(0,0,0,.18)!important;
+}
+
+/* Soft, spacious sections */
+section.content{padding:clamp(62px,7.5vw,108px) clamp(18px,5vw,76px)!important}
+.section-inner{max-width:1320px!important}
+.section-title{margin-bottom:36px!important}
+.section-title small,.eyebrow{
+  color:#66845d!important;font-size:10px!important;font-weight:850!important;
+  letter-spacing:2.6px!important;
+}
+.section-title h2,.local-intro-copy h2{
+  color:#153b30!important;font-family:Inter,"Avenir Next",system-ui,sans-serif!important;
+  font-size:clamp(32px,4.4vw,58px)!important;font-weight:820!important;
+  letter-spacing:-.055em!important;line-height:1.04!important;
+}
+.section-title h2:after{
+  width:42px!important;height:4px!important;border-radius:8px!important;
+  background:#c5f36a!important;margin:17px auto 0!important;
+}
+.intro,.local-intro-copy p{
+  color:#66766d!important;font-size:15px!important;line-height:1.9!important;
+}
+.content.info,.destination-gallery,.group-departures-section,.faq-section{
+  background:#f0f4ed!important;
+}
+.local-intro{gap:clamp(28px,5vw,70px)!important}
+.local-intro-panel{
+  border:1px solid rgba(255,255,255,.2)!important;border-radius:24px!important;
+  background:linear-gradient(145deg,#123b32,#205c48)!important;
+  box-shadow:0 24px 60px rgba(18,59,50,.18)!important;padding:clamp(24px,4vw,42px)!important;
+}
+.local-intro-panel h3{font-family:Inter,system-ui,sans-serif!important;font-weight:800!important;letter-spacing:-.04em!important}
+.local-intro-panel p{font-size:14px!important;line-height:1.85!important}
+
+/* Card language: rounded, clean, image-first */
+.cards{gap:22px!important}
+.card,.destination-card,.group-departure-card,.guide-card,.package-card,.itinerary-card{
+  border-radius:20px!important;overflow:hidden!important;
+  border:1px solid rgba(18,59,50,.10)!important;
+  box-shadow:0 12px 34px rgba(15,48,38,.075)!important;
+  transition:transform .4s cubic-bezier(.2,.75,.25,1),box-shadow .4s ease!important;
+}
+.card:hover,.destination-card:hover,.group-departure-card:hover,.guide-card:hover,.package-card:hover,.itinerary-card:hover{
+  transform:translateY(-7px)!important;box-shadow:0 22px 48px rgba(15,48,38,.14)!important;
+}
+.destination-gallery{padding-top:clamp(64px,7vw,100px)!important;padding-bottom:clamp(64px,7vw,100px)!important}
+.destination-grid{gap:18px!important}
+.destination-card{height:clamp(320px,35vw,440px)!important}
+.destination-card:after{
+  background:linear-gradient(0deg,rgba(5,24,19,.9) 0%,rgba(5,24,19,.42) 38%,rgba(5,24,19,0) 78%)!important;
+}
+.destination-card:before{border-radius:15px!important}
+.destination-info{left:23px!important;right:18px!important;bottom:24px!important}
+.destination-info h3{
+  font-family:Inter,system-ui,sans-serif!important;font-weight:850!important;
+  letter-spacing:-.045em!important;font-size:clamp(26px,3vw,38px)!important;
+}
+.destination-info small{color:#d8ff8c!important;letter-spacing:1.8px!important}
+.destination-info small:before{background:#c5f36a!important}
+.destination-info span{font-weight:750!important}
+.group-departures-section{border-radius:0!important}
+.group-departure-card{background:#fff!important}
+.group-departure-photo{height:205px!important}
+.group-departure-body{padding:22px!important}
+.group-departure-body h3{font-family:Inter,system-ui,sans-serif!important;font-weight:820!important;letter-spacing:-.04em!important}
+.group-departure-status{border-radius:999px!important;background:#dfffad!important;color:#173d33!important}
+.group-departure-cta{
+  border-radius:999px!important;background:#173d33!important;
+  padding:14px!important;font-size:10px!important;
+}
+.group-departure-cta:hover{background:#c5f36a!important;color:#123b32!important}
+.guide-card,.package-card,.itinerary-card{background:#fff!important}
+.faq-list{gap:13px!important}
+.faq-list details{border-radius:15px!important;border:1px solid rgba(18,59,50,.10)!important;background:#fff!important}
+.faq-list summary{font-family:Inter,system-ui,sans-serif!important;font-weight:750!important;letter-spacing:-.025em!important}
+.faq-list details[open]{border-color:#b8d98a!important;box-shadow:0 12px 30px rgba(18,59,50,.08)!important}
+.faq-list summary:after{color:#6b944e!important}
+.enquiry-box{
+  border:1px solid rgba(18,59,50,.12)!important;border-top:4px solid #c5f36a!important;
+  border-radius:22px!important;box-shadow:0 22px 60px rgba(0,0,0,.18)!important;
+}
+.enquiry-box input,.enquiry-box select{border-radius:12px!important}
+footer{background:#09251f!important}
+
+/* Floating quick actions use the same soft-glass visual language */
+.footer-contact-bar{
+  border:1px solid rgba(18,59,50,.12)!important;border-radius:24px!important;
+  background:rgba(250,252,247,.88)!important;
+  box-shadow:0 18px 50px rgba(9,37,31,.18)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(1.4)!important;
+  backdrop-filter:blur(24px) saturate(1.4)!important;
+}
+.footer-contact-bar a,.footer-contact-bar button{border-radius:16px!important}
+
+/* Motion is subtle and consistent; no layout-affecting animation */
+@keyframes odysseyRise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes odysseyFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.hero-service-icon:nth-child(2){animation:odysseyFloat 5s ease-in-out 1s infinite}
+.hero-service-icon:nth-child(3){animation:odysseyFloat 5s ease-in-out 2s infinite}
+.destination-card img,.card>img{transition:transform .8s cubic-bezier(.2,.75,.25,1),filter .6s ease!important}
+.destination-card:hover img,.card:hover>img{transform:scale(1.055)!important}
+button:focus-visible,a:focus-visible{outline:3px solid #a9d86c!important;outline-offset:3px!important}
+
+/* Tablet and phone refinements */
+@media(max-width:900px){
+  .header-inner{min-height:76px!important;flex-wrap:wrap!important;justify-content:center!important;gap:6px!important;padding:8px 14px 11px!important}
+  .brand{margin:0 auto!important;display:flex!important;justify-content:center!important}
+  .brand img{max-height:48px!important}
+  .header-tagline{display:none!important}
+  .glass-nav{
+    order:3!important;width:100%!important;margin:0!important;
+    display:flex!important;justify-content:space-between!important;gap:2px!important;
+    overflow:visible!important;padding:4px!important;
+  }
+  .glass-nav>a,.glass-nav .nav-dropdown-toggle{
+    min-width:0!important;flex:1 1 0!important;justify-content:center!important;
+    padding:0 6px!important;min-height:39px!important;font-size:9px!important;
+    letter-spacing:.25px!important;white-space:nowrap!important;
+  }
+  .glass-nav>a .nav-glass-icon,.glass-nav .nav-dropdown-toggle .nav-glass-icon{width:13px!important;height:13px!important}
+  .hero{min-height:690px!important;padding:74px 24px 78px!important;background-position:58% center!important}
+  .hero-content{max-width:700px!important}
+  .hero-animated-heading{font-size:clamp(44px,9vw,72px)!important;line-height:1.02!important}
+  .hero p{font-size:15px!important;line-height:1.75!important}
+  .destination-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .destination-card{height:350px!important}
+}
+@media(max-width:600px){
+  .header-inner{padding:7px 10px 10px!important;gap:5px!important}
+  .brand img{max-height:43px!important}
+  .glass-nav{border-radius:17px!important;padding:4px!important}
+  .glass-nav>a,.glass-nav .nav-dropdown-toggle{
+    min-height:37px!important;padding:0 3px!important;font-size:8px!important;
+    letter-spacing:0!important;gap:3px!important;
+  }
+  .glass-nav>a .nav-glass-icon,.glass-nav .nav-dropdown-toggle .nav-glass-icon{display:none!important}
+  .nav-dropdown{display:flex!important;align-items:center!important;flex:1 1 0!important;min-width:0!important}
+  .nav-dropdown-toggle{flex:1 1 auto!important}
+  .services-chevron{font-size:14px!important;margin-left:0!important}
+  .nav-dropdown-menu{right:0!important;left:auto!important;min-width:220px!important}
+  .hero{
+    min-height:690px!important;padding:64px 18px 72px!important;
+    background-image:linear-gradient(0deg,rgba(5,25,21,.78),rgba(5,25,21,.38)),url('/spiti.jpg')!important;
+    background-position:58% center!important;
+  }
+  .hero:before{inset:9px!important;border-radius:18px!important}
+  .hero-content{text-align:center!important}
+  .hero-animated-heading{
+    font-size:clamp(39px,10.3vw,56px)!important;line-height:1.06!important;
+    letter-spacing:-.06em!important;margin:0 auto 21px!important;
+    max-width:100%!important;text-wrap:balance!important;
+  }
+  .hero-service-icons{max-width:100%!important;gap:8px!important;margin:22px auto 0!important}
+  .hero-service-icon{min-height:70px!important;border-radius:14px!important;padding:8px 5px!important}
+  .hero-service-icon svg{width:21px!important;height:21px!important}
+  .hero-service-icon span{font-size:9px!important}
+  .hero-build-cta-wrap{max-width:100%!important;margin:17px auto 0!important}
+  .hero p{font-size:14px!important;line-height:1.7!important;margin:20px auto!important;max-width:520px!important}
+  .hero-note{justify-content:center!important;gap:7px!important;margin-top:17px!important}
+  .hero-note span{font-size:9px!important;padding:7px 10px!important}
+  section.content{padding:62px 17px!important}
+  .section-title{margin-bottom:27px!important}
+  .section-title h2,.local-intro-copy h2{font-size:clamp(31px,8.5vw,43px)!important}
+  .intro,.local-intro-copy p{font-size:14px!important;line-height:1.8!important}
+  .local-intro-panel{border-radius:19px!important}
+  .destination-grid{grid-template-columns:1fr 1fr!important;gap:10px!important}
+  .destination-card{height:270px!important;border-radius:15px!important}
+  .destination-info{left:13px!important;right:10px!important;bottom:16px!important}
+  .destination-info h3{font-size:25px!important;margin:8px 0!important}
+  .destination-info small{font-size:8px!important;letter-spacing:1px!important}
+  .destination-info span{font-size:8px!important;letter-spacing:.4px!important}
+  .group-departure-card{border-radius:17px!important}
+  .group-departure-photo{height:180px!important}
+  .footer-contact-bar{width:calc(100% - 22px)!important;bottom:10px!important;border-radius:18px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
