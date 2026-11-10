@@ -752,9 +752,13 @@ body>header .header-inner>.brand img{
 }
 
 
-/* Desktop: keep the hero headline clearly below the overlaid navigation. */
-@media (min-width: 1101px) {
+/* Desktop: reserve a clear vertical band between the overlaid navigation and hero headline.
+   The breakpoint matches the site's desktop layout (above 1000px), including compact laptops. */
+@media (min-width: 1001px) {
   .hero {
-    padding-top: clamp(280px, 30vh, 350px) !important;
+    padding-top: clamp(330px, 36vh, 410px) !important;
+  }
+  .hero .hero-content {
+    margin-top: 0 !important;
   }
 }
