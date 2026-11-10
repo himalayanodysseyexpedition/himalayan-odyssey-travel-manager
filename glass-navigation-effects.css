@@ -361,3 +361,92 @@ header .header-inner > nav.glass-nav > .nav-dropdown.open > .services-chevron {
     transform: translateY(-50%) rotate(180deg) !important;
   }
 }
+
+
+/* FINAL MOBILE NAV WIDTH FIX: four equal columns; Services chevron sits outside. */
+@media screen and (max-width: 640px) {
+  html body header .header-inner > nav.glass-nav[aria-label="Main navigation"] {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    gap: 5px !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+  }
+
+  html body header .header-inner > nav.glass-nav[aria-label="Main navigation"] > a,
+  html body header .header-inner > nav.glass-nav[aria-label="Main navigation"] > .nav-dropdown {
+    display: flex !important;
+    flex: 1 1 0 !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+    justify-content: center !important;
+    align-items: stretch !important;
+  }
+
+  html body header .header-inner > nav.glass-nav[aria-label="Main navigation"] > a {
+    flex-direction: column !important;
+    min-height: 49px !important;
+    height: 49px !important;
+    padding: 5px 1px !important;
+    gap: 3px !important;
+    box-sizing: border-box !important;
+  }
+
+  html body header .header-inner > nav.glass-nav[aria-label="Main navigation"] > .nav-dropdown {
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  html body header .header-inner > nav.glass-nav[aria-label="Main navigation"] > .nav-dropdown > .nav-dropdown-toggle {
+    display: flex !important;
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 49px !important;
+    height: 49px !important;
+    padding: 5px 1px !important;
+    gap: 3px !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+
+  html body header .header-inner > nav.glass-nav[aria-label="Main navigation"] > .nav-dropdown > .nav-dropdown-toggle > .nav-glass-icon,
+  html body header .header-inner > nav.glass-nav[aria-label="Main navigation"] > a > .nav-glass-icon {
+    flex: 0 0 16px !important;
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  html body header .header-inner > nav.glass-nav[aria-label="Main navigation"] > .nav-dropdown > .services-chevron {
+    position: absolute !important;
+    left: calc(100% + 1px) !important;
+    right: auto !important;
+    top: 50% !important;
+    z-index: 5 !important;
+    width: 9px !important;
+    height: 18px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    font-size: 13px !important;
+    line-height: 18px !important;
+    transform: translateY(-50%) !important;
+    pointer-events: none !important;
+  }
+
+  html body header .header-inner > nav.glass-nav[aria-label="Main navigation"] > .nav-dropdown.open > .services-chevron {
+    transform: translateY(-50%) rotate(180deg) !important;
+  }
+}
