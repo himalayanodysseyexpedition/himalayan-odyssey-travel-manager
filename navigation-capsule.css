@@ -1155,3 +1155,57 @@ html body #footerContactBar.footer-contact-bar{
     outline:none!important;
   }
 }
+
+
+/* DESKTOP MOUNTAIN-SPARK LOGO — tiny Himalayan starlight glints around the
+   original artwork. No logo replacement, scaling, rotation or layout shift. */
+@media(min-width:761px){
+  html body>header .header-inner>a.brand{
+    position:relative!important;
+    isolation:isolate!important;
+    overflow:visible!important;
+  }
+  html body>header .header-inner>a.brand img{
+    position:relative!important;
+    z-index:1!important;
+  }
+  html body>header .header-inner>a.brand::before,
+  html body>header .header-inner>a.brand::after{
+    content:""!important;
+    display:block!important;
+    position:absolute!important;
+    z-index:2!important;
+    width:8px!important;
+    height:8px!important;
+    border:0!important;
+    border-radius:50%!important;
+    pointer-events:none!important;
+    opacity:0!important;
+    background:radial-gradient(circle,rgba(255,255,235,1) 0 12%,rgba(234,255,194,.95) 24%,rgba(197,243,106,.38) 48%,rgba(197,243,106,0) 74%)!important;
+    box-shadow:0 0 7px rgba(234,255,194,.65),0 0 15px rgba(197,243,106,.28)!important;
+    animation:hoe-mountain-spark 4.8s ease-in-out infinite!important;
+  }
+  html body>header .header-inner>a.brand::before{
+    top:14%!important;
+    right:17%!important;
+    animation-delay:0s!important;
+  }
+  html body>header .header-inner>a.brand::after{
+    left:19%!important;
+    bottom:20%!important;
+    animation-delay:2.35s!important;
+  }
+}
+@keyframes hoe-mountain-spark{
+  0%,72%,100%{opacity:0;transform:scale(.35)}
+  78%{opacity:.95;transform:scale(1.2)}
+  84%{opacity:.35;transform:scale(.72)}
+  90%{opacity:.85;transform:scale(1)}
+}
+@media(min-width:761px) and (prefers-reduced-motion:reduce){
+  html body>header .header-inner>a.brand::before,
+  html body>header .header-inner>a.brand::after{
+    animation:none!important;
+    opacity:0!important;
+  }
+}
