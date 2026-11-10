@@ -21,6 +21,8 @@
     const atTop = y < 36;
     const menuOpen = dropdown?.classList.contains("open") === true;
 
+    // At the top the header remains in normal page flow. Once scrolling,
+    // it becomes fixed glass and can hide/reappear without covering hero content.
     header.classList.toggle("is-scrolled", !atTop);
     if (atTop || direction === "up" || menuOpen) {
       header.classList.remove("is-hidden");

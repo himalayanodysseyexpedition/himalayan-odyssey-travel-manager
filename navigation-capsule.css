@@ -526,3 +526,34 @@ html body>.hero{
 @media(prefers-reduced-motion:reduce){
   html body>header{transition:none!important}
 }
+
+
+/* HERO CLEARANCE FIX — the header occupies normal document space at page top.
+   It only becomes fixed after the visitor starts scrolling, so it cannot sit
+   over the hero photo or the Cabs / Hotels / Packages service icons. */
+html body>header{
+  position:relative!important;
+  top:auto!important;left:auto!important;right:auto!important;
+  width:100%!important;
+  transform:translateY(0)!important;
+  margin:0!important;
+}
+html body>header.is-scrolled{
+  position:fixed!important;
+  top:0!important;left:0!important;right:0!important;
+  width:100%!important;
+}
+html body>header.is-hidden{
+  transform:translateY(-110%)!important;
+  pointer-events:none!important;
+}
+html body>.hero{
+  padding:clamp(34px,5vh,58px) 32px 54px!important;
+  min-height:clamp(610px,82svh,850px)!important;
+}
+@media(max-width:760px){
+  html body>.hero{
+    padding:34px 16px 58px!important;
+    min-height:0!important;
+  }
+}
