@@ -974,3 +974,13 @@ html body #footerContactBar.footer-contact-bar{
     max-width:calc(100vw - 20px)!important;
   }
 }
+
+
+/* DESKTOP NAVIGATION TYPOGRAPHY — General Sans; mobile typography remains unchanged. */
+@media(min-width:761px){
+  html body>header .header-inner>nav.glass-nav>a,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+    font-family:"General Sans",Arial,sans-serif!important;
+    font-weight:600!important;
+  }
+}
