@@ -1795,3 +1795,67 @@ html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu a 
     transform:rotate(180deg)!important;
   }
 }
+
+
+/* MOBILE CORRECTION — explicitly restore the Services text and place one arrow beneath it. */
+@media screen and (max-width:760px){
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+    display:inline-flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:2px!important;
+    min-width:max-content!important;
+    height:auto!important;
+    padding:4px 8px 3px!important;
+    background:linear-gradient(105deg,#fff4bd 0%,#ffe58a 22%,#f2c94c 48%,#fff0a6 68%,#d99b22 100%)!important;
+    color:#173c36!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>span:first-of-type{
+    display:block!important;
+    position:static!important;
+    visibility:visible!important;
+    opacity:1!important;
+    width:auto!important;
+    min-width:max-content!important;
+    height:auto!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:visible!important;
+    font-family:"General Sans",Arial,sans-serif!important;
+    font-size:calc(clamp(6.5px,1.85vw,8px) - 2px)!important;
+    line-height:1.2!important;
+    white-space:nowrap!important;
+    text-indent:0!important;
+    color:#173c36!important;
+    -webkit-text-fill-color:#173c36!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>.services-chevron{
+    display:none!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:before{
+    content:none!important;
+    display:none!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:after{
+    content:"⌄"!important;
+    display:block!important;
+    position:static!important;
+    width:auto!important;
+    height:auto!important;
+    margin:0!important;
+    padding:0!important;
+    background:none!important;
+    border:0!important;
+    font-family:Arial,sans-serif!important;
+    font-size:9px!important;
+    font-weight:700!important;
+    line-height:8px!important;
+    color:#173c36!important;
+    opacity:1!important;
+    transform:none!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle:after{
+    transform:rotate(180deg)!important;
+  }
+}
