@@ -1317,3 +1317,17 @@ html body #footerContactBar.footer-contact-bar{
     pointer-events:auto!important;
   }
 }
+
+
+/* FINAL DROPDOWN VISIBILITY STATE — overrides legacy layer rules above.
+   Closed menus must never sit invisibly over the page or intercept taps. */
+html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu{
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-menu{
+  visibility:visible!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+}
