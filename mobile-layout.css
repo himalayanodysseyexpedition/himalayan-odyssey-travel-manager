@@ -467,3 +467,15 @@
     text-shadow:0 0 14px rgba(197,243,106,.22)!important;
   }
 }
+
+
+/* MOBILE ONLY — bring the hero headline closer to the header. */
+@media screen and (max-width:760px){
+  body>header{margin-bottom:0!important}
+  body>.hero{
+    padding-top:12px!important;
+  }
+  body>.hero>.hero-content>.hero-animated-heading{
+    margin-top:0!important;
+  }
+}
