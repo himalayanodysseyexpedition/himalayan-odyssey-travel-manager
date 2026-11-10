@@ -403,3 +403,37 @@
   }
 }
 
+
+
+/* FINAL MOBILE HERO HEADING — center the whole changing sentence with
+   comfortable, consistent word spacing on narrow screens. */
+@media(max-width:760px){
+  .hero > .hero-content > h1.hero-animated-heading{
+    display:flex!important;
+    flex-flow:row nowrap!important;
+    align-items:baseline!important;
+    justify-content:center!important;
+    box-sizing:border-box!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    padding-inline:4px!important;
+    font-size:clamp(14px,4.25vw,22px)!important;
+    line-height:1.2!important;
+    letter-spacing:-.035em!important;
+    text-align:center!important;
+    text-align-last:auto!important;
+    white-space:nowrap!important;
+    word-break:keep-all!important;
+    overflow-wrap:normal!important;
+    gap:clamp(4px,1.15vw,8px)!important;
+  }
+  .hero > .hero-content > h1.hero-animated-heading .hero-heading-static,
+  .hero > .hero-content > h1.hero-animated-heading .hero-word-slot{
+    flex:0 0 auto!important;
+  }
+  .hero > .hero-content > h1.hero-animated-heading .hero-word-slot{
+    margin:0!important;
+  }
+}
