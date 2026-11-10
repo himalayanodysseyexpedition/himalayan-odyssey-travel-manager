@@ -299,8 +299,9 @@ footer{background:linear-gradient(180deg,#0b2a22,#061a15)!important}
   .journey-item span{font-size:7px!important;letter-spacing:.45px!important}
   .destination-gallery{padding-top:65px!important;padding-bottom:68px!important}
   .destination-gallery .destination-grid.destinations-carousel{
-    width:calc(100% + 6vw);margin-right:-6vw;grid-auto-columns:84%;
-    padding-right:6vw;gap:14px;
+    width:100%;max-width:100%;margin-left:0;margin-right:0;
+    grid-auto-columns:84%;padding-left:2px;padding-right:16px;gap:14px;
+    box-sizing:border-box;min-width:0;
   }
   .destination-gallery .destinations-carousel .destination-card{height:365px!important}
   .destination-gallery .destination-info h3{font-size:34px!important}
