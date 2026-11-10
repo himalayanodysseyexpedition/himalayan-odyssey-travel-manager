@@ -1195,3 +1195,29 @@ html body>header .header-inner{
     white-space:nowrap!important;
   }
 }
+
+
+/* FINAL DESKTOP HERO HEADING — center all three phrase parts as one unit.
+   The changing phrase stays naturally sized; consistent gaps prevent crowding. */
+@media(min-width:761px){
+  .hero > .hero-content > h1.hero-animated-heading{
+    display:flex!important;
+    flex-flow:row nowrap!important;
+    align-items:baseline!important;
+    justify-content:center!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    text-align:center!important;
+    white-space:nowrap!important;
+    gap:clamp(10px,1.15vw,20px)!important;
+  }
+  .hero > .hero-content > h1.hero-animated-heading .hero-heading-static,
+  .hero > .hero-content > h1.hero-animated-heading .hero-word-slot{
+    flex:0 0 auto!important;
+  }
+  .hero > .hero-content > h1.hero-animated-heading .hero-word-slot{
+    margin:0!important;
+  }
+}
