@@ -4460,6 +4460,39 @@ header .header-inner > a.brand .brand-wordmark{
   }
 }
 </style>
+
+<style id="mobile-services-arrow-below-label-final">
+/* MOBILE ONLY — place the Services dropdown arrow on its own line below the label. */
+@media screen and (max-width:760px){
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:2px!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>span:first-of-type{
+    order:0!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:after{
+    content:"⌄"!important;
+    display:block!important;
+    order:1!important;
+    position:static!important;
+    width:auto!important;
+    height:auto!important;
+    margin:0!important;
+    padding:0!important;
+    font-size:10px!important;
+    line-height:8px!important;
+    color:#173c36!important;
+    transform:none!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle:after{
+    transform:rotate(180deg)!important;
+  }
+}
+</style>
 </body>
 </html>
 
