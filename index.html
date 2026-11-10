@@ -2876,6 +2876,37 @@ header .header-inner > a.brand .brand-wordmark{
 }
 </style>
 <link rel="stylesheet" href="/manrope-body.css?v=1">
+
+
+<style id="desktop-brand-tagline">
+/* Elegant handwritten tagline beneath the original logo and ODYSSEY wordmark. */
+@media(min-width:761px){
+  header .header-inner>a.brand>.brand-tagline{
+    display:block!important;
+    order:3!important;
+    position:relative!important;
+    z-index:2!important;
+    width:max-content!important;
+    max-width:calc(100% + 30px)!important;
+    margin:3px 0 0!important;
+    color:#eaffd2!important;
+    font-family:"Allura","Cormorant Garamond",cursive!important;
+    font-size:clamp(17px,1.35vw,21px)!important;
+    font-weight:400!important;
+    font-style:normal!important;
+    line-height:1!important;
+    letter-spacing:.015em!important;
+    white-space:nowrap!important;
+    text-align:center!important;
+    text-shadow:0 1px 8px rgba(197,243,106,.22)!important;
+    pointer-events:none!important;
+  }
+}
+@media(max-width:760px){
+  header .header-inner>a.brand>.brand-tagline{display:none!important}
+}
+</style>
+
 </head>
 
 <body>
@@ -2886,7 +2917,7 @@ header .header-inner > a.brand .brand-wordmark{
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Himalayan Odyssey Expedition — Home">
       <img src="logo.webp" alt="Himalayan Odyssey Expedition">
-      
+      <span class="brand-tagline">The Himalayas are calling</span>
     </a>
 
     <nav class="glass-nav" aria-label="Main navigation">
