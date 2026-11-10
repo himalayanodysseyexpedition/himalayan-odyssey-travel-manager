@@ -1942,8 +1942,7 @@ header nav .header-cta:hover{background:linear-gradient(135deg,#f3dfb5,#d1ab70);
 
 
 <script src="/analytics.js" defer></script>
-  <link rel="stylesheet" href="/site-motion.css?v=1">
-  <link rel="stylesheet" href="/site-motion.css?v=1">
+  <link rel="stylesheet" href="/site-motion.css?v=2">
 
 <style id="hoe-services-menu-polish">
 /* Services follows the same soft pill language as the other header links */
@@ -4021,6 +4020,66 @@ loadHotels();
   }
 }
 </style>
+
+
+<script id="hoe-scroll-story-motion">
+/* Progressive enhancement: reveal real page content as it enters the viewport.
+   Existing booking, carousel and Supabase logic is left untouched. */
+(() => {
+  const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion) return;
+
+  const selectors = [
+    ".content > .section-title",
+    ".content > .intro",
+    ".our-approach",
+    ".destination-card",
+    ".guide-card",
+    ".package-slide",
+    ".itinerary-slide",
+    ".cab-card",
+    ".hotel-card",
+    ".group-departure-card",
+    ".review-panel",
+    ".faq-list details",
+    ".instagram-content"
+  ];
+  const seen = new WeakSet();
+  let observer;
+
+  const reveal = (root = document) => {
+    if (!observer) {
+      observer = new IntersectionObserver((entries, io) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("hoe-motion-visible");
+          io.unobserve(entry.target);
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+    }
+    root.querySelectorAll(selectors.join(",")).forEach((el, index) => {
+      if (seen.has(el)) return;
+      seen.add(el);
+      el.classList.add("hoe-motion-reveal");
+      const siblingIndex = [...(el.parentElement?.children || [])].indexOf(el);
+      el.style.setProperty("--hoe-motion-delay", Math.min(siblingIndex * 65, 260) + "ms");
+      observer.observe(el);
+    });
+  };
+
+  document.documentElement.classList.add("hoe-motion-enabled");
+  reveal();
+  const mutationObserver = new MutationObserver(records => {
+    records.forEach(record => record.addedNodes.forEach(node => {
+      if (node.nodeType === 1) {
+        if (node.matches?.(selectors.join(","))) reveal(node.parentElement || document);
+        else reveal(node);
+      }
+    }));
+  });
+  mutationObserver.observe(document.body, { childList: true, subtree: true });
+})();
+</script>
 
 </body>
 </html>
