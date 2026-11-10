@@ -192,3 +192,84 @@ header .header-inner > nav.glass-nav > .nav-dropdown > .nav-dropdown-toggle > .s
     line-height: 9px !important;
   }
 }
+
+
+/* MOBILE SERVICES NAV REPAIR: match the other three icon-over-label pills. */
+@media screen and (max-width: 700px) {
+  html body header .header-inner > nav.glass-nav[aria-label="Main navigation"] > .nav-dropdown > button.nav-dropdown-toggle {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 49px !important;
+    height: 49px !important;
+    padding: 5px 2px 4px !important;
+    gap: 3px !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+    font-size: clamp(6px, 1.9vw, 8px) !important;
+    line-height: 1.1 !important;
+    letter-spacing: 0 !important;
+  }
+
+  html body header .header-inner > nav.glass-nav > .nav-dropdown > button.nav-dropdown-toggle > svg.nav-glass-icon {
+    display: block !important;
+    position: static !important;
+    flex: 0 0 16px !important;
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0 !important;
+    order: 0 !important;
+  }
+
+  html body header .header-inner > nav.glass-nav > .nav-dropdown > button.nav-dropdown-toggle > span:not(.services-chevron) {
+    display: block !important;
+    position: static !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    height: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: inherit !important;
+    font: inherit !important;
+    line-height: 1.1 !important;
+    letter-spacing: inherit !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+    order: 1 !important;
+  }
+
+  html body header .header-inner > nav.glass-nav > .nav-dropdown > button.nav-dropdown-toggle > span.services-chevron {
+    display: grid !important;
+    position: absolute !important;
+    top: 2px !important;
+    right: 3px !important;
+    z-index: 2 !important;
+    place-items: center !important;
+    width: 9px !important;
+    height: 9px !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #f2d89b !important;
+    font-size: 8px !important;
+    line-height: 9px !important;
+    order: 2 !important;
+  }
+}
