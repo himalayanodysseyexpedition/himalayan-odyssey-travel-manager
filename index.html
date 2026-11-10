@@ -4407,6 +4407,44 @@ header .header-inner > a.brand .brand-wordmark{
 
 
 
+
+<style id="mobile-header-transparent-final-override">
+/* FINAL MOBILE OVERRIDE — transparent header shell only; keep logo and nav controls intact. */
+@media screen and (max-width:760px){
+  html body>header,
+  html body>header.is-scrolled,
+  html body>header.is-hidden{
+    background:transparent!important;
+    background-color:transparent!important;
+    background-image:none!important;
+    border:0!important;
+    box-shadow:none!important;
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+    filter:none!important;
+  }
+  html body>header .header-inner{
+    background:transparent!important;
+    background-color:transparent!important;
+    background-image:none!important;
+    border:0!important;
+    box-shadow:none!important;
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+    filter:none!important;
+  }
+  html body>header::before,
+  html body>header::after,
+  html body>header .header-inner::before,
+  html body>header .header-inner::after{
+    content:none!important;
+    display:none!important;
+    background:none!important;
+    box-shadow:none!important;
+  }
+}
+</style>
+
 </body>
 </html>
 
