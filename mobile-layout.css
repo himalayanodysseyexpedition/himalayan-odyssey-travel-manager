@@ -691,3 +691,31 @@
     color:#0b211d!important;
   }
 }
+
+
+/* MOBILE ONLY — force every header shell layer fully transparent, including decorative overlays. */
+@media screen and (max-width:760px){
+  html body>header,
+  html body>header.is-scrolled,
+  html body>header.is-hidden,
+  html body>header .header-inner{
+    background:transparent!important;
+    background-color:transparent!important;
+    background-image:none!important;
+    border-color:transparent!important;
+    box-shadow:none!important;
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+  }
+  html body>header::before,
+  html body>header::after,
+  html body>header .header-inner::before,
+  html body>header .header-inner::after{
+    content:none!important;
+    display:none!important;
+    background:transparent!important;
+    box-shadow:none!important;
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+  }
+}
