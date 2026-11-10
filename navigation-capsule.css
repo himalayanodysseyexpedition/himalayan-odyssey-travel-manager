@@ -575,13 +575,14 @@ html body>header:not(.is-scrolled) .header-inner>nav.glass-nav{
 }
 
 
-/* STYLE 5 — EDITORIAL TEXT + GOLD DIRECTIONAL ARROWS
-   Replace individual glass pills with understated luxury text navigation.
-   Keep the existing links, dropdown behavior, responsive layout and CTA intact. */
+
+/* STYLE 2 — UNDERLINE NAVIGATION
+   Editorial text links with a fine champagne-gold underline on hover/focus
+   and for the active page. Preserve original anchors, Services dropdown and CTA. */
 html body>header .header-inner>nav.glass-nav{
   width:max-content!important;
   max-width:100%!important;
-  gap:clamp(14px,2vw,28px)!important;
+  gap:clamp(18px,2.4vw,34px)!important;
   padding:5px 8px!important;
   background:transparent!important;
   border:0!important;
@@ -596,11 +597,11 @@ html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
   display:inline-flex!important;
   align-items:center!important;
   justify-content:center!important;
-  gap:7px!important;
-  min-height:38px!important;
+  gap:6px!important;
+  min-height:40px!important;
   height:auto!important;
   width:auto!important;
-  padding:7px 1px!important;
+  padding:8px 1px 10px!important;
   border:0!important;
   border-radius:0!important;
   background:transparent!important;
@@ -609,28 +610,40 @@ html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
   font:600 10px var(--sans)!important;
   letter-spacing:.095em!important;
   text-transform:uppercase!important;
+  white-space:nowrap!important;
   -webkit-backdrop-filter:none!important;
   backdrop-filter:none!important;
   transform:none!important;
-  transition:color .25s ease,opacity .25s ease!important;
+  transition:color .25s ease!important;
 }
-html body>header .header-inner>nav.glass-nav>a:after{
-  content:"↗"!important;
-  position:static!important;
-  display:inline-block!important;
-  width:auto!important;
-  height:auto!important;
-  margin-left:1px!important;
-  background:none!important;
-  color:#d5b477!important;
-  font-size:11px!important;
-  line-height:1!important;
-  opacity:.82!important;
-  transform:translate(0,0)!important;
-  transition:transform .25s ease,opacity .25s ease!important;
+html body>header .header-inner>nav.glass-nav>a:after,
+html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:after{
+  content:""!important;
+  position:absolute!important;
+  left:0!important;
+  right:0!important;
+  bottom:2px!important;
+  display:block!important;
+  width:100%!important;
+  height:1px!important;
+  margin:0!important;
+  background:#d5b477!important;
+  opacity:.95!important;
+  transform:scaleX(0)!important;
+  transform-origin:left center!important;
+  transition:transform .28s ease!important;
+}
+html body>header .header-inner>nav.glass-nav>a:hover:after,
+html body>header .header-inner>nav.glass-nav>a:focus-visible:after,
+html body>header .header-inner>nav.glass-nav>a[aria-current="page"]:after,
+html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:hover:after,
+html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:focus-visible:after,
+html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle:after{
+  transform:scaleX(1)!important;
 }
 html body>header .header-inner>nav.glass-nav>a:hover,
 html body>header .header-inner>nav.glass-nav>a:focus-visible,
+html body>header .header-inner>nav.glass-nav>a[aria-current="page"],
 html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:hover,
 html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:focus-visible,
 html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle{
@@ -639,11 +652,6 @@ html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-to
   border:0!important;
   box-shadow:none!important;
   transform:none!important;
-}
-html body>header .header-inner>nav.glass-nav>a:hover:after,
-html body>header .header-inner>nav.glass-nav>a:focus-visible:after{
-  opacity:1!important;
-  transform:translate(3px,-2px)!important;
 }
 html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
   cursor:pointer!important;
@@ -680,23 +688,23 @@ html body>header .header-inner>nav.glass-nav .nav-dropdown-menu{
     width:100%!important;
     max-width:520px!important;
     justify-content:space-between!important;
-    gap:clamp(5px,2vw,13px)!important;
+    gap:clamp(7px,2.1vw,15px)!important;
     padding:3px 2px!important;
     overflow-x:auto!important;
+    overflow-y:visible!important;
+    scrollbar-width:none!important;
   }
+  html body>header .header-inner>nav.glass-nav::-webkit-scrollbar{display:none!important}
   html body>header .header-inner>nav.glass-nav>a,
   html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
     flex:0 0 auto!important;
     width:auto!important;
     min-width:0!important;
-    min-height:34px!important;
-    padding:6px 0!important;
-    gap:4px!important;
-    font-size:clamp(7px,2.15vw,9px)!important;
+    min-height:36px!important;
+    padding:7px 0 9px!important;
+    gap:3px!important;
+    font-size:clamp(7px,2.05vw,9px)!important;
     letter-spacing:.015em!important;
-  }
-  html body>header .header-inner>nav.glass-nav>a:after{
-    font-size:9px!important;
   }
   html body>header .header-inner>nav.glass-nav>.nav-dropdown{
     flex:0 0 auto!important;
