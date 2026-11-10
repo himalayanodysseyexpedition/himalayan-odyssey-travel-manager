@@ -581,3 +581,9 @@ body > .hero .hero-note{
   body > .hero > .hero-content > p{margin-top:12px!important;margin-bottom:14px!important}
   body > .hero .hero-note{margin-top:10px!important;padding:12px 14px!important}
 }
+
+/* Give the Cabs service tile the same gentle floating motion as Hotels and Packages.
+   Staggered timing keeps all three tiles moving in the same animation style. */
+.hero-service-icon:nth-child(1){
+  animation:odysseyFloat 5s ease-in-out 0s infinite;
+}
