@@ -1368,3 +1368,51 @@ html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-me
     margin:0!important;
   }
 }
+
+
+/* DESKTOP NAV POSITION — keep the navigation group truly centered in the
+   viewport, with the original logo anchored left and the CTA anchored right. */
+@media (min-width: 761px) {
+  html body>header .header-inner {
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important;
+    grid-template-rows:1fr!important;
+    align-items:center!important;
+    justify-items:stretch!important;
+    column-gap:clamp(12px,2vw,28px)!important;
+  }
+  html body>header .header-inner>a.brand {
+    grid-column:1!important;
+    grid-row:1!important;
+    justify-self:start!important;
+    align-self:center!important;
+  }
+  html body>header .header-inner>nav.glass-nav {
+    grid-column:2!important;
+    grid-row:1!important;
+    justify-self:center!important;
+    align-self:center!important;
+    display:flex!important;
+    flex-direction:row!important;
+    flex-wrap:nowrap!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:max-content!important;
+    max-width:calc(100vw - 360px)!important;
+    min-width:0!important;
+    margin:0 auto!important;
+  }
+  html body>header .header-inner>nav.glass-nav>a,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle {
+    flex:0 0 auto!important;
+    white-space:nowrap!important;
+    text-align:center!important;
+  }
+  html body>header .header-inner>.header-cta {
+    grid-column:3!important;
+    grid-row:1!important;
+    justify-self:end!important;
+    align-self:center!important;
+    margin:0!important;
+  }
+}
