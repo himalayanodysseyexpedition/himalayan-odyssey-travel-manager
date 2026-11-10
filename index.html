@@ -114,7 +114,7 @@
           "name": "How do I enquire about a Spiti Valley tour?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Browse the packages on this website or submit the trip enquiry form. It opens WhatsApp with your details so you can review and send the enquiry directly to our team."
+            "text": "Browse current packages or use Build Your Trip to combine cabs, stays and tour packages in one enquiry. Review your selections and send them to our team on WhatsApp."
           }
         },
         {
@@ -181,8 +181,6 @@
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:115px}
-#plan-your-himalayan-adventure{scroll-margin-top:130px}
-#travel-enquiry{scroll-margin-top:130px}
 body{
   margin:0;
   background:var(--cream);
@@ -2067,7 +2065,7 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
         </div>
       </div>
     </nav>
-    <a class="header-cta" href="#travel-enquiry">Plan Your Trip</a>
+    <a class="header-cta" href="/build-your-trip/">Build Your Trip</a>
   </div>
 </header>
 
@@ -2084,7 +2082,7 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
     <a class="btn" href="#packages">Explore Our Journeys</a>
 
     <a class="btn outline"
-       href="/?topic=General%20Himalayan%20tour%20enquiry#travel-enquiry"
+       href="/?topic=General%20Himalayan%20tour%20enquiry/build-your-trip/"
        target="_blank"
        rel="noopener noreferrer">Enquire on WhatsApp</a>
     <div class="hero-note" aria-label="Destinations we offer">
@@ -2120,7 +2118,7 @@ header nav .nav-dropdown-menu a:hover,header nav .nav-dropdown-menu a:focus-visi
       <small class="eyebrow" style="color:#987342">A LOCAL HIMALAYAN PERSPECTIVE</small>
       <h2>Thoughtful journeys, shaped around the mountains.</h2>
       <p>Himalayan Odyssey Expedition is based in Narkanda, Himachal Pradesh. We help travellers explore Spiti Valley, Kinnaur and the wider region with trip planning and direct assistance. Tell us your dates, group size and travel preferences, and our team can discuss a suitable route and package with you.</p>
-      <a class="btn" href="#travel-enquiry">Plan Your Journey</a>
+      <a class="btn" href="/build-your-trip/">Build Your Trip</a>
     </div>
     <div class="local-intro-panel reveal">
       <small>Start with a conversation</small>
@@ -2665,125 +2663,6 @@ header .header-inner > nav[aria-label="Main navigation"]::after{content:none!imp
   </div>
 </section>
 
-<!-- TRAVEL ENQUIRY -->
-<section class="content enquiry-section" id="travel-enquiry">
-  <div class="section-inner">
-
-    <div class="section-title reveal">
-      <small>YOUR JOURNEY STARTS HERE</small>
-      <h2 id="plan-your-himalayan-adventure">Plan Your Himalayan Adventure</h2>
-    </div>
-
-    <p class="intro" style="color:#e0e8e2">Tell us a little about your travel plans. We'll help you shape a memorable mountain holiday.</p>
-
-    <details class="enquiry-dropdown reveal">
-      <summary>
-        <span>Open the trip enquiry form</span>
-        <span class="enquiry-dropdown-icon" aria-hidden="true">⌄</span>
-      </summary>
-      <div class="enquiry-box">
-
-      <form id="travelEnquiryForm">
-        <div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden"><label for="website">Leave this field empty</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
-
-        <label for="guestName">Your Full Name *</label>
-        <input type="text"
-               id="guestName"
-               placeholder="Enter your name"
-               maxlength="100"
-               autocomplete="name"
-               required>
-
-        <label for="guestPhone">Your Phone Number *</label>
-        <input type="tel"
-               id="guestPhone"
-               placeholder="Enter 10-digit mobile number"
-               inputmode="numeric"
-               pattern="[6-9][0-9]{9}"
-               maxlength="10"
-               minlength="10"
-               autocomplete="tel"
-               required>
-
-        <label for="travellers">Number of Persons *</label>
-        <input type="number"
-               id="travellers"
-               min="1"
-               max="100"
-               step="1"
-               placeholder="How many people are travelling?"
-               required>
-
-        <label for="selectedPackage">Selected Tour Package</label>
-        <select id="selectedPackage"><option value="">Custom itinerary / General enquiry</option></select>
-        <label for="enquiryTopic">What would you like to enquire about? <span class="optional-label">(Optional)</span></label>
-        <input type="text" id="enquiryTopic" maxlength="180" placeholder="Package, itinerary, cab, hotel or custom trip">
-        <p class="cost-helper">Your selected tour or service will be added here automatically when you open this form from the website.</p>
-        <label>Choose Your Destinations & Number of Nights *</label>
-        <p class="cost-helper">Select every place you want to stay. Rates include one night of stay, breakfast and dinner per person.</p>
-        <div id="stayDestinationOptions" class="stay-destination-grid">
-          <div class="stay-option"><input type="checkbox" value="Narkanda" data-rate="1300" aria-label="Add Narkanda to journey"><span><strong>Narkanda</strong><small>₹1,300 / person / night</small></span><input class="stay-nights" type="number" min="1" max="30" value="1" aria-label="Narkanda nights" disabled></div>
-          <div class="stay-option"><input type="checkbox" value="Shimla" data-rate="1300" aria-label="Add Shimla to journey"><span><strong>Shimla</strong><small>₹1,300 / person / night</small></span><input class="stay-nights" type="number" min="1" max="30" value="1" aria-label="Shimla nights" disabled></div>
-          <div class="stay-option"><input type="checkbox" value="Kufri" data-rate="1300" aria-label="Add Kufri to journey"><span><strong>Kufri</strong><small>₹1,300 / person / night</small></span><input class="stay-nights" type="number" min="1" max="30" value="1" aria-label="Kufri nights" disabled></div>
-          <div class="stay-option"><input type="checkbox" value="Sangla" data-rate="1600" aria-label="Add Sangla to journey"><span><strong>Sangla</strong><small>₹1,600 / person / night</small></span><input class="stay-nights" type="number" min="1" max="30" value="1" aria-label="Sangla nights" disabled></div>
-          <div class="stay-option"><input type="checkbox" value="Kalpa" data-rate="1500" aria-label="Add Kalpa to journey"><span><strong>Kalpa</strong><small>₹1,500 / person / night</small></span><input class="stay-nights" type="number" min="1" max="30" value="1" aria-label="Kalpa nights" disabled></div>
-          <div class="stay-option"><input type="checkbox" value="Tabo" data-rate="1600" aria-label="Add Tabo to journey"><span><strong>Tabo</strong><small>₹1,600 / person / night</small></span><input class="stay-nights" type="number" min="1" max="30" value="1" aria-label="Tabo nights" disabled></div>
-          <div class="stay-option"><input type="checkbox" value="Kaza" data-rate="1500" aria-label="Add Kaza to journey"><span><strong>Kaza</strong><small>₹1,500 / person / night</small></span><input class="stay-nights" type="number" min="1" max="30" value="1" aria-label="Kaza nights" disabled></div>
-          <div class="stay-option"><input type="checkbox" value="Manali" data-rate="1300" aria-label="Add Manali to journey"><span><strong>Manali</strong><small>₹1,300 / person / night</small></span><input class="stay-nights" type="number" min="1" max="30" value="1" aria-label="Manali nights" disabled></div>
-          <div class="stay-option"><input type="checkbox" value="Jibhi" data-rate="1400" aria-label="Add Jibhi to journey"><span><strong>Jibhi</strong><small>₹1,400 / person / night</small></span><input class="stay-nights" type="number" min="1" max="30" value="1" aria-label="Jibhi nights" disabled></div>
-          <div class="stay-option"><input type="checkbox" value="Kasol" data-rate="1300" aria-label="Add Kasol to journey"><span><strong>Kasol</strong><small>₹1,300 / person / night</small></span><input class="stay-nights" type="number" min="1" max="30" value="1" aria-label="Kasol nights" disabled></div>
-        </div>
-        <label for="tripDays">Total Trip Days *</label>
-        <input type="number" id="tripDays" min="1" max="60" step="1" placeholder="Enter total number of travel days" required>
-        <label for="tripCab">Choose Your Cab</label>
-        <select id="tripCab"><option value="">Loading available cabs...</option></select>
-        <p class="cost-helper">Cab share = listed daily cab price × trip days ÷ number of travellers. Final route charges and availability will be confirmed by our team.</p>
-        <div id="journeyEstimate" class="journey-estimate" aria-live="polite">
-          <div class="estimate-heading"><span>YOUR LIVE TRIP ESTIMATE</span><small>Updates as you plan</small></div>
-          <p>Select destinations and enter your group size to see your estimate.</p>
-        </div>
-
-        <label for="travelMonth">Travel Month *</label>
-        <select id="travelMonth" required>
-          <option value="">Select travel month</option>
-          <option>January</option>
-          <option>February</option>
-          <option>March</option>
-          <option>April</option>
-          <option>May</option>
-          <option>June</option>
-          <option>July</option>
-          <option>August</option>
-          <option>September</option>
-          <option>October</option>
-          <option>November</option>
-          <option>December</option>
-        </select>
-
-        <div class="date-fields">
-
-          <div>
-            <label for="startDate">Travel Start Date <span class="optional-label">(Optional)</span></label>
-            <input type="date" id="startDate">
-          </div>
-
-          <div>
-            <label for="endDate">Travel End Date <span class="optional-label">(Optional)</span></label>
-            <input type="date" id="endDate">
-          </div>
-
-        </div>
-
-        <button type="submit" class="btn">Submit Enquiry on WhatsApp</button>
-
-        <p class="enquiry-note">Your enquiry opens in WhatsApp. Review the message and press Send.</p>
-
-      </form>
-      </div>
-    </details>
-  </div>
-</section>
-
 <!-- ITINERARIES -->
 <section class="content" id="itineraries">
   <div class="section-inner">
@@ -2887,7 +2766,7 @@ header .header-inner > nav[aria-label="Main navigation"]::after{content:none!imp
         <h3>Hotel Enquiries</h3>
         <p>Looking for comfortable stays in the mountains?</p>
         <a class="btn"
-           href="/?topic=Hotel%20or%20stay%20enquiry#travel-enquiry"
+           href="/?topic=Hotel%20or%20stay%20enquiry/build-your-trip/"
            target="_blank" rel="noopener">Enquire Now</a>
       </div>
 
@@ -2900,7 +2779,7 @@ header .header-inner > nav[aria-label="Main navigation"]::after{content:none!imp
       <div class="info-box reveal">
         <h3>Custom Packages</h3>
         <p>Tell us your dates, group size and travel preferences.</p>
-        <a class="btn" href="#travel-enquiry">Plan My Trip</a>
+        <a class="btn" href="/build-your-trip/">Build Your Trip</a>
       </div>
 
     </div>
@@ -2917,7 +2796,7 @@ header .header-inner > nav[aria-label="Main navigation"]::after{content:none!imp
   <p>Contact Himalayan Odyssey Expedition for packages, bookings and travel enquiries.</p>
 
   <a class="btn"
-     href="/?topic=General%20Himalayan%20trip%20planning#travel-enquiry">Start an Enquiry</a>
+     href="/?topic=General%20Himalayan%20trip%20planning/build-your-trip/">Start an Enquiry</a>
 
   <a class="btn outline"
      href="tel:+919816929669">Call Us: +91 98169 29669</a>
@@ -2934,7 +2813,7 @@ header .header-inner > nav[aria-label="Main navigation"]::after{content:none!imp
         <p>Planning a Himalayan escape should feel personal from the very first conversation. Our Google Business Profile currently shows a <strong>5.0/5 rating from 7 reviews</strong>. Read traveller feedback or tell us about the journey you have in mind.</p>
         <div class="review-actions">
           <a class="btn" href="https://maps.google.com/maps?cid=3907406288341631942" target="_blank" rel="noopener noreferrer">Find us on Google ↗</a>
-          <a class="btn outline" href="/?topic=Talk%20to%20the%20Himalayan%20Odyssey%20team#travel-enquiry">Talk to our team</a>
+          <a class="btn outline" href="/?topic=Talk%20to%20the%20Himalayan%20Odyssey%20team/build-your-trip/">Talk to our team</a>
         </div>
       </div>
       <div class="review-points" aria-label="Our travel approach">
@@ -2959,7 +2838,7 @@ header .header-inner > nav[aria-label="Main navigation"]::after{content:none!imp
     <div class="faq-list reveal">
       <details>
         <summary>How do I enquire about a Spiti Valley tour?</summary>
-        <p>Browse the packages on this website or submit the trip enquiry form. It opens WhatsApp with your details so you can review and send the enquiry directly to our team.</p>
+        <p>Browse current packages or use Build Your Trip to combine cabs, stays and tour packages in one enquiry. Review your selections and send them to our team on WhatsApp.</p>
       </details>
       <details>
         <summary>Do you arrange group and private trips?</summary>
@@ -2983,7 +2862,7 @@ header .header-inner > nav[aria-label="Main navigation"]::after{content:none!imp
       </details>
     </div>
     <div class="section-action reveal">
-      <a class="btn" href="/?topic=Question%20about%20Himalayan%20tour%20packages#travel-enquiry">Ask a Question</a>
+      <a class="btn" href="/?topic=Question%20about%20Himalayan%20tour%20packages/build-your-trip/">Ask a Question</a>
     </div>
   </div>
 </section>
@@ -3055,7 +2934,7 @@ header .header-inner > nav[aria-label="Main navigation"]::after{content:none!imp
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h14a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 18V6A1.5 1.5 0 0 1 5 4.5Z"/><path d="M8 3v3M16 3v3M3.5 9h17M8 13h3M8 16h6"/></svg>
       <span>Book</span>
     </a>
-    <a class="quick-nav-whatsapp" href="/?topic=Winter%20Spiti%20Group%20Tour%20booking%20enquiry#travel-enquiry" aria-label="Enquire about the Winter Spiti group tour">
+    <a class="quick-nav-whatsapp" href="/?topic=Winter%20Spiti%20Group%20Tour%20booking%20enquiry/build-your-trip/" aria-label="Enquire about the Winter Spiti group tour">
       <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 .7A15.1 15.1 0 0 0 3.1 23.7L1 31l7.5-2A15.2 15.2 0 1 0 16 .7zm0 27.6c-2.4 0-4.7-.7-6.7-2l-.5-.3-4.4 1.2 1.2-4.3-.3-.5A12.5 12.5 0 1 1 16 28.3zm6.9-9.4c-.4-.2-2.3-1.1-2.7-1.2-.4-.2-.6-.2-.9.2-.3.4-1 1.2-1.2 1.4-.2.3-.5.3-.9.1-.4-.2-1.7-.6-3.2-2-1.2-1.1-2-2.4-2.2-2.8-.2-.4 0-.6.2-.8l.6-.7c.2-.2.3-.3.4-.7.1-.3 0-.5 0-.7l-1.2-2.9c-.3-.7-.6-.6-.9-.6h-.8c-.3 0-.7.1-1.1.5-.4.4-1.4 1.3-1.4 3.2s1.4 3.7 1.6 4c.2.3 2.8 4.3 6.8 6 .9.4 1.6.6 2.1.7.9.3 1.8.2 2.4.1.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.7.2-1.8-.1-.2-.4-.3-.8-.5z"/></svg>
     </a>
     <a class="quick-nav-item" href="tel:+919816929669" aria-label="Call Himalayan Odyssey Expedition">
@@ -3068,7 +2947,7 @@ header .header-inner > nav[aria-label="Main navigation"]::after{content:none!imp
     </button>
     <div class="quick-nav-menu" id="quickNavMenu" hidden>
       <a href="#destinations">Destinations</a>
-      <a href="#travel-enquiry">Plan Your Trip</a>
+      <a href="/build-your-trip/">Build Your Trip</a>
       <a href="#itineraries">Itineraries</a>
       <a href="#cabs">Cabs</a>
       <a href="#gallery">Hotels</a>
@@ -3143,39 +3022,6 @@ function showLoadingError(element, title, message, enquiry) {
     </div>`;
 }
 
-/* Keep direct destination enquiries aligned with the actual enquiry section.
-   Recheck after asynchronous package rendering and font/layout shifts on mobile Safari. */
-function settleEnquiryAnchor() {
-  const isEnquiryLink = () =>
-    window.location.hash === "#travel-enquiry" ||
-    window.location.hash === "#plan-your-himalayan-adventure" ||
-    new URLSearchParams(window.location.search).get("enquiry") === "1";
-
-  if (!isEnquiryLink()) return;
-
-  const target = document.getElementById("travel-enquiry");
-  if (!target) return;
-
-  const alignForm = () => {
-    if (!isEnquiryLink()) return;
-    const header = document.querySelector("header");
-    const headerHeight = header ? header.getBoundingClientRect().height : 0;
-    const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
-    window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
-  };
-
-  requestAnimationFrame(() => requestAnimationFrame(alignForm));
-  [250, 700, 1400].forEach(delay => window.setTimeout(alignForm, delay));
-
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(() => requestAnimationFrame(alignForm));
-  }
-}
-
-/* Re-align on browser restoration and once the page's initial assets finish loading. */
-window.addEventListener("pageshow", settleEnquiryAnchor);
-window.addEventListener("load", settleEnquiryAnchor);
-
 /* Match each package to a destination photograph when no custom cover is saved. */
 function packageImageFor(pkg) {
   const destination = String(pkg.destination || "").toLowerCase();
@@ -3199,7 +3045,6 @@ async function loadPackages() {
 
   if (!db) {
     showLoadingError(list,"Packages Temporarily Unavailable","The website connection could not be started.","Please share your available tour packages.");
-    settleEnquiryAnchor();
     return;
   }
 
@@ -3296,7 +3141,7 @@ async function loadPackages() {
               <div class="price">${rupees(p.price_per_person)} <small>per person</small></div>
             ` : ""}
 
-            <a class="btn" href="/?package=${encodeURIComponent(p.id)}#travel-enquiry">Enquire About This Package</a>
+            <a class="btn" href="/?package=${encodeURIComponent(p.id)}/build-your-trip/">Enquire About This Package</a>
 
             ${p.linkedItineraryPage ? `
               <a class="btn" href="${safe(p.linkedItineraryPage)}">Explore Full Itinerary</a>
@@ -3313,8 +3158,7 @@ async function loadPackages() {
 
     showLoadingError(list,"Packages Temporarily Unavailable","Packages could not be loaded right now. Please contact us for available tours.","Please share your available tour packages.");
   } finally {
-    settleEnquiryAnchor();
-  }
+    }
 }
 
 /* LOAD PUBLISHED ITINERARY WEBPAGES */
@@ -3333,7 +3177,7 @@ async function loadItineraries() {
       const cover=item.cover_image||(gallery[0]&&gallery[0].url)||"";
       const pageUrl="/itinerary.html?id="+encodeURIComponent(item.id);
       const coverHtml=cover?'<img src="'+safe(cover)+'" alt="'+safe(item.title||"Himalayan tour")+'" loading="lazy" decoding="async">':'<div class="itinerary-cover-placeholder"><span>✧</span><b>HIMALAYAN ODYSSEY EXPEDITION</b><small>CURATED HIMALAYAN JOURNEY</small></div>';
-      return '<article class="card package-slide itinerary-slide reveal"><a class="itinerary-cover-link" href="'+safe(pageUrl)+'"><div class="itinerary-cover">'+coverHtml+'</div></a><div class="card-body"><h3>'+safe(item.title||"Himalayan Tour")+'</h3><p>'+safe(item.destination||"Himalayan Tour")+'</p>'+(duration?'<p class="itinerary-meta">'+safe(duration)+'</p>':"")+(item.price!=null&&item.price!==""?'<div class="price">'+rupees(item.price)+' <small>per person</small></div>':"")+(item.summary?'<p>'+safe(item.summary)+'</p>':"")+'<a class="btn" href="'+safe(pageUrl)+'">Explore Full Itinerary</a><a class="btn" href="/?itinerary='+encodeURIComponent(item.id)+'&topic='+encodeURIComponent("Itinerary enquiry: "+(item.title||"Himalayan tour"))+'#travel-enquiry">Enquire About This Itinerary</a></div></article>';
+      return '<article class="card package-slide itinerary-slide reveal"><a class="itinerary-cover-link" href="'+safe(pageUrl)+'"><div class="itinerary-cover">'+coverHtml+'</div></a><div class="card-body"><h3>'+safe(item.title||"Himalayan Tour")+'</h3><p>'+safe(item.destination||"Himalayan Tour")+'</p>'+(duration?'<p class="itinerary-meta">'+safe(duration)+'</p>':"")+(item.price!=null&&item.price!==""?'<div class="price">'+rupees(item.price)+' <small>per person</small></div>':"")+(item.summary?'<p>'+safe(item.summary)+'</p>':"")+'<a class="btn" href="'+safe(pageUrl)+'">Explore Full Itinerary</a><a class="btn" href="/?itinerary='+encodeURIComponent(item.id)+'&topic='+encodeURIComponent("Itinerary enquiry: "+(item.title||"Himalayan tour"))+'/build-your-trip/">Enquire About This Itinerary</a></div></article>';
     }).join("");
     observeReveals();
   }catch(error){console.error("Itinerary loading error:",error);showLoadingError(list,"Itineraries Temporarily Unavailable","Please contact us on WhatsApp for current tour details.","Please share your tour itineraries.");}
@@ -3410,7 +3254,7 @@ async function loadCabs() {
             <p class="cab-details">Please confirm inclusions, route charges and availability with our team before booking.</p>
 
             <a class="btn"
-               href="/?topic=${encodeURIComponent("Cab enquiry: "+(cab.name||"Vehicle"))}#travel-enquiry">Enquire About This Cab</a>
+               href="/?topic=${encodeURIComponent("Cab enquiry: "+(cab.name||"Vehicle"))}/build-your-trip/">Enquire About This Cab</a>
 
           </div>
         </article>`;
@@ -3509,7 +3353,7 @@ async function loadHotels() {
                     data-view-hotel="${safe(hotel.id)}">View Property</button>
 
             <a class="btn"
-               href="/?topic=${encodeURIComponent("Property enquiry: "+(hotel.name||"Accommodation"))}#travel-enquiry">Enquire Now</a>
+               href="/?topic=${encodeURIComponent("Property enquiry: "+(hotel.name||"Accommodation"))}/build-your-trip/">Enquire Now</a>
 
           </div>
         </article>`;
@@ -3568,7 +3412,7 @@ function showHotelDetails(hotelId) {
 
     <div style="margin-top:25px">
       <a class="btn"
-         href="/?topic=${encodeURIComponent("Property enquiry: "+(hotel.name||"Accommodation"))}#travel-enquiry">Enquire About This Property</a>
+         href="/?topic=${encodeURIComponent("Property enquiry: "+(hotel.name||"Accommodation"))}/build-your-trip/">Enquire About This Property</a>
     </div>
   `;
 
@@ -3603,67 +3447,6 @@ document.getElementById("galleryList")
 
     showHotelDetails(button.getAttribute("data-view-hotel"));
   });
-
-/* LIVE JOURNEY COST ESTIMATE + WHATSAPP ENQUIRY */
-const stayOptions=[...document.querySelectorAll("#stayDestinationOptions .stay-option")];
-const travellersInput=document.getElementById("travellers"),tripDaysInput=document.getElementById("tripDays"),tripCabSelect=document.getElementById("tripCab"),estimateBox=document.getElementById("journeyEstimate");
-let availableTripCabs=[];
-function money(value){return "₹"+Math.round(Number(value)||0).toLocaleString("en-IN")}
-function selectedStays(){return stayOptions.filter(x=>x.querySelector('[type=checkbox]').checked).map(x=>({name:x.querySelector('[type=checkbox]').value,rate:Number(x.querySelector('[type=checkbox]').dataset.rate),nights:Math.max(1,Math.min(30,Number(x.querySelector('.stay-nights').value)||1))}))}
-function calculateJourneyEstimate(){
- const persons=Number(travellersInput.value),days=Number(tripDaysInput.value),stays=selectedStays(),stayTotal=stays.reduce((n,x)=>n+x.rate*x.nights,0),cab=availableTripCabs.find(x=>String(x.id)===tripCabSelect.value),cabTotal=cab&&days>0?Number(cab.daily_price||0)*days:0,cabShare=persons>0?cabTotal/persons:0,total=stayTotal+cabShare;
- if(!(persons>0&&days>0&&stays.length)){estimateBox.innerHTML='<div class="estimate-heading"><span>YOUR LIVE TRIP ESTIMATE</span><small>Updates as you plan</small></div><p>Select at least one destination, number of persons and trip days.</p>';return null}
- const nights=stays.reduce((n,x)=>n+x.nights,0);
- const rows=stays.map(x=>'<div class="estimate-line"><span>'+x.name+' · '+x.nights+' night(s) × '+money(x.rate)+'</span><strong>'+money(x.rate*x.nights)+'</strong></div>').join("");
- const cabRows=cab?'<div class="estimate-line"><span>'+cab.name+' · '+days+' days × '+money(cab.daily_price)+'/day</span><strong>'+money(cabTotal)+'</strong></div><div class="estimate-line"><span>Cab share per person ('+persons+' travellers)</span><strong>'+money(cabShare)+'</strong></div>':'<div class="estimate-line"><span>Cab</span><strong>Not selected</strong></div>';
- estimateBox.innerHTML='<div class="estimate-heading"><span>YOUR LIVE TRIP ESTIMATE</span><small>'+nights+' stay night(s) · '+days+' travel day(s)</small></div><div class="estimate-lines"><strong>Stay & meals per person: '+money(stayTotal)+'</strong>'+rows+cabRows+'</div><div class="estimate-total"><div><span>ESTIMATED TOTAL / PERSON</span><br><strong>'+money(total)+'</strong></div><span>'+persons+' traveller(s)<br>Group total: '+money(total*persons)+'</span></div><p class="estimate-note">Stay prices include accommodation, breakfast and dinner. Cab share is divided equally among travellers. Tolls, parking, permits, driver allowance, route restrictions and extra charges are excluded unless confirmed. Estimate only; not a confirmed booking.</p>';
- return {persons,days,stays,cab,stayTotal,cabTotal,cabShare,total,nights};
-}
-stayOptions.forEach(x=>{const check=x.querySelector('[type=checkbox]'),nights=x.querySelector('.stay-nights');check.addEventListener('change',()=>{nights.disabled=!check.checked;calculateJourneyEstimate()});nights.addEventListener('input',calculateJourneyEstimate)});
-[travellersInput,tripDaysInput,tripCabSelect].forEach(x=>x.addEventListener('input',calculateJourneyEstimate));
-tripCabSelect.addEventListener('change',calculateJourneyEstimate);
-async function loadTripCostCabs(){try{if(!db)throw Error("Database unavailable");const {data,error}=await db.from("cabs").select("id,name,model,daily_price").eq("published",true).order("created_at",{ascending:false});if(error)throw error;availableTripCabs=data||[];tripCabSelect.innerHTML='<option value="">No cab selected — stays only</option>'+availableTripCabs.map(x=>'<option value="'+safe(x.id)+'">'+safe(x.name)+(x.model?' · '+safe(x.model):'')+' · '+rupees(x.daily_price)+'/day</option>').join("");}catch(e){console.warn("Cab prices unavailable for calculator",e);availableTripCabs=[];tripCabSelect.innerHTML='<option value="">Cab rates unavailable — enquire</option>'}calculateJourneyEstimate()}
-loadTripCostCabs();
-function syncTripDays(){const a=document.getElementById("startDate").value,b=document.getElementById("endDate").value;if(!a||!b||b<a)return;tripDaysInput.value=Math.max(1,Math.round((new Date(b+"T00:00:00")-new Date(a+"T00:00:00"))/86400000)+1);calculateJourneyEstimate()}
-document.getElementById("startDate").addEventListener("change",syncTripDays);document.getElementById("endDate").addEventListener("change",syncTripDays);
-document.getElementById("travelEnquiryForm").addEventListener("submit",async function(e){
- e.preventDefault();const name=document.getElementById("guestName").value.trim(),phone=document.getElementById("guestPhone").value.trim(),persons=Number(travellersInput.value),month=document.getElementById("travelMonth").value,startDate=document.getElementById("startDate").value,endDate=document.getElementById("endDate").value,estimate=calculateJourneyEstimate();
- const enquiryTopic=document.getElementById("enquiryTopic")?.value.trim()||"",requestedItinerary=new URLSearchParams(window.location.search).get("itinerary")||"",packageId=document.getElementById("selectedPackage")?.value||"",selectedPackage=(window.hoePackageRecords||[]).find(p=>String(p.id)===String(packageId))||null,packageName=selectedPackage?.name||"";
- const stayDestination=estimate?estimate.stays.map(x=>x.name+" ("+x.nights+" night(s))").join(", "):"",destination=[packageName,enquiryTopic,stayDestination].filter(Boolean).join(" — ")||"Custom Himalayan trip";
- if(!name||! /^[6-9][0-9]{9}$/.test(phone)||!Number.isInteger(persons)||persons<1||persons>100||!month||!estimate){alert("Please enter your details, select at least one stay, number of persons and trip days, and review your estimate.");return}
- if(startDate&&endDate&&endDate<startDate){alert("End date cannot be earlier than start date.");return}
- const button=this.querySelector('button[type="submit"]');if(button)button.disabled=true;const waWindow=window.open("about:blank","_blank");let saved=false,saveErrorText="";
- const costNote="Stay/person "+money(estimate.stayTotal)+"; "+(estimate.cab?"Cab "+estimate.cab.name+" total "+money(estimate.cabTotal)+"; cab/person "+money(estimate.cabShare):"Cab not selected")+"; Total/person "+money(estimate.total)+"; Group "+money(estimate.total*persons);
- const packageNote=selectedPackage?"Selected package: "+packageName+"; Advertised package price: "+(selectedPackage.price_per_person!=null?money(selectedPackage.price_per_person)+" per person":"Not listed")+"; Itinerary: "+(selectedPackage.linkedItineraryPage||"No linked itinerary found"):"Custom itinerary / general enquiry";
- try{
-  const intakeResponse=await fetch(SUPABASE_URL+"/functions/v1/submit-website-enquiry",{
-   method:"POST",
-   headers:{apikey:SUPABASE_KEY,"Content-Type":"application/json"},
-   body:JSON.stringify({
-    name,phone,persons,destination,
-    travelDate:startDate||null,
-    budget:Math.round(estimate.total*persons),
-    sourceDetails:selectedPackage?"Website package enquiry: "+packageName:(enquiryTopic?"Website enquiry: "+enquiryTopic:"Website journey calculator"),
-    notes:["Website enquiry form","Enquiry topic: "+(enquiryTopic||"General trip enquiry"),packageNote,"Month: "+month,"Trip days: "+estimate.days,"Stays: "+estimate.stays.map(x=>x.name+" "+x.nights+" night(s) @ ₹"+x.rate).join(", "),costNote,endDate?"End date: "+endDate:""].filter(Boolean).join(" | "),
-    website:document.getElementById("website")?.value||""
-   })
-  });
-  const intakeResult=await intakeResponse.json().catch(()=>({}));
-  if(!intakeResponse.ok||!intakeResult.saved)throw Error(intakeResult.message||"CRM save unavailable");
-  saved=true;
- }catch(err){console.error("CRM save failed",err);saveErrorText=err.message||"Unknown error"}
- let message="NEW WEBSITE TRAVEL ENQUIRY\nHIMALAYAN ODYSSEY EXPEDITION\n\nGuest: "+name+"\nPhone: "+phone+"\nEnquiry: "+(enquiryTopic||"General trip enquiry")+"\nSelected package: "+(packageName||"Custom itinerary / general enquiry")+"\nPersons: "+persons+"\nDestinations: "+destination+"\nMonth: "+month+"\nTrip duration: "+estimate.days+" days\n\nSTAY & MEALS: "+money(estimate.stayTotal)+" per person\n"+estimate.stays.map(x=>"• "+x.name+": "+x.nights+" night(s) × "+money(x.rate)+" = "+money(x.rate*x.nights)+" per person").join("\n")+"\n"+(estimate.cab?"Cab: "+estimate.cab.name+" · "+money(estimate.cab.daily_price)+"/day × "+estimate.days+" days = "+money(estimate.cabTotal)+" group total; "+money(estimate.cabShare)+" per person":"Cab: Not selected") +"\n\nESTIMATED TOTAL PER PERSON: "+money(estimate.total)+"\nESTIMATED GROUP TOTAL: "+money(estimate.total*persons)+"\n"+(selectedPackage?.price_per_person!=null?"Advertised package price: "+money(selectedPackage.price_per_person)+" per person (separate from custom estimate)\n":"")+"\nEstimate excludes unconfirmed tolls, parking, permits, driver allowance and route charges.";
- if(startDate)message+="\nStart date: "+startDate;if(endDate)message+="\nEnd date: "+endDate;message+=saved?"\nCRM: Saved.":"\nCRM: Please record manually; automatic save failed.";message+="\n\nPlease confirm availability and final quotation.";
- if(selectedPackage?.linkedItineraryPage)message+="\n\nSelected itinerary: https://himalayanexpedition.co.in"+selectedPackage.linkedItineraryPage;
- const redirectUrl=requestedItinerary
-   ? "/itinerary.html?id="+encodeURIComponent(requestedItinerary)
-   : (selectedPackage?.linkedItineraryPage || (selectedPackage ? "/#itineraries" : ""));
- if(button)button.disabled=false;
- // Initiate the main-tab itinerary navigation before handing WhatsApp to iOS.
- if(redirectUrl)window.location.assign(redirectUrl);
- if(waWindow)waWindow.location.href=whatsappLink(message);else alert("Please allow pop-ups to continue to WhatsApp.");
- if(waWindow&&!saved)alert("WhatsApp is ready, but CRM saving failed. Please record this enquiry manually. "+saveErrorText);
-});
 
 /* SCROLL REVEAL ANIMATIONS */
 let revealObserver;
@@ -3921,7 +3704,7 @@ loadHotels();
    const joined=Number(item.joined_count||0),capacity=Math.max(1,Number(item.max_travellers||1)),pct=Math.min(100,Math.round(joined/capacity*100)),full=item.status==="full"||joined>=capacity;
    const msg=encodeURIComponent("Hello Himalayan Odyssey Expedition, I am interested in joining the "+item.title+" to "+item.destination+" departing on "+date(item.start_date)+". Please share booking details.");
    const image=item.image_url||"https://himalayanexpedition.co.in/spiti.jpg";
-   return '<article class="group-departure-card"><div class="group-departure-photo"><img src="'+safe(image)+'" alt="'+safe(item.destination)+' group tour" loading="lazy" decoding="async"><span class="group-departure-status">'+(full?"GROUP FULL":"OPEN FOR BOOKINGS")+'</span></div><div class="group-departure-body"><small>'+safe(item.destination)+'</small><h3>'+safe(item.title)+'</h3><div class="group-departure-date">'+date(item.start_date)+(item.end_date?" – "+date(item.end_date):"")+(item.duration?" · "+safe(item.duration):"")+'</div><div class="group-departure-meta"><span>Package price</span><strong>'+money(item.price_per_person)+' / person</strong></div><div class="group-occupancy"><div class="group-occupancy-label"><span>Travellers joined</span><strong>'+joined+' / '+capacity+'</strong></div><div class="group-occupancy-track"><span style="width:'+pct+'%"></span></div></div><p class="group-departure-highlights">'+safe(item.highlights||"A memorable Himalayan group journey with local support.")+'</p><a class="group-departure-cta" href="/?topic='+encodeURIComponent("Group departure: "+item.title+" · "+date(item.start_date))+'#travel-enquiry">'+(full?"Ask About Next Departure":"Enquire / Book This Group")+'</a></div></article>';
+   return '<article class="group-departure-card"><div class="group-departure-photo"><img src="'+safe(image)+'" alt="'+safe(item.destination)+' group tour" loading="lazy" decoding="async"><span class="group-departure-status">'+(full?"GROUP FULL":"OPEN FOR BOOKINGS")+'</span></div><div class="group-departure-body"><small>'+safe(item.destination)+'</small><h3>'+safe(item.title)+'</h3><div class="group-departure-date">'+date(item.start_date)+(item.end_date?" – "+date(item.end_date):"")+(item.duration?" · "+safe(item.duration):"")+'</div><div class="group-departure-meta"><span>Package price</span><strong>'+money(item.price_per_person)+' / person</strong></div><div class="group-occupancy"><div class="group-occupancy-label"><span>Travellers joined</span><strong>'+joined+' / '+capacity+'</strong></div><div class="group-occupancy-track"><span style="width:'+pct+'%"></span></div></div><p class="group-departure-highlights">'+safe(item.highlights||"A memorable Himalayan group journey with local support.")+'</p><a class="group-departure-cta" href="/?topic='+encodeURIComponent("Group departure: "+item.title+" · "+date(item.start_date))+'/build-your-trip/">'+(full?"Ask About Next Departure":"Enquire / Book This Group")+'</a></div></article>';
   }).join("");
   const count=document.getElementById("groupDeparturesCount");
   const step=()=>{const card=rail.querySelector(".group-departure-card");return card?card.getBoundingClientRect().width+parseFloat(getComputedStyle(rail).gap||0):280;};
@@ -3941,7 +3724,7 @@ loadHotels();
     const {data,error}=await client.from("destinations").select("title,tagline,image_url,link_url,sort_order").eq("is_active",true).order("sort_order",{ascending:true});
     if(error||!data?.length)return;
     const rail=document.getElementById("destinationsCarousel");if(!rail)return;
-    rail.innerHTML=data.map(item=>{const safe=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));return `<a class="destination-card reveal" href="${safe(item.link_url||"#travel-enquiry")}"><img src="${safe(item.image_url||"")}" alt="${safe(item.title)}" loading="lazy" decoding="async"><div class="destination-info"><small>${safe(item.tagline||"EXPLORE HIMACHAL")}</small><h3>${safe(item.title)}</h3><span>Explore the journey ↗</span></div></a>`;}).join("");
+    rail.innerHTML=data.map(item=>{const safe=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));return `<a class="destination-card reveal" href="${safe(item.link_url||"/build-your-trip/")}"><img src="${safe(item.image_url||"")}" alt="${safe(item.title)}" loading="lazy" decoding="async"><div class="destination-info"><small>${safe(item.tagline||"EXPLORE HIMACHAL")}</small><h3>${safe(item.title)}</h3><span>Explore the journey ↗</span></div></a>`;}).join("");
     rail.querySelectorAll(".reveal").forEach(el=>el.classList.add("is-visible"));
     const count=document.getElementById("destinationsCount");if(count)count.innerHTML="01 <i>/</i> "+String(data.length).padStart(2,"0");
   }catch(error){console.warn("Destination cards could not be refreshed:",error);}
