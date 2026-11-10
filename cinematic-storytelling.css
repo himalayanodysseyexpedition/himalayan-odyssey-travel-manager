@@ -603,3 +603,77 @@ body>header .header-inner>.brand img{
     max-height:88px!important;
   }
 }
+
+
+/* MOBILE HORIZONTAL OVERFLOW REPAIR
+   Keep the document locked to the viewport while preserving swipe inside carousels. */
+@media (max-width: 760px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip !important;
+    overscroll-behavior-x: none;
+  }
+
+  /* Sections and page-level wrappers must never create a wider document. */
+  body > *,
+  main,
+  main > *,
+  section,
+  .story-scene,
+  .section-inner,
+  .content,
+  .homepage,
+  .page-content {
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* Remove the intentional 6vw bleed that was pushing the page past the screen. */
+  .guides-carousel,
+  .destination-gallery .destination-grid.destinations-carousel {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 2px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Keep horizontal scrolling local to the actual carousels. */
+  .guides-carousel,
+  .destination-gallery .destination-grid.destinations-carousel,
+  .packages-carousel,
+  .itineraries-carousel,
+  .cabs-carousel,
+  .group-departures-rail {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overscroll-behavior-x: contain !important;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y pinch-zoom;
+  }
+
+  /* Prevent long labels, cards, and flex/grid children from widening their parents. */
+  .section-inner > *,
+  .header-inner > *,
+  .journey-strip > *,
+  .destination-card,
+  .package-slide,
+  .itinerary-slide,
+  .cab-card,
+  .group-departure-card {
+    min-width: 0 !important;
+    max-width: 100%;
+  }
+
+  img,
+  video,
+  iframe,
+  canvas,
+  svg {
+    max-width: 100%;
+  }
+}
