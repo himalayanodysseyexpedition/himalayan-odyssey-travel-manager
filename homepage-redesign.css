@@ -837,3 +837,60 @@ body > .hero::before,
 @media(prefers-reduced-motion:reduce){
   .hero > .hero-content > .hero-go-line{animation:none!important}
 }
+
+
+/* DESKTOP HEADER GREEN FROSTED GLASS — unify the header shell, navigation
+   pills and Plan Your Trip CTA in translucent forest-green glass, not solid lime. */
+@media(min-width:761px){
+  html body>header .header-inner{
+    background:linear-gradient(135deg,rgba(17,67,53,.34),rgba(10,43,35,.22) 52%,rgba(28,83,61,.30))!important;
+    border:1px solid rgba(190,235,195,.22)!important;
+    border-radius:30px!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 14px 38px rgba(0,0,0,.16)!important;
+    -webkit-backdrop-filter:blur(28px) saturate(165%)!important;
+    backdrop-filter:blur(28px) saturate(165%)!important;
+  }
+  html body>header .header-inner>nav.glass-nav{
+    background:linear-gradient(135deg,rgba(24,83,65,.48),rgba(10,48,39,.38) 58%,rgba(38,91,65,.32))!important;
+    border-color:rgba(190,235,195,.30)!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.17),0 8px 24px rgba(0,0,0,.14)!important;
+    -webkit-backdrop-filter:blur(24px) saturate(170%)!important;
+    backdrop-filter:blur(24px) saturate(170%)!important;
+  }
+  html body>header .header-inner>nav.glass-nav>a,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle,
+  html body>header .header-inner>nav.glass-nav>a:first-child{
+    color:rgba(244,255,239,.96)!important;
+    background:linear-gradient(135deg,rgba(169,225,176,.15),rgba(31,105,76,.19))!important;
+    border:1px solid rgba(190,235,195,.18)!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.13),0 3px 12px rgba(0,0,0,.08)!important;
+    -webkit-backdrop-filter:blur(14px) saturate(155%)!important;
+    backdrop-filter:blur(14px) saturate(155%)!important;
+  }
+  html body>header .header-inner>nav.glass-nav>a:hover,
+  html body>header .header-inner>nav.glass-nav>a:focus-visible,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:hover,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:focus-visible{
+    color:#eaffc2!important;
+    background:linear-gradient(135deg,rgba(190,245,181,.25),rgba(57,139,91,.28))!important;
+    border-color:rgba(214,255,205,.48)!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 0 18px rgba(164,230,155,.10)!important;
+  }
+  html body>header .header-inner>.header-cta,
+  html body>header.is-scrolled .header-inner>.header-cta{
+    color:#efffe8!important;
+    background:linear-gradient(135deg,rgba(178,235,177,.23),rgba(35,111,76,.34) 55%,rgba(15,67,52,.40))!important;
+    border:1px solid rgba(206,247,195,.48)!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.24),inset 0 -1px 0 rgba(255,255,255,.06),0 8px 24px rgba(0,0,0,.17),0 0 18px rgba(153,224,142,.09)!important;
+    -webkit-backdrop-filter:blur(22px) saturate(175%)!important;
+    backdrop-filter:blur(22px) saturate(175%)!important;
+  }
+  html body>header .header-inner>.header-cta:hover,
+  html body>header .header-inner>.header-cta:focus-visible{
+    color:#f5ffe9!important;
+    background:linear-gradient(135deg,rgba(198,249,187,.32),rgba(54,139,91,.42) 55%,rgba(17,79,59,.48))!important;
+    border-color:rgba(224,255,210,.72)!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 12px 30px rgba(0,0,0,.2),0 0 24px rgba(153,224,142,.16)!important;
+  }
+}
