@@ -1095,3 +1095,33 @@ body > .hero::before,
     opacity:1!important;
   }
 }
+
+
+/* MOBILE HEADER FIX — keep the header pinned at the top while scrolling.
+   Neutralize scroll-hide transforms/states on mobile only; preserve the existing
+   logo, navigation controls, dropdown and CTA dimensions and styling. */
+@media(max-width:760px){
+  html body>header,
+  html body>header.is-scrolled,
+  html body>header.is-hidden{
+    position:-webkit-sticky!important;
+    position:sticky!important;
+    top:0!important;
+    right:auto!important;
+    bottom:auto!important;
+    left:auto!important;
+    inset-block-start:0!important;
+    width:100%!important;
+    z-index:10000!important;
+    transform:none!important;
+    translate:none!important;
+    transition:background-color .25s ease,backdrop-filter .25s ease!important;
+    visibility:visible!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+    will-change:auto!important;
+  }
+  html body>header .header-inner{
+    transform:none!important;
+  }
+}
