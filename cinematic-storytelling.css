@@ -580,3 +580,26 @@ body>header .header-inner>.brand img{
     max-height:76px!important;
   }
 }
+
+
+/* MAIN BRAND LOGO SIZE ENHANCEMENT */
+body>header .header-inner>.brand img{
+  width:clamp(240px,22vw,290px)!important;
+  max-height:112px!important;
+  height:auto!important;
+  object-fit:contain!important;
+}
+@media(max-width:760px){
+  body>header .header-inner>.brand img{
+    width:250px!important;
+    max-width:min(72vw,250px)!important;
+    max-height:96px!important;
+  }
+}
+@media(max-width:370px){
+  body>header .header-inner>.brand img{
+    width:220px!important;
+    max-width:68vw!important;
+    max-height:88px!important;
+  }
+}
