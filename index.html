@@ -3905,5 +3905,35 @@ loadHotels();
 }
 </style>
 
+
+<style id="desktop-hero-header-clearance">
+/* Give the hero headline its own visual space below the complete header */
+@media (min-width: 801px) {
+  header .header-inner {
+    gap: 12px !important;
+    padding-top: 20px !important;
+    padding-bottom: 24px !important;
+  }
+  header .header-tagline {
+    margin-top: 6px !important;
+  }
+  header nav.glass-nav {
+    margin-top: 22px !important;
+  }
+  .hero {
+    position: relative !important;
+    align-items: flex-start !important;
+    padding-top: clamp(145px, 17vh, 205px) !important;
+    padding-bottom: 90px !important;
+    margin-top: 0 !important;
+  }
+  .hero .hero-content {
+    position: relative !important;
+    z-index: 2 !important;
+    margin-top: 0 !important;
+  }
+}
+</style>
+
 </body>
 </html>
