@@ -982,3 +982,116 @@ body > .hero::before,
     backdrop-filter:blur(24px) saturate(135%)!important;
   }
 }
+
+
+/* MOBILE PARITY — carry the latest desktop visual refinements to mobile.
+   Preserve navigation pills, their spacing/typography, and the header Plan Your Trip CTA. */
+@media(max-width:760px){
+  /* Ultra-minimal glass header: remove the opaque forest-green slab while
+     keeping a subtle translucent surface and the existing sticky behaviour. */
+  html body>header{
+    background:rgba(8,27,23,.12)!important;
+    -webkit-backdrop-filter:blur(24px) saturate(135%)!important;
+    backdrop-filter:blur(24px) saturate(135%)!important;
+  }
+  html body>header .header-inner{
+    background:rgba(18,34,29,.10)!important;
+    border:0!important;
+    border-radius:0!important;
+    outline:0!important;
+    box-shadow:none!important;
+    -webkit-backdrop-filter:blur(24px) saturate(135%)!important;
+    backdrop-filter:blur(24px) saturate(135%)!important;
+  }
+
+  /* Keep the original logo artwork; add the same restrained travelling
+     Himalayan highlight without changing its size or position. */
+  html body>header .header-inner>a.brand{
+    position:relative!important;
+    isolation:isolate!important;
+  }
+  html body>header .header-inner>a.brand img{
+    position:relative!important;
+    z-index:1!important;
+  }
+  html body>header .header-inner>a.brand::before{
+    content:""!important;
+    position:absolute!important;
+    inset:0!important;
+    z-index:3!important;
+    display:block!important;
+    width:auto!important;
+    height:auto!important;
+    border:0!important;
+    border-radius:inherit!important;
+    pointer-events:none!important;
+    opacity:0!important;
+    background:linear-gradient(108deg,
+      transparent 0%,
+      transparent 38%,
+      rgba(234,255,220,.04) 44%,
+      rgba(255,255,244,.68) 49%,
+      rgba(214,255,185,.22) 53%,
+      transparent 61%,
+      transparent 100%)!important;
+    box-shadow:none!important;
+    transform:translateX(-115%) skewX(-12deg)!important;
+    animation:hoe-himalayan-light-sweep-mobile 8.5s ease-in-out infinite!important;
+  }
+  html body>header .header-inner>a.brand::after{
+    content:none!important;
+    display:none!important;
+    animation:none!important;
+  }
+
+  /* Restore the cursive supporting line below the hero heading on mobile,
+     scaled to fit narrow screens without altering the headline itself. */
+  .hero > .hero-content > .hero-go-line{
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin:-10px auto 17px!important;
+    padding:0!important;
+    font-family:"Allura","Brush Script MT",cursive!important;
+    font-size:clamp(31px,8.4vw,43px)!important;
+    font-weight:400!important;
+    line-height:1!important;
+    letter-spacing:.01em!important;
+    text-align:center!important;
+    white-space:nowrap!important;
+    color:rgba(234,255,194,.96)!important;
+    text-shadow:0 2px 14px rgba(0,0,0,.38),0 0 16px rgba(197,243,106,.14)!important;
+    animation:heroGoLineReveal 1.15s .28s cubic-bezier(.2,.75,.25,1) both!important;
+  }
+
+  /* Match the mobile Build Your Trip action to the frosted-glass treatment.
+     The header Plan Your Trip button and navigation controls are untouched. */
+  body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta{
+    cursor:pointer!important;
+    color:#f1ffe9!important;
+    background:linear-gradient(135deg,rgba(220,255,218,.24),rgba(70,145,105,.18) 48%,rgba(14,65,49,.38))!important;
+    border:1px solid rgba(220,255,218,.52)!important;
+    -webkit-backdrop-filter:blur(24px) saturate(180%)!important;
+    backdrop-filter:blur(24px) saturate(180%)!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.36),inset 0 -1px 0 rgba(255,255,255,.08),0 8px 22px rgba(0,0,0,.22),0 0 18px rgba(169,225,176,.10)!important;
+    text-shadow:0 1px 8px rgba(0,0,0,.22)!important;
+  }
+  body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta:active{
+    background:linear-gradient(135deg,rgba(205,245,199,.30),rgba(57,125,89,.34) 48%,rgba(12,57,43,.52))!important;
+    box-shadow:inset 0 2px 5px rgba(0,0,0,.16),0 5px 16px rgba(0,0,0,.2)!important;
+    transform:scale(.985)!important;
+  }
+}
+@keyframes hoe-himalayan-light-sweep-mobile{
+  0%,62%{opacity:0;transform:translateX(-115%) skewX(-12deg)}
+  67%{opacity:.86}
+  79%{opacity:.68;transform:translateX(115%) skewX(-12deg)}
+  84%,100%{opacity:0;transform:translateX(115%) skewX(-12deg)}
+}
+@media(max-width:760px) and (prefers-reduced-motion:reduce){
+  html body>header .header-inner>a.brand::before,
+  .hero > .hero-content > .hero-go-line{
+    animation:none!important;
+    opacity:1!important;
+  }
+}
