@@ -1676,3 +1676,48 @@ html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu a 
     opacity:.9!important;
   }
 }
+
+
+/* MOBILE FIX — Services must use the same label scale as sibling links.
+   Draw the dropdown indicator independently so earlier chevron-hide rules cannot suppress it. */
+@media screen and (max-width:760px){
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+    position:relative!important;
+    display:inline-flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    box-sizing:border-box!important;
+    padding:3px 10px 3px 2px!important;
+    font-size:calc(clamp(6.5px,1.85vw,8px) - 2px)!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>span:not(.services-chevron){
+    display:block!important;
+    width:100%!important;
+    font-size:calc(clamp(6.5px,1.85vw,8px) - 2px)!important;
+    line-height:1.1!important;
+    text-align:center!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>.services-chevron{
+    display:none!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:after{
+    content:"⌄"!important;
+    display:block!important;
+    position:absolute!important;
+    right:1px!important;
+    bottom:4px!important;
+    width:auto!important;
+    height:auto!important;
+    font-family:Arial,sans-serif!important;
+    font-size:9px!important;
+    font-weight:600!important;
+    line-height:1!important;
+    color:currentColor!important;
+    opacity:.95!important;
+    transform:none!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle:after{
+    transform:rotate(180deg)!important;
+  }
+}
