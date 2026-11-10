@@ -1177,3 +1177,21 @@ html body>header .header-inner{
 }
 
 }
+
+
+/* DESKTOP HERO TAGLINE — center the complete sentence and add clear,
+   elegant breathing room between each word without changing its typeface. */
+@media(min-width:761px){
+  .hero > .hero-content > .hero-go-line{
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    text-align:center!important;
+    text-indent:0!important;
+    word-spacing:.22em!important;
+    letter-spacing:.025em!important;
+    white-space:nowrap!important;
+  }
+}
