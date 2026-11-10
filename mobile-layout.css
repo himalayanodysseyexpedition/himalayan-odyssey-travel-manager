@@ -395,3 +395,11 @@
   }
 }
 
+/* MOBILE ONLY — hide the header Plan Your Trip button.
+   The desktop header CTA remains unchanged. */
+@media(max-width:760px){
+  html body>header .header-inner>.header-cta{
+    display:none!important;
+  }
+}
+
