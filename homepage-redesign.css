@@ -806,3 +806,34 @@ body > .hero::before,
     transform:none!important;
   }
 }
+
+
+/* DESKTOP INTRO TAGLINE — lowercase luxury cursive beneath the animated hero heading. */
+@media(min-width:761px){
+  .hero > .hero-content > .hero-go-line{
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin:5px auto 26px!important;
+    padding:0!important;
+    color:rgba(234,255,194,.96)!important;
+    font-family:"Allura","Brush Script MT",cursive!important;
+    font-size:clamp(34px,3.3vw,48px)!important;
+    font-weight:400!important;
+    line-height:1.05!important;
+    letter-spacing:.015em!important;
+    text-align:center!important;
+    text-shadow:0 2px 16px rgba(0,0,0,.38),0 0 18px rgba(197,243,106,.16)!important;
+    animation:heroGoLineReveal 1.15s .28s cubic-bezier(.2,.75,.25,1) both!important;
+  }
+}
+@keyframes heroGoLineReveal{
+  from{opacity:0;transform:translateY(13px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@media(max-width:760px){
+  .hero > .hero-content > .hero-go-line{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero > .hero-content > .hero-go-line{animation:none!important}
+}
