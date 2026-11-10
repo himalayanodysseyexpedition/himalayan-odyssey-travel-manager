@@ -29,3 +29,112 @@ body{animation:siteFadeIn .65s var(--motion-ease) both}
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   .motion-reveal{opacity:1!important;transform:none!important}
 }
+
+
+/* HIMALAYAN ODYSSEY — cinematic scroll and interaction refinement.
+   Inspired by premium travel storytelling: restrained movement, clear hierarchy,
+   no layout shifts, and no dependencies or extra image requests. */
+@media (prefers-reduced-motion: no-preference) {
+  .hoe-motion-reveal {
+    opacity: 0;
+    transform: translate3d(0, 26px, 0);
+    transition:
+      opacity 760ms var(--motion-ease),
+      transform 760ms var(--motion-ease);
+    transition-delay: var(--hoe-motion-delay, 0ms);
+    will-change: opacity, transform;
+  }
+  .hoe-motion-reveal.hoe-motion-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  .destination-card.hoe-motion-reveal,
+  .package-slide.hoe-motion-reveal,
+  .itinerary-slide.hoe-motion-reveal,
+  .cab-card.hoe-motion-reveal,
+  .hotel-card.hoe-motion-reveal,
+  .group-departure-card.hoe-motion-reveal {
+    transform: translate3d(0, 30px, 0) scale(.985);
+  }
+  .destination-card.hoe-motion-reveal.hoe-motion-visible,
+  .package-slide.hoe-motion-reveal.hoe-motion-visible,
+  .itinerary-slide.hoe-motion-reveal.hoe-motion-visible,
+  .cab-card.hoe-motion-reveal.hoe-motion-visible,
+  .hotel-card.hoe-motion-reveal.hoe-motion-visible,
+  .group-departure-card.hoe-motion-reveal.hoe-motion-visible {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  /* Image movement is limited to hover-capable devices. */
+  @media (hover: hover) and (pointer: fine) {
+    .destination-card img,
+    .group-departure-photo img,
+    .package-slide > img,
+    .itinerary-slide img,
+    .hotel-card > img {
+      transition: transform 1.05s var(--motion-ease), filter .7s ease;
+    }
+    .destination-card:hover img,
+    .group-departure-card:hover .group-departure-photo img,
+    .package-slide:hover > img,
+    .itinerary-slide:hover img,
+    .hotel-card:hover > img {
+      transform: scale(1.055);
+      filter: saturate(1.08);
+    }
+    .destination-card,
+    .group-departure-card,
+    .package-slide,
+    .itinerary-slide,
+    .cab-card,
+    .hotel-card {
+      transition:
+        transform .55s var(--motion-ease),
+        box-shadow .55s ease,
+        border-color .4s ease;
+    }
+  }
+
+  /* A subtle, continuous gold highlight makes the journey stats feel connected. */
+  .journey-strip {
+    position: relative;
+    isolation: isolate;
+  }
+  .journey-strip:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 8%;
+    right: 8%;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(211,180,123,.85), transparent);
+    transform: scaleX(.35);
+    transform-origin: center;
+    animation: hoeJourneyLine 1.2s .35s var(--motion-ease) both;
+  }
+  @keyframes hoeJourneyLine {
+    to { transform: scaleX(1); }
+  }
+
+  /* Navigation and CTA feedback: refined lift, not a large bounce. */
+  .header-cta,
+  .btn,
+  .group-departure-cta,
+  .guide-arrow {
+    transition:
+      transform .28s var(--motion-ease),
+      box-shadow .3s ease,
+      background-color .3s ease,
+      color .3s ease;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hoe-motion-reveal,
+  .hoe-motion-reveal.hoe-motion-visible {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+  }
+}
