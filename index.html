@@ -4295,6 +4295,44 @@ header .header-inner > a.brand .brand-wordmark{
 }
 </style>
 
+
+<style id="hero-heading-natural-word-flow">
+/* Let the fixed words flow around each rotating phrase at its actual width. */
+.hero .hero-animated-heading{
+  display:flex!important;
+  flex-flow:row nowrap!important;
+  align-items:baseline!important;
+  justify-content:center!important;
+  white-space:nowrap!important;
+}
+.hero .hero-heading-prefix,
+.hero .hero-heading-suffix,
+.hero .hero-heading-period{
+  flex:0 0 auto!important;
+  margin-inline:0!important;
+}
+.hero .hero-word-slot{
+  display:inline-flex!important;
+  flex:0 1 auto!important;
+  width:auto!important;
+  min-width:0!important;
+  align-items:baseline!important;
+  justify-content:center!important;
+  white-space:nowrap!important;
+}
+.hero #heroRotatingWord{
+  display:inline-block!important;
+  width:auto!important;
+  min-width:0!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+}
+@media(max-width:700px){
+  .hero .hero-animated-heading{font-size:clamp(15px,5.15vw,26px)!important}
+  .hero .hero-word-slot{flex:0 1 auto!important;width:auto!important;min-width:0!important}
+}
+</style>
+
 </body>
 </html>
 
