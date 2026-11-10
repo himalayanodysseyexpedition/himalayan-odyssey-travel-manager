@@ -3,7 +3,6 @@
 (() => {
   "use strict";
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const header = document.querySelector("body > header");
   const hero = document.querySelector(".hero");
   const progress = document.getElementById("scrollProgress");
   const scenes = [...document.querySelectorAll(
@@ -52,7 +51,6 @@
   let ticking = false;
   const update = () => {
     const y = window.scrollY || 0;
-    if (header) header.classList.toggle("is-scrolled", y > 70);
     if (progress) {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       progress.style.width = (max > 0 ? Math.min(100, y / max * 100) : 0) + "%";
