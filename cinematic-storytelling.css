@@ -506,3 +506,32 @@ body>header.is-scrolled{
     border:0!important;border-radius:0!important;box-shadow:none!important;
   }
 }
+ 
+/* HERO IMAGE EDGE-TO-EDGE + CLEARER ORIGINAL BRAND LOGO */
+body>header .header-inner>.brand img{
+  width:clamp(170px,15vw,205px)!important;
+  max-height:82px!important;
+  object-fit:contain!important;
+}
+.hero{
+  margin:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+@media(max-width:760px){
+  body>header .header-inner>.brand img{
+    width:145px!important;
+    max-height:62px!important;
+  }
+  .hero{
+    margin:0!important;
+    border-radius:0!important;
+    box-shadow:none!important;
+  }
+}
+@media(max-width:370px){
+  body>header .header-inner>.brand img{
+    width:132px!important;
+    max-height:58px!important;
+  }
+}
