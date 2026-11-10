@@ -234,21 +234,23 @@
 /* MOBILE FINAL OVERRIDES — ultra-minimal glass shell and frosted hero CTA.
    Keep all existing navigation link/button styles and header CTA styling intact. */
 @media(max-width:760px){
-  html body>header{
-    background:rgba(8,27,23,.12)!important;
-    border-bottom:0!important;
-    box-shadow:none!important;
-    -webkit-backdrop-filter:blur(24px) saturate(135%)!important;
-    backdrop-filter:blur(24px) saturate(135%)!important;
+  html body>header,
+  html body>header.is-scrolled,
+  html body>header.is-hidden{
+    background:rgba(35,91,68,.28)!important;
+    border-bottom:1px solid rgba(224,246,230,.18)!important;
+    box-shadow:0 8px 28px rgba(0,0,0,.12)!important;
+    -webkit-backdrop-filter:blur(30px) saturate(165%)!important;
+    backdrop-filter:blur(30px) saturate(165%)!important;
   }
   html body>header .header-inner{
-    background:rgba(18,34,29,.10)!important;
+    background:rgba(35,91,68,.14)!important;
     border:0!important;
     border-radius:0!important;
     outline:0!important;
     box-shadow:none!important;
-    -webkit-backdrop-filter:blur(24px) saturate(135%)!important;
-    backdrop-filter:blur(24px) saturate(135%)!important;
+    -webkit-backdrop-filter:blur(30px) saturate(165%)!important;
+    backdrop-filter:blur(30px) saturate(165%)!important;
   }
 
   /* Keep the mobile Build Your Trip control visibly clickable with glass,
