@@ -229,3 +229,42 @@
     .hero-service-icon,.hero-content,.glass-nav{animation:none!important}
   }
 }
+
+
+/* MOBILE FINAL OVERRIDES — ultra-minimal glass shell and frosted hero CTA.
+   Keep all existing navigation link/button styles and header CTA styling intact. */
+@media(max-width:760px){
+  html body>header{
+    background:rgba(8,27,23,.12)!important;
+    border-bottom:0!important;
+    box-shadow:none!important;
+    -webkit-backdrop-filter:blur(24px) saturate(135%)!important;
+    backdrop-filter:blur(24px) saturate(135%)!important;
+  }
+  html body>header .header-inner{
+    background:rgba(18,34,29,.10)!important;
+    border:0!important;
+    border-radius:0!important;
+    outline:0!important;
+    box-shadow:none!important;
+    -webkit-backdrop-filter:blur(24px) saturate(135%)!important;
+    backdrop-filter:blur(24px) saturate(135%)!important;
+  }
+
+  /* Keep the mobile Build Your Trip control visibly clickable with glass,
+     without changing the separate header Plan Your Trip CTA. */
+  body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta{
+    color:#f1ffe9!important;
+    background:linear-gradient(135deg,rgba(220,255,218,.24),rgba(70,145,105,.18) 48%,rgba(14,65,49,.38))!important;
+    border:1px solid rgba(220,255,218,.52)!important;
+    -webkit-backdrop-filter:blur(24px) saturate(180%)!important;
+    backdrop-filter:blur(24px) saturate(180%)!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.36),inset 0 -1px 0 rgba(255,255,255,.08),0 8px 22px rgba(0,0,0,.22),0 0 18px rgba(169,225,176,.10)!important;
+    text-shadow:0 1px 8px rgba(0,0,0,.22)!important;
+  }
+  body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta:active{
+    background:linear-gradient(135deg,rgba(205,245,199,.30),rgba(57,125,89,.34) 48%,rgba(12,57,43,.52))!important;
+    box-shadow:inset 0 2px 5px rgba(0,0,0,.16),0 5px 16px rgba(0,0,0,.2)!important;
+    transform:scale(.985)!important;
+  }
+}
