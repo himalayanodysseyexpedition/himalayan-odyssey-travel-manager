@@ -1012,3 +1012,22 @@ html body #footerContactBar.footer-contact-bar{
     transform:translateY(-50%) rotate(180deg)!important;
   }
 }
+
+/* DESKTOP STATIC HEADER — keep it in normal page flow and disable scroll-follow/hide states. */
+@media(min-width:761px){
+  html body>header,
+  html body>header.is-scrolled,
+  html body>header.is-hidden{
+    position:static!important;
+    inset:auto!important;
+    top:auto!important;
+    right:auto!important;
+    bottom:auto!important;
+    left:auto!important;
+    width:100%!important;
+    transform:none!important;
+    transition:none!important;
+    pointer-events:auto!important;
+    will-change:auto!important;
+  }
+}
