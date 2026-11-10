@@ -522,3 +522,11 @@
     font-size:clamp(23px,6.2vw,32px)!important;
   }
 }
+
+
+/* MOBILE ONLY — enlarge the “The Himalayas are calling” hero headline. */
+@media screen and (max-width:760px){
+  html body>.hero>.hero-content>h1.hero-animated-heading{
+    font-size:clamp(18px,5.3vw,27px)!important;
+  }
+}
