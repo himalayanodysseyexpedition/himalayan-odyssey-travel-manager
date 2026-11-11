@@ -100,3 +100,8 @@ footer a,footer b{color:var(--hoe-yellow)!important}
 }
 @media(max-width:380px){.journey-strip{gap:5px!important}.journey-item{padding:8px 4px!important}.quick-nav-item{font-size:8px!important}}
 @media(prefers-reduced-motion:reduce){.footer-contact-bar,.package-slide,.hero-build-cta{transition:none!important;animation:none!important}}
+
+/* Homepage participates in the same sitewide navigation and action system. */
+html body>header.sitewide-header{background:rgba(16,36,59,.96)!important;background-image:none!important;border-bottom:1px solid rgba(220,238,250,.28)!important}
+html body>header.sitewide-header .glass-nav{background:rgba(255,255,255,.075)!important;border-color:rgba(220,238,250,.34)!important}
+html body>header.sitewide-header .header-cta{background:linear-gradient(120deg,#ff8738,#ff9d5b)!important;color:#172b40!important}

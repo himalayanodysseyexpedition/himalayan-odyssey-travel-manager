@@ -39,3 +39,17 @@ footer a{color:var(--pkg-yellow)!important}
 @media(max-width:850px){.package-cards-carousel{grid-auto-columns:calc((100% - 18px)/2)!important}.package-filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:580px){.package-filters{grid-template-columns:1fr;padding:13px;margin:18px 0 10px}.package-cards-carousel{grid-auto-columns:88%!important;gap:14px!important}.package-card-media{height:205px}.featured-departure{border-radius:20px!important}.departure-copy{padding:24px 19px!important}.package-result-count{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.package-cards-carousel{scroll-behavior:auto}}
+
+/* Package page uses the same sitewide header, dock and action colours as every page. */
+header.sitewide-header{background:rgba(16,36,59,.96)!important;background-image:none!important}
+header.sitewide-header .glass-nav{background:rgba(255,255,255,.075)!important;border-color:rgba(220,238,250,.34)!important}
+header.sitewide-header .glass-nav>a,header.sitewide-header .glass-nav .nav-dropdown-toggle{color:#f4f8fc!important}
+.btn,.departure-cta{background:linear-gradient(120deg,#ff8738,#ff9d5b)!important;color:#172b40!important;border:1px solid #ffc49f!important}
+
+/* Last-in-file normalisation: legacy package overrides must not fork the mobile dock. */
+.mobile-app-dock{background:rgba(244,248,252,.94)!important;border:1px solid rgba(255,255,255,.9)!important;box-shadow:0 12px 32px rgba(16,36,59,.2)!important}
+.mobile-app-dock a{color:#40566b!important}
+.mobile-app-dock a[aria-current="page"]{background:#dceefa!important;color:#10243b!important}
+.mobile-app-dock a.dock-plan{background:linear-gradient(120deg,#ff8738,#ff9d5b)!important;color:#172b40!important}
+footer{background:#10243b!important;border-top:1px solid rgba(220,238,250,.2)!important}
+footer a{color:#b9dcf2!important}
