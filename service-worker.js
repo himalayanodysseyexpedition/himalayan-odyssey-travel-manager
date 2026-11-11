@@ -1,7 +1,7 @@
 /* Minimal offline shell cache. Never cache API, Supabase, booking or enquiry responses. */
-const CACHE='himalayan-odyssey-shell-v1';
-const SHELL=['/','/manifest.webmanifest','/logo.webp','/favicon.svg'];
-self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(SHELL)).then(()=>self.skipWaiting()))});
+const CACHE='himalayan-odyssey-shell-v2';
+const SHELL=['/','/manifest.webmanifest','/logo.webp','/favicon.svg','/mobile-app-experience.css','/mobile-app-experience.js'];
+self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>Promise.all(SHELL.map(url=>cache.add(url).catch(()=>null)))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('himalayan-odyssey-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',event=>{
  const req=event.request,url=new URL(req.url);
