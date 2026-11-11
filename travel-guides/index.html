@@ -11,25 +11,33 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--forest:#0b211d;--green:#173d33;--gold:#c6a36a;--cream:#f8f6f0;--ink:#263b34;--muted:#718078}
+:root{--forest:#10243b;--green:#10243b;--gold:#a9d8f2;--cream:#f5f8fc;--ink:#10243b;--muted:#718078}
 *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:15px/1.7 "DM Sans",sans-serif}
-header{background:rgba(8,27,23,.97);border-bottom:1px solid rgba(198,163,106,.55);padding:16px 5%;display:flex;justify-content:space-between;align-items:center;gap:16px}
-.brand{color:#f8f6f0;font-weight:700;letter-spacing:1.5px;text-decoration:none;font-size:13px}.brand span{color:#ead6ae}
-header a.home{color:#ead6ae;text-decoration:none;font-size:11px;font-weight:700;letter-spacing:1.2px}
-.hero{padding:76px 6% 58px;text-align:center;color:#fff;background:linear-gradient(120deg,rgba(5,23,19,.94),rgba(23,61,51,.86)),url('/spiti.jpg') center/cover}
-.hero small{color:#ead6ae;letter-spacing:3px;font-size:10px;font-weight:700}.hero h1{font:600 clamp(40px,6vw,68px)/1.05 "Cormorant Garamond",serif;margin:14px 0}.hero p{max-width:680px;margin:0 auto;color:rgba(255,255,255,.8);font-size:14px}
+header{background:rgba(16,36,59,.97);border-bottom:1px solid rgba(169,216,242,.55);padding:16px 5%;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.brand{color:#f5f8fc;font-weight:700;letter-spacing:1.5px;text-decoration:none;font-size:13px}.brand span{color:#a9d8f2}
+header a.home{color:#a9d8f2;text-decoration:none;font-size:11px;font-weight:700;letter-spacing:1.2px}
+.hero{padding:76px 6% 58px;text-align:center;color:#fff;background:linear-gradient(120deg,rgba(16,36,59,.94),rgba(16,36,59,.86)),url('/spiti.jpg') center/cover}
+.hero small{color:#a9d8f2;letter-spacing:3px;font-size:10px;font-weight:700}.hero h1{font:600 clamp(40px,6vw,68px)/1.05 "Cormorant Garamond",serif;margin:14px 0}.hero p{max-width:680px;margin:0 auto;color:rgba(255,255,255,.8);font-size:14px}
 main{max-width:1180px;margin:0 auto;padding:54px 5% 76px}.intro{text-align:center;margin:0 auto 32px;max-width:700px}.intro h2{font:600 36px/1.1 "Cormorant Garamond",serif;color:var(--green);margin:0 0 8px}.intro p{color:var(--muted);margin:0}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.card{display:flex;flex-direction:column;min-height:220px;padding:25px;border:1px solid #e5dece;border-radius:14px;background:#fffefa;box-shadow:0 12px 32px rgba(8,30,24,.06);text-decoration:none;transition:transform .25s,box-shadow .25s}.card:hover{transform:translateY(-4px);box-shadow:0 18px 36px rgba(8,30,24,.11)}.card small{color:#987746;font-size:9px;font-weight:700;letter-spacing:2px}.card h3{font:600 27px/1.08 "Cormorant Garamond",serif;color:var(--green);margin:12px 0 8px}.card p{font-size:13px;color:var(--muted);margin:0 0 18px}.card b{margin-top:auto;color:#876536;font-size:11px;letter-spacing:.7px}
-.cta{margin:34px auto 0;padding:25px;border-radius:14px;background:var(--green);color:#fff;text-align:center}.cta p{margin:5px 0 14px;color:rgba(255,255,255,.78);font-size:13px}.cta a{display:inline-block;padding:10px 20px;border-radius:30px;background:linear-gradient(135deg,#f0ddb8,#c6a36a);color:#10251f;text-decoration:none;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
-footer{padding:22px 5%;background:var(--forest);color:#d8d4c9;text-align:center;font-size:11px}footer a{color:#ead6ae}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.card{display:flex;flex-direction:column;min-height:220px;padding:25px;border:1px solid #d8e3ec;border-radius:14px;background:#ffffff;box-shadow:0 12px 32px rgba(16,36,59,.06);text-decoration:none;transition:transform .25s,box-shadow .25s}.card:hover{transform:translateY(-4px);box-shadow:0 18px 36px rgba(16,36,59,.11)}.card small{color:#a9d8f2;font-size:9px;font-weight:700;letter-spacing:2px}.card h3{font:600 27px/1.08 "Cormorant Garamond",serif;color:var(--green);margin:12px 0 8px}.card p{font-size:13px;color:var(--muted);margin:0 0 18px}.card b{margin-top:auto;color:#a9d8f2;font-size:11px;letter-spacing:.7px}
+.cta{margin:34px auto 0;padding:25px;border-radius:14px;background:var(--green);color:#fff;text-align:center}.cta p{margin:5px 0 14px;color:rgba(255,255,255,.78);font-size:13px}.cta a{display:inline-block;padding:10px 20px;border-radius:30px;background:linear-gradient(135deg,#a9d8f2,#a9d8f2);color:#10243b;text-decoration:none;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+footer{padding:22px 5%;background:var(--forest);color:#d8e3ec;text-align:center;font-size:11px}footer a{color:#a9d8f2}
 @media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding:58px 6% 48px}}
 @media(max-width:520px){.grid{grid-template-columns:1fr}.card{min-height:0}.hero h1{font-size:46px}header{padding:13px 4%}}
 </style>
 <link rel="stylesheet" href="/manrope-body.css?v=1">
+<link rel="stylesheet" href="/navigation-capsule.css?v=34">
+<link rel="stylesheet" href="/mobile-layout.css?v=25">
 <link rel="stylesheet" href="/arctic-prestige-sitewide.css?v=4">
+<link rel="stylesheet" href="/navigation-capsule.css?v=34">
+<link rel="stylesheet" href="/mobile-app-experience.css?v=1">
 </head>
 <body>
-<header><a class="brand" href="/">HIMALAYAN ODYSSEY <span>EXPEDITION</span></a><a class="home" href="/">HOME ↗</a></header>
+<header class="sitewide-header"><div class="header-inner">
+<a class="brand" href="/" aria-label="Himalayan Odyssey Expedition — Home"><img src="/logo.webp" alt="Himalayan Odyssey Expedition"></a>
+<nav class="glass-nav" aria-label="Main navigation"><a href="/destinations/"><span>Destinations</span></a><a href="/packages/#packageList"><span>Upcoming Tours</span></a><a href="/itineraries/"><span>Itinerary</span></a>
+<div class="nav-dropdown"><button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="servicesMenu"><span>Services</span></button><span class="services-chevron" aria-hidden="true">⌄</span><div class="nav-dropdown-menu" id="servicesMenu"><a href="/services/">All Services &amp; B2B Partners</a><a href="/build-your-trip/">Build Your Trip</a><a href="/marketplace/">Cabs &amp; Hotels Marketplace</a><a href="/suppliers/">List Your Vehicle or Property</a><a href="/travel-guides/">Travel Guides</a></div></div></nav>
+<a class="header-cta" href="/build-your-trip/" aria-label="Plan your trip">Plan Your Trip</a></div></header>
 <section class="hero"><small>LOCAL KNOWLEDGE · PRACTICAL PLANNING</small><h1>Himalayan Travel Guides</h1><p>Explore practical route, season and trip-planning information before you set out. For current availability and a tailored itinerary, speak with our Narkanda-based team.</p></section>
 <main>
 <section class="intro"><h2>Explore the guides</h2><p>Choose a topic to get started. Mountain road access, weather and local conditions can change, so confirm the latest details before departure.</p></section>
@@ -49,5 +57,8 @@ footer{padding:22px 5%;background:var(--forest);color:#d8d4c9;text-align:center;
 <section class="cta"><strong>Ready to plan your journey?</strong><p>Share your dates, pickup point and group size with our team.</p><a href="/build-your-trip/">Build Your Trip</a></section>
 </main>
 <footer>HIMALAYAN ODYSSEY EXPEDITION · Narkanda, Himachal Pradesh · <a href="tel:+919816929669">+91 98169 29669</a> · <a href="/">Home</a></footer>
+<script src="/header-scroll.js?v=2" defer></script>
+<script src="/site-navigation.js?v=1" defer></script>
+<script src="/mobile-app-experience.js?v=1" defer></script>
 </body>
 </html>
