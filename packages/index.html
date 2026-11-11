@@ -40,8 +40,33 @@
 <link rel="stylesheet" href="/mobile-app-experience.css?v=1">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="stylesheet" href="/arctic-prestige-sitewide.css?v=4">
+<link rel="stylesheet" href="/navigation-capsule.css?v=32">
+<link rel="stylesheet" href="/mobile-layout.css?v=24">
 </head><body>
-<header class="top site-topbar"><a class="site-brand" href="/" aria-label="Himalayan Odyssey Expedition — Home"><span class="brand-mark" aria-hidden="true">HO</span><span class="brand-copy"><strong>HIMALAYAN ODYSSEY</strong><small>EXPEDITION · HIMACHAL</small></span></a><nav class="site-nav" aria-label="Main navigation"><a class="site-nav-link" href="/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg><span>Home</span></a><a class="site-nav-link" href="/spiti-valley-tours/" aria-label="Spiti Valley"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2.5 19 7-12 4.2 7 2.3-3.5 5.5 8.5z"/><path d="m7 11 2.5 2 2.2-2"/></svg><span>Spiti Valley</span></a></nav></header>
+<header class="sitewide-header">
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="Himalayan Odyssey Expedition — Home">
+      <img src="/logo.webp" alt="Himalayan Odyssey Expedition">
+    </a>
+    <nav class="glass-nav" aria-label="Main navigation">
+      <a href="/destinations/"><span>Destinations</span></a>
+      <a href="/packages/#upcoming-packages"><span>Upcoming Tours</span></a>
+      <a href="/itineraries/"><span>Itinerary</span></a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="servicesMenu"><span>Services</span></button>
+        <span class="services-chevron" aria-hidden="true">⌄</span>
+        <div class="nav-dropdown-menu" id="servicesMenu">
+          <a href="/services/">All Services &amp; B2B Partners</a>
+          <a href="/build-your-trip/">Build Your Trip</a>
+          <a href="/marketplace/">Cabs &amp; Hotels Marketplace</a>
+          <a href="/suppliers/">List Your Vehicle or Property</a>
+          <a href="/travel-guides/">Travel Guides</a>
+        </div>
+      </div>
+    </nav>
+    <a class="header-cta" href="/build-your-trip/" aria-label="Plan your trip">Plan Your Trip</a>
+  </div>
+</header>
 <section class="hero"><small>FIND YOUR NEXT JOURNEY</small><h1>Himalayan tour packages</h1><p>Explore current group departures and private journeys across Spiti Valley, Kinnaur and Himachal Pradesh. Package details, inclusions, rates and dates are confirmed directly with our team.</p><a class="btn" href="https://wa.me/919816929669?text=Hello%2C%20please%20share%20your%20current%20Himalayan%20tour%20packages." target="_blank" rel="noopener noreferrer">Ask for current departures</a></section>
 <main class="wrap">
 <section class="featured-departure" aria-labelledby="winter-spiti-departure">
@@ -89,6 +114,8 @@ const wa=t=>"https://wa.me/919816929669?text="+encodeURIComponent(t);
   list.innerHTML=data.map(p=>'<article class="card">'+(p.image_url||p.cover_image?'<img src="'+esc(p.image_url||p.cover_image)+'" alt="'+esc(p.name||"Himalayan tour")+'" loading="lazy">':'')+'<h2>'+esc(p.name||"Himalayan Tour")+'</h2><p>'+esc(p.destination||"Himachal Pradesh")+'</p><p>'+esc(p.duration||"")+'</p>'+(p.inclusions?'<p>'+esc(p.inclusions)+'</p>':'')+(p.price_per_person!=null&&p.price_per_person!==""?'<p class="price">₹'+Number(p.price_per_person).toLocaleString("en-IN")+' per person</p>':'')+'<a class="btn" href="'+wa("Hello, I am interested in "+(p.name||"your Himalayan package")+". Please share dates and details.")+'" target="_blank" rel="noopener noreferrer">Enquire on WhatsApp</a></article>').join("");
  }catch(e){console.error("Package directory error",e);list.innerHTML='<p class="status">We could not load the latest package list. <a href="'+wa("Hello, please share your current Himalayan tour packages.")+'">Contact us on WhatsApp</a> for current availability.</p>';}
 })();
-</script><script>(()=>{const ds=[["Spiti Valley","/spiti-valley-tours/"],["Kinnaur","/kinnaur-tours/"],["Narkanda","/narkanda-tours/"],["Manali","/manali-tours/"],["Kasol","/kasol-tours/"],["Jibhi","/jibhi-tours/"],["Shimla","/shimla-tours/"]];const a=[...document.querySelectorAll('.site-nav a')].find(x=>x.getAttribute('href')==='/spiti-valley-tours/');if(!a)return;const d=ds[Math.floor(Math.random()*ds.length)];a.href=d[1];a.dataset.destination=d[0];a.setAttribute('aria-label','Explore '+d[0]+' tours');a.title='Explore '+d[0]+' tours';const label=a.querySelector('span');if(label)label.textContent=d[0];else a.append(document.createElement('span')).textContent=d[0];})();</script>  <script src="/site-motion.js?v=1" defer></script>
+</script>  <script src="/site-motion.js?v=1" defer></script>
 <script src="/mobile-app-experience.js?v=1" defer></script>
+<script src="/header-scroll.js?v=2" defer></script>
+<script src="/site-navigation.js?v=1" defer></script>
 </body></html>
