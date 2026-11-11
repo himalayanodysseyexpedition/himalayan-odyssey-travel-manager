@@ -2948,6 +2948,91 @@ header .header-inner > a.brand .brand-wordmark{
 }
 </style>
 <link rel="stylesheet" href="/arctic-prestige-sitewide.css?v=1">
+
+<!-- HOMEPAGE REDESIGN: concise editorial layout and consistent dual-tone visual system -->
+<style id="hoe-homepage-dual-tone-redesign">
+:root{--forest:#142c46!important;--forest2:#244b68!important;--gold:#c8e2f1!important;--gold-light:#e4f2f8!important;--cream:#f4f7fa!important;--paper:#fff!important;--ink:#1b3147!important;--muted:#63798e!important;--line:#dce6ee!important;--serif:"Bodoni Moda","Cormorant Garamond",Georgia,serif!important;--sans:"DM Sans","General Sans",Arial,sans-serif!important}
+body{font-family:var(--sans)!important;color:#1b3147!important;background:#f4f7fa!important}
+header,header.is-scrolled{background:rgba(13,31,51,.97)!important;border-bottom:1px solid rgba(210,235,248,.2)!important}
+.header-tagline{color:#c8e2f1!important}
+.glass-nav>a,.glass-nav .nav-dropdown-toggle{border-radius:999px!important;background:rgba(255,255,255,.09)!important;border-color:rgba(226,241,249,.22)!important}
+.header-cta{background:linear-gradient(120deg,#f3fbff,#b9dced)!important;color:#142c46!important;border:0!important}
+.hero{min-height:clamp(610px,82vh,790px)!important;padding:clamp(76px,10vw,130px) 7%!important;background-image:linear-gradient(100deg,rgba(7,22,39,.82),rgba(10,34,56,.44) 58%,rgba(8,25,42,.12)),url("/spiti.jpg")!important}
+.hero h1{font-family:"Bodoni Moda",Georgia,serif!important;font-weight:600!important;letter-spacing:-.045em!important}
+.hero .hero-go-line{font-size:clamp(15px,2vw,20px)!important;letter-spacing:.14em!important;color:#d9eff9!important}
+.hero p{max-width:510px!important;font-size:clamp(14px,1.2vw,16px)!important;line-height:1.65!important;color:#f2f8fc!important}
+.hero-rule{background:#c8e2f1!important}
+.hero-service-icon{border:1px solid rgba(226,241,249,.34)!important;background:rgba(10,29,49,.38)!important;border-radius:17px!important}
+.hero-service-icon svg{stroke:#c8e2f1!important}
+.hero-destination-list,.hero-destination-list span{color:#e4f2f8!important}
+.hero-build-cta{background:linear-gradient(120deg,#f1f9fd,#a9d5eb)!important;color:#142c46!important;border:0!important;border-radius:999px!important;box-shadow:0 12px 28px rgba(0,0,0,.22)!important}
+.journey-strip{max-width:1180px!important;margin:-1px auto 0!important;padding:18px!important;border-radius:0 0 24px 24px!important;background:#e6f0f6!important}
+.journey-item{border:0!important;border-radius:15px!important;background:#fff!important;padding:15px!important}
+.journey-item strong{color:#183650!important;font-family:"Bodoni Moda",Georgia,serif!important;font-size:18px!important}
+.journey-item span{color:#63798e!important;font-size:12px!important}
+section.content{padding:clamp(52px,6vw,82px) 6%!important}
+section.content.info,.content.group-departures-section,.content.faq-section{background:#eaf2f7!important}
+.section-title{margin-bottom:22px!important}
+.section-title small,.eyebrow,.review-kicker{color:#527f9d!important;letter-spacing:.18em!important}
+.section-title h2,.content h2,.section-inner h2{font-family:"Bodoni Moda",Georgia,serif!important;color:#142c46!important;font-weight:600!important;letter-spacing:-.025em!important}
+.section-title h2:after{height:3px!important;width:54px!important;border-radius:9px!important;background:linear-gradient(90deg,#244b68,#c8e2f1)!important}
+.intro{max-width:620px!important;margin:0 auto 27px!important;color:#63798e!important;font-size:14px!important;line-height:1.65!important}
+.cards,.packages-carousel,.group-departures-rail{gap:18px!important}
+.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card,.destination-card,.guide-card,.group-departure-card{
+ border:1px solid #dce6ee!important;border-radius:22px!important;background:#fff!important;
+ box-shadow:0 14px 38px rgba(20,44,70,.075)!important;overflow:hidden!important
+}
+.package-slide:hover,.itinerary-slide:hover,.cab-card:hover,.hotel-card:hover,.card:hover{transform:translateY(-5px)!important;box-shadow:0 20px 44px rgba(20,44,70,.13)!important}
+.package-slide>img,.package-slide>.image-fallback,.itinerary-slide .itinerary-cover,.cab-card>img,.hotel-card>img{border-radius:0!important}
+.package-slide .card-body,.itinerary-slide .card-body,.cab-card .card-body,.hotel-card .card-body{padding:20px!important}
+.package-slide .card-body h3,.itinerary-slide .card-body h3,.cab-card h3,.hotel-card h3,.card h3{font-family:"Bodoni Moda",Georgia,serif!important;color:#183650!important;font-size:clamp(23px,2vw,28px)!important;line-height:1.12!important}
+.package-slide .card-body p,.itinerary-slide p,.cab-card p,.hotel-card p,.card p{color:#63798e!important;line-height:1.65!important;font-size:13px!important}
+.package-slide .price,.price,.itinerary-meta,.departure-date{color:#244b68!important;font-family:"DM Sans","General Sans",Arial,sans-serif!important;font-weight:800!important}
+.package-slide .price{font-size:20px!important}
+.package-slide .btn,.itinerary-slide .btn,.cab-card .btn,.hotel-card .btn,.card .btn,.btn{
+ border:0!important;border-radius:999px!important;background:linear-gradient(120deg,#e4f2f8,#b9dced)!important;color:#142c46!important;
+ box-shadow:none!important;font-family:"DM Sans","General Sans",Arial,sans-serif!important;font-weight:800!important
+}
+.package-slide .btn:hover,.itinerary-slide .btn:hover,.cab-card .btn:hover,.hotel-card .btn:hover,.card .btn:hover,.btn:hover{background:#d0e8f5!important;box-shadow:none!important}
+.package-slide .btn.outline,.btn.outline{background:transparent!important;color:#244b68!important;border:0!important;box-shadow:none!important;text-decoration:underline;text-underline-offset:4px}
+.package-slide .btn,.itinerary-slide .btn{margin-top:auto!important}
+.info-grid{gap:16px!important}
+.info-box{background:#fff!important;border:1px solid #dce6ee!important;border-radius:20px!important;padding:22px!important;box-shadow:0 10px 28px rgba(20,44,70,.055)!important}
+.info-box h3{font-family:"Bodoni Moda",Georgia,serif!important;color:#183650!important;font-size:22px!important}
+.info-box p{font-size:13px!important;color:#63798e!important}
+.cta{padding:62px 7%!important;background:linear-gradient(105deg,rgba(8,25,43,.93),rgba(19,55,82,.85)),url("/spiti.jpg") center/cover!important;border:0!important}
+.cta h2{font-family:"Bodoni Moda",Georgia,serif!important}
+.review-panel{max-width:1040px!important;margin:0 auto!important;padding:clamp(22px,3vw,34px)!important;gap:25px!important;border:1px solid #dce6ee!important;border-radius:22px!important;background:linear-gradient(120deg,#fff,#edf5fa)!important;box-shadow:0 12px 34px rgba(20,44,70,.07)!important}
+.review-panel h2{font-size:clamp(25px,3vw,34px)!important;margin:8px 0!important}
+.review-panel p{font-size:13px!important;line-height:1.65!important;color:#63798e!important;margin:8px 0 14px!important}
+.review-points{gap:9px!important}
+.review-point{padding:12px!important;border-radius:14px!important;background:#f1f6fa!important}
+.review-point strong{font-size:14px!important}.review-point span{font-size:11px!important}
+.review-actions{gap:7px!important}
+.instagram-section{padding-top:45px!important;padding-bottom:48px!important;background:#eaf2f7!important}
+.instagram-content{max-width:440px!important;padding:22px 25px!important;border:1px solid rgba(255,255,255,.25)!important;border-radius:22px!important;background:linear-gradient(145deg,#142c46,#244b68)!important;box-shadow:0 14px 36px rgba(20,44,70,.14)!important}
+.instagram-logo{width:48px!important;height:48px!important;border-radius:15px!important;font-size:32px!important;margin:0 auto 10px!important}
+.instagram-content h3{font-size:24px!important;margin:5px 0!important}
+.instagram-content p{font-size:12px!important;line-height:1.55!important;margin:6px 0!important}
+.instagram-btn{margin-top:10px!important;padding:11px 20px!important;font-size:11px!important}
+.footer-contact-bar{border-radius:18px!important}
+footer{background:#10243b!important;border-top:1px solid rgba(200,226,241,.24)!important}
+@media(max-width:760px){
+ .hero{min-height:clamp(560px,82svh,720px)!important;padding:48px 5%!important}
+ .hero-content{padding:36px 12px 88px!important}
+ .hero h1,.hero-animated-heading{font-size:clamp(37px,10vw,56px)!important}
+ .hero-service-icons{gap:8px!important}
+ .hero-service-icon{min-height:64px!important}
+ .journey-strip{margin:0 12px!important;padding:10px!important;border-radius:0 0 18px 18px!important}
+ .journey-item{padding:10px 7px!important}
+ .journey-item strong{font-size:14px!important}
+ .journey-item span{font-size:10px!important;line-height:1.35!important}
+ .review-panel{grid-template-columns:1fr!important}
+ .instagram-content{max-width:100%!important;padding:20px!important}
+}
+@media(prefers-reduced-motion:reduce){.hero-build-cta,.package-slide,.instagram-btn{animation:none!important;transition:none!important}}
+</style>
+
 </head>
 
 <body>
@@ -3006,7 +3091,7 @@ header .header-inner > a.brand .brand-wordmark{
       <a class="btn hero-build-cta" href="/build-your-trip/">Build Your Trip</a>
     </div>
 
-    <p>From the high-altitude wilderness of Spiti to the quiet valleys of Kinnaur and the cedar forests of Narkanda, discover journeys shaped by the mountains and made memorable by the people you meet along the way.</p>
+    <p>Spiti, Kinnaur and Himachal — thoughtfully planned journeys, local stays and reliable mountain travel.</p>
     <div class="hero-destination-list" aria-label="Destinations we offer">
       <span>Spiti Valley</span><i aria-hidden="true">·</i><span>Kinnaur</span><i aria-hidden="true">·</i><span>Narkanda</span><i aria-hidden="true">·</i><span>Shimla</span><i aria-hidden="true">·</i><span>Manali</span><i aria-hidden="true">·</i><span>Kasol</span><i aria-hidden="true">·</i><span>Jibhi</span>
     </div>
@@ -3035,7 +3120,7 @@ header .header-inner > a.brand .brand-wordmark{
  <div class="section-inner">
   <div class="group-departures-head">
    <div class="section-title reveal"><small>FIND YOUR NEXT HIMALAYAN ESCAPE</small><h2>Upcoming Packages</h2></div>
-   <p class="intro reveal">Explore our upcoming Himalayan packages, compare departure dates and prices, and see how many travellers have already joined each journey.</p>
+   <p class="intro reveal">Upcoming departures, clear prices and the details you need to choose your trip.</p>
   </div>
   <div class="group-departures-rail" id="groupDeparturesCarousel" tabindex="0" aria-label="Swipe through upcoming packages">
    <div class="group-departures-empty">Loading upcoming packages…</div>
@@ -3092,7 +3177,7 @@ header .header-inner > a.brand .brand-wordmark{
       <h2>Tour Itineraries</h2>
     </div>
 
-    <p class="intro reveal">Explore detailed day-wise Himalayan journeys, routes, photographs and travel information before planning your trip.</p>
+    <p class="intro reveal">Simple day-wise routes to help you plan with confidence.</p>
 
     <div id="itineraryList" class="packages-carousel itineraries-carousel" tabindex="0" aria-label="Tour itineraries carousel">
       <p id="itineraryMessage">Loading available itineraries...</p>
@@ -3118,7 +3203,7 @@ header .header-inner > a.brand .brand-wordmark{
       <h2>Our Vehicles & Cabs</h2>
     </div>
 
-    <p class="intro reveal">Choose from our available vehicles for your Himalayan journey. View photographs, seating capacity and daily rates. Contact us for availability and booking details.</p>
+    <p class="intro reveal">Explore our vehicles, seating and daily rates. Ask us to confirm availability.</p>
 
     <div id="cabList" class="packages-carousel cabs-carousel" tabindex="0" aria-label="Available vehicles and cabs carousel">
       <div class="cab-empty">Loading available vehicles...</div>
@@ -3143,7 +3228,7 @@ header .header-inner > a.brand .brand-wordmark{
       <h2>Hotels & Properties</h2>
     </div>
 
-    <p class="intro reveal">Explore selected mountain stays, hotels and homestays. View property details and photographs before planning your journey.</p>
+    <p class="intro reveal">Browse mountain stays, photographs and property details.</p>
 
     <div id="galleryList" class="cards">
       <div class="hotel-empty">Loading hotels and properties...</div>
@@ -3230,7 +3315,7 @@ header .header-inner > a.brand .brand-wordmark{
       <div>
         <span class="review-kicker">TRAVELLER STORIES & FEEDBACK</span>
         <h2>Every journey is better when shared.</h2>
-        <p>Planning a Himalayan escape should feel personal from the very first conversation. Our Google Business Profile currently shows a <strong>5.0/5 rating from 7 reviews</strong>. Read traveller feedback or tell us about the journey you have in mind.</p>
+        <p>See what travellers say about us, or start planning your Himalayan trip.</p>
         <div class="review-actions">
           <a class="btn" href="https://maps.google.com/maps?cid=3907406288341631942" target="_blank" rel="noopener noreferrer">Find us on Google ↗</a>
           <a class="btn outline" href="/?topic=Talk%20to%20the%20Himalayan%20Odyssey%20team/build-your-trip/">Talk to our team</a>
@@ -3302,7 +3387,7 @@ header .header-inner > a.brand .brand-wordmark{
 
       <h3>@kxnwxrvineet</h3>
 
-      <p>Explore our Himalayan adventures, beautiful destinations, travel photographs and unforgettable guest experiences.</p>
+      <p>Follow our latest mountain journeys and travel updates.</p>
 
       <a class="instagram-btn"
          href="https://www.instagram.com/kxnwxrvineet/"
