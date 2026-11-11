@@ -81,3 +81,40 @@
   body:has(.guest-form) .guest-form button{min-height:54px!important;width:100%;white-space:normal;line-height:1.35}
   body:has(.guest-form) .status{min-height:24px;line-height:1.5}
 }
+
+/* Arctic Prestige navigation finish: replace legacy warm-metal Services treatment on mobile. */
+@media(max-width:760px){
+  html body>header .header-inner>nav.glass-nav{
+    border-color:rgba(185,220,242,.48)!important;
+    background:linear-gradient(135deg,rgba(234,244,250,.14),rgba(16,36,59,.62) 58%,rgba(185,220,242,.07))!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 8px 26px rgba(0,0,0,.2)!important;
+  }
+  html body>header .header-inner>nav.glass-nav>a,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>span{
+    color:#f1f7fb!important;
+    -webkit-text-fill-color:#f1f7fb!important;
+    font-size:clamp(7.5px,2.15vw,9.5px)!important;
+  }
+  html body>header .header-inner>nav.glass-nav>a:after{
+    background:linear-gradient(90deg,#a9d7f0,#f3f9fc)!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+    background:linear-gradient(135deg,rgba(234,244,250,.16),rgba(185,220,242,.07))!important;
+    border:1px solid rgba(185,220,242,.38)!important;
+    color:#f1f7fb!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.16)!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:after{
+    color:#c7e4f5!important;
+    -webkit-text-fill-color:#c7e4f5!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu{
+    background:rgba(12,29,48,.97)!important;
+    border-color:rgba(185,220,242,.32)!important;
+  }
+  html body>header.is-scrolled .header-inner>nav.glass-nav{
+    border-color:rgba(185,220,242,.42)!important;
+    background:rgba(9,24,42,.88)!important;
+  }
+}
