@@ -1,0 +1,232 @@
+/* Arctic Prestige — homepage-only visual layer.
+   Presentation overrides only: preserve existing markup, data, links and application behaviour. */
+:root{
+  --forest:#10243d !important;
+  --forest2:#1b3857 !important;
+  --gold:#a9d8f2 !important;
+  --gold-light:#dceefa !important;
+  --cream:#f4f7fa !important;
+  --paper:#ffffff !important;
+  --ink:#152a43 !important;
+  --muted:#65788d !important;
+  --line:#dce5ee !important;
+  --tour-forest:#10243d !important;
+  --tour-deep:#091522 !important;
+  --tour-moss:#647f98 !important;
+  --tour-gold:#a9d8f2 !important;
+  --tour-champagne:#dceefa !important;
+  --tour-cream:#f4f7fa !important;
+  --tour-paper:#ffffff !important;
+  --tour-ink:#152a43 !important;
+  --tour-muted:#65788d !important;
+  --tour-line:#dce5ee !important;
+  --arctic-navy:#091522;
+  --arctic-blue:#10243d;
+  --arctic-mid:#263f5b;
+  --arctic-ice:#a9d8f2;
+  --arctic-silver:#dce5ee;
+  --arctic-paper:#f7f9fc;
+  --arctic-white:#ffffff;
+  --arctic-text:#152a43;
+  --arctic-muted:#63778d;
+  --arctic-border:rgba(31,63,94,.14);
+  --arctic-shadow:0 18px 48px rgba(9,21,34,.10);
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--arctic-paper)!important;
+  color:var(--arctic-text)!important;
+  font-family:"DM Sans","Manrope",Arial,sans-serif!important;
+}
+body :is(h1,h2,h3,h4,.section-title h2,.destination-info h3,.package-slide h3,.guide-card h3,.itinerary-slide h3){
+  color:var(--arctic-blue);
+}
+::selection{background:var(--arctic-ice)!important;color:var(--arctic-navy)!important}
+:focus-visible{outline:3px solid var(--arctic-ice)!important;outline-offset:4px}
+
+/* Navigation: deep-blue glass, cool silver outlines. Original logo image is untouched. */
+header{
+  background:rgba(9,21,34,.92)!important;
+  border-bottom:1px solid rgba(220,229,238,.28)!important;
+  box-shadow:0 10px 34px rgba(4,13,24,.22)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(145%)!important;
+  backdrop-filter:blur(22px) saturate(145%)!important;
+}
+header .brand,header .brand:hover{filter:none!important}
+header .brand:before{
+  border-color:rgba(220,238,250,.30)!important;
+  background:linear-gradient(110deg,transparent 15%,rgba(220,238,250,.15) 48%,transparent 78%)!important;
+}
+header .brand:after{
+  background:radial-gradient(circle at 8% 22%,rgba(220,238,250,.55) 0 1px,transparent 2px),
+             radial-gradient(circle at 91% 76%,rgba(220,238,250,.45) 0 1px,transparent 2px),
+             radial-gradient(ellipse at 50% 50%,rgba(169,216,242,.12),transparent 70%)!important;
+}
+.header-tagline{color:#dceefa!important}
+.glass-nav>a,.nav-dropdown-toggle{
+  color:#f5f8fc!important;
+  border-color:rgba(220,229,238,.25)!important;
+  background:rgba(255,255,255,.065)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10)!important;
+}
+.glass-nav>a:hover,.nav-dropdown-toggle:hover,.nav-dropdown.open .nav-dropdown-toggle{
+  color:#ffffff!important;
+  border-color:rgba(169,216,242,.82)!important;
+  background:rgba(169,216,242,.16)!important;
+  box-shadow:0 9px 24px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.16)!important;
+}
+.glass-nav .services-chevron,.nav-dropdown-toggle span{color:var(--arctic-ice)!important}
+.nav-dropdown-menu{
+  border:1px solid rgba(220,229,238,.24)!important;
+  background:rgba(9,21,34,.97)!important;
+  box-shadow:0 22px 55px rgba(0,0,0,.34)!important;
+}
+.nav-dropdown-menu a{color:#f3f7fb!important}
+.nav-dropdown-menu a:hover{background:rgba(169,216,242,.14)!important;color:#fff!important}
+.header-cta{
+  color:var(--arctic-navy)!important;
+  background:linear-gradient(135deg,#dff2fc,#a9d8f2)!important;
+  border:1px solid rgba(255,255,255,.58)!important;
+  box-shadow:0 8px 24px rgba(5,18,31,.22),inset 0 1px 0 rgba(255,255,255,.8)!important;
+}
+.header-cta:hover{background:#ffffff!important;color:var(--arctic-navy)!important}
+
+/* Cinematic hero: retain the existing mountain image, copy and interactive word rotation. */
+.hero{
+  background-color:var(--arctic-navy)!important;
+  color:#ffffff!important;
+}
+.hero:before{
+  background:linear-gradient(90deg,rgba(5,16,29,.78) 0%,rgba(8,25,44,.48) 48%,rgba(8,25,44,.12) 100%),
+             linear-gradient(0deg,rgba(5,16,29,.48),transparent 58%)!important;
+}
+.hero :is(h1,p,.hero-go-line,.hero-destination-list,.hero-note){color:#ffffff!important}
+.hero .hero-animated-heading{text-shadow:0 8px 36px rgba(0,0,0,.34)!important}
+.hero .hero-word-rotator{
+  background:linear-gradient(115deg,#ffffff 4%,#c9e9fa 54%,#8fc9ec 100%)!important;
+  -webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;
+}
+.hero .hero-service-icon{
+  color:#f5f9fd!important;
+  border:1px solid rgba(220,238,250,.34)!important;
+  background:rgba(9,21,34,.30)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12)!important;
+  -webkit-backdrop-filter:blur(14px)!important;backdrop-filter:blur(14px)!important;
+}
+.hero .hero-service-icon svg{stroke:var(--arctic-ice)!important}
+.hero .hero-service-icon:hover{background:rgba(169,216,242,.16)!important;border-color:rgba(220,238,250,.75)!important}
+.hero .hero-note span{
+  color:#f5f9fd!important;border-color:rgba(220,238,250,.34)!important;
+  background:rgba(9,21,34,.34)!important;
+}
+.hero .hero-note span:before{background:var(--arctic-ice)!important;box-shadow:0 0 8px rgba(169,216,242,.4)!important}
+.hero .hero-destination-list{color:rgba(245,249,253,.88)!important}
+.hero .hero-destination-list i{color:var(--arctic-ice)!important}
+
+/* Unified ice-blue action language; do not alter link destinations or click behaviour. */
+body :is(.btn,.button,.submit-btn,.hero-build-cta,.group-departure-cta,.header-cta){
+  background:linear-gradient(135deg,#e1f3fc,#a9d8f2)!important;
+  color:#10243d!important;
+  border:1px solid rgba(255,255,255,.68)!important;
+  box-shadow:0 9px 24px rgba(16,36,61,.14),inset 0 1px 0 rgba(255,255,255,.82)!important;
+  font-weight:800!important;
+}
+body :is(.btn,.button,.submit-btn,.hero-build-cta,.group-departure-cta):hover{
+  background:#ffffff!important;color:#10243d!important;
+  box-shadow:0 14px 30px rgba(16,36,61,.18),inset 0 1px 0 #ffffff!important;
+}
+body :is(button,.guide-arrow,.packages-controls button,.destinations-controls button,.group-departures-controls button){
+  border-color:rgba(31,63,94,.22)!important;
+}
+body :is(button,.guide-arrow,.packages-controls button,.destinations-controls button,.group-departures-controls button):hover{
+  border-color:var(--arctic-ice)!important;color:var(--arctic-blue)!important;
+}
+
+/* Trust strip and alternating light sections. */
+.journey-strip{
+  background:rgba(220,229,238,.68)!important;
+  border-color:rgba(31,63,94,.12)!important;
+  box-shadow:0 12px 34px rgba(9,21,34,.06)!important;
+}
+.journey-item{background:rgba(255,255,255,.88)!important}
+.journey-item strong{color:var(--arctic-blue)!important}
+.journey-item span{color:var(--arctic-muted)!important}
+.content{
+  background:var(--arctic-paper)!important;
+  color:var(--arctic-text)!important;
+}
+.content.info,.content.group-departures-section,.content.faq-section{
+  background:linear-gradient(180deg,#edf4fa 0%,#f7f9fc 100%)!important;
+}
+.section-title small,.eyebrow,.section-kicker,.group-departures-controls span{
+  color:#587c9d!important;
+}
+.section-title h2,.content h2,.section-inner h2{
+  color:var(--arctic-blue)!important;
+}
+.content p,.content .intro,.content li{color:var(--arctic-muted)!important}
+.content a[style*="color"],.content a{ text-decoration-color:rgba(88,124,157,.45) }
+
+/* Cards, carousels and package panels. */
+body :is(.destination-card,.guide-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card,.group-departure-card,.review-panel,.review-point,.review-card){
+  background:#ffffff!important;
+  border-color:var(--arctic-border)!important;
+  box-shadow:0 12px 34px rgba(9,21,34,.075)!important;
+}
+body :is(.destination-card,.guide-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card,.group-departure-card):hover{
+  border-color:rgba(91,151,191,.48)!important;
+  box-shadow:0 22px 48px rgba(9,21,34,.14)!important;
+}
+.destination-info{background:linear-gradient(180deg,transparent 10%,rgba(5,17,31,.88) 100%)!important}
+.destination-info :is(h3,p,span){color:#ffffff!important}
+.group-departures-section{
+  background:linear-gradient(180deg,#eaf2f9,#f7f9fc)!important;
+}
+.group-departure-body,.group-departure-card{color:var(--arctic-text)!important}
+.group-departure-date{background:#e5f3fb!important;color:#193653!important;border-color:#c8dfef!important}
+.group-departure-meta{color:var(--arctic-muted)!important}
+.group-departure-cta{background:var(--arctic-navy)!important;color:#ffffff!important}
+.group-departure-cta:hover{background:var(--arctic-ice)!important;color:var(--arctic-navy)!important}
+.guides-controls button,.guide-arrow,.group-departures-controls button{
+  color:var(--arctic-blue)!important;background:#ffffff!important;
+}
+.guides-progress{background:#dce5ee!important}
+.guides-progress span{background:#6faed4!important}
+.guides-swipe-hint{color:#70849a!important}
+.review-panel{background:linear-gradient(135deg,#ffffff,#edf4fa)!important}
+.review-point :is(strong,span){color:var(--arctic-blue)!important}
+
+/* Forms and feedback surfaces. */
+body :is(input,select,textarea){
+  color:var(--arctic-text)!important;background:#ffffff!important;border-color:#cfdae5!important;
+}
+body :is(input,select,textarea):focus{
+  border-color:#83b9dc!important;box-shadow:0 0 0 3px rgba(169,216,242,.22)!important;
+}
+.faq-list details,.faq-item,.form-card,.enquiry-card,.contact-card{
+  background:#ffffff!important;border-color:var(--arctic-border)!important;
+  box-shadow:0 10px 28px rgba(9,21,34,.055)!important;
+}
+
+/* Deep navy footer closes the page with a consistent premium finish. */
+footer,.site-footer{
+  background:linear-gradient(145deg,#091522,#142b45)!important;
+  border-top:1px solid rgba(220,229,238,.20)!important;
+  color:#eef5fb!important;
+}
+footer :is(h2,h3,h4,p,span,small,a),.site-footer :is(h2,h3,h4,p,span,small,a){color:#eaf2f9!important}
+footer a:hover,.site-footer a:hover{color:var(--arctic-ice)!important}
+footer :is(.btn,.button),.site-footer :is(.btn,.button){color:var(--arctic-navy)!important}
+.scroll-progress{background:linear-gradient(90deg,#8fc9ec,#e1f3fc)!important}
+
+/* Narrow screens retain the existing horizontal navigation and carousel behaviour. */
+@media(max-width:640px){
+  .hero:before{
+    background:linear-gradient(90deg,rgba(5,16,29,.76),rgba(8,25,44,.34)),
+               linear-gradient(0deg,rgba(5,16,29,.52),transparent 62%)!important;
+  }
+  .journey-strip{background:rgba(220,229,238,.78)!important}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
