@@ -1,0 +1,24 @@
+/* Match the public site to admin.html: navy, sky blue and ice white. */
+:root{--forest:#10243b!important;--forest2:#244a66!important;--gold:#a9d8f2!important;--gold-light:#dceefa!important;--cream:#f5f8fc!important;--paper:#fff!important;--ink:#152b40!important;--muted:#61788d!important;--line:#d8e3ec!important}
+html,body{background-color:#f5f8fc!important;color:#152b40!important}
+body{font-family:"DM Sans",Arial,sans-serif!important}
+body :is(h1,h2,h3,h4,.section-title h2){color:#10243b!important}
+html body>header,html body>header.is-scrolled,html body>header.is-hidden,body :is(.site-topbar,.top){background:rgba(16,36,59,.97)!important;background-image:none!important;color:#f5f8fc!important;border-bottom:1px solid rgba(169,216,242,.58)!important;box-shadow:0 10px 32px rgba(16,36,59,.2)!important;-webkit-backdrop-filter:blur(18px) saturate(155%)!important;backdrop-filter:blur(18px) saturate(155%)!important}
+html body>header .header-inner{background:transparent!important;border:0!important;box-shadow:none!important}
+html body>header .glass-nav>a,html body>header .glass-nav>.nav-dropdown>.nav-dropdown-toggle{background:linear-gradient(135deg,#dceefa,#a9d8f2)!important;color:#10243b!important;-webkit-text-fill-color:#10243b!important;border:1px solid #dceefa!important;border-radius:999px!important;box-shadow:0 4px 14px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.7)!important}
+html body>header .glass-nav>a.active,html body>header .glass-nav>a[aria-current="page"],html body>header .glass-nav>a:hover,html body>header .glass-nav>.nav-dropdown.open>.nav-dropdown-toggle{background:#a9d8f2!important;color:#10243b!important;-webkit-text-fill-color:#10243b!important}
+html body>header .glass-nav .services-chevron{color:#10243b!important;-webkit-text-fill-color:#10243b!important}
+html body>header .nav-dropdown-menu,html body>header .glass-nav .nav-dropdown-menu{background:#10243b!important;border:1px solid rgba(169,216,242,.65)!important;border-radius:14px!important;box-shadow:0 14px 34px rgba(0,0,0,.24)!important}
+html body>header .nav-dropdown-menu a{color:#f5f8fc!important;-webkit-text-fill-color:#f5f8fc!important}
+html body :is(button,input[type="button"],input[type="submit"],.btn,.button,.submit-btn,.primary,.hero-build-cta,.group-departure-cta,a[class*="cta"],a[role="button"]):not(header *){background:linear-gradient(120deg,#dceefa,#a9d8f2)!important;color:#10243b!important;border:1px solid #a9d8f2!important;border-radius:999px!important;box-shadow:0 8px 22px rgba(16,36,59,.12),inset 0 1px 0 rgba(255,255,255,.48)!important}
+body :is(.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card,.service,.property-card,.vehicle-card,.featured-departure,.form-card,.enquiry-card,.contact-card){background:#fff!important;border:1px solid #d8e3ec!important;box-shadow:0 18px 50px rgba(16,36,59,.09)!important}
+body :is(.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card,.service,.property-card,.vehicle-card) :is(h2,h3,h4){color:#10243b!important}
+body :is(.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card,.service,.property-card,.vehicle-card) p{color:#61788d!important}
+body :is(.local-intro-panel,.feature-panel,.testimonial-section,.instagram-section,.site-footer,footer){background:linear-gradient(145deg,#10243b,#244a66)!important;color:#f5f8fc!important;border-color:rgba(169,216,242,.32)!important}
+body :is(.local-intro-panel,.feature-panel,.testimonial-section,.instagram-section,.site-footer,footer) :is(h2,h3,h4,p,a){color:#f5f8fc!important}
+body :is(.eyebrow,.kicker,.section-title small,.tag){color:#527f9d!important}
+body :is(input,select,textarea){border-color:#d8e3ec!important}
+body :is(input,select,textarea):focus{border-color:#a9d8f2!important;box-shadow:0 0 0 3px rgba(169,216,242,.22)!important}
+/* Retain all original destination photography, with a subtle cool/crisp finish. */
+body :is(.hero img,.destination-card img,.guide-card img,.package-slide img,.itinerary-slide img,.cab-card img,.hotel-card img,.group-departure-photo img){filter:saturate(.91) contrast(1.035)!important}
+@media(max-width:760px){html body>header,html body>header.is-scrolled,html body>header.is-hidden{background:rgba(16,36,59,.97)!important}html body>header .glass-nav>a,html body>header .glass-nav>.nav-dropdown>.nav-dropdown-toggle{background:linear-gradient(120deg,#dceefa,#a9d8f2)!important;color:#10243b!important;-webkit-text-fill-color:#10243b!important}}
