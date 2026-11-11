@@ -4,16 +4,16 @@
    Additive overrides only: existing page structure, data and booking logic stay intact. */
 :root{
   --tour-forest:#173c36;
-  --tour-deep:#0b211d;
-  --tour-moss:#557565;
+  --tour-deep:#10243b;
+  --tour-moss:#244a66;
   --tour-gold:#c6a36a;
-  --tour-champagne:#ead6ae;
+  --tour-champagne:#dceefa;
   --tour-cream:#f6f3eb;
   --tour-paper:#fffefa;
-  --tour-ink:#263b34;
+  --tour-ink:#10243b;
   --tour-muted:#748078;
   --tour-line:#e7e1d5;
-  --tour-shadow:0 18px 46px rgba(16,43,34,.11);
+  --tour-shadow:0 18px 46px rgba(16,36,59,.11);
   --tour-radius:18px;
 }
 html{background:var(--tour-cream);scroll-behavior:smooth}
@@ -45,7 +45,7 @@ body{background:var(--tour-cream)!important;color:var(--tour-ink)!important}
 }
 .hero .hero-content>p{color:rgba(255,255,255,.88);line-height:1.85}
 .hero-service-icon{
-  border:1px solid rgba(234,214,174,.42)!important;
+  border:1px solid rgba(220,238,250,.42)!important;
   background:linear-gradient(145deg,rgba(255,255,255,.17),rgba(255,255,255,.055))!important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 10px 26px rgba(0,0,0,.15)!important;
   -webkit-backdrop-filter:blur(14px) saturate(145%);
@@ -55,21 +55,21 @@ body{background:var(--tour-cream)!important;color:var(--tour-ink)!important}
 .hero-service-icon span{color:#fff!important}
 .hero-build-cta,.btn{
   border-radius:999px!important;
-  background:linear-gradient(135deg,#f0ddb8,#c6a36a)!important;
-  color:#132c25!important;
+  background:linear-gradient(135deg,#dceefa,#c6a36a)!important;
+  color:#10243b!important;
   border:1px solid rgba(255,255,255,.28)!important;
   box-shadow:0 8px 22px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.45);
   font-weight:800!important;
   letter-spacing:1.15px!important;
 }
 .hero-build-cta:hover,.btn:hover{filter:brightness(1.06);transform:translateY(-2px);box-shadow:0 13px 28px rgba(0,0,0,.2)}
-.hero-note span{border-color:rgba(234,214,174,.35)!important;color:#f4ead6!important}
+.hero-note span{border-color:rgba(220,238,250,.35)!important;color:#f4ead6!important}
 /* A neat reassurance strip beneath the hero */
 .journey-strip{
   background:var(--tour-paper)!important;
   border:1px solid var(--tour-line)!important;
   border-radius:0 0 18px 18px;
-  box-shadow:0 12px 34px rgba(18,48,37,.06);
+  box-shadow:0 12px 34px rgba(16,36,59,.06);
 }
 .journey-item strong{color:var(--tour-forest)!important;font-family:"Cormorant Garamond",Georgia,serif;font-size:23px}
 .journey-item span{color:var(--tour-muted)!important}
@@ -78,7 +78,7 @@ body{background:var(--tour-cream)!important;color:var(--tour-ink)!important}
   border:1px solid rgba(23,60,54,.11)!important;
   border-radius:var(--tour-radius)!important;
   background:var(--tour-paper)!important;
-  box-shadow:0 8px 28px rgba(18,48,37,.07)!important;
+  box-shadow:0 8px 28px rgba(16,36,59,.07)!important;
   overflow:hidden;
 }
 .destination-card:hover,.guide-card:hover,.package-slide:hover,.itinerary-slide:hover,.cab-card:hover,.hotel-card:hover,.card:hover{
@@ -89,9 +89,9 @@ body{background:var(--tour-cream)!important;color:var(--tour-ink)!important}
   filter:saturate(.94) contrast(1.02);
 }
 .destination-info,.destination-card .destination-info{
-  background:linear-gradient(180deg,transparent 0%,rgba(5,24,19,.88) 100%);
+  background:linear-gradient(180deg,transparent 0%,rgba(16,36,59,.88) 100%);
 }
-.destination-info small,.destination-info span{color:#f0ddb8!important}
+.destination-info small,.destination-info span{color:#dceefa!important}
 .destination-info h3{font-family:"Cormorant Garamond",Georgia,serif!important;font-size:clamp(25px,2.5vw,34px)!important}
 .package-slide h3,.guide-card h3,.itinerary-slide h3,.cab-card h3,.hotel-card h3,.card h3{
   color:var(--tour-forest)!important;font-family:"Cormorant Garamond",Georgia,serif!important;
@@ -99,7 +99,7 @@ body{background:var(--tour-cream)!important;color:var(--tour-ink)!important}
 .package-slide p,.guide-card p,.itinerary-slide p,.cab-card p,.hotel-card p,.card p{color:var(--tour-muted)}
 /* Featured group departures */
 .group-departures-section{background:linear-gradient(180deg,#f8f6f0,#e9eee7)!important}
-.group-departure-card{border-radius:var(--tour-radius)!important;border:1px solid var(--tour-line)!important;box-shadow:0 12px 34px rgba(20,45,35,.08)!important;overflow:hidden}
+.group-departure-card{border-radius:var(--tour-radius)!important;border:1px solid var(--tour-line)!important;box-shadow:0 12px 34px rgba(16,36,59,.08)!important;overflow:hidden}
 .group-departure-photo img{transition:transform .7s ease}
 .group-departure-card:hover .group-departure-photo img{transform:scale(1.045)}
 .group-departure-cta{border-radius:999px;background:var(--tour-forest)!important}
@@ -112,7 +112,7 @@ body{background:var(--tour-cream)!important;color:var(--tour-ink)!important}
 /* FAQ, forms and interactive controls */
 .faq-list details,.faq-item,.form-card,.enquiry-card,.contact-card{
   background:var(--tour-paper)!important;border:1px solid var(--tour-line)!important;border-radius:14px!important;
-  box-shadow:0 8px 24px rgba(18,48,37,.045);
+  box-shadow:0 8px 24px rgba(16,36,59,.045);
 }
 input,select,textarea{
   border-color:#d9ded5!important;border-radius:10px!important;
@@ -124,7 +124,7 @@ button:not(.nav-dropdown-toggle),.button,.submit-btn{border-radius:999px}
 a:focus-visible,button:focus-visible{outline:2px solid var(--tour-gold)!important;outline-offset:3px}
 /* Footer */
 footer,.site-footer{
-  background:linear-gradient(145deg,#0b211d,#173c36)!important;
+  background:linear-gradient(145deg,#10243b,#173c36)!important;
   color:#e9e5da!important;border-top:1px solid rgba(198,163,106,.32);
 }
 footer h2,footer h3,footer h4,.site-footer h2,.site-footer h3,.site-footer h4{color:var(--tour-champagne)!important}
@@ -149,18 +149,18 @@ footer a:hover,.site-footer a:hover{color:var(--tour-champagne)}
    to every button outside the site header, on every page.
    ========================================================== */
 html body :is(button,input[type="button"],input[type="submit"],input[type="reset"],.btn,.button,.submit-btn,.header-cta,.hero-build-cta,.group-departure-cta,[role="button"],a[role="button"],a[class*="btn"],a[class*="button"],a[class*="cta"]):not(header *){
-  background:#E4FEB5!important;
-  color:#243E2C!important;
-  border:1px solid #E4FEB5!important;
+  background:#a9d8f2!important;
+  color:#10243b!important;
+  border:1px solid #a9d8f2!important;
   font-family:"Montserrat",sans-serif!important;
   font-size:inherit;
   font-weight:800!important;
-  box-shadow:0 8px 22px rgba(36,62,44,.12),inset 0 1px 0 rgba(255,255,255,.48)!important;
+  box-shadow:0 8px 22px rgba(16,36,59,.12),inset 0 1px 0 rgba(255,255,255,.48)!important;
 }
 html body :is(button,input[type="button"],input[type="submit"],input[type="reset"],.btn,.button,.submit-btn,.header-cta,.hero-build-cta,.group-departure-cta,[role="button"],a[role="button"],a[class*="btn"],a[class*="button"],a[class*="cta"]):not(header *):hover{
-  background:#E4FEB5!important;
-  color:#243E2C!important;
-  border-color:#E4FEB5!important;
+  background:#a9d8f2!important;
+  color:#10243b!important;
+  border-color:#a9d8f2!important;
   filter:brightness(1.035);
 }
 html body :is(button,input[type="button"],input[type="submit"],input[type="reset"],.btn,.button,.submit-btn,.header-cta,.hero-build-cta,.group-departure-cta,[role="button"],a[role="button"],a[class*="btn"],a[class*="button"],a[class*="cta"]):not(header *):disabled{
@@ -168,6 +168,6 @@ html body :is(button,input[type="button"],input[type="submit"],input[type="reset
   cursor:not-allowed!important;
 }
 html body :is(button,input[type="button"],input[type="submit"],input[type="reset"],.btn,.button,.submit-btn,[role="button"],a[role="button"],a[class*="btn"],a[class*="button"],a[class*="cta"]):not(header *):focus-visible{
-  outline:2px solid #243E2C!important;
+  outline:2px solid #10243b!important;
   outline-offset:3px!important;
 }
