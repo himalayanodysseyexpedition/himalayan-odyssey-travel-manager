@@ -2,7 +2,7 @@
    Complete visual direction layer. Existing IDs, dynamic content and forms remain intact. */
 :root{
  --story-forest:#10243b;--story-deep:#10243b;--story-green:#173c36;
- --story-gold:#cda96d;--story-champagne:#dceefa;--story-cream:#f5f2ea;
+ --story-gold:#a9d8f2;--story-champagne:#dceefa;--story-cream:#f5f2ea;
  --story-ink:#10243b;--story-muted:#718078;
  --story-serif:"Cormorant Garamond",Georgia,serif;
  --story-sans:"DM Sans",Arial,sans-serif;
@@ -20,7 +20,7 @@ body>header{
 }
 body>header.is-scrolled{
  position:fixed!important;background:rgba(16,36,59,.91)!important;
- border-bottom:1px solid rgba(205,169,109,.32)!important;
+ border-bottom:1px solid rgba(169,216,242,.32)!important;
  box-shadow:0 12px 34px rgba(0,0,0,.18)!important;
  backdrop-filter:blur(22px) saturate(145%)!important;-webkit-backdrop-filter:blur(22px) saturate(145%)!important;
 }
@@ -72,13 +72,13 @@ header .header-inner>.header-cta{
  grid-column:3;grid-row:1;justify-self:end!important;display:inline-flex!important;
  align-items:center!important;justify-content:center!important;min-height:43px!important;
  padding:0 21px!important;border:1px solid rgba(220,238,250,.9)!important;border-radius:999px!important;
- background:linear-gradient(135deg,#dceefa,#bd9658)!important;color:#10243b!important;
+ background:linear-gradient(135deg,#dceefa,#a9d8f2)!important;color:#10243b!important;
  font:700 9px/1 var(--story-sans)!important;letter-spacing:1.25px!important;
  box-shadow:0 8px 24px rgba(0,0,0,.16)!important;animation:none!important;
  transition:transform .3s var(--story-ease),filter .3s ease!important;
 }
 header .header-inner>.header-cta:hover{transform:translateY(-2px)!important;filter:brightness(1.07)}
-header .nav-dropdown-menu{background:rgba(16,36,59,.97)!important;border:1px solid rgba(205,169,109,.42)!important;border-radius:12px!important;backdrop-filter:blur(20px)}
+header .nav-dropdown-menu{background:rgba(16,36,59,.97)!important;border:1px solid rgba(169,216,242,.42)!important;border-radius:12px!important;backdrop-filter:blur(20px)}
 /* Hero becomes a framed cinematic image rather than a conventional banner. */
 .hero{
  position:relative!important;isolation:isolate!important;overflow:hidden!important;
@@ -117,7 +117,7 @@ header .nav-dropdown-menu{background:rgba(16,36,59,.97)!important;border:1px sol
 .hero .eyebrow:before{content:"";display:block;width:35px;height:1px;background:var(--story-gold)}
 .hero-rule{
  width:74px!important;height:2px!important;margin:25px 0 27px!important;
- background:linear-gradient(90deg,var(--story-champagne),rgba(205,169,109,0))!important;
+ background:linear-gradient(90deg,var(--story-champagne),rgba(169,216,242,0))!important;
 }
 .hero h1{
  max-width:900px!important;margin:0!important;color:#fffdf7!important;
@@ -134,7 +134,7 @@ header .nav-dropdown-menu{background:rgba(16,36,59,.97)!important;border:1px sol
  display:inline-flex!important;align-items:center!important;justify-content:center!important;
  min-height:51px!important;margin:0 9px 8px 0!important;padding:0 27px!important;
  border:1px solid rgba(220,238,250,.92)!important;border-radius:999px!important;
- background:linear-gradient(135deg,#a9d8f2,#bd9556)!important;color:#10243b!important;
+ background:linear-gradient(135deg,#a9d8f2,#a9d8f2)!important;color:#10243b!important;
  font:700 9px/1 var(--story-sans)!important;letter-spacing:1.25px!important;text-transform:uppercase!important;
  box-shadow:0 9px 26px rgba(0,0,0,.18)!important;transition:transform .3s var(--story-ease),filter .3s ease!important;
 }
@@ -150,7 +150,7 @@ header .nav-dropdown-menu{background:rgba(16,36,59,.97)!important;border:1px sol
 .journey-strip{
  position:relative!important;z-index:3!important;display:grid!important;
  grid-template-columns:repeat(3,minmax(0,1fr))!important;max-width:1100px!important;
- margin:-32px auto 0!important;padding:0 22px!important;border:1px solid rgba(205,169,109,.38)!important;
+ margin:-32px auto 0!important;padding:0 22px!important;border:1px solid rgba(169,216,242,.38)!important;
  border-radius:18px!important;background:linear-gradient(120deg,rgba(16,36,59,.97),rgba(16,36,59,.94))!important;
  box-shadow:0 20px 55px rgba(16,36,59,.18)!important;
 }
@@ -163,7 +163,7 @@ header .nav-dropdown-menu{background:rgba(16,36,59,.97)!important;border:1px sol
 .content .section-inner{width:100%;max-width:1320px!important;margin:0 auto!important}
 .section-title{margin-bottom:22px!important}
 .section-title small,.group-departures-head .section-title small{
- color:#9b7846!important;font:700 8px/1.4 var(--story-sans)!important;letter-spacing:3.2px!important;
+ color:#a9d8f2!important;font:700 8px/1.4 var(--story-sans)!important;letter-spacing:3.2px!important;
 }
 .section-title h2{
  margin:9px 0 0!important;color:var(--story-forest)!important;
@@ -217,7 +217,7 @@ header .nav-dropdown-menu{background:rgba(16,36,59,.97)!important;border:1px sol
 /* Destination chapter: large cinematic cards and dark green stage. */
 .destination-gallery{
  background:
-  radial-gradient(ellipse at 50% 0%,rgba(205,169,109,.14),transparent 45%),
+  radial-gradient(ellipse at 50% 0%,rgba(169,216,242,.14),transparent 45%),
   repeating-radial-gradient(ellipse at 12% 18%,transparent 0 35px,rgba(220,238,250,.028) 36px 37px,transparent 38px 68px),
   linear-gradient(160deg,#10243b,#10243b 100%)!important;color:white!important;
 }
@@ -276,7 +276,7 @@ header .nav-dropdown-menu{background:rgba(16,36,59,.97)!important;border:1px sol
  transition:transform .55s var(--story-ease),box-shadow .55s ease,border-color .4s ease!important;
 }
 .package-slide:hover,.itinerary-slide:hover,.cab-card:hover,.hotel-card:hover{
- transform:translateY(-8px)!important;border-color:rgba(205,169,109,.62)!important;
+ transform:translateY(-8px)!important;border-color:rgba(169,216,242,.62)!important;
  box-shadow:0 25px 52px rgba(16,36,59,.15)!important;
 }
 .package-slide>img,.package-slide .package-photo,.itinerary-slide .itinerary-cover,.hotel-card>img{height:245px!important}
@@ -307,13 +307,13 @@ header .nav-dropdown-menu{background:rgba(16,36,59,.97)!important;border:1px sol
 #instagram .instagram-content p{color:rgba(255,255,255,.72)!important}
 .cta{
  margin:14px!important;padding:clamp(85px,12vw,160px) 7%!important;
- border:1px solid rgba(205,169,109,.42)!important;border-radius:9px!important;
+ border:1px solid rgba(169,216,242,.42)!important;border-radius:9px!important;
  background:linear-gradient(0deg,rgba(16,36,59,.82),rgba(16,36,59,.42)),url("/kinnaur.jpg") center 48%/cover!important;
 }
 .cta h2{max-width:900px;margin:12px auto!important;color:#fff!important;font:500 clamp(48px,7vw,88px)/.94 var(--story-serif)!important}
 .cta>small{color:var(--story-champagne)!important;font-size:9px!important;letter-spacing:3px!important}
 .cta p{color:rgba(255,255,255,.82)!important;font-size:14px!important}
-footer{background:#10243b!important;border-top:1px solid rgba(205,169,109,.35)!important;color:rgba(255,255,255,.68)!important}
+footer{background:#10243b!important;border-top:1px solid rgba(169,216,242,.35)!important;color:rgba(255,255,255,.68)!important}
 footer>b{color:var(--story-champagne)!important;letter-spacing:2px!important}
 footer a{color:#dceefa!important}
 /* Scroll storytelling motion: gentle chapter reveals, not distracting movement. */
@@ -331,7 +331,7 @@ footer a{color:#dceefa!important}
 .story-progress-label.active{opacity:.9}
 .story-progress-label span{display:block;width:2px;height:22px;border-radius:4px;background:rgba(220,238,250,.35);transition:height .35s ease,background .35s ease}
 .story-progress-label span.active{height:38px;background:var(--story-gold)}
-.scroll-progress{height:2px!important;background:var(--story-gold)!important;box-shadow:0 0 12px rgba(205,169,109,.5)!important;z-index:1200!important}
+.scroll-progress{height:2px!important;background:var(--story-gold)!important;box-shadow:0 0 12px rgba(169,216,242,.5)!important;z-index:1200!important}
 @keyframes storyHeroReveal{from{opacity:0;transform:translate3d(0,32px,0);filter:blur(5px)}to{opacity:1;transform:translate3d(0,0,0);filter:blur(0)}}
 @keyframes storyLight{from{opacity:.55;transform:scale(1)}to{opacity:1;transform:scale(1.035)}}
 @media(max-width:1000px){
