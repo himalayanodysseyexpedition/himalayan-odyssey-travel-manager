@@ -2884,67 +2884,68 @@ header .header-inner > a.brand .brand-wordmark{
 
 <!-- FINAL MOBILE HEADER ROW: logo | navigation | Plan Your Trip -->
 <style id="mobile-header-single-row-final">
-@media (max-width:760px){
+/* Mobile header: logo, one-line swipeable navigation, then Plan Your Trip. */
+@media(max-width:760px){
+  html body>header{
+    background:rgba(9,21,34,.96)!important;border-bottom:1px solid rgba(220,229,238,.24)!important;
+    box-shadow:0 8px 24px rgba(4,13,24,.20)!important;
+    -webkit-backdrop-filter:blur(20px) saturate(150%)!important;backdrop-filter:blur(20px) saturate(150%)!important;
+  }
   html body>header .header-inner{
-    display:grid!important;
-    grid-template-columns:minmax(68px,21vw) minmax(0,1fr) auto!important;
-    grid-template-rows: minmax(48px,auto)!important;
-    align-items:center!important;justify-content:stretch!important;
-    column-gap:clamp(4px,1.2vw,9px)!important;row-gap:0!important;
-    width:100%!important;max-width:100%!important;min-height:56px!important;
-    padding:5px 8px!important;box-sizing:border-box!important;
+    display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+    gap:7px!important;width:100%!important;max-width:100%!important;min-height:0!important;padding:8px 10px!important;
   }
   html body>header .header-inner>a.brand{
-    grid-column:1!important;grid-row:1!important;order:0!important;
-    display:flex!important;align-items:center!important;justify-content:flex-start!important;
-    justify-self:start!important;align-self:center!important;
-    width:100%!important;min-width:0!important;max-width:100%!important;
-    margin:0!important;padding:0!important;
+    order:0!important;display:flex!important;align-items:center!important;justify-content:center!important;
+    width:max-content!important;max-width:100%!important;margin:0!important;padding:0!important;
   }
   html body>header .header-inner>a.brand>img{
-    display:block!important;width:100%!important;max-width:100%!important;
-    max-height:35px!important;height:auto!important;object-fit:contain!important;
+    display:block!important;width:auto!important;max-width:min(190px,70vw)!important;max-height:42px!important;height:auto!important;object-fit:contain!important;
   }
-  html body>header .header-inner>a.brand .brand-wordmark{display:none!important}
   html body>header .header-inner>nav.glass-nav{
-    grid-column:2!important;grid-row:1!important;order:1!important;
-    display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;
-    align-items:center!important;justify-content:space-between!important;
-    width:100%!important;min-width:0!important;max-width:none!important;
-    gap:clamp(3px,.8vw,7px)!important;padding:0!important;margin:0!important;
+    order:1!important;display:flex!important;flex-flow:row nowrap!important;align-items:center!important;justify-content:flex-start!important;
+    width:100%!important;min-width:0!important;max-width:100%!important;gap:5px!important;padding:4px 5px!important;margin:0!important;
     overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none!important;
-    border:0!important;border-radius:0!important;background:transparent!important;
-    box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+    border:1px solid rgba(220,229,238,.28)!important;border-radius:999px!important;
+    background:linear-gradient(135deg,rgba(255,255,255,.13),rgba(255,255,255,.045))!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 5px 16px rgba(0,0,0,.12)!important;
+    -webkit-backdrop-filter:blur(18px) saturate(155%)!important;backdrop-filter:blur(18px) saturate(155%)!important;
+    -webkit-overflow-scrolling:touch!important;
   }
   html body>header .header-inner>nav.glass-nav::-webkit-scrollbar{display:none!important}
   html body>header .header-inner>nav.glass-nav>a,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown,
   html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
-    display:inline-flex!important;flex:0 0 auto!important;flex-direction:row!important;
-    align-items:center!important;justify-content:center!important;width:auto!important;
-    min-width:0!important;max-width:none!important;height:30px!important;min-height:30px!important;
-    padding:0!important;gap:2px!important;border:0!important;border-radius:0!important;
-    background:transparent!important;box-shadow:none!important;white-space:nowrap!important;
-    font-size:clamp(6px,1.65vw,8px)!important;letter-spacing:0!important;line-height:1!important;
+    display:inline-flex!important;flex:0 0 auto!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;
+    width:auto!important;min-width:max-content!important;max-width:none!important;min-height:34px!important;padding:0 9px!important;
+    border:1px solid rgba(220,229,238,.24)!important;border-radius:999px!important;background:rgba(255,255,255,.065)!important;
+    color:#f1f7fb!important;font:700 8px/1 "DM Sans",Arial,sans-serif!important;letter-spacing:.25px!important;white-space:nowrap!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.12)!important;
   }
-  html body>header .header-inner>nav.glass-nav .nav-glass-icon{
-    display:inline-block!important;flex:0 0 9px!important;width:9px!important;height:9px!important;
-    min-width:9px!important;stroke:currentColor!important;fill:none!important;
-  }
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown{
-    display:flex!important;flex:0 0 auto!important;width:auto!important;min-width:0!important;
-  }
+  html body>header .header-inner>nav.glass-nav .nav-glass-icon{display:none!important}
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown{flex:0 0 auto!important}
   html body>header .header-inner>nav.glass-nav .services-chevron{
-    display:inline-flex!important;flex:0 0 7px!important;width:7px!important;height:10px!important;
-    margin:0!important;font-size:8px!important;
+    display:inline-grid!important;place-items:center!important;width:12px!important;height:12px!important;margin-left:3px!important;
+    border:0!important;background:transparent!important;color:#c9e9fa!important;font-size:12px!important;
   }
   html body>header .header-inner>.header-cta{
-    grid-column:3!important;grid-row:1!important;order:2!important;
-    display:inline-flex!important;visibility:visible!important;opacity:1!important;
-    justify-self:end!important;align-self:center!important;position:static!important;
-    width:auto!important;min-width:0!important;min-height:30px!important;height:30px!important;
-    margin:0!important;padding:0 clamp(6px,1.6vw,10px)!important;
-    font-size:clamp(6px,1.65vw,8px)!important;letter-spacing:0!important;white-space:nowrap!important;
+    grid-column:auto!important;grid-row:auto!important;order:2!important;display:inline-flex!important;visibility:visible!important;opacity:1!important;
+    justify-self:center!important;align-self:center!important;position:static!important;width:auto!important;min-width:0!important;
+    min-height:35px!important;height:auto!important;margin:0!important;padding:7px 20px!important;
+    background:linear-gradient(135deg,#e1f3fc,#a9d8f2)!important;color:#10243d!important;
+    border:1px solid rgba(255,255,255,.78)!important;border-radius:999px!important;font-size:8.5px!important;letter-spacing:.8px!important;
+    white-space:nowrap!important;box-shadow:0 7px 18px rgba(16,36,61,.18)!important;
   }
+  html body>header .nav-dropdown-menu{
+    z-index:1200!important;top:calc(100% + 8px)!important;right:0!important;left:auto!important;
+    background:rgba(9,21,34,.97)!important;border:1px solid rgba(220,229,238,.25)!important;
+  }
+}
+@media(max-width:380px){
+  html body>header .header-inner{padding-left:8px!important;padding-right:8px!important}
+  html body>header .header-inner>nav.glass-nav{gap:3px!important;padding:3px!important}
+  html body>header .header-inner>nav.glass-nav>a,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{min-height:32px!important;padding:0 7px!important;font-size:7.5px!important}
 }
 </style>
 <!-- Sitewide Arctic overrides moved to the end of the stylesheet stack to win the cascade. -->
@@ -4509,39 +4510,15 @@ header .header-inner > a.brand .brand-wordmark{
 
 
 <style id="mobile-header-transparent-final-override">
-/* FINAL MOBILE OVERRIDE — transparent header shell only; keep logo and nav controls intact. */
+/* Keep the mobile header as a solid Arctic navy ribbon; only its inner layout is transparent. */
 @media screen and (max-width:760px){
-  html body>header,
-  html body>header.is-scrolled,
-  html body>header.is-hidden{
-    background:transparent!important;
-    background-color:transparent!important;
-    background-image:none!important;
-    border:0!important;
-    box-shadow:none!important;
-    -webkit-backdrop-filter:none!important;
-    backdrop-filter:none!important;
-    filter:none!important;
+  html body>header,html body>header.is-scrolled,html body>header.is-hidden{
+    background:rgba(9,21,34,.96)!important;background-color:rgba(9,21,34,.96)!important;background-image:none!important;
+    border:0!important;border-bottom:1px solid rgba(220,229,238,.24)!important;box-shadow:0 8px 24px rgba(4,13,24,.20)!important;
+    -webkit-backdrop-filter:blur(20px) saturate(150%)!important;backdrop-filter:blur(20px) saturate(150%)!important;filter:none!important;
   }
-  html body>header .header-inner{
-    background:transparent!important;
-    background-color:transparent!important;
-    background-image:none!important;
-    border:0!important;
-    box-shadow:none!important;
-    -webkit-backdrop-filter:none!important;
-    backdrop-filter:none!important;
-    filter:none!important;
-  }
-  html body>header::before,
-  html body>header::after,
-  html body>header .header-inner::before,
-  html body>header .header-inner::after{
-    content:none!important;
-    display:none!important;
-    background:none!important;
-    box-shadow:none!important;
-  }
+  html body>header .header-inner{background:transparent!important;background-color:transparent!important;background-image:none!important;border:0!important;box-shadow:none!important;filter:none!important}
+  html body>header::before,html body>header::after,html body>header .header-inner::before,html body>header .header-inner::after{content:none!important;display:none!important}
 }
 </style>
 
@@ -4562,125 +4539,91 @@ header .header-inner > a.brand .brand-wordmark{
 </style>
 
 <style id="mobile-services-arrow-below-label-final">
-/* MOBILE ONLY — place the Services dropdown arrow on its own line below the label. */
+/* Arctic ice-blue Services pill with its chevron below the label. */
 @media screen and (max-width:760px){
   html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
-    display:flex!important;
-    flex-direction:column!important;
-    align-items:center!important;
-    justify-content:center!important;
-    gap:2px!important;
+    display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:2px!important;
+    min-width:max-content!important;min-height:34px!important;height:auto!important;padding:4px 9px 3px!important;
+    border:1px solid rgba(169,216,242,.72)!important;border-radius:999px!important;
+    background:linear-gradient(135deg,#e1f3fc,#a9d8f2)!important;color:#10243d!important;
+    box-shadow:0 0 12px rgba(169,216,242,.18),inset 0 1px 0 rgba(255,255,255,.62)!important;
   }
   html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>span:first-of-type{
-    order:0!important;
+    display:block!important;position:static!important;visibility:visible!important;opacity:1!important;flex:0 0 auto!important;
+    width:auto!important;min-width:max-content!important;height:auto!important;max-height:none!important;margin:0!important;padding:0!important;
+    overflow:visible!important;font-family:"DM Sans",Arial,sans-serif!important;font-size:7px!important;font-weight:700!important;
+    line-height:1.2!important;letter-spacing:.25px!important;text-align:center!important;text-transform:uppercase!important;white-space:nowrap!important;
+    color:#10243d!important;-webkit-text-fill-color:#10243d!important;
   }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>.nav-glass-icon,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>.services-chevron{display:none!important}
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:before{content:none!important;display:none!important}
   html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:after{
-    content:"⌄"!important;
-    display:block!important;
-    order:1!important;
-    position:static!important;
-    width:auto!important;
-    height:auto!important;
-    margin:0!important;
-    padding:0!important;
-    font-size:10px!important;
-    line-height:8px!important;
-    color:#173c36!important;
-    transform:none!important;
+    content:"⌄"!important;display:block!important;position:static!important;flex:0 0 auto!important;width:auto!important;height:auto!important;
+    margin:0!important;padding:0!important;border:0!important;background:none!important;font-family:Arial,sans-serif!important;
+    font-size:9px!important;font-weight:700!important;line-height:8px!important;color:#10243d!important;-webkit-text-fill-color:#10243d!important;
+    opacity:1!important;transform:none!important;
   }
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle:after{
-    transform:rotate(180deg)!important;
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle:after{transform:rotate(180deg)!important}
+  html body>header .nav-dropdown-menu,html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu{
+    background:rgba(9,21,34,.97)!important;border:1px solid rgba(220,229,238,.28)!important;border-radius:14px!important;
+    box-shadow:0 10px 28px rgba(0,0,0,.24)!important;-webkit-backdrop-filter:blur(18px)!important;backdrop-filter:blur(18px)!important;
   }
+  html body>header .nav-dropdown-menu a,html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu a{
+    color:#f1f7fb!important;-webkit-text-fill-color:#f1f7fb!important;border-bottom:1px solid rgba(220,229,238,.12)!important;
+  }
+  html body>header .nav-dropdown-menu a:last-child{border-bottom:0!important}
+  html body>header .nav-dropdown-menu a:hover,html body>header .nav-dropdown-menu a:focus-visible{background:rgba(169,216,242,.14)!important;color:#fff!important}
 }
 </style>
 
 <style id="mobile-hero-destination-list">
-/* MOBILE ONLY — one-line destination list below the hero introduction. */
+/* Mobile destination rail in the Arctic ice palette. */
 @media screen and (max-width:760px){
   html body>.hero>.hero-content>.hero-destination-list{
-    display:flex!important;
-    align-items:center!important;
-    justify-content:center!important;
-    flex-wrap:nowrap!important;
-    gap:5px!important;
-    width:100%!important;
-    max-width:100%!important;
-    margin:16px auto 0!important;
-    padding:0 2px 5px!important;
-    overflow-x:auto!important;
-    overflow-y:hidden!important;
-    white-space:nowrap!important;
-    scrollbar-width:none!important;
-    -webkit-overflow-scrolling:touch!important;
-    color:#d6ff78!important;
-    font-size:9px!important;
-    line-height:1.5!important;
-    letter-spacing:.1px!important;
-    text-align:center!important;
+    display:flex!important;align-items:center!important;justify-content:center!important;flex-wrap:nowrap!important;gap:5px!important;
+    width:100%!important;max-width:100%!important;margin:16px auto 0!important;padding:0 2px 5px!important;
+    overflow-x:auto!important;overflow-y:hidden!important;white-space:nowrap!important;scrollbar-width:none!important;
+    -webkit-overflow-scrolling:touch!important;color:#dceefa!important;font-size:9px!important;line-height:1.5!important;
+    letter-spacing:.1px!important;text-align:center!important;
   }
   html body>.hero>.hero-content>.hero-destination-list::-webkit-scrollbar{display:none!important}
-  html body>.hero>.hero-content>.hero-destination-list i{
-    flex:0 0 auto!important;
-    color:#d8bd86!important;
-    font-style:normal!important;
-    font-size:11px!important;
-  }
-  html body>.hero>.hero-content>.hero-destination-list span{
-    flex:0 0 auto!important;
-    color:#d6ff78!important;
-    text-shadow:0 0 8px rgba(198,255,92,.22)!important;
-  }
+  html body>.hero>.hero-content>.hero-destination-list i{flex:0 0 auto!important;color:#a9d8f2!important;font-style:normal!important;font-size:11px!important}
+  html body>.hero>.hero-content>.hero-destination-list span{flex:0 0 auto!important;color:#dceefa!important;text-shadow:0 0 8px rgba(169,216,242,.18)!important}
 }
 </style>
 
 
 <style id="mobile-build-trip-neon-glass">
-/* MOBILE ONLY — champagne-gold frosted-glass treatment for the hero Build Your Trip CTA. */
+/* Mobile Build Your Trip CTA in Arctic ice-blue glass. */
 @media screen and (max-width:760px){
   html body>.hero>.hero-content>.hero-build-cta-wrap>.hero-build-cta{
-    color:#123b32!important;
-    background:linear-gradient(135deg,rgba(224,255,145,.76),rgba(197,243,106,.54) 52%,rgba(169,220,79,.34))!important;
-    border:1px solid rgba(214,255,120,.96)!important;
-    -webkit-backdrop-filter:blur(22px) saturate(185%)!important;
-    backdrop-filter:blur(22px) saturate(185%)!important;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.34),inset 0 -1px 0 rgba(214,255,120,.22),0 0 12px rgba(198,255,92,.30),0 8px 24px rgba(0,0,0,.22)!important;
-    text-shadow:0 0 9px rgba(214,255,120,.30)!important;
+    color:#10243d!important;background:linear-gradient(135deg,rgba(232,245,252,.96),rgba(169,216,242,.84))!important;
+    border:1px solid rgba(255,255,255,.86)!important;-webkit-backdrop-filter:blur(22px) saturate(175%)!important;
+    backdrop-filter:blur(22px) saturate(175%)!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 0 12px rgba(169,216,242,.24),0 8px 24px rgba(0,0,0,.20)!important;
+    text-shadow:none!important;
   }
   html body>.hero>.hero-content>.hero-build-cta-wrap>.hero-build-cta:active{
-    background:linear-gradient(135deg,rgba(234,255,176,.88),rgba(214,255,120,.68) 52%,rgba(169,220,79,.46))!important;
-    box-shadow:inset 0 2px 6px rgba(0,0,0,.16),0 0 15px rgba(198,255,92,.38)!important;
+    background:linear-gradient(135deg,#fff,#c9e9fa)!important;
+    box-shadow:inset 0 2px 6px rgba(16,36,61,.12),0 0 15px rgba(169,216,242,.28)!important;
   }
 }
 </style>
 
 
 <style id="mobile-build-trip-attention-animation">
-/* MOBILE ONLY — gentle repeating glow and lift to make the primary trip CTA noticeable. */
+/* Gentle Arctic ice-blue emphasis; respects reduced motion. */
 @keyframes mobileBuildTripPulse{
-  0%,100%{
-    transform:translateY(0) scale(1);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.34),inset 0 -1px 0 rgba(234,214,174,.20),0 0 12px rgba(198,255,92,.30),0 8px 24px rgba(0,0,0,.22);
-  }
-  50%{
-    transform:translateY(-2px) scale(1.025);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.42),0 0 22px rgba(198,255,92,.56),0 10px 28px rgba(0,0,0,.24);
-  }
+  0%,100%{transform:translateY(0) scale(1);box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 0 12px rgba(169,216,242,.24),0 8px 24px rgba(0,0,0,.20)}
+  50%{transform:translateY(-2px) scale(1.015);box-shadow:inset 0 1px 0 rgba(255,255,255,.82),0 0 22px rgba(169,216,242,.42),0 10px 28px rgba(0,0,0,.22)}
 }
 @media screen and (max-width:760px){
-  html body>.hero>.hero-content>.hero-build-cta-wrap>.hero-build-cta{
-    animation:mobileBuildTripPulse 2.8s ease-in-out infinite!important;
-    transform-origin:center!important;
-    will-change:transform,box-shadow!important;
-  }
-  html body>.hero>.hero-content>.hero-build-cta-wrap>.hero-build-cta:active{
-    animation:none!important;
-    transform:scale(.97)!important;
-  }
+  html body>.hero>.hero-content>.hero-build-cta-wrap>.hero-build-cta{animation:mobileBuildTripPulse 2.8s ease-in-out infinite!important;transform-origin:center!important;will-change:transform,box-shadow!important}
+  html body>.hero>.hero-content>.hero-build-cta-wrap>.hero-build-cta:active{animation:none!important;transform:scale(.97)!important}
 }
 @media screen and (max-width:760px) and (prefers-reduced-motion:reduce){
-  html body>.hero>.hero-content>.hero-build-cta-wrap>.hero-build-cta{
-    animation:none!important;
-  }
+  html body>.hero>.hero-content>.hero-build-cta-wrap>.hero-build-cta{animation:none!important}
 }
 </style>
 
