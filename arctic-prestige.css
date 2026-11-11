@@ -230,3 +230,9 @@ footer :is(.btn,.button),.site-footer :is(.btn,.button){color:var(--arctic-navy)
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+/* Neutralise legacy inline accent colours on homepage links without changing their targets. */
+.content a[style*="color"],
+.content a[style*="#987342"],
+.content a[style*="#c6a36a"],
+.content a[style*="#173c36"]{color:#527fa2!important;text-decoration-color:rgba(82,127,162,.5)!important}
