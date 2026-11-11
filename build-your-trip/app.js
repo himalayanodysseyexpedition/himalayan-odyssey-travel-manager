@@ -116,7 +116,7 @@ $("guestForm").addEventListener("submit",async e=>{
  e.preventDefault();const button=$("submitEnquiry"),status=$("status");
  if(!cart.length){status.textContent="Please add at least one service to your trip.";return;}
  const name=$("guestName").value.trim(),phone=$("guestPhone").value.trim(),date=$("travelDate").value,total=currentTotal();
- const phoneDigits=phone.replace(/\\D/g,"");
+ const phoneDigits=phone.replace(/\D/g,"");
  if(!/^[+0-9 ()-]{10,18}$/.test(phone)||phoneDigits.length<10||phoneDigits.length>15){status.textContent="Please enter a valid mobile number with 10–15 digits.";return;}
  if(date&&date<todayISO()){status.textContent="Please choose today or a future travel date.";return;}
  const selections=cart.map(line=>{const s=services.find(x=>x.id===line.id);return {service_id:s.id,category:s.category,title:s.title,destination:s.destination,unit_price:Number(s.price),price_unit:s.price_unit,days:line.days,nights:line.nights,people:line.people,vehicles:line.quantity,line_total:priceFor(s,line)};});
