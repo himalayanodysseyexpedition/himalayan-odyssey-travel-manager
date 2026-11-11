@@ -5,7 +5,7 @@ header .header-inner > nav.glass-nav {
   border: 1px solid rgba(255,255,255,.34) !important;
   border-radius: 24px !important;
   background: linear-gradient(135deg,rgba(255,255,255,.22),rgba(226,241,232,.09) 48%,rgba(255,255,255,.14)) !important;
-  box-shadow: 0 12px 34px rgba(2,20,15,.20), inset 0 1px 0 rgba(255,255,255,.42), inset 0 -1px 0 rgba(255,255,255,.08) !important;
+  box-shadow: 0 12px 34px rgba(16,36,59,.20), inset 0 1px 0 rgba(255,255,255,.42), inset 0 -1px 0 rgba(255,255,255,.08) !important;
   -webkit-backdrop-filter: blur(22px) saturate(165%) !important;
   backdrop-filter: blur(22px) saturate(165%) !important;
 }
@@ -50,11 +50,11 @@ header .header-inner > nav.glass-nav .nav-glass-icon {
   width: 17px !important;
   height: 17px !important;
   fill: none !important;
-  stroke: #f2d89b !important;
+  stroke: #a9d8f2 !important;
   stroke-width: 1.65 !important;
   stroke-linecap: round !important;
   stroke-linejoin: round !important;
-  filter: drop-shadow(0 0 5px rgba(242,216,155,.34));
+  filter: drop-shadow(0 0 5px rgba(169,216,242,.34));
   transition: transform .3s ease, filter .3s ease !important;
 }
 
@@ -69,9 +69,9 @@ header .header-inner > nav.glass-nav > .nav-dropdown > .nav-dropdown-toggle:hove
 header .header-inner > nav.glass-nav > a:focus-visible,
 header .header-inner > nav.glass-nav > .nav-dropdown.open > .nav-dropdown-toggle {
   transform: translateY(-2px) !important;
-  border-color: rgba(242,216,155,.72) !important;
+  border-color: rgba(169,216,242,.72) !important;
   background: linear-gradient(145deg,rgba(255,255,255,.30),rgba(207,230,214,.14)) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.48), 0 8px 22px rgba(0,0,0,.18), 0 0 16px rgba(242,216,155,.13) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.48), 0 8px 22px rgba(0,0,0,.18), 0 0 16px rgba(169,216,242,.13) !important;
 }
 
 header .header-inner > nav.glass-nav > a:hover::before,
@@ -82,7 +82,7 @@ header .header-inner > nav.glass-nav > .nav-dropdown > .nav-dropdown-toggle:hove
 header .header-inner > nav.glass-nav > a:hover .nav-glass-icon,
 header .header-inner > nav.glass-nav > .nav-dropdown > .nav-dropdown-toggle:hover .nav-glass-icon {
   transform: translateY(-1px) scale(1.12);
-  filter: drop-shadow(0 0 8px rgba(242,216,155,.72));
+  filter: drop-shadow(0 0 8px rgba(169,216,242,.72));
 }
 
 header .header-inner > nav.glass-nav > a:active,
@@ -91,7 +91,7 @@ header .header-inner > nav.glass-nav > .nav-dropdown > .nav-dropdown-toggle:acti
 }
 
 header .header-inner > nav.glass-nav .services-chevron {
-  color: #f2d89b !important;
+  color: #a9d8f2 !important;
   transition: transform .28s ease !important;
 }
 header .header-inner > nav.glass-nav .nav-dropdown.open .services-chevron {
@@ -172,7 +172,7 @@ header .header-inner > nav.glass-nav > .nav-dropdown > .nav-dropdown-toggle > .s
   border: 1px solid rgba(255,255,255,.38) !important;
   border-radius: 50% !important;
   background: rgba(255,255,255,.04) !important;
-  color: #f2d89b !important;
+  color: #a9d8f2 !important;
   font-size: 13px !important;
   line-height: 1 !important;
 }
@@ -267,7 +267,7 @@ header .header-inner > nav.glass-nav > .nav-dropdown > .nav-dropdown-toggle > .s
     padding: 0 !important;
     border: 0 !important;
     background: transparent !important;
-    color: #f2d89b !important;
+    color: #a9d8f2 !important;
     font-size: 8px !important;
     line-height: 9px !important;
     order: 2 !important;
@@ -302,7 +302,7 @@ header .header-inner > nav.glass-nav > .nav-dropdown > .services-chevron {
   border: 0 !important;
   border-radius: 0 !important;
   background: transparent !important;
-  color: #f2d89b !important;
+  color: #a9d8f2 !important;
   font-size: 16px !important;
   line-height: 1 !important;
   cursor: pointer !important;
