@@ -1859,3 +1859,79 @@ html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu a 
     transform:rotate(180deg)!important;
   }
 }
+
+
+/* FINAL MOBILE NAV CLEANUP — one consistent glass style for every item. */
+@media (max-width:760px){
+  html body>header .header-inner>nav.glass-nav{
+    display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;
+    align-items:center!important;justify-content:space-between!important;
+    gap:3px!important;width:100%!important;max-width:100%!important;
+    margin:0!important;padding:4px!important;overflow-x:auto!important;
+    overflow-y:hidden!important;border:1px solid rgba(185,220,242,.42)!important;
+    border-radius:999px!important;
+    background:rgba(16,36,59,.52)!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 5px 16px rgba(0,0,0,.12)!important;
+    -webkit-backdrop-filter:blur(18px) saturate(140%)!important;
+    backdrop-filter:blur(18px) saturate(140%)!important;
+  }
+  html body>header .header-inner>nav.glass-nav>a,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+    display:inline-flex!important;flex:0 0 auto!important;flex-direction:row!important;
+    align-items:center!important;justify-content:center!important;
+    min-height:34px!important;height:34px!important;width:auto!important;
+    min-width:0!important;padding:0 8px!important;margin:0!important;
+    border:1px solid transparent!important;border-radius:999px!important;
+    background:transparent!important;box-shadow:none!important;
+    color:#f1f7fb!important;-webkit-text-fill-color:#f1f7fb!important;
+    font-family:"DM Sans",Arial,sans-serif!important;
+    font-size:clamp(7px,2.05vw,9px)!important;font-weight:700!important;
+    letter-spacing:0!important;line-height:1!important;white-space:nowrap!important;
+    text-transform:uppercase!important;transform:none!important;
+  }
+  html body>header .header-inner>nav.glass-nav>a>.nav-glass-icon,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>.nav-glass-icon{
+    display:none!important;
+  }
+  html body>header .header-inner>nav.glass-nav>a:before,
+  html body>header .header-inner>nav.glass-nav>a:after,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:before,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:after{
+    content:none!important;display:none!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown{
+    display:flex!important;flex:0 0 auto!important;align-items:center!important;
+    width:auto!important;min-width:0!important;margin:0!important;padding:0!important;
+    border:0!important;background:transparent!important;box-shadow:none!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+    gap:4px!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>span:first-of-type{
+    display:inline!important;position:static!important;width:auto!important;
+    min-width:0!important;height:auto!important;margin:0!important;padding:0!important;
+    overflow:visible!important;font:inherit!important;color:inherit!important;
+    -webkit-text-fill-color:currentColor!important;white-space:nowrap!important;
+  }
+  html body>header .header-inner>nav.glass-nav .services-chevron{
+    display:inline-block!important;position:static!important;flex:0 0 auto!important;
+    width:auto!important;height:auto!important;min-width:0!important;
+    margin:0!important;padding:0!important;border:0!important;border-radius:0!important;
+    background:none!important;box-shadow:none!important;color:inherit!important;
+    font-size:11px!important;line-height:1!important;transform:none!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle .services-chevron{
+    transform:rotate(180deg)!important;
+  }
+  html body>header .header-inner>nav.glass-nav>a:hover,
+  html body>header .header-inner>nav.glass-nav>a:focus-visible,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:hover,
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle{
+    background:rgba(185,220,242,.12)!important;
+    border-color:rgba(185,220,242,.3)!important;
+    box-shadow:none!important;color:#eaf4fa!important;
+  }
+  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu{
+    top:calc(100% + 8px)!important;z-index:1300!important;
+  }
+}
