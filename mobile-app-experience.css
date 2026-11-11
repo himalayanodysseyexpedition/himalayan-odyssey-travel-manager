@@ -134,3 +134,15 @@
   }
   .mobile-app-dock.is-hidden{pointer-events:none!important}
 }
+
+/* Remove the legacy duplicate floating contact dock on mobile.
+   The mobile-app-dock remains the single mobile navigation surface. */
+@media (max-width:760px){
+  html body .footer-contact-bar,
+  html body .quick-nav-bar,
+  html body .quick-nav{
+    display:none!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+  }
+}
