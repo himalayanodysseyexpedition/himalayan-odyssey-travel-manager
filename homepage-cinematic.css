@@ -85,15 +85,15 @@ header .header-inner>.header-cta{
   justify-self:end;display:inline-flex!important;align-items:center!important;
   justify-content:center!important;min-height:44px!important;padding:0 23px!important;
   border:1px solid rgba(220,238,250,.82)!important;border-radius:999px!important;
-  background:linear-gradient(135deg,#dceefa 0%,#a9d8f2 56%,#b88e52 100%)!important;
+  background:linear-gradient(135deg,#dceefa 0%,#a9d8f2 56%,#a9d8f2 100%)!important;
   color:#10243b!important;font-size:10px!important;font-weight:800!important;
   letter-spacing:1.05px!important;white-space:nowrap!important;
-  box-shadow:0 8px 25px rgba(190,148,83,.22),inset 0 1px 0 rgba(255,255,255,.68)!important;
+  box-shadow:0 8px 25px rgba(169,216,242,.22),inset 0 1px 0 rgba(255,255,255,.68)!important;
   transition:transform .3s var(--hoe-ease),box-shadow .3s ease,filter .3s ease!important;
 }
 header .header-inner>.header-cta:hover{
   transform:translateY(-2px)!important;filter:brightness(1.06);
-  box-shadow:0 12px 30px rgba(190,148,83,.3),inset 0 1px 0 rgba(255,255,255,.72)!important;
+  box-shadow:0 12px 30px rgba(169,216,242,.3),inset 0 1px 0 rgba(255,255,255,.72)!important;
 }
 /* Cinematic hero: reuse the already-preloaded local Spiti image; no extra image request. */
 .hero{
@@ -135,7 +135,7 @@ header .header-inner>.header-cta:hover{
 .hero .eyebrow:before{content:"";width:34px;height:1px;background:var(--hoe-gold);opacity:.95}
 .hero-rule{
   width:86px!important;height:2px!important;margin:23px 0 27px!important;
-  background:linear-gradient(90deg,#dceefa,#b78e52,transparent)!important;
+  background:linear-gradient(90deg,#dceefa,#a9d8f2,transparent)!important;
   box-shadow:0 0 18px rgba(169,216,242,.38);
 }
 .hero h1{
@@ -154,7 +154,7 @@ header .header-inner>.header-cta:hover{
   background:linear-gradient(135deg,#dceefa,#a9d8f2)!important;
   border:1px solid rgba(220,238,250,.88)!important;color:#10243b!important;
   font-size:10px!important;letter-spacing:1.15px!important;
-  box-shadow:0 10px 28px rgba(190,148,83,.25),inset 0 1px 0 rgba(255,255,255,.6)!important;
+  box-shadow:0 10px 28px rgba(169,216,242,.25),inset 0 1px 0 rgba(255,255,255,.6)!important;
 }
 .hero .btn.outline{
   background:rgba(16,36,59,.28)!important;color:#fff!important;
@@ -225,12 +225,12 @@ header .header-inner>.header-cta:hover{
   scrollbar-width:none;scroll-behavior:smooth;
 }
 .package-slide,.group-departure-card,.itinerary-slide,.cab-card{
-  border:1px solid rgba(190,161,111,.27)!important;
+  border:1px solid rgba(169,216,242,.27)!important;
   box-shadow:0 14px 36px rgba(16,36,59,.09)!important;
   transition:transform .5s var(--hoe-ease),box-shadow .5s ease,border-color .35s ease!important;
 }
 .package-slide:hover,.group-departure-card:hover,.itinerary-slide:hover,.cab-card:hover{
-  transform:translateY(-6px)!important;border-color:rgba(190,148,83,.65)!important;
+  transform:translateY(-6px)!important;border-color:rgba(169,216,242,.65)!important;
   box-shadow:0 22px 48px rgba(16,36,59,.16)!important;
 }
 .section-title h2{letter-spacing:-.8px}
