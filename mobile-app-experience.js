@@ -11,8 +11,11 @@
  function mountDock(){
   if(!mobile()||document.querySelector('.mobile-app-dock'))return;
   const nav=document.createElement('nav');nav.className='mobile-app-dock';nav.setAttribute('aria-label','Quick travel navigation');
-  nav.innerHTML=items.map(x=>'<a '+(x.cls?'class="'+x.cls+'" ':'')+'href="'+x.href+'" data-dock="'+x.path+'">'+icon(x.svg)+'<span>'+x.label+'</span></a>').join('');
+  const onBuilder=location.pathname.startsWith('/build-your-trip');
+  const navItems=items.map(x=>x.path==='plan'&&onBuilder?{...x,label:'Enquire',href:'#guestForm'}:x);
+  nav.innerHTML=navItems.map(x=>'<a '+(x.cls?'class="'+x.cls+'" ':'')+'href="'+x.href+'" data-dock="'+x.path+'">'+icon(x.svg)+'<span>'+x.label+'</span></a>').join('');
   document.body.appendChild(nav);
+  if(onBuilder){const plan=nav.querySelector('[data-dock="plan"]');if(plan)plan.setAttribute('aria-current','page');}
   const anchors=[...document.querySelectorAll('a[href^="#"],a[href^="/#"]')];
   const targets=['home','packages','upcoming-packages','itineraries','contact'].map(id=>document.getElementById(id)).filter(Boolean);
   if('IntersectionObserver'in window&&targets.length){

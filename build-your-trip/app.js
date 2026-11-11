@@ -16,6 +16,8 @@ async function apiRequest(path,options={}){
  finally{clearTimeout(timer);}
 }
 const $=id=>document.getElementById(id);
+const travelDateInput=document.getElementById("travelDate");
+if(travelDateInput){const now=new Date(),localToday=[now.getFullYear(),String(now.getMonth()+1).padStart(2,"0"),String(now.getDate()).padStart(2,"0")].join("-");travelDateInput.min=localToday;}
 const money=value=>"₹"+(Number(value)||0).toLocaleString("en-IN",{maximumFractionDigits:0});
 const esc=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 let services=[],cart=[],category="all",serviceDays={};
