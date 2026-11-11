@@ -1,0 +1,19 @@
+{
+  "name": "Himalayan Odyssey Expedition",
+  "short_name": "Himalayan Odyssey",
+  "description": "Plan premium Himalayan journeys across Spiti, Kinnaur and Himachal Pradesh.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f6f9fb",
+  "theme_color": "#10243b",
+  "icons": [
+    {
+      "src": "/logo.webp",
+      "sizes": "any",
+      "type": "image/webp",
+      "purpose": "any"
+    }
+  ]
+}

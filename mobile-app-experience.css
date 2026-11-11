@@ -1,0 +1,74 @@
+/* Arctic Prestige Mobile App Experience — additive mobile-only layer.
+   Keeps existing content, booking flows, Supabase integrations and brand logo intact. */
+:root{
+  --app-ink:#0b1728;--app-navy:#10243b;--app-blue:#b9dcf2;--app-ice:#eaf4fa;
+  --app-paper:#f6f9fb;--app-line:rgba(28,57,82,.13);--app-muted:#637487;
+  --app-shadow:0 16px 44px rgba(10,29,49,.12);
+}
+@media(max-width:760px){
+  html{scroll-behavior:smooth;scroll-padding-top:116px}
+  body{background:var(--app-paper)!important;color:var(--app-ink);padding-bottom:calc(82px + env(safe-area-inset-bottom))}
+  body,button,a,input,select,textarea{ -webkit-tap-highlight-color:transparent }
+  img{height:auto}
+  header{background:rgba(9,24,42,.94)!important;border-bottom:1px solid rgba(214,235,248,.22)!important;backdrop-filter:blur(22px) saturate(155%)!important;-webkit-backdrop-filter:blur(22px) saturate(155%)!important}
+  .header-inner{padding-top:8px!important;padding-bottom:9px!important}
+  .brand img{max-height:42px!important}
+  .glass-nav{scroll-snap-type:x proximity!important;justify-content:flex-start!important;gap:16px!important;padding:5px 10px!important}
+  .glass-nav>a,.glass-nav .nav-dropdown>.nav-dropdown-toggle{font-family:"DM Sans",system-ui,sans-serif!important;font-size:10px!important;font-weight:700!important;letter-spacing:.045em!important;color:#f1f7fb!important;scroll-snap-align:center}
+  .glass-nav>a:after,.glass-nav .nav-dropdown>.nav-dropdown-toggle:after{background:linear-gradient(90deg,#a9d7f0,#f3f9fc)!important}
+  .header-cta{background:linear-gradient(135deg,#e9f5fc,#a9d5ee)!important;color:#10243b!important;border:1px solid rgba(255,255,255,.8)!important;border-radius:999px!important;box-shadow:0 7px 24px rgba(133,190,222,.25)!important;font-weight:800!important;letter-spacing:.02em}
+  .hero{min-height:clamp(590px,88svh,790px)!important;display:flex!important;align-items:center!important;overflow:hidden!important}
+  .hero:after{background:linear-gradient(180deg,rgba(5,17,31,.10),rgba(5,17,31,.28) 35%,rgba(5,17,31,.82))!important}
+  .hero-content{width:100%!important;padding:54px 20px 100px!important}
+  .hero h1,.hero-animated-heading{font-size:clamp(38px,10vw,58px)!important;line-height:1.02!important;letter-spacing:-.035em!important;text-wrap:balance}
+  .hero-go-line{font-size:15px!important;letter-spacing:.13em!important}
+  .hero-build-cta,.hero .btn{min-height:54px!important;border-radius:999px!important;padding:15px 24px!important;font-family:"DM Sans",system-ui,sans-serif!important;font-weight:800!important;letter-spacing:.035em!important}
+  .content{padding-top:54px!important;padding-bottom:54px!important}
+  .section-inner{width:min(100% - 34px,680px)!important}
+  .section-title h2,.content h2{font-size:clamp(28px,7vw,39px)!important;line-height:1.08!important;letter-spacing:-.025em!important}
+  .intro{font-size:14px!important;line-height:1.7!important;color:var(--app-muted)!important}
+  .packages-carousel,.group-departures-rail{scroll-snap-type:x mandatory!important;scroll-padding-inline:16px!important;padding:5px 2px 18px!important}
+  .packages-carousel>* ,.group-departures-rail>*{scroll-snap-align:start}
+  .package-card,.group-departure-card,.destination-card,.service-card{border-radius:22px!important;overflow:hidden!important;box-shadow:var(--app-shadow)!important}
+  .btn,.button,.cta a{border-radius:999px!important;min-height:48px}
+  input,select,textarea{font-size:16px!important;min-height:48px;border-radius:14px!important}
+  button,a{touch-action:manipulation}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #75bce5!important;outline-offset:3px!important}
+  .mobile-app-dock{position:fixed;z-index:1200;left:12px;right:12px;bottom:calc(9px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:8px 7px;border:1px solid rgba(255,255,255,.78);border-radius:22px;background:rgba(244,249,252,.88);box-shadow:0 14px 42px rgba(8,25,44,.2),inset 0 1px 0 #fff;backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%);transition:transform .28s ease,opacity .28s ease}
+  .mobile-app-dock.is-hidden{transform:translateY(130%);opacity:0;pointer-events:none}
+  .mobile-app-dock a{display:flex;min-width:0;min-height:48px;align-items:center;justify-content:center;flex-direction:column;gap:3px;text-decoration:none;color:#40566b;font:700 9px/1.1 "DM Sans",system-ui,sans-serif;letter-spacing:.015em;border-radius:14px}
+  .mobile-app-dock a[aria-current="page"]{background:#e0eff8;color:#10243b}
+  .mobile-app-dock .dock-icon{width:19px;height:19px;display:block;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .mobile-app-dock a.dock-plan{background:linear-gradient(135deg,#dceefa,#acd4ed);color:#10243b;box-shadow:inset 0 1px 0 rgba(255,255,255,.9)}
+  .mobile-app-dock a.dock-plan .dock-icon{width:20px;height:20px}
+  .app-reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.7,.2,1)}
+  .app-reveal.is-visible{opacity:1;transform:none}
+  .app-install-hint{display:none}
+}
+@media(max-width:380px){
+  .mobile-app-dock{left:8px;right:8px;gap:2px;padding:7px 5px}
+  .mobile-app-dock a{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+  .app-reveal{opacity:1!important;transform:none!important;transition:none!important}
+  .mobile-app-dock{transition:none!important}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
+}
+
+/* Shared Arctic palette tokens for legacy sections that still consume the original theme variables. */
+@media(max-width:760px){:root{--forest:#10243b;--green:#294a66;--gold:#b9dcf2;--cream:#f6f9fb;--paper:#fff;--ink:#142b40;--muted:#667b8d;--line:#dce8f0}}
+@media(max-width:760px){
+  .btn,.primary,.service button,.tabs button.active,.header-cta{background:linear-gradient(135deg,#e8f4fb,#b8dcef)!important;color:#10243b!important;border:1px solid rgba(255,255,255,.9)!important;box-shadow:0 8px 22px rgba(45,95,130,.13)!important}
+  .cart,.service,.review-panel,.package-card{border:1px solid rgba(69,112,145,.14)!important;border-radius:20px!important;background:rgba(255,255,255,.94)!important}
+  .guest-form input,.controls input,.toolbar input{border:1px solid #d6e5ef!important;border-radius:13px!important;background:#fbfdff!important;color:#142b40!important}
+  .tag,.hero small,.section-title small{color:#6b9fc0!important}
+  body:has(.guest-form) header{background:rgba(9,24,42,.96)!important}
+  body:has(.guest-form) .hero{background-image:linear-gradient(100deg,rgba(7,23,41,.94),rgba(7,23,41,.72)),url('/spiti.jpg')!important}
+  body:has(.guest-form) .hero small{color:#c5e4f6!important}
+  body:has(.guest-form) .hero p{color:#e5f1f8!important}
+  body:has(.guest-form) .tabs button{border-radius:999px!important;background:#fff!important;color:#294a66!important;border-color:#dce8f0!important}
+  body:has(.guest-form) .tabs button.active{background:linear-gradient(135deg,#e8f4fb,#b8dcef)!important;color:#10243b!important}
+  body:has(.guest-form) .cart h2,body:has(.guest-form) .intro h2{color:#10243b!important}
+  body:has(.guest-form) footer{background:#10243b!important;color:#e5f1f8!important}
+}

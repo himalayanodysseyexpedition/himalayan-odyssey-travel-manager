@@ -99,7 +99,12 @@ $("guestForm").addEventListener("submit",async e=>{
   status.textContent="Enquiry saved. Opening WhatsApp…";
   const url="https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(enquiryText(name,phone,date,total));
   window.location.href=url;
- }catch(error){console.error(error);status.textContent="We couldn't save your enquiry. Please try again or contact us directly on WhatsApp.";}
+ }catch(error){
+  console.error("Enquiry save failed; handing off to WhatsApp:",error);
+  status.textContent="Online saving is temporarily unavailable. Opening WhatsApp so you can still send your enquiry.";
+  const fallbackUrl="https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(enquiryText(name,phone,date,total));
+  window.location.href=fallbackUrl;
+ }
  finally{button.disabled=false;}
 });
 load();
