@@ -19,7 +19,7 @@
   display: inline-block;
   width: auto;
   min-width: 0;
-  color: #f2d36b !important;
+  color: #a9d8f2 !important;
   text-align: center;
   white-space: nowrap;
   transition: opacity 260ms ease, transform 260ms ease, filter 260ms ease;
@@ -29,18 +29,18 @@
 .hero .hero-animated-heading .hero-word-rotator.word-himachal,
 .hero .hero-animated-heading .hero-word-rotator.word-spiti,
 .hero .hero-animated-heading .hero-word-rotator.word-adventure {
-  color: #f2d36b !important;
+  color: #a9d8f2 !important;
 }
 
 .hero .hero-animated-heading .hero-word-rotator.is-shuffling-out {
-  color: #f2d36b !important;
+  color: #a9d8f2 !important;
   opacity: 0;
   filter: blur(5px);
   transform: translateY(-0.18em);
 }
 
 .hero .hero-animated-heading .hero-word-rotator.is-shuffling-in {
-  color: #f2d36b !important;
+  color: #a9d8f2 !important;
   opacity: 1;
   filter: blur(0);
   transform: translateY(0);
@@ -93,10 +93,10 @@
 .hero .hero-animated-heading .hero-word-rotator.is-shuffling-in {
   background: linear-gradient(
     105deg,
-    #fff4bd 0%,
-    #ffe58a 22%,
-    #f2c94c 48%,
-    #fff0a6 68%,
+    #a9d8f2 0%,
+    #a9d8f2 22%,
+    #a9d8f2 48%,
+    #a9d8f2 68%,
     #d99b22 100%
   ) !important;
   -webkit-background-clip: text !important;
