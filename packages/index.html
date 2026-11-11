@@ -42,6 +42,7 @@
 <link rel="stylesheet" href="/mobile-layout.css?v=25">
 <link rel="stylesheet" href="/arctic-prestige-sitewide.css?v=4">
 <link rel="stylesheet" href="/navigation-capsule.css?v=34">
+<link rel="stylesheet" href="/packages/bright-package-discovery.css?v=1">
 </head><body>
 <header class="sitewide-header">
   <div class="header-inner">
@@ -80,7 +81,15 @@
 </div></section>
 <h2>Available Himalayan journeys</h2><p>Explore current group departures and private trip options for Spiti Valley, Kinnaur and Himachal Pradesh. The package cards below are loaded from our live package manager, so published dates and prices are not duplicated in static page text. If no departure is currently listed, contact us to discuss your dates.</p><!-- Long SEO planning copy removed; live package cards and featured group departure are retained. -->
 
-<div class="related-guides"><p><a href="/spiti-valley-tours/">Spiti Valley tours</a> · <a href="/winter-spiti-tours/">Winter Spiti tours</a> · <a href="/spiti-valley-travel-guide/">Spiti travel guide</a> · <a href="/spiti-tour-cost/">Spiti tour cost guide</a> · <a href="/kinnaur-tours/">Kinnaur tours</a> · <a href="/narkanda-tours/">Narkanda stays</a> · <a href="/manali-tours/">Manali tours</a> · <a href="/himachal-pradesh-tours/">Himachal tours</a></p></div><div id="packageList" class="cards"><p class="status">Loading currently published packages…</p></div><p><a class="btn" href="/">Return to main website</a></p></main>
+<div class="related-guides"><p><a href="/spiti-valley-tours/">Spiti Valley tours</a> · <a href="/winter-spiti-tours/">Winter Spiti tours</a> · <a href="/spiti-valley-travel-guide/">Spiti travel guide</a> · <a href="/spiti-tour-cost/">Spiti tour cost guide</a> · <a href="/kinnaur-tours/">Kinnaur tours</a> · <a href="/narkanda-tours/">Narkanda stays</a> · <a href="/manali-tours/">Manali tours</a> · <a href="/himachal-pradesh-tours/">Himachal tours</a></p></div><section class="package-filters" aria-label="Filter tour packages">
+<label>Search packages<input id="packageSearch" type="search" placeholder="Search Spiti, Kinnaur, Manali…" autocomplete="off"></label>
+<label>Destination<select id="destinationFilter"><option value="all">All destinations</option></select></label>
+<label>Budget per person<select id="budgetFilter"><option value="all">Any budget</option><option value="under10000">Under ₹10,000</option><option value="10000-20000">₹10,000–₹20,000</option><option value="20000-35000">₹20,000–₹35,000</option><option value="over35000">Above ₹35,000</option></select></label>
+<label>Trip duration<select id="durationFilter"><option value="all">Any duration</option><option value="short">1–3 days</option><option value="medium">4–6 days</option><option value="long">7+ days</option></select></label>
+</section>
+<p class="package-result-count" id="packageResultCount" aria-live="polite">Loading published packages…</p>
+<div id="packageList" class="cards package-cards-carousel" tabindex="0" aria-label="Swipe through available Himalayan tour packages"><p class="status">Loading currently published packages…</p></div>
+<p class="package-swipe-hint">SWIPE TO COMPARE PACKAGES · USE FILTERS TO NARROW YOUR CHOICE</p><p><a class="btn" href="/">Return to main website</a></p></main>
 <footer>HIMALAYAN ODYSSEY EXPEDITION · Narkanda, Himachal Pradesh · <a href="tel:+919816929669" style="color:#a9d8f2">+91 98169 29669</a> · <a href="/privacy-policy/" style="color:#a9d8f2">Privacy Policy</a></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -88,15 +97,59 @@
 const db=window.supabase?.createClient("https://ynkoiuyjevclypumnyes.supabase.co","sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-");
 const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const wa=t=>"https://wa.me/919816929669?text="+encodeURIComponent(t);
+const parseDays=value=>{const m=String(value||"").match(/(\d+)\s*(?:days?|d)\b/i);return m?Number(m[1]):null;};
 (async()=>{
  const list=document.getElementById("packageList");
+ const search=document.getElementById("packageSearch");
+ const destination=document.getElementById("destinationFilter");
+ const budget=document.getElementById("budgetFilter");
+ const duration=document.getElementById("durationFilter");
+ const count=document.getElementById("packageResultCount");
  try{
   if(!db)throw new Error("Package connection unavailable");
   const {data,error}=await db.from("packages").select("*").order("created_at",{ascending:false});
   if(error)throw error;
-  if(!data?.length){list.innerHTML='<p class="status">No packages are currently published. Please contact our team for upcoming departures.</p>';return;}
-  list.innerHTML=data.map(p=>'<article class="card">'+(p.image_url||p.cover_image?'<img src="'+esc(p.image_url||p.cover_image)+'" alt="'+esc(p.name||"Himalayan tour")+'" loading="lazy">':'')+'<h2>'+esc(p.name||"Himalayan Tour")+'</h2><p>'+esc(p.destination||"Himachal Pradesh")+'</p><p>'+esc(p.duration||"")+'</p>'+(p.inclusions?'<p>'+esc(p.inclusions)+'</p>':'')+(p.price_per_person!=null&&p.price_per_person!==""?'<p class="price">₹'+Number(p.price_per_person).toLocaleString("en-IN")+' per person</p>':'')+'<a class="btn" href="'+wa("Hello, I am interested in "+(p.name||"your Himalayan package")+". Please share dates and details.")+'" target="_blank" rel="noopener noreferrer">Enquire on WhatsApp</a></article>').join("");
- }catch(e){console.error("Package directory error",e);list.innerHTML='<p class="status">We could not load the latest package list. <a href="'+wa("Hello, please share your current Himalayan tour packages.")+'">Contact us on WhatsApp</a> for current availability.</p>';}
+  if(!data?.length){list.innerHTML='<p class="package-empty">No packages are currently published. Please contact our team for upcoming departures.</p>';count.textContent="No published packages right now";return;}
+  const destinations=[...new Set(data.map(p=>String(p.destination||"Himachal Pradesh").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+  destination.innerHTML='<option value="all">All destinations</option>'+destinations.map(d=>'<option value="'+esc(d)+'">'+esc(d)+'</option>').join("");
+  const render=()=>{
+   const query=search.value.trim().toLowerCase();
+   const selectedDestination=destination.value;
+   const selectedBudget=budget.value;
+   const selectedDuration=duration.value;
+   const filtered=data.filter(p=>{
+    const place=String(p.destination||"Himachal Pradesh").trim();
+    const haystack=[p.name,p.destination,p.duration,p.description,p.inclusions].filter(Boolean).join(" ").toLowerCase();
+    const price=p.price_per_person==null||p.price_per_person===""?null:Number(p.price_per_person);
+    const days=parseDays(p.duration);
+    const matchesBudget=selectedBudget==="all"||
+      (price!==null&&Number.isFinite(price)&&(
+       (selectedBudget==="under10000"&&price<10000)||
+       (selectedBudget==="10000-20000"&&price>=10000&&price<=20000)||
+       (selectedBudget==="20000-35000"&&price>20000&&price<=35000)||
+       (selectedBudget==="over35000"&&price>35000)
+      ));
+    const matchesDuration=selectedDuration==="all"||
+      (days!==null&&((selectedDuration==="short"&&days<=3)||(selectedDuration==="medium"&&days>=4&&days<=6)||(selectedDuration==="long"&&days>=7)));
+    return (!query||haystack.includes(query))&&(selectedDestination==="all"||place===selectedDestination)&&matchesBudget&&matchesDuration;
+   });
+   count.textContent="Showing "+filtered.length+" of "+data.length+" published packages";
+   if(!filtered.length){list.innerHTML='<div class="package-empty">No packages match these filters. Try another destination, budget or duration.</div>';return;}
+   list.innerHTML=filtered.map(p=>{
+    const name=p.name||"Himalayan Tour";
+    const place=p.destination||"Himachal Pradesh";
+    const image=p.image_url||p.cover_image||"/spiti.jpg";
+    const price=p.price_per_person==null||p.price_per_person===""?"":'<p class="price">₹'+Number(p.price_per_person).toLocaleString("en-IN")+' per person</p>';
+    const inclusions=p.inclusions?'<p>'+esc(p.inclusions)+'</p>':"";
+    const durationText=p.duration?'<p>'+esc(p.duration)+'</p>':"";
+    return '<article class="card"><div class="package-card-media"><img src="'+esc(image)+'" alt="'+esc(name)+' — '+esc(place)+'" loading="lazy" decoding="async"></div><h2>'+esc(name)+'</h2><p>'+esc(place)+'</p>'+durationText+inclusions+price+'<a class="btn" href="'+wa("Hello, I am interested in "+name+". Please share dates and details.")+'" target="_blank" rel="noopener noreferrer">Enquire on WhatsApp</a></article>';
+   }).join("");
+   list.scrollLeft=0;
+  };
+  [search,destination,budget,duration].forEach(control=>control.addEventListener("input",render));
+  [destination,budget,duration].forEach(control=>control.addEventListener("change",render));
+  render();
+ }catch(e){console.error("Package directory error",e);count.textContent="Package list temporarily unavailable";list.innerHTML='<p class="package-empty">We could not load the latest package list. <a href="'+wa("Hello, please share your current Himalayan tour packages.")+'">Contact us on WhatsApp</a> for current availability.</p>';}
 })();
 </script>  <script src="/site-motion.js?v=1" defer></script>
 <script src="/mobile-app-experience.js?v=1" defer></script>
