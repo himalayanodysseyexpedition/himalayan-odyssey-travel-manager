@@ -718,7 +718,7 @@ function makePDF(title, content) {
         body {
           font-family: Arial, sans-serif;
           margin: 30px;
-          color: #173c36;
+          color: #10243b;
         }
         h1 { font-size: 22px; }
         .box {
@@ -729,7 +729,7 @@ function makePDF(title, content) {
         }
         button {
           padding: 12px;
-          background: #173c36;
+          background: #10243b;
           color: white;
           border: 0;
           cursor: pointer;
@@ -3072,7 +3072,7 @@ function renderDestinationAdmin() {
   if(!items.length){target.innerHTML="<p>No destinations yet. Add your first destination photo.</p>";return;}
   target.innerHTML='<div class="hotel-photo-grid">'+items.map(item=>`
     <article class="hotel-photo" style="min-width:220px">
-      ${item.image_url?`<img src="${esc(item.image_url)}" alt="${esc(item.title)}">`:'<div style="height:100px;display:grid;place-items:center;background:#edf1eb">No photo</div>'}
+      ${item.image_url?`<img src="${esc(item.image_url)}" alt="${esc(item.title)}">`:'<div style="height:100px;display:grid;place-items:center;background:#f3f8fc">No photo</div>'}
       <strong>${esc(item.title)}</strong><small>${esc(item.tagline||"")}</small>
       <small>Order: ${Number(item.sort_order)||0} · ${item.is_active?"Published":"Hidden"}</small>
       <button type="button" data-edit-destination="${esc(item.id)}">Edit</button>
