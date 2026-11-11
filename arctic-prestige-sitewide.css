@@ -112,3 +112,47 @@ body :is(.site-topbar,header,.top){background:rgba(13,31,51,.97)!important;borde
 body :is(.related-guides,.related-links,.notice){background:#eaf2f7!important;border-color:#c8e2f1!important;color:#244b68!important}
 body :is(.btn,.button,.submit-btn,.primary){border:0!important;border-radius:999px!important;background:linear-gradient(120deg,#e4f2f8,#b9dced)!important;color:#142c46!important;box-shadow:none!important;font-weight:800!important}
 body :is(.btn.outline,.button.outline){background:transparent!important;color:#244b68!important;border:0!important;text-decoration:underline;text-underline-offset:4px}
+
+
+/* FINAL MOBILE CASCADE FIX — override legacy high-specificity transparent-header
+   and lime Build Your Trip rules that were defeating Arctic Prestige. */
+@media screen and (max-width:760px){
+  html body>header,
+  html body>header.is-scrolled,
+  html body>header.is-hidden{
+    background:rgba(10,29,49,.97)!important;
+    background-color:rgba(10,29,49,.97)!important;
+    background-image:none!important;
+    border:0!important;
+    border-bottom:1px solid rgba(217,237,248,.24)!important;
+    box-shadow:0 10px 32px rgba(7,23,41,.18)!important;
+    -webkit-backdrop-filter:blur(20px) saturate(150%)!important;
+    backdrop-filter:blur(20px) saturate(150%)!important;
+  }
+  html body>header .header-inner{
+    background:transparent!important;background-color:transparent!important;
+    background-image:none!important;border:0!important;box-shadow:none!important;
+  }
+  html body>header .glass-nav>a,
+  html body>header .glass-nav>.nav-dropdown>.nav-dropdown-toggle{
+    color:#f1f7fb!important;-webkit-text-fill-color:#f1f7fb!important;
+    background:linear-gradient(135deg,rgba(255,255,255,.15),rgba(255,255,255,.045))!important;
+    border:1px solid rgba(217,237,248,.28)!important;
+  }
+  html body>header .glass-nav .services-chevron{
+    color:#d9edf8!important;-webkit-text-fill-color:#d9edf8!important;
+  }
+  html body>.hero>.hero-content>.hero-build-cta-wrap>.hero-build-cta{
+    background:linear-gradient(120deg,#e8f5fc,#b9dcef)!important;
+    background-color:#c5e2f2!important;
+    background-image:linear-gradient(120deg,#e8f5fc,#b9dcef)!important;
+    color:#10243b!important;-webkit-text-fill-color:#10243b!important;
+    border:1px solid rgba(255,255,255,.92)!important;
+    box-shadow:0 8px 24px rgba(119,177,210,.22)!important;
+    animation:none!important;
+  }
+  html body>.hero>.hero-content>.hero-build-cta-wrap>.hero-build-cta:active{
+    background:linear-gradient(120deg,#e8f5fc,#b9dcef)!important;
+    color:#10243b!important;
+  }
+}
