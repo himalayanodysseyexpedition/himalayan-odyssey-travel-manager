@@ -55,3 +55,20 @@
   .mobile-app-dock{transition:none!important}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
 }
+
+/* Shared Arctic palette tokens for legacy sections that still consume the original theme variables. */
+:root{--forest:#10243b;--green:#294a66;--gold:#b9dcf2;--cream:#f6f9fb;--paper:#fff;--ink:#142b40;--muted:#667b8d;--line:#dce8f0}
+@media(max-width:760px){
+  .btn,.primary,.service button,.tabs button.active,.header-cta{background:linear-gradient(135deg,#e8f4fb,#b8dcef)!important;color:#10243b!important;border:1px solid rgba(255,255,255,.9)!important;box-shadow:0 8px 22px rgba(45,95,130,.13)!important}
+  .cart,.service,.review-panel,.package-card{border:1px solid rgba(69,112,145,.14)!important;border-radius:20px!important;background:rgba(255,255,255,.94)!important}
+  .guest-form input,.controls input,.toolbar input{border:1px solid #d6e5ef!important;border-radius:13px!important;background:#fbfdff!important;color:#142b40!important}
+  .tag,.hero small,.section-title small{color:#6b9fc0!important}
+  body:has(.guest-form) header{background:rgba(9,24,42,.96)!important}
+  body:has(.guest-form) .hero{background-image:linear-gradient(100deg,rgba(7,23,41,.94),rgba(7,23,41,.72)),url('/spiti.jpg')!important}
+  body:has(.guest-form) .hero small{color:#c5e4f6!important}
+  body:has(.guest-form) .hero p{color:#e5f1f8!important}
+  body:has(.guest-form) .tabs button{border-radius:999px!important;background:#fff!important;color:#294a66!important;border-color:#dce8f0!important}
+  body:has(.guest-form) .tabs button.active{background:linear-gradient(135deg,#e8f4fb,#b8dcef)!important;color:#10243b!important}
+  body:has(.guest-form) .cart h2,body:has(.guest-form) .intro h2{color:#10243b!important}
+  body:has(.guest-form) footer{background:#10243b!important;color:#e5f1f8!important}
+}
