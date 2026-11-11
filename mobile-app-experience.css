@@ -57,7 +57,7 @@
 }
 
 /* Shared Arctic palette tokens for legacy sections that still consume the original theme variables. */
-:root{--forest:#10243b;--green:#294a66;--gold:#b9dcf2;--cream:#f6f9fb;--paper:#fff;--ink:#142b40;--muted:#667b8d;--line:#dce8f0}
+@media(max-width:760px){:root{--forest:#10243b;--green:#294a66;--gold:#b9dcf2;--cream:#f6f9fb;--paper:#fff;--ink:#142b40;--muted:#667b8d;--line:#dce8f0}}
 @media(max-width:760px){
   .btn,.primary,.service button,.tabs button.active,.header-cta{background:linear-gradient(135deg,#e8f4fb,#b8dcef)!important;color:#10243b!important;border:1px solid rgba(255,255,255,.9)!important;box-shadow:0 8px 22px rgba(45,95,130,.13)!important}
   .cart,.service,.review-panel,.package-card{border:1px solid rgba(69,112,145,.14)!important;border-radius:20px!important;background:rgba(255,255,255,.94)!important}
