@@ -16,11 +16,33 @@ async function apiRequest(path,options={}){
  finally{clearTimeout(timer);}
 }
 const $=id=>document.getElementById(id);
+const todayISO=()=>{const now=new Date();return [now.getFullYear(),String(now.getMonth()+1).padStart(2,"0"),String(now.getDate()).padStart(2,"0")].join("-");};
 const travelDateInput=document.getElementById("travelDate");
-if(travelDateInput){const now=new Date(),localToday=[now.getFullYear(),String(now.getMonth()+1).padStart(2,"0"),String(now.getDate()).padStart(2,"0")].join("-");travelDateInput.min=localToday;}
+if(travelDateInput)travelDateInput.min=todayISO();
 const money=value=>"₹"+(Number(value)||0).toLocaleString("en-IN",{maximumFractionDigits:0});
 const esc=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 let services=[],cart=[],category="all",serviceDays={};
+const CART_DRAFT_KEY="hoe_trip_cart_v1";
+function saveCartDraft(){
+ try{
+  const items=cart.map(({id,days,nights,people,quantity})=>({id,days,nights,people,quantity}));
+  localStorage.setItem(CART_DRAFT_KEY,JSON.stringify({updatedAt:Date.now(),items}));
+ }catch(error){console.warn("Trip cart could not be saved on this device:",error);}
+}
+function restoreCartDraft(){
+ try{
+  const raw=localStorage.getItem(CART_DRAFT_KEY);if(!raw)return [];
+  const saved=JSON.parse(raw);
+  if(!saved||!Array.isArray(saved.items)||Date.now()-Number(saved.updatedAt||0)>7*24*60*60*1000){localStorage.removeItem(CART_DRAFT_KEY);return [];}
+  return saved.items.filter(item=>item&&services.some(service=>service.id===item.id)).map(item=>({
+   key:(crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random()),
+   id:item.id,days:Math.max(1,Math.min(100,Number(item.days)||1)),
+   nights:Math.max(1,Math.min(100,Number(item.nights)||1)),
+   people:Math.max(1,Math.min(100,Number(item.people)||1)),
+   quantity:Math.max(1,Math.min(10,Number(item.quantity)||1))
+  }));
+ }catch(error){console.warn("Saved trip cart could not be restored:",error);return [];}
+}
 const unitLabel={per_vehicle_day:"per vehicle / day",per_person_night:"per person / night",per_person:"per person"};
 const categoryLabel={cab:"Cab",hotel:"Hotel / Homestay",package:"Tour Package"};
 function priceFor(service,line){
@@ -44,12 +66,12 @@ function renderServices(){
 function addToCart(id){
  const service=services.find(x=>x.id===id);if(!service)return;
  const days=Math.max(1,Math.min(100,Number(serviceDays[id])||1));cart.push({key:(crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random()),id:service.id,days,nights:days,people:1,quantity:1});
- renderCart();
+ saveCartDraft();renderCart();
 }
 function changeLine(key,field,value){
  const line=cart.find(x=>x.key===key);if(!line)return;
  const number=Math.max(1,Math.min(100,Number(value)||1));
- line[field]=number;renderCart();
+ line[field]=number;saveCartDraft();renderCart();
 }
 function renderCart(){
  if(!cart.length){$("cartItems").innerHTML='<div class="cart-empty">Your cart is empty. Add a service to get started.</div>';$("grandTotal").textContent=money(0);return;}
@@ -76,7 +98,8 @@ async function load(){
  try{
   const rows=await apiRequest("marketplace_services?select=id,category,title,destination,description,price,price_unit,inventory,capacity,image_url,sort_order,created_at&is_active=eq.true&order=sort_order.asc,created_at.desc");
   services=Array.isArray(rows)?rows:[];
-  renderServices();
+  cart=restoreCartDraft();
+  renderCart();renderServices();
   if(!services.length)container.innerHTML='<div class="empty">No services are published yet. Please contact us on WhatsApp and we will help plan your trip.</div>';
  }catch(error){
   console.error("Build Your Trip catalogue failed:",error);
@@ -87,13 +110,15 @@ $("serviceCards").addEventListener("click",e=>{if(e.target.closest("[data-retry-
 $("tabs").addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(!b)return;category=b.dataset.category;$("tabs").querySelectorAll("button").forEach(x=>x.classList.toggle("active",x===b));renderServices();});
 $("search").addEventListener("input",renderServices);
 $("serviceCards").addEventListener("click",e=>{const step=e.target.closest("[data-day-step]");if(step){const id=step.dataset.dayStep;const next=Math.max(1,Math.min(100,(Number(serviceDays[id])||1)+Number(step.dataset.dir)));serviceDays[id]=next;const card=step.closest(".service");card.querySelector("[data-day-value]").textContent=next;card.querySelectorAll("[data-day-step]").forEach(x=>{if(x.dataset.dir==="-1")x.disabled=next===1;});card.querySelector("[data-add]").dataset.days=next;return;}const b=e.target.closest("[data-add]");if(b){serviceDays[b.dataset.add]=Number(b.dataset.days)||1;addToCart(b.dataset.add);}});
-$("cartItems").addEventListener("click",e=>{const b=e.target.closest("[data-remove]");if(b){cart=cart.filter(x=>x.key!==b.dataset.remove);renderCart();}});
+$("cartItems").addEventListener("click",e=>{const b=e.target.closest("[data-remove]");if(b){cart=cart.filter(x=>x.key!==b.dataset.remove);saveCartDraft();renderCart();}});
 $("cartItems").addEventListener("change",e=>{const input=e.target.closest("[data-line][data-field]");if(input)changeLine(input.dataset.line,input.dataset.field,input.value);});
 $("guestForm").addEventListener("submit",async e=>{
  e.preventDefault();const button=$("submitEnquiry"),status=$("status");
  if(!cart.length){status.textContent="Please add at least one service to your trip.";return;}
  const name=$("guestName").value.trim(),phone=$("guestPhone").value.trim(),date=$("travelDate").value,total=currentTotal();
- if(!/^[+0-9 ()-]{10,18}$/.test(phone)){status.textContent="Please enter a valid mobile number.";return;}
+ const phoneDigits=phone.replace(/\\D/g,"");
+ if(!/^[+0-9 ()-]{10,18}$/.test(phone)||phoneDigits.length<10||phoneDigits.length>15){status.textContent="Please enter a valid mobile number with 10–15 digits.";return;}
+ if(date&&date<todayISO()){status.textContent="Please choose today or a future travel date.";return;}
  const selections=cart.map(line=>{const s=services.find(x=>x.id===line.id);return {service_id:s.id,category:s.category,title:s.title,destination:s.destination,unit_price:Number(s.price),price_unit:s.price_unit,days:line.days,nights:line.nights,people:line.people,vehicles:line.quantity,line_total:priceFor(s,line)};});
  button.disabled=true;status.textContent="Saving your enquiry…";
  try{
