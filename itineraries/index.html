@@ -26,9 +26,34 @@
 <link rel="stylesheet" href="/mobile-app-experience.css?v=1">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="stylesheet" href="/arctic-prestige-sitewide.css?v=4">
+<link rel="stylesheet" href="/navigation-capsule.css?v=32">
+<link rel="stylesheet" href="/mobile-layout.css?v=24">
 </head>
 <body>
-<header class="top"><a href="/"><strong>HIMALAYAN ODYSSEY <span style="color:#c6a36a">EXPEDITION</span></strong></a><nav aria-label="Main navigation"><a href="/">Home</a><a href="/packages/">Packages</a><a href="/services/">Services</a><a href="/marketplace/">Cabs & Stays</a></nav></header>
+<header class="sitewide-header">
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="Himalayan Odyssey Expedition — Home">
+      <img src="/logo.webp" alt="Himalayan Odyssey Expedition">
+    </a>
+    <nav class="glass-nav" aria-label="Main navigation">
+      <a href="/destinations/"><span>Destinations</span></a>
+      <a href="/packages/#upcoming-packages"><span>Upcoming Tours</span></a>
+      <a href="/itineraries/"><span>Itinerary</span></a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="servicesMenu"><span>Services</span></button>
+        <span class="services-chevron" aria-hidden="true">⌄</span>
+        <div class="nav-dropdown-menu" id="servicesMenu">
+          <a href="/services/">All Services &amp; B2B Partners</a>
+          <a href="/build-your-trip/">Build Your Trip</a>
+          <a href="/marketplace/">Cabs &amp; Hotels Marketplace</a>
+          <a href="/suppliers/">List Your Vehicle or Property</a>
+          <a href="/travel-guides/">Travel Guides</a>
+        </div>
+      </div>
+    </nav>
+    <a class="header-cta" href="/build-your-trip/" aria-label="Plan your trip">Plan Your Trip</a>
+  </div>
+</header>
 <section class="hero"><small>PLAN WITH CLARITY</small><h1>Himalayan Tour Itineraries</h1><p>Explore trip routes, destinations, durations and brochure PDFs for journeys curated by Himalayan Odyssey Expedition.</p></section>
 <main class="wrap"><div id="itineraryResults" class="grid"><div class="status">Loading published itineraries…</div></div>
  <section class="seo-section" aria-labelledby="itinerary-guide-title">
@@ -72,4 +97,6 @@ async function loadItineraries(){
 loadItineraries();
 </script>
 <script src="/mobile-app-experience.js?v=1" defer></script>
+<script src="/header-scroll.js?v=2" defer></script>
+<script src="/site-navigation.js?v=1" defer></script>
 </body></html>
