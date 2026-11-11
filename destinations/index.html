@@ -18,7 +18,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/navigation-capsule.css?v=2">
 <style>
 :root{--forest:#0b211d;--green:#173c36;--gold:#c6a36a;--champagne:#ead6ae;--cream:#f8f6ef;--ink:#263b34;--muted:#718078;--serif:"Cormorant Garamond",Georgia,serif;--sans:"DM Sans",Arial,sans-serif}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font:15px/1.7 var(--sans)}
@@ -59,16 +58,33 @@ footer a{color:#f1dfbd}
 <link rel="stylesheet" href="/manrope-body.css?v=1">
 <link rel="stylesheet" href="/mobile-app-experience.css?v=1">
 <link rel="manifest" href="/manifest.webmanifest">
+<link rel="stylesheet" href="/mobile-layout.css?v=24">
 <link rel="stylesheet" href="/arctic-prestige-sitewide.css?v=4">
+<link rel="stylesheet" href="/navigation-capsule.css?v=33">
 </head>
 <body>
-<header><div class="header-inner">
-<a class="brand" href="/" aria-label="Himalayan Odyssey Expedition home"><img src="/logo.webp" alt="Himalayan Odyssey Expedition"><span class="brand-wordmark">ODYSSEY</span></a>
-<nav class="glass-nav" aria-label="Main navigation">
-<a href="/destinations/">Destinations</a><a href="/#upcoming-packages">Upcoming Tours</a><a href="/#itineraries">Itinerary</a><a href="/services/">Services</a>
-</nav>
-<a class="header-cta" href="/build-your-trip/">Plan Your Trip</a>
-</div></header>
+<header class="sitewide-header">
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="Himalayan Odyssey Expedition — Home"><img src="/logo.webp" alt="Himalayan Odyssey Expedition"></a>
+    <nav class="glass-nav" aria-label="Main navigation">
+      <a href="/destinations/"><span>Destinations</span></a>
+      <a href="/packages/#packageList"><span>Upcoming Tours</span></a>
+      <a href="/itineraries/"><span>Itinerary</span></a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="servicesMenu"><span>Services</span></button>
+        <span class="services-chevron" aria-hidden="true">⌄</span>
+        <div class="nav-dropdown-menu" id="servicesMenu">
+          <a href="/services/">All Services &amp; B2B Partners</a>
+          <a href="/build-your-trip/">Build Your Trip</a>
+          <a href="/marketplace/">Cabs &amp; Hotels Marketplace</a>
+          <a href="/suppliers/">List Your Vehicle or Property</a>
+          <a href="/travel-guides/">Travel Guides</a>
+        </div>
+      </div>
+    </nav>
+    <a class="header-cta" href="/build-your-trip/" aria-label="Plan your trip">Plan Your Trip</a>
+  </div>
+</header>
 <main>
 <div class="page-heading"><small>EXPLORE THE MOUNTAINS</small><h1>Discover Our Destinations</h1><p>From high-altitude valleys to cedar-lined mountain towns, explore the places that make Himachal unforgettable. Swipe to discover each destination.</p></div>
 <div class="destination-rail" id="destinationsCarousel" tabindex="0" aria-label="Swipe through Himachal destinations">
@@ -111,4 +127,6 @@ footer a{color:#f1dfbd}
 })();
 </script>
 <script src="/mobile-app-experience.js?v=1" defer></script>
+<script src="/header-scroll.js?v=2" defer></script>
+<script src="/site-navigation.js?v=1" defer></script>
 </body></html>
