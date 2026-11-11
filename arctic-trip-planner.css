@@ -1,0 +1,81 @@
+/* Arctic Prestige — Build Your Trip app-like experience */
+:root{--ap-ink:#142b40;--ap-navy:#10243b;--ap-blue:#294a66;--ap-ice:#d9edf8;--ap-pale:#f3f8fc;--ap-white:#fff;--ap-muted:#6c8294;--ap-line:#dce8f0;--ap-shadow:0 18px 48px rgba(16,36,59,.09)}
+html{scroll-behavior:smooth}
+body{background:linear-gradient(180deg,#f7fbfe 0%,#edf4f9 100%)!important;color:var(--ap-ink)!important;font-family:"General Sans","DM Sans",sans-serif!important}
+header{position:relative;background:rgba(10,29,49,.97)!important;color:#f5fbff!important;padding:13px clamp(16px,5vw,72px)!important;border-bottom:1px solid rgba(217,237,248,.16);box-shadow:0 10px 32px rgba(7,23,41,.13)}
+header img{width:174px!important;max-height:58px}
+header nav{color:#d8eaf5!important;gap:clamp(12px,2vw,26px)!important}
+header nav a{transition:color .2s ease}
+header nav a:hover{color:#fff}
+.hero{position:relative;isolation:isolate;min-height:330px;padding:clamp(52px,7vw,92px) clamp(20px,8vw,120px)!important;background-image:linear-gradient(90deg,rgba(6,22,39,.94),rgba(9,32,53,.72) 58%,rgba(9,32,53,.28)),url('/spiti.jpg')!important;background-position:center 48%!important;background-size:cover!important}
+.hero:after{content:"";position:absolute;z-index:-1;inset:auto 0 0;height:1px;background:linear-gradient(90deg,transparent,rgba(217,237,248,.8),transparent)}
+.hero small,.tag{color:#b9dcef!important;letter-spacing:.18em!important;font-weight:700}
+.hero h1{max-width:820px;color:#fff!important;font-family:"Bodoni Moda","Cormorant Garamond",serif!important;font-size:clamp(44px,6.3vw,76px)!important;letter-spacing:-.035em}
+.hero p{max-width:640px;color:#e3eff7!important;font-size:clamp(14px,1.4vw,17px)}
+.wrap{max-width:1360px!important;margin:42px auto!important;padding:0 clamp(16px,3vw,42px) 100px!important}
+.intro{max-width:760px!important;margin-bottom:34px!important}
+.intro h2,.cart h2,.service h3{color:var(--ap-navy)!important;font-family:"Bodoni Moda","Cormorant Garamond",serif!important}
+.intro h2{font-size:clamp(34px,4vw,46px)!important;letter-spacing:-.025em}
+.intro p,.muted,.desc,.fine{color:var(--ap-muted)!important}
+.toolbar{gap:14px!important;margin:24px 0!important}
+.tabs{gap:8px!important}
+.tabs button,.toolbar input{border:1px solid var(--ap-line)!important;border-radius:999px!important;background:#fff!important;color:var(--ap-blue)!important;padding:12px 18px!important;box-shadow:0 4px 14px rgba(16,36,59,.035);font-weight:700!important}
+.tabs button.active{background:var(--ap-navy)!important;color:#fff!important;border-color:var(--ap-navy)!important;box-shadow:0 8px 22px rgba(16,36,59,.18)!important}
+.toolbar input{min-height:46px;min-width:min(280px,100%)!important}
+.layout{grid-template-columns:minmax(0,1fr) minmax(320px,380px)!important;gap:26px!important}
+.cards{gap:18px!important;padding:5px 3px 22px!important}
+.cards .service{flex-basis:min(410px,calc(50% - 9px))!important}
+.service,.cart{border:1px solid rgba(89,132,164,.16)!important;border-radius:24px!important;background:rgba(255,255,255,.96)!important;box-shadow:var(--ap-shadow)!important;overflow:hidden}
+.service{transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease}
+@media(hover:hover){.service:hover{transform:translateY(-5px);box-shadow:0 24px 56px rgba(16,36,59,.14)!important;border-color:rgba(93,153,190,.4)!important}}
+.service img,.service-placeholder{height:210px!important}
+.service-body{padding:20px!important}
+.service h3{font-size:29px!important;line-height:1.12!important}
+.tag{color:#6595b4!important;font-size:10px!important}
+.price{color:var(--ap-navy)!important;font-size:19px!important}
+.service button,.primary,.guest-form button{background:linear-gradient(135deg,#e8f5fc,#c4e2f2)!important;color:#10243b!important;border:1px solid rgba(255,255,255,.95)!important;border-radius:14px!important;min-height:48px;padding:13px 18px!important;font:800 12px/1.2 "Montserrat","General Sans",sans-serif!important;letter-spacing:.035em!important;box-shadow:0 9px 22px rgba(45,95,130,.14)!important;transition:transform .18s ease,box-shadow .18s ease}
+.service button:hover,.primary:hover,.guest-form button:hover{transform:translateY(-2px);box-shadow:0 13px 28px rgba(45,95,130,.2)!important}
+.stepper button{min-height:34px!important;width:36px!important;padding:0!important;border-radius:11px!important}
+.stepper output{color:var(--ap-navy)!important}
+.cart{position:sticky!important;top:18px!important;padding:24px!important;overflow:visible}
+.cart h2{font-size:34px!important}
+.cart-line{border-color:var(--ap-line)!important}
+.line-head b,.line-total,.total strong{color:var(--ap-navy)!important}
+.controls input,.guest-form input{border:1px solid var(--ap-line)!important;border-radius:12px!important;background:#fafdff!important;color:var(--ap-ink)!important;min-height:44px;padding:10px 12px!important}
+.guest-form{border-color:var(--ap-line)!important}
+.guest-form label{color:#425d73!important}
+.total{border-color:var(--ap-line)!important}
+.total strong{font-family:"Bodoni Moda","Cormorant Garamond",serif!important;font-size:30px!important}
+.empty{border:1px solid var(--ap-line);border-radius:20px!important;background:#fff!important;padding:40px!important}
+footer{background:var(--ap-navy)!important;color:#dceaf4!important;padding:30px 18px!important}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #8bc5e3!important;outline-offset:3px!important}
+@media(max-width:900px){.layout{grid-template-columns:minmax(0,1fr)!important}.cart{position:static!important}.cards .service{flex-basis:min(390px,calc(50% - 9px))!important}}
+@media(max-width:580px){
+ header{padding:10px 15px!important;gap:10px!important}
+ header img{width:132px!important}
+ header nav{gap:9px!important;font-size:9px!important;letter-spacing:.04em!important}
+ .hero{min-height:300px;padding:48px 22px!important;background-position:58% center!important}
+ .hero h1{font-size:clamp(42px,11vw,54px)!important;line-height:1.02!important}
+ .hero p{font-size:14px!important;line-height:1.6}
+ .wrap{margin:28px auto!important;padding:0 14px calc(112px + env(safe-area-inset-bottom))!important}
+ .intro{margin-bottom:20px!important}
+ .intro h2{font-size:34px!important}
+ .toolbar{margin:15px 0 18px!important}
+ .tabs{padding:2px 1px 7px!important}
+ .tabs button{padding:11px 15px!important;font-size:11px!important}
+ .toolbar input{width:100%;min-width:0!important}
+ .layout{display:flex!important;flex-direction:column!important;gap:18px!important}
+ .layout>section{order:0!important;width:100%!important}
+ .cards{gap:12px!important;padding:4px 1px 16px!important}
+ .cards .service{flex:0 0 86%!important;max-width:370px!important}
+ .service,.cart{border-radius:22px!important}
+ .service img,.service-placeholder{height:188px!important}
+ .service-body{padding:16px!important}
+ .service h3{font-size:27px!important}
+ .cart{order:1!important;width:100%!important;padding:19px!important}
+ .cart h2{font-size:31px!important}
+ .guest-form input{min-height:48px!important}
+ .guest-form button{width:100%!important;min-height:54px!important;font-size:12px!important}
+ .status{line-height:1.5!important}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
