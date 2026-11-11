@@ -118,3 +118,19 @@
     background:rgba(9,24,42,.88)!important;
   }
 }
+
+
+/* FINAL MOBILE DOCK LAYER — opaque enough to prevent legacy content showing through. */
+@media(max-width:760px){
+  body{padding-bottom:calc(94px + env(safe-area-inset-bottom))!important}
+  .mobile-app-dock{
+    z-index:1100!important;
+    background:rgba(246,250,253,.985)!important;
+    -webkit-backdrop-filter:blur(26px) saturate(150%)!important;
+    backdrop-filter:blur(26px) saturate(150%)!important;
+    border:1px solid rgba(169,205,228,.72)!important;
+    box-shadow:0 12px 34px rgba(8,25,44,.22),inset 0 1px 0 rgba(255,255,255,.98)!important;
+    isolation:isolate!important;
+  }
+  .mobile-app-dock.is-hidden{pointer-events:none!important}
+}
