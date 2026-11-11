@@ -34,9 +34,8 @@ header nav a,.top nav a{color:#d8eaf5!important}
  background-color:#10243b!important;
 }
 .hero small,.eyebrow,.section-kicker,.section-title small,.tag{color:#6794b1!important}
-.hero h1,.page-heading h1,.section-title h2,.content h2,.section-inner h2{
- color:#10243b!important;
-}
+.hero h1,.page-hero h1,.destination-hero h1{color:#fff!important;text-shadow:0 4px 24px rgba(0,0,0,.28)}
+.page-heading h1,.section-title h2,.content h2,.section-inner h2{color:#10243b!important;}
 .hero h1,.page-heading h1,.section-title h2,.content h2,.section-inner h2,
 .package-slide h3,.guide-card h3,.itinerary-slide h3,.cab-card h3,.hotel-card h3,.card h3{
  font-family:"Bodoni Moda","Cormorant Garamond",Georgia,serif!important;
