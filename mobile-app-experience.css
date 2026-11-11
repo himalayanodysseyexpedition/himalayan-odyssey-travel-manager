@@ -72,3 +72,12 @@
   body:has(.guest-form) .cart h2,body:has(.guest-form) .intro h2{color:#10243b!important}
   body:has(.guest-form) footer{background:#10243b!important;color:#e5f1f8!important}
 }
+
+/* Booking form comfort: keep anchor targets clear of the floating dock. */
+@media(max-width:760px){
+  body:has(.guest-form) #guestForm{scroll-margin-top:118px;scroll-margin-bottom:calc(104px + env(safe-area-inset-bottom))}
+  body:has(.guest-form) .guest-form label{font-size:12px!important;letter-spacing:.01em}
+  body:has(.guest-form) .guest-form input{padding:13px 14px!important}
+  body:has(.guest-form) .guest-form button{min-height:54px!important;width:100%;white-space:normal;line-height:1.35}
+  body:has(.guest-form) .status{min-height:24px;line-height:1.5}
+}
