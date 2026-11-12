@@ -1432,8 +1432,10 @@
   <div class="htp-shell">
    <div class="htp-main">
     <div class="htp-step">
-     <div class="htp-step-head"><span class="htp-step-number">1</span><div><h3>Choose your destinations</h3><p class="htp-help">Add nights with + and reduce them with −. Every destination starts at zero.</p></div></div>
-     <div class="htp-destinations" id="htpDestinations"></div>
+     <div class="htp-step-head"><span class="htp-step-number">1</span><div><h3>Location</h3><p class="htp-help">Choose a destination from the list. You can add multiple locations to your trip.</p></div></div>
+     <label class="htp-location-label" for="htpLocationSelect">Select location</label>
+     <select id="htpLocationSelect" class="htp-location-select" aria-label="Select a destination"><option value="">Choose a destination</option></select>
+     <div class="htp-destinations" id="htpDestinations" aria-live="polite"></div>
     </div>
     <div class="htp-step">
      <div class="htp-step-head"><span class="htp-step-number">2</span><div><h3>Travel dates</h3><p class="htp-help">Select your departure and return dates.</p></div></div>
