@@ -47,3 +47,28 @@
 @media(max-width:760px){.home-trip-planner .htp-shell{grid-template-columns:1fr}.home-trip-planner .htp-summary{position:static;order:-1}.home-trip-planner .htp-main{padding:16px}.home-trip-planner .htp-destinations{grid-template-columns:1fr}.home-trip-planner .htp-destination{padding:10px 12px}.home-trip-planner .htp-summary{padding:17px}}
 @media(max-width:380px){.home-trip-planner .htp-fields{grid-template-columns:1fr}.home-trip-planner .htp-travellers{align-items:stretch;flex-direction:column}.home-trip-planner .htp-travellers select{max-width:none}}
 @media(prefers-reduced-motion:reduce){.home-trip-planner *{scroll-behavior:auto!important;transition:none!important}}
+
+
+/* Compact Design Your Journey WhatsApp enquiry summary */
+.home-trip-planner .htp-summary .htp-summary-row,
+.home-trip-planner .htp-summary .htp-per-person,
+.home-trip-planner .htp-summary .htp-fine {
+  display: none !important;
+}
+.home-trip-planner .htp-summary {
+  padding: 18px !important;
+}
+.home-trip-planner .htp-summary h3 {
+  margin-bottom: 8px !important;
+}
+.home-trip-planner .htp-summary .htp-total {
+  border-top: 0 !important;
+  padding: 8px 0 14px !important;
+  margin-top: 0 !important;
+}
+.home-trip-planner .htp-summary .htp-total strong {
+  font-size: clamp(30px, 4vw, 38px) !important;
+}
+.home-trip-planner .htp-summary .htp-cta {
+  margin-top: 2px !important;
+}
