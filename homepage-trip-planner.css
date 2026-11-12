@@ -154,3 +154,24 @@
 .home-trip-planner .htp-stepper output{min-width:16px;text-align:center;font-size:12px;font-weight:700}
 .home-trip-planner .htp-stepper .htp-remove{font-size:18px}
 @media(max-width:760px){.home-trip-planner .htp-destination{padding:9px 10px}.home-trip-planner .htp-stepper{gap:5px}}
+
+
+/* Destination picker typography and clear name/price hierarchy */
+.home-trip-planner .htp-location-select,
+.home-trip-planner .htp-destination,
+.home-trip-planner .htp-destination strong,
+.home-trip-planner .htp-destination .htp-rate,
+.home-trip-planner .htp-destination .htp-rate small {
+  font-family:"General Sans",Arial,sans-serif!important;
+}
+.home-trip-planner .htp-location-select { letter-spacing:.01em; }
+.home-trip-planner .htp-destination { gap:16px!important; }
+.home-trip-planner .htp-destination>div:first-child { gap:5px!important; }
+.home-trip-planner .htp-destination strong {font-size:12px!important;font-weight:600!important;letter-spacing:.01em}
+.home-trip-planner .htp-destination .htp-rate {display:flex!important;flex-direction:column;gap:1px!important;margin-top:0!important}
+.home-trip-planner .htp-destination .htp-rate strong {font-size:13px!important;font-weight:600!important;color:#183b56!important}
+.home-trip-planner .htp-destination .htp-rate small {font-size:9px!important;line-height:1.25!important;color:#8293a1!important;font-weight:400!important}
+@media(max-width:760px){
+ .home-trip-planner .htp-destination {padding:10px 11px!important}
+ .home-trip-planner .htp-destination .htp-rate strong {font-size:12px!important}
+}
