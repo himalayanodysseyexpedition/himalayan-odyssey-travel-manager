@@ -56,11 +56,13 @@
   calculate();
  }
  root.addEventListener("click",e=>{
-  const add=e.target.closest("[data-add-place]");
+  const target=e.target instanceof Element?e.target:null;
+  if(!target)return;
+  const add=target.closest("[data-add-place]");
   if(add){const n=add.dataset.addPlace;if(!Object.prototype.hasOwnProperty.call(nights,n)){nights[n]=1;renderLocationCards();renderDestinations();calculate();}return;}
-  const remove=e.target.closest("[data-remove-place]");
+  const remove=target.closest("[data-remove-place]");
   if(remove){delete nights[remove.dataset.removePlace];renderLocationCards();renderDestinations();calculate();return;}
-  const b=e.target.closest("[data-place][data-delta]");if(!b)return;
+  const b=target.closest("[data-place][data-delta]");if(!b)return;
   const n=b.dataset.place,delta=Number(b.dataset.delta);
   if(delta<0&&nights[n]<=1){delete nights[n];renderLocationCards();renderDestinations();}
   else{nights[n]=Math.max(1,nights[n]+delta);$("htpNight-"+n).textContent=String(nights[n]);}
