@@ -431,3 +431,9 @@
  color:#fff!important;
  border-color:#111!important;
 }
+
+
+/* Match the outer journey-planner section background to Upcoming Packages. */
+.home-trip-planner{
+ background:linear-gradient(180deg,#f6f4ed 0%,#e9ede7 100%)!important;
+}
