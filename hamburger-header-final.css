@@ -283,3 +283,60 @@ html body > header .nav-dropdown.open .services-chevron-icon { transform: rotate
     line-height: 2 !important;
   }
 }
+
+
+/* Compact mobile black header refinement — v7 */
+@media (max-width: 760px) {
+  html body > header,
+  html body > header.is-scrolled,
+  html body > header.is-hidden,
+  html body > header.menu-open {
+    height: 88px !important;
+    min-height: 88px !important;
+    max-height: 88px !important;
+  }
+  html body > header .header-inner {
+    height: 88px !important;
+    min-height: 88px !important;
+    max-height: 88px !important;
+    padding: 0 12px 0 0 !important;
+    gap: 8px !important;
+  }
+  html body > header .header-inner > a.brand {
+    max-width: calc(100vw - 82px) !important;
+    margin: 0 auto 0 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+  }
+  html body > header .header-inner > a.brand > img {
+    width: clamp(190px, 34vw, 225px) !important;
+    max-width: 100% !important;
+    max-height: 64px !important;
+    height: auto !important;
+    object-fit: contain !important;
+  }
+  html body > header .header-menu-toggle {
+    width: 54px !important;
+    height: 54px !important;
+    min-width: 54px !important;
+    min-height: 54px !important;
+    flex: 0 0 54px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+  }
+  html body > header .header-menu-toggle svg {
+    width: 34px !important;
+    height: 34px !important;
+  }
+  html body > header .header-menu-toggle svg path {
+    stroke: #fff !important;
+    stroke-width: 2.4 !important;
+    stroke-linecap: round !important;
+  }
+}
