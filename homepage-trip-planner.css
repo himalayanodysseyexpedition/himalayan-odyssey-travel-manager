@@ -742,3 +742,11 @@
 .home-trip-planner .htp-traveller-control output{min-width:22px;text-align:center;color:#10243b;font-size:16px;font-weight:800}
 .home-trip-planner .htp-traveller-control button:focus-visible{outline:3px solid #8bc5e3;outline-offset:2px}
 @media(max-width:380px){.home-trip-planner .htp-travellers{align-items:center;flex-direction:row}.home-trip-planner .htp-traveller-control{gap:9px}}
+
+/* Black +/- controls for selected destinations and vehicle days */
+.home-trip-planner #htpDestinations .htp-stepper button:not(.htp-remove),
+.home-trip-planner .htp-vehicle-days-control button{background:#111!important;border-color:#111!important;color:#fff!important;}
+.home-trip-planner #htpDestinations .htp-stepper button:not(.htp-remove):hover,
+.home-trip-planner .htp-vehicle-days-control button:hover{background:#292929!important;border-color:#292929!important;color:#fff!important;}
+.home-trip-planner #htpDestinations .htp-stepper button:not(.htp-remove):active,
+.home-trip-planner .htp-vehicle-days-control button:active{background:#000!important;color:#fff!important;}
