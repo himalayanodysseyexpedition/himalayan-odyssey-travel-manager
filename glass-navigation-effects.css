@@ -7,13 +7,21 @@
 }
 
 @media (max-width: 700px) {
-}/* MOBILE SERVICES NAV REPAIR: match the other three icon-over-label pills. */
-@media screen and (max-width: 700px){
+}
+
+
+/* MOBILE SERVICES NAV REPAIR: match the other three icon-over-label pills. */
+@media screen and (max-width: 700px) {
 }
 @media (max-width: 700px) {
-}/* Keep the mobile Services pill the same full column width as its peers;
+}
+
+/* Keep the mobile Services pill the same full column width as its peers;
    place its disclosure chevron just outside the pill without taking layout space. */
-@media (max-width: 700px){
-}/* FINAL MOBILE NAV WIDTH FIX: four equal columns; Services chevron sits outside. */
-@media screen and (max-width: 640px){
+@media (max-width: 700px) {
+}
+
+
+/* FINAL MOBILE NAV WIDTH FIX: four equal columns; Services chevron sits outside. */
+@media screen and (max-width: 640px) {
 }
