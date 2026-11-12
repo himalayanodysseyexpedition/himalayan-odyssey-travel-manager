@@ -44,6 +44,15 @@ body>header nav button{background:transparent!important;color:#444!important;bor
 body>header nav button:hover,body>header nav button.active{
   background:#111!important;color:#fff!important;border-color:#111!important;
 }
+#app>nav{
+  background:rgba(255,255,255,.92)!important;border:1px solid var(--admin-line)!important;
+  border-radius:999px!important;box-shadow:0 5px 18px rgba(0,0,0,.045)!important;
+  scrollbar-color:#c8c8c5 transparent!important;
+}
+#app>nav button{background:transparent!important;color:#444!important;border:1px solid transparent!important;box-shadow:none!important}
+#app>nav button:hover,#app>nav button.active{background:#111!important;color:#fff!important;border-color:#111!important}
+#app>nav a{background:#111!important;color:#fff!important;border:1px solid #111!important;border-radius:999px!important}
+#app>nav a:hover{background:#333!important;color:#fff!important}
 body :is(button,input[type=button],input[type=submit],.btn,.button){
   border:1px solid #111!important;border-radius:999px!important;
   background:#111!important;color:#fff!important;box-shadow:none!important;
