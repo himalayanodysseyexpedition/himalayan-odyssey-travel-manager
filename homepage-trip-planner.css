@@ -734,3 +734,11 @@
 .home-trip-planner .htp-vehicle-days-control input::-webkit-inner-spin-button,
 .home-trip-planner .htp-vehicle-days-control input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 .home-trip-planner .htp-vehicle-days-control input[type=number]{-moz-appearance:textfield}
+
+/* Traveller count stepper */
+.home-trip-planner .htp-travellers{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.home-trip-planner .htp-traveller-control{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.home-trip-planner .htp-traveller-control button{width:36px;height:36px;border:1px solid #c9dbe8;border-radius:10px;background:#fff;color:#183d5b;font-size:22px;line-height:1;cursor:pointer;touch-action:manipulation}
+.home-trip-planner .htp-traveller-control output{min-width:22px;text-align:center;color:#10243b;font-size:16px;font-weight:800}
+.home-trip-planner .htp-traveller-control button:focus-visible{outline:3px solid #8bc5e3;outline-offset:2px}
+@media(max-width:380px){.home-trip-planner .htp-travellers{align-items:center;flex-direction:row}.home-trip-planner .htp-traveller-control{gap:9px}}
