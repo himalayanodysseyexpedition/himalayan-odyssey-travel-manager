@@ -561,3 +561,10 @@
   transform:scale(.985)!important;
  }
 }
+
+
+/* Match the Plan Your Himalayan Trip outer section to Upcoming Packages. */
+.home-trip-planner{
+  background:linear-gradient(180deg,#eaf2f9 0%,#f7f9fc 100%)!important;
+  background-color:#eaf2f9!important;
+}
