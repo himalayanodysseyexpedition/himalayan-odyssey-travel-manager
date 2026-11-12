@@ -11,37 +11,14 @@
   html,body{max-width:100%;overflow-x:hidden}
   body{background:var(--mobile-paper);-webkit-text-size-adjust:100%}
   img,svg{max-width:100%}
-  .header-inner{
-    width:100%!important;min-height:0!important;
-    display:flex!important;flex-direction:column!important;align-items:center!important;
-    justify-content:center!important;gap:5px!important;
-    padding:7px 12px 10px!important;
-  }
   .brand{margin:0 auto!important;padding:3px 10px!important}
   .brand img{width:auto!important;max-width:190px!important;max-height:43px!important}
-  .glass-nav{
-    order:2!important;display:flex!important;align-items:center!important;
-    justify-content:space-between!important;gap:clamp(5px,2vw,12px)!important;
-    width:100%!important;max-width:560px!important;margin:0!important;
-    padding:2px 3px!important;overflow-x:auto!important;overflow-y:visible!important;
-    scrollbar-width:none!important;background:transparent!important;border:0!important;
-    border-radius:0!important;box-shadow:none!important;
-  }
   .nav-dropdown-menu{
     top:calc(100% + 8px)!important;right:0!important;left:auto!important;
     min-width:min(245px,calc(100vw - 28px))!important;
     padding:8px!important;border:1px solid rgba(169,216,242,.48)!important;
     border-radius:13px!important;background:rgba(16,36,59,.985)!important;
     box-shadow:0 16px 36px rgba(0,0,0,.3)!important;
-  }
-  .header-cta{
-    order:3!important;display:inline-flex!important;align-items:center!important;
-    justify-content:center!important;min-height:35px!important;
-    margin:0 auto!important;padding:8px 21px!important;
-    border:1px solid rgba(169,216,242,.88)!important;border-radius:999px!important;
-    background:linear-gradient(135deg,#e1f3fc,#a9d8f2)!important;
-    color:#10243d!important;font-size:9px!important;letter-spacing:1.2px!important;
-    box-shadow:0 5px 16px rgba(0,0,0,.16)!important;
   }
 
   /* Hero: same cinematic image, navy overlay, typography and ice-blue accent as desktop */
@@ -186,7 +163,6 @@
 }
 @media(max-width:380px){
   .header-inner{padding-left:8px!important;padding-right:8px!important}
-  .glass-nav{gap:5px!important}
   .brand img{max-width:168px!important}
   .hero-animated-heading{font-size:clamp(36px,10vw,43px)!important}
   .destination-grid{gap:8px!important}
