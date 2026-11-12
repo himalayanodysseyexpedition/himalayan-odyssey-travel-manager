@@ -3015,7 +3015,7 @@ footer{background:#10243b!important;border-top:1px solid rgba(200,226,241,.24)!i
 <link rel="stylesheet" href="/homepage-redesign.css?v=13">
 <link rel="stylesheet" href="/arctic-prestige.css?v=2">
 <link rel="stylesheet" href="/arctic-prestige-sitewide.css?v=5">
-<link rel="stylesheet" href="/homepage-hero-final.css?v=4">
+<link rel="stylesheet" href="/homepage-hero-final.css?v=5">
 </head>
 
 <body>
@@ -4697,6 +4697,37 @@ header .header-inner > a.brand .brand-wordmark{
 }
 @media(prefers-reduced-motion:reduce){
   #home.hero .hero-content{animation:none!important}
+}
+</style>
+
+<style id="hero-three-line-font-spacing-final">
+/* One shared Bodoni Moda typeface, weight and size for all three headline lines. */
+#home.hero .hero-animated-heading{
+  font-family:"Bodoni Moda","Cormorant Garamond",Georgia,serif!important;
+  font-weight:600!important;
+  line-height:1!important;
+  letter-spacing:-.065em!important;
+  gap:.10em!important;
+}
+#home.hero .hero-animated-heading>.hero-heading-prefix,
+#home.hero .hero-animated-heading>.hero-word-slot,
+#home.hero .hero-animated-heading>.hero-heading-suffix,
+#home.hero .hero-animated-heading #heroRotatingWord{
+  font-family:inherit!important;
+  font-size:inherit!important;
+  font-weight:inherit!important;
+  letter-spacing:inherit!important;
+  line-height:inherit!important;
+}
+@media(max-width:760px){
+  #home.hero .hero-animated-heading{
+    font-size:clamp(43px,12.2vw,66px)!important;
+    line-height:1!important;
+    gap:.10em!important;
+  }
+}
+@media(max-width:380px){
+  #home.hero .hero-animated-heading{font-size:clamp(40px,11.8vw,45px)!important}
 }
 </style>
 
