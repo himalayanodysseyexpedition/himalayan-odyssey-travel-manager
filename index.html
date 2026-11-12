@@ -3005,6 +3005,7 @@ footer{background:#10243b!important;border-top:1px solid rgba(200,226,241,.24)!i
 <link rel="stylesheet" href="/arctic-prestige-sitewide.css?v=4">
 <link rel="stylesheet" href="/navigation-capsule.css?v=36">
 
+<link rel="stylesheet" href="/homepage-trip-planner.css?v=1">
 </head>
 
 <body>
@@ -3137,6 +3138,55 @@ footer{background:#10243b!important;border-top:1px solid rgba(200,226,241,.24)!i
     <p class="guides-swipe-hint">SWIPE TO EXPLORE <span>·</span> OR USE THE ARROWS</p>
 
   </div>
+</section>
+
+
+<!-- HOMEPAGE LIVE TRIP PLANNER -->
+<section class="home-trip-planner" id="plan-your-trip">
+ <div class="htp-inner">
+  <div class="htp-heading">
+   <span class="htp-eyebrow">DESIGN YOUR OWN JOURNEY</span>
+   <h2>Plan Your Himalayan Trip</h2>
+   <p>Choose your destinations, stay nights, travel dates and vehicle. Your estimate updates as you plan.</p>
+  </div>
+  <div class="htp-shell">
+   <div class="htp-main">
+    <div class="htp-step">
+     <div class="htp-step-head"><span class="htp-step-number">1</span><div><h3>Choose your destinations</h3><p class="htp-help">Add nights with + and reduce them with −. Every destination starts at zero.</p></div></div>
+     <div class="htp-destinations" id="htpDestinations"></div>
+    </div>
+    <div class="htp-step">
+     <div class="htp-step-head"><span class="htp-step-number">2</span><div><h3>Travel dates</h3><p class="htp-help">Select your departure and return dates.</p></div></div>
+     <div class="htp-fields">
+      <label>Departure date<input id="htpStart" type="date" required></label>
+      <label>Return date<input id="htpEnd" type="date" required></label>
+     </div>
+    </div>
+    <div class="htp-step">
+     <div class="htp-step-head"><span class="htp-step-number">3</span><div><h3>Travellers</h3><p class="htp-help">Choose from 1 to 30 travellers.</p></div></div>
+     <div class="htp-travellers"><label for="htpTravellers">Number of travellers</label><select id="htpTravellers" aria-label="Number of travellers"></select></div>
+    </div>
+    <div class="htp-step">
+     <div class="htp-step-head"><span class="htp-step-number">4</span><div><h3>Select your vehicle</h3><p class="htp-help">Live vehicle options and rates from our published cab catalogue.</p></div></div>
+     <label for="htpVehicle">Available vehicles</label><select id="htpVehicle"><option value="">Loading vehicles…</option></select>
+     <p class="htp-vehicle-note" id="htpVehicleHint" aria-live="polite">Loading published vehicle rates…</p>
+    </div>
+   </div>
+   <aside class="htp-summary" aria-live="polite">
+    <h3>Your trip estimate</h3>
+    <div class="htp-summary-row"><span>Selected stay</span><strong id="htpTotalNights">0 nights</strong></div>
+    <div class="htp-summary-row"><span>Trip duration</span><strong id="htpTripDays">1 day</strong></div>
+    <div class="htp-summary-row"><span>Stay + meals</span><strong id="htpStayTotal">₹0</strong></div>
+    <div class="htp-summary-row"><span>Vehicle</span><strong id="htpVehicleCount">Select a vehicle</strong></div>
+    <div class="htp-summary-row"><span>Cab estimate</span><strong id="htpCabTotal">Not selected</strong></div>
+    <div class="htp-total"><span>Estimated trip total</span><strong id="htpGrandTotal">₹0</strong></div>
+    <p class="htp-per-person" id="htpPerPerson">Choose your trip details to see the estimate.</p>
+    <button class="htp-cta" id="htpCalculate" type="button" disabled>PREPARE WHATSAPP ENQUIRY →</button>
+    <p class="htp-status" id="htpStatus" role="status"></p>
+    <p class="htp-fine">Stay estimates use the destination rates shown. Cab estimates use currently published per-vehicle/day rates. Final route, availability, inclusions and price are confirmed by our team.</p>
+   </aside>
+  </div>
+ </div>
 </section>
 
 <!-- ITINERARIES -->
@@ -4549,6 +4599,7 @@ header .header-inner > a.brand .brand-wordmark{
 <link rel="stylesheet" href="/admin-theme-sync.css?v=4">
 <link rel="stylesheet" href="/bright-homepage-refresh.css?v=1">
 
+<script src="/homepage-trip-planner.js?v=1" defer></script>
 </body>
 </html>
 
