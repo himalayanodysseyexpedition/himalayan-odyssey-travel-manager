@@ -2801,7 +2801,7 @@ loadHotels();
 
 <link rel="manifest" href="/manifest.webmanifest">
 <script src="/mobile-app-experience.js?v=1" defer></script>
-<script src="/site-navigation.js?v=5" defer></script>
+<script src="/site-navigation.js?v=7" defer></script>
 
 <!-- Final cascade guard: load approved Arctic layers after legacy page-level styles. -->
 
@@ -2888,6 +2888,28 @@ loadHotels();
 }
 @media(max-width:380px){#home.hero .hero-animated-heading{font-size:clamp(40px,11.8vw,45px)!important}
 }
+</style>
+
+
+
+<style id="mobile-home-hero-final-v2">
+@media(max-width:760px){
+  #home.hero{min-height:max(820px,calc(100svh - 88px))!important;padding:32px 20px 76px!important;background-position:center,center,58% 38%!important}
+  #home.hero>.hero-content{display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:space-between!important;width:100%!important;max-width:560px!important;min-height:680px!important;margin:0 auto!important;padding:0!important;gap:0!important;text-align:left!important}
+  #home.hero .hero-animated-heading{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;width:100%!important;max-width:100%!important;margin:0!important;padding:0!important;font-size:clamp(46px,13vw,60px)!important;line-height:1.08!important;letter-spacing:-.055em!important;gap:.16em!important;text-align:left!important}
+  #home.hero .hero-animated-heading>.hero-heading-prefix,#home.hero .hero-animated-heading>.hero-word-slot,#home.hero .hero-animated-heading>.hero-heading-suffix{display:block!important;flex:0 0 auto!important;width:auto!important;max-width:100%!important;margin:0!important;padding:0!important;line-height:inherit!important;white-space:nowrap!important}
+  #home.hero .hero-animated-heading #heroRotatingWord{display:inline-block!important;max-width:100%!important;font:inherit!important;letter-spacing:inherit!important;line-height:inherit!important;white-space:nowrap!important}
+  #home.hero .hero-go-line{display:block!important;width:100%!important;max-width:100%!important;margin:clamp(92px,15vh,130px) 0 0!important;font-size:9px!important;line-height:1.8!important;letter-spacing:1.35px!important;text-align:left!important}
+  #home.hero .hero-service-icons{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:center!important;width:100%!important;max-width:100%!important;gap:10px!important;margin:0 auto!important;padding:0!important}
+  #home.hero .hero-service-icon{display:inline-flex!important;flex:1 1 0!important;min-width:0!important;min-height:58px!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:7px!important;padding:10px 8px!important}
+  #home.hero .hero-service-icon svg{width:19px!important;height:19px!important;flex:none!important}
+  #home.hero .hero-service-icon span{font-size:9px!important;letter-spacing:.6px!important;white-space:nowrap!important}
+  #home.hero .hero-build-cta-wrap{display:flex!important;justify-content:center!important;align-items:center!important;width:100%!important;max-width:100%!important;margin:16px auto 0!important}
+  #home.hero .hero-build-cta{display:inline-flex!important;justify-content:center!important;align-items:center!important;width:min(330px,90%)!important;min-width:0!important;min-height:58px!important;margin:0 auto!important;padding:14px 24px!important;font-size:13px!important;letter-spacing:1.6px!important}
+  #home.hero .hero-content>p:not(.hero-go-line){width:100%!important;max-width:540px!important;margin:auto auto 0!important;font-size:15px!important;line-height:1.75!important;text-align:center!important}
+  #home.hero .hero-destination-list{display:flex!important;justify-content:center!important;align-items:center!important;flex-wrap:wrap!important;width:100%!important;max-width:540px!important;margin:12px auto 0!important;gap:6px 9px!important;font-size:9px!important;line-height:1.8!important;text-align:center!important}
+}
+@media(max-width:380px){#home.hero{padding-left:16px!important;padding-right:16px!important}#home.hero .hero-animated-heading{font-size:clamp(43px,12.4vw,48px)!important}#home.hero .hero-service-icons{gap:7px!important}#home.hero .hero-service-icon{padding-left:5px!important;padding-right:5px!important}}
 </style>
 
 </body>
