@@ -2607,6 +2607,7 @@ loadHotels();
   const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduceMotion) return;
   let index = 0;
+  // Give each phrase time to fade out and fade back in; no vertical movement.
   window.setInterval(() => {
     word.classList.add("is-shuffling-out");
     window.setTimeout(() => {
@@ -2616,8 +2617,8 @@ loadHotels();
       window.requestAnimationFrame(() => {
         window.requestAnimationFrame(() => word.classList.remove("is-shuffling-in"));
       });
-    }, 260);
-  }, 1500);
+    }, 850);
+  }, 3200);
 })();
 </script>
 
@@ -2916,14 +2917,25 @@ loadHotels();
 
 
 <style id="hero-rotating-words-final-size">
-/* The rotating phrase is one element; apply the same slightly reduced size to every word it displays. Keep “The” and “calling” untouched. */
+/* Keep every rotating phrase comfortably readable and consistent; static words stay unchanged. */
 #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord,
 #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-in,
 #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-out{
+  display:inline-block!important;
   font-family:sans-serif!important;
-  font-size:.78em!important;
+  font-size:.92em!important;
   line-height:inherit!important;
   letter-spacing:inherit!important;
+  transition:opacity .85s ease-in-out!important;
+  transform:none!important;
+  filter:none!important;
+  will-change:opacity;
+}
+#home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-out,
+#home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-in{
+  opacity:0!important;
+  transform:none!important;
+  filter:none!important;
 }
 </style>
 </body>
