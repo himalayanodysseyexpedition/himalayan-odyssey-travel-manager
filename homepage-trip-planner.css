@@ -696,3 +696,41 @@
  color:#111!important;font-size:20px!important;line-height:1!important;
 }
 .home-trip-planner .htp-location-select:disabled{opacity:.55!important;cursor:not-allowed!important}
+
+
+/* Vehicle picker: single-line daily rate options and an editable rental-day card. */
+.home-trip-planner #htpVehicle{
+ width:100%!important;min-height:52px!important;padding:12px 42px 12px 14px!important;
+ border:1px solid #cbd0d6!important;border-radius:13px!important;background:#fff!important;
+ color:#111!important;font:600 13px "General Sans","DM Sans",Arial,sans-serif!important;
+ white-space:nowrap!important;text-overflow:ellipsis!important;overflow:hidden!important;
+}
+.home-trip-planner #htpVehicle option{white-space:nowrap!important;color:#111!important;background:#fff!important}
+.home-trip-planner .htp-vehicle-selection{
+ margin-top:12px!important;padding:14px 15px!important;border:1px solid #d6dbe1!important;
+ border-radius:14px!important;background:#fff!important;box-shadow:0 5px 18px rgba(15,23,42,.055)!important;
+}
+.home-trip-planner .htp-vehicle-selection[hidden]{display:none!important}
+.home-trip-planner .htp-vehicle-selected-top{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;
+ padding-bottom:12px!important;border-bottom:1px solid #eceff2!important;
+}
+.home-trip-planner .htp-vehicle-selected-top div{display:flex!important;flex-direction:column!important;min-width:0!important}
+.home-trip-planner .htp-vehicle-selected-top span{font-size:10px!important;color:#666!important;letter-spacing:.04em!important;text-transform:uppercase!important}
+.home-trip-planner #htpSelectedVehicleName{font-size:14px!important;font-weight:700!important;color:#111!important;overflow-wrap:anywhere!important}
+.home-trip-planner .htp-vehicle-daily-rate{flex:none!important;white-space:nowrap!important;font-size:14px!important;font-weight:750!important;color:#111!important}
+.home-trip-planner .htp-vehicle-days-row{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;padding-top:12px!important}
+.home-trip-planner .htp-vehicle-days-row>label{margin:0!important;color:#222!important;font-size:12px!important;font-weight:650!important}
+.home-trip-planner .htp-vehicle-days-control{display:flex!important;align-items:center!important;gap:7px!important}
+.home-trip-planner .htp-vehicle-days-control button{
+ width:32px!important;height:32px!important;border:1px solid #d2d6dc!important;border-radius:9px!important;
+ background:#fff!important;color:#111!important;font-size:18px!important;line-height:1!important;cursor:pointer!important;
+}
+.home-trip-planner .htp-vehicle-days-control input{
+ width:48px!important;height:32px!important;padding:3px!important;border:1px solid #d2d6dc!important;
+ border-radius:8px!important;background:#fff!important;color:#111!important;text-align:center!important;
+ font-size:13px!important;font-weight:700!important;
+}
+.home-trip-planner .htp-vehicle-days-control input::-webkit-inner-spin-button,
+.home-trip-planner .htp-vehicle-days-control input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.home-trip-planner .htp-vehicle-days-control input[type=number]{-moz-appearance:textfield}
