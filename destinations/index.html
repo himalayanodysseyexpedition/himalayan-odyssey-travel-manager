@@ -21,13 +21,11 @@
 <style>
 :root{--forest:#10243b;--green:#173c36;--gold:#a9d8f2;--champagne:#a9d8f2;--cream:#f8f6ef;--ink:#10243b;--muted:#718078;--serif:"Cormorant Garamond",Georgia,serif;--sans:"DM Sans",Arial,sans-serif}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font:15px/1.7 var(--sans)}
-header{position:sticky;top:0;z-index:100;background:rgba(16,36,59,.96);backdrop-filter:blur(18px);border-bottom:1px solid rgba(169,216,242,.55);box-shadow:0 8px 28px #0002}
 .header-inner{max-width:1450px;margin:auto;padding:10px 5%;display:flex;flex-direction:column;align-items:center;gap:8px}
 .brand{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5px 12px;color:var(--champagne)}
 .brand img{display:block;width:215px;max-height:75px;object-fit:contain}
 .brand-wordmark{display:block;margin-top:-4px;color:var(--champagne);font-size:9px;font-weight:700;letter-spacing:3px;text-align:center}
 .glass-nav{display:flex;flex-wrap:nowrap;justify-content:center;align-items:center;gap:clamp(7px,1.15vw,15px);width:max-content;max-width:100%;padding:3px 2px;overflow-x:auto;scrollbar-width:none}
-.glass-nav>a,.glass-nav .nav-dropdown-toggle{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;color:rgba(255,255,255,.94);font:700 10px var(--sans);letter-spacing:1px;text-transform:uppercase;padding:10px 16px;min-height:38px;border:1px solid rgba(255,255,255,.28);border-radius:999px;background:linear-gradient(135deg,rgba(255,255,255,.17),rgba(255,255,255,.065));text-decoration:none}
 .header-cta{display:inline-flex;align-items:center;justify-content:center;min-height:39px;padding:9px 25px;border:1px solid rgba(169,216,242,.9);border-radius:999px;color:#10243b;background:linear-gradient(135deg,#a9d8f2,#a9d8f2);font:700 10px var(--sans);letter-spacing:1.65px;text-transform:uppercase;text-decoration:none}
 main{max-width:1380px;margin:auto;padding:clamp(48px,7vw,88px) 6% 90px}
 .page-heading{text-align:center;max-width:780px;margin:0 auto 35px}
@@ -52,7 +50,7 @@ main{max-width:1380px;margin:auto;padding:clamp(48px,7vw,88px) 6% 90px}
 .swipe-hint{text-align:center;margin:17px 0 0;color:#87928a;font-size:9px;font-weight:700;letter-spacing:2px}
 footer{padding:30px 20px;text-align:center;background:linear-gradient(145deg,#10243b,#173c36);color:rgba(255,255,255,.82);font-size:11px}
 footer a{color:#a9d8f2}
-@media(max-width:640px){.header-inner{padding:8px 3%;gap:8px}.glass-nav{width:100%;justify-content:flex-start;gap:5px}.glass-nav>a{font-size:8px;letter-spacing:.4px;padding:9px 10px;min-height:35px}.header-cta{min-height:37px;padding:8px 22px;font-size:9px}main{padding:45px 4% 65px}.destination-rail{gap:14px;padding-inline:2px}.destination-card{flex-basis:82vw;height:440px;scroll-snap-align:center}.destination-info{padding:24px}.carousel-controls button{width:40px;height:40px}}
+@media(max-width:640px){.header-inner{padding:8px 3%;gap:8px}.glass-nav{width:100%;justify-content:flex-start;gap:5px}.header-cta{min-height:37px;padding:8px 22px;font-size:9px}main{padding:45px 4% 65px}.destination-rail{gap:14px;padding-inline:2px}.destination-card{flex-basis:82vw;height:440px;scroll-snap-align:center}.destination-info{padding:24px}.carousel-controls button{width:40px;height:40px}}
 @media(prefers-reduced-motion:reduce){html,.destination-rail{scroll-behavior:auto}.destination-card img,.carousel-controls button,.progress span{transition:none}}
 </style>
 <link rel="stylesheet" href="/manrope-body.css?v=1">
