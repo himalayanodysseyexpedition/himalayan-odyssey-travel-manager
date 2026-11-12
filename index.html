@@ -4614,6 +4614,92 @@ header .header-inner > a.brand .brand-wordmark{
 
 
 <script src="/homepage-trip-planner.js?v=1" defer></script>
+
+<style id="hero-three-line-large-and-spaced-services">
+/* Final homepage hero composition: oversized stacked headline, then separated service pills. */
+#home.hero .hero-content{width:100%!important;max-width:1120px!important}
+#home.hero .hero-animated-heading{
+  display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;
+  width:100%!important;max-width:100%!important;margin:0!important;padding:0!important;
+  font-family:"Bodoni Moda","Cormorant Garamond",Georgia,serif!important;
+  font-size:clamp(70px,9vw,118px)!important;line-height:.88!important;letter-spacing:-.065em!important;
+  text-align:left!important;white-space:normal!important;
+}
+#home.hero .hero-animated-heading>.hero-heading-prefix,
+#home.hero .hero-animated-heading>.hero-word-slot,
+#home.hero .hero-animated-heading>.hero-heading-suffix{
+  display:block!important;flex:0 0 auto!important;width:auto!important;min-width:0!important;max-width:100%!important;
+  margin:0!important;padding:0!important;text-align:left!important;white-space:nowrap!important;
+}
+#home.hero .hero-animated-heading>.hero-word-slot{min-height:1em!important;line-height:inherit!important}
+#home.hero .hero-animated-heading #heroRotatingWord{
+  display:inline-block!important;width:auto!important;max-width:100%!important;
+  font:inherit!important;letter-spacing:inherit!important;line-height:inherit!important;text-align:left!important;white-space:nowrap!important;
+}
+#home.hero .hero-go-line{
+  margin:clamp(105px,17vh,155px) 0 0!important;
+  max-width:100%!important;font-size:clamp(10px,1.15vw,13px)!important;
+  line-height:1.7!important;letter-spacing:2px!important;
+}
+#home.hero .hero-service-icons{
+  display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;align-items:center!important;
+  justify-content:flex-start!important;gap:clamp(18px,3vw,30px)!important;
+  width:100%!important;margin:52px 0 30px!important;padding:0!important;
+}
+#home.hero .hero-service-icon{
+  display:inline-flex!important;flex:0 0 auto!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;
+  gap:10px!important;min-width:112px!important;min-height:48px!important;padding:12px 20px!important;
+  border:1px solid rgba(223,242,252,.42)!important;border-radius:999px!important;
+  background:rgba(8,25,44,.42)!important;color:#f7fbfe!important;
+  box-shadow:0 8px 26px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.12)!important;
+  -webkit-backdrop-filter:blur(14px) saturate(145%)!important;backdrop-filter:blur(14px) saturate(145%)!important;
+}
+#home.hero .hero-service-icon svg{width:17px!important;height:17px!important;stroke:#c8e9fa!important}
+#home.hero .hero-service-icon span{font-size:11px!important;font-weight:700!important;letter-spacing:.8px!important}
+@media(max-width:760px){
+  #home.hero{
+    min-height:max(780px,calc(100svh - 68px))!important;
+    padding:30px 20px 72px!important;
+    align-items:flex-start!important;
+    background-position:center,center,58% 38%!important;
+  }
+  #home.hero .hero-content{max-width:560px!important}
+  #home.hero .hero-animated-heading{
+    font-size:clamp(43px,12.2vw,66px)!important;line-height:.94!important;letter-spacing:-.065em!important;
+    margin:0!important;
+  }
+  #home.hero .hero-animated-heading>.hero-word-slot,
+  #home.hero .hero-animated-heading #heroRotatingWord{
+    font-size:inherit!important;letter-spacing:inherit!important;line-height:inherit!important;
+  }
+  #home.hero .hero-go-line{
+    margin-top:clamp(112px,19vh,160px)!important;margin-bottom:0!important;
+    font-size:9px!important;line-height:1.8!important;letter-spacing:1.25px!important;
+  }
+  #home.hero .hero-service-icons{
+    flex-wrap:nowrap!important;justify-content:flex-start!important;gap:clamp(10px,4vw,18px)!important;
+    margin:48px 0 26px!important;
+  }
+  #home.hero .hero-service-icon{
+    min-width:0!important;min-height:46px!important;gap:7px!important;padding:11px 13px!important;
+  }
+  #home.hero .hero-service-icon svg{width:15px!important;height:15px!important}
+  #home.hero .hero-service-icon span{font-size:9px!important;letter-spacing:.55px!important}
+  #home.hero .hero-build-cta{width:auto!important;min-width:190px!important}
+  #home.hero .hero-content>p:not(.hero-go-line){margin-top:22px!important}
+}
+@media(max-width:380px){
+  #home.hero{padding-left:17px!important;padding-right:17px!important}
+  #home.hero .hero-animated-heading{font-size:clamp(40px,11.8vw,45px)!important}
+  #home.hero .hero-service-icons{gap:9px!important}
+  #home.hero .hero-service-icon{padding:10px 10px!important}
+  #home.hero .hero-service-icon span{font-size:8px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #home.hero .hero-content{animation:none!important}
+}
+</style>
+
 </body>
 </html>
 
