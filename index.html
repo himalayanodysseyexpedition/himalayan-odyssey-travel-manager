@@ -3283,7 +3283,7 @@ html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is
 
 
 <style id="mobile-hero-destination-prayer-flag-marquee">
-/* Mobile destinations: one-line five-colour Tibetan prayer-flag palette, moving right continuously. */
+/* Mobile destinations: continuous rightward marquee in Tibetan prayer-flag colours. */
 @media screen and (max-width:760px){
   html body #home.hero .hero-destination-list{
     display:block!important;
@@ -3299,12 +3299,15 @@ html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is
     -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 5%,#000 95%,transparent 100%)!important;
     mask-image:linear-gradient(90deg,transparent 0%,#000 5%,#000 95%,transparent 100%)!important;
   }
-  html body #home.hero .hero-destination-marquee{display:flex!important;width:100%!important;overflow:hidden!important}
+  html body #home.hero .hero-destination-marquee{
+    display:flex!important;width:100%!important;overflow:hidden!important;
+  }
   html body #home.hero .hero-destination-track{
     display:flex!important;flex:0 0 max-content!important;align-items:center!important;gap:13px!important;
     width:max-content!important;white-space:nowrap!important;
     animation:hero-destinations-rightward 24s linear infinite!important;
-    will-change:transform!important;
+    animation-play-state:running!important;
+    will-change:transform;
   }
   html body #home.hero .hero-destination-track span{
     display:inline-block!important;flex:none!important;font-size:11px!important;font-weight:800!important;
@@ -3318,18 +3321,14 @@ html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is
   html body #home.hero .hero-destination-track span:nth-of-type(7n+5){color:#f0c746!important;-webkit-text-fill-color:currentColor!important}
   html body #home.hero .hero-destination-track span:nth-of-type(7n+6){color:#159bd0!important;-webkit-text-fill-color:currentColor!important}
   html body #home.hero .hero-destination-track span:nth-of-type(7n+7){color:#f5f1e7!important;-webkit-text-fill-color:currentColor!important}
-  }
   html body #home.hero .hero-destination-track i{
     display:inline-block!important;flex:none!important;font-style:normal!important;font-size:12px!important;
     color:#f0c746!important;-webkit-text-fill-color:#f0c746!important;
   }
 }
 @keyframes hero-destinations-rightward{
-  from{transform:translateX(-50%)}
-  to{transform:translateX(0)}
-}
-@media (prefers-reduced-motion:reduce){
-  html body #home.hero .hero-destination-track{animation:none!important}
+  from{transform:translate3d(-50%,0,0)}
+  to{transform:translate3d(0,0,0)}
 }
 </style>
 
