@@ -9,13 +9,13 @@
 #home.hero{
   position:relative!important;
   display:flex!important;
-  align-items:center!important;
+  align-items:flex-start!important;
   justify-content:flex-start!important;
   isolation:isolate!important;
   box-sizing:border-box!important;
   width:100%!important;
   min-height:min(820px,calc(100svh - 74px))!important;
-  padding:clamp(70px,10vh,112px) clamp(22px,8vw,116px) 92px!important;
+  padding:clamp(52px,7vh,78px) clamp(22px,8vw,116px) 92px!important;
   margin:0!important;
   overflow:hidden!important;
   border:0!important;
@@ -173,13 +173,13 @@
 @media(max-width:760px){
   #home.hero{
     min-height:clamp(620px,calc(100svh - 68px),780px)!important;
-    align-items:flex-end!important;
-    padding:70px 22px 76px!important;
+    align-items:flex-start!important;
+    padding:34px 22px 76px!important;
     background-image:
       linear-gradient(0deg,rgba(5,16,29,.94) 0%,rgba(5,16,29,.72) 43%,rgba(5,16,29,.20) 100%),
       linear-gradient(90deg,rgba(5,16,29,.18),rgba(5,16,29,.05)),
       url("/spiti.jpg")!important;
-    background-position:center,center,58% center!important;
+    background-position:center,center,58% 38%!important;
   }
   #home .hero-content{width:100%!important;max-width:560px!important;text-align:left!important}
   #home .hero-animated-heading{
