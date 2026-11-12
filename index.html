@@ -1326,7 +1326,7 @@
 
 <link rel="stylesheet" href="/monochrome-app-final.css?v=20261112-1">
   <link rel="stylesheet" href="/hamburger-header-final.css?v=8">
-  <link rel="stylesheet" href="/homepage-trip-planner.css?v=45">
+  <link rel="stylesheet" href="/homepage-trip-planner.css?v=46">
 </head>
 
 <body>
@@ -1448,7 +1448,7 @@
     </div>
     <div class="htp-step">
      <div class="htp-step-head"><span class="htp-step-number">3</span><div><h3>Travellers</h3><p class="htp-help">Choose from 1 to 30 travellers.</p></div></div>
-     <div class="htp-travellers"><label for="htpTravellers">Number of travellers</label><select id="htpTravellers" aria-label="Number of travellers"></select></div>
+     <div class="htp-travellers"><label>Number of travellers</label><div class="htp-traveller-control" role="group" aria-label="Number of travellers"><button type="button" data-travellers-delta="-1" aria-label="Remove one traveller">−</button><output id="htpTravellersOutput" aria-live="polite">1</output><button type="button" data-travellers-delta="1" aria-label="Add one traveller">+</button></div><input id="htpTravellers" type="hidden" value="1"></div>
     </div>
     <div class="htp-step">
      <div class="htp-step-head"><span class="htp-step-number">4</span><div><h3>Select your vehicle</h3><p class="htp-help">Live vehicle options and rates from our published cab catalogue.</p></div></div>
@@ -2820,7 +2820,7 @@ loadHotels();
 
 
 
-<script src="/homepage-trip-planner.js?v=22" defer></script>
+<script src="/homepage-trip-planner.js?v=23" defer></script>
 
 <style id="hero-three-line-large-and-spaced-services">#home.hero .hero-content{width:100%!important;max-width:1120px!important}#home.hero .hero-animated-heading{
   display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;
