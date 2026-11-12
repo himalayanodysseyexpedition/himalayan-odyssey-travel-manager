@@ -276,21 +276,16 @@
 }
 
 
-/* Keep the complete rotating phrase visible on narrow mobile screens. */
+/* Keep the rotating phrase unbroken while inheriting the shared headline typography. */
 @media(max-width:760px){
   #home .hero-animated-heading>.hero-word-slot,
   #home .hero-animated-heading #heroRotatingWord{
-    font-size:clamp(28px,8.2vw,50px)!important;
-    letter-spacing:-.06em!important;
-    line-height:1!important;
+    font-family:inherit!important;
+    font-size:inherit!important;
+    font-weight:inherit!important;
+    letter-spacing:inherit!important;
+    line-height:inherit!important;
     max-width:100%!important;
     white-space:nowrap!important;
-  }
-}
-@media(max-width:380px){
-  #home .hero-animated-heading>.hero-word-slot,
-  #home .hero-animated-heading #heroRotatingWord{
-    font-size:clamp(26px,8vw,31px)!important;
-    letter-spacing:-.065em!important;
   }
 }
