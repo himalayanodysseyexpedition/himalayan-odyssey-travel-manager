@@ -468,3 +468,26 @@
 .home-trip-planner .htp-location-menu[hidden]{display:none!important;visibility:hidden!important;pointer-events:none!important}
 .home-trip-planner .htp-location-menu.is-open{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}
 .home-trip-planner .htp-location-menu:not(.is-open){pointer-events:none}
+
+
+/* Keep the destination menu above every later calculator step. */
+.home-trip-planner .htp-main{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:visible!important;
+}
+.home-trip-planner .htp-main>.htp-step{
+  position:relative!important;
+  z-index:1!important;
+  overflow:visible!important;
+}
+.home-trip-planner .htp-main>.htp-step:first-child{
+  z-index:100!important;
+}
+.home-trip-planner .htp-main>.htp-step:first-child .htp-location-dropdown{
+  position:relative!important;
+  z-index:101!important;
+}
+.home-trip-planner .htp-main>.htp-step:first-child .htp-location-menu{
+  z-index:102!important;
+}
