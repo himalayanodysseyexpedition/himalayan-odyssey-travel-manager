@@ -10,22 +10,24 @@
  const $=id=>root.querySelector("#"+id);
  const money=n=>"₹"+Math.round(Number(n)||0).toLocaleString("en-IN");
  let vehicles=[];
+ const hasPlace=n=>Object.prototype.hasOwnProperty.call(nights,n);
  const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
  const today=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-")};
  $("htpStart").min=today();
  function renderLocationOptions(){
-  const select=$("htpLocationSelect"),previous=select.value,available=names.filter(n=>!Object.hasOwn(nights,n));
+  const select=$("htpLocationSelect"),previous=select.value,available=names.filter(n=>!hasPlace(n));
   select.innerHTML='<option value="">Select a destination</option>'+available.map(n=>'<option value="'+esc(n)+'">'+esc(n)+'</option>').join("");
-  if(names.includes(previous)&&!Object.hasOwn(nights,previous))select.value=previous;else select.value="";
+  if(names.includes(previous)&&!hasPlace(previous))select.value=previous;else select.value="";
   $("htpLocationMenu").innerHTML=available.map(n=>'<button type="button" class="htp-location-option" role="option" data-select-place="'+esc(n)+'"><span>'+esc(n)+'</span><span class="htp-option-arrow" aria-hidden="true">↗</span></button>').join("")||'<p class="htp-location-empty">All destinations selected</p>';
   $("htpLocationPlaceholder").textContent="Select a destination";
  }
  function closeLocationMenu(){
   $("htpLocationToggle").setAttribute("aria-expanded","false");
   $("htpLocationMenu").hidden=true;
+  $("htpLocationMenu").classList.remove("is-open");
  }
  function renderDestinations(){
-  $("htpDestinations").innerHTML=names.filter(n=>Object.hasOwn(nights,n)).map(n=>'<div class="htp-destination" data-destination="'+n+'"><div><strong>'+n+'</strong><span class="htp-rate"><strong>'+money(rates[n])+'</strong><small>stay + food · per person / night</small></span></div><div class="htp-stepper"><span class="htp-night-label">Nights</span><button type="button" data-place="'+n+'" data-delta="-1" aria-label="Remove one night in '+n+'">−</button><output id="htpNight-'+n+'">'+nights[n]+'</output><button type="button" data-place="'+n+'" data-delta="1" aria-label="Add one night in '+n+'">+</button><button type="button" class="htp-remove" data-remove-place="'+n+'" aria-label="Delete '+n+'">×</button></div></div>').join("");
+  $("htpDestinations").innerHTML=names.filter(n=>hasPlace(n)).map(n=>'<div class="htp-destination" data-destination="'+n+'"><div><strong>'+n+'</strong><span class="htp-rate"><strong>'+money(rates[n])+'</strong><small>stay + food · per person / night</small></span></div><div class="htp-stepper"><span class="htp-night-label">Nights</span><button type="button" data-place="'+n+'" data-delta="-1" aria-label="Remove one night in '+n+'">−</button><output id="htpNight-'+n+'">'+nights[n]+'</output><button type="button" data-place="'+n+'" data-delta="1" aria-label="Add one night in '+n+'">+</button><button type="button" class="htp-remove" data-remove-place="'+n+'" aria-label="Delete '+n+'">×</button></div></div>').join("");
   $("htpSelectedWrap").hidden=Object.keys(nights).length===0;
   renderLocationOptions();
  }
@@ -53,13 +55,17 @@
  }
  $("htpLocationToggle").addEventListener("click",()=>{
   const open=$("htpLocationToggle").getAttribute("aria-expanded")==="true";
-  $("htpLocationToggle").setAttribute("aria-expanded",String(!open));
-  $("htpLocationMenu").hidden=open;
+  const menu=$("htpLocationMenu");
+  const nextOpen=!open;
+  $("htpLocationToggle").setAttribute("aria-expanded",String(nextOpen));
+  menu.hidden=!nextOpen;
+  menu.classList.toggle("is-open",nextOpen);
  });
  $("htpLocationMenu").addEventListener("click",e=>{
-  const option=e.target.closest("[data-select-place]");if(!option)return;
+  const target=e.target instanceof Element?e.target:null;if(!target)return;
+  const option=target.closest("[data-select-place]");if(!option)return;
   const n=option.dataset.selectPlace;
-  if(!names.includes(n)||Object.hasOwn(nights,n))return;
+  if(!names.includes(n)||hasPlace(n))return;
   $("htpLocationSelect").value=n;nights[n]=1;closeLocationMenu();renderDestinations();calculate();
  });
  document.addEventListener("click",e=>{if(!e.target.closest(".htp-location-dropdown"))closeLocationMenu()});
