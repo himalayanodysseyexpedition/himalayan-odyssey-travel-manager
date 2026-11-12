@@ -19,7 +19,7 @@
  function renderLocationOptions(){
   const select=$("htpLocationSelect");
   const current=select.value;
-  select.innerHTML='<option value="">Choose a destination</option>'+names.filter(n=>!Object.prototype.hasOwnProperty.call(nights,n)).map(n=>'<option value="'+n+'">'+n+' — '+money(rates[n])+' / person / night</option>').join("");
+  select.innerHTML='<option value="">Choose a destination</option>'+names.filter(n=>!Object.prototype.hasOwnProperty.call(nights,n)).map(n=>'<option value="'+n+'">'+n+'　　　　 '+money(rates[n])+'</option>').join("");
   if(current&&!root.querySelector('[data-destination="'+current+'"]'))select.value=current;
  }
  function renderDestinations(){
