@@ -71,31 +71,6 @@ body :is(.btn.outline,.button.outline){background:transparent!important;color:#2
 /* FINAL MOBILE CASCADE FIX — override legacy high-specificity transparent-header
    and lime Build Your Trip rules that were defeating Arctic Prestige. */
 @media screen and (max-width:760px){
-  html body>header,
-  html body>header.is-scrolled,
-  html body>header.is-hidden{
-    background:rgba(10,29,49,.97)!important;
-    background-color:rgba(10,29,49,.97)!important;
-    background-image:none!important;
-    border:0!important;
-    border-bottom:1px solid rgba(217,237,248,.24)!important;
-    box-shadow:0 10px 32px rgba(7,23,41,.18)!important;
-    -webkit-backdrop-filter:blur(20px) saturate(150%)!important;
-    backdrop-filter:blur(20px) saturate(150%)!important;
-  }
-  html body>header .header-inner{
-    background:transparent!important;background-color:transparent!important;
-    background-image:none!important;border:0!important;box-shadow:none!important;
-  }
-  html body>header .glass-nav>a,
-  html body>header .glass-nav>.nav-dropdown>.nav-dropdown-toggle{
-    color:#f1f7fb!important;-webkit-text-fill-color:#f1f7fb!important;
-    background:linear-gradient(135deg,rgba(255,255,255,.15),rgba(255,255,255,.045))!important;
-    border:1px solid rgba(217,237,248,.28)!important;
-  }
-  html body>header .glass-nav .services-chevron{
-    color:#d9edf8!important;-webkit-text-fill-color:#d9edf8!important;
-  }
   html body>.hero>.hero-content>.hero-build-cta-wrap>.hero-build-cta{
     background:linear-gradient(120deg,#e8f5fc,#b9dcef)!important;
     background-color:#c5e2f2!important;
