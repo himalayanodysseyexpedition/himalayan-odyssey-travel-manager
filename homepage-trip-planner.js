@@ -25,7 +25,9 @@
   $("htpSelectedWrap").hidden=Object.keys(nights).length===0;
   renderLocationOptions();
  }
- $("htpTravellers").innerHTML=Array.from({length:30},(_,i)=>'<option value="'+(i+1)+'">'+(i+1)+' '+(i===0?"traveller":"travellers")+'</option>').join("");
+ function setTravellers(value){const count=Math.min(30,Math.max(1,Number(value)||1));$("htpTravellers").value=String(count);$("htpTravellersOutput").textContent=String(count);}
+ setTravellers(1);
+ root.addEventListener("click",e=>{const b=e.target.closest("[data-travellers-delta]");if(!b)return;setTravellers(Number($("htpTravellers").value)+Number(b.dataset.travellersDelta));calculate();});
  function totalNights(){return Object.values(nights).reduce((a,b)=>a+b,0)}
  function tripDays(){const a=$("htpStart").value,b=$("htpEnd").value;if(!a||!b||b<=a)return 0;return Math.round((new Date(b+"T00:00:00")-new Date(a+"T00:00:00"))/86400000)}
  function selectedVehicle(){return vehicles.find(v=>String(v.id)===$("htpVehicle").value)||null}
@@ -64,7 +66,7 @@
   nights[n]=Math.max(1,(nights[n]||1)+delta);
   renderDestinations();calculate();
  });
- ["htpTravellers","htpStart","htpEnd"].forEach(id=>$(id).addEventListener("change",calculate));
+ ["htpStart","htpEnd"].forEach(id=>$(id).addEventListener("change",calculate));
  $("htpVehicle").addEventListener("change",()=>{vehicleDays=tripDays()||1;renderVehicleSelection();calculate()});
  $("htpVehicleDays").addEventListener("input",e=>{vehicleDays=Math.min(30,Math.max(1,Number(e.target.value)||1));renderVehicleSelection();calculate()});
  root.addEventListener("click",e=>{const b=e.target.closest("[data-vehicle-days]");if(!b)return;vehicleDays=Math.min(30,Math.max(1,vehicleDays+Number(b.dataset.vehicleDays)));renderVehicleSelection();calculate()});
