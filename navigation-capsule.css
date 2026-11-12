@@ -1,4 +1,3 @@
-/* Himalayan Odyssey Expedition — Concept 14: single floating glass capsule */
 :root{
   --hoe-nav-ice:#a9d8f2;
   --hoe-nav-ice-light:#dceefa;
@@ -13,38 +12,35 @@
 @media(max-width:640px){
 }
 @media(prefers-reduced-motion:reduce){
-}
-.hero{padding-top:clamp(175px,21vh,225px)!important}
-@media(max-width:640px){
-  .hero{padding-top:185px!important}
+}.hero{padding-top:clamp(175px,21vh,225px)!important}
+@media(max-width:640px){.hero{padding-top:185px!important}
 }
 @media(prefers-reduced-motion:reduce){
 }
-@media (max-width: 760px) {
-  .hero {padding-top:clamp(150px,21vh,178px)!important}
+
+
+/* FINAL HEADER LAYOUT OVERRIDE — desktop horizontal, mobile compact one-row nav.
+   This intentionally comes last to neutralize legacy grid/stacking and icon-nav rules. */
+@media (min-width: 761px) {.hero{padding-top:clamp(125px,16vh,165px)!important}
+}
+@media (max-width: 760px) {.hero{padding-top:clamp(150px,21vh,178px)!important}
 }
 @media (prefers-reduced-motion: reduce) {
-}
-
-/* Reserve real breathing room so the fixed navigation never covers the hero copy. */
-html body>.hero{
+}html body>.hero{
   padding-top:clamp(150px,17vh,190px)!important;
   min-height:clamp(610px,82svh,850px)!important;
 }
-@media(max-width:760px){
-  html body>.hero{
+@media(max-width:760px){html body>.hero{
     padding:clamp(142px,19vh,168px) 16px 58px!important;
     min-height:0!important;
   }
 }
 @media(prefers-reduced-motion:reduce){
-}
-html body>.hero{
+}html body>.hero{
   padding:clamp(34px,5vh,58px) 32px 54px!important;
   min-height:clamp(610px,82svh,850px)!important;
 }
-@media(max-width:760px){
-  html body>.hero{
+@media(max-width:760px){html body>.hero{
     padding:34px 16px 58px!important;
     min-height:0!important;
   }
@@ -58,12 +54,7 @@ html body>.hero{
 @media(min-width:761px){
 }
 @media(max-width:760px){
-}
-
-
-/* LUXURY GLASS FLOATING BAR — visual-only treatment.
-   Existing visibility classes, scroll-direction logic and transition timings remain untouched. */
-body #footerContactBar.footer-contact-bar{
+}body #footerContactBar.footer-contact-bar{
   left:50%!important;
   right:auto!important;
   bottom:max(18px,env(safe-area-inset-bottom))!important;
@@ -83,8 +74,7 @@ body #footerContactBar.footer-contact-bar{
   -webkit-backdrop-filter:blur(26px) saturate(165%)!important;
   backdrop-filter:blur(26px) saturate(165%)!important;
   translate:-50% 0;
-}
-body #footerContactBar .quick-nav-item{
+}body #footerContactBar .quick-nav-item{
   appearance:none!important;
   -webkit-appearance:none!important;
   flex:1 1 0!important;
@@ -111,8 +101,7 @@ body #footerContactBar .quick-nav-item{
   text-transform:uppercase!important;
   white-space:nowrap!important;
   box-shadow:none!important;
-}
-body #footerContactBar .quick-nav-item svg{
+}body #footerContactBar .quick-nav-item svg{
   display:block!important;
   width:18px!important;
   height:18px!important;
@@ -122,49 +111,37 @@ body #footerContactBar .quick-nav-item svg{
   stroke-width:1.55!important;
   stroke-linecap:round!important;
   stroke-linejoin:round!important;
-}
-body #footerContactBar .quick-nav-item span{
+}body #footerContactBar .quick-nav-item span{
   display:block!important;
   color:inherit!important;
   font-size:inherit!important;
   line-height:inherit!important;
   white-space:nowrap!important;
-}
-body #footerContactBar .quick-nav-item:hover,
-body #footerContactBar .quick-nav-item:focus-visible{
+}body #footerContactBar .quick-nav-item:hover,body #footerContactBar .quick-nav-item:focus-visible{
   color:#dceefa!important;
   background:rgba(169,216,242,.10)!important;
   border-color:rgba(169,216,242,.25)!important;
   outline:none!important;
-}
-body #footerContactBar .quick-nav-whatsapp{
+}body #footerContactBar .quick-nav-whatsapp{
   color:#dceefa!important;
   background:rgba(169,216,242,.075)!important;
 }
-@media(max-width:520px){
-  body #footerContactBar.footer-contact-bar{
+@media(max-width:520px){body #footerContactBar.footer-contact-bar{
     width:calc(100vw - 20px)!important;
     max-width:calc(100vw - 20px)!important;
     bottom:max(12px,env(safe-area-inset-bottom))!important;
     gap:1px!important;
     padding:6px!important;
-  }
-  body #footerContactBar .quick-nav-item{
+  }body #footerContactBar .quick-nav-item{
     min-height:45px!important;
     padding:6px 2px!important;
     gap:3px!important;
     font-size:clamp(7px,2.15vw,8.5px)!important;
     letter-spacing:0!important;
-  }
-  body #footerContactBar .quick-nav-item svg{
+  }body #footerContactBar .quick-nav-item svg{
     width:17px!important;height:17px!important;flex-basis:17px!important;
   }
-}
-
-
-/* FLOATING BAR CENTERING FIX — center by equal fixed-position side insets,
-   not a translate transform, so the existing show/hide animation stays intact. */
-html body #footerContactBar.footer-contact-bar{
+}html body #footerContactBar.footer-contact-bar{
   position:fixed!important;
   left:0!important;
   right:0!important;
@@ -172,14 +149,7 @@ html body #footerContactBar.footer-contact-bar{
   margin-right:auto!important;
   translate:none!important;
   transform-origin:center bottom!important;
-}
-
-
-/* DEFINITIVE FLOATING BAR CENTER FIX.
-   The original visibility animation already includes translateX(-50%).
-   Pair it with left:50% and remove the separate translate property so the
-   horizontal offset is applied exactly once. Keep all Y/scale animation states. */
-html body #footerContactBar.footer-contact-bar{
+}html body #footerContactBar.footer-contact-bar{
   position:fixed!important;
   left:50%!important;
   right:auto!important;
@@ -190,8 +160,7 @@ html body #footerContactBar.footer-contact-bar{
   box-sizing:border-box!important;
   translate:none!important;
 }
-@media(max-width:520px){
-  html body #footerContactBar.footer-contact-bar{
+@media(max-width:520px){html body #footerContactBar.footer-contact-bar{
     width:calc(100vw - 20px)!important;
     max-width:calc(100vw - 20px)!important;
   }
@@ -207,11 +176,21 @@ html body #footerContactBar.footer-contact-bar{
 @media(min-width:761px){
 }
 
+/* DESKTOP STATIC HEADER — keep it in normal page flow and disable scroll-follow/hide states. */
+@media(min-width:761px){
+}
+
 /* DESKTOP FLOATING PILL DROPDOWN — individual glass pills, no rectangular menu frame. */
 @media(min-width:761px){
 }
 
 /* DESKTOP NAV LABEL SIZE — slightly larger for clearer hierarchy. */
+@media(min-width:761px){
+}
+
+
+/* DESKTOP DROPDOWN LAYER FIX — keep the static header in normal flow,
+   while placing its floating Services menu above header content and page sections. */
 @media(min-width:761px){
 }
 
@@ -226,11 +205,7 @@ html body #footerContactBar.footer-contact-bar{
    original artwork. No logo replacement, scaling, rotation or layout shift. */
 @media(min-width:761px){
 }
-@keyframes hoe-mountain-spark{
-  0%,72%,100%{opacity:0;transform:scale(.35)}
-  78%{opacity:.95;transform:scale(1.2)}
-  84%{opacity:.35;transform:scale(.72)}
-  90%{opacity:.85;transform:scale(1)}
+@keyframes hoe-mountain-spark{0%,72%,100%{opacity:0;transform:scale(.35)}78%{opacity:.95;transform:scale(1.2)}84%{opacity:.35;transform:scale(.72)}90%{opacity:.85;transform:scale(1)}
 }
 @media(min-width:761px) and (prefers-reduced-motion:reduce){
 }
@@ -250,9 +225,7 @@ html body #footerContactBar.footer-contact-bar{
    the original logo artwork; existing sparkle animation remains untouched. */
 @media(min-width:761px){
 }
-@keyframes hoe-mountain-mist{
-  0%,100%{background-position:-65% 100%,165% 0%,50% 140%;filter:drop-shadow(0 0 0 rgba(205,226,211,0))}
-  50%{background-position:35% 15%,65% 100%,50% 15%;filter:drop-shadow(0 0 5px rgba(205,226,211,.12))}
+@keyframes hoe-mountain-mist{0%,100%{background-position:-65% 100%,165% 0%,50% 140%;filter:drop-shadow(0 0 0 rgba(205,226,211,0))}50%{background-position:35% 15%,65% 100%,50% 15%;filter:drop-shadow(0 0 5px rgba(205,226,211,.12))}
 }
 @media(min-width:761px) and (prefers-reduced-motion:reduce){
 }
@@ -262,13 +235,22 @@ html body #footerContactBar.footer-contact-bar{
    refined travelling highlight across the unchanged original logo artwork. */
 @media(min-width:761px){
 }
-@keyframes hoe-himalayan-light-sweep{
-  0%,62%{opacity:0;transform:translateX(-115%) skewX(-12deg)}
-  67%{opacity:.9}
-  79%{opacity:.72;transform:translateX(115%) skewX(-12deg)}
-  84%,100%{opacity:0;transform:translateX(115%) skewX(-12deg)}
+@keyframes hoe-himalayan-light-sweep{0%,62%{opacity:0;transform:translateX(-115%) skewX(-12deg)}67%{opacity:.9}79%{opacity:.72;transform:translateX(115%) skewX(-12deg)}84%,100%{opacity:0;transform:translateX(115%) skewX(-12deg)}
 }
 @media(min-width:761px) and (prefers-reduced-motion:reduce){
+}
+
+
+
+/* DESKTOP SERVICES MENU STATE FIX — preserve the existing horizontal header layout,
+   but keep the dropdown hidden and non-interactive until its parent is opened. */
+@media(min-width:761px){
+}
+
+
+/* DESKTOP HEADER ROW — keep the original logo left, navigation centered/right,
+   and desktop Plan Your Trip action on one aligned row. */
+@media(min-width:761px){
 }
 
 
@@ -285,6 +267,11 @@ html body #footerContactBar.footer-contact-bar{
 
 
 /* MOBILE ONLY — remove the navigation capsule's glass treatment; keep desktop unchanged. */
+@media(max-width:760px){
+}
+
+
+/* MOBILE HEADER ROW — logo left, navigation centered between logo and Plan Your Trip. */
 @media(max-width:760px){
 }
 
@@ -341,77 +328,65 @@ html body #footerContactBar.footer-contact-bar{
 
 /* MOBILE NAV FINAL NORMALIZATION: equal pill geometry and readable labels. */
 @media screen and (max-width:760px){
-}
-html body :is(.btn,.button,.primary,.departure-cta,[type="submit"]){
+}:root{
+  --hoe-ink:#172b40;
+  --hoe-navy:#10243b;
+  --hoe-blue:#1769e8;
+  --hoe-ice:#dceefa;
+  --hoe-paper:#f4f8fc;
+  --hoe-white:#ffffff;
+  --hoe-coral:#ff8738;
+  --hoe-muted:#64748b;
+  --hoe-line:#dce6f0;
+  --hoe-radius:16px;
+}html body :is(button,.btn,.button,.primary,.departure-cta,[type="submit"]){
+  border-radius:999px!important;
+  font-family:"DM Sans","Manrope",Arial,sans-serif!important;
+  font-weight:750!important;
+  transition:background .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease,transform .2s ease!important;
+}html body :is(.btn,.button,.primary,.departure-cta,[type="submit"]){
   background:linear-gradient(120deg,#ff8738,#ff9d5b)!important;
   color:#172b40!important;border:1px solid #ffc49f!important;
   box-shadow:0 7px 18px rgba(255,135,56,.16)!important;
-}
-html body :is(.btn,.button,.primary,.departure-cta,[type="submit"]):hover{
+}html body :is(.btn,.button,.primary,.departure-cta,[type="submit"]):hover{
   filter:brightness(1.045)!important;transform:translateY(-1px)!important;
-}
-html body :is(input,select,textarea){
+}html body :is(input,select,textarea){
   border-color:#d5e1ed!important;border-radius:12px!important;
   color:#172b40!important;background:#fff!important;
-}
-html body :is(input,select,textarea):focus{
+}html body :is(input,select,textarea):focus{
   outline:3px solid rgba(23,105,232,.16)!important;border-color:#1769e8!important;
-}
-html body :is(h1,h2,h3,h4){color:var(--hoe-ink)}
-html body footer{background:#10243b!important;color:#eef5fb!important;border-top:1px solid rgba(220,238,250,.2)!important}
-html body footer a{color:#b9dcf2!important}
-html body .mobile-app-dock{
+}html body :is(h1,h2,h3,h4){color:var(--hoe-ink)}html body footer{background:#10243b!important;color:#eef5fb!important;border-top:1px solid rgba(220,238,250,.2)!important}html body footer a{color:#b9dcf2!important}html body .mobile-app-dock{
   background:rgba(244,248,252,.94)!important;border:1px solid rgba(255,255,255,.9)!important;
   box-shadow:0 12px 32px rgba(16,36,59,.2)!important;
-}
-html body .mobile-app-dock a{color:#40566b!important}
-html body .mobile-app-dock a[aria-current="page"]{background:#dceefa!important;color:#10243b!important}
-html body .mobile-app-dock a.dock-plan{background:linear-gradient(120deg,#ff8738,#ff9d5b)!important;color:#172b40!important}
+}html body .mobile-app-dock a{color:#40566b!important}html body .mobile-app-dock a[aria-current="page"]{background:#dceefa!important;color:#10243b!important}html body .mobile-app-dock a.dock-plan{background:linear-gradient(120deg,#ff8738,#ff9d5b)!important;color:#172b40!important}
 @media(max-width:640px){
 }
-@media(prefers-reduced-motion:reduce){
-}
-html body .site-topbar{
-  background:rgba(16,36,59,.96)!important;
-  background-image:none!important;
-  color:#f4f8fc!important;
-  border-bottom:1px solid rgba(220,238,250,.28)!important;
-  box-shadow:0 10px 30px rgba(16,36,59,.16)!important;
-  -webkit-backdrop-filter:blur(20px) saturate(145%)!important;
-  backdrop-filter:blur(20px) saturate(145%)!important;
-}
-html body .site-topbar .site-brand{color:#f4f8fc!important}
-html body .site-topbar .brand-mark{
-  color:#dceefa!important;border-color:#a9d8f2!important;
-  box-shadow:inset 0 0 0 4px rgba(220,238,250,.09),0 0 18px rgba(169,216,242,.12)!important;
-}
-html body .site-topbar .brand-copy strong{color:#f4f8fc!important}
-html body .site-topbar .brand-copy small{color:#b9dcf2!important}
-html body :is(.btn,.button,.primary,.departure-cta,[type="submit"]){
+@media(prefers-reduced-motion:reduce){html body :is(button,.btn,.button,.primary){transition:none!important;animation:none!important}
+}:root{
+  --hoe-ink:#172b40;--hoe-navy:#10243b;--hoe-blue:#1769e8;
+  --hoe-ice:#dceefa;--hoe-paper:#f4f8fc;--hoe-coral:#ff8738;
+  --hoe-muted:#64748b;--hoe-line:#dce6f0;
+}html body :is(button,.btn,.button,.primary,.departure-cta,[type="submit"]){
+  border-radius:999px!important;
+  font-family:"DM Sans","Manrope",Arial,sans-serif!important;
+  font-weight:750!important;
+  transition:background .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease,transform .2s ease!important;
+}html body :is(.btn,.button,.primary,.departure-cta,[type="submit"]){
   background:linear-gradient(120deg,#ff8738,#ff9d5b)!important;
   color:#172b40!important;border:1px solid #ffc49f!important;
   box-shadow:0 7px 18px rgba(255,135,56,.16)!important;
-}
-html body :is(.btn,.button,.primary,.departure-cta,[type="submit"]):hover{
+}html body :is(.btn,.button,.primary,.departure-cta,[type="submit"]):hover{
   filter:brightness(1.045)!important;transform:translateY(-1px)!important;
-}
-html body :is(input,select,textarea){
+}html body :is(input,select,textarea){
   border-color:#d5e1ed!important;border-radius:12px!important;
   color:#172b40!important;background:#fff!important;
-}
-html body :is(input,select,textarea):focus{
+}html body :is(input,select,textarea):focus{
   outline:3px solid rgba(23,105,232,.16)!important;border-color:#1769e8!important;
-}
-html body :is(h1,h2,h3,h4){color:var(--hoe-ink)}
-html body footer{
+}html body :is(h1,h2,h3,h4){color:var(--hoe-ink)}html body footer{
   background:#10243b!important;color:#eef5fb!important;
   border-top:1px solid rgba(220,238,250,.2)!important;
-}
-html body footer a{color:#b9dcf2!important}
+}html body footer a{color:#b9dcf2!important}
 @media(max-width:680px){
-  html body .site-topbar{background:rgba(16,36,59,.96)!important}
 }
-@media(prefers-reduced-motion:reduce){
-  html body .site-topbar,html body .site-topbar *,
-  html body :is(button,.btn,.button,.primary,.site-nav-contact){transition:none!important;animation:none!important}
+@media(prefers-reduced-motion:reduce){html body :is(button,.btn,.button,.primary){transition:none!important;animation:none!important}
 }

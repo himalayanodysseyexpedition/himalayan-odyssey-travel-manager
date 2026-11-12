@@ -1,146 +1,15 @@
-/* COMPLETE HOMEPAGE REDESIGN — Himalayan Odyssey Expedition
-   A single final cascade layer for the homepage. Existing content, image assets,
-   Supabase data, forms, booking links and interaction scripts remain untouched. */
 :root{
  --hoe-bg:#f4f1e8;--hoe-paper:#fffdf7;--hoe-forest:#173c36;--hoe-deep:#10243b;
  --hoe-green:#244a66;--hoe-gold:#a9d8f2;--hoe-champagne:#dceefa;
  --hoe-ink:#10243b;--hoe-muted:#718078;--hoe-line:rgba(23,60,54,.13);
  --hoe-shadow:0 18px 48px rgba(16,36,59,.10);--hoe-radius:22px;
-}
-html{background:var(--hoe-bg)!important;scroll-behavior:smooth;scroll-padding-top:110px}
-body{margin:0!important;background:var(--hoe-bg)!important;color:var(--hoe-ink)!important;font-family:"DM Sans",Arial,sans-serif!important;overflow-x:hidden}
-body::selection{background:var(--hoe-gold);color:var(--hoe-deep)}
-/* Hero: full-bleed cinematic opening */
-.hero{position:relative!important;isolation:isolate!important;min-height:clamp(590px,76vh,820px)!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:100px 24px 90px!important;box-sizing:border-box!important;background-color:var(--hoe-deep)!important;background-image:linear-gradient(180deg,rgba(16,36,59,.44),rgba(16,36,59,.34) 42%,rgba(16,36,59,.83)),url('/spiti.jpg')!important;background-size:cover!important;background-position:center 48%!important}
-.hero:before{content:""!important;position:absolute!important;inset:0!important;z-index:-1!important;background:radial-gradient(ellipse at 50% 42%,rgba(16,36,59,.04),rgba(16,36,59,.36) 76%)!important;pointer-events:none!important}
-.hero-content{position:relative!important;width:min(1050px,100%)!important;max-width:1050px!important;margin:auto!important;text-align:center!important}
-.hero .hero-animated-heading{margin:0 auto 28px!important;color:#fff!important;font-family:"Cinzel",Georgia,serif!important;font-size:clamp(42px,6.2vw,82px)!important;font-weight:600!important;line-height:1.02!important;letter-spacing:-.035em!important;text-shadow:0 5px 30px rgba(0,0,0,.38)!important;text-align:center!important}
-.hero .hero-word-rotator{background:linear-gradient(105deg,#a9d8f2,#a9d8f2 48%,#a9d8f2)!important;background-clip:text!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;color:transparent!important}
-.hero-service-icons{display:flex!important;justify-content:center!important;align-items:stretch!important;gap:clamp(12px,2.5vw,28px)!important;width:min(540px,100%)!important;margin:0 auto 25px!important}
-.hero-service-icon{flex:1 1 0!important;min-width:0!important;min-height:92px!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;gap:9px!important;border:1px solid rgba(220,238,250,.45)!important;border-radius:20px!important;background:linear-gradient(145deg,rgba(255,255,255,.19),rgba(255,255,255,.055))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 12px 28px rgba(0,0,0,.2)!important;backdrop-filter:blur(17px) saturate(150%)!important;-webkit-backdrop-filter:blur(17px) saturate(150%)!important;color:#fff!important}
-.hero-service-icon svg{width:26px!important;height:26px!important;stroke:var(--hoe-champagne)!important;stroke-width:1.5!important;fill:none!important}
-.hero-service-icon span{font-size:11px!important;letter-spacing:1.5px!important;text-transform:uppercase!important;color:#fff!important;font-weight:700!important}
-.hero-build-cta-wrap{margin:0 auto 28px!important;text-align:center!important}
-.hero .hero-build-cta{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:48px!important;padding:0 29px!important;border-radius:999px!important;background:linear-gradient(130deg,#dceefa,#a9d8f2)!important;color:#10243b!important;border:1px solid rgba(255,255,255,.5)!important;box-shadow:0 10px 28px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.7)!important;font-size:10px!important;font-weight:800!important;letter-spacing:1.5px!important;text-transform:uppercase!important}
-.hero .hero-content>p{max-width:760px!important;margin:0 auto!important;color:rgba(255,255,255,.9)!important;font-size:clamp(14px,1.3vw,17px)!important;line-height:1.9!important}
-.hero-note{justify-content:center!important;gap:9px 22px!important;margin-top:28px!important}
-.hero-note span{font-size:10px!important;letter-spacing:1.35px!important;color:#f4ead6!important;text-transform:uppercase!important}
-.hero-note span:before{background:var(--hoe-gold)!important;box-shadow:0 0 10px rgba(169,216,242,.7)!important}
-/* Trust strip and editorial sections */
-.journey-strip{position:relative!important;z-index:4!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;width:min(1120px,calc(100% - 40px))!important;max-width:1120px!important;margin:-34px auto 0!important;padding:0!important;border:1px solid rgba(169,216,242,.3)!important;border-radius:20px!important;overflow:hidden!important;background:var(--hoe-paper)!important;box-shadow:var(--hoe-shadow)!important}
-.journey-item{min-height:112px!important;padding:22px 14px!important;background:transparent!important;border:0!important;box-shadow:none!important}
-.journey-item+.journey-item{border-left:1px solid var(--hoe-line)!important}
-.journey-item strong{font:600 25px/1.1 "Cormorant Garamond",Georgia,serif!important;color:var(--hoe-forest)!important}
-.journey-item span{margin-top:8px!important;color:var(--hoe-muted)!important;font-size:9px!important;letter-spacing:1.25px!important;text-transform:uppercase!important}
-.content{padding:clamp(58px,7vw,100px) 24px!important;background:var(--hoe-bg)!important}
-.content:nth-of-type(even){background:#fbfaf5!important}
-.section-inner{width:min(1180px,100%)!important;max-width:1180px!important;margin:0 auto!important}
-.section-title{margin:0 auto 20px!important;text-align:center!important}
-.section-title small,.eyebrow,.section-kicker{display:block!important;color:#a9d8f2!important;font-size:10px!important;font-weight:800!important;letter-spacing:2.5px!important;text-transform:uppercase!important}
-.section-title h2,.content h2,.section-inner h2{font-family:"Cormorant Garamond",Georgia,serif!important;color:var(--hoe-forest)!important;font-size:clamp(35px,4.6vw,58px)!important;font-weight:600!important;line-height:1.04!important;letter-spacing:-.025em!important}
-.content .intro{max-width:760px!important;margin:0 auto 32px!important;color:var(--hoe-muted)!important;text-align:center!important;font-size:14px!important;line-height:1.9!important}
-.local-intro{display:grid!important;grid-template-columns:1.08fr .92fr!important;gap:clamp(28px,5vw,70px)!important;align-items:center!important}
-.local-intro-copy h2{margin:12px 0 18px!important}
-.local-intro-copy p{color:var(--hoe-muted)!important;line-height:1.95!important}
-.local-intro-panel{padding:clamp(28px,4vw,46px)!important;border:1px solid rgba(169,216,242,.55)!important;border-radius:var(--hoe-radius)!important;background:linear-gradient(145deg,#10243b,#10243b)!important;box-shadow:var(--hoe-shadow)!important;color:#fff!important}
-.local-intro-panel small{color:var(--hoe-champagne)!important;letter-spacing:2px!important;text-transform:uppercase!important}
-.local-intro-panel h3{font:600 clamp(28px,3vw,38px)/1.08 "Cormorant Garamond",Georgia,serif!important;color:#fff!important}
-.local-intro-panel p{color:rgba(255,255,255,.8)!important;line-height:1.9!important}
-/* Destination imagery and horizontal discovery rails */
-.destination-gallery{background:#f8f6ef!important}
-.destination-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:20px!important}
-.destination-card{position:relative!important;display:block!important;min-height:340px!important;border:1px solid rgba(169,216,242,.28)!important;border-radius:20px!important;overflow:hidden!important;background:#173c36!important;box-shadow:0 12px 34px rgba(16,36,59,.12)!important}
-.destination-card img{display:block!important;width:100%!important;height:100%!important;min-height:340px!important;object-fit:cover!important;transition:transform .8s ease,filter .5s ease!important}
-.destination-card:after{content:""!important;position:absolute!important;inset:25% 0 0!important;background:linear-gradient(180deg,transparent,rgba(16,36,59,.88))!important;pointer-events:none!important}
-.destination-card:hover img{transform:scale(1.055)!important}
-.destination-info{position:absolute!important;z-index:2!important;left:0!important;right:0!important;bottom:0!important;padding:26px!important;background:none!important}
-.destination-info small{color:var(--hoe-champagne)!important;font-size:9px!important;letter-spacing:2px!important}
-.destination-info h3{margin:7px 0!important;color:#fff!important;font:600 34px/1.05 "Cormorant Garamond",Georgia,serif!important}
-.destination-info span{color:#dceefa!important;font-size:10px!important;letter-spacing:1.1px!important;text-transform:uppercase!important}
-.group-departures-section{background:linear-gradient(180deg,#f8f6ef,#e9eee7)!important}
-.group-departures-head{align-items:end!important}
-.group-departures-head .section-title{text-align:left!important;margin:0!important}
-.group-departures-head .section-title h2{text-align:left!important}
-.group-departures-head .intro{max-width:440px!important;text-align:left!important;margin:0!important}
-.group-departures-rail{gap:22px!important;padding:8px 3px 22px!important}
-.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.card{border:1px solid var(--hoe-line)!important;border-radius:20px!important;background:var(--hoe-paper)!important;box-shadow:0 12px 32px rgba(16,36,59,.075)!important;overflow:hidden!important}
-.group-departure-photo{height:220px!important}
-.group-departure-body{padding:24px!important}
-.group-departure-body h3,.package-slide h3,.itinerary-slide h3,.cab-card h3,.hotel-card h3,.guide-card h3,.card h3{font:600 27px/1.1 "Cormorant Garamond",Georgia,serif!important;color:var(--hoe-forest)!important}
-.group-departure-cta{border-radius:999px!important;background:var(--hoe-forest)!important;color:#fff!important}
-.group-departure-cta:hover{background:var(--hoe-gold)!important;color:var(--hoe-deep)!important}
-.packages-carousel,.itineraries-carousel,.cabs-carousel,.destinations-carousel,.guides-carousel{scrollbar-width:thin;scrollbar-color:var(--hoe-gold) transparent}
-.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card{transition:transform .35s ease,box-shadow .35s ease!important}
-.package-slide:hover,.itinerary-slide:hover,.cab-card:hover,.hotel-card:hover,.guide-card:hover{transform:translateY(-5px)!important;box-shadow:var(--hoe-shadow)!important}
-.destination-gallery .destinations-controls button,.group-departures-controls button,.packages-controls button,.itineraries-controls button,.cabs-controls button,.guides-controls button{border:1px solid rgba(23,60,54,.2)!important;border-radius:50%!important;background:var(--hoe-paper)!important;color:var(--hoe-forest)!important}
-/* Guides, itinerary, cabs, hotels and supporting content */
-.info-grid,.info-box{border-radius:18px!important}
-.faq-section{background:#f8f6ef!important}
-.faq-list details,.faq-item,.form-card,.enquiry-card,.contact-card{border:1px solid var(--hoe-line)!important;border-radius:16px!important;background:var(--hoe-paper)!important;box-shadow:0 8px 24px rgba(16,36,59,.045)!important}
-input,select,textarea{border:1px solid #d8ddd5!important;border-radius:10px!important}
-input:focus,select:focus,textarea:focus{border-color:var(--hoe-gold)!important;box-shadow:0 0 0 3px rgba(169,216,242,.15)!important;outline:none!important}
-.btn,.button,.submit-btn{border-radius:999px!important}
-.instagram-section{background:linear-gradient(145deg,#10243b,#173c36)!important;color:#fff!important}
-.instagram-section h2,.instagram-section h3{color:#fff!important}
-.instagram-section p{color:rgba(255,255,255,.78)!important}
-.instagram-btn{border:1px solid rgba(220,238,250,.55)!important;border-radius:999px!important;background:rgba(255,255,255,.08)!important;color:var(--hoe-champagne)!important}
-/* Footer and floating quick actions */
-footer#siteFooter,footer,.site-footer{background:linear-gradient(145deg,#10243b,#173c36)!important;color:rgba(255,255,255,.82)!important;border-top:1px solid rgba(169,216,242,.35)!important;padding:46px 24px!important}
-footer b,footer strong,footer h2,footer h3,footer h4{color:var(--hoe-champagne)!important}
-footer a{color:#dceefa!important}
-.footer-contact-bar{z-index:999!important}
-a:focus-visible,button:focus-visible{outline:2px solid var(--hoe-gold)!important;outline-offset:3px!important}
+}html{background:var(--hoe-bg)!important;scroll-behavior:smooth;scroll-padding-top:110px}body{margin:0!important;background:var(--hoe-bg)!important;color:var(--hoe-ink)!important;font-family:"DM Sans",Arial,sans-serif!important;overflow-x:hidden}body::selection{background:var(--hoe-gold);color:var(--hoe-deep)}.hero{position:relative!important;isolation:isolate!important;min-height:clamp(590px,76vh,820px)!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:100px 24px 90px!important;box-sizing:border-box!important;background-color:var(--hoe-deep)!important;background-image:linear-gradient(180deg,rgba(16,36,59,.44),rgba(16,36,59,.34) 42%,rgba(16,36,59,.83)),url('/spiti.jpg')!important;background-size:cover!important;background-position:center 48%!important}.hero:before{content:""!important;position:absolute!important;inset:0!important;z-index:-1!important;background:radial-gradient(ellipse at 50% 42%,rgba(16,36,59,.04),rgba(16,36,59,.36) 76%)!important;pointer-events:none!important}.hero-content{position:relative!important;width:min(1050px,100%)!important;max-width:1050px!important;margin:auto!important;text-align:center!important}.hero .hero-animated-heading{margin:0 auto 28px!important;color:#fff!important;font-family:"Cinzel",Georgia,serif!important;font-size:clamp(42px,6.2vw,82px)!important;font-weight:600!important;line-height:1.02!important;letter-spacing:-.035em!important;text-shadow:0 5px 30px rgba(0,0,0,.38)!important;text-align:center!important}.hero .hero-word-rotator{background:linear-gradient(105deg,#a9d8f2,#a9d8f2 48%,#a9d8f2)!important;background-clip:text!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;color:transparent!important}.hero-service-icons{display:flex!important;justify-content:center!important;align-items:stretch!important;gap:clamp(12px,2.5vw,28px)!important;width:min(540px,100%)!important;margin:0 auto 25px!important}.hero-service-icon{flex:1 1 0!important;min-width:0!important;min-height:92px!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;gap:9px!important;border:1px solid rgba(220,238,250,.45)!important;border-radius:20px!important;background:linear-gradient(145deg,rgba(255,255,255,.19),rgba(255,255,255,.055))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 12px 28px rgba(0,0,0,.2)!important;backdrop-filter:blur(17px) saturate(150%)!important;-webkit-backdrop-filter:blur(17px) saturate(150%)!important;color:#fff!important}.hero-service-icon svg{width:26px!important;height:26px!important;stroke:var(--hoe-champagne)!important;stroke-width:1.5!important;fill:none!important}.hero-service-icon span{font-size:11px!important;letter-spacing:1.5px!important;text-transform:uppercase!important;color:#fff!important;font-weight:700!important}.hero-build-cta-wrap{margin:0 auto 28px!important;text-align:center!important}.hero .hero-build-cta{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:48px!important;padding:0 29px!important;border-radius:999px!important;background:linear-gradient(130deg,#dceefa,#a9d8f2)!important;color:#10243b!important;border:1px solid rgba(255,255,255,.5)!important;box-shadow:0 10px 28px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.7)!important;font-size:10px!important;font-weight:800!important;letter-spacing:1.5px!important;text-transform:uppercase!important}.hero .hero-content>p{max-width:760px!important;margin:0 auto!important;color:rgba(255,255,255,.9)!important;font-size:clamp(14px,1.3vw,17px)!important;line-height:1.9!important}.hero-note{justify-content:center!important;gap:9px 22px!important;margin-top:28px!important}.hero-note span{font-size:10px!important;letter-spacing:1.35px!important;color:#f4ead6!important;text-transform:uppercase!important}.hero-note span:before{background:var(--hoe-gold)!important;box-shadow:0 0 10px rgba(169,216,242,.7)!important}.journey-strip{position:relative!important;z-index:4!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;width:min(1120px,calc(100% - 40px))!important;max-width:1120px!important;margin:-34px auto 0!important;padding:0!important;border:1px solid rgba(169,216,242,.3)!important;border-radius:20px!important;overflow:hidden!important;background:var(--hoe-paper)!important;box-shadow:var(--hoe-shadow)!important}.journey-item{min-height:112px!important;padding:22px 14px!important;background:transparent!important;border:0!important;box-shadow:none!important}.journey-item+.journey-item{border-left:1px solid var(--hoe-line)!important}.journey-item strong{font:600 25px/1.1 "Cormorant Garamond",Georgia,serif!important;color:var(--hoe-forest)!important}.journey-item span{margin-top:8px!important;color:var(--hoe-muted)!important;font-size:9px!important;letter-spacing:1.25px!important;text-transform:uppercase!important}.content{padding:clamp(58px,7vw,100px) 24px!important;background:var(--hoe-bg)!important}.content:nth-of-type(even){background:#fbfaf5!important}.section-inner{width:min(1180px,100%)!important;max-width:1180px!important;margin:0 auto!important}.section-title{margin:0 auto 20px!important;text-align:center!important}.section-title small,.eyebrow,.section-kicker{display:block!important;color:#a9d8f2!important;font-size:10px!important;font-weight:800!important;letter-spacing:2.5px!important;text-transform:uppercase!important}.section-title h2,.content h2,.section-inner h2{font-family:"Cormorant Garamond",Georgia,serif!important;color:var(--hoe-forest)!important;font-size:clamp(35px,4.6vw,58px)!important;font-weight:600!important;line-height:1.04!important;letter-spacing:-.025em!important}.content .intro{max-width:760px!important;margin:0 auto 32px!important;color:var(--hoe-muted)!important;text-align:center!important;font-size:14px!important;line-height:1.9!important}.local-intro{display:grid!important;grid-template-columns:1.08fr .92fr!important;gap:clamp(28px,5vw,70px)!important;align-items:center!important}.local-intro-copy h2{margin:12px 0 18px!important}.local-intro-copy p{color:var(--hoe-muted)!important;line-height:1.95!important}.local-intro-panel{padding:clamp(28px,4vw,46px)!important;border:1px solid rgba(169,216,242,.55)!important;border-radius:var(--hoe-radius)!important;background:linear-gradient(145deg,#10243b,#10243b)!important;box-shadow:var(--hoe-shadow)!important;color:#fff!important}.local-intro-panel small{color:var(--hoe-champagne)!important;letter-spacing:2px!important;text-transform:uppercase!important}.local-intro-panel h3{font:600 clamp(28px,3vw,38px)/1.08 "Cormorant Garamond",Georgia,serif!important;color:#fff!important}.local-intro-panel p{color:rgba(255,255,255,.8)!important;line-height:1.9!important}.destination-gallery{background:#f8f6ef!important}.destination-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:20px!important}.destination-card{position:relative!important;display:block!important;min-height:340px!important;border:1px solid rgba(169,216,242,.28)!important;border-radius:20px!important;overflow:hidden!important;background:#173c36!important;box-shadow:0 12px 34px rgba(16,36,59,.12)!important}.destination-card img{display:block!important;width:100%!important;height:100%!important;min-height:340px!important;object-fit:cover!important;transition:transform .8s ease,filter .5s ease!important}.destination-card:after{content:""!important;position:absolute!important;inset:25% 0 0!important;background:linear-gradient(180deg,transparent,rgba(16,36,59,.88))!important;pointer-events:none!important}.destination-card:hover img{transform:scale(1.055)!important}.destination-info{position:absolute!important;z-index:2!important;left:0!important;right:0!important;bottom:0!important;padding:26px!important;background:none!important}.destination-info small{color:var(--hoe-champagne)!important;font-size:9px!important;letter-spacing:2px!important}.destination-info h3{margin:7px 0!important;color:#fff!important;font:600 34px/1.05 "Cormorant Garamond",Georgia,serif!important}.destination-info span{color:#dceefa!important;font-size:10px!important;letter-spacing:1.1px!important;text-transform:uppercase!important}.group-departures-section{background:linear-gradient(180deg,#f8f6ef,#e9eee7)!important}.group-departures-head{align-items:end!important}.group-departures-head .section-title{text-align:left!important;margin:0!important}.group-departures-head .section-title h2{text-align:left!important}.group-departures-head .intro{max-width:440px!important;text-align:left!important;margin:0!important}.group-departures-rail{gap:22px!important;padding:8px 3px 22px!important}.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.card{border:1px solid var(--hoe-line)!important;border-radius:20px!important;background:var(--hoe-paper)!important;box-shadow:0 12px 32px rgba(16,36,59,.075)!important;overflow:hidden!important}.group-departure-photo{height:220px!important}.group-departure-body{padding:24px!important}.group-departure-body h3,.package-slide h3,.itinerary-slide h3,.cab-card h3,.hotel-card h3,.guide-card h3,.card h3{font:600 27px/1.1 "Cormorant Garamond",Georgia,serif!important;color:var(--hoe-forest)!important}.group-departure-cta{border-radius:999px!important;background:var(--hoe-forest)!important;color:#fff!important}.group-departure-cta:hover{background:var(--hoe-gold)!important;color:var(--hoe-deep)!important}.packages-carousel,.itineraries-carousel,.cabs-carousel,.destinations-carousel,.guides-carousel{scrollbar-width:thin;scrollbar-color:var(--hoe-gold) transparent}.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card{transition:transform .35s ease,box-shadow .35s ease!important}.package-slide:hover,.itinerary-slide:hover,.cab-card:hover,.hotel-card:hover,.guide-card:hover{transform:translateY(-5px)!important;box-shadow:var(--hoe-shadow)!important}.destination-gallery .destinations-controls button,.group-departures-controls button,.packages-controls button,.itineraries-controls button,.cabs-controls button,.guides-controls button{border:1px solid rgba(23,60,54,.2)!important;border-radius:50%!important;background:var(--hoe-paper)!important;color:var(--hoe-forest)!important}.info-grid,.info-box{border-radius:18px!important}.faq-section{background:#f8f6ef!important}.faq-list details,.faq-item,.form-card,.enquiry-card,.contact-card{border:1px solid var(--hoe-line)!important;border-radius:16px!important;background:var(--hoe-paper)!important;box-shadow:0 8px 24px rgba(16,36,59,.045)!important}input,select,textarea{border:1px solid #d8ddd5!important;border-radius:10px!important}input:focus,select:focus,textarea:focus{border-color:var(--hoe-gold)!important;box-shadow:0 0 0 3px rgba(169,216,242,.15)!important;outline:none!important}.btn,.button,.submit-btn{border-radius:999px!important}.instagram-section{background:linear-gradient(145deg,#10243b,#173c36)!important;color:#fff!important}.instagram-section h2,.instagram-section h3{color:#fff!important}.instagram-section p{color:rgba(255,255,255,.78)!important}.instagram-btn{border:1px solid rgba(220,238,250,.55)!important;border-radius:999px!important;background:rgba(255,255,255,.08)!important;color:var(--hoe-champagne)!important}footer#siteFooter,footer,.site-footer{background:linear-gradient(145deg,#10243b,#173c36)!important;color:rgba(255,255,255,.82)!important;border-top:1px solid rgba(169,216,242,.35)!important;padding:46px 24px!important}footer b,footer strong,footer h2,footer h3,footer h4{color:var(--hoe-champagne)!important}footer a{color:#dceefa!important}.footer-contact-bar{z-index:999!important}a:focus-visible,button:focus-visible{outline:2px solid var(--hoe-gold)!important;outline-offset:3px!important}
 /* Responsive layout */
-@media(max-width:900px){
- .hero{min-height:650px!important;padding:76px 18px 76px!important;background-position:center!important}
- .hero .hero-animated-heading{font-size:clamp(30px,6vw,52px)!important}
- .content{padding:62px 20px!important}
- .destination-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+@media(max-width:900px){.hero{min-height:650px!important;padding:76px 18px 76px!important;background-position:center!important}.hero .hero-animated-heading{font-size:clamp(30px,6vw,52px)!important}.content{padding:62px 20px!important}.destination-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
-@media(max-width:600px){
- html{scroll-padding-top:112px}
- .hero{min-height:590px!important;padding:54px 16px 68px!important}
- .hero .hero-animated-heading{font-size:clamp(20px,5.6vw,28px)!important;line-height:1.2!important;white-space:nowrap!important;letter-spacing:-.035em!important;margin-bottom:24px!important}
- .hero-service-icons{gap:10px!important;margin-bottom:22px!important}
- .hero-service-icon{min-height:76px!important;border-radius:15px!important;gap:7px!important}
- .hero-service-icon svg{width:22px!important;height:22px!important}
- .hero-service-icon span{font-size:9px!important;letter-spacing:1px!important}
- .hero .hero-build-cta{min-height:44px!important;padding:0 24px!important;font-size:9px!important}
- .hero .hero-content>p{font-size:13px!important;line-height:1.75!important}
- .hero-note{gap:8px 12px!important;margin-top:20px!important}
- .hero-note span{font-size:8px!important;letter-spacing:.8px!important}
- .journey-strip{width:calc(100% - 24px)!important;margin-top:-25px!important;grid-template-columns:1fr!important;border-radius:16px!important}
- .journey-item{min-height:76px!important;padding:14px 10px!important}
- .journey-item+.journey-item{border-left:0!important;border-top:1px solid var(--hoe-line)!important}
- .journey-item strong{font-size:22px!important}
- .journey-item span{font-size:8px!important}
- .content{padding:52px 16px!important}
- .section-title h2,.content h2,.section-inner h2{font-size:clamp(32px,9vw,43px)!important}
- .content .intro{font-size:13px!important;line-height:1.8!important}
- .local-intro{grid-template-columns:1fr!important;gap:24px!important}
- .local-intro-panel{padding:25px!important}
- .group-departures-head{display:block!important}
- .group-departures-head .section-title{text-align:center!important}
- .group-departures-head .section-title h2{text-align:center!important}
- .group-departures-head .intro{margin:14px auto 24px!important;text-align:center!important}
- .group-departures-rail{grid-auto-columns:minmax(0,86%)!important;gap:14px!important}
- .group-departure-photo{height:185px!important}
- .destination-grid{grid-template-columns:1fr!important;gap:15px!important}
- .destination-card,.destination-card img{min-height:300px!important}
- .destination-info{padding:22px!important}
- .destination-info h3{font-size:31px!important}
- footer#siteFooter,footer,.site-footer{padding:36px 18px!important}
+@media(max-width:600px){html{scroll-padding-top:112px}.hero{min-height:590px!important;padding:54px 16px 68px!important}.hero .hero-animated-heading{font-size:clamp(20px,5.6vw,28px)!important;line-height:1.2!important;white-space:nowrap!important;letter-spacing:-.035em!important;margin-bottom:24px!important}.hero-service-icons{gap:10px!important;margin-bottom:22px!important}.hero-service-icon{min-height:76px!important;border-radius:15px!important;gap:7px!important}.hero-service-icon svg{width:22px!important;height:22px!important}.hero-service-icon span{font-size:9px!important;letter-spacing:1px!important}.hero .hero-build-cta{min-height:44px!important;padding:0 24px!important;font-size:9px!important}.hero .hero-content>p{font-size:13px!important;line-height:1.75!important}.hero-note{gap:8px 12px!important;margin-top:20px!important}.hero-note span{font-size:8px!important;letter-spacing:.8px!important}.journey-strip{width:calc(100% - 24px)!important;margin-top:-25px!important;grid-template-columns:1fr!important;border-radius:16px!important}.journey-item{min-height:76px!important;padding:14px 10px!important}.journey-item+.journey-item{border-left:0!important;border-top:1px solid var(--hoe-line)!important}.journey-item strong{font-size:22px!important}.journey-item span{font-size:8px!important}.content{padding:52px 16px!important}.section-title h2,.content h2,.section-inner h2{font-size:clamp(32px,9vw,43px)!important}.content .intro{font-size:13px!important;line-height:1.8!important}.local-intro{grid-template-columns:1fr!important;gap:24px!important}.local-intro-panel{padding:25px!important}.group-departures-head{display:block!important}.group-departures-head .section-title{text-align:center!important}.group-departures-head .section-title h2{text-align:center!important}.group-departures-head .intro{margin:14px auto 24px!important;text-align:center!important}.group-departures-rail{grid-auto-columns:minmax(0,86%)!important;gap:14px!important}.group-departure-photo{height:185px!important}.destination-grid{grid-template-columns:1fr!important;gap:15px!important}.destination-card,.destination-card img{min-height:300px!important}.destination-info{padding:22px!important}.destination-info h3{font-size:31px!important}footer#siteFooter,footer,.site-footer{padding:36px 18px!important}
 }
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
-
-
-/* =========================================================
-   BOOK BEFIKAR-INSPIRED VISUAL SYSTEM — HIMALAYAN ODYSSEY
-   Editorial travel layout, confident type, image-led cards,
-   soft surfaces and restrained motion. Existing content and
-   booking components remain untouched.
-   ========================================================= */
-:root{
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}:root{
   --forest:#10243b!important;
   --forest-deep:#10243b!important;
   --gold:#a9d8f2!important;
@@ -151,29 +20,12 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--hoe-gold)!important
   --shadow:0 22px 60px rgba(16,36,59,.12)!important;
   --sans:Inter,"Avenir Next",Avenir,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
   --serif:Inter,"Avenir Next",Avenir,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
-}
-html{scroll-behavior:smooth;scroll-padding-top:100px}
-body{
+}html{scroll-behavior:smooth;scroll-padding-top:100px}body{
   background:#f7f8f4!important;
   color:#10243b!important;
   font-family:Inter,"Avenir Next",Avenir,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
   -webkit-font-smoothing:antialiased;
-}
-a,button{ -webkit-tap-highlight-color:transparent }
-::selection{background:#a9d8f2;color:#10243b}
-.brand img{width:auto!important;max-height:58px!important;object-fit:contain}
-.glass-nav{
-  margin-left:auto!important;gap:5px!important;padding:6px!important;
-  border:1px solid rgba(16,36,59,.10)!important;border-radius:999px!important;
-  background:rgba(255,255,255,.62)!important;
-  box-shadow:inset 0 1px 0 #fff,0 6px 20px rgba(16,36,59,.055)!important;
-  -webkit-backdrop-filter:blur(18px)!important;backdrop-filter:blur(18px)!important;
-}
-.nav-glass-icon{width:15px!important;height:15px!important;stroke:#244a66!important}
-.services-chevron{color:#244a66!important;margin-left:2px!important}
-
-/* Immersive hero, with a clear editorial headline */
-.hero{
+}a,button{ -webkit-tap-highlight-color:transparent }::selection{background:#a9d8f2;color:#10243b}.nav-glass-icon{width:15px!important;height:15px!important;stroke:#244a66!important}.hero{
   min-height:min(780px,calc(100svh - 80px))!important;
   display:flex!important;align-items:center!important;
   padding:clamp(72px,9vw,130px) clamp(22px,8vw,120px)!important;
@@ -181,371 +33,208 @@ a,button{ -webkit-tap-highlight-color:transparent }
   background-image:linear-gradient(90deg,rgba(16,36,59,.82) 0%,rgba(16,36,59,.55) 48%,rgba(16,36,59,.18) 100%),linear-gradient(0deg,rgba(16,36,59,.38),transparent 50%),url('/spiti.jpg')!important;
   background-position:center!important;background-size:cover!important;
   isolation:isolate!important;overflow:hidden!important;
-}
-.hero:before{
+}.hero:before{
   content:"";position:absolute;inset:18px;z-index:-1;pointer-events:none;
   border:1px solid rgba(235,255,220,.23);border-radius:24px;
-}
-.hero-content{
+}.hero-content{
   width:min(100%,1180px)!important;max-width:1180px!important;
   margin:0 auto!important;position:relative!important;
   animation:odysseyRise .9s cubic-bezier(.2,.75,.25,1) both;
-}
-.hero-animated-heading{
+}.hero-animated-heading{
   max-width:980px!important;margin:0 0 26px!important;
   color:#fff!important;font-family:Inter,"Avenir Next",system-ui,sans-serif!important;
   font-size:clamp(48px,7.3vw,100px)!important;font-weight:850!important;
   line-height:.98!important;letter-spacing:-.065em!important;
   text-wrap:balance!important;text-shadow:0 8px 35px rgba(0,0,0,.22)!important;
-}
-.hero-word-slot{display:inline-block!important;min-width:0!important}
-.hero-word-rotator{
+}.hero-word-slot{display:inline-block!important;min-width:0!important}.hero-word-rotator{
   color:#a9d8f2!important;
   background:linear-gradient(100deg,#dceefa 0%,#a9d8f2 45%,#a9d8f2 100%)!important;
   -webkit-background-clip:text!important;background-clip:text!important;
   -webkit-text-fill-color:transparent!important;
-}
-.hero p{
+}.hero p{
   max-width:660px!important;color:rgba(255,255,255,.9)!important;
   font-size:clamp(15px,1.35vw,18px)!important;line-height:1.8!important;
   margin:22px 0 24px!important;
-}
-.hero-note{gap:9px!important;margin-top:24px!important}
-.hero-note span{
+}.hero-note{gap:9px!important;margin-top:24px!important}.hero-note span{
   padding:8px 13px!important;border:1px solid rgba(255,255,255,.22)!important;
   border-radius:999px!important;background:rgba(255,255,255,.10)!important;
   color:#f6f8ef!important;font-size:10px!important;letter-spacing:.35px!important;
   -webkit-backdrop-filter:blur(10px)!important;backdrop-filter:blur(10px)!important;
-}
-.hero-note span:before{width:5px!important;height:5px!important;background:#a9d8f2!important}
-.hero-service-icons{gap:12px!important;max-width:530px!important;margin:28px 0 0!important}
-.hero-service-icon{
+}.hero-note span:before{width:5px!important;height:5px!important;background:#a9d8f2!important}.hero-service-icons{gap:12px!important;max-width:530px!important;margin:28px 0 0!important}.hero-service-icon{
   min-height:82px!important;border-radius:17px!important;
   border:1px solid rgba(238,255,230,.24)!important;
   background:rgba(255,255,255,.13)!important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 12px 32px rgba(0,0,0,.12)!important;
   -webkit-backdrop-filter:blur(16px)!important;backdrop-filter:blur(16px)!important;
   transition:transform .35s ease,border-color .35s ease,background .35s ease!important;
-}
-.hero-service-icon:hover{transform:translateY(-5px)!important;background:rgba(255,255,255,.2)!important;border-color:#a9d8f2!important}
-.hero-service-icon svg{stroke:#a9d8f2!important}
-.hero-service-icon span{font-size:10px!important;letter-spacing:1.1px!important}
-.hero-build-cta-wrap{margin:18px 0 0!important;max-width:530px!important}
-.hero-build-cta,.btn{
+}.hero-service-icon:hover{transform:translateY(-5px)!important;background:rgba(255,255,255,.2)!important;border-color:#a9d8f2!important}.hero-service-icon svg{stroke:#a9d8f2!important}.hero-service-icon span{font-size:10px!important;letter-spacing:1.1px!important}.hero-build-cta-wrap{margin:18px 0 0!important;max-width:530px!important}.hero-build-cta,.btn{
   min-height:48px!important;padding:0 24px!important;border:1px solid #a9d8f2!important;
   border-radius:999px!important;background:#a9d8f2!important;color:#10243b!important;
   font-size:11px!important;font-weight:850!important;letter-spacing:.75px!important;
   box-shadow:0 9px 24px rgba(0,0,0,.12)!important;
   transition:transform .25s ease,box-shadow .25s ease,background .25s ease!important;
-}
-.hero-build-cta:hover,.btn:hover{
+}.hero-build-cta:hover,.btn:hover{
   transform:translateY(-3px)!important;background:#a9d8f2!important;
   box-shadow:0 15px 32px rgba(0,0,0,.18)!important;
-}
-
-/* Soft, spacious sections */
-section.content{padding:clamp(62px,7.5vw,108px) clamp(18px,5vw,76px)!important}
-.section-inner{max-width:1320px!important}
-.section-title{margin-bottom:36px!important}
-.section-title small,.eyebrow{
+}section.content{padding:clamp(62px,7.5vw,108px) clamp(18px,5vw,76px)!important}.section-inner{max-width:1320px!important}.section-title{margin-bottom:36px!important}.section-title small,.eyebrow{
   color:#a9d8f2!important;font-size:10px!important;font-weight:850!important;
   letter-spacing:2.6px!important;
-}
-.section-title h2,.local-intro-copy h2{
+}.section-title h2,.local-intro-copy h2{
   color:#10243b!important;font-family:Inter,"Avenir Next",system-ui,sans-serif!important;
   font-size:clamp(32px,4.4vw,58px)!important;font-weight:820!important;
   letter-spacing:-.055em!important;line-height:1.04!important;
-}
-.section-title h2:after{
+}.section-title h2:after{
   width:42px!important;height:4px!important;border-radius:8px!important;
   background:#a9d8f2!important;margin:17px auto 0!important;
-}
-.intro,.local-intro-copy p{
+}.intro,.local-intro-copy p{
   color:#66766d!important;font-size:15px!important;line-height:1.9!important;
-}
-.content.info,.destination-gallery,.group-departures-section,.faq-section{
+}.content.info,.destination-gallery,.group-departures-section,.faq-section{
   background:#f0f4ed!important;
-}
-.local-intro{gap:clamp(28px,5vw,70px)!important}
-.local-intro-panel{
+}.local-intro{gap:clamp(28px,5vw,70px)!important}.local-intro-panel{
   border:1px solid rgba(255,255,255,.2)!important;border-radius:24px!important;
   background:linear-gradient(145deg,#10243b,#244a66)!important;
   box-shadow:0 24px 60px rgba(16,36,59,.18)!important;padding:clamp(24px,4vw,42px)!important;
-}
-.local-intro-panel h3{font-family:Inter,system-ui,sans-serif!important;font-weight:800!important;letter-spacing:-.04em!important}
-.local-intro-panel p{font-size:14px!important;line-height:1.85!important}
-
-/* Card language: rounded, clean, image-first */
-.cards{gap:22px!important}
-.card,.destination-card,.group-departure-card,.guide-card,.package-card,.itinerary-card{
+}.local-intro-panel h3{font-family:Inter,system-ui,sans-serif!important;font-weight:800!important;letter-spacing:-.04em!important}.local-intro-panel p{font-size:14px!important;line-height:1.85!important}.cards{gap:22px!important}.card,.destination-card,.group-departure-card,.guide-card,.package-card,.itinerary-card{
   border-radius:20px!important;overflow:hidden!important;
   border:1px solid rgba(16,36,59,.10)!important;
   box-shadow:0 12px 34px rgba(16,36,59,.075)!important;
   transition:transform .4s cubic-bezier(.2,.75,.25,1),box-shadow .4s ease!important;
-}
-.card:hover,.destination-card:hover,.group-departure-card:hover,.guide-card:hover,.package-card:hover,.itinerary-card:hover{
+}.card:hover,.destination-card:hover,.group-departure-card:hover,.guide-card:hover,.package-card:hover,.itinerary-card:hover{
   transform:translateY(-7px)!important;box-shadow:0 22px 48px rgba(16,36,59,.14)!important;
-}
-.destination-gallery{padding-top:clamp(64px,7vw,100px)!important;padding-bottom:clamp(64px,7vw,100px)!important}
-.destination-grid{gap:18px!important}
-.destination-card{height:clamp(320px,35vw,440px)!important}
-.destination-card:after{
+}.destination-gallery{padding-top:clamp(64px,7vw,100px)!important;padding-bottom:clamp(64px,7vw,100px)!important}.destination-grid{gap:18px!important}.destination-card{height:clamp(320px,35vw,440px)!important}.destination-card:after{
   background:linear-gradient(0deg,rgba(16,36,59,.9) 0%,rgba(16,36,59,.42) 38%,rgba(16,36,59,0) 78%)!important;
-}
-.destination-card:before{border-radius:15px!important}
-.destination-info{left:23px!important;right:18px!important;bottom:24px!important}
-.destination-info h3{
+}.destination-card:before{border-radius:15px!important}.destination-info{left:23px!important;right:18px!important;bottom:24px!important}.destination-info h3{
   font-family:Inter,system-ui,sans-serif!important;font-weight:850!important;
   letter-spacing:-.045em!important;font-size:clamp(26px,3vw,38px)!important;
-}
-.destination-info small{color:#a9d8f2!important;letter-spacing:1.8px!important}
-.destination-info small:before{background:#a9d8f2!important}
-.destination-info span{font-weight:750!important}
-.group-departures-section{border-radius:0!important}
-.group-departure-card{background:#fff!important}
-.group-departure-photo{height:205px!important}
-.group-departure-body{padding:22px!important}
-.group-departure-body h3{font-family:Inter,system-ui,sans-serif!important;font-weight:820!important;letter-spacing:-.04em!important}
-.group-departure-status{border-radius:999px!important;background:#a9d8f2!important;color:#10243b!important}
-.group-departure-cta{
+}.destination-info small{color:#a9d8f2!important;letter-spacing:1.8px!important}.destination-info small:before{background:#a9d8f2!important}.destination-info span{font-weight:750!important}.group-departures-section{border-radius:0!important}.group-departure-card{background:#fff!important}.group-departure-photo{height:205px!important}.group-departure-body{padding:22px!important}.group-departure-body h3{font-family:Inter,system-ui,sans-serif!important;font-weight:820!important;letter-spacing:-.04em!important}.group-departure-status{border-radius:999px!important;background:#a9d8f2!important;color:#10243b!important}.group-departure-cta{
   border-radius:999px!important;background:#10243b!important;
   padding:14px!important;font-size:10px!important;
-}
-.group-departure-cta:hover{background:#a9d8f2!important;color:#10243b!important}
-.guide-card,.package-card,.itinerary-card{background:#fff!important}
-.faq-list{gap:13px!important}
-.faq-list details{border-radius:15px!important;border:1px solid rgba(16,36,59,.10)!important;background:#fff!important}
-.faq-list summary{font-family:Inter,system-ui,sans-serif!important;font-weight:750!important;letter-spacing:-.025em!important}
-.faq-list details[open]{border-color:#a9d8f2!important;box-shadow:0 12px 30px rgba(16,36,59,.08)!important}
-.faq-list summary:after{color:#a9d8f2!important}
-.enquiry-box{
+}.group-departure-cta:hover{background:#a9d8f2!important;color:#10243b!important}.guide-card,.package-card,.itinerary-card{background:#fff!important}.faq-list{gap:13px!important}.faq-list details{border-radius:15px!important;border:1px solid rgba(16,36,59,.10)!important;background:#fff!important}.faq-list summary{font-family:Inter,system-ui,sans-serif!important;font-weight:750!important;letter-spacing:-.025em!important}.faq-list details[open]{border-color:#a9d8f2!important;box-shadow:0 12px 30px rgba(16,36,59,.08)!important}.faq-list summary:after{color:#a9d8f2!important}.enquiry-box{
   border:1px solid rgba(16,36,59,.12)!important;border-top:4px solid #a9d8f2!important;
   border-radius:22px!important;box-shadow:0 22px 60px rgba(0,0,0,.18)!important;
-}
-.enquiry-box input,.enquiry-box select{border-radius:12px!important}
-footer{background:#10243b!important}
-
-/* Floating quick actions use the same soft-glass visual language */
-.footer-contact-bar{
+}.enquiry-box input,.enquiry-box select{border-radius:12px!important}footer{background:#10243b!important}.footer-contact-bar{
   border:1px solid rgba(16,36,59,.12)!important;border-radius:24px!important;
   background:rgba(250,252,247,.88)!important;
   box-shadow:0 18px 50px rgba(16,36,59,.18)!important;
   -webkit-backdrop-filter:blur(24px) saturate(1.4)!important;
   backdrop-filter:blur(24px) saturate(1.4)!important;
-}
-.footer-contact-bar a,.footer-contact-bar button{border-radius:16px!important}
+}.footer-contact-bar a,.footer-contact-bar button{border-radius:16px!important}
 
 /* Motion is subtle and consistent; no layout-affecting animation */
 @keyframes odysseyRise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-@keyframes odysseyFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-.hero-service-icon:nth-child(2){animation:odysseyFloat 5s ease-in-out 1s infinite}
-.hero-service-icon:nth-child(3){animation:odysseyFloat 5s ease-in-out 2s infinite}
-.destination-card img,.card>img{transition:transform .8s cubic-bezier(.2,.75,.25,1),filter .6s ease!important}
-.destination-card:hover img,.card:hover>img{transform:scale(1.055)!important}
-button:focus-visible,a:focus-visible{outline:3px solid #a9d8f2!important;outline-offset:3px!important}
+@keyframes odysseyFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}.hero-service-icon:nth-child(2){animation:odysseyFloat 5s ease-in-out 1s infinite}.hero-service-icon:nth-child(3){animation:odysseyFloat 5s ease-in-out 2s infinite}.destination-card img,.card>img{transition:transform .8s cubic-bezier(.2,.75,.25,1),filter .6s ease!important}.destination-card:hover img,.card:hover>img{transform:scale(1.055)!important}button:focus-visible,a:focus-visible{outline:3px solid #a9d8f2!important;outline-offset:3px!important}
 
 /* Tablet and phone refinements */
-@media(max-width:900px){
-  .header-inner{min-height:76px!important;flex-wrap:wrap!important;justify-content:center!important;gap:6px!important;padding:8px 14px 11px!important}
-  .brand{margin:0 auto!important;display:flex!important;justify-content:center!important}
-  .brand img{max-height:48px!important}
-  .glass-nav{
-    order:3!important;width:100%!important;margin:0!important;
-    display:flex!important;justify-content:space-between!important;gap:2px!important;
-    overflow:visible!important;padding:4px!important;
-  }
-  .hero{min-height:690px!important;padding:74px 24px 78px!important;background-position:58% center!important}
-  .hero-content{max-width:700px!important}
-  .hero-animated-heading{font-size:clamp(44px,9vw,72px)!important;line-height:1.02!important}
-  .hero p{font-size:15px!important;line-height:1.75!important}
-  .destination-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
-  .destination-card{height:350px!important}
+@media(max-width:900px){.hero{min-height:690px!important;padding:74px 24px 78px!important;background-position:58% center!important}.hero-content{max-width:700px!important}.hero-animated-heading{font-size:clamp(44px,9vw,72px)!important;line-height:1.02!important}.hero p{font-size:15px!important;line-height:1.75!important}.destination-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.destination-card{height:350px!important}
 }
-@media(max-width:600px){
-  .header-inner{padding:7px 10px 10px!important;gap:5px!important}
-  .brand img{max-height:43px!important}
-  .nav-dropdown{display:flex!important;align-items:center!important;flex:1 1 0!important;min-width:0!important}
-  .services-chevron{font-size:14px!important;margin-left:0!important}
-  .hero{
+@media(max-width:600px){.hero{
     min-height:690px!important;padding:64px 18px 72px!important;
     background-image:linear-gradient(0deg,rgba(16,36,59,.78),rgba(16,36,59,.38)),url('/spiti.jpg')!important;
     background-position:58% center!important;
-  }
-  .hero:before{inset:9px!important;border-radius:18px!important}
-  .hero-content{text-align:center!important}
-  .hero-animated-heading{
+  }.hero:before{inset:9px!important;border-radius:18px!important}.hero-content{text-align:center!important}.hero-animated-heading{
     font-size:clamp(39px,10.3vw,56px)!important;line-height:1.06!important;
     letter-spacing:-.06em!important;margin:0 auto 21px!important;
     max-width:100%!important;text-wrap:balance!important;
-  }
-  .hero-service-icons{max-width:100%!important;gap:8px!important;margin:22px auto 0!important}
-  .hero-service-icon{min-height:70px!important;border-radius:14px!important;padding:8px 5px!important}
-  .hero-service-icon svg{width:21px!important;height:21px!important}
-  .hero-service-icon span{font-size:9px!important}
-  .hero-build-cta-wrap{max-width:100%!important;margin:17px auto 0!important}
-  .hero p{font-size:14px!important;line-height:1.7!important;margin:20px auto!important;max-width:520px!important}
-  .hero-note{justify-content:center!important;gap:7px!important;margin-top:17px!important}
-  .hero-note span{font-size:9px!important;padding:7px 10px!important}
-  section.content{padding:62px 17px!important}
-  .section-title{margin-bottom:27px!important}
-  .section-title h2,.local-intro-copy h2{font-size:clamp(31px,8.5vw,43px)!important}
-  .intro,.local-intro-copy p{font-size:14px!important;line-height:1.8!important}
-  .local-intro-panel{border-radius:19px!important}
-  .destination-grid{grid-template-columns:1fr 1fr!important;gap:10px!important}
-  .destination-card{height:270px!important;border-radius:15px!important}
-  .destination-info{left:13px!important;right:10px!important;bottom:16px!important}
-  .destination-info h3{font-size:25px!important;margin:8px 0!important}
-  .destination-info small{font-size:8px!important;letter-spacing:1px!important}
-  .destination-info span{font-size:8px!important;letter-spacing:.4px!important}
-  .group-departure-card{border-radius:17px!important}
-  .group-departure-photo{height:180px!important}
-  .footer-contact-bar{width:calc(100% - 22px)!important;bottom:10px!important;border-radius:18px!important}
+  }.hero-service-icons{max-width:100%!important;gap:8px!important;margin:22px auto 0!important}.hero-service-icon{min-height:70px!important;border-radius:14px!important;padding:8px 5px!important}.hero-service-icon svg{width:21px!important;height:21px!important}.hero-service-icon span{font-size:9px!important}.hero-build-cta-wrap{max-width:100%!important;margin:17px auto 0!important}.hero p{font-size:14px!important;line-height:1.7!important;margin:20px auto!important;max-width:520px!important}.hero-note{justify-content:center!important;gap:7px!important;margin-top:17px!important}.hero-note span{font-size:9px!important;padding:7px 10px!important}section.content{padding:62px 17px!important}.section-title{margin-bottom:27px!important}.section-title h2,.local-intro-copy h2{font-size:clamp(31px,8.5vw,43px)!important}.intro,.local-intro-copy p{font-size:14px!important;line-height:1.8!important}.local-intro-panel{border-radius:19px!important}.destination-grid{grid-template-columns:1fr 1fr!important;gap:10px!important}.destination-card{height:270px!important;border-radius:15px!important}.destination-info{left:13px!important;right:10px!important;bottom:16px!important}.destination-info h3{font-size:25px!important;margin:8px 0!important}.destination-info small{font-size:8px!important;letter-spacing:1px!important}.destination-info span{font-size:8px!important;letter-spacing:.4px!important}.group-departure-card{border-radius:17px!important}.group-departure-photo{height:180px!important}.footer-contact-bar{width:calc(100% - 22px)!important;bottom:10px!important;border-radius:18px!important}
 }
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 
 
 /* Desktop-only: place the hero headline close beneath the navigation.
    Mobile hero spacing and layout remain unchanged. */
-@media (min-width: 901px){
-  .hero{
+@media (min-width: 901px){.hero{
     align-items:flex-start!important;
     justify-content:flex-start!important;
     padding-top:clamp(24px,3.2vw,42px)!important;
-  }
-  .hero-content{
+  }.hero-content{
     margin-top:0!important;
     padding-top:0!important;
     transform:none!important;
-  }
-  .hero-animated-heading{
+  }.hero-animated-heading{
     margin-top:0!important;
   }
-}
-
-
-
-.hero .hero-heading-static{
+}.hero .hero-heading-static{
   letter-spacing:-.035em!important;
-}
-.hero .hero-word-rotator{
+}.hero .hero-word-rotator{
   font-style:normal!important;
   text-transform:uppercase!important;
   font-variant-ligatures:common-ligatures discretionary-ligatures!important;
   font-feature-settings:"liga" 1,"dlig" 1!important;
   letter-spacing:.005em!important;
-}
-
-
-/* COMPACT HERO — remove the oversized empty image area while keeping the headline and trip details clear */
-body > .hero{
+}body > .hero{
   min-height:0!important;
   height:auto!important;
   padding:238px 32px 54px!important;
   background-position:center,center,center 50%!important;
   background-size:cover,cover,cover!important;
-}
-body > .hero > .hero-content{
+}body > .hero > .hero-content{
   gap:0!important;
-}
-body > .hero > .hero-content > h1{
+}body > .hero > .hero-content > h1{
   margin-bottom:22px!important;
-}
-body > .hero .hero-service-icons{
+}body > .hero .hero-service-icons{
   margin-top:16px!important;
   margin-bottom:16px!important;
-}
-body > .hero .hero-build-cta-wrap{
+}body > .hero .hero-build-cta-wrap{
   margin-top:8px!important;
-}
-body > .hero .hero-note{
+}body > .hero .hero-note{
   margin-top:16px!important;
 }
-@media(max-width:1100px){
-  body > .hero{
+@media(max-width:1100px){body > .hero{
     min-height:0!important;
     padding:66px 6% 78px!important;
     background-position:center,center,58% center!important;
-  }
-  body > .hero > .hero-content > h1{margin-bottom:18px!important}
-  body > .hero .hero-service-icons{margin:14px 0!important}
-  body > .hero .hero-note{margin-top:14px!important}
+  }body > .hero > .hero-content > h1{margin-bottom:18px!important}body > .hero .hero-service-icons{margin:14px 0!important}body > .hero .hero-note{margin-top:14px!important}
 }
-@media(max-width:600px){
-  body > .hero{
+@media(max-width:600px){body > .hero{
     min-height:0!important;
     padding:46px 6% 68px!important;
     background-position:center,center,60% center!important;
-  }
-  body > .hero > .hero-content > h1{
+  }body > .hero > .hero-content > h1{
     font-size:clamp(43px,11.5vw,66px)!important;
     line-height:.98!important;
     margin-bottom:16px!important;
-  }
-  body > .hero .hero-service-icons{gap:7px!important;margin:12px 0!important}
-  body > .hero .hero-build-cta-wrap{margin-top:6px!important}
-  body > .hero > .hero-content > p{margin-top:12px!important;margin-bottom:14px!important}
-  body > .hero .hero-note{margin-top:10px!important;padding:12px 14px!important}
-}
-
-/* Give the Cabs service tile the same gentle floating motion as Hotels and Packages.
-   Staggered timing keeps all three tiles moving in the same animation style. */
-.hero-service-icon:nth-child(1){
+  }body > .hero .hero-service-icons{gap:7px!important;margin:12px 0!important}body > .hero .hero-build-cta-wrap{margin-top:6px!important}body > .hero > .hero-content > p{margin-top:12px!important;margin-bottom:14px!important}body > .hero .hero-note{margin-top:10px!important;padding:12px 14px!important}
+}.hero-service-icon:nth-child(1){
   animation:odysseyFloat 5s ease-in-out 0s infinite;
 }
 @media(max-width:900px){
 }
 @media(max-width:600px){
-}
-
-
-/* Hero image: remove the inset curved frame so the image reaches the full hero edges. */
-body > .hero,
-body > .hero::before,
-.hero,
-.hero::before{
+}body > .hero,body > .hero::before,.hero,.hero::before{
   border-radius:0!important;
   clip-path:none!important;
   -webkit-clip-path:none!important;
   mask:none!important;
   -webkit-mask:none!important;
-}
-body > .hero::before,
-.hero::before{
+}body > .hero::before,.hero::before{
   inset:0!important;
 }
 
 
 /* Desktop hero font restoration.
    Match the specificity of the earlier site-motion.css Cinzel override. */
-@media (min-width:761px){
-  .hero > .hero-content > h1.hero-animated-heading{
+@media (min-width:761px){.hero > .hero-content > h1.hero-animated-heading{
     font-family:"General Sans",Arial,sans-serif!important;
-  }
-  .hero > .hero-content > h1.hero-animated-heading .hero-heading-static{
+  }.hero > .hero-content > h1.hero-animated-heading .hero-heading-static{
     font-family:"General Sans",Arial,sans-serif!important;
-  }
-  .hero > .hero-content > h1.hero-animated-heading .hero-word-rotator{
+  }.hero > .hero-content > h1.hero-animated-heading .hero-word-rotator{
     font-family:"General Sans",Arial,sans-serif!important;
   }
 }
 
 /* Desktop hero: Cormorant rotating phrase with a true bottom-to-top entrance. */
-@media (min-width:761px){
-  .hero > .hero-content > h1.hero-animated-heading .hero-word-rotator{
+@media (min-width:761px){.hero > .hero-content > h1.hero-animated-heading .hero-word-rotator{
     font-family:"Cormorant Garamond",Georgia,serif!important;
     transition:opacity .38s cubic-bezier(.22,.7,.2,1),
                transform .38s cubic-bezier(.22,.7,.2,1),
                filter .38s ease!important;
     will-change:opacity,transform;
-  }
-  .hero > .hero-content > h1.hero-animated-heading .hero-word-rotator.is-shuffling-out{
+  }.hero > .hero-content > h1.hero-animated-heading .hero-word-rotator.is-shuffling-out{
     opacity:0!important;
     transform:translateY(-.22em)!important;
     filter:blur(2px)!important;
-  }
-  .hero > .hero-content > h1.hero-animated-heading .hero-word-rotator.is-shuffling-in{
+  }.hero > .hero-content > h1.hero-animated-heading .hero-word-rotator.is-shuffling-in{
     opacity:0!important;
     transform:translateY(.42em)!important;
     filter:blur(2px)!important;
@@ -554,19 +243,16 @@ body > .hero::before,
 
 
 /* DESKTOP HERO WORD SPACING — add breathing room around the rotating phrase. */
-@media(min-width:761px){
-  .hero > .hero-content > h1.hero-animated-heading .hero-word-slot{
+@media(min-width:761px){.hero > .hero-content > h1.hero-animated-heading .hero-word-slot{
     margin-inline:.24em!important;
-  }
-  .hero > .hero-content > h1.hero-animated-heading .hero-word-rotator{
+  }.hero > .hero-content > h1.hero-animated-heading .hero-word-rotator{
     font-family:"Cinzel",Georgia,serif!important;
   }
 }
 
 
 /* DESKTOP HERO ROTATING WORD — match the neon-lime Cabs / Hotels / Packages identity. */
-@media(min-width:761px){
-  html body .hero > .hero-content > h1.hero-animated-heading .hero-word-slot .hero-word-rotator{
+@media(min-width:761px){html body .hero > .hero-content > h1.hero-animated-heading .hero-word-slot .hero-word-rotator{
     color:#a9d8f2!important;
     background:linear-gradient(100deg,#a9d8f2 0%,#a9d8f2 48%,#a9d8f2 100%)!important;
     background-clip:text!important;
@@ -577,8 +263,7 @@ body > .hero::before,
 
 
 /* DESKTOP BUILD YOUR TRIP — centered Apple-glass CTA with refined motion. */
-@media(min-width:761px){
-  body > .hero > .hero-content > .hero-build-cta-wrap{
+@media(min-width:761px){body > .hero > .hero-content > .hero-build-cta-wrap{
     display:flex!important;
     width:100%!important;
     max-width:none!important;
@@ -586,8 +271,7 @@ body > .hero::before,
     align-items:center!important;
     margin:18px auto 0!important;
     text-align:center!important;
-  }
-  body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta{
+  }body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta{
     position:relative!important;
     isolation:isolate!important;
     overflow:hidden!important;
@@ -612,8 +296,7 @@ body > .hero::before,
     text-decoration:none!important;
     animation:desktopGlassCtaFloat 4.2s ease-in-out infinite,desktopGlassCtaEnter .8s cubic-bezier(.2,.75,.25,1) both!important;
     transition:transform .35s cubic-bezier(.2,.75,.25,1),border-color .35s ease,box-shadow .35s ease,background .35s ease!important;
-  }
-  body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta:before{
+  }body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta:before{
     content:""!important;
     position:absolute!important;
     z-index:-1!important;
@@ -623,29 +306,20 @@ body > .hero::before,
     transform:translateX(-130%)!important;
     animation:desktopGlassCtaShine 5.5s ease-in-out infinite!important;
     pointer-events:none!important;
-  }
-  body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta:hover{
+  }body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta:hover{
     transform:translateY(-5px) scale(1.035)!important;
     border-color:rgba(169,216,242,.95)!important;
     background:linear-gradient(135deg,rgba(255,255,255,.36),rgba(255,255,255,.14) 52%,rgba(169,216,242,.24))!important;
     box-shadow:inset 0 1px 0 rgba(255,255,255,.62),0 18px 42px rgba(0,0,0,.3),0 0 30px rgba(169,216,242,.24)!important;
   }
-  @keyframes desktopGlassCtaFloat{
-    0%,100%{translate:0 0}
-    50%{translate:0 -4px}
+  @keyframes desktopGlassCtaFloat{0%,100%{translate:0 0}50%{translate:0 -4px}
   }
-  @keyframes desktopGlassCtaEnter{
-    from{opacity:0;transform:translateY(14px) scale(.97)}
-    to{opacity:1;transform:translateY(0) scale(1)}
+  @keyframes desktopGlassCtaEnter{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}
   }
-  @keyframes desktopGlassCtaShine{
-    0%,62%{transform:translateX(-130%)}
-    88%,100%{transform:translateX(130%)}
+  @keyframes desktopGlassCtaShine{0%,62%{transform:translateX(-130%)}88%,100%{transform:translateX(130%)}
   }
 }
-@media(min-width:761px) and (prefers-reduced-motion:reduce){
-  body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta,
-  body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta:before{
+@media(min-width:761px) and (prefers-reduced-motion:reduce){body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta,body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta:before{
     animation:none!important;
     transition:none!important;
   }
@@ -653,13 +327,27 @@ body > .hero::before,
 
 
 /* DESKTOP CTA COLOUR SYSTEM — replace champagne/gold button fills with the hero neon-lime. */
+@media(min-width:761px){html body .footer-package,html body .enquiry-dropdown>summary,html body .hero .hero-build-cta,html body .btn,html body a.btn,html body button.btn{
+    background:linear-gradient(110deg,#a9d8f2 0%,#a9d8f2 48%,#a9d8f2 100%)!important;
+    color:#10243b!important;
+    border-color:rgba(169,216,242,.9)!important;
+    box-shadow:0 8px 24px rgba(0,0,0,.14),0 0 16px rgba(169,216,242,.13),inset 0 1px 0 rgba(255,255,255,.58)!important;
+  }html body .footer-package:hover,html body .enquiry-dropdown>summary:hover,html body .btn:hover,html body a.btn:hover,html body button.btn:hover{
+    background:linear-gradient(110deg,#f2ffd9 0%,#a9d8f2 48%,#a9d8f2 100%)!important;
+    color:#10243b!important;
+    border-color:#efffd7!important;
+    box-shadow:0 13px 30px rgba(0,0,0,.18),0 0 24px rgba(169,216,242,.24),inset 0 1px 0 rgba(255,255,255,.7)!important;
+  }
+}
+
+
+/* DESKTOP HEADER — return to normal document flow; do not stick or follow page scroll. */
 @media(min-width:761px){
 }
 
 
 /* DESKTOP INTRO TAGLINE — lowercase luxury cursive beneath the animated hero heading. */
-@media(min-width:761px){
-  .hero > .hero-content > .hero-go-line{
+@media(min-width:761px){.hero > .hero-content > .hero-go-line{
     display:block!important;
     width:100%!important;
     max-width:100%!important;
@@ -676,33 +364,38 @@ body > .hero::before,
     animation:heroGoLineReveal 1.15s .28s cubic-bezier(.2,.75,.25,1) both!important;
   }
 }
-@keyframes heroGoLineReveal{
-  from{opacity:0;transform:translateY(13px)}
-  to{opacity:1;transform:translateY(0)}
+@keyframes heroGoLineReveal{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}
 }
-@media(max-width:760px){
-  .hero > .hero-content > .hero-go-line{display:none!important}
+@media(max-width:760px){.hero > .hero-content > .hero-go-line{display:none!important}
 }
-@media(prefers-reduced-motion:reduce){
-  .hero > .hero-content > .hero-go-line{animation:none!important}
+@media(prefers-reduced-motion:reduce){.hero > .hero-content > .hero-go-line{animation:none!important}
+}
+
+
+/* DESKTOP HEADER GREEN FROSTED GLASS — unify the header shell, navigation
+   pills and Plan Your Trip CTA in translucent forest-green glass, not solid lime. */
+@media(min-width:761px){
 }
 
 
 /* DESKTOP HERO TAGLINE — tighten the gap beneath the animated headline. */
-@media(min-width:761px){
-  .hero > .hero-content > h1.hero-animated-heading{
+@media(min-width:761px){.hero > .hero-content > h1.hero-animated-heading{
     margin-bottom:0!important;
-  }
-  .hero > .hero-content > .hero-go-line{
+  }.hero > .hero-content > .hero-go-line{
     margin-top:-7px!important;
   }
 }
 
 
+/* DESKTOP HEADER GLASS BACKGROUND — remove the curved frame and visible outline.
+   Keep only the translucent forest-green frosted-glass surface. */
+@media(min-width:761px){
+}
+
+
 /* DESKTOP HERO TAGLINE — enlarge the cursive line to balance the headline
    and keep it precisely centered beneath the full heading. */
-@media(min-width:761px){
-  .hero > .hero-content > .hero-go-line{
+@media(min-width:761px){.hero > .hero-content > .hero-go-line{
     display:block!important;
     width:100%!important;
     max-width:100%!important;
@@ -719,8 +412,7 @@ body > .hero::before,
 
 /* DESKTOP BUILD YOUR TRIP — restore a clearly clickable frosted-glass finish,
    overriding the shared solid-lime button treatment without changing layout. */
-@media(min-width:761px){
-  body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta{
+@media(min-width:761px){body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta{
     cursor:pointer!important;
     color:#f1ffe9!important;
     background:linear-gradient(135deg,rgba(169,216,242,.24),rgba(36,74,102,.18) 48%,rgba(16,36,59,.38))!important;
@@ -729,37 +421,87 @@ body > .hero::before,
     backdrop-filter:blur(26px) saturate(185%)!important;
     box-shadow:inset 0 1px 0 rgba(255,255,255,.38),inset 0 -1px 0 rgba(255,255,255,.08),0 10px 30px rgba(0,0,0,.24),0 0 22px rgba(169,216,242,.12)!important;
     text-shadow:0 1px 8px rgba(0,0,0,.22)!important;
-  }
-  body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta:hover,
-  body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta:focus-visible{
+  }body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta:hover,body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta:focus-visible{
     color:#f7ffed!important;
     background:linear-gradient(135deg,rgba(232,255,226,.34),rgba(36,74,102,.27) 48%,rgba(36,74,102,.46))!important;
     border-color:rgba(232,255,220,.78)!important;
     box-shadow:inset 0 1px 0 rgba(255,255,255,.52),0 16px 38px rgba(0,0,0,.29),0 0 30px rgba(169,216,242,.2)!important;
     outline:none!important;
-  }
-  body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta:active{
+  }body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta:active{
     transform:translateY(-1px) scale(.985)!important;
     background:linear-gradient(135deg,rgba(169,216,242,.30),rgba(36,74,102,.34) 48%,rgba(16,36,59,.52))!important;
     box-shadow:inset 0 2px 5px rgba(0,0,0,.16),0 5px 16px rgba(0,0,0,.2)!important;
   }
 }
-@keyframes hoe-himalayan-light-sweep-mobile{
-  0%,62%{opacity:0;transform:translateX(-115%) skewX(-12deg)}
-  67%{opacity:.86}
-  79%{opacity:.68;transform:translateX(115%) skewX(-12deg)}
-  84%,100%{opacity:0;transform:translateX(115%) skewX(-12deg)}
+
+
+/* DESKTOP ULTRA-MINIMAL HEADER GLASS — remove the solid green fill from the
+   header shell only. Navigation buttons, dropdowns, CTA and their styling remain untouched. */
+@media(min-width:761px){
 }
-@media(max-width:760px) and (prefers-reduced-motion:reduce){
+
+
+/* MOBILE PARITY — carry the latest desktop visual refinements to mobile.
+   Preserve navigation pills, their spacing/typography, and the header Plan Your Trip CTA. */
+@media(max-width:760px){.hero > .hero-content > .hero-go-line{
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin:-10px auto 17px!important;
+    padding:0!important;
+    font-family:"Allura","Brush Script MT",cursive!important;
+    font-size:clamp(31px,8.4vw,43px)!important;
+    font-weight:400!important;
+    line-height:1!important;
+    letter-spacing:.01em!important;
+    text-align:center!important;
+    white-space:nowrap!important;
+    color:rgba(169,216,242,.96)!important;
+    text-shadow:0 2px 14px rgba(0,0,0,.38),0 0 16px rgba(169,216,242,.14)!important;
+    animation:heroGoLineReveal 1.15s .28s cubic-bezier(.2,.75,.25,1) both!important;
+  }body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta{
+    cursor:pointer!important;
+    color:#f1ffe9!important;
+    background:linear-gradient(135deg,rgba(169,216,242,.24),rgba(36,74,102,.18) 48%,rgba(16,36,59,.38))!important;
+    border:1px solid rgba(169,216,242,.52)!important;
+    -webkit-backdrop-filter:blur(24px) saturate(180%)!important;
+    backdrop-filter:blur(24px) saturate(180%)!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.36),inset 0 -1px 0 rgba(255,255,255,.08),0 8px 22px rgba(0,0,0,.22),0 0 18px rgba(169,216,242,.10)!important;
+    text-shadow:0 1px 8px rgba(0,0,0,.22)!important;
+  }body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta:active{
+    background:linear-gradient(135deg,rgba(169,216,242,.30),rgba(36,74,102,.34) 48%,rgba(16,36,59,.52))!important;
+    box-shadow:inset 0 2px 5px rgba(0,0,0,.16),0 5px 16px rgba(0,0,0,.2)!important;
+    transform:scale(.985)!important;
+  }
+}
+@keyframes hoe-himalayan-light-sweep-mobile{0%,62%{opacity:0;transform:translateX(-115%) skewX(-12deg)}67%{opacity:.86}79%{opacity:.68;transform:translateX(115%) skewX(-12deg)}84%,100%{opacity:0;transform:translateX(115%) skewX(-12deg)}
+}
+@media(max-width:760px) and (prefers-reduced-motion:reduce){.hero > .hero-content > .hero-go-line{
+    animation:none!important;
+    opacity:1!important;
+  }
+}
+
+
+/* MOBILE HEADER FIX — keep the header pinned at the top while scrolling.
+   Neutralize scroll-hide transforms/states on mobile only; preserve the existing
+   logo, navigation controls, dropdown and CTA dimensions and styling. */
+@media(max-width:760px){
 }
 @media(max-width:760px){
 }
 
 
+/* DESKTOP ONLY — Apple-style glass across the full logo/navigation header,
+   ending at the fine champagne-gold baseline. Mobile header styling is unchanged. */
+@media(min-width:761px){
+
+}
+
+
 /* DESKTOP HERO TAGLINE — center the complete sentence and add clear,
    elegant breathing room between each word without changing its typeface. */
-@media(min-width:761px){
-  .hero > .hero-content > .hero-go-line{
+@media(min-width:761px){.hero > .hero-content > .hero-go-line{
     display:block!important;
     width:100%!important;
     max-width:100%!important;
@@ -776,8 +518,7 @@ body > .hero::before,
 
 /* FINAL DESKTOP HERO HEADING — center all three phrase parts as one unit.
    The changing phrase stays naturally sized; consistent gaps prevent crowding. */
-@media(min-width:761px){
-  .hero > .hero-content > h1.hero-animated-heading{
+@media(min-width:761px){.hero > .hero-content > h1.hero-animated-heading{
     display:flex!important;
     flex-flow:row nowrap!important;
     align-items:baseline!important;
@@ -789,12 +530,9 @@ body > .hero::before,
     text-align:center!important;
     white-space:nowrap!important;
     gap:clamp(10px,1.15vw,20px)!important;
-  }
-  .hero > .hero-content > h1.hero-animated-heading .hero-heading-static,
-  .hero > .hero-content > h1.hero-animated-heading .hero-word-slot{
+  }.hero > .hero-content > h1.hero-animated-heading .hero-heading-static,.hero > .hero-content > h1.hero-animated-heading .hero-word-slot{
     flex:0 0 auto!important;
-  }
-  .hero > .hero-content > h1.hero-animated-heading .hero-word-slot{
+  }.hero > .hero-content > h1.hero-animated-heading .hero-word-slot{
     margin:0!important;
   }
 }
@@ -802,11 +540,9 @@ body > .hero::before,
 
 /* HERO TYPOGRAPHY REFINEMENT — slightly larger headline, more restrained
    supporting cursive tagline. Keep the centered layout and existing fonts. */
-@media(min-width:761px){
-  .hero > .hero-content > h1.hero-animated-heading{
+@media(min-width:761px){.hero > .hero-content > h1.hero-animated-heading{
     font-size:clamp(48px,6.8vw,90px)!important;
-  }
-  .hero > .hero-content > .hero-go-line{
+  }.hero > .hero-content > .hero-go-line{
     font-size:clamp(48px,5.35vw,74px)!important;
   }
 }
