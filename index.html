@@ -227,9 +227,11 @@
   backdrop-filter:blur(14px);
   color:#fff8e9;
   text-align:center;
-  pointer-events:none;
+  pointer-events:auto;
+  cursor:pointer;
+  text-decoration:none;
   user-select:none;
-}.hero-service-icon svg{width:25px;height:25px;stroke:var(--gold-light);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}.hero-service-icon span{font-size:10px;font-weight:700;letter-spacing:1.15px;text-transform:uppercase;white-space:nowrap}
+}.hero-service-icon:focus-visible{outline:2px solid #fff8e9;outline-offset:4px}.hero-service-icon svg{width:25px;height:25px;stroke:var(--gold-light);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}.hero-service-icon span{font-size:10px;font-weight:700;letter-spacing:1.15px;text-transform:uppercase;white-space:nowrap}
 @media(max-width:600px){.hero-service-icons{gap:8px;margin:19px 0 19px;max-width:100%;}.hero-service-icon{min-height:68px;padding:9px 5px;border-radius:11px;gap:6px;}.hero-service-icon svg{width:22px;height:22px;}.hero-service-icon span{font-size:9px;letter-spacing:.65px;}
 }.hero p{
   max-width:570px;
@@ -1362,18 +1364,18 @@
     <h1 class="hero-animated-heading"><span class="hero-heading-static hero-heading-prefix">The</span><span class="hero-word-slot"><span id="heroRotatingWord" class="hero-word-rotator word-himalayas" aria-label="Himalayas are">Himalayas are</span></span><span class="hero-heading-static hero-heading-suffix">calling</span></h1>
 
     <div class="hero-service-icons" aria-label="Our services">
-      <div class="hero-service-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24"><path d="M5 17h14l1-5-2-5H6l-2 5 1 5Z"/><path d="M7 17v2m10-2v2M4 12h16M7 7l1-3h8l1 3"/><circle cx="7.5" cy="15" r="1"/><circle cx="16.5" cy="15" r="1"/></svg>
+      <a class="hero-service-icon" href="#cabs" aria-label="Explore cabs">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 17h14l1-5-2-5H6l-2 5 1 5Z"/><path d="M7 17v2m10-2v2M4 12h16M7 7l1-3h8l1 3"/><circle cx="7.5" cy="15" r="1"/><circle cx="16.5" cy="15" r="1"/></svg>
         <span>Cabs</span>
-      </div>
-      <div class="hero-service-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13M2 21h20M7 21v-7h10v7M7 9h.01M12 9h.01M17 9h.01M7 12h.01M17 12h.01"/></svg>
+      </a>
+      <a class="hero-service-icon" href="#gallery" aria-label="Explore hotels and stays">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21V8l9-5 9 5v13M2 21h20M7 21v-7h10v7M7 9h.01M12 9h.01M17 9h.01M7 12h.01M17 12h.01"/></svg>
         <span>Hotels</span>
-      </div>
-      <div class="hero-service-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24"><path d="m3 19 7-13 4 7 2-3 5 9H3Z"/><path d="m8 19 4-7 4 7M10 6l1.5 2.5L13 6"/></svg>
+      </a>
+      <a class="hero-service-icon" href="#packages" aria-label="Explore travel packages">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 19 7-13 4 7 2-3 5 9H3Z"/><path d="m8 19 4-7 4 7M10 6l1.5 2.5L13 6"/></svg>
         <span>Packages</span>
-      </div>
+      </a>
     </div>
 
     <div class="hero-build-cta-wrap">
