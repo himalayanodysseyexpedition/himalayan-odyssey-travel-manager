@@ -29,14 +29,33 @@
   icon.setAttribute("stroke-linecap", "round");
   icon.setAttribute("aria-hidden", "true");
   icon.setAttribute("focusable", "false");
-  [6, 12, 18].forEach(y => {
-    const line = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    line.setAttribute("d", `M4 ${y}h16`);
-    icon.appendChild(line);
-  });
+  const menuLines = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  menuLines.setAttribute("d", "M4 6h16M4 12h16M4 18h16");
+  menuLines.setAttribute("class", "menu-icon-lines");
+  icon.appendChild(menuLines);
   button.appendChild(icon);
   nav.id = nav.id || "siteMainNavigation";
   nav.setAttribute("aria-hidden", "true");
+
+  /* Add a clear SVG chevron to the Services dropdown. */
+  const servicesToggle = nav.querySelector(".nav-dropdown-toggle");
+  if (servicesToggle && !servicesToggle.querySelector(".services-chevron-icon")) {
+    const chevron = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    chevron.setAttribute("class", "services-chevron-icon");
+    chevron.setAttribute("viewBox", "0 0 24 24");
+    chevron.setAttribute("width", "16");
+    chevron.setAttribute("height", "16");
+    chevron.setAttribute("fill", "none");
+    chevron.setAttribute("stroke", "currentColor");
+    chevron.setAttribute("stroke-width", "2");
+    chevron.setAttribute("stroke-linecap", "round");
+    chevron.setAttribute("stroke-linejoin", "round");
+    chevron.setAttribute("aria-hidden", "true");
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", "m6 9 6 6 6-6");
+    chevron.appendChild(path);
+    servicesToggle.appendChild(chevron);
+  }
   inner.insertBefore(button, nav);
 
   const close = (restoreFocus = false) => {
