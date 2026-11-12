@@ -3143,21 +3143,37 @@ html body #home.hero .hero-content h1.hero-animated-heading > .hero-word-slot{
 
 
 <style id="hero-rotating-words-larger-extra-bold">
-/* Make only the changing phrase larger and extra-bold while keeping the three-line lockup tight. */
+/* Keep the three fixed lines at the same base size; enlarge only the rotating phrase. */
 html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord,
 html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-in,
 html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-out{
   font-size:1.14em!important;
   font-weight:900!important;
-  -webkit-text-stroke:.45px currentColor!important;
+  -webkit-text-stroke:.35px currentColor!important;
 }
-@media(max-width:760px){
+@media screen and (max-width:760px){
+  html body #home.hero .hero-content h1.hero-animated-heading > .hero-heading-prefix,
+  html body #home.hero .hero-content h1.hero-animated-heading > .hero-heading-suffix{
+    font-size:inherit!important;
+  }
+  html body #home.hero .hero-content h1.hero-animated-heading > .hero-word-slot,
   html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord,
   html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-in,
   html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-out{
-    font-size:1.12em!important;
+    font-size:1.04em!important;
     font-weight:900!important;
-    -webkit-text-stroke:.4px currentColor!important;
+    letter-spacing:-.085em!important;
+    max-width:100%!important;
+    -webkit-text-stroke:.3px currentColor!important;
+  }
+}
+@media screen and (max-width:380px){
+  html body #home.hero .hero-content h1.hero-animated-heading > .hero-word-slot,
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord,
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-in,
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-out{
+    font-size:1em!important;
+    letter-spacing:-.09em!important;
   }
 }
 </style>
