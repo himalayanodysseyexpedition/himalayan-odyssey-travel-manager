@@ -3113,5 +3113,32 @@ html body #home.hero .hero-build-cta-wrap > a.hero-build-cta:focus-visible {
   -webkit-text-fill-color:#fff!important;
 }
 </style>
+
+
+<style id="hero-headline-tight-three-line-layout">
+/* Bring “The”, the rotating phrase, and “calling” closer into one compact headline lockup. */
+html body #home.hero .hero-content h1.hero-animated-heading{
+  gap:.025em!important;
+  row-gap:.025em!important;
+  line-height:.94!important;
+}
+html body #home.hero .hero-content h1.hero-animated-heading > .hero-heading-prefix,
+html body #home.hero .hero-content h1.hero-animated-heading > .hero-word-slot,
+html body #home.hero .hero-content h1.hero-animated-heading > .hero-heading-suffix{
+  margin-block:0!important;
+  line-height:.94!important;
+}
+html body #home.hero .hero-content h1.hero-animated-heading > .hero-word-slot{
+  min-height:.94em!important;
+}
+@media(max-width:760px){
+  html body #home.hero .hero-content h1.hero-animated-heading{
+    gap:.015em!important;
+    row-gap:.015em!important;
+    line-height:.94!important;
+  }
+}
+</style>
+
 </body>
 </html>
