@@ -16,7 +16,21 @@
  const dateInput=$("htpStart");
  const today=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-")};
  dateInput.min=today();
- $("htpDestinations").innerHTML=names.map(n=>'<div class="htp-destination"><div><strong>'+n+'</strong><span class="htp-rate">'+money(rates[n])+' / person / night</span></div><div class="htp-stepper"><button type="button" data-place="'+n+'" data-delta="-1" aria-label="Remove one night in '+n+'" disabled>−</button><output id="htpNight-'+n+'">0</output><button type="button" data-place="'+n+'" data-delta="1" aria-label="Add one night in '+n+'">+</button></div></div>').join("");
+ function renderLocationOptions(){
+  const select=$("htpLocationSelect"),added=names.filter(n=>Object.prototype.hasOwnProperty.call(nights,n)&&nights[n]>=0&&root.querySelector('[data-destination="'+n+'"]'));
+  const current=select.value;
+  select.innerHTML='<option value="">Choose a destination</option>'+names.filter(n=>!root.querySelector('[data-destination="'+n+'"]')).map(n=>'<option value="'+n+'">'+n+'</option>').join("");
+  if(current&&!root.querySelector('[data-destination="'+current+'"]'))select.value=current;
+ }
+ function renderDestinations(){
+  $("htpDestinations").innerHTML=names.filter(n=>root.querySelector('[data-destination="'+n+'"]')).map(n=>'<div class="htp-destination" data-destination="'+n+'"><div><strong>'+n+'</strong><span class="htp-rate">'+money(rates[n])+' / person / night</span></div><div class="htp-stepper"><button type="button" data-place="'+n+'" data-delta="-1" aria-label="Remove one night in '+n+'" '+(nights[n]===1?'disabled':'')+'>−</button><output id="htpNight-'+n+'">'+nights[n]+'</output><button type="button" data-place="'+n+'" data-delta="1" aria-label="Add one night in '+n+'">+</button><button type="button" class="htp-remove" data-remove-place="'+n+'" aria-label="Remove '+n+' from trip">×</button></div></div>').join("");
+ }
+ $("htpLocationSelect").addEventListener("change",()=>{
+  const n=$("htpLocationSelect").value;if(!n)return;
+  nights[n]=1;
+  renderDestinations();renderLocationOptions();$("htpLocationSelect").value="";
+  calculate();
+ });
  $("htpTravellers").innerHTML=Array.from({length:30},(_,i)=>'<option value="'+(i+1)+'">'+(i+1)+' '+(i===0?"traveller":"travellers")+'</option>').join("");
  function dayCount(){const start=$("htpStart").value,end=$("htpEnd").value;if(start&&end&&end>start){const a=new Date(start+"T00:00:00"),b=new Date(end+"T00:00:00");return Math.max(1,Math.round((b-a)/86400000));}return Math.max(1,totalNights()+1);}
  function totalNights(){return Object.values(nights).reduce((a,b)=>a+b,0);}
@@ -47,10 +61,12 @@
   calculate();
  }
  root.addEventListener("click",e=>{
+  const remove=e.target.closest("[data-remove-place]");
+  if(remove){delete nights[remove.dataset.removePlace];renderDestinations();renderLocationOptions();calculate();return;}
   const b=e.target.closest("[data-place][data-delta]");if(!b)return;
-  const n=b.dataset.place; nights[n]=Math.max(0,nights[n]+Number(b.dataset.delta));
+  const n=b.dataset.place;nights[n]=Math.max(1,nights[n]+Number(b.dataset.delta));
   $("htpNight-"+n).textContent=String(nights[n]);
-  root.querySelectorAll('[data-place="'+n+'"]').forEach(x=>{if(x.dataset.delta==="-1")x.disabled=nights[n]===0;});
+  root.querySelectorAll('[data-place="'+n+'"]').forEach(x=>{if(x.dataset.delta==="-1")x.disabled=nights[n]===1;});
   calculate();
  });
  ["htpTravellers","htpVehicle","htpStart","htpEnd"].forEach(id=>$(id).addEventListener("change",calculate));
@@ -71,5 +87,5 @@
    renderVehicleOptions();
   }catch(error){console.warn("Homepage trip planner cab catalogue:",error);vehicles=[];renderVehicleOptions();}
  }
- calculate();loadVehicles();
+ renderLocationOptions();calculate();loadVehicles();
 })();
