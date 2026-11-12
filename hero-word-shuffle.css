@@ -139,3 +139,20 @@
     margin-inline: 0.035em !important;
   }
 }
+
+
+/* Hero rotating/shuffle words — solid black text in every animation state. */
+html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator,
+html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator.word-himalaya,
+html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator.word-himachal,
+html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator.word-spiti,
+html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator.word-adventure,
+html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator.is-shuffling-in,
+html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator.is-shuffling-out {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: #000 !important;
+  color: #000 !important;
+  text-shadow: none !important;
+}
