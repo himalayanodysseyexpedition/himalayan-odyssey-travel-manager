@@ -161,16 +161,7 @@ body{
 }
 a,button{ -webkit-tap-highlight-color:transparent }
 ::selection{background:#a9d8f2;color:#10243b}
-.header-inner{
-  max-width:1440px!important;min-height:82px!important;
-  padding:10px clamp(18px,4vw,58px)!important;
-  display:flex!important;align-items:center!important;gap:clamp(16px,2.4vw,34px)!important;
-}
 .brand img{width:auto!important;max-height:58px!important;object-fit:contain}
-.header-tagline{
-  color:#66786d!important;font-size:9px!important;font-weight:750!important;
-  letter-spacing:2px!important;line-height:1.5!important;
-}
 .glass-nav{
   margin-left:auto!important;gap:5px!important;padding:6px!important;
   border:1px solid rgba(16,36,59,.10)!important;border-radius:999px!important;
@@ -180,12 +171,6 @@ a,button{ -webkit-tap-highlight-color:transparent }
 }
 .nav-glass-icon{width:15px!important;height:15px!important;stroke:#244a66!important}
 .services-chevron{color:#244a66!important;margin-left:2px!important}
-.nav-dropdown-menu{
-  border:1px solid rgba(16,36,59,.12)!important;border-radius:18px!important;
-  padding:9px!important;background:rgba(251,252,248,.97)!important;
-  box-shadow:0 20px 55px rgba(16,36,59,.16)!important;
-  -webkit-backdrop-filter:blur(20px)!important;backdrop-filter:blur(20px)!important;
-}
 
 /* Immersive hero, with a clear editorial headline */
 .hero{
@@ -364,7 +349,6 @@ button:focus-visible,a:focus-visible{outline:3px solid #a9d8f2!important;outline
   .header-inner{min-height:76px!important;flex-wrap:wrap!important;justify-content:center!important;gap:6px!important;padding:8px 14px 11px!important}
   .brand{margin:0 auto!important;display:flex!important;justify-content:center!important}
   .brand img{max-height:48px!important}
-  .header-tagline{display:none!important}
   .glass-nav{
     order:3!important;width:100%!important;margin:0!important;
     display:flex!important;justify-content:space-between!important;gap:2px!important;
@@ -380,11 +364,8 @@ button:focus-visible,a:focus-visible{outline:3px solid #a9d8f2!important;outline
 @media(max-width:600px){
   .header-inner{padding:7px 10px 10px!important;gap:5px!important}
   .brand img{max-height:43px!important}
-  .glass-nav{border-radius:17px!important;padding:4px!important}
   .nav-dropdown{display:flex!important;align-items:center!important;flex:1 1 0!important;min-width:0!important}
-  .nav-dropdown-toggle{flex:1 1 auto!important}
   .services-chevron{font-size:14px!important;margin-left:0!important}
-  .nav-dropdown-menu{right:0!important;left:auto!important;min-width:220px!important}
   .hero{
     min-height:690px!important;padding:64px 18px 72px!important;
     background-image:linear-gradient(0deg,rgba(16,36,59,.78),rgba(16,36,59,.38)),url('/spiti.jpg')!important;
