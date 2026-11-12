@@ -32,7 +32,23 @@
   button.setAttribute("aria-label", "Open navigation menu");
   button.setAttribute("aria-expanded", "false");
   button.setAttribute("aria-controls", "siteMainNavigation");
-  button.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>';
+  /* Build the three-line icon with DOM nodes so it cannot be stripped by HTML sanitizers. */
+  const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  icon.setAttribute("viewBox", "0 0 24 24");
+  icon.setAttribute("width", "22");
+  icon.setAttribute("height", "22");
+  icon.setAttribute("fill", "none");
+  icon.setAttribute("stroke", "currentColor");
+  icon.setAttribute("stroke-width", "2");
+  icon.setAttribute("stroke-linecap", "round");
+  icon.setAttribute("aria-hidden", "true");
+  icon.setAttribute("focusable", "false");
+  [6, 12, 18].forEach(y => {
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    line.setAttribute("d", `M4 ${y}h16`);
+    icon.appendChild(line);
+  });
+  button.appendChild(icon);
   nav.id = nav.id || "siteMainNavigation";
   nav.setAttribute("aria-hidden", "true");
   inner.insertBefore(button, nav);
