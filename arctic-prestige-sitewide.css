@@ -45,7 +45,6 @@ footer h2,footer h3,footer h4,.site-footer h2,.site-footer h3,.site-footer h4{co
 footer a,.site-footer a{color:#c8e2f2!important}
 @media(max-width:760px){
  body{background:#f3f8fc!important}
- .glass-nav{scrollbar-width:none!important}
  .destination-card,.guide-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card{border-radius:19px!important}
  .content{padding-top:42px;padding-bottom:44px}
 }
