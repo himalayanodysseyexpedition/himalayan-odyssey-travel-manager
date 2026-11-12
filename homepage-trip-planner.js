@@ -15,7 +15,7 @@
  $("htpStart").min=today();
  function renderLocationOptions(){
   const select=$("htpLocationSelect"),previous=select.value;
-  select.innerHTML='<option value="">Select a destination</option>'+names.filter(n=>!Object.hasOwn(nights,n)).map(n=>'<option value="'+esc(n)+'">'+esc(n)+' — '+money(rates[n])+' / person / night</option>').join("");
+  select.innerHTML='<option value="">Select a destination</option>'+names.filter(n=>!Object.hasOwn(nights,n)).map(n=>'<option value="'+esc(n)+'">'+esc(n)+'</option>').join("");
   if(names.includes(previous)&&!Object.hasOwn(nights,previous))select.value=previous;
   $("htpAddLocation").disabled=!select.value;
  }
