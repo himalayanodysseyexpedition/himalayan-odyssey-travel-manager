@@ -6,18 +6,10 @@
 }
 html{scroll-padding-top:112px}
 body{background:var(--ho-paper);color:var(--ho-ink);overflow-x:hidden}
-header{background:rgba(8,24,42,.94)!important;border-bottom:1px solid rgba(191,229,248,.22)!important;box-shadow:0 8px 28px rgba(4,16,30,.18)!important}
 .header-inner{width:100%;max-width:1440px;padding:9px clamp(12px,3vw,40px)!important;gap:8px!important}
 .brand{padding:3px 12px!important;background:none!important;box-shadow:none!important}
 .brand img{width:clamp(150px,22vw,205px)!important;max-height:58px!important}
 .glass-nav{max-width:100%;width:max-content;display:flex;align-items:center;justify-content:center;gap:7px;overflow:visible}
-.glass-nav>a,.nav-dropdown-toggle{
-  min-height:38px!important;padding:9px 14px!important;border:1px solid rgba(191,229,248,.34)!important;
-  border-radius:999px!important;background:rgba(225,244,253,.08)!important;color:#eff9ff!important;
-  font:700 10px/1.1 "DM Sans",Arial,sans-serif!important;letter-spacing:.08em!important;text-transform:uppercase!important;
-  white-space:nowrap!important;box-shadow:inset 0 1px rgba(255,255,255,.08)!important
-}
-.glass-nav>a:hover,.nav-dropdown-toggle:hover{background:rgba(191,229,248,.18)!important;border-color:rgba(191,229,248,.7)!important}
 .nav-dropdown{position:relative}
 .nav-dropdown-menu{z-index:120!important}
 .hero{
@@ -63,7 +55,6 @@ button,a,input,select{ -webkit-tap-highlight-color:transparent}
 :focus-visible{outline:3px solid #8acbed!important;outline-offset:3px!important}
 @media(max-width:760px){
   html{scroll-padding-top:136px}
-  header{position:sticky!important;top:0!important}
   .header-inner{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:6px!important;padding:6px 10px 8px!important}
   .brand{align-self:center!important;padding:0 8px!important}
   .brand img{width:156px!important;max-height:43px!important}
@@ -73,12 +64,6 @@ button,a,input,select{ -webkit-tap-highlight-color:transparent}
     overflow-x:auto!important;overflow-y:visible!important;white-space:nowrap!important;scrollbar-width:none!important;
     -webkit-overflow-scrolling:touch!important;scroll-snap-type:x proximity!important
   }
-  .glass-nav::-webkit-scrollbar{display:none!important}
-  .glass-nav>a,.nav-dropdown-toggle{
-    flex:0 0 auto!important;min-height:34px!important;height:34px!important;padding:8px 11px!important;
-    font-size:8px!important;letter-spacing:.045em!important;scroll-snap-align:start!important
-  }
-  .glass-nav>a .nav-glass-icon{display:none!important}
   .nav-dropdown{flex:0 0 auto!important}
   .nav-dropdown-toggle{display:flex!important;align-items:center!important;justify-content:center!important}
   .nav-dropdown-menu{position:absolute!important;top:calc(100% + 8px)!important;right:0!important;left:auto!important;min-width:220px!important;max-width:min(86vw,300px)!important}
