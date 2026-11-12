@@ -105,3 +105,16 @@ html body > header .header-menu-toggle svg,
 html body > header .header-menu-toggle svg path {
   stroke: #fff !important;
 }
+
+
+/* Logo alignment and accessible navigation icon polish. */
+@media (max-width: 760px) {
+  html body > header .header-inner { padding-left: 7px !important; padding-right: 10px !important; gap: 10px !important; }
+  html body > header .header-inner > a.brand { margin-left: 0 !important; transform: translateX(-2px); }
+}
+html body > header .header-menu-toggle { width: 42px !important; height: 42px !important; flex-basis: 42px !important; border-radius: 12px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; }
+html body > header .header-menu-toggle svg { width: 23px !important; height: 23px !important; display: block !important; overflow: visible !important; }
+html body > header .header-menu-toggle svg path { stroke: #fff !important; stroke-width: 2.2 !important; stroke-linecap: round !important; }
+html body > header .nav-dropdown-toggle { display: flex !important; align-items: center !important; justify-content: space-between !important; gap: 12px !important; }
+html body > header .services-chevron-icon { display: inline-block !important; flex: 0 0 16px !important; width: 16px !important; height: 16px !important; margin-left: auto !important; transition: transform .2s ease !important; }
+html body > header .nav-dropdown.open .services-chevron-icon { transform: rotate(180deg) !important; }
