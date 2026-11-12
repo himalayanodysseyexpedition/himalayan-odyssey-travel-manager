@@ -1385,7 +1385,12 @@
     </div>
 
     <div class="hero-destination-list" aria-label="Destinations we offer">
-      <span>Spiti Valley</span><i aria-hidden="true">·</i><span>Kinnaur</span><i aria-hidden="true">·</i><span>Narkanda</span><i aria-hidden="true">·</i><span>Shimla</span><i aria-hidden="true">·</i><span>Manali</span><i aria-hidden="true">·</i><span>Kasol</span><i aria-hidden="true">·</i><span>Jibhi</span>
+      <div class="hero-destination-marquee">
+        <div class="hero-destination-track">
+          <span>Spiti Valley</span><i aria-hidden="true">·</i><span>Kinnaur</span><i aria-hidden="true">·</i><span>Narkanda</span><i aria-hidden="true">·</i><span>Shimla</span><i aria-hidden="true">·</i><span>Manali</span><i aria-hidden="true">·</i><span>Kasol</span><i aria-hidden="true">·</i><span>Jibhi</span><i aria-hidden="true">·</i>
+          <span aria-hidden="true">Spiti Valley</span><i aria-hidden="true">·</i><span aria-hidden="true">Kinnaur</span><i aria-hidden="true">·</i><span aria-hidden="true">Narkanda</span><i aria-hidden="true">·</i><span aria-hidden="true">Shimla</span><i aria-hidden="true">·</i><span aria-hidden="true">Manali</span><i aria-hidden="true">·</i><span aria-hidden="true">Kasol</span><i aria-hidden="true">·</i><span aria-hidden="true">Jibhi</span><i aria-hidden="true">·</i>
+        </div>
+      </div>
     </div>
 
     
@@ -3273,6 +3278,54 @@ html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is
 }
 @media (prefers-reduced-motion:reduce){
   html body #home.hero .hero-content .mobile-tibetan-flag-line{animation:none!important}
+}
+</style>
+
+
+<style id="mobile-hero-destination-prayer-flag-marquee">
+/* Mobile destinations: one-line five-colour Tibetan prayer-flag palette, moving right continuously. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-destination-list{
+    display:block!important;
+    width:100vw!important;
+    max-width:none!important;
+    margin:16px 0 0 50%!important;
+    padding:7px 0!important;
+    overflow:hidden!important;
+    white-space:nowrap!important;
+    text-align:left!important;
+    line-height:1.6!important;
+    border-top:1px solid rgba(255,255,255,.22)!important;
+    border-bottom:1px solid rgba(255,255,255,.22)!important;
+    background:rgba(8,20,32,.16)!important;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 5%,#000 95%,transparent 100%)!important;
+    mask-image:linear-gradient(90deg,transparent 0%,#000 5%,#000 95%,transparent 100%)!important;
+  }
+  html body #home.hero .hero-destination-marquee{display:flex!important;width:100%!important;overflow:hidden!important}
+  html body #home.hero .hero-destination-track{
+    display:flex!important;flex:0 0 max-content!important;align-items:center!important;gap:13px!important;
+    width:max-content!important;white-space:nowrap!important;
+    animation:hero-destinations-rightward 24s linear infinite!important;
+    will-change:transform!important;
+  }
+  html body #home.hero .hero-destination-track span{
+    display:inline-block!important;flex:none!important;font-size:11px!important;font-weight:800!important;
+    letter-spacing:1.1px!important;text-transform:uppercase!important;
+    color:#fff!important;-webkit-text-fill-color:transparent!important;
+    background:linear-gradient(90deg,#159bd0 0%,#f5f1e7 22%,#e44747 45%,#55aa72 68%,#f0c746 88%,#159bd0 100%)!important;
+    -webkit-background-clip:text!important;background-clip:text!important;
+  }
+  html body #home.hero .hero-destination-track i{
+    display:inline-block!important;flex:none!important;font-style:normal!important;font-size:12px!important;
+    color:#f0c746!important;-webkit-text-fill-color:#f0c746!important;
+  }
+}
+@keyframes hero-destinations-rightward{
+  from{transform:translateX(-50%)}
+  to{transform:translateX(0)}
+}
+@media (prefers-reduced-motion:reduce){
+  html body #home.hero .hero-destination-track{animation:none!important}
 }
 </style>
 
