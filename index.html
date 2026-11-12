@@ -1326,7 +1326,7 @@
 
 <link rel="stylesheet" href="/monochrome-app-final.css?v=20261112-1">
   <link rel="stylesheet" href="/hamburger-header-final.css?v=8">
-  <link rel="stylesheet" href="/homepage-trip-planner.css?v=43">
+  <link rel="stylesheet" href="/homepage-trip-planner.css?v=44">
 </head>
 
 <body>
@@ -1433,7 +1433,7 @@
    <div class="htp-main">
     <div class="htp-step">
      <div class="htp-step-head"><span class="htp-step-number">1</span><div><h3>Location</h3><p class="htp-help">Choose a destination from the list. You can add multiple locations to your trip.</p></div></div>
-     <div class="htp-location-picker"><label class="htp-location-label" for="htpLocationToggle">Choose destination</label><div class="htp-location-dropdown"><button type="button" id="htpLocationToggle" class="htp-location-toggle" aria-expanded="false" aria-controls="htpLocationMenu"><span id="htpLocationPlaceholder">Select a destination</span><span class="htp-location-chevron" aria-hidden="true">⌄</span></button><div id="htpLocationMenu" class="htp-location-menu" role="listbox" aria-label="Available destinations" hidden></div></div></div>
+     <div class="htp-location-picker"><label class="htp-location-label" for="htpLocationSelect">Choose destination</label><div class="htp-location-dropdown htp-native-picker"><select id="htpLocationSelect" class="htp-location-select" aria-label="Choose a destination"><option value="">Select a destination</option></select><span class="htp-native-chevron" aria-hidden="true">⌄</span></div></div>
      <div class="htp-selected-wrap" id="htpSelectedWrap" hidden>
       <p class="htp-selected-title">Your selected locations</p>
       <div class="htp-destinations" id="htpDestinations" aria-live="polite"></div>
@@ -2816,7 +2816,7 @@ loadHotels();
 
 
 
-<script src="/homepage-trip-planner.js?v=19" defer></script>
+<script src="/homepage-trip-planner.js?v=20" defer></script>
 
 <style id="hero-three-line-large-and-spaced-services">#home.hero .hero-content{width:100%!important;max-width:1120px!important}#home.hero .hero-animated-heading{
   display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;
