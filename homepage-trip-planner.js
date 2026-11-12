@@ -1,7 +1,7 @@
 
 "use strict";
 (()=>{
- const root=document.getElementById("homeTripPlanner");
+ const root=document.getElementById("plan-your-trip")||document.getElementById("homeTripPlanner");
  if(!root)return;
  const API="https://ynkoiuyjevclypumnyes.supabase.co/rest/v1/marketplace_services?select=id,title,price,price_unit,capacity,inventory,destination&category=eq.cab&is_active=eq.true&order=sort_order.asc,created_at.desc";
  const KEY="sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-";
