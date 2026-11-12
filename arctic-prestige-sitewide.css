@@ -96,3 +96,25 @@
   color:#000!important;
   -webkit-text-fill-color:#000!important;
 }
+
+
+/* Definitive hero shortcut override — white cards with black labels/icons */
+html body #home .hero-service-icons > a.hero-service-icon,
+html body #home .hero-service-icons > a.hero-service-icon:visited,
+html body #home .hero-service-icons > a.hero-service-icon:active{
+  background:#fff!important;background-color:#fff!important;background-image:none!important;
+  border:1px solid #fff!important;color:#111!important;-webkit-text-fill-color:#111!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.12)!important;opacity:1!important;
+}
+html body #home .hero-service-icons > a.hero-service-icon span{
+  color:#111!important;-webkit-text-fill-color:#111!important;opacity:1!important;
+}
+html body #home .hero-service-icons > a.hero-service-icon svg,
+html body #home .hero-service-icons > a.hero-service-icon svg *{
+  stroke:#111!important;fill:none!important;
+}
+html body #home .hero-service-icons > a.hero-service-icon:hover,
+html body #home .hero-service-icons > a.hero-service-icon:focus-visible{
+  background:#f1f1f1!important;background-color:#f1f1f1!important;border-color:#f1f1f1!important;
+  color:#000!important;-webkit-text-fill-color:#000!important;
+}
