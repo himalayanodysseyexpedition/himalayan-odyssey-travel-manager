@@ -1362,6 +1362,7 @@
 <!-- HERO -->
 <div class="hero" id="home">
   <div class="hero-content">
+    <div class="mobile-tibetan-flag-line" aria-hidden="true"></div>
     <h1 class="hero-animated-heading"><span class="hero-heading-static hero-heading-prefix">The</span><span class="hero-word-slot"><span id="heroRotatingWord" class="hero-word-rotator word-himalayas" aria-label="Himalayas are">Himalayas are</span></span><span class="hero-heading-static hero-heading-suffix">calling</span></h1>
 
     <div class="hero-service-icons" aria-label="Our services">
@@ -3242,28 +3243,36 @@ html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is
 
 
 <style id="mobile-hero-tibetan-prayer-flags">
-/* A subtle five-colour Himalayan prayer-flag string behind the mobile hero headline. */
+/* Full-width Tibetan prayer-flag line with a slow wind-swept motion on phones. */
 @media screen and (max-width:760px){
-  html body #home.hero .hero-content h1.hero-animated-heading{
-    position:relative!important;
-    isolation:isolate!important;
-    overflow:visible!important;
-  }
-  html body #home.hero .hero-content h1.hero-animated-heading::before{
-    content:""!important;
+  html body #home.hero .hero-content{position:relative!important;isolation:isolate!important}
+  html body #home.hero .hero-content .mobile-tibetan-flag-line{
+    display:block!important;
     position:absolute!important;
-    z-index:-1!important;
+    z-index:0!important;
     pointer-events:none!important;
-    top:34%!important;
-    left:-5%!important;
-    width:110%!important;
-    height:76px!important;
-    opacity:.52!important;
-    background-repeat:no-repeat!important;
-    background-position:center!important;
-    background-size:100% 100%!important;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 100'%3E%3Cpath d='M4 13 Q260 38 516 8' fill='none' stroke='%235b5149' stroke-width='2.5'/%3E%3Cg stroke='%23ffffff' stroke-opacity='.38' stroke-width='1'%3E%3Cpath fill='%230c91d2' d='M28 17l65 7-8 64-29-13-25 10z'/%3E%3Cpath fill='%23f7f5ed' d='M101 25l65 5-10 63-28-14-25 12z'/%3E%3Cpath fill='%23d93638' d='M174 31l65 4-12 62-27-15-24 13z'/%3E%3Cpath fill='%233d9b62' d='M247 35l65 1-13 62-26-16-23 14z'/%3E%3Cpath fill='%23f2c52e' d='M320 35l65-4-14 62-25-16-22 15z'/%3E%3Cpath fill='%230c91d2' d='M393 30l65-7-15 62-24-17-21 15z'/%3E%3C/g%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.52' stroke-width='1.5'%3E%3Cpath d='M40 27l43 5M113 35l42 5M186 41l42 5M259 45l42 5M332 44l42-1M405 38l42-4'/%3E%3C/g%3E%3C/svg%3E")!important;
+    top:clamp(105px,20vh,190px)!important;
+    left:50%!important;
+    width:118vw!important;
+    height:112px!important;
+    transform:translateX(-50%) rotate(-2deg)!important;
+    transform-origin:50% 10%!important;
+    opacity:.76!important;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 150'%3E%3Cpath d='M0 10 Q220 -2 450 12 T900 8' fill='none' stroke='%23483f39' stroke-width='3'/%3E%3Cg stroke='%23ffffff' stroke-opacity='.25' stroke-width='1.5'%3E%3Cpath fill='%230c8fc7' d='M18 11h78v112l-39-12-39 12z'/%3E%3Cpath fill='%23f5f1e7' d='M105 10h78v112l-39-12-39 12z'/%3E%3Cpath fill='%23d83b3b' d='M192 10h78v112l-39-12-39 12z'/%3E%3Cpath fill='%233e9560' d='M279 10h78v112l-39-12-39 12z'/%3E%3Cpath fill='%23edc43b' d='M366 10h78v112l-39-12-39 12z'/%3E%3Cpath fill='%230c8fc7' d='M453 10h78v112l-39-12-39 12z'/%3E%3Cpath fill='%23f5f1e7' d='M540 10h78v112l-39-12-39 12z'/%3E%3Cpath fill='%23d83b3b' d='M627 10h78v112l-39-12-39 12z'/%3E%3Cpath fill='%233e9560' d='M714 10h78v112l-39-12-39 12z'/%3E%3Cpath fill='%23edc43b' d='M801 10h78v112l-39-12-39 12z'/%3E%3C/g%3E%3Cg fill='none' stroke='%23433b35' stroke-opacity='.48' stroke-width='2'%3E%3Ccircle cx='57' cy='57' r='17'/%3E%3Ccircle cx='144' cy='57' r='17'/%3E%3Ccircle cx='231' cy='57' r='17'/%3E%3Ccircle cx='318' cy='57' r='17'/%3E%3Ccircle cx='405' cy='57' r='17'/%3E%3Ccircle cx='492' cy='57' r='17'/%3E%3Ccircle cx='579' cy='57' r='17'/%3E%3Ccircle cx='666' cy='57' r='17'/%3E%3Ccircle cx='753' cy='57' r='17'/%3E%3Ccircle cx='840' cy='57' r='17'/%3E%3Cpath d='M57 39v36m-18-18h36m-18-18 13 13m-26 0 26 13m-26 0 26-26M144 39v36m-18-18h36m-18-18 13 13m-26 0 26 13m-26 0 26-26M231 39v36m-18-18h36m-18-18 13 13m-26 0 26 13m-26 0 26-26M318 39v36m-18-18h36m-18-18 13 13m-26 0 26 13m-26 0 26-26M405 39v36m-18-18h36m-18-18 13 13m-26 0 26 13m-26 0 26-26M492 39v36m-18-18h36m-18-18 13 13m-26 0 26 13m-26 0 26-26M579 39v36m-18-18h36m-18-18 13 13m-26 0 26 13m-26 0 26-26M666 39v36m-18-18h36m-18-18 13 13m-26 0 26 13m-26 0 26-26M753 39v36m-18-18h36m-18-18 13 13m-26 0 26 13m-26 0 26-26M840 39v36m-18-18h36m-18-18 13 13m-26 0 26 13m-26 0 26-26'/%3E%3C/g%3E%3C/svg%3E")!important;
+    background-repeat:repeat-x!important;
+    background-size:900px 150px!important;
+    animation:mobile-tibetan-flags-sway 7s ease-in-out infinite alternate!important;
+    filter:drop-shadow(0 5px 7px rgba(0,0,0,.12))!important;
   }
+  html body #home.hero .hero-content h1.hero-animated-heading{position:relative!important;z-index:1!important}
+}
+@keyframes mobile-tibetan-flags-sway{
+  0%{transform:translateX(-53%) rotate(-2.8deg)}
+  50%{transform:translateX(-47%) rotate(1.8deg)}
+  100%{transform:translateX(-53%) rotate(-1.4deg)}
+}
+@media (prefers-reduced-motion:reduce){
+  html body #home.hero .hero-content .mobile-tibetan-flag-line{animation:none!important}
 }
 </style>
 
