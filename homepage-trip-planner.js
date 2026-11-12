@@ -40,7 +40,7 @@
   $("htpStayTotal").textContent=money(stay);
   $("htpCabTotal").textContent=v?(cab?money(cab):"Confirm rate"):"Not selected";
   $("htpVehicleCount").textContent=v?count+" × "+v.title:"Select a vehicle";
-  $("htpGrandTotal").textContent=v&&cab?money(stay+cab):money(stay)+(v?" + cab confirmation":" + cab quote");
+  $("htpGrandTotal").textContent=v&&cab?money(stay+cab):money(stay);
   $("htpPerPerson").textContent=people+" travellers · "+money((stay+cab)/people)+" per person"+(!v||!cab?" (cab not included)":"");
   $("htpCalculate").disabled=!valid;
   $("htpCalculate").dataset.stay=String(stay);$("htpCalculate").dataset.cab=String(cab);
