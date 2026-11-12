@@ -72,3 +72,65 @@
 .home-trip-planner .htp-summary .htp-cta {
   margin-top: 2px !important;
 }
+
+
+/* Neutral white Arctic Prestige palette — calculator and its option cards */
+.home-trip-planner{
+  background:#f4f4f2 !important;
+  color:#202124 !important;
+}
+.home-trip-planner .htp-main,
+.home-trip-planner .htp-summary{
+  background:#fff !important;
+  border:1px solid #e4e4e1 !important;
+  box-shadow:0 12px 34px rgba(0,0,0,.055) !important;
+}
+.home-trip-planner h2,
+.home-trip-planner h3,
+.home-trip-planner .htp-total strong,
+.home-trip-planner .htp-summary-row strong,
+.home-trip-planner .htp-destination strong,
+.home-trip-planner .htp-stepper output{
+  color:#171717 !important;
+}
+.home-trip-planner .htp-eyebrow,
+.home-trip-planner .htp-heading p,
+.home-trip-planner .htp-help,
+.home-trip-planner .htp-rate,
+.home-trip-planner .htp-vehicle-note,
+.home-trip-planner .htp-total span,
+.home-trip-planner .htp-status{
+  color:#666 !important;
+}
+.home-trip-planner .htp-step-number{
+  background:#ededeb !important;
+  color:#202020 !important;
+}
+.home-trip-planner .htp-destination{
+  background:#fff !important;
+  border-color:#e5e5e2 !important;
+}
+.home-trip-planner input,
+.home-trip-planner select{
+  background:#fff !important;
+  border-color:#d9d9d5 !important;
+  color:#202020 !important;
+}
+.home-trip-planner .htp-stepper button{
+  background:#fff !important;
+  border-color:#d5d5d1 !important;
+  color:#202020 !important;
+}
+.home-trip-planner .htp-cta{
+  background:#171717 !important;
+  color:#fff !important;
+}
+.home-trip-planner .htp-no-vehicles{
+  background:#f1f1ef !important;
+  color:#5f5f5b !important;
+}
+.home-trip-planner button:focus-visible,
+.home-trip-planner input:focus-visible,
+.home-trip-planner select:focus-visible{
+  outline-color:#777 !important;
+}
