@@ -3209,5 +3209,36 @@ html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is
   }
 }
 </style>
+
+<style id="mobile-hero-headline-balanced-size-and-weight">
+/* Mobile only: restore a slightly larger headline while giving the rotating middle line the strongest weight. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-content h1.hero-animated-heading{
+    font-size:clamp(42px,12vw,62px)!important;
+    line-height:.96!important;
+  }
+  html body #home.hero .hero-content h1.hero-animated-heading > .hero-heading-prefix,
+  html body #home.hero .hero-content h1.hero-animated-heading > .hero-heading-suffix{
+    font-weight:500!important;
+    -webkit-text-stroke:0!important;
+  }
+  html body #home.hero .hero-content h1.hero-animated-heading > .hero-word-slot,
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord,
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-in,
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-out{
+    font-size:1em!important;
+    font-weight:900!important;
+    letter-spacing:-.085em!important;
+    -webkit-text-stroke:.4px currentColor!important;
+    white-space:nowrap!important;
+  }
+}
+@media screen and (max-width:380px){
+  html body #home.hero .hero-content h1.hero-animated-heading{
+    font-size:clamp(40px,11.4vw,46px)!important;
+  }
+}
+</style>
+
 </body>
 </html>
