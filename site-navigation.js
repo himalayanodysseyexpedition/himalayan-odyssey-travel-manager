@@ -9,7 +9,7 @@
   /* Load after legacy inline page styles so they cannot restore the old nav. */
   const finalCss = document.createElement("link");
   finalCss.rel = "stylesheet";
-  finalCss.href = "/hamburger-header-final.css?v=6";
+  finalCss.href = "/hamburger-header-final.css?v=7";
   document.head.appendChild(finalCss);
   /* The shared stylesheet is the single source of truth for header presentation. */
   const button = document.createElement("button");
