@@ -71,3 +71,17 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #8bc5
  .status{line-height:1.5!important}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+
+
+/* Build Your Trip: replace the pale-blue page surfaces and blue action fills with white. */
+body{background:#fff!important}
+.service button,.primary,.guest-form button{
+ background:#fff!important;
+ color:#10243b!important;
+ border:1px solid #dce8f0!important;
+ box-shadow:0 6px 18px rgba(16,36,59,.07)!important
+}
+.service button:hover,.primary:hover,.guest-form button:hover{
+ background:#f7fafc!important;
+ box-shadow:0 10px 22px rgba(16,36,59,.10)!important
+}
