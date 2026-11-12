@@ -168,3 +168,16 @@ html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator.i
 html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator.is-shuffling-out {
   font-weight: 800 !important;
 }
+
+
+/* Extra-heavy rotating hero words — stronger visual weight. */
+html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator,
+html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator.word-himalaya,
+html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator.word-himachal,
+html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator.word-spiti,
+html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator.word-adventure,
+html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator.is-shuffling-in,
+html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator.is-shuffling-out {
+  font-weight: 900 !important;
+  -webkit-text-stroke: .35px currentColor !important;
+}
