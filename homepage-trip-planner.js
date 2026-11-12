@@ -31,8 +31,8 @@
   $("htpStayTotal").textContent=money(stay);
   $("htpCabTotal").textContent=v?money(cab):"Not selected";
   $("htpVehicleCount").textContent=v?count+" × "+v.title:"Select a vehicle";
-  $("htpGrandTotal").textContent=money(total);
-  $("htpPerPerson").textContent=people+" travellers · "+money(total/people)+" per person";
+  $("htpGrandTotal").textContent=v?money(total):money(stay)+" + cab quote";
+  $("htpPerPerson").textContent=people+" travellers · "+money((v?total:stay)/people)+" per person"+(v?"":" (cab excluded)");
   $("htpCalculate").disabled=nn===0||!$("htpStart").value||!$("htpEnd").value||$("htpEnd").value<=$("htpStart").value;
   $("htpCalculate").dataset.total=String(total);
   $("htpCalculate").dataset.stay=String(stay);
@@ -58,7 +58,7 @@
   const people=Number($("htpTravellers").value)||1,v=selectedVehicle(),places=selectedPlaces();
   if(!places.length){$("htpStatus").textContent="Please add at least one night to a destination.";return;}
   if(!$("htpStart").value||!$("htpEnd").value||$("htpEnd").value<=$("htpStart").value){$("htpStatus").textContent="Please select a valid departure and return date.";return;}
-  const summary=["Hello Himalayan Odyssey Expedition! I would like a trip estimate.","Destinations: "+places.map(n=>n+" ("+nights[n]+" nights)").join(", "),"Travel dates: "+$("htpStart").value+" to "+$("htpEnd").value,"Duration: "+dayCount()+" days / "+totalNights()+" selected stay nights","Travellers: "+people,"Vehicle: "+(v?v.title+" × "+Math.ceil(people/Math.max(1,Number(v.capacity)||1)):"Please suggest a suitable vehicle"),"Stay + meals estimate: "+money(Number($("htpCalculate").dataset.stay)),"Cab estimate: "+(v?money(Number($("htpCalculate").dataset.cab)):"To be quoted"),"Estimated total: "+$("htpGrandTotal").textContent,"Per person: "+$("htpPerPerson").textContent,"Please confirm availability, route feasibility and final inclusions."].join("\n");
+  const summary=["Hello Himalayan Odyssey Expedition! I would like a trip estimate.","Destinations: "+places.map(n=>n+" ("+nights[n]+" nights)").join(", "),"Travel dates: "+$("htpStart").value+" to "+$("htpEnd").value,"Duration: "+dayCount()+" days / "+totalNights()+" selected stay nights","Travellers: "+people,"Vehicle: "+(v?v.title+" × "+Math.ceil(people/Math.max(1,Number(v.capacity)||1)):"Please suggest a suitable vehicle"),"Stay estimate: "+money(Number($("htpCalculate").dataset.stay)),"Cab estimate: "+(v?money(Number($("htpCalculate").dataset.cab)):"To be quoted"),"Estimated total: "+$("htpGrandTotal").textContent,"Per person: "+$("htpPerPerson").textContent,"Please confirm availability, route feasibility and final inclusions."].join("\n");
   window.open("https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(summary),"_blank","noopener");
   $("htpStatus").textContent="Your trip summary has been prepared for WhatsApp.";
  });
