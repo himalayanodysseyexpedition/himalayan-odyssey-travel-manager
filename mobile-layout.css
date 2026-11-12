@@ -1,5 +1,3 @@
-/* MOBILE LAYOUT — carry the desktop editorial design system onto phones.
-   Layout-only overrides: existing content,links,carousels and booking flows stay intact. */
 :root{
   --mobile-forest:#10243d;
   --mobile-green:#183957;
@@ -7,8 +5,7 @@
   --mobile-lime:#a9d8f2;
   --mobile-paper:#f3f8fc;
 }
-@media(max-width:760px){html,body{max-width:100%;overflow-x:hidden}body{background:var(--mobile-paper);-webkit-text-size-adjust:100%}img,svg{max-width:100%}/* Hero: same cinematic image,navy overlay,typography and ice-blue accent as desktop */
-  body>.hero{
+@media(max-width:760px){html,body{max-width:100%;overflow-x:hidden}body{background:var(--mobile-paper);-webkit-text-size-adjust:100%}img,svg{max-width:100%}body>.hero{
     min-height:0!important;height:auto!important;
     padding:clamp(38px,8vw,58px) 18px 48px!important;
     background-color:#10243d!important;
@@ -41,8 +38,7 @@
     max-width:540px!important;margin:14px auto 0!important;
     color:rgba(255,255,255,.9)!important;font-size:13px!important;line-height:1.7!important;
     text-align:center!important;
-  }/* Editorial section rhythm and typography */
-  section.content{
+  }section.content{
     padding:54px 17px!important;background:var(--mobile-paper)!important;
   }.section-inner{width:100%!important;max-width:680px!important;margin:0 auto!important}.section-title{margin:0 0 20px!important;text-align:left!important}.section-title small,.eyebrow{
     display:block!important;margin-bottom:9px!important;
@@ -64,8 +60,7 @@
   }.local-intro-panel h3{
     font-family:"General Sans",Inter,system-ui,sans-serif!important;
     font-size:23px!important;line-height:1.12!important;letter-spacing:-.04em!important;
-  }.local-intro-panel p{font-size:13px!important;line-height:1.75!important}/* Swipe rails and image cards keep the desktop visual language */
-  .group-departures-section{padding-top:52px!important;padding-bottom:45px!important}.group-departures-head{display:block!important}.group-departures-head>.intro{margin:0 0 18px!important}.group-departures-rail,.packages-carousel{
+  }.local-intro-panel p{font-size:13px!important;line-height:1.75!important}.group-departures-section{padding-top:52px!important;padding-bottom:45px!important}.group-departures-head{display:block!important}.group-departures-head>.intro{margin:0 0 18px!important}.group-departures-rail,.packages-carousel{
     display:flex!important;gap:13px!important;overflow-x:auto!important;overflow-y:hidden!important;
     scroll-snap-type:x mandatory!important;scroll-padding:12px!important;
     padding:3px 2px 14px!important;margin:0 -2px!important;
@@ -94,9 +89,11 @@
 @media(prefers-reduced-motion:reduce){
   @media(max-width:760px){.hero-service-icon,.hero-content{animation:none!important}
   }
-}/* Arctic Prestige mobile shell and primary action. */
-@media(max-width:760px){
-  body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta{
+}
+
+
+/* Arctic Prestige mobile shell and primary action. */
+@media(max-width:760px){body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta{
     color:#10243d!important;
     background:linear-gradient(135deg,rgba(232,245,252,.96),rgba(169,216,242,.84))!important;
     border:1px solid rgba(255,255,255,.82)!important;
@@ -104,18 +101,20 @@
     backdrop-filter:blur(22px) saturate(175%)!important;
     box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 8px 22px rgba(16,36,59,.20),0 0 18px rgba(169,216,242,.16)!important;
     text-shadow:none!important;
-  }
-  body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta:active{
+  }body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta:active{
     background:linear-gradient(135deg,#ffffff,#c9e9fa)!important;
     box-shadow:inset 0 2px 5px rgba(16,36,59,.12),0 5px 16px rgba(16,36,59,.18)!important;
     transform:scale(.985)!important;
   }
 }
 @media(max-width:360px){
-}/* FINAL MOBILE HERO HEADING — center the whole changing sentence with
-   comfortable,consistent word spacing on narrow screens. */
-@media(max-width:760px){
-  .hero > .hero-content > h1.hero-animated-heading{
+}
+
+
+
+/* FINAL MOBILE HERO HEADING — center the whole changing sentence with
+   comfortable, consistent word spacing on narrow screens. */
+@media(max-width:760px){.hero > .hero-content > h1.hero-animated-heading{
     display:flex!important;
     flex-flow:row nowrap!important;
     align-items:baseline!important;
@@ -135,32 +134,25 @@
     word-break:keep-all!important;
     overflow-wrap:normal!important;
     gap:clamp(4px,1.15vw,8px)!important;
-  }
-  .hero > .hero-content > h1.hero-animated-heading .hero-heading-static,
-  .hero > .hero-content > h1.hero-animated-heading .hero-word-slot{
+  }.hero > .hero-content > h1.hero-animated-heading .hero-heading-static,.hero > .hero-content > h1.hero-animated-heading .hero-word-slot{
     flex:0 0 auto!important;
-  }
-  .hero > .hero-content > h1.hero-animated-heading .hero-word-slot{
+  }.hero > .hero-content > h1.hero-animated-heading .hero-word-slot{
     margin:0!important;
   }
-}/* MOBILE HERO TYPOGRAPHY REFINEMENT — lift the headline slightly and
+}
+
+
+/* MOBILE HERO TYPOGRAPHY REFINEMENT — lift the headline slightly and
    scale the supporting cursive line down a touch for clearer hierarchy. */
-@media(max-width:760px){
-  .hero > .hero-content > h1.hero-animated-heading{
+@media(max-width:760px){.hero > .hero-content > h1.hero-animated-heading{
     font-size:clamp(15px,4.65vw,24px)!important;
-  }
-  .hero > .hero-content > .hero-go-line{
+  }.hero > .hero-content > .hero-go-line{
     font-size:clamp(28px,7.9vw,40px)!important;
   }
-}/* MOBILE ONLY — match the rotating hero words to the ice-blue “and you must go” accent. Desktop hero colours remain unchanged. */
-@media screen and (max-width:760px){
-  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator,
-  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.word-himalaya,
-  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.word-himachal,
-  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.word-spiti,
-  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.word-adventure,
-  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.is-shuffling-out,
-  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.is-shuffling-in{
+}
+
+/* MOBILE ONLY — match the rotating hero words to the ice-blue “and you must go” accent. Desktop hero colours remain unchanged. */
+@media screen and (max-width:760px){html body .hero .hero-content > .hero-animated-heading .hero-word-rotator,html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.word-himalaya,html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.word-himachal,html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.word-spiti,html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.word-adventure,html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.is-shuffling-out,html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.is-shuffling-in{
     color:#a9d8f2!important;
     background:linear-gradient(100deg,#e1f3fc 0%,#a9d8f2 48%,#c9e9fa 100%)!important;
     -webkit-background-clip:text!important;
@@ -168,63 +160,75 @@
     -webkit-text-fill-color:transparent!important;
     text-shadow:0 0 14px rgba(169,216,242,.22)!important;
   }
-}/* MOBILE ONLY — show the hero photograph cleanly,without a glass pane or blur. */
-@media screen and (max-width:760px){
-  body>.hero,
-  body>.hero::before,
-  body>.hero::after{
+}
+
+
+/* MOBILE ONLY — show the hero photograph cleanly, without a glass pane or blur. */
+@media screen and (max-width:760px){body>.hero,body>.hero::before,body>.hero::after{
     -webkit-backdrop-filter:none!important;
     backdrop-filter:none!important;
-  }
-  body>.hero::before,
-  body>.hero::after{
+  }body>.hero::before,body>.hero::after{
     display:none!important;
     content:none!important;
     border:0!important;
     background:none!important;
     box-shadow:none!important;
   }
-}/* MOBILE ONLY — reduce the supporting “and you must go” line. */
-@media screen and (max-width:760px){
-  html body>.hero>.hero-content>.hero-go-line{
+}
+
+
+/* MOBILE ONLY — reduce the supporting “and you must go” line. */
+@media screen and (max-width:760px){html body>.hero>.hero-content>.hero-go-line{
     font-size:clamp(23px,6.2vw,32px)!important;
   }
-}/* MOBILE ONLY — enlarge the “The Himalayas are calling” hero headline. */
-@media screen and (max-width:760px){
-  html body>.hero>.hero-content>h1.hero-animated-heading{
+}
+
+
+/* MOBILE ONLY — enlarge the “The Himalayas are calling” hero headline. */
+@media screen and (max-width:760px){html body>.hero>.hero-content>h1.hero-animated-heading{
     font-size:clamp(18px,5.3vw,27px)!important;
   }
-}/* MOBILE ONLY — add breathing room below the Cabs / Hotels / Packages icons,then separate the hero introduction from the Build Your Trip button. */
-@media screen and (max-width:760px){
-  body>.hero>.hero-content>.hero-build-cta-wrap{
+}
+
+
+/* MOBILE ONLY — add breathing room below the Cabs / Hotels / Packages icons,
+   then separate the hero introduction from the Build Your Trip button. */
+@media screen and (max-width:760px){body>.hero>.hero-content>.hero-build-cta-wrap{
     margin-top:30px!important;
-  }
-  body>.hero>.hero-content>.hero-build-cta-wrap+p{
+  }body>.hero>.hero-content>.hero-build-cta-wrap+p{
     margin-top:28px!important;
   }
-}/* MOBILE ONLY — increase the separation between service icons,CTA,and introduction. */
-@media screen and (max-width:760px){
-  body>.hero>.hero-content>.hero-build-cta-wrap{
+}
+
+
+/* MOBILE ONLY — increase the separation between service icons, CTA, and introduction. */
+@media screen and (max-width:760px){body>.hero>.hero-content>.hero-build-cta-wrap{
     margin-top:48px!important;
-  }
-  body>.hero>.hero-content>.hero-build-cta-wrap+p{
+  }body>.hero>.hero-content>.hero-build-cta-wrap+p{
     margin-top:40px!important;
   }
-}/* MOBILE ONLY — use equal vertical spacing from “and you must go” to the service icons,and from the service icons to the Build Your Trip button. */
-@media screen and (max-width:760px){
-  html body>.hero>.hero-content>.hero-go-line{
+}
+
+
+/* MOBILE ONLY — use equal vertical spacing from “and you must go” to the service icons,
+   and from the service icons to the Build Your Trip button. */
+@media screen and (max-width:760px){html body>.hero>.hero-content>.hero-go-line{
     margin-bottom:0!important;
-  }
-  html body>.hero>.hero-content>.hero-service-icons{
+  }html body>.hero>.hero-content>.hero-service-icons{
     margin-top:48px!important;
     margin-bottom:0!important;
-  }
-  html body>.hero>.hero-content>.hero-build-cta-wrap{
+  }html body>.hero>.hero-content>.hero-build-cta-wrap{
     margin-top:48px!important;
   }
-}/* FINAL MOBILE NAV FIX — restore the visible Services label and use the same ice-blue
+}
+
+
+/* FINAL MOBILE NAV FIX — restore the visible Services label and use the same ice-blue
    colour family as the rotating hero words. The single dropdown arrow sits underneath. */
 @media screen and (max-width:760px){
-}/* MOBILE ONLY — match the Services dropdown panel to the ice-blue Services button. */
+}
+
+
+/* MOBILE ONLY — match the Services dropdown panel to the ice-blue Services button. */
 @media screen and (max-width:760px){
 }
