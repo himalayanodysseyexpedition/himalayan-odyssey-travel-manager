@@ -1,0 +1,112 @@
+/* Himalayan Odyssey — monochrome travel-app visual system, inspired by supplied UI reference. */
+:root{
+ --hoe-bg:#f5f5f3;--hoe-surface:#fff;--hoe-ink:#111;--hoe-muted:#777;
+ --hoe-line:#e8e8e6;--hoe-radius:24px;--hoe-shadow:0 12px 34px rgba(0,0,0,.07);
+ --forest:#111!important;--forest2:#222!important;--green:#222!important;
+ --gold:#111!important;--gold-light:#555!important;--cream:#f5f5f3!important;
+ --paper:#fff!important;--ink:#111!important;--muted:#777!important;--line:#e8e8e6!important;
+ --tour-forest:#111!important;--tour-deep:#111!important;--tour-gold:#111!important;
+ --tour-cream:#f5f5f3!important;--tour-paper:#fff!important;--tour-ink:#111!important;
+ --tour-muted:#777!important;--tour-line:#e8e8e6!important;
+}
+html,body{background:var(--hoe-bg)!important;color:var(--hoe-ink)!important;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important}
+body,button,input,select,textarea{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important}
+h1,h2,h3,h4,h5,h6{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;letter-spacing:-.035em}
+a{color:inherit}
+::selection{background:#111;color:#fff}
+:focus-visible{outline:3px solid #777!important;outline-offset:3px!important}
+
+/* Clean compact app header */
+html body>header,html body>header.is-scrolled,html body>header.is-hidden{
+ background:rgba(255,255,255,.94)!important;background-image:none!important;color:#111!important;
+ border:0!important;border-bottom:1px solid #e9e9e7!important;
+ box-shadow:0 5px 24px rgba(0,0,0,.045)!important;
+ -webkit-backdrop-filter:blur(22px) saturate(150%)!important;backdrop-filter:blur(22px) saturate(150%)!important;
+}
+header .header-inner{max-width:1440px!important;padding:10px clamp(12px,3vw,38px)!important;gap:9px!important}
+header .brand{background:none!important;border:0!important;box-shadow:none!important;padding:2px 8px!important}
+header .brand:before,header .brand:after{display:none!important}
+header .brand img{filter:none!important;max-height:58px!important;width:180px!important}
+header .header-tagline{color:#777!important;letter-spacing:2px!important}
+header nav a,header .glass-nav>a,header .glass-nav .nav-dropdown-toggle{
+ color:#222!important;-webkit-text-fill-color:#222!important;
+ background:#fff!important;background-image:none!important;border:1px solid #e6e6e4!important;
+ border-radius:999px!important;box-shadow:none!important;text-shadow:none!important;
+ font-size:9px!important;font-weight:700!important;letter-spacing:.045em!important;
+ min-height:37px!important;padding:9px 14px!important;
+}
+header .glass-nav>a:hover,header .glass-nav .nav-dropdown-toggle:hover,
+header .glass-nav .nav-dropdown.open .nav-dropdown-toggle{
+ background:#111!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+ border-color:#111!important;box-shadow:0 5px 14px rgba(0,0,0,.12)!important;transform:translateY(-1px)
+}
+header .glass-nav .services-chevron{color:currentColor!important;border-color:#ccc!important;background:#f6f6f5!important}
+header .nav-dropdown-menu{background:#fff!important;border:1px solid #e8e8e6!important;border-radius:18px!important;box-shadow:0 18px 45px rgba(0,0,0,.13)!important}
+header .nav-dropdown-menu a{color:#111!important;border-radius:12px!important}
+header .nav-dropdown-menu a:hover{background:#f2f2f0!important;color:#111!important}
+header .header-cta{
+ background:#111!important;background-image:none!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+ border:1px solid #111!important;border-radius:999px!important;box-shadow:none!important;
+ animation:none!important;letter-spacing:.04em!important;
+}
+header .header-cta:hover{background:#333!important;color:#fff!important}
+
+/* Hero remains photographic, with crisp app-style content */
+.hero,.page-hero,.destination-hero{
+ background-color:#111!important;color:#fff!important;
+}
+.hero{min-height:min(760px,86vh)!important;padding:clamp(70px,10vw,130px) clamp(22px,7vw,100px)!important}
+.hero h1,.page-hero h1,.destination-hero h1{font-family:Inter,-apple-system,sans-serif!important;font-weight:750!important;letter-spacing:-.055em!important;line-height:.98!important}
+.hero .eyebrow,.eyebrow,.section-kicker,.section-title small,.tag{color:rgba(255,255,255,.78)!important}
+.hero-rule{background:#fff!important}
+.hero-service-icons{gap:9px!important}
+.hero-service-icon{background:rgba(255,255,255,.13)!important;border:1px solid rgba(255,255,255,.28)!important;border-radius:18px!important;box-shadow:none!important;backdrop-filter:blur(18px)!important}
+.hero-service-icon svg{stroke:#fff!important}
+.hero-build-cta,.header-cta{background:#fff!important;color:#111!important;border:1px solid #fff!important;box-shadow:none!important;border-radius:999px!important}
+.hero-build-cta:hover{background:#eee!important}
+
+/* App-like cards and destination photography */
+body :is(.destination-card,.guide-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card,
+.group-departure-card,.form-card,.enquiry-card,.contact-card,.booking-card,.service,.property-card,.vehicle-card){
+ background:#fff!important;border:1px solid #e8e8e6!important;border-radius:24px!important;
+ box-shadow:var(--hoe-shadow)!important;overflow:hidden!important;
+}
+body :is(.destination-card,.guide-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card) img{
+ border-radius:inherit;object-fit:cover
+}
+body :is(.destination-card,.guide-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card) :is(h2,h3,h4){
+ color:#111!important;font-family:Inter,-apple-system,sans-serif!important;font-weight:700!important;letter-spacing:-.025em!important
+}
+body :is(.destination-card,.guide-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card) p{color:#777!important}
+body :is(.price,.package-price,.itinerary-meta,.departure-date,.rate,.amount){color:#111!important;font-weight:750!important}
+body :is(.section-title h2,.page-heading h1,.content h2,.section-inner h2){color:#111!important;font-family:Inter,-apple-system,sans-serif!important}
+body :is(.section-title,.page-heading,.content,.section-inner){color:#111}
+input,select,textarea{background:#fff!important;border:1px solid #e3e3e1!important;border-radius:14px!important;color:#111!important;box-shadow:none!important}
+input:focus,select:focus,textarea:focus{border-color:#777!important;box-shadow:0 0 0 3px rgba(0,0,0,.07)!important}
+html body :is(button,input[type="button"],input[type="submit"],input[type="reset"],.btn,.button,.submit-btn,.group-departure-cta,.hero-build-cta,[role="button"],a[role="button"],a[class*="btn"],a[class*="button"],a[class*="cta"]):not(header *){
+ background:#111!important;background-image:none!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+ border:1px solid #111!important;border-radius:999px!important;box-shadow:none!important;
+ font-family:Inter,-apple-system,sans-serif!important;font-weight:700!important;letter-spacing:.01em!important;
+}
+html body :is(button,.btn,.button,a[role="button"],a[class*="btn"],a[class*="button"],a[class*="cta"]):not(header *):hover{
+ background:#333!important;color:#fff!important;filter:none!important;transform:translateY(-1px)
+}
+html body :is(.outline,.btn-outline,.button-outline){background:#fff!important;color:#111!important;border:1px solid #ddd!important}
+footer,.site-footer{background:#111!important;background-image:none!important;color:#eee!important;border-top:0!important}
+footer :is(h2,h3,h4),.site-footer :is(h2,h3,h4){color:#fff!important}
+footer a,.site-footer a{color:#ddd!important}
+body :is(.journey-strip,.faq-list details,.faq-item,.seo-section,.form-panel,.related-guides,.related-links,.notice){
+ border-radius:20px!important
+}
+@media(max-width:760px){
+ header .header-inner{padding:8px 10px!important;gap:7px!important}
+ header .brand img{width:145px!important;max-height:48px!important}
+ header .glass-nav{width:100%!important;justify-content:flex-start!important;gap:5px!important;padding:2px 0!important;overflow-x:auto!important}
+ header .glass-nav>a,header .glass-nav .nav-dropdown-toggle{font-size:8px!important;padding:8px 10px!important;min-height:34px!important}
+ .hero{min-height:82svh!important;padding:65px 22px 80px!important;background-position:center!important}
+ .hero h1{font-size:clamp(43px,12vw,68px)!important}
+ .hero-service-icons{gap:7px!important}
+ .hero-service-icon{min-height:67px!important;padding:9px 6px!important;border-radius:15px!important}
+ body :is(.destination-card,.guide-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card){border-radius:20px!important}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
