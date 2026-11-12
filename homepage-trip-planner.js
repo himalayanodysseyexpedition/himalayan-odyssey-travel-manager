@@ -16,21 +16,16 @@
  const dateInput=$("htpStart");
  const today=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-")};
  dateInput.min=today();
- function renderLocationOptions(){
-  const select=$("htpLocationSelect");
-  const current=select.value;
-  select.innerHTML='<option value="">Choose a destination</option>'+names.filter(n=>!Object.prototype.hasOwnProperty.call(nights,n)).map(n=>'<option value="'+n+'">'+n+'　　　　 '+money(rates[n])+'</option>').join("");
-  if(current&&!root.querySelector('[data-destination="'+current+'"]'))select.value=current;
+ function renderLocationCards(){
+  $("htpLocationCards").innerHTML=names.map(n=>{
+   const added=Object.prototype.hasOwnProperty.call(nights,n);
+   return '<article class="htp-location-card"><div class="htp-location-card-info"><strong>'+n+'</strong><span class="htp-card-price">'+money(rates[n])+'</span><small>per person · per night (approx.)</small></div><button type="button" class="htp-add-place" data-add-place="'+n+'" '+(added?'disabled':'')+'>'+ (added?'Added':'＋ Add') +'</button></article>';
+  }).join("");
  }
  function renderDestinations(){
-  $("htpDestinations").innerHTML=names.filter(n=>Object.prototype.hasOwnProperty.call(nights,n)).map(n=>'<div class="htp-destination" data-destination="'+n+'"><div><strong>'+n+'</strong><span class="htp-rate">'+money(rates[n])+' / person / night</span></div><div class="htp-stepper"><button type="button" data-place="'+n+'" data-delta="-1" aria-label="Remove one night in '+n+'">>−</button><output id="htpNight-'+n+'">'+nights[n]+'</output><button type="button" data-place="'+n+'" data-delta="1" aria-label="Add one night in '+n+'">+</button><button type="button" class="htp-remove" data-remove-place="'+n+'" aria-label="Remove '+n+' from trip">×</button></div></div>').join("");
+  $("htpDestinations").innerHTML=names.filter(n=>Object.prototype.hasOwnProperty.call(nights,n)).map(n=>'<div class="htp-destination" data-destination="'+n+'"><div><strong>'+n+'</strong><span class="htp-rate"><strong>'+money(rates[n])+'</strong><small>per person · per night (approx.)</small></span></div><div class="htp-stepper"><button type="button" data-place="'+n+'" data-delta="-1" aria-label="Remove one night in '+n+'">−</button><output id="htpNight-'+n+'">'+nights[n]+'</output><button type="button" data-place="'+n+'" data-delta="1" aria-label="Add one night in '+n+'">+</button><button type="button" class="htp-remove" data-remove-place="'+n+'" aria-label="Delete '+n+' from trip">×</button></div></div>').join("");
+  $("htpSelectedWrap").hidden=Object.keys(nights).length===0;
  }
- $("htpLocationSelect").addEventListener("change",()=>{
-  const n=$("htpLocationSelect").value;if(!n)return;
-  nights[n]=1;
-  renderDestinations();renderLocationOptions();$("htpLocationSelect").value="";
-  calculate();
- });
  $("htpTravellers").innerHTML=Array.from({length:30},(_,i)=>'<option value="'+(i+1)+'">'+(i+1)+' '+(i===0?"traveller":"travellers")+'</option>').join("");
  function dayCount(){const start=$("htpStart").value,end=$("htpEnd").value;if(start&&end&&end>start){const a=new Date(start+"T00:00:00"),b=new Date(end+"T00:00:00");return Math.max(1,Math.round((b-a)/86400000));}return Math.max(1,totalNights()+1);}
  function totalNights(){return Object.values(nights).reduce((a,b)=>a+b,0);}
@@ -61,11 +56,13 @@
   calculate();
  }
  root.addEventListener("click",e=>{
+  const add=e.target.closest("[data-add-place]");
+  if(add){const n=add.dataset.addPlace;if(!Object.prototype.hasOwnProperty.call(nights,n)){nights[n]=1;renderLocationCards();renderDestinations();calculate();}return;}
   const remove=e.target.closest("[data-remove-place]");
-  if(remove){delete nights[remove.dataset.removePlace];renderDestinations();renderLocationOptions();calculate();return;}
+  if(remove){delete nights[remove.dataset.removePlace];renderLocationCards();renderDestinations();calculate();return;}
   const b=e.target.closest("[data-place][data-delta]");if(!b)return;
   const n=b.dataset.place,delta=Number(b.dataset.delta);
-  if(delta<0&&nights[n]<=1){delete nights[n];renderDestinations();renderLocationOptions();}
+  if(delta<0&&nights[n]<=1){delete nights[n];renderLocationCards();renderDestinations();}
   else{nights[n]=Math.max(1,nights[n]+delta);$("htpNight-"+n).textContent=String(nights[n]);}
   calculate();
  });
@@ -87,5 +84,5 @@
    renderVehicleOptions();
   }catch(error){console.warn("Homepage trip planner cab catalogue:",error);vehicles=[];renderVehicleOptions();}
  }
- renderLocationOptions();calculate();loadVehicles();
+ renderLocationCards();renderDestinations();calculate();loadVehicles();
 })();
