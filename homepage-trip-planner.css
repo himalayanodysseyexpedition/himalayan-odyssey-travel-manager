@@ -768,3 +768,14 @@
  background-color:#000!important;border-color:#000!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
 }
 .home-trip-planner .htp-summary .htp-per-person{display:block!important;margin:0 0 14px!important;color:#26394b!important;font-size:12px!important;font-weight:700!important;line-height:1.5!important;}
+
+
+/* Match the selected-location remove control to the black stepper buttons */
+.home-trip-planner #htpDestinations .htp-stepper .htp-remove{
+ background:#000!important;background-image:none!important;border:1px solid #000!important;
+ color:#fff!important;-webkit-text-fill-color:#fff!important;opacity:1!important;
+}
+.home-trip-planner #htpDestinations .htp-stepper .htp-remove:hover,
+.home-trip-planner #htpDestinations .htp-stepper .htp-remove:active{
+ background:#222!important;border-color:#222!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+}
