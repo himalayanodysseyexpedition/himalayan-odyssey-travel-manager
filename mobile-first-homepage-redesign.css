@@ -1,0 +1,152 @@
+/* Himalayan Odyssey — mobile-first Arctic Prestige homepage refresh.
+   Keeps existing IDs, data hooks, booking links and the original logo intact. */
+:root{
+  --ho-ink:#10243b;--ho-navy:#0b1a2c;--ho-ice:#bfe5f8;--ho-pale:#eaf6fc;
+  --ho-paper:#f7fbfe;--ho-muted:#607487;--ho-line:rgba(16,36,59,.12);
+}
+html{scroll-padding-top:112px}
+body{background:var(--ho-paper);color:var(--ho-ink);overflow-x:hidden}
+header{background:rgba(8,24,42,.94)!important;border-bottom:1px solid rgba(191,229,248,.22)!important;box-shadow:0 8px 28px rgba(4,16,30,.18)!important}
+.header-inner{width:100%;max-width:1440px;padding:9px clamp(12px,3vw,40px)!important;gap:8px!important}
+.brand{padding:3px 12px!important;background:none!important;box-shadow:none!important}
+.brand img{width:clamp(150px,22vw,205px)!important;max-height:58px!important}
+.glass-nav{max-width:100%;width:max-content;display:flex;align-items:center;justify-content:center;gap:7px;overflow:visible}
+.glass-nav>a,.nav-dropdown-toggle{
+  min-height:38px!important;padding:9px 14px!important;border:1px solid rgba(191,229,248,.34)!important;
+  border-radius:999px!important;background:rgba(225,244,253,.08)!important;color:#eff9ff!important;
+  font:700 10px/1.1 "DM Sans",Arial,sans-serif!important;letter-spacing:.08em!important;text-transform:uppercase!important;
+  white-space:nowrap!important;box-shadow:inset 0 1px rgba(255,255,255,.08)!important
+}
+.glass-nav>a:hover,.nav-dropdown-toggle:hover{background:rgba(191,229,248,.18)!important;border-color:rgba(191,229,248,.7)!important}
+.nav-dropdown{position:relative}
+.nav-dropdown-menu{z-index:120!important}
+.hero{
+  min-height:clamp(570px,78svh,820px)!important;padding:clamp(76px,11vh,130px) clamp(20px,7vw,110px) 70px!important;
+  background-position:center 48%!important;background-size:cover!important
+}
+.hero:before{background:linear-gradient(90deg,rgba(5,18,32,.82),rgba(5,18,32,.48) 58%,rgba(5,18,32,.12))!important}
+.hero-content{max-width:790px!important}
+.hero h1{max-width:760px;text-wrap:balance}
+.hero-go-line{color:#d9f1ff!important}
+.hero-content>p:not(.hero-go-line){max-width:560px;color:rgba(245,251,255,.88)!important}
+.hero-build-cta{border-radius:999px!important}
+.journey-strip{background:#eaf6fc!important;border-top:1px solid #d5eaf6!important;border-bottom:1px solid #d5eaf6!important}
+.journey-item strong{color:#10243b!important}
+.content{padding:clamp(48px,7vw,88px) clamp(16px,5vw,72px)!important}
+.content.info{background:#edf5fa!important}
+.section-title h2{color:#10243b!important}
+.section-title small{color:#4f88aa!important;letter-spacing:.22em!important}
+.section-title h2:after{background:#9ed4ef!important}
+.intro{color:#5f7386!important}
+.group-departures-section{padding-top:clamp(38px,5vw,64px)!important;padding-bottom:clamp(38px,5vw,64px)!important;background:linear-gradient(180deg,#f7fbfe,#edf6fb)!important}
+.group-departures-head{align-items:end}
+.group-departures-rail{scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.group-departures-rail>*{scroll-snap-align:start}
+.home-trip-planner{background:linear-gradient(145deg,#0b1a2c,#142e49 62%,#1c405d)!important;color:#f4faff!important;padding:clamp(48px,7vw,84px) 16px!important}
+.htp-inner{max-width:1180px!important}
+.htp-heading h2,.htp-heading p,.htp-step h3,.htp-summary h3{color:#f4faff!important}
+.htp-heading p,.htp-help,.htp-fine{color:rgba(232,245,253,.72)!important}
+.htp-shell{gap:18px!important}
+.htp-step,.htp-summary{border:1px solid rgba(191,229,248,.2)!important;background:rgba(240,249,255,.07)!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:20px!important}
+.htp-step{padding:clamp(16px,3vw,24px)!important}
+.htp-summary{padding:clamp(18px,3vw,26px)!important}
+.htp-step input,.htp-step select,.htp-travellers select{min-height:48px!important;border-radius:12px!important;border:1px solid rgba(191,229,248,.42)!important;background:#f6fbff!important;color:#10243b!important;font-size:16px!important}
+.htp-destination-card,.htp-destination{border-radius:14px!important}
+.htp-cta{min-height:52px!important;border-radius:999px!important;background:linear-gradient(135deg,#dff4ff,#9fd7f2)!important;color:#10243b!important;font-weight:800!important;letter-spacing:.04em!important}
+.htp-total{border-color:rgba(191,229,248,.3)!important}
+.cta{background:linear-gradient(135deg,#0b1a2c,#173854)!important}
+.cta .btn{border-radius:999px!important}
+.card,.package-card,.itinerary-card,.cab-card{border-radius:18px!important;overflow:hidden}
+.card{border-color:rgba(16,36,59,.1)!important;box-shadow:0 12px 30px rgba(16,36,59,.08)!important}
+footer{background:#091727!important}
+button,a,input,select{ -webkit-tap-highlight-color:transparent}
+:focus-visible{outline:3px solid #8acbed!important;outline-offset:3px!important}
+@media(max-width:760px){
+  html{scroll-padding-top:136px}
+  header{position:sticky!important;top:0!important}
+  .header-inner{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:6px!important;padding:6px 10px 8px!important}
+  .brand{align-self:center!important;padding:0 8px!important}
+  .brand img{width:156px!important;max-height:43px!important}
+  .glass-nav{
+    display:flex!important;flex-direction:row!important;justify-content:flex-start!important;align-items:center!important;
+    width:100%!important;max-width:100%!important;gap:6px!important;padding:2px 1px 5px!important;
+    overflow-x:auto!important;overflow-y:visible!important;white-space:nowrap!important;scrollbar-width:none!important;
+    -webkit-overflow-scrolling:touch!important;scroll-snap-type:x proximity!important
+  }
+  .glass-nav::-webkit-scrollbar{display:none!important}
+  .glass-nav>a,.nav-dropdown-toggle{
+    flex:0 0 auto!important;min-height:34px!important;height:34px!important;padding:8px 11px!important;
+    font-size:8px!important;letter-spacing:.045em!important;scroll-snap-align:start!important
+  }
+  .glass-nav>a .nav-glass-icon{display:none!important}
+  .nav-dropdown{flex:0 0 auto!important}
+  .nav-dropdown-toggle{display:flex!important;align-items:center!important;justify-content:center!important}
+  .nav-dropdown-menu{position:absolute!important;top:calc(100% + 8px)!important;right:0!important;left:auto!important;min-width:220px!important;max-width:min(86vw,300px)!important}
+  .hero{
+    min-height:590px!important;min-height:72svh!important;max-height:760px!important;
+    padding:66px 20px 44px!important;align-items:flex-end!important;background-position:56% center!important
+  }
+  .hero:before{background:linear-gradient(180deg,rgba(5,18,32,.12) 0%,rgba(5,18,32,.38) 38%,rgba(5,18,32,.88) 100%)!important}
+  .hero:after{height:80px!important}
+  .hero-content{width:100%!important;max-width:100%!important;text-align:left!important}
+  .hero h1{font-size:clamp(43px,12vw,66px)!important;line-height:.98!important;letter-spacing:-.035em!important}
+  .hero-go-line{font-size:clamp(20px,6vw,27px)!important;margin:8px 0 12px!important}
+  .hero-content>p:not(.hero-go-line){font-size:13px!important;line-height:1.65!important;margin:12px 0!important}
+  .hero-service-icons{gap:8px!important;margin:16px 0!important}
+  .hero-service-icon{min-height:64px!important;padding:8px 5px!important;border-radius:13px!important;background:rgba(230,246,255,.1)!important;backdrop-filter:blur(12px)}
+  .hero-build-cta-wrap{justify-content:flex-start!important;margin:15px 0 0!important}
+  .hero-build-cta{min-height:46px!important;padding:12px 22px!important;font-size:10px!important}
+  .hero-destination-list{justify-content:flex-start!important}
+  .journey-strip{display:grid!important;grid-template-columns:1fr!important;gap:0!important;padding:8px 18px!important}
+  .journey-item{padding:12px 2px!important;border-bottom:1px solid rgba(16,36,59,.09)!important}
+  .journey-item:last-child{border-bottom:0!important}
+  .journey-item strong{font-size:12px!important}
+  .journey-item span{font-size:11px!important}
+  .group-departures-head{display:block!important}
+  .group-departures-head .intro{text-align:left!important;margin:0 0 18px!important}
+  .group-departures-section .section-title{text-align:left!important;margin:0 0 12px!important}
+  .group-departures-section .section-title h2:after{margin:12px 0 0!important}
+  .content{padding:46px 16px!important}
+  .section-title{margin-bottom:22px!important}
+  .section-title h2{font-size:clamp(32px,9vw,42px)!important;line-height:1.02!important}
+  .section-title small{font-size:9px!important;letter-spacing:.16em!important}
+  .intro{font-size:13px!important;line-height:1.7!important;margin-bottom:24px!important}
+  .group-departures-rail,.packages-carousel,.itineraries-carousel,.cabs-carousel{margin-left:-2px!important;margin-right:-2px!important}
+  .group-departures-controls,.guides-controls{gap:8px!important}
+  .home-trip-planner{padding:46px 14px!important}
+  .htp-heading{text-align:left!important;margin-bottom:22px!important}
+  .htp-heading h2{font-size:clamp(32px,9vw,42px)!important;line-height:1.02!important}
+  .htp-heading p{font-size:13px!important;line-height:1.65!important}
+  .htp-shell{display:flex!important;flex-direction:column!important;gap:12px!important}
+  .htp-main{display:flex!important;flex-direction:column!important;gap:12px!important;min-width:0!important}
+  .htp-step{padding:16px!important;border-radius:17px!important}
+  .htp-step-head{gap:10px!important}
+  .htp-step h3{font-size:16px!important}
+  .htp-help{font-size:11px!important;line-height:1.5!important}
+  .htp-destinations{display:grid!important;grid-template-columns:1fr!important;gap:8px!important}
+  .htp-fields{display:grid!important;grid-template-columns:1fr!important;gap:10px!important}
+  .htp-step label,.htp-travellers label{font-size:12px!important}
+  .htp-summary{position:static!important;top:auto!important;border-radius:18px!important}
+  .htp-summary h3{font-size:20px!important}
+  .htp-summary-row{font-size:12px!important}
+  .htp-total strong{font-size:25px!important}
+  .htp-cta{width:100%!important;font-size:11px!important}
+  .cards{grid-template-columns:1fr!important;gap:14px!important}
+  .card>img{height:210px!important}
+  .info-grid{grid-template-columns:1fr!important;gap:12px!important}
+  .cta{padding:44px 18px!important}
+  .cta h2{font-size:34px!important;line-height:1.05!important}
+  .cta .btn{width:100%!important;max-width:340px!important;margin:7px auto!important}
+  .review-panel{display:flex!important;flex-direction:column!important;gap:20px!important;padding:20px!important}
+  .review-actions{display:flex!important;flex-direction:column!important}
+  .review-actions .btn{width:100%!important}
+  img{max-width:100%}
+}
+@media(min-width:761px){
+  .header-inner{flex-direction:row!important;justify-content:space-between!important}
+  .hero{min-height:690px!important}
+  .home-trip-planner .htp-shell{grid-template-columns:minmax(0,1.5fr) minmax(300px,.8fr)!important}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
