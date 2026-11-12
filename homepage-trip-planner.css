@@ -72,3 +72,63 @@
 .home-trip-planner .htp-summary .htp-cta {
   margin-top: 2px !important;
 }
+
+
+/* Compact premium trip planner refresh — keeps all calculator fields and behaviour intact. */
+.home-trip-planner{padding:clamp(24px,3.5vw,42px) 0;background:linear-gradient(180deg,#f7f9fb 0%,#edf3f8 100%)}
+.home-trip-planner .htp-inner{width:min(1040px,calc(100% - 32px))}
+.home-trip-planner .htp-heading{max-width:620px;margin-bottom:16px}
+.home-trip-planner .htp-heading h2{font-size:clamp(28px,3.5vw,40px);margin:5px 0}
+.home-trip-planner .htp-heading p{font-size:12px;line-height:1.5;margin:5px auto 0;max-width:440px}
+.home-trip-planner .htp-shell{grid-template-columns:minmax(0,1fr) 270px;gap:14px}
+.home-trip-planner .htp-main,.home-trip-planner .htp-summary{border-radius:18px;box-shadow:0 10px 30px rgba(16,36,59,.07)}
+.home-trip-planner .htp-main{padding:18px}
+.home-trip-planner .htp-step{margin-bottom:15px}
+.home-trip-planner .htp-step-head{gap:8px;margin-bottom:9px}
+.home-trip-planner .htp-step-number{width:24px;height:24px;font-size:10px;flex:none}
+.home-trip-planner h3{font-size:19px}
+.home-trip-planner .htp-help{font-size:10px;line-height:1.35}
+.home-trip-planner .htp-destinations{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.home-trip-planner .htp-destination{padding:8px 9px;border-radius:11px}
+.home-trip-planner .htp-destination strong{font-size:11px}
+.home-trip-planner .htp-rate{font-size:9px}
+.home-trip-planner .htp-stepper{gap:5px}
+.home-trip-planner .htp-stepper button{width:26px;height:26px;border-radius:8px;font-size:16px}
+.home-trip-planner .htp-stepper output{font-size:11px;min-width:12px}
+.home-trip-planner .htp-fields{gap:8px}
+.home-trip-planner input,.home-trip-planner select{min-height:41px;margin-top:4px;padding:8px 10px;border-radius:10px;font-size:12px}
+.home-trip-planner label{font-size:10px}
+.home-trip-planner .htp-travellers{gap:9px}
+.home-trip-planner .htp-travellers select{max-width:150px}
+.home-trip-planner .htp-vehicle-note{font-size:10px;margin-top:5px}
+.home-trip-planner .htp-summary{top:14px;padding:16px}
+.home-trip-planner .htp-summary h3{font-size:22px;margin-bottom:8px}
+.home-trip-planner .htp-summary-row{padding:7px 0;font-size:10px}
+.home-trip-planner .htp-total{padding:11px 0 5px}
+.home-trip-planner .htp-total strong{font-size:29px}
+.home-trip-planner .htp-per-person{font-size:10px;margin-bottom:10px}
+.home-trip-planner .htp-cta{min-height:43px;padding:10px 12px;border-radius:11px;font-size:10px}
+.home-trip-planner .htp-fine{font-size:9px;margin-top:8px}
+.home-trip-planner .htp-status{min-height:14px;font-size:10px;margin-top:5px}
+@media(max-width:760px){
+ .home-trip-planner{padding:25px 0}
+ .home-trip-planner .htp-inner{width:calc(100% - 24px)}
+ .home-trip-planner .htp-heading{margin-bottom:13px}
+ .home-trip-planner .htp-heading h2{font-size:clamp(27px,7vw,34px)}
+ .home-trip-planner .htp-heading p{font-size:11px;max-width:340px}
+ .home-trip-planner .htp-shell{grid-template-columns:1fr;gap:10px}
+ .home-trip-planner .htp-summary{position:static;order:-1;padding:13px}
+ .home-trip-planner .htp-main{padding:14px}
+ .home-trip-planner .htp-destinations{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ .home-trip-planner .htp-destination{padding:8px}
+ .home-trip-planner .htp-step{margin-bottom:14px}
+ .home-trip-planner .htp-summary h3{font-size:20px}
+ .home-trip-planner .htp-summary-row{padding:6px 0}
+ .home-trip-planner .htp-total strong{font-size:26px}
+ .home-trip-planner .htp-fine{font-size:9px}
+}
+@media(max-width:380px){
+ .home-trip-planner .htp-fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .home-trip-planner .htp-travellers{align-items:center;flex-direction:row}
+ .home-trip-planner .htp-travellers select{max-width:145px}
+}
