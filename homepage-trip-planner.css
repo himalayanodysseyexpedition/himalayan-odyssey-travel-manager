@@ -365,3 +365,69 @@
 /* Keep both trip-planner heading lines white for contrast. */
 .home-trip-planner .htp-eyebrow,
 .home-trip-planner .htp-heading h2{color:#fff!important}
+
+
+/* Monochrome white treatment for the complete homepage journey planner. */
+.home-trip-planner{
+ background:#fff!important;
+ color:#111!important;
+}
+.home-trip-planner .htp-eyebrow,
+.home-trip-planner .htp-heading h2{
+ color:#111!important;
+}
+.home-trip-planner .htp-main,
+.home-trip-planner .htp-summary{
+ background:#fff!important;
+ color:#111!important;
+ border:1px solid #e5e7eb!important;
+ box-shadow:0 10px 28px rgba(0,0,0,.06)!important;
+}
+.home-trip-planner .htp-step{
+ background:#fff!important;
+ border:1px solid #eceff1!important;
+ border-radius:18px!important;
+ padding:16px!important;
+}
+.home-trip-planner .htp-step-head h3,
+.home-trip-planner .htp-summary h3,
+.home-trip-planner .htp-destination strong,
+.home-trip-planner .htp-step-number,
+.home-trip-planner label,
+.home-trip-planner .htp-selected-title{
+ color:#111!important;
+}
+.home-trip-planner .htp-step-number{
+ background:#f1f3f5!important;
+}
+.home-trip-planner .htp-help,
+.home-trip-planner .htp-rate,
+.home-trip-planner .htp-vehicle-note,
+.home-trip-planner .htp-location-label,
+.home-trip-planner .htp-swipe-hint{
+ color:#555!important;
+}
+.home-trip-planner .htp-location-card,
+.home-trip-planner .htp-destination,
+.home-trip-planner input,
+.home-trip-planner select{
+ background:#fff!important;
+ color:#111!important;
+ border:1px solid #d1d5db!important;
+}
+.home-trip-planner .htp-card-price,
+.home-trip-planner .htp-destination .htp-rate strong,
+.home-trip-planner .htp-stepper output{
+ color:#111!important;
+}
+.home-trip-planner .htp-add-place,
+.home-trip-planner .htp-stepper button{
+ background:#fff!important;
+ color:#111!important;
+ border:1px solid #cbd5e1!important;
+}
+.home-trip-planner .htp-summary .htp-cta{
+ background:#111!important;
+ color:#fff!important;
+ border-color:#111!important;
+}
