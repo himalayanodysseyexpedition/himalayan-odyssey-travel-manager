@@ -6,7 +6,7 @@
  const API="https://ynkoiuyjevclypumnyes.supabase.co/rest/v1/marketplace_services?select=id,title,price,price_unit,capacity,inventory,destination&category=eq.cab&is_active=eq.true&order=sort_order.asc,created_at.desc";
  const KEY="sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-";
  const WHATSAPP="919816929669";
- const rates={"Narkanda":1300,"Shimla":1300,"Kufri":1300,"Sangla":1600,"Chitkul":1600,"Kalpa":1500,"Tabo":1600,"Kaza":1500,"Manali":1300,"Jibhi":1400,"Kasol":1300};
+ const rates={"Narkanda":1300,"Shimla":1300,"Kufri":1300,"Sangla":1600,"Kalpa":1500,"Tabo":1600,"Kaza":1500,"Manali":1300,"Jibhi":1400,"Kasol":1300};
  const names=Object.keys(rates);
  const nights=Object.fromEntries(names.map(n=>[n,0]));
  const $=id=>root.querySelector("#"+id);
