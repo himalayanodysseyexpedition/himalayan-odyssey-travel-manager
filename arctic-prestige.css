@@ -1,5 +1,3 @@
-/* Arctic Prestige — homepage-only visual layer.
-   Presentation overrides only: preserve existing markup,data,links and application behaviour. */
 :root{
   --forest:#10243d !important;
   --forest2:#1b3857 !important;
@@ -37,8 +35,7 @@
   font-family:"DM Sans","Manrope",Arial,sans-serif!important;
 }body :is(h1,h2,h3,h4,.section-title h2,.destination-info h3,.package-slide h3,.guide-card h3,.itinerary-slide h3){
   color:var(--arctic-blue);
-}::selection{background:var(--arctic-ice)!important;color:var(--arctic-navy)!important}:focus-visible{outline:3px solid var(--arctic-ice)!important;outline-offset:4px}/* Cinematic hero: retain the existing mountain image,copy and interactive word rotation. */
-.hero{
+}::selection{background:var(--arctic-ice)!important;color:var(--arctic-navy)!important}:focus-visible{outline:3px solid var(--arctic-ice)!important;outline-offset:4px}.hero{
   background-color:var(--arctic-navy)!important;
   color:#ffffff!important;
 }.hero:before{
@@ -63,8 +60,7 @@
   border-color:rgba(31,63,94,.22)!important;
 }body :is(button,.guide-arrow,.packages-controls button,.destinations-controls button,.group-departures-controls button):hover{
   border-color:var(--arctic-ice)!important;color:var(--arctic-blue)!important;
-}/* Trust strip and alternating light sections. */
-.journey-strip{
+}.journey-strip{
   background:rgba(220,229,238,.68)!important;
   border-color:rgba(31,63,94,.12)!important;
   box-shadow:0 12px 34px rgba(9,21,34,.06)!important;
@@ -77,8 +73,7 @@
   color:#587c9d!important;
 }.section-title h2,.content h2,.section-inner h2{
   color:var(--arctic-blue)!important;
-}.content p,.content .intro,.content li{color:var(--arctic-muted)!important}.content a[style*="color"],.content a{ text-decoration-color:rgba(88,124,157,.45) }/* Cards,carousels and package panels. */
-body :is(.destination-card,.guide-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card,.group-departure-card,.review-panel,.review-point,.review-card){
+}.content p,.content .intro,.content li{color:var(--arctic-muted)!important}.content a[style*="color"],.content a{ text-decoration-color:rgba(88,124,157,.45) }body :is(.destination-card,.guide-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card,.group-departure-card,.review-panel,.review-point,.review-card){
   background:#ffffff!important;
   border-color:var(--arctic-border)!important;
   box-shadow:0 12px 34px rgba(9,21,34,.075)!important;
@@ -89,31 +84,27 @@ body :is(.destination-card,.guide-card,.package-slide,.itinerary-slide,.cab-card
   background:linear-gradient(180deg,#eaf2f9,#f7f9fc)!important;
 }.group-departure-body,.group-departure-card{color:var(--arctic-text)!important}.group-departure-date{background:#e5f3fb!important;color:#193653!important;border-color:#c8dfef!important}.group-departure-meta{color:var(--arctic-muted)!important}.group-departure-cta{background:var(--arctic-navy)!important;color:#ffffff!important}.group-departure-cta:hover{background:var(--arctic-ice)!important;color:var(--arctic-navy)!important}.guides-controls button,.guide-arrow,.group-departures-controls button{
   color:var(--arctic-blue)!important;background:#ffffff!important;
-}.guides-progress{background:#dce5ee!important}.guides-progress span{background:#6faed4!important}.guides-swipe-hint{color:#70849a!important}.review-panel{background:linear-gradient(135deg,#ffffff,#edf4fa)!important}.review-point :is(strong,span){color:var(--arctic-blue)!important}/* Forms and feedback surfaces. */
-body :is(input,select,textarea){
+}.guides-progress{background:#dce5ee!important}.guides-progress span{background:#6faed4!important}.guides-swipe-hint{color:#70849a!important}.review-panel{background:linear-gradient(135deg,#ffffff,#edf4fa)!important}.review-point :is(strong,span){color:var(--arctic-blue)!important}body :is(input,select,textarea){
   color:var(--arctic-text)!important;background:#ffffff!important;border-color:#cfdae5!important;
 }body :is(input,select,textarea):focus{
   border-color:#83b9dc!important;box-shadow:0 0 0 3px rgba(169,216,242,.22)!important;
 }.faq-list details,.faq-item,.form-card,.enquiry-card,.contact-card{
   background:#ffffff!important;border-color:var(--arctic-border)!important;
   box-shadow:0 10px 28px rgba(9,21,34,.055)!important;
-}/* Deep navy footer closes the page with a consistent premium finish. */
-footer,.site-footer{
+}footer,.site-footer{
   background:linear-gradient(145deg,#091522,#142b45)!important;
   border-top:1px solid rgba(220,229,238,.20)!important;
   color:#eef5fb!important;
-}footer :is(h2,h3,h4,p,span,small,a),.site-footer :is(h2,h3,h4,p,span,small,a){color:#eaf2f9!important}footer a:hover,.site-footer a:hover{color:var(--arctic-ice)!important}footer :is(.btn,.button),.site-footer :is(.btn,.button){color:var(--arctic-navy)!important}.scroll-progress{background:linear-gradient(90deg,#8fc9ec,#e1f3fc)!important}/* Narrow screens retain the existing horizontal navigation and carousel behaviour. */
-@media(max-width:640px){
-  .hero:before{
+}footer :is(h2,h3,h4,p,span,small,a),.site-footer :is(h2,h3,h4,p,span,small,a){color:#eaf2f9!important}footer a:hover,.site-footer a:hover{color:var(--arctic-ice)!important}footer :is(.btn,.button),.site-footer :is(.btn,.button){color:var(--arctic-navy)!important}.scroll-progress{background:linear-gradient(90deg,#8fc9ec,#e1f3fc)!important}
+
+/* Narrow screens retain the existing horizontal navigation and carousel behaviour. */
+@media(max-width:640px){.hero:before{
     background:linear-gradient(90deg,rgba(5,16,29,.76),rgba(8,25,44,.34)),
                linear-gradient(0deg,rgba(5,16,29,.52),transparent 62%)!important;
-  }
-  .journey-strip{background:rgba(220,229,238,.78)!important}
+  }.journey-strip{background:rgba(220,229,238,.78)!important}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-}/* Neutralise legacy inline accent colours on homepage links without changing their targets. */
-.content a[style*="color"],.content a[style*="#a9d8f2"],.content a[style*="#a9d8f2"],.content a[style*="#173c36"]{color:#527fa2!important;text-decoration-color:rgba(82,127,162,.5)!important}/* Unified dual-tone design for package,itinerary,cab and property cards across the site. */
-:root{--forest:#142c46!important;--forest2:#244b68!important;--gold:#c8e2f1!important;--gold-light:#e4f2f8!important;--cream:#f4f7fa!important;--paper:#fff!important;--ink:#1b3147!important;--muted:#63798e!important;--line:#dce6ee!important}body{font-family:"DM Sans","General Sans",Arial,sans-serif!important;color:#1b3147!important}body :is(h1,h2,h3,h4,.section-title h2){font-family:"Bodoni Moda","Cormorant Garamond",Georgia,serif!important;color:#142c46!important}body :is(.price,.package-price,.itinerary-meta,.departure-date,.rate,.amount){color:#244b68!important;font-family:"DM Sans","General Sans",Arial,sans-serif!important;font-weight:800!important}body :is(.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card,.service,.featured-departure,.property-card,.vehicle-card){
+}.content a[style*="color"],.content a[style*="#a9d8f2"],.content a[style*="#a9d8f2"],.content a[style*="#173c36"]{color:#527fa2!important;text-decoration-color:rgba(82,127,162,.5)!important}:root{--forest:#142c46!important;--forest2:#244b68!important;--gold:#c8e2f1!important;--gold-light:#e4f2f8!important;--cream:#f4f7fa!important;--paper:#fff!important;--ink:#1b3147!important;--muted:#63798e!important;--line:#dce6ee!important}body{font-family:"DM Sans","General Sans",Arial,sans-serif!important;color:#1b3147!important}body :is(h1,h2,h3,h4,.section-title h2){font-family:"Bodoni Moda","Cormorant Garamond",Georgia,serif!important;color:#142c46!important}body :is(.price,.package-price,.itinerary-meta,.departure-date,.rate,.amount){color:#244b68!important;font-family:"DM Sans","General Sans",Arial,sans-serif!important;font-weight:800!important}body :is(.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card,.service,.featured-departure,.property-card,.vehicle-card){
  background:#fff!important;border:1px solid #dce6ee!important;border-radius:22px!important;box-shadow:0 14px 38px rgba(20,44,70,.075)!important;overflow:hidden!important
 }body :is(.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card,.service,.property-card,.vehicle-card) :is(h2,h3,h4){color:#183650!important}body :is(.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card,.service,.property-card,.vehicle-card) p{color:#63798e!important;line-height:1.65!important}body :is(.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card,.service,.property-card,.vehicle-card) :is(.btn,.button,a[class*="enquir"],a[class*="inquir"],button){
  border:0!important;border-radius:999px!important;background:linear-gradient(120deg,#e4f2f8,#b9dced)!important;color:#142c46!important;box-shadow:none!important;font-weight:800!important
