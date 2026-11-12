@@ -14,10 +14,14 @@
  const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
  const today=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-")};
  $("htpStart").min=today();
+ function closeLocationMenu(){
+  const menu=$("htpLocationMenu"),toggle=$("htpLocationToggle");
+  menu.hidden=true;menu.classList.remove("is-open");toggle.setAttribute("aria-expanded","false");
+ }
  function renderLocationOptions(){
-  const select=$("htpLocationSelect"),available=names.filter(n=>!hasPlace(n));
-  select.innerHTML='<option value="">Select a destination</option>'+available.map(n=>'<option value="'+esc(n)+'">'+esc(n)+'</option>').join("");
-  select.value="";
+  const menu=$("htpLocationMenu"),available=names.filter(n=>!hasPlace(n));
+  menu.innerHTML=available.length?available.map(n=>'<button type="button" class="htp-location-option" role="option" aria-label="Add '+esc(n)+'" data-add-destination="'+esc(n)+'"><span>'+esc(n)+'</span><span class="htp-option-arrow" aria-hidden="true">↗</span></button>').join(""):'<p class="htp-location-empty">All destinations added</p>';
+  if(!available.length)closeLocationMenu();
  }
  function renderDestinations(){
   $("htpDestinations").innerHTML=names.filter(n=>hasPlace(n)).map(n=>'<div class="htp-destination" data-destination="'+n+'"><div><strong>'+n+'</strong><span class="htp-rate"><strong>'+money(rates[n])+'</strong><small>stay + food · per person / night</small></span></div><div class="htp-stepper"><span class="htp-night-label">Nights</span><button type="button" data-place="'+n+'" data-delta="-1" aria-label="Remove one night in '+n+'">−</button><output id="htpNight-'+n+'">'+nights[n]+'</output><button type="button" data-place="'+n+'" data-delta="1" aria-label="Add one night in '+n+'">+</button><button type="button" class="htp-remove" data-remove-place="'+n+'" aria-label="Delete '+n+'">×</button></div></div>').join("");
@@ -46,13 +50,22 @@
   $("htpCalculate").dataset.stay=String(stay);$("htpCalculate").dataset.cab=String(cab);
   $("htpCalculate").dataset.total=String(stay+cab);$("htpCalculate").dataset.days=String(days);
  }
- $("htpLocationSelect").addEventListener("change",()=>{
-  const n=$("htpLocationSelect").value;
-  if(!names.includes(n)||hasPlace(n))return;
-  nights[n]=1;
-  renderDestinations();
-  calculate();
+ $("htpLocationToggle").addEventListener("click",()=>{
+  const menu=$("htpLocationMenu"),open=$("htpLocationToggle").getAttribute("aria-expanded")==="true";
+  if(open){closeLocationMenu();return}
+  renderLocationOptions();menu.hidden=false;menu.classList.remove("is-open");
+  requestAnimationFrame(()=>menu.classList.add("is-open"));
+  $("htpLocationToggle").setAttribute("aria-expanded","true");
  });
+ $("htpLocationMenu").addEventListener("click",e=>{
+  const option=e.target.closest("[data-add-destination]");if(!option)return;
+  const n=option.dataset.addDestination;if(!names.includes(n)||hasPlace(n))return;
+  nights[n]=1;closeLocationMenu();renderDestinations();calculate();
+ });
+ document.addEventListener("click",e=>{
+  if(!root.contains(e.target))closeLocationMenu();
+ });
+ root.addEventListener("keydown",e=>{if(e.key==="Escape")closeLocationMenu()});
  root.addEventListener("click",e=>{
   const t=e.target instanceof Element?e.target:null;if(!t)return;
   const remove=t.closest("[data-remove-place]");
