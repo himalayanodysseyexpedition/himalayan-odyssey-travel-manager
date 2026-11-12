@@ -750,3 +750,21 @@
 .home-trip-planner .htp-vehicle-days-control button:hover{background:#292929!important;border-color:#292929!important;color:#fff!important;}
 .home-trip-planner #htpDestinations .htp-stepper button:not(.htp-remove):active,
 .home-trip-planner .htp-vehicle-days-control button:active{background:#000!important;color:#fff!important;}
+
+
+/* Final control contrast + visible per-person estimate */
+.home-trip-planner #htpDestinations .htp-stepper button:not(.htp-remove),
+.home-trip-planner #htpVehicleSelection .htp-vehicle-days-control button,
+.home-trip-planner .htp-vehicle-days-control button{
+ background-color:#000!important;background-image:none!important;border-color:#000!important;color:#fff!important;
+ -webkit-text-fill-color:#fff!important;opacity:1!important;box-shadow:none!important;
+}
+.home-trip-planner #htpDestinations .htp-stepper button:not(.htp-remove):hover,
+.home-trip-planner #htpVehicleSelection .htp-vehicle-days-control button:hover{
+ background-color:#222!important;border-color:#222!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+}
+.home-trip-planner #htpDestinations .htp-stepper button:not(.htp-remove):active,
+.home-trip-planner #htpVehicleSelection .htp-vehicle-days-control button:active{
+ background-color:#000!important;border-color:#000!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+}
+.home-trip-planner .htp-summary .htp-per-person{display:block!important;margin:0 0 14px!important;color:#26394b!important;font-size:12px!important;font-weight:700!important;line-height:1.5!important;}
