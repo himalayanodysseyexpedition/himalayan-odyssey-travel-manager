@@ -550,3 +550,7 @@
 
 /* FINAL HERO FONT — use the generic sans-serif family for “The Himalayas are calling” and every rotating/shuffling word on desktop. */
 @media(min-width:761px){html body #home.hero .hero-content h1.hero-animated-heading,html body #home.hero .hero-content h1.hero-animated-heading .hero-heading-static,html body #home.hero .hero-content h1.hero-animated-heading .hero-word-slot,html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator,html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator.is-shuffling-in,html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator.is-shuffling-out{font-family:sans-serif!important}}
+
+
+/* ROTATING HERO WORD SIZE — reduce only the changing phrase; keep “The” and “calling” at the original heading size. */
+@media(min-width:761px){html body #home.hero .hero-content h1.hero-animated-heading .hero-word-slot .hero-word-rotator,html body #home.hero .hero-content h1.hero-animated-heading .hero-word-slot .hero-word-rotator.is-shuffling-in,html body #home.hero .hero-content h1.hero-animated-heading .hero-word-slot .hero-word-rotator.is-shuffling-out{font-family:sans-serif!important;font-size:.84em!important}}
