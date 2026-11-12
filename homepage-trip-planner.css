@@ -593,29 +593,79 @@
 }
 
 
-/* Reliable native destination select: opens consistently on iOS and Android. */
-.home-trip-planner .htp-location-picker{position:relative!important;z-index:2!important}
-.home-trip-planner #htpLocationSelect{
- display:block!important;
- width:100%!important;
- min-height:52px!important;
- padding:12px 42px 12px 15px!important;
- border:1px solid #cfd4da!important;
- border-radius:12px!important;
- background:#fff!important;
- color:#111!important;
- font:600 14px "General Sans","DM Sans",Arial,sans-serif!important;
- line-height:1.4!important;
- appearance:auto!important;
- -webkit-appearance:menulist!important;
- opacity:1!important;
- visibility:visible!important;
- pointer-events:auto!important;
- clip-path:none!important;
- position:static!important;
- cursor:pointer!important;
+
+
+/* Premium black-and-white destination picker with tactile option buttons. */
+.home-trip-planner .htp-location-picker{position:relative!important;z-index:110!important}
+.home-trip-planner .htp-location-dropdown{position:relative!important;z-index:111!important;width:100%!important}
+.home-trip-planner .htp-location-toggle{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;gap:14px!important;
+ width:100%!important;min-height:54px!important;padding:13px 16px!important;margin:0!important;
+ border:1px solid #cbd0d6!important;border-radius:14px!important;background:#fff!important;color:#111!important;
+ box-shadow:0 4px 14px rgba(0,0,0,.045)!important;font:600 14px "General Sans","DM Sans",Arial,sans-serif!important;
+ text-align:left!important;cursor:pointer!important;touch-action:manipulation!important;
+ transition:border-color .25s ease,box-shadow .25s ease,transform .25s ease!important;
 }
-.home-trip-planner #htpLocationSelect:focus{
- outline:2px solid #222!important;
- outline-offset:2px!important;
+.home-trip-planner .htp-location-toggle:hover,
+.home-trip-planner .htp-location-toggle[aria-expanded="true"]{
+ border-color:#222!important;box-shadow:0 8px 22px rgba(0,0,0,.10)!important;
+}
+.home-trip-planner .htp-location-toggle[aria-expanded="true"]{transform:translateY(-1px)!important}
+.home-trip-planner .htp-location-chevron{
+ display:grid!important;place-items:center!important;width:27px!important;height:27px!important;flex:none!important;
+ border:1px solid #d5d8dc!important;border-radius:50%!important;color:#111!important;font-size:20px!important;line-height:1!important;
+ transition:transform .28s cubic-bezier(.2,.75,.25,1),background .2s ease,color .2s ease!important;
+}
+.home-trip-planner .htp-location-toggle[aria-expanded="true"] .htp-location-chevron{
+ transform:rotate(180deg)!important;background:#111!important;color:#fff!important;border-color:#111!important;
+}
+.home-trip-planner .htp-location-menu{
+ position:absolute!important;top:calc(100% + 9px)!important;left:0!important;right:0!important;z-index:120!important;
+ display:block!important;max-height:280px!important;overflow-y:auto!important;padding:8px!important;
+ border:1px solid #e1e4e8!important;border-radius:16px!important;background:rgba(255,255,255,.98)!important;
+ box-shadow:0 22px 50px rgba(0,0,0,.17),0 3px 10px rgba(0,0,0,.05)!important;
+ -webkit-backdrop-filter:blur(16px)!important;backdrop-filter:blur(16px)!important;
+ transform-origin:top center!important;
+}
+.home-trip-planner .htp-location-menu[hidden]{display:none!important}
+.home-trip-planner .htp-location-menu.is-open{animation:htpCustomMenuIn .28s cubic-bezier(.2,.8,.2,1) both!important}
+@keyframes htpCustomMenuIn{from{opacity:0;transform:translateY(-9px) scale(.975);filter:blur(3px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+.home-trip-planner .htp-location-option{
+ position:relative!important;isolation:isolate!important;display:flex!important;align-items:center!important;justify-content:space-between!important;
+ width:100%!important;min-height:47px!important;margin:3px 0!important;padding:11px 13px!important;overflow:hidden!important;
+ border:1px solid transparent!important;border-radius:11px!important;background:linear-gradient(110deg,#fff,#f7f8fa)!important;
+ color:#151515!important;text-align:left!important;font:600 13px "General Sans","DM Sans",Arial,sans-serif!important;
+ letter-spacing:.01em!important;cursor:pointer!important;touch-action:manipulation!important;
+ transition:background .22s ease,border-color .22s ease,color .22s ease,box-shadow .22s ease,transform .22s cubic-bezier(.2,.75,.25,1)!important;
+}
+.home-trip-planner .htp-location-option:before{
+ content:""!important;position:absolute!important;z-index:-1!important;inset:0 auto 0 -120%!important;width:85%!important;
+ background:linear-gradient(105deg,transparent,rgba(255,255,255,.2),transparent)!important;
+ transform:skewX(-18deg)!important;transition:left .45s ease!important;
+}
+.home-trip-planner .htp-location-option:hover,
+.home-trip-planner .htp-location-option:focus-visible{
+ transform:translateX(3px) scale(1.012)!important;border-color:#222!important;
+ background:linear-gradient(110deg,#151515,#303030)!important;color:#fff!important;
+ box-shadow:0 6px 15px rgba(0,0,0,.15)!important;outline:none!important;
+}
+.home-trip-planner .htp-location-option:hover:before,
+.home-trip-planner .htp-location-option:focus-visible:before{left:130%!important}
+.home-trip-planner .htp-location-option:active{transform:scale(.975)!important}
+.home-trip-planner .htp-option-arrow{
+ display:grid!important;place-items:center!important;width:24px!important;height:24px!important;flex:none!important;
+ border:1px solid currentColor!important;border-radius:50%!important;font-size:13px!important;
+ opacity:.45!important;transform:translateX(-3px) rotate(-35deg)!important;
+ transition:opacity .2s ease,transform .22s ease,background .2s ease!important;
+}
+.home-trip-planner .htp-location-option:hover .htp-option-arrow,
+.home-trip-planner .htp-location-option:focus-visible .htp-option-arrow{
+ opacity:1!important;transform:translateX(0) rotate(0)!important;background:rgba(255,255,255,.12)!important;
+}
+.home-trip-planner .htp-location-empty{margin:0;padding:14px;color:#555;font-size:12px}
+@media(hover:none){
+ .home-trip-planner .htp-location-option:active{background:#151515!important;color:#fff!important;border-color:#151515!important;transform:scale(.975)!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .home-trip-planner .htp-location-menu.is-open,.home-trip-planner .htp-location-toggle,.home-trip-planner .htp-location-option{animation:none!important;transition:none!important}
 }
