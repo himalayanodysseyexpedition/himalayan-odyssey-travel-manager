@@ -337,3 +337,11 @@
  color:#fff!important;
 }
 .home-trip-planner .htp-summary .htp-status{color:#374151!important}
+
+
+/* On mobile, keep the estimate after all trip and vehicle selections. */
+@media(max-width:760px){
+ .home-trip-planner .htp-shell{display:grid;grid-template-columns:1fr}
+ .home-trip-planner .htp-main{order:0}
+ .home-trip-planner .htp-summary{order:1;position:static}
+}
