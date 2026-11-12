@@ -433,7 +433,8 @@
 }
 
 
-/* Match the outer journey-planner section background to Upcoming Packages. */
+/* Match Upcoming Packages exactly; remove the previous cool-blue tint. */
 .home-trip-planner{
- background:linear-gradient(180deg,#f6f4ed 0%,#e9ede7 100%)!important;
+ background-image:linear-gradient(180deg,#f6f4ed 0%,#e9ede7 100%)!important;
+ background-color:#f6f4ed!important;
 }
