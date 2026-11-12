@@ -1,4 +1,10 @@
-/* Final cascade layer for the compact logo-left / hamburger-right header. */
+/* Force the compact white logo-left / hamburger-right header above all legacy themes. */
+html body>header,html body header{background:#fff!important;background-color:#fff!important;background-image:none!important;color:#171717!important;}
+html body>header .header-inner,html body header .header-inner{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:space-between!important;}
+html body>header .header-inner>a.brand,html body header .header-inner>a.brand{margin-left:0!important;margin-right:auto!important;justify-content:flex-start!important;}
+html body>header .header-inner>nav.glass-nav,html body header .header-inner>nav.glass-nav{display:none!important;}
+html body>header.menu-open .header-inner>nav.glass-nav,html body header.menu-open .header-inner>nav.glass-nav{display:flex!important;}
+html body>header .header-tagline{display:none!important;}
 html body>header,html body>header.is-scrolled,html body>header.is-hidden{
  position:sticky!important;top:0!important;z-index:1000!important;height:auto!important;min-height:0!important;
  background:rgba(255,255,255,.97)!important;background-image:none!important;color:#171717!important;
