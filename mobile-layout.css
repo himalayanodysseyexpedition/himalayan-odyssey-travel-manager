@@ -272,3 +272,7 @@
 /* MOBILE ONLY — force every header shell layer fully transparent, including decorative overlays. */
 @media screen and (max-width:760px){
 }
+
+
+/* FINAL MOBILE HERO FONT — keep the static headline and every rotating/shuffling phrase in generic sans-serif. */
+@media(max-width:760px){html body #home.hero .hero-content h1.hero-animated-heading,html body #home.hero .hero-content h1.hero-animated-heading .hero-heading-static,html body #home.hero .hero-content h1.hero-animated-heading .hero-word-slot,html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator,html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator.is-shuffling-in,html body #home.hero .hero-content h1.hero-animated-heading .hero-word-rotator.is-shuffling-out{font-family:sans-serif!important}}
