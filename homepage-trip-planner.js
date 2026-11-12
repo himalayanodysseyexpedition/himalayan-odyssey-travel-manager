@@ -9,7 +9,7 @@
  const names=Object.keys(rates),nights={};
  const $=id=>root.querySelector("#"+id);
  const money=n=>"₹"+Math.round(Number(n)||0).toLocaleString("en-IN");
- let vehicles=[];
+ let vehicles=[],vehicleDays=1;
  const hasPlace=n=>Object.prototype.hasOwnProperty.call(nights,n);
  const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
  const today=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-")};
@@ -33,14 +33,14 @@
   const people=Number($("htpTravellers").value)||1,nn=totalNights(),days=tripDays();
   const stay=names.reduce((sum,n)=>sum+(nights[n]||0)*rates[n]*people,0),v=selectedVehicle();
   const capacity=Math.max(1,Number(v?.capacity)||1),count=v?Math.ceil(people/capacity):0;
-  const unit=String(v?.price_unit||"").toLowerCase();
-  const cab=v&&["per_vehicle_day","vehicle_day","per_day","day"].includes(unit)?Number(v.price)*days*count:0;
+  const cab=v?Number(v.price)*vehicleDays*count:0;
   const validDates=days>0,valid=nn>0&&validDates;
   $("htpTotalNights").textContent=nn+" nights";
   $("htpTripDays").textContent=days?days+" days":"Select dates";
   $("htpStayTotal").textContent=money(stay);
   $("htpCabTotal").textContent=v?(cab?money(cab):"Confirm rate"):"Not selected";
-  $("htpVehicleCount").textContent=v?count+" × "+v.title:"Select a vehicle";
+  $("htpVehicleCount").textContent=v?count+" × "+v.title+" · "+vehicleDays+" days":"Select a vehicle";
+  renderVehicleSelection();
   $("htpGrandTotal").textContent=v&&cab?money(stay+cab):money(stay);
   $("htpPerPerson").textContent=people+" travellers · "+money((stay+cab)/people)+" per person"+(!v||!cab?" (cab not included)":"");
   $("htpCalculate").disabled=!valid;
@@ -64,21 +64,35 @@
   nights[n]=Math.max(1,(nights[n]||1)+delta);
   renderDestinations();calculate();
  });
- ["htpTravellers","htpVehicle","htpStart","htpEnd"].forEach(id=>$(id).addEventListener("change",calculate));
+ ["htpTravellers","htpStart","htpEnd"].forEach(id=>$(id).addEventListener("change",calculate));
+ $("htpVehicle").addEventListener("change",()=>{vehicleDays=tripDays()||1;renderVehicleSelection();calculate()});
+ $("htpVehicleDays").addEventListener("input",e=>{vehicleDays=Math.min(30,Math.max(1,Number(e.target.value)||1));renderVehicleSelection();calculate()});
+ root.addEventListener("click",e=>{const b=e.target.closest("[data-vehicle-days]");if(!b)return;vehicleDays=Math.min(30,Math.max(1,vehicleDays+Number(b.dataset.vehicleDays)));renderVehicleSelection();calculate()});
  $("htpCalculate").addEventListener("click",()=>{
   const places=names.filter(n=>nights[n]>0),people=Number($("htpTravellers").value)||1,v=selectedVehicle(),days=tripDays();
   if(!places.length||!days){$("htpStatus").textContent="Add a destination and select valid travel dates.";return}
   const stay=Number($("htpCalculate").dataset.stay),cab=Number($("htpCalculate").dataset.cab);
-  const lines=["Hello Himalayan Odyssey Expedition! Please prepare my trip quotation.","Destinations: "+places.map(n=>n+" ("+nights[n]+" nights)").join(", "),"Dates: "+$("htpStart").value+" to "+$("htpEnd").value,"Duration: "+days+" days; selected stay: "+totalNights()+" nights","Travellers: "+people,"Stay estimate: "+money(stay),"Vehicle: "+(v?v.title+" × "+Math.ceil(people/Math.max(1,Number(v.capacity)||1)):"Please suggest a suitable vehicle"),"Cab estimate: "+(v&&cab?money(cab):"Please quote"),"Estimated total: "+(v&&cab?money(stay+cab):money(stay)+" + cab quote"),"Please confirm availability, route feasibility and final inclusions."];
+  const lines=["Hello Himalayan Odyssey Expedition! Please prepare my trip quotation.","Destinations: "+places.map(n=>n+" ("+nights[n]+" nights)").join(", "),"Dates: "+$("htpStart").value+" to "+$("htpEnd").value,"Duration: "+days+" days; selected stay: "+totalNights()+" nights","Travellers: "+people,"Stay estimate: "+money(stay),"Vehicle: "+(v?v.title+" × "+Math.ceil(people/Math.max(1,Number(v.capacity)||1)):"Please suggest a suitable vehicle"),"Vehicle rental days: "+(v?vehicleDays:"Not selected"),"Daily vehicle rate: "+(v?money(v.price):"Please quote"),"Cab estimate: "+(v&&cab?money(cab):"Please quote"),"Estimated total: "+(v&&cab?money(stay+cab):money(stay)+" + cab quote"),"Please confirm availability, route feasibility and final inclusions."];
   const url="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(lines.join("\n"));
   const w=window.open(url,"_blank");if(!w)window.location.href=url;
   $("htpStatus").textContent="Trip estimate prepared. Confirm final cab and stay rates with our team.";
  });
+ function renderVehicleSelection(){
+  const card=$("htpVehicleSelection"),v=selectedVehicle();
+  if(!card)return;
+  card.hidden=!v;
+  if(!v)return;
+  $("htpSelectedVehicleName").textContent=v.title;
+  $("htpSelectedVehicleRate").textContent=money(v.price)+" / day";
+  $("htpVehicleDays").value=String(vehicleDays);
+  $("htpVehicleDaysOutput").textContent=String(vehicleDays);
+ }
  function renderVehicles(){
   const s=$("htpVehicle"),old=s.value;
-  s.innerHTML='<option value="">Choose a vehicle</option>'+vehicles.map(v=>'<option value="'+esc(v.id)+'">'+esc(v.title)+" · "+(Number(v.capacity)||"—")+" seats · "+money(v.price)+" / vehicle / day</option>").join("");
+  s.innerHTML='<option value="">Choose a vehicle</option>'+vehicles.map(v=>'<option value="'+esc(v.id)+'">'+esc(v.title)+' — '+money(v.price)+' / day</option>').join("");
   if(vehicles.some(v=>String(v.id)===old))s.value=old;
-  $("htpVehicleHint").textContent=vehicles.length?"Vehicle count is calculated using passenger count and seat capacity.":"No active cab rates loaded. Stay estimate is available; request a cab quote on WhatsApp.";
+  $("htpVehicleHint").textContent=vehicles.length?"Choose a vehicle and set how many days you need it.":"No active cab rates loaded. Stay estimate is available; request a cab quote on WhatsApp.";
+  renderVehicleSelection();
   calculate();
  }
  async function loadVehicles(){
