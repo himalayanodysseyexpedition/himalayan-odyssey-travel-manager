@@ -20,8 +20,6 @@ body{font-family:var(--editorial-sans)!important;background:var(--tour-cream)!im
 body :is(h1,h2,h3,h4,.section-title h2,.destination-info h3,.package-slide h3,.guide-card h3,.itinerary-slide h3){font-family:var(--editorial-serif)!important;font-weight:600!important;letter-spacing:-.035em}
 body :is(p,li,label,input,select,textarea,button,a,small){font-family:var(--editorial-sans)}
 ::selection{background:var(--tour-gold);color:var(--tour-deep)}
-/* Wide editorial masthead: original logo artwork stays unchanged. */
-header{background:rgba(16,36,59,.91)!important;border-bottom:1px solid rgba(220,238,250,.22)!important;box-shadow:0 12px 34px rgba(16,36,59,.16)!important;backdrop-filter:blur(22px) saturate(145%)!important;-webkit-backdrop-filter:blur(22px) saturate(145%)!important}
 .header-inner{max-width:1500px!important;min-height:88px;padding:10px clamp(18px,4.2vw,64px)!important;display:flex!important;flex-direction:row!important;justify-content:space-between!important;align-items:center!important;gap:28px!important}
 .brand{flex:0 0 auto;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:14px!important;padding:5px 0!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;text-decoration:none!important}
 .brand:before,.brand:after{display:none!important}
@@ -29,16 +27,10 @@ header{background:rgba(16,36,59,.91)!important;border-bottom:1px solid rgba(220,
 .brand-wordmark{display:inline-block;color:var(--tour-champagne);font-size:clamp(18px,2vw,25px);font-weight:800;letter-spacing:.19em;line-height:1;text-transform:uppercase;white-space:nowrap;text-shadow:0 3px 18px rgba(169,216,242,.18)}
 .header-tagline{display:none!important}
 .glass-nav{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:8px!important;flex-wrap:wrap!important;margin-left:auto}
-.glass-nav>a,.nav-dropdown-toggle{min-height:42px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:9px!important;padding:10px 15px!important;border:1px solid rgba(220,238,250,.25)!important;border-radius:999px!important;background:rgba(255,255,255,.055)!important;color:#f6f3eb!important;font-size:10px!important;font-weight:700!important;letter-spacing:.105em!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.10)!important;transition:transform .3s var(--editorial-ease),background .3s,border-color .3s,box-shadow .3s!important}
-.glass-nav>a:after{display:none!important}
-.glass-nav>a:hover,.nav-dropdown-toggle:hover,.nav-dropdown.open .nav-dropdown-toggle{transform:translateY(-2px);background:rgba(169,216,242,.16)!important;border-color:rgba(220,238,250,.7)!important;color:var(--tour-champagne)!important;box-shadow:0 9px 24px rgba(0,0,0,.17),inset 0 1px 0 rgba(255,255,255,.16)!important}
 .nav-glass-icon{width:15px!important;height:15px!important;stroke:currentColor!important;opacity:.9}
 .nav-dropdown{gap:6px}
-.nav-dropdown-toggle span{width:15px!important;height:15px!important;border:0!important;background:none!important;color:var(--tour-champagne)!important}
 .services-chevron{color:var(--tour-champagne)!important;font-size:14px}
 .nav-dropdown-menu{top:calc(100% + 12px)!important;min-width:245px!important;padding:10px!important;border:1px solid rgba(220,238,250,.3)!important;border-radius:16px!important;background:rgba(16,36,59,.97)!important;box-shadow:0 22px 55px rgba(0,0,0,.32)!important;backdrop-filter:blur(20px)}
-.nav-dropdown-menu a{border-radius:10px!important;padding:12px 14px!important;font-size:11px!important;letter-spacing:.045em!important}
-.nav-dropdown-menu a:hover{background:rgba(169,216,242,.15)!important}
 /* Cinematic but uncluttered hero. Existing headline rotation and copy remain untouched. */
 .hero{min-height:min(760px,calc(100svh - 88px));display:grid;place-items:center;position:relative;isolation:isolate;background-position:center 48%!important;background-size:cover!important}
 .hero:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(16,36,59,.66),rgba(16,36,59,.22) 58%,rgba(16,36,59,.35)),linear-gradient(0deg,rgba(16,36,59,.42),transparent 52%)!important}
@@ -87,21 +79,16 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--tour-gold)!importan
  .brand img{width:86px!important;max-height:55px!important}
  .brand-wordmark{font-size:17px;letter-spacing:.14em}
  .glass-nav{gap:6px!important}
- .glass-nav>a,.nav-dropdown-toggle{min-height:38px!important;padding:8px 11px!important;font-size:9px!important}
 }
 @media(max-width:640px){
- header{position:sticky}
  .header-inner{min-height:0!important;flex-direction:column!important;gap:9px!important;padding:9px 12px 11px!important}
  .brand{justify-content:center!important;gap:10px!important}
  .brand img{width:76px!important;max-height:48px!important}
  .brand-wordmark{font-size:16px;letter-spacing:.16em}
  .glass-nav{width:100%!important;justify-content:center!important;flex-wrap:nowrap!important;gap:5px!important;overflow-x:auto!important;overflow-y:visible!important;padding:2px 1px 5px!important;scrollbar-width:none}
- .glass-nav::-webkit-scrollbar{display:none}
- .glass-nav>a,.nav-dropdown-toggle{flex:0 0 auto!important;min-height:35px!important;padding:7px 9px!important;gap:5px!important;font-size:8px!important;letter-spacing:.045em!important}
  .nav-glass-icon{width:12px!important;height:12px!important}
  .nav-dropdown{flex:0 0 auto}
  .nav-dropdown-menu{position:fixed!important;top:auto!important;left:auto!important;right:12px!important;transform:translateY(-8px) scale(.97)!important;max-width:min(290px,calc(100vw - 24px));}
- .nav-dropdown.open .nav-dropdown-menu{transform:translateY(0) scale(1)!important}
  .hero{min-height:640px!important;min-height:calc(100svh - 105px)!important;background-position:58% center!important}
  .hero-content{width:calc(100% - 38px)!important;padding:72px 0 62px!important;text-align:left!important}
  .hero .hero-animated-heading{font-size:clamp(43px,12vw,66px)!important;line-height:1.02!important}
