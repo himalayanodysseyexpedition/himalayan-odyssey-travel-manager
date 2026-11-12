@@ -1433,27 +1433,10 @@
    <div class="htp-main">
     <div class="htp-step">
      <div class="htp-step-head"><span class="htp-step-number">1</span><div><h3>Location</h3><p class="htp-help">Choose a destination from the list. You can add multiple locations to your trip.</p></div></div>
-     <label class="htp-location-label" for="htpLocationSelect">Select location</label>
-     <select id="htpLocationSelect" class="htp-location-select" aria-label="Select a destination">
-      <option value="">Choose a destination</option>
-      <option value="Narkanda">Narkanda — ₹1,300 / person / night</option>
-      <option value="Shimla">Shimla — ₹1,300 / person / night</option>
-      <option value="Kufri">Kufri — ₹1,300 / person / night</option>
-      <option value="Sangla">Sangla — ₹1,600 / person / night</option>
-      <option value="Kalpa">Kalpa — ₹1,500 / person / night</option>
-      <option value="Tabo">Tabo — ₹1,600 / person / night</option>
-      <option value="Kaza">Kaza — ₹1,500 / person / night</option>
-      <option value="Manali">Manali — ₹1,300 / person / night</option>
-      <option value="Jibhi">Jibhi — ₹1,400 / person / night</option>
-      <option value="Kasol">Kasol — ₹1,300 / person / night</option>
-     </select>
-     <div class="htp-destinations" id="htpDestinations" aria-live="polite"></div>
-    </div>
-    <div class="htp-step">
-     <div class="htp-step-head"><span class="htp-step-number">2</span><div><h3>Travel dates</h3><p class="htp-help">Select your departure and return dates.</p></div></div>
-     <div class="htp-fields">
-      <label>Departure date<input id="htpStart" type="date" required></label>
-      <label>Return date<input id="htpEnd" type="date" required></label>
+     <div class="htp-location-cards" id="htpLocationCards" aria-label="Available destinations"></div>
+     <div class="htp-selected-wrap" id="htpSelectedWrap" hidden>
+      <p class="htp-selected-title">Your selected locations</p>
+      <div class="htp-destinations" id="htpDestinations" aria-live="polite"></div>
      </div>
     </div>
     <div class="htp-step">
@@ -2826,7 +2809,7 @@ loadHotels();
 
 
 
-<script src="/homepage-trip-planner.js?v=5" defer></script>
+<script src="/homepage-trip-planner.js?v=6" defer></script>
 
 <style id="hero-three-line-large-and-spaced-services">#home.hero .hero-content{width:100%!important;max-width:1120px!important}#home.hero .hero-animated-heading{
   display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;
