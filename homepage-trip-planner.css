@@ -244,3 +244,51 @@
  .home-trip-planner #htpDestinations{grid-template-columns:minmax(0,1fr)!important}
  .home-trip-planner #htpDestinations>.htp-destination{width:92%;max-width:360px}
 }
+
+
+/* Mobile planner: reduce overall footprint while keeping all controls easy to tap */
+@media(max-width:760px){
+ .home-trip-planner{padding:18px 0!important}
+ .home-trip-planner .htp-inner{width:calc(100% - 20px)!important}
+ .home-trip-planner .htp-heading{margin-bottom:10px!important}
+ .home-trip-planner .htp-heading h2{font-size:clamp(24px,6vw,30px)!important;line-height:1.08}
+ .home-trip-planner .htp-heading p{font-size:10px!important;line-height:1.35}
+ .home-trip-planner .htp-main{padding:11px!important}
+ .home-trip-planner .htp-step{margin-bottom:10px!important}
+ .home-trip-planner .htp-step-head{gap:7px!important;margin-bottom:7px!important}
+ .home-trip-planner .htp-step-number{width:21px!important;height:21px!important;font-size:9px!important}
+ .home-trip-planner .htp-step-head h3{font-size:17px!important}
+ .home-trip-planner .htp-help{font-size:9px!important;line-height:1.3!important}
+ .home-trip-planner #htpLocationCards{gap:7px!important;padding:2px 2px 8px!important}
+ .home-trip-planner #htpLocationCards>.htp-location-card{flex-basis:68%!important;width:68%!important;max-width:245px!important;min-height:68px!important;padding:7px 8px!important;gap:6px!important}
+ .home-trip-planner .htp-location-card-info>strong{font-size:10px!important}
+ .home-trip-planner .htp-card-price{font-size:12px!important}
+ .home-trip-planner .htp-location-card-info small{font-size:7px!important}
+ .home-trip-planner .htp-add-place{min-height:36px!important;padding:6px 8px!important;font-size:10px!important;position:relative!important;z-index:5!important;pointer-events:auto!important;touch-action:manipulation!important}
+ .home-trip-planner .htp-swipe-hint{margin:2px 0 7px!important;font-size:8px!important}
+ .home-trip-planner .htp-selected-wrap{margin-top:7px!important}
+ .home-trip-planner .htp-selected-title{margin-bottom:5px!important;font-size:9px!important}
+ .home-trip-planner #htpDestinations{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:5px!important}
+ .home-trip-planner #htpDestinations>.htp-destination{width:100%!important;padding:6px!important;gap:4px!important;min-height:58px}
+ .home-trip-planner #htpDestinations .htp-destination strong{font-size:9px!important}
+ .home-trip-planner #htpDestinations .htp-destination .htp-rate strong{font-size:10px!important}
+ .home-trip-planner #htpDestinations .htp-destination .htp-rate small{font-size:7px!important}
+ .home-trip-planner #htpDestinations .htp-stepper{gap:2px!important}
+ .home-trip-planner #htpDestinations .htp-stepper button{width:28px!important;min-width:28px!important;height:30px!important;min-height:30px!important;font-size:15px!important;position:relative!important;z-index:5!important;pointer-events:auto!important;touch-action:manipulation!important}
+ .home-trip-planner #htpDestinations .htp-stepper .htp-remove{width:30px!important;min-width:30px!important;background:#f1e9e9!important;color:#9a4141!important;font-size:19px!important}
+ .home-trip-planner .htp-fields{gap:6px!important}
+ .home-trip-planner input,.home-trip-planner select{min-height:37px!important;padding:7px 9px!important;font-size:11px!important}
+ .home-trip-planner label{font-size:9px!important}
+ .home-trip-planner .htp-travellers{gap:7px!important}
+ .home-trip-planner .htp-travellers select{max-width:130px!important}
+ .home-trip-planner .htp-summary{padding:11px!important}
+ .home-trip-planner .htp-summary h3{font-size:18px!important}
+ .home-trip-planner .htp-total{padding:6px 0 9px!important}
+ .home-trip-planner .htp-total strong{font-size:24px!important}
+ .home-trip-planner .htp-cta{min-height:40px!important;padding:9px 10px!important;font-size:9px!important}
+ .home-trip-planner .htp-status{font-size:9px!important}
+}
+@media(max-width:380px){
+ .home-trip-planner #htpDestinations{grid-template-columns:minmax(0,1fr)!important}
+ .home-trip-planner #htpDestinations>.htp-destination{width:100%!important}
+}
