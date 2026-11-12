@@ -50,14 +50,22 @@
   $("htpCalculate").dataset.stay=String(stay);$("htpCalculate").dataset.cab=String(cab);
   $("htpCalculate").dataset.total=String(stay+cab);$("htpCalculate").dataset.days=String(days);
  }
- $("htpLocationToggle").addEventListener("click",()=>{
-  const menu=$("htpLocationMenu"),open=$("htpLocationToggle").getAttribute("aria-expanded")==="true";
+ const locationToggle=$("htpLocationToggle"),locationMenu=$("htpLocationMenu");
+ locationToggle.addEventListener("click",e=>{
+  e.preventDefault();e.stopPropagation();
+  const open=locationToggle.getAttribute("aria-expanded")==="true";
   if(open){closeLocationMenu();return}
-  renderLocationOptions();menu.hidden=false;menu.classList.remove("is-open");
-  requestAnimationFrame(()=>menu.classList.add("is-open"));
-  $("htpLocationToggle").setAttribute("aria-expanded","true");
+  renderLocationOptions();
+  if(!locationMenu.querySelector("[data-add-destination]"))return;
+  locationMenu.hidden=false;
+  locationMenu.classList.remove("is-open");
+  locationToggle.setAttribute("aria-expanded","true");
+  // Apply the open state synchronously so iOS Safari cannot miss a deferred animation frame.
+  void locationMenu.offsetHeight;
+  locationMenu.classList.add("is-open");
  });
- $("htpLocationMenu").addEventListener("click",e=>{
+ locationMenu.addEventListener("click",e=>{
+  e.stopPropagation();
   const option=e.target.closest("[data-add-destination]");if(!option)return;
   const n=option.dataset.addDestination;if(!names.includes(n)||hasPlace(n))return;
   nights[n]=1;closeLocationMenu();renderDestinations();calculate();
