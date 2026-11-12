@@ -1,0 +1,213 @@
+/* Homepage hero: final, mobile-first Arctic Prestige layer.
+   Loaded after legacy homepage styles to remove conflicting cascade effects. */
+:root{
+  --ho-hero-ink:#0b1a2c;
+  --ho-hero-ice:#dff2fc;
+  --ho-hero-blue:#9fd4f0;
+  --ho-hero-paper:#f7fbfe;
+}
+#home.hero{
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  isolation:isolate!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-height:min(820px,calc(100svh - 74px))!important;
+  padding:clamp(70px,10vh,112px) clamp(22px,8vw,116px) 92px!important;
+  margin:0!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-radius:0!important;
+  background-color:var(--ho-hero-ink)!important;
+  background-image:
+    linear-gradient(90deg,rgba(5,16,29,.88) 0%,rgba(5,16,29,.70) 36%,rgba(5,16,29,.24) 72%,rgba(5,16,29,.12) 100%),
+    linear-gradient(0deg,rgba(5,16,29,.56),rgba(5,16,29,.02) 54%,rgba(5,16,29,.18)),
+    url("/spiti.jpg")!important;
+  background-position:center,center,center 48%!important;
+  background-size:cover,cover,cover!important;
+  background-attachment:scroll!important;
+}
+#home.hero:before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-1!important;
+  border:0!important;
+  border-radius:0!important;
+  background:radial-gradient(ellipse at 76% 24%,rgba(191,229,248,.16),transparent 35%)!important;
+  pointer-events:none!important;
+}
+#home.hero:after{
+  content:"SCROLL TO EXPLORE  ↓"!important;
+  position:absolute!important;
+  right:clamp(22px,5vw,70px)!important;
+  bottom:28px!important;
+  left:auto!important;
+  width:auto!important;
+  height:auto!important;
+  padding:9px 0 9px 15px!important;
+  border:0!important;
+  border-left:1px solid rgba(223,242,252,.68)!important;
+  border-radius:0!important;
+  background:none!important;
+  color:rgba(247,251,254,.84)!important;
+  font:700 9px/1.4 "DM Sans",Arial,sans-serif!important;
+  letter-spacing:2px!important;
+  pointer-events:none!important;
+}
+#home .hero-content{
+  position:relative!important;
+  z-index:2!important;
+  width:min(900px,100%)!important;
+  max-width:900px!important;
+  margin:0!important;
+  padding:0!important;
+  text-align:left!important;
+  animation:hoHeroReveal .9s ease-out both;
+}
+#home .hero-animated-heading{
+  max-width:900px!important;
+  margin:0 0 22px!important;
+  color:#fff!important;
+  font-family:"Bodoni Moda","Cormorant Garamond",Georgia,serif!important;
+  font-size:clamp(54px,8.1vw,108px)!important;
+  font-weight:600!important;
+  line-height:.98!important;
+  letter-spacing:-.055em!important;
+  text-align:left!important;
+  text-wrap:balance!important;
+  text-shadow:0 8px 34px rgba(0,0,0,.34)!important;
+}
+#home .hero-heading-static{color:#fff!important}
+#home .hero-word-rotator{
+  background:linear-gradient(110deg,#fff 8%,#dff2fc 55%,#9fd4f0 100%)!important;
+  background-clip:text!important;
+  -webkit-background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  color:transparent!important;
+}
+#home .hero-go-line{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:12px!important;
+  margin:0 0 26px!important;
+  padding:0!important;
+  color:#dff2fc!important;
+  font:700 10px/1.5 "DM Sans",Arial,sans-serif!important;
+  letter-spacing:2.5px!important;
+  text-transform:uppercase!important;
+}
+#home .hero-go-line:before{
+  content:""!important;
+  display:inline-block!important;
+  width:34px!important;
+  height:1px!important;
+  background:#9fd4f0!important;
+}
+#home .hero-content>p:not(.hero-go-line){
+  max-width:540px!important;
+  margin:25px 0 0!important;
+  color:rgba(247,251,254,.88)!important;
+  font:400 clamp(14px,1.35vw,17px)/1.75 "DM Sans",Arial,sans-serif!important;
+}
+#home .hero-service-icons{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  justify-content:flex-start!important;
+  gap:9px!important;
+  margin:0 0 25px!important;
+}
+#home .hero-service-icon{
+  display:inline-flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  gap:8px!important;
+  min-height:0!important;
+  padding:9px 13px!important;
+  border:1px solid rgba(223,242,252,.28)!important;
+  border-radius:999px!important;
+  background:rgba(8,25,44,.32)!important;
+  color:#f7fbfe!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+#home .hero-service-icon svg{width:16px!important;height:16px!important;stroke:#c8e9fa!important}
+#home .hero-service-icon span{color:#f7fbfe!important;font-size:11px!important;letter-spacing:.04em!important}
+#home .hero-build-cta-wrap{margin:0!important}
+#home .hero-build-cta{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:54px!important;
+  padding:0 30px!important;
+  border:1px solid rgba(255,255,255,.86)!important;
+  border-radius:999px!important;
+  background:linear-gradient(120deg,#f7fbfe,#bfe5f8)!important;
+  color:#10243b!important;
+  font:800 12px/1 "DM Sans",Arial,sans-serif!important;
+  letter-spacing:1.25px!important;
+  text-transform:uppercase!important;
+  box-shadow:0 12px 34px rgba(0,0,0,.24)!important;
+  transition:transform .22s ease,box-shadow .22s ease!important;
+}
+#home .hero-build-cta:hover{transform:translateY(-2px)!important;box-shadow:0 17px 38px rgba(0,0,0,.3)!important}
+#home .hero-destination-list{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  align-items:center!important;
+  gap:7px 11px!important;
+  margin-top:28px!important;
+  color:rgba(247,251,254,.82)!important;
+  font:600 10px/1.5 "DM Sans",Arial,sans-serif!important;
+  letter-spacing:1.2px!important;
+  text-transform:uppercase!important;
+}
+#home .hero-destination-list i{color:#9fd4f0!important}
+@keyframes hoHeroReveal{
+  from{opacity:0;transform:translateY(16px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@media(max-width:760px){
+  #home.hero{
+    min-height:clamp(620px,calc(100svh - 68px),780px)!important;
+    align-items:flex-end!important;
+    padding:70px 22px 76px!important;
+    background-image:
+      linear-gradient(0deg,rgba(5,16,29,.94) 0%,rgba(5,16,29,.72) 43%,rgba(5,16,29,.20) 100%),
+      linear-gradient(90deg,rgba(5,16,29,.18),rgba(5,16,29,.05)),
+      url("/spiti.jpg")!important;
+    background-position:center,center,58% center!important;
+  }
+  #home .hero-content{width:100%!important;max-width:560px!important;text-align:left!important}
+  #home .hero-animated-heading{
+    max-width:100%!important;
+    margin-bottom:16px!important;
+    font-size:clamp(43px,12.2vw,72px)!important;
+    line-height:1.01!important;
+    letter-spacing:-.06em!important;
+  }
+  #home .hero-go-line{
+    max-width:100%!important;
+    margin-bottom:19px!important;
+    font-size:9px!important;
+    letter-spacing:1.5px!important;
+  }
+  #home .hero-service-icons{gap:7px!important;margin-bottom:19px!important}
+  #home .hero-service-icon{padding:8px 10px!important}
+  #home .hero-build-cta{width:100%!important;min-height:54px!important}
+  #home .hero-content>p:not(.hero-go-line){margin-top:19px!important;font-size:13px!important;line-height:1.65!important}
+  #home .hero-destination-list{gap:6px 8px!important;margin-top:19px!important;font-size:9px!important;letter-spacing:.7px!important}
+  #home.hero:after{right:20px!important;bottom:17px!important;font-size:8px!important;letter-spacing:1.4px!important}
+}
+@media(max-width:380px){
+  #home.hero{padding-left:18px!important;padding-right:18px!important}
+  #home .hero-animated-heading{font-size:clamp(40px,11.7vw,48px)!important}
+  #home .hero-service-icon{gap:6px!important;padding:7px 9px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #home .hero-content{animation:none!important}
+  #home .hero-build-cta{transition:none!important}
+}
