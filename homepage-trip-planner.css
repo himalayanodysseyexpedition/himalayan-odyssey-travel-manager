@@ -224,3 +224,23 @@
  .home-trip-planner #htpLocationCards{gap:9px!important;padding-bottom:10px!important}
  .home-trip-planner #htpLocationCards>.htp-location-card{flex-basis:76%!important;width:76%!important;max-width:290px!important;min-height:82px!important}
 }
+
+
+/* Mobile selected-destination cards: compact sizing without horizontal clipping */
+.home-trip-planner #htpSelectedWrap,
+.home-trip-planner #htpDestinations{min-width:0;max-width:100%;box-sizing:border-box}
+.home-trip-planner #htpDestinations>.htp-destination{box-sizing:border-box;min-width:0;width:100%;max-width:100%;padding:7px 8px!important;gap:5px!important;border-radius:10px}
+.home-trip-planner #htpDestinations .htp-destination>div:first-child{min-width:0;flex:1 1 auto;gap:2px!important}
+.home-trip-planner #htpDestinations .htp-destination strong{font-size:10px!important;line-height:1.2}
+.home-trip-planner #htpDestinations .htp-destination .htp-rate strong{font-size:11px!important}
+.home-trip-planner #htpDestinations .htp-destination .htp-rate small{font-size:8px!important}
+.home-trip-planner #htpDestinations .htp-stepper{gap:3px!important;flex:0 0 auto}
+.home-trip-planner #htpDestinations .htp-stepper button{width:22px!important;min-width:22px!important;height:22px!important;min-height:22px!important;padding:0!important;border-radius:7px!important;font-size:14px!important}
+.home-trip-planner #htpDestinations .htp-stepper output{min-width:11px!important;font-size:10px!important}
+@media(max-width:760px){
+ .home-trip-planner #htpDestinations{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important}
+}
+@media(max-width:380px){
+ .home-trip-planner #htpDestinations{grid-template-columns:minmax(0,1fr)!important}
+ .home-trip-planner #htpDestinations>.htp-destination{width:92%;max-width:360px}
+}
