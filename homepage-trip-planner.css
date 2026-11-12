@@ -303,3 +303,37 @@
 .home-trip-planner .htp-add-place:disabled{opacity:.45;cursor:not-allowed}
 .home-trip-planner #htpDestinations{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 @media(max-width:380px){.home-trip-planner .htp-location-controls{grid-template-columns:1fr}.home-trip-planner .htp-add-place{width:100%}.home-trip-planner #htpDestinations{grid-template-columns:1fr!important}}
+
+
+/* White trip-estimate card with crisp black typography */
+.home-trip-planner .htp-summary{
+ background:#fff!important;
+ color:#111827!important;
+ border:1px solid #e5e7eb!important;
+ box-shadow:0 12px 32px rgba(15,23,42,.09)!important;
+}
+.home-trip-planner .htp-summary h3,
+.home-trip-planner .htp-summary strong,
+.home-trip-planner .htp-summary .htp-total strong{
+ color:#111827!important;
+}
+.home-trip-planner .htp-summary .htp-summary-row,
+.home-trip-planner .htp-summary .htp-total,
+.home-trip-planner .htp-summary .htp-per-person,
+.home-trip-planner .htp-summary .htp-fine{
+ color:#4b5563!important;
+}
+.home-trip-planner .htp-summary .htp-total{
+ border-top:1px solid #e5e7eb!important;
+}
+.home-trip-planner .htp-summary .htp-cta{
+ background:#111827!important;
+ color:#fff!important;
+ border:1px solid #111827!important;
+}
+.home-trip-planner .htp-summary .htp-cta:disabled{
+ background:#6b7280!important;
+ border-color:#6b7280!important;
+ color:#fff!important;
+}
+.home-trip-planner .htp-summary .htp-status{color:#374151!important}
