@@ -89,7 +89,7 @@
  }
  function renderVehicles(){
   const s=$("htpVehicle"),old=s.value;
-  s.innerHTML='<option value="">Choose a vehicle</option>'+vehicles.map(v=>'<option value="'+esc(v.id)+'">'+esc(v.title)+' — '+money(v.price)+' / day</option>').join("");
+  s.innerHTML='<option value="">Choose a vehicle</option>'+vehicles.map(v=>'<option value="'+esc(v.id)+'">'+esc(v.title)+'</option>').join("");
   if(vehicles.some(v=>String(v.id)===old))s.value=old;
   $("htpVehicleHint").textContent=vehicles.length?"Choose a vehicle and set how many days you need it.":"No active cab rates loaded. Stay estimate is available; request a cab quote on WhatsApp.";
   renderVehicleSelection();
