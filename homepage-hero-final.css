@@ -274,3 +274,23 @@
     letter-spacing:-.06em!important;
   }
 }
+
+
+/* Keep the complete rotating phrase visible on narrow mobile screens. */
+@media(max-width:760px){
+  #home .hero-animated-heading>.hero-word-slot,
+  #home .hero-animated-heading #heroRotatingWord{
+    font-size:clamp(28px,8.2vw,50px)!important;
+    letter-spacing:-.06em!important;
+    line-height:1!important;
+    max-width:100%!important;
+    white-space:nowrap!important;
+  }
+}
+@media(max-width:380px){
+  #home .hero-animated-heading>.hero-word-slot,
+  #home .hero-animated-heading #heroRotatingWord{
+    font-size:clamp(26px,8vw,31px)!important;
+    letter-spacing:-.065em!important;
+  }
+}
