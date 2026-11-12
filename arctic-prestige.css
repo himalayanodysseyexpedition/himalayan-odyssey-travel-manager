@@ -43,17 +43,10 @@ body :is(h1,h2,h3,h4,.section-title h2,.destination-info h3,.package-slide h3,.g
 }
 ::selection{background:var(--arctic-ice)!important;color:var(--arctic-navy)!important}
 :focus-visible{outline:3px solid var(--arctic-ice)!important;outline-offset:4px}
-.header-tagline{color:#dceefa!important}
 .nav-dropdown-menu{
   border:1px solid rgba(220,229,238,.24)!important;
   background:rgba(9,21,34,.97)!important;
   box-shadow:0 22px 55px rgba(0,0,0,.34)!important;
-}
-.header-cta{
-  color:var(--arctic-navy)!important;
-  background:linear-gradient(135deg,#dff2fc,#a9d8f2)!important;
-  border:1px solid rgba(255,255,255,.58)!important;
-  box-shadow:0 8px 24px rgba(5,18,31,.22),inset 0 1px 0 rgba(255,255,255,.8)!important;
 }
 
 /* Cinematic hero: retain the existing mountain image, copy and interactive word rotation. */
