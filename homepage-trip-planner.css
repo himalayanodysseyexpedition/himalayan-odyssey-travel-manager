@@ -669,3 +669,30 @@
 @media(prefers-reduced-motion:reduce){
  .home-trip-planner .htp-location-menu.is-open,.home-trip-planner .htp-location-toggle,.home-trip-planner .htp-location-option{animation:none!important;transition:none!important}
 }
+
+
+/* Reliable iOS-native destination picker: keep the system select interactive. */
+.home-trip-planner .htp-location-picker{position:relative!important;z-index:20!important}
+.home-trip-planner .htp-native-picker{position:relative!important;width:100%!important}
+.home-trip-planner .htp-location-select{
+ appearance:none!important;-webkit-appearance:none!important;display:block!important;
+ width:100%!important;min-height:54px!important;padding:13px 48px 13px 16px!important;
+ border:1px solid #cbd0d6!important;border-radius:14px!important;
+ background:#fff!important;color:#111!important;
+ font:600 14px "General Sans","DM Sans",Arial,sans-serif!important;
+ line-height:1.4!important;text-align:left!important;cursor:pointer!important;
+ box-shadow:0 4px 14px rgba(0,0,0,.045)!important;
+ touch-action:manipulation!important;
+}
+.home-trip-planner .htp-location-select:focus{
+ outline:none!important;border-color:#222!important;
+ box-shadow:0 0 0 3px rgba(17,17,17,.09),0 8px 22px rgba(0,0,0,.08)!important;
+}
+.home-trip-planner .htp-native-chevron{
+ position:absolute!important;right:14px!important;top:50%!important;
+ transform:translateY(-50%)!important;pointer-events:none!important;
+ display:grid!important;place-items:center!important;width:27px!important;height:27px!important;
+ border:1px solid #d5d8dc!important;border-radius:50%!important;
+ color:#111!important;font-size:20px!important;line-height:1!important;
+}
+.home-trip-planner .htp-location-select:disabled{opacity:.55!important;cursor:not-allowed!important}
