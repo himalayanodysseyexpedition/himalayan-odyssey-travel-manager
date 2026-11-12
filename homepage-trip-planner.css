@@ -459,3 +459,12 @@
 .home-trip-planner .htp-location-empty{margin:0;padding:13px;color:#666;font:500 12px "General Sans","DM Sans",Arial,sans-serif}
 .home-trip-planner .htp-location-label{font:650 10px "General Sans","DM Sans",Arial,sans-serif!important;letter-spacing:.04em!important;color:#404040!important}
 @media(prefers-reduced-motion:reduce){.home-trip-planner .htp-location-menu,.home-trip-planner .htp-location-toggle,.home-trip-planner .htp-location-option{animation:none!important;transition:none!important}}
+
+
+/* Dropdown interaction reliability: explicit visible state and stacking context. */
+.home-trip-planner .htp-step:has(.htp-location-dropdown){position:relative;z-index:40;overflow:visible!important}
+.home-trip-planner .htp-location-dropdown{position:relative;z-index:41}
+.home-trip-planner .htp-location-menu{display:block;visibility:visible;opacity:1;pointer-events:auto}
+.home-trip-planner .htp-location-menu[hidden]{display:none!important;visibility:hidden!important;pointer-events:none!important}
+.home-trip-planner .htp-location-menu.is-open{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}
+.home-trip-planner .htp-location-menu:not(.is-open){pointer-events:none}
