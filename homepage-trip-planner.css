@@ -203,3 +203,24 @@
 .home-trip-planner #htpLocationCards .htp-add-place{display:inline-flex!important;align-items:center!important;justify-content:center!important;position:relative!important;z-index:3!important;pointer-events:auto!important;touch-action:manipulation!important}
 @media(max-width:760px){.home-trip-planner #htpLocationCards{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:360px){.home-trip-planner #htpLocationCards{grid-template-columns:1fr!important}}
+
+
+/* Swipeable destination picker — horizontal carousel on touch and desktop */
+.home-trip-planner #htpLocationCards{
+ display:flex!important;flex-wrap:nowrap!important;align-items:stretch!important;gap:10px!important;
+ width:100%!important;max-width:100%!important;overflow-x:auto!important;overflow-y:hidden!important;
+ padding:3px 2px 12px!important;margin:2px 0 0!important;
+ scroll-snap-type:x mandatory!important;scroll-padding-inline:2px!important;
+ -webkit-overflow-scrolling:touch!important;overscroll-behavior-x:contain!important;
+ touch-action:pan-x pan-y!important;scrollbar-width:none!important;
+}
+.home-trip-planner #htpLocationCards::-webkit-scrollbar{display:none!important}
+.home-trip-planner #htpLocationCards>.htp-location-card{
+ flex:0 0 248px!important;width:248px!important;max-width:82vw!important;
+ min-height:82px!important;scroll-snap-align:start!important;scroll-snap-stop:always!important;
+}
+.home-trip-planner .htp-swipe-hint{margin:4px 0 12px!important;text-align:right!important;color:#8293a1!important;font:500 9px "General Sans",Arial,sans-serif!important;letter-spacing:.04em!important}
+@media(max-width:760px){
+ .home-trip-planner #htpLocationCards{gap:9px!important;padding-bottom:10px!important}
+ .home-trip-planner #htpLocationCards>.htp-location-card{flex-basis:76%!important;width:76%!important;max-width:290px!important;min-height:82px!important}
+}
