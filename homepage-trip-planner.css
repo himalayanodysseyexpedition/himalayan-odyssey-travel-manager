@@ -591,3 +591,31 @@
   border-color:#000!important;
   opacity:.55!important;
 }
+
+
+/* Reliable native destination select: opens consistently on iOS and Android. */
+.home-trip-planner .htp-location-picker{position:relative!important;z-index:2!important}
+.home-trip-planner #htpLocationSelect{
+ display:block!important;
+ width:100%!important;
+ min-height:52px!important;
+ padding:12px 42px 12px 15px!important;
+ border:1px solid #cfd4da!important;
+ border-radius:12px!important;
+ background:#fff!important;
+ color:#111!important;
+ font:600 14px "General Sans","DM Sans",Arial,sans-serif!important;
+ line-height:1.4!important;
+ appearance:auto!important;
+ -webkit-appearance:menulist!important;
+ opacity:1!important;
+ visibility:visible!important;
+ pointer-events:auto!important;
+ clip-path:none!important;
+ position:static!important;
+ cursor:pointer!important;
+}
+.home-trip-planner #htpLocationSelect:focus{
+ outline:2px solid #222!important;
+ outline-offset:2px!important;
+}
