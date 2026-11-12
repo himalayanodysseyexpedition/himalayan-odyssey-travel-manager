@@ -280,3 +280,6 @@
 
 /* MOBILE ROTATING HERO WORD SIZE — only the changing phrase is smaller; “The” and “calling” retain their current size. */
 @media(max-width:760px){html body #home.hero .hero-content h1.hero-animated-heading .hero-word-slot .hero-word-rotator,html body #home.hero .hero-content h1.hero-animated-heading .hero-word-slot .hero-word-rotator.is-shuffling-in,html body #home.hero .hero-content h1.hero-animated-heading .hero-word-slot .hero-word-rotator.is-shuffling-out{font-family:sans-serif!important;font-size:.84em!important}}
+
+/* Only the long “Himalayas are” rotating phrase is reduced; all other shuffle words retain their existing size. */
+@media(max-width:760px){html body #home.hero .hero-content h1.hero-animated-heading .hero-word-slot .hero-word-rotator.word-himalayas,html body #home.hero .hero-content h1.hero-animated-heading .hero-word-slot .hero-word-rotator.word-himalayas.is-shuffling-in,html body #home.hero .hero-content h1.hero-animated-heading .hero-word-slot .hero-word-rotator.word-himalayas.is-shuffling-out{font-size:.68em!important}}
