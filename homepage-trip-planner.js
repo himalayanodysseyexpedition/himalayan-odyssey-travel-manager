@@ -20,7 +20,7 @@
   $("htpAddLocation").disabled=!select.value;
  }
  function renderDestinations(){
-  $("htpDestinations").innerHTML=names.filter(n=>Object.hasOwn(nights,n)).map(n=>'<div class="htp-destination" data-destination="'+n+'"><div><strong>'+n+'</strong><span class="htp-rate"><strong>'+money(rates[n])+'</strong><small>stay + food · per person / night</small></span></div><div class="htp-stepper"><button type="button" data-place="'+n+'" data-delta="-1" aria-label="Remove one night in '+n+'">−</button><output id="htpNight-'+n+'">'+nights[n]+'</output><button type="button" data-place="'+n+'" data-delta="1" aria-label="Add one night in '+n+'">+</button><button type="button" class="htp-remove" data-remove-place="'+n+'" aria-label="Delete '+n+'">×</button></div></div>').join("");
+  $("htpDestinations").innerHTML=names.filter(n=>Object.hasOwn(nights,n)).map(n=>'<div class="htp-destination" data-destination="'+n+'"><div><strong>'+n+'</strong><span class="htp-rate"><strong>'+money(rates[n])+'</strong><small>stay + food · per person / night</small></span></div><div class="htp-stepper"><span class="htp-night-label">Nights</span><button type="button" data-place="'+n+'" data-delta="-1" aria-label="Remove one night in '+n+'">−</button><output id="htpNight-'+n+'">'+nights[n]+'</output><button type="button" data-place="'+n+'" data-delta="1" aria-label="Add one night in '+n+'">+</button><button type="button" class="htp-remove" data-remove-place="'+n+'" aria-label="Delete '+n+'">×</button></div></div>').join("");
   $("htpSelectedWrap").hidden=Object.keys(nights).length===0;
   renderLocationOptions();
  }
@@ -58,7 +58,7 @@
   if(remove){delete nights[remove.dataset.removePlace];renderDestinations();calculate();return}
   const b=t.closest("[data-place][data-delta]");if(!b)return;
   const n=b.dataset.place,delta=Number(b.dataset.delta);
-  if(delta<0&&nights[n]<=1)delete nights[n];else nights[n]=Math.max(1,(nights[n]||1)+delta);
+  nights[n]=Math.max(1,(nights[n]||1)+delta);
   renderDestinations();calculate();
  });
  ["htpTravellers","htpVehicle","htpStart","htpEnd"].forEach(id=>$(id).addEventListener("change",calculate));
