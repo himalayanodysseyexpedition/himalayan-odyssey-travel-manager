@@ -23,7 +23,7 @@
   if(current&&!root.querySelector('[data-destination="'+current+'"]'))select.value=current;
  }
  function renderDestinations(){
-  $("htpDestinations").innerHTML=names.filter(n=>Object.prototype.hasOwnProperty.call(nights,n)).map(n=>'<div class="htp-destination" data-destination="'+n+'"><div><strong>'+n+'</strong><span class="htp-rate">'+money(rates[n])+' / person / night</span></div><div class="htp-stepper"><button type="button" data-place="'+n+'" data-delta="-1" aria-label="Remove one night in '+n+'" '>−</button><output id="htpNight-'+n+'">'+nights[n]+'</output><button type="button" data-place="'+n+'" data-delta="1" aria-label="Add one night in '+n+'">+</button><button type="button" class="htp-remove" data-remove-place="'+n+'" aria-label="Remove '+n+' from trip">×</button></div></div>').join("");
+  $("htpDestinations").innerHTML=names.filter(n=>Object.prototype.hasOwnProperty.call(nights,n)).map(n=>'<div class="htp-destination" data-destination="'+n+'"><div><strong>'+n+'</strong><span class="htp-rate">'+money(rates[n])+' / person / night</span></div><div class="htp-stepper"><button type="button" data-place="'+n+'" data-delta="-1" aria-label="Remove one night in '+n+'">>−</button><output id="htpNight-'+n+'">'+nights[n]+'</output><button type="button" data-place="'+n+'" data-delta="1" aria-label="Add one night in '+n+'">+</button><button type="button" class="htp-remove" data-remove-place="'+n+'" aria-label="Remove '+n+' from trip">×</button></div></div>').join("");
  }
  $("htpLocationSelect").addEventListener("change",()=>{
   const n=$("htpLocationSelect").value;if(!n)return;
