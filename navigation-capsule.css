@@ -387,12 +387,6 @@ html body .site-topbar .brand-mark{
 }
 html body .site-topbar .brand-copy strong{color:#f4f8fc!important}
 html body .site-topbar .brand-copy small{color:#b9dcf2!important}
-html body :is(button,.btn,.button,.primary,.site-nav-contact,.departure-cta,[type="submit"]){
-  border-radius:999px!important;
-  font-family:"DM Sans","Manrope",Arial,sans-serif!important;
-  font-weight:750!important;
-  transition:background .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease,transform .2s ease!important;
-}
 html body :is(.btn,.button,.primary,.departure-cta,[type="submit"]){
   background:linear-gradient(120deg,#ff8738,#ff9d5b)!important;
   color:#172b40!important;border:1px solid #ffc49f!important;
@@ -416,7 +410,6 @@ html body footer{
 html body footer a{color:#b9dcf2!important}
 @media(max-width:680px){
   html body .site-topbar{background:rgba(16,36,59,.96)!important}
-  html body .site-topbar .site-nav{gap:5px!important}
 }
 @media(prefers-reduced-motion:reduce){
   html body .site-topbar,html body .site-topbar *,
