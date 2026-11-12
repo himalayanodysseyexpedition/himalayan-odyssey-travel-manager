@@ -1,5 +1,3 @@
-/* MOBILE LAYOUT — carry the desktop editorial design system onto phones.
-   Layout-only overrides: existing content, links, carousels and booking flows stay intact. */
 :root{
   --mobile-forest:#10243d;
   --mobile-green:#183957;
@@ -7,176 +5,95 @@
   --mobile-lime:#a9d8f2;
   --mobile-paper:#f3f8fc;
 }
-@media(max-width:760px){
-  html,body{max-width:100%;overflow-x:hidden}
-  body{background:var(--mobile-paper);-webkit-text-size-adjust:100%}
-  img,svg{max-width:100%}
-  .brand{margin:0 auto!important;padding:3px 10px!important}
-  .brand img{width:auto!important;max-width:190px!important;max-height:43px!important}
-  .nav-dropdown-menu{
-    top:calc(100% + 8px)!important;right:0!important;left:auto!important;
-    min-width:min(245px,calc(100vw - 28px))!important;
-    padding:8px!important;border:1px solid rgba(169,216,242,.48)!important;
-    border-radius:13px!important;background:rgba(16,36,59,.985)!important;
-    box-shadow:0 16px 36px rgba(0,0,0,.3)!important;
-  }
-
-  /* Hero: same cinematic image, navy overlay, typography and ice-blue accent as desktop */
-  body>.hero{
+@media(max-width:760px){html,body{max-width:100%;overflow-x:hidden}body{background:var(--mobile-paper);-webkit-text-size-adjust:100%}img,svg{max-width:100%}body>.hero{
     min-height:0!important;height:auto!important;
     padding:clamp(38px,8vw,58px) 18px 48px!important;
     background-color:#10243d!important;
     background-image:linear-gradient(0deg,rgba(16,36,59,.82),rgba(16,36,59,.38)),url('/spiti.jpg')!important;
     background-position:center,60% center!important;background-size:cover!important;
     overflow:hidden!important;
-  }
-  body>.hero:before{inset:8px!important;border-radius:18px!important;border-color:rgba(235,255,220,.22)!important}
-  .hero-content{width:100%!important;max-width:620px!important;margin:0 auto!important;text-align:center!important}
-  .hero-animated-heading{
+  }body>.hero:before{inset:8px!important;border-radius:18px!important;border-color:rgba(235,255,220,.22)!important}.hero-content{width:100%!important;max-width:620px!important;margin:0 auto!important;text-align:center!important}.hero-animated-heading{
     max-width:100%!important;margin:0 auto 17px!important;
     font-family:"General Sans",sans-serif!important;
     font-size:clamp(39px,10.5vw,61px)!important;font-weight:700!important;
     line-height:1.02!important;letter-spacing:-.06em!important;text-wrap:balance!important;
-  }
-  .hero .hero-heading-static{font-family:"General Sans",sans-serif!important}
-  .hero .hero-word-rotator{font-family:"Boska",Georgia,serif!important;color:var(--mobile-lime)!important}
-  .hero-service-icons{
+  }.hero .hero-heading-static{font-family:"General Sans",sans-serif!important}.hero .hero-word-rotator{font-family:"Boska",Georgia,serif!important;color:var(--mobile-lime)!important}.hero-service-icons{
     display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
     width:100%!important;max-width:420px!important;gap:8px!important;
     margin:17px auto 0!important;
-  }
-  .hero-service-icon{
+  }.hero-service-icon{
     display:flex!important;flex-direction:column!important;align-items:center!important;
     justify-content:center!important;gap:5px!important;min-width:0!important;min-height:68px!important;
     padding:9px 4px!important;border:1px solid rgba(238,255,230,.25)!important;
     border-radius:14px!important;background:rgba(255,255,255,.13)!important;
     box-shadow:inset 0 1px 0 rgba(255,255,255,.2)!important;
     -webkit-backdrop-filter:blur(14px)!important;backdrop-filter:blur(14px)!important;
-  }
-  .hero-service-icon svg{width:21px!important;height:21px!important;stroke:var(--mobile-lime)!important}
-  .hero-service-icon span{font-size:9px!important;font-weight:750!important;letter-spacing:1px!important}
-  .hero-build-cta-wrap{width:100%!important;max-width:420px!important;margin:13px auto 0!important}
-  .hero-build-cta,.hero .btn{
+  }.hero-service-icon svg{width:21px!important;height:21px!important;stroke:var(--mobile-lime)!important}.hero-service-icon span{font-size:9px!important;font-weight:750!important;letter-spacing:1px!important}.hero-build-cta-wrap{width:100%!important;max-width:420px!important;margin:13px auto 0!important}.hero-build-cta,.hero .btn{
     display:inline-flex!important;align-items:center!important;justify-content:center!important;
     width:100%!important;min-height:46px!important;padding:0 20px!important;
     border:1px solid var(--mobile-lime)!important;border-radius:999px!important;
     background:var(--mobile-lime)!important;color:#10243d!important;
     font-size:10px!important;font-weight:850!important;letter-spacing:.8px!important;
-  }
-  .hero p{
+  }.hero p{
     max-width:540px!important;margin:14px auto 0!important;
     color:rgba(255,255,255,.9)!important;font-size:13px!important;line-height:1.7!important;
     text-align:center!important;
-  }
-
-  /* Editorial section rhythm and typography */
-  section.content{
+  }section.content{
     padding:54px 17px!important;background:var(--mobile-paper)!important;
-  }
-  .section-inner{width:100%!important;max-width:680px!important;margin:0 auto!important}
-  .section-title{margin:0 0 20px!important;text-align:left!important}
-  .section-title small,.eyebrow{
+  }.section-inner{width:100%!important;max-width:680px!important;margin:0 auto!important}.section-title{margin:0 0 20px!important;text-align:left!important}.section-title small,.eyebrow{
     display:block!important;margin-bottom:9px!important;
     color:#8fb7d0!important;font-size:9px!important;font-weight:850!important;
     letter-spacing:2px!important;line-height:1.5!important;
-  }
-  .section-title h2,.local-intro-copy h2{
+  }.section-title h2,.local-intro-copy h2{
     margin:0!important;color:#183957!important;
     font-family:"General Sans",Inter,system-ui,sans-serif!important;
     font-size:clamp(30px,8.4vw,43px)!important;font-weight:800!important;
     line-height:1.04!important;letter-spacing:-.055em!important;text-wrap:balance!important;
-  }
-  .section-title h2:after{margin:13px 0 0!important;width:36px!important;height:3px!important}
-  .intro,.local-intro-copy p{
+  }.section-title h2:after{margin:13px 0 0!important;width:36px!important;height:3px!important}.intro,.local-intro-copy p{
     color:#63798e!important;font-size:13px!important;line-height:1.8!important;
-  }
-  .content.info,.destination-gallery,.group-departures-section,.faq-section{
+  }.content.info,.destination-gallery,.group-departures-section,.faq-section{
     background:#f3f8fc!important;
-  }
-  .local-intro{display:grid!important;grid-template-columns:1fr!important;gap:20px!important}
-  .local-intro-panel{
+  }.local-intro{display:grid!important;grid-template-columns:1fr!important;gap:20px!important}.local-intro-panel{
     padding:22px!important;border:1px solid rgba(255,255,255,.2)!important;
     border-radius:18px!important;background:linear-gradient(145deg,#10243d,#244b68)!important;
     box-shadow:0 16px 38px rgba(16,36,59,.15)!important;
-  }
-  .local-intro-panel h3{
+  }.local-intro-panel h3{
     font-family:"General Sans",Inter,system-ui,sans-serif!important;
     font-size:23px!important;line-height:1.12!important;letter-spacing:-.04em!important;
-  }
-  .local-intro-panel p{font-size:13px!important;line-height:1.75!important}
-
-  /* Swipe rails and image cards keep the desktop visual language */
-  .group-departures-section{padding-top:52px!important;padding-bottom:45px!important}
-  .group-departures-head{display:block!important}
-  .group-departures-head>.intro{margin:0 0 18px!important}
-  .group-departures-rail,.packages-carousel{
+  }.local-intro-panel p{font-size:13px!important;line-height:1.75!important}.group-departures-section{padding-top:52px!important;padding-bottom:45px!important}.group-departures-head{display:block!important}.group-departures-head>.intro{margin:0 0 18px!important}.group-departures-rail,.packages-carousel{
     display:flex!important;gap:13px!important;overflow-x:auto!important;overflow-y:hidden!important;
     scroll-snap-type:x mandatory!important;scroll-padding:12px!important;
     padding:3px 2px 14px!important;margin:0 -2px!important;
     scrollbar-width:none!important;-webkit-overflow-scrolling:touch!important;
-  }
-  .group-departures-rail::-webkit-scrollbar,.packages-carousel::-webkit-scrollbar{display:none!important}
-  .group-departures-rail>*{flex:0 0 min(84vw,360px)!important;max-width:min(84vw,360px)!important;scroll-snap-align:start!important}
-  .packages-carousel>*{flex:0 0 min(82vw,340px)!important;max-width:min(82vw,340px)!important;scroll-snap-align:start!important}
-  .group-departure-card,.package-card,.itinerary-card,.guide-card,.card,.destination-card{
+  }.group-departures-rail::-webkit-scrollbar,.packages-carousel::-webkit-scrollbar{display:none!important}.group-departures-rail>*{flex:0 0 min(84vw,360px)!important;max-width:min(84vw,360px)!important;scroll-snap-align:start!important}.packages-carousel>*{flex:0 0 min(82vw,340px)!important;max-width:min(82vw,340px)!important;scroll-snap-align:start!important}.group-departure-card,.package-card,.itinerary-card,.guide-card,.card,.destination-card{
     border:1px solid rgba(16,36,59,.10)!important;border-radius:18px!important;
     box-shadow:0 10px 28px rgba(16,36,59,.075)!important;
-  }
-  .group-departure-photo{height:175px!important}
-  .group-departure-body{padding:18px!important}
-  .group-departure-body h3,.package-card h3,.itinerary-card h3{
+  }.group-departure-photo{height:175px!important}.group-departure-body{padding:18px!important}.group-departure-body h3,.package-card h3,.itinerary-card h3{
     font-family:"General Sans",Inter,system-ui,sans-serif!important;
     font-size:21px!important;line-height:1.15!important;letter-spacing:-.04em!important;
-  }
-  .group-departure-status{border-radius:999px!important;background:#dceefa!important;color:#183957!important}
-  .group-departure-cta{min-height:42px!important;border-radius:999px!important;background:#183957!important}
-  .guides-controls,.group-departures-controls{gap:9px!important;margin-top:10px!important}
-  .guides-controls button,.group-departures-controls button,.guide-arrow{
+  }.group-departure-status{border-radius:999px!important;background:#dceefa!important;color:#183957!important}.group-departure-cta{min-height:42px!important;border-radius:999px!important;background:#183957!important}.guides-controls,.group-departures-controls{gap:9px!important;margin-top:10px!important}.guides-controls button,.group-departures-controls button,.guide-arrow{
     width:39px!important;height:39px!important;min-width:39px!important;
     border:1px solid rgba(16,36,59,.2)!important;border-radius:50%!important;
     background:#fff!important;color:#183957!important;
-  }
-  .guides-swipe-hint{font-size:8px!important;letter-spacing:1.3px!important}
-
-  .destination-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
-  .destination-card{height:clamp(225px,64vw,290px)!important;border-radius:15px!important}
-  .destination-info{left:12px!important;right:9px!important;bottom:14px!important}
-  .destination-info h3{font-family:"General Sans",sans-serif!important;font-size:clamp(19px,5.5vw,25px)!important;line-height:1.05!important}
-  .destination-info small{font-size:7px!important;letter-spacing:1px!important}
-  .destination-info span{font-size:8px!important}
-
-  .faq-list{gap:10px!important}
-  .faq-list details{border-radius:13px!important;background:#fff!important}
-  .faq-list summary{padding:15px!important;font-size:13px!important}
-  .enquiry-box{padding:20px!important;border-radius:18px!important}
-  .enquiry-box input,.enquiry-box select,.enquiry-box textarea{min-height:44px!important;border-radius:11px!important}
-  footer{padding-bottom:calc(90px + env(safe-area-inset-bottom))!important}
-  .footer-contact-bar{
+  }.guides-swipe-hint{font-size:8px!important;letter-spacing:1.3px!important}.destination-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}.destination-card{height:clamp(225px,64vw,290px)!important;border-radius:15px!important}.destination-info{left:12px!important;right:9px!important;bottom:14px!important}.destination-info h3{font-family:"General Sans",sans-serif!important;font-size:clamp(19px,5.5vw,25px)!important;line-height:1.05!important}.destination-info small{font-size:7px!important;letter-spacing:1px!important}.destination-info span{font-size:8px!important}.faq-list{gap:10px!important}.faq-list details{border-radius:13px!important;background:#fff!important}.faq-list summary{padding:15px!important;font-size:13px!important}.enquiry-box{padding:20px!important;border-radius:18px!important}.enquiry-box input,.enquiry-box select,.enquiry-box textarea{min-height:44px!important;border-radius:11px!important}footer{padding-bottom:calc(90px + env(safe-area-inset-bottom))!important}.footer-contact-bar{
     width:calc(100% - 20px)!important;left:10px!important;right:10px!important;
     bottom:calc(8px + env(safe-area-inset-bottom))!important;
     border:1px solid rgba(16,36,59,.13)!important;border-radius:18px!important;
     background:rgba(250,252,247,.94)!important;
     box-shadow:0 14px 38px rgba(16,36,59,.17)!important;
     -webkit-backdrop-filter:blur(22px)!important;backdrop-filter:blur(22px)!important;
-  }
-  .footer-contact-bar a,.footer-contact-bar button{min-height:42px!important;border-radius:13px!important}
+  }.footer-contact-bar a,.footer-contact-bar button{min-height:42px!important;border-radius:13px!important}
 }
-@media(max-width:380px){
-  .header-inner{padding-left:8px!important;padding-right:8px!important}
-  .brand img{max-width:168px!important}
-  .hero-animated-heading{font-size:clamp(36px,10vw,43px)!important}
-  .destination-grid{gap:8px!important}
+@media(max-width:380px){.hero-animated-heading{font-size:clamp(36px,10vw,43px)!important}.destination-grid{gap:8px!important}
 }
 @media(prefers-reduced-motion:reduce){
-  @media(max-width:760px){
-    .hero-service-icon,.hero-content,.glass-nav{animation:none!important}
+  @media(max-width:760px){.hero-service-icon,.hero-content{animation:none!important}
   }
 }
 
 
 /* Arctic Prestige mobile shell and primary action. */
-@media(max-width:760px){
-  body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta{
+@media(max-width:760px){body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta{
     color:#10243d!important;
     background:linear-gradient(135deg,rgba(232,245,252,.96),rgba(169,216,242,.84))!important;
     border:1px solid rgba(255,255,255,.82)!important;
@@ -184,22 +101,28 @@
     backdrop-filter:blur(22px) saturate(175%)!important;
     box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 8px 22px rgba(16,36,59,.20),0 0 18px rgba(169,216,242,.16)!important;
     text-shadow:none!important;
-  }
-  body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta:active{
+  }body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta:active{
     background:linear-gradient(135deg,#ffffff,#c9e9fa)!important;
     box-shadow:inset 0 2px 5px rgba(16,36,59,.12),0 5px 16px rgba(16,36,59,.18)!important;
     transform:scale(.985)!important;
   }
 }
+
+/* MOBILE HEADER — logo, swipeable single-line navigation, then Plan Your Trip. */
+@media(max-width:760px){
+}
 @media(max-width:360px){
+}
+
+/* Keep the mobile header Plan Your Trip action visible below the navigation row. */
+@media(max-width:760px){
 }
 
 
 
 /* FINAL MOBILE HERO HEADING — center the whole changing sentence with
    comfortable, consistent word spacing on narrow screens. */
-@media(max-width:760px){
-  .hero > .hero-content > h1.hero-animated-heading{
+@media(max-width:760px){.hero > .hero-content > h1.hero-animated-heading{
     display:flex!important;
     flex-flow:row nowrap!important;
     align-items:baseline!important;
@@ -219,12 +142,9 @@
     word-break:keep-all!important;
     overflow-wrap:normal!important;
     gap:clamp(4px,1.15vw,8px)!important;
-  }
-  .hero > .hero-content > h1.hero-animated-heading .hero-heading-static,
-  .hero > .hero-content > h1.hero-animated-heading .hero-word-slot{
+  }.hero > .hero-content > h1.hero-animated-heading .hero-heading-static,.hero > .hero-content > h1.hero-animated-heading .hero-word-slot{
     flex:0 0 auto!important;
-  }
-  .hero > .hero-content > h1.hero-animated-heading .hero-word-slot{
+  }.hero > .hero-content > h1.hero-animated-heading .hero-word-slot{
     margin:0!important;
   }
 }
@@ -232,24 +152,15 @@
 
 /* MOBILE HERO TYPOGRAPHY REFINEMENT — lift the headline slightly and
    scale the supporting cursive line down a touch for clearer hierarchy. */
-@media(max-width:760px){
-  .hero > .hero-content > h1.hero-animated-heading{
+@media(max-width:760px){.hero > .hero-content > h1.hero-animated-heading{
     font-size:clamp(15px,4.65vw,24px)!important;
-  }
-  .hero > .hero-content > .hero-go-line{
+  }.hero > .hero-content > .hero-go-line{
     font-size:clamp(28px,7.9vw,40px)!important;
   }
 }
 
 /* MOBILE ONLY — match the rotating hero words to the ice-blue “and you must go” accent. Desktop hero colours remain unchanged. */
-@media screen and (max-width:760px){
-  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator,
-  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.word-himalaya,
-  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.word-himachal,
-  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.word-spiti,
-  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.word-adventure,
-  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.is-shuffling-out,
-  html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.is-shuffling-in{
+@media screen and (max-width:760px){html body .hero .hero-content > .hero-animated-heading .hero-word-rotator,html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.word-himalaya,html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.word-himachal,html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.word-spiti,html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.word-adventure,html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.is-shuffling-out,html body .hero .hero-content > .hero-animated-heading .hero-word-rotator.is-shuffling-in{
     color:#a9d8f2!important;
     background:linear-gradient(100deg,#e1f3fc 0%,#a9d8f2 48%,#c9e9fa 100%)!important;
     -webkit-background-clip:text!important;
@@ -260,16 +171,20 @@
 }
 
 
+/* MOBILE ONLY — bring the hero headline closer to the header. */
+@media screen and (max-width:760px){body>.hero{
+    padding-top:12px!important;
+  }body>.hero>.hero-content>.hero-animated-heading{
+    margin-top:0!important;
+  }
+}
+
+
 /* MOBILE ONLY — show the hero photograph cleanly, without a glass pane or blur. */
-@media screen and (max-width:760px){
-  body>.hero,
-  body>.hero::before,
-  body>.hero::after{
+@media screen and (max-width:760px){body>.hero,body>.hero::before,body>.hero::after{
     -webkit-backdrop-filter:none!important;
     backdrop-filter:none!important;
-  }
-  body>.hero::before,
-  body>.hero::after{
+  }body>.hero::before,body>.hero::after{
     display:none!important;
     content:none!important;
     border:0!important;
@@ -279,17 +194,28 @@
 }
 
 
+/* MOBILE ONLY — position “The Himalayas are calling” immediately below the header. */
+@media screen and (max-width:760px){body>.hero{
+    padding-top:2px!important;
+  }body>.hero>.hero-content{
+    margin-top:0!important;
+    padding-top:0!important;
+  }body>.hero>.hero-content>.hero-animated-heading{
+    margin-top:0!important;
+    margin-bottom:12px!important;
+  }
+}
+
+
 /* MOBILE ONLY — reduce the supporting “and you must go” line. */
-@media screen and (max-width:760px){
-  html body>.hero>.hero-content>.hero-go-line{
+@media screen and (max-width:760px){html body>.hero>.hero-content>.hero-go-line{
     font-size:clamp(23px,6.2vw,32px)!important;
   }
 }
 
 
 /* MOBILE ONLY — enlarge the “The Himalayas are calling” hero headline. */
-@media screen and (max-width:760px){
-  html body>.hero>.hero-content>h1.hero-animated-heading{
+@media screen and (max-width:760px){html body>.hero>.hero-content>h1.hero-animated-heading{
     font-size:clamp(18px,5.3vw,27px)!important;
   }
 }
@@ -297,38 +223,36 @@
 
 /* MOBILE ONLY — add breathing room below the Cabs / Hotels / Packages icons,
    then separate the hero introduction from the Build Your Trip button. */
-@media screen and (max-width:760px){
-  body>.hero>.hero-content>.hero-build-cta-wrap{
+@media screen and (max-width:760px){body>.hero>.hero-content>.hero-build-cta-wrap{
     margin-top:30px!important;
-  }
-  body>.hero>.hero-content>.hero-build-cta-wrap+p{
+  }body>.hero>.hero-content>.hero-build-cta-wrap+p{
     margin-top:28px!important;
   }
 }
 
 
 /* MOBILE ONLY — increase the separation between service icons, CTA, and introduction. */
-@media screen and (max-width:760px){
-  body>.hero>.hero-content>.hero-build-cta-wrap{
+@media screen and (max-width:760px){body>.hero>.hero-content>.hero-build-cta-wrap{
     margin-top:48px!important;
-  }
-  body>.hero>.hero-content>.hero-build-cta-wrap+p{
+  }body>.hero>.hero-content>.hero-build-cta-wrap+p{
     margin-top:40px!important;
   }
 }
 
 
+/* MOBILE ONLY — keep the header stationary and visually unchanged during page scrolling. */
+@media screen and (max-width:760px){
+}
+
+
 /* MOBILE ONLY — use equal vertical spacing from “and you must go” to the service icons,
    and from the service icons to the Build Your Trip button. */
-@media screen and (max-width:760px){
-  html body>.hero>.hero-content>.hero-go-line{
+@media screen and (max-width:760px){html body>.hero>.hero-content>.hero-go-line{
     margin-bottom:0!important;
-  }
-  html body>.hero>.hero-content>.hero-service-icons{
+  }html body>.hero>.hero-content>.hero-service-icons{
     margin-top:48px!important;
     margin-bottom:0!important;
-  }
-  html body>.hero>.hero-content>.hero-build-cta-wrap{
+  }html body>.hero>.hero-content>.hero-build-cta-wrap{
     margin-top:48px!important;
   }
 }
@@ -341,5 +265,10 @@
 
 
 /* MOBILE ONLY — match the Services dropdown panel to the ice-blue Services button. */
+@media screen and (max-width:760px){
+}
+
+
+/* MOBILE ONLY — force every header shell layer fully transparent, including decorative overlays. */
 @media screen and (max-width:760px){
 }
