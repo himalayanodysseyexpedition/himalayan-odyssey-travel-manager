@@ -340,3 +340,82 @@ html body > header .nav-dropdown.open .services-chevron-icon { transform: rotate
     stroke-linecap: round !important;
   }
 }
+
+
+/* Final compact mobile header — v8. Keep this last in the cascade. */
+@media (max-width: 760px) {
+  html body > header,
+  html body > header.sitewide-header,
+  html body > header.is-scrolled,
+  html body > header.is-hidden,
+  html body > header.menu-open {
+    height: 76px !important;
+    min-height: 76px !important;
+    max-height: 76px !important;
+    background: #000 !important;
+    background-color: #000 !important;
+  }
+  html body > header .header-inner {
+    height: 76px !important;
+    min-height: 76px !important;
+    max-height: 76px !important;
+    padding: 0 10px 0 0 !important;
+    gap: 6px !important;
+  }
+  html body > header .header-inner > a.brand {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    flex: 1 1 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: calc(100vw - 70px) !important;
+    margin: 0 auto 0 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+  }
+  html body > header .header-inner > a.brand > img {
+    display: block !important;
+    width: clamp(160px, 42vw, 190px) !important;
+    max-width: 100% !important;
+    max-height: 52px !important;
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: left center !important;
+  }
+  html body > header .header-menu-toggle {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 46px !important;
+    height: 46px !important;
+    min-width: 46px !important;
+    min-height: 46px !important;
+    max-width: 46px !important;
+    max-height: 46px !important;
+    flex: 0 0 46px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+  }
+  html body > header .header-menu-toggle svg {
+    display: block !important;
+    width: 28px !important;
+    height: 28px !important;
+    max-width: 28px !important;
+    max-height: 28px !important;
+    stroke: #fff !important;
+  }
+  html body > header .header-menu-toggle svg path {
+    stroke: #fff !important;
+    stroke-width: 2.3 !important;
+    stroke-linecap: round !important;
+  }
+}
