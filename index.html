@@ -1452,7 +1452,11 @@
     </div>
     <div class="htp-step">
      <div class="htp-step-head"><span class="htp-step-number">4</span><div><h3>Select your vehicle</h3><p class="htp-help">Live vehicle options and rates from our published cab catalogue.</p></div></div>
-     <label for="htpVehicle">Available vehicles</label><select id="htpVehicle"><option value="">Loading vehicles…</option></select>
+     <label for="htpVehicle">Choose a vehicle</label><select id="htpVehicle"><option value="">Loading vehicles…</option></select>
+     <div class="htp-vehicle-selection" id="htpVehicleSelection" hidden>
+      <div class="htp-vehicle-selected-top"><div><span>Selected vehicle</span><strong id="htpSelectedVehicleName"></strong></div><strong class="htp-vehicle-daily-rate" id="htpSelectedVehicleRate"></strong></div>
+      <div class="htp-vehicle-days-row"><label for="htpVehicleDays">Vehicle days</label><div class="htp-vehicle-days-control"><button type="button" data-vehicle-days="-1" aria-label="Remove one vehicle day">−</button><input id="htpVehicleDays" type="number" min="1" max="30" value="1" inputmode="numeric" aria-label="Number of vehicle days"><button type="button" data-vehicle-days="1" aria-label="Add one vehicle day">+</button></div></div>
+     </div>
      <p class="htp-vehicle-note" id="htpVehicleHint" aria-live="polite">Loading published vehicle rates…</p>
     </div>
    </div>
