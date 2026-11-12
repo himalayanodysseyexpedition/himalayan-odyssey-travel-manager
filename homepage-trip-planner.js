@@ -9,7 +9,7 @@
  const names=Object.keys(rates),nights={};
  const $=id=>root.querySelector("#"+id);
  const money=n=>"₹"+Math.round(Number(n)||0).toLocaleString("en-IN");
- let vehicles=[],vehicleDays=1;
+ let vehicles=[],vehicleDays=0;
  const hasPlace=n=>Object.prototype.hasOwnProperty.call(nights,n);
  const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
  const today=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-")};
@@ -35,13 +35,13 @@
   const people=Number($("htpTravellers").value)||1,nn=totalNights(),days=tripDays();
   const stay=names.reduce((sum,n)=>sum+(nights[n]||0)*rates[n]*people,0),v=selectedVehicle();
   const capacity=Math.max(1,Number(v?.capacity)||1),count=v?Math.ceil(people/capacity):0;
-  const cab=v?Number(v.price)*vehicleDays*count:0;
-  const validDates=days>0,valid=nn>0&&validDates&&!!v&&cab>0;
+  const cab=v&&vehicleDays>0?Number(v.price)*vehicleDays*count:0;
+  const validDates=days>0,valid=nn>0&&validDates&&(!v||vehicleDays===0||cab>0);
   $("htpTotalNights").textContent=nn+" nights";
   $("htpTripDays").textContent=days?days+" days":"Select dates";
   $("htpStayTotal").textContent=money(stay);
-  $("htpCabTotal").textContent=v?(cab?money(cab):"Confirm rate"):"Not selected";
-  $("htpVehicleCount").textContent=v?count+" × "+v.title+" · "+vehicleDays+" days":"Select a vehicle";
+  $("htpCabTotal").textContent=v?money(cab):"Not selected";
+  $("htpVehicleCount").textContent=v?(vehicleDays>0?count+" × "+v.title+" · "+vehicleDays+" days":"Vehicle removed · 0 days"):"Select a vehicle";
   renderVehicleSelection();
   $("htpGrandTotal").textContent=money(stay+cab);
   $("htpPerPerson").textContent=money((stay+cab)/people)+" per person · "+people+" travellers";
@@ -63,18 +63,19 @@
   if(remove){delete nights[remove.dataset.removePlace];renderDestinations();calculate();return}
   const b=t.closest("[data-place][data-delta]");if(!b)return;
   const n=b.dataset.place,delta=Number(b.dataset.delta);
-  nights[n]=Math.max(1,(nights[n]||1)+delta);
+  const updated=(nights[n]||1)+delta;
+  if(updated<=0)delete nights[n];else nights[n]=updated;
   renderDestinations();calculate();
  });
  ["htpStart","htpEnd"].forEach(id=>$(id).addEventListener("change",calculate));
- $("htpVehicle").addEventListener("change",()=>{vehicleDays=tripDays()||1;renderVehicleSelection();calculate()});
- $("htpVehicleDays").addEventListener("input",e=>{vehicleDays=Math.min(30,Math.max(1,Number(e.target.value)||1));renderVehicleSelection();calculate()});
- root.addEventListener("click",e=>{const b=e.target.closest("[data-vehicle-days]");if(!b)return;vehicleDays=Math.min(30,Math.max(1,vehicleDays+Number(b.dataset.vehicleDays)));renderVehicleSelection();calculate()});
+ $("htpVehicle").addEventListener("change",()=>{vehicleDays=0;renderVehicleSelection();calculate()});
+ $("htpVehicleDays").addEventListener("input",e=>{vehicleDays=Math.min(30,Math.max(0,Number(e.target.value)||0));renderVehicleSelection();calculate()});
+ root.addEventListener("click",e=>{const b=e.target.closest("[data-vehicle-days]");if(!b)return;vehicleDays=Math.min(30,Math.max(0,vehicleDays+Number(b.dataset.vehicleDays)));renderVehicleSelection();calculate()});
  $("htpCalculate").addEventListener("click",()=>{
   const places=names.filter(n=>nights[n]>0),people=Number($("htpTravellers").value)||1,v=selectedVehicle(),days=tripDays();
   const stay=Number($("htpCalculate").dataset.stay),cab=Number($("htpCalculate").dataset.cab);
-  if(!places.length||!days||!v||!cab){$("htpStatus").textContent="Select a destination, valid travel dates, number of travellers and a vehicle to calculate your complete trip estimate.";return}
-  const lines=["Hello Himalayan Odyssey Expedition! Please prepare my trip quotation.","Destinations: "+places.map(n=>n+" ("+nights[n]+" nights)").join(", "),"Dates: "+$("htpStart").value+" to "+$("htpEnd").value,"Duration: "+days+" days; selected stay: "+totalNights()+" nights","Travellers: "+people,"Stay estimate: "+money(stay),"Vehicle: "+(v?v.title+" × "+Math.ceil(people/Math.max(1,Number(v.capacity)||1)):"Please suggest a suitable vehicle"),"Vehicle rental days: "+(v?vehicleDays:"Not selected"),"Daily vehicle rate: "+(v?money(v.price):"Please quote"),"Cab estimate: "+(v&&cab?money(cab):"Please quote"),"Estimated total: "+money(stay+cab),"Estimated per person: "+money((stay+cab)/people),"Please confirm availability, route feasibility and final inclusions."];
+  if(!places.length||!days||(v&&vehicleDays>0&&!cab)){$("htpStatus").textContent="Select a destination and valid travel dates to prepare your trip estimate.";return}
+  const lines=["Hello Himalayan Odyssey Expedition! Please prepare my trip quotation.","Destinations: "+places.map(n=>n+" ("+nights[n]+" nights)").join(", "),"Dates: "+$("htpStart").value+" to "+$("htpEnd").value,"Duration: "+days+" days; selected stay: "+totalNights()+" nights","Travellers: "+people,"Stay estimate: "+money(stay),"Vehicle: "+(v&&vehicleDays>0?v.title+" × "+Math.ceil(people/Math.max(1,Number(v.capacity)||1)):"Not included (0 days)"),"Vehicle rental days: "+(v?vehicleDays:0),"Daily vehicle rate: "+(v&&vehicleDays>0?money(v.price):"Not applicable"),"Cab estimate: "+money(cab),"Estimated total: "+money(stay+cab),"Estimated per person: "+money((stay+cab)/people),"Please confirm availability, route feasibility and final inclusions."];
   const url="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(lines.join("\n"));
   const w=window.open(url,"_blank");if(!w)window.location.href=url;
   $("htpStatus").textContent="Trip estimate prepared. Confirm final cab and stay rates with our team.";
