@@ -11,69 +11,14 @@
   html,body{max-width:100%;overflow-x:hidden}
   body{background:var(--mobile-paper);-webkit-text-size-adjust:100%}
   img,svg{max-width:100%}
-
-  /* Header: logo, one-line navigation, then the primary action */
-  header{
-    position:sticky!important;top:0!important;z-index:1000!important;
-    background:rgba(16,36,59,.97)!important;
-    border-bottom:1px solid rgba(169,216,242,.48)!important;
-    box-shadow:0 8px 24px rgba(0,0,0,.16)!important;
-    -webkit-backdrop-filter:blur(20px)!important;backdrop-filter:blur(20px)!important;
-  }
-  .header-inner{
-    width:100%!important;min-height:0!important;
-    display:flex!important;flex-direction:column!important;align-items:center!important;
-    justify-content:center!important;gap:5px!important;
-    padding:7px 12px 10px!important;
-  }
   .brand{margin:0 auto!important;padding:3px 10px!important}
   .brand img{width:auto!important;max-width:190px!important;max-height:43px!important}
-  .glass-nav{
-    order:2!important;display:flex!important;align-items:center!important;
-    justify-content:space-between!important;gap:clamp(5px,2vw,12px)!important;
-    width:100%!important;max-width:560px!important;margin:0!important;
-    padding:2px 3px!important;overflow-x:auto!important;overflow-y:visible!important;
-    scrollbar-width:none!important;background:transparent!important;border:0!important;
-    border-radius:0!important;box-shadow:none!important;
-  }
-  .glass-nav::-webkit-scrollbar{display:none!important}
-  .glass-nav>a,.glass-nav .nav-dropdown>.nav-dropdown-toggle{
-    flex:0 0 auto!important;display:inline-flex!important;align-items:center!important;
-    justify-content:center!important;min-width:0!important;min-height:34px!important;
-    width:auto!important;padding:6px 1px 8px!important;
-    color:#f3f8fc!important;background:transparent!important;border:0!important;
-    border-radius:0!important;box-shadow:none!important;
-    font-family:"Tiempos Text",Georgia,serif!important;
-    font-size:clamp(8px,2.25vw,10px)!important;font-weight:500!important;
-    letter-spacing:.015em!important;line-height:1.1!important;text-transform:uppercase!important;
-    white-space:nowrap!important;
-  }
-  .glass-nav>a:after,.glass-nav .nav-dropdown>.nav-dropdown-toggle:after{
-    height:1px!important;background:var(--mobile-gold)!important;
-  }
-  .glass-nav .nav-glass-icon{display:none!important}
-  .glass-nav .nav-dropdown{flex:0 0 auto!important;min-width:0!important}
-  .glass-nav .services-chevron{
-    display:inline-grid!important;place-items:center!important;width:auto!important;height:auto!important;
-    margin-left:3px!important;border:0!important;background:transparent!important;
-    color:#c9e9fa!important;font-size:13px!important;
-  }
   .nav-dropdown-menu{
     top:calc(100% + 8px)!important;right:0!important;left:auto!important;
     min-width:min(245px,calc(100vw - 28px))!important;
     padding:8px!important;border:1px solid rgba(169,216,242,.48)!important;
     border-radius:13px!important;background:rgba(16,36,59,.985)!important;
     box-shadow:0 16px 36px rgba(0,0,0,.3)!important;
-  }
-  .nav-dropdown-menu a{padding:12px!important;font-size:10px!important}
-  .header-cta{
-    order:3!important;display:inline-flex!important;align-items:center!important;
-    justify-content:center!important;min-height:35px!important;
-    margin:0 auto!important;padding:8px 21px!important;
-    border:1px solid rgba(169,216,242,.88)!important;border-radius:999px!important;
-    background:linear-gradient(135deg,#e1f3fc,#a9d8f2)!important;
-    color:#10243d!important;font-size:9px!important;letter-spacing:1.2px!important;
-    box-shadow:0 5px 16px rgba(0,0,0,.16)!important;
   }
 
   /* Hero: same cinematic image, navy overlay, typography and ice-blue accent as desktop */
@@ -218,8 +163,6 @@
 }
 @media(max-width:380px){
   .header-inner{padding-left:8px!important;padding-right:8px!important}
-  .glass-nav{gap:5px!important}
-  .glass-nav>a,.glass-nav .nav-dropdown>.nav-dropdown-toggle{font-size:7.5px!important}
   .brand img{max-width:168px!important}
   .hero-animated-heading{font-size:clamp(36px,10vw,43px)!important}
   .destination-grid{gap:8px!important}
@@ -233,20 +176,6 @@
 
 /* Arctic Prestige mobile shell and primary action. */
 @media(max-width:760px){
-  html body>header,
-  html body>header.is-scrolled,
-  html body>header.is-hidden{
-    background:rgba(16,36,59,.96)!important;
-    border-bottom:1px solid rgba(220,229,238,.24)!important;
-    box-shadow:0 8px 24px rgba(16,36,59,.20)!important;
-    -webkit-backdrop-filter:blur(20px) saturate(150%)!important;
-    backdrop-filter:blur(20px) saturate(150%)!important;
-  }
-  html body>header .header-inner{
-    background:transparent!important;border:0!important;border-radius:0!important;
-    outline:0!important;box-shadow:none!important;
-    -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
-  }
   body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta{
     color:#10243d!important;
     background:linear-gradient(135deg,rgba(232,245,252,.96),rgba(169,216,242,.84))!important;
@@ -262,86 +191,7 @@
     transform:scale(.985)!important;
   }
 }
-
-/* MOBILE HEADER — logo, swipeable single-line navigation, then Plan Your Trip. */
-@media(max-width:760px){
-  html body>header .header-inner{
-    display:flex!important;flex-direction:column!important;align-items:center!important;
-    justify-content:center!important;gap:7px!important;width:100%!important;
-    min-height:0!important;padding:8px 10px!important;
-  }
-  html body>header .header-inner>a.brand{
-    order:0!important;display:flex!important;align-items:center!important;
-    justify-content:center!important;width:max-content!important;max-width:100%!important;
-    margin:0!important;padding:0!important;
-  }
-  html body>header .header-inner>a.brand img{
-    display:block!important;width:auto!important;max-width:min(190px,70vw)!important;
-    max-height:42px!important;object-fit:contain!important;
-  }
-  html body>header .header-inner>nav.glass-nav{
-    order:1!important;display:flex!important;flex-flow:row nowrap!important;
-    align-items:center!important;justify-content:flex-start!important;gap:5px!important;
-    width:100%!important;min-width:0!important;max-width:100%!important;
-    margin:0!important;padding:4px 5px!important;overflow-x:auto!important;
-    overflow-y:hidden!important;scrollbar-width:none!important;
-    border:1px solid rgba(220,229,238,.28)!important;border-radius:999px!important;
-    background:linear-gradient(135deg,rgba(255,255,255,.13),rgba(255,255,255,.045))!important;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 5px 16px rgba(0,0,0,.12)!important;
-    -webkit-backdrop-filter:blur(18px) saturate(155%)!important;
-    backdrop-filter:blur(18px) saturate(155%)!important;
-    -webkit-overflow-scrolling:touch!important;
-  }
-  html body>header .header-inner>nav.glass-nav::-webkit-scrollbar{display:none!important}
-  html body>header .header-inner>nav.glass-nav>a,
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown,
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
-    display:inline-flex!important;flex:0 0 auto!important;align-items:center!important;
-    justify-content:center!important;width:auto!important;min-width:max-content!important;
-    max-width:none!important;min-height:34px!important;padding:0 9px!important;
-    border:1px solid rgba(220,229,238,.24)!important;border-radius:999px!important;
-    background:rgba(255,255,255,.065)!important;color:#f1f7fb!important;
-    font:700 8px/1 "DM Sans",Arial,sans-serif!important;letter-spacing:.25px!important;
-    white-space:nowrap!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.12)!important;
-  }
-  html body>header .header-inner>nav.glass-nav .nav-glass-icon{display:none!important}
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown{flex:0 0 auto!important}
-  html body>header .header-inner>nav.glass-nav .services-chevron{
-    display:inline-grid!important;place-items:center!important;width:12px!important;height:12px!important;
-    margin-left:3px!important;border:0!important;background:transparent!important;
-    color:#c9e9fa!important;font-size:12px!important;
-  }
-  html body>header .header-inner>.header-cta{
-    order:2!important;display:inline-flex!important;visibility:visible!important;opacity:1!important;
-    align-items:center!important;justify-content:center!important;position:static!important;
-    width:auto!important;min-width:0!important;min-height:35px!important;height:auto!important;
-    margin:0!important;padding:7px 20px!important;
-    background:linear-gradient(135deg,#e1f3fc,#a9d8f2)!important;color:#10243d!important;
-    border:1px solid rgba(255,255,255,.78)!important;border-radius:999px!important;
-    font-size:8.5px!important;letter-spacing:.8px!important;white-space:nowrap!important;
-    box-shadow:0 7px 18px rgba(16,36,59,.18)!important;
-  }
-  html body>header .nav-dropdown-menu{
-    z-index:1200!important;top:calc(100% + 8px)!important;right:0!important;left:auto!important;
-    background:rgba(16,36,59,.97)!important;border:1px solid rgba(220,229,238,.25)!important;
-  }
-}
 @media(max-width:360px){
-  html body>header .header-inner{
-    grid-template-columns:82px minmax(0,1fr)!important;
-    column-gap:6px!important;
-    padding-left:7px!important;padding-right:7px!important;
-  }
-  html body>header .header-inner>nav.glass-nav{gap:3px!important;padding:3px!important}
-  html body>header .header-inner>nav.glass-nav>a,
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
-    min-height:31px!important;padding:0 7px!important;font-size:7.5px!important;
-  }
-}
-
-/* Keep the mobile header Plan Your Trip action visible below the navigation row. */
-@media(max-width:760px){
-  html body>header .header-inner>.header-cta{display:inline-flex!important}
 }
 
 
@@ -410,18 +260,6 @@
 }
 
 
-/* MOBILE ONLY — bring the hero headline closer to the header. */
-@media screen and (max-width:760px){
-  body>header{margin-bottom:0!important}
-  body>.hero{
-    padding-top:12px!important;
-  }
-  body>.hero>.hero-content>.hero-animated-heading{
-    margin-top:0!important;
-  }
-}
-
-
 /* MOBILE ONLY — show the hero photograph cleanly, without a glass pane or blur. */
 @media screen and (max-width:760px){
   body>.hero,
@@ -437,22 +275,6 @@
     border:0!important;
     background:none!important;
     box-shadow:none!important;
-  }
-}
-
-
-/* MOBILE ONLY — position “The Himalayas are calling” immediately below the header. */
-@media screen and (max-width:760px){
-  body>.hero{
-    padding-top:2px!important;
-  }
-  body>.hero>.hero-content{
-    margin-top:0!important;
-    padding-top:0!important;
-  }
-  body>.hero>.hero-content>.hero-animated-heading{
-    margin-top:0!important;
-    margin-bottom:12px!important;
   }
 }
 
@@ -496,22 +318,6 @@
 }
 
 
-/* MOBILE ONLY — keep the header stationary and visually unchanged during page scrolling. */
-@media screen and (max-width:760px){
-  html body>header,
-  html body>header.is-scrolled,
-  html body>header.is-hidden{
-    position:sticky!important;
-    top:0!important;
-    transform:none!important;
-    opacity:1!important;
-    visibility:visible!important;
-    transition:none!important;
-    animation:none!important;
-  }
-}
-
-
 /* MOBILE ONLY — use equal vertical spacing from “and you must go” to the service icons,
    and from the service icons to the Build Your Trip button. */
 @media screen and (max-width:760px){
@@ -531,132 +337,9 @@
 /* FINAL MOBILE NAV FIX — restore the visible Services label and use the same ice-blue
    colour family as the rotating hero words. The single dropdown arrow sits underneath. */
 @media screen and (max-width:760px){
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
-    display:inline-flex!important;
-    flex-direction:column!important;
-    align-items:center!important;
-    justify-content:center!important;
-    gap:2px!important;
-    min-width:max-content!important;
-    min-height:34px!important;
-    height:auto!important;
-    padding:4px 9px 3px!important;
-    border:1px solid rgba(169,216,242,.72)!important;
-    border-radius:999px!important;
-    background:linear-gradient(100deg,#e1f3fc 0%,#a9d8f2 48%,#c9e9fa 100%)!important;
-    color:#10243d!important;
-    box-shadow:0 0 12px rgba(169,216,242,.2),inset 0 1px 0 rgba(255,255,255,.45)!important;
-  }
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>span:first-of-type{
-    display:block!important;
-    position:static!important;
-    visibility:visible!important;
-    opacity:1!important;
-    flex:0 0 auto!important;
-    width:auto!important;
-    min-width:max-content!important;
-    height:auto!important;
-    max-height:none!important;
-    margin:0!important;
-    padding:0!important;
-    overflow:visible!important;
-    font-family:"General Sans",Arial,sans-serif!important;
-    font-size:calc(clamp(6.5px,1.85vw,8px) - 2px)!important;
-    font-weight:700!important;
-    line-height:1.2!important;
-    letter-spacing:.25px!important;
-    text-align:center!important;
-    text-indent:0!important;
-    text-transform:uppercase!important;
-    white-space:nowrap!important;
-    color:#10243d!important;
-    -webkit-text-fill-color:#10243d!important;
-  }
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>.nav-glass-icon,
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle>.services-chevron{
-    display:none!important;
-  }
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:before{
-    content:none!important;
-    display:none!important;
-  }
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:after{
-    content:"⌄"!important;
-    display:block!important;
-    position:static!important;
-    flex:0 0 auto!important;
-    width:auto!important;
-    height:auto!important;
-    margin:0!important;
-    padding:0!important;
-    border:0!important;
-    background:none!important;
-    font-family:Arial,sans-serif!important;
-    font-size:9px!important;
-    font-weight:700!important;
-    line-height:8px!important;
-    color:#10243d!important;
-    -webkit-text-fill-color:#10243d!important;
-    opacity:1!important;
-    transform:none!important;
-  }
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle:after{
-    transform:rotate(180deg)!important;
-  }
 }
 
 
 /* MOBILE ONLY — match the Services dropdown panel to the ice-blue Services button. */
 @media screen and (max-width:760px){
-  html body>header .nav-dropdown-menu,
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu{
-    background:linear-gradient(100deg,#e1f3fc 0%,#a9d8f2 48%,#c9e9fa 100%)!important;
-    border:1px solid rgba(169,216,242,.78)!important;
-    border-radius:14px!important;
-    box-shadow:0 10px 28px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.45)!important;
-    -webkit-backdrop-filter:none!important;
-    backdrop-filter:none!important;
-  }
-  html body>header .nav-dropdown-menu a,
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu a{
-    color:#10243d!important;
-    -webkit-text-fill-color:#10243d!important;
-    border-bottom:1px solid rgba(16,36,59,.12)!important;
-  }
-  html body>header .nav-dropdown-menu a:last-child{
-    border-bottom:0!important;
-  }
-  html body>header .nav-dropdown-menu a:hover,
-  html body>header .nav-dropdown-menu a:focus-visible{
-    background:rgba(255,255,255,.35)!important;
-    color:#10243d!important;
-  }
-}
-
-
-/* MOBILE ONLY — force every header shell layer fully transparent, including decorative overlays. */
-@media screen and (max-width:760px){
-  html body>header,
-  html body>header.is-scrolled,
-  html body>header.is-hidden,
-  html body>header .header-inner{
-    background:transparent!important;
-    background-color:transparent!important;
-    background-image:none!important;
-    border-color:transparent!important;
-    box-shadow:none!important;
-    -webkit-backdrop-filter:none!important;
-    backdrop-filter:none!important;
-  }
-  html body>header::before,
-  html body>header::after,
-  html body>header .header-inner::before,
-  html body>header .header-inner::after{
-    content:none!important;
-    display:none!important;
-    background:transparent!important;
-    box-shadow:none!important;
-    -webkit-backdrop-filter:none!important;
-    backdrop-filter:none!important;
-  }
 }

@@ -10,21 +10,6 @@
 html{background:var(--hoe-bg)!important;scroll-behavior:smooth;scroll-padding-top:110px}
 body{margin:0!important;background:var(--hoe-bg)!important;color:var(--hoe-ink)!important;font-family:"DM Sans",Arial,sans-serif!important;overflow-x:hidden}
 body::selection{background:var(--hoe-gold);color:var(--hoe-deep)}
-/* Header */
-body>header{position:sticky!important;inset:0 0 auto!important;z-index:1000!important;background:rgba(16,36,59,.94)!important;border:0!important;border-bottom:1px solid rgba(169,216,242,.35)!important;box-shadow:0 10px 32px rgba(0,0,0,.16)!important;backdrop-filter:blur(22px) saturate(150%)!important;-webkit-backdrop-filter:blur(22px) saturate(150%)!important}
-header .header-inner{width:min(1480px,100%)!important;min-height:88px!important;margin:auto!important;padding:10px clamp(16px,4vw,60px)!important;display:grid!important;grid-template-columns:minmax(150px,210px) 1fr!important;grid-template-rows:1fr!important;align-items:center!important;gap:22px!important;box-sizing:border-box!important}
-header .header-inner>.brand{padding:0!important;border:0!important;background:none!important;box-shadow:none!important;justify-self:start!important}
-header .header-inner>.brand img{display:block;width:clamp(130px,14vw,184px)!important;max-height:66px!important;object-fit:contain!important;filter:drop-shadow(0 3px 10px rgba(0,0,0,.25))!important;animation:none!important}
-header .header-inner>.header-tagline{display:none!important}
-header .header-inner>nav.glass-nav{justify-self:end!important;display:flex!important;flex-flow:row nowrap!important;align-items:center!important;justify-content:center!important;gap:7px!important;width:max-content!important;max-width:100%!important;min-width:0!important;padding:6px!important;border:1px solid rgba(220,238,250,.25)!important;border-radius:999px!important;background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.045))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 8px 24px rgba(0,0,0,.13)!important;backdrop-filter:blur(22px) saturate(155%)!important;-webkit-backdrop-filter:blur(22px) saturate(155%)!important;overflow:visible!important}
-header .header-inner>nav.glass-nav>a,header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;min-height:42px!important;padding:9px 15px!important;border:1px solid rgba(255,255,255,.20)!important;border-radius:999px!important;background:rgba(255,255,255,.075)!important;color:#fff!important;font:700 10px/1 "DM Sans",Arial,sans-serif!important;letter-spacing:1.05px!important;text-transform:uppercase!important;white-space:nowrap!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.15)!important}
-header .header-inner>nav.glass-nav>a:hover,header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:hover,header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle{background:rgba(169,216,242,.18)!important;border-color:rgba(220,238,250,.65)!important;color:var(--hoe-champagne)!important;transform:translateY(-1px)!important}
-header .nav-glass-icon{width:16px!important;height:16px!important;stroke:var(--hoe-champagne)!important;stroke-width:1.7!important;fill:none!important}
-header .services-chevron{position:absolute!important;right:-12px!important;top:50%!important;transform:translateY(-50%)!important;color:var(--hoe-champagne)!important;font-size:16px!important}
-header .nav-dropdown{position:relative!important}
-header .nav-dropdown-menu{z-index:1200!important;background:rgba(16,36,59,.97)!important;border:1px solid rgba(169,216,242,.4)!important;border-radius:16px!important;box-shadow:0 18px 45px rgba(0,0,0,.25)!important;backdrop-filter:blur(18px)!important}
-header .nav-dropdown-menu a{color:#f7f2e8!important}
-header .nav-dropdown-menu a:hover{background:rgba(169,216,242,.15)!important;color:var(--hoe-champagne)!important}
 /* Hero: full-bleed cinematic opening */
 .hero{position:relative!important;isolation:isolate!important;min-height:clamp(590px,76vh,820px)!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:100px 24px 90px!important;box-sizing:border-box!important;background-color:var(--hoe-deep)!important;background-image:linear-gradient(180deg,rgba(16,36,59,.44),rgba(16,36,59,.34) 42%,rgba(16,36,59,.83)),url('/spiti.jpg')!important;background-size:cover!important;background-position:center 48%!important}
 .hero:before{content:""!important;position:absolute!important;inset:0!important;z-index:-1!important;background:radial-gradient(ellipse at 50% 42%,rgba(16,36,59,.04),rgba(16,36,59,.36) 76%)!important;pointer-events:none!important}
@@ -107,12 +92,6 @@ footer a{color:#dceefa!important}
 a:focus-visible,button:focus-visible{outline:2px solid var(--hoe-gold)!important;outline-offset:3px!important}
 /* Responsive layout */
 @media(max-width:900px){
- header .header-inner{grid-template-columns:1fr!important;grid-template-rows:auto auto!important;gap:8px!important;padding:8px 12px 10px!important}
- header .header-inner>.brand{justify-self:center!important}
- header .header-inner>.brand img{width:130px!important;max-height:48px!important}
- header .header-inner>nav.glass-nav{justify-self:center!important;width:100%!important;max-width:560px!important;gap:4px!important;padding:4px!important}
- header .header-inner>nav.glass-nav>a,header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{min-height:37px!important;padding:7px 10px!important;gap:5px!important;font-size:9px!important;letter-spacing:.45px!important}
- header .nav-glass-icon{width:14px!important;height:14px!important}
  .hero{min-height:650px!important;padding:76px 18px 76px!important;background-position:center!important}
  .hero .hero-animated-heading{font-size:clamp(30px,6vw,52px)!important}
  .content{padding:62px 20px!important}
@@ -120,13 +99,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--hoe-gold)!important
 }
 @media(max-width:600px){
  html{scroll-padding-top:112px}
- header .header-inner{gap:7px!important;padding:7px 8px 9px!important}
- header .header-inner>.brand img{width:118px!important;max-height:43px!important}
- header .header-inner>nav.glass-nav{gap:3px!important;padding:4px!important;border-radius:18px!important;width:100%!important}
- header .header-inner>nav.glass-nav>a,header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{flex:1 1 0!important;min-width:0!important;min-height:36px!important;padding:6px 4px!important;gap:4px!important;font-size:7.5px!important;letter-spacing:.15px!important;white-space:nowrap!important;border-radius:12px!important}
- header .header-inner>nav.glass-nav .nav-glass-icon{width:12px!important;height:12px!important;flex-basis:12px!important}
- header .nav-dropdown{display:flex!important;align-items:center!important}
- header .services-chevron{right:-7px!important;font-size:12px!important}
  .hero{min-height:590px!important;padding:54px 16px 68px!important}
  .hero .hero-animated-heading{font-size:clamp(20px,5.6vw,28px)!important;line-height:1.2!important;white-space:nowrap!important;letter-spacing:-.035em!important;margin-bottom:24px!important}
  .hero-service-icons{gap:10px!important;margin-bottom:22px!important}
@@ -189,26 +161,7 @@ body{
 }
 a,button{ -webkit-tap-highlight-color:transparent }
 ::selection{background:#a9d8f2;color:#10243b}
-
-/* Clean floating glass header */
-header{
-  position:sticky!important;top:0!important;z-index:1000!important;
-  background:rgba(250,251,247,.86)!important;
-  border-bottom:1px solid rgba(16,36,59,.09)!important;
-  box-shadow:0 8px 30px rgba(16,36,59,.045)!important;
-  -webkit-backdrop-filter:blur(22px) saturate(1.35)!important;
-  backdrop-filter:blur(22px) saturate(1.35)!important;
-}
-.header-inner{
-  max-width:1440px!important;min-height:82px!important;
-  padding:10px clamp(18px,4vw,58px)!important;
-  display:flex!important;align-items:center!important;gap:clamp(16px,2.4vw,34px)!important;
-}
 .brand img{width:auto!important;max-height:58px!important;object-fit:contain}
-.header-tagline{
-  color:#66786d!important;font-size:9px!important;font-weight:750!important;
-  letter-spacing:2px!important;line-height:1.5!important;
-}
 .glass-nav{
   margin-left:auto!important;gap:5px!important;padding:6px!important;
   border:1px solid rgba(16,36,59,.10)!important;border-radius:999px!important;
@@ -216,30 +169,8 @@ header{
   box-shadow:inset 0 1px 0 #fff,0 6px 20px rgba(16,36,59,.055)!important;
   -webkit-backdrop-filter:blur(18px)!important;backdrop-filter:blur(18px)!important;
 }
-.glass-nav>a,.glass-nav .nav-dropdown-toggle{
-  min-height:42px!important;padding:0 15px!important;border:0!important;
-  border-radius:999px!important;background:transparent!important;
-  color:#10243b!important;font-size:10px!important;font-weight:800!important;
-  letter-spacing:.7px!important;text-transform:uppercase!important;
-  transition:background .25s ease,color .25s ease,transform .25s ease!important;
-}
-.glass-nav>a:hover,.glass-nav .nav-dropdown-toggle:hover,
-.glass-nav>a:focus-visible,.glass-nav .nav-dropdown-toggle:focus-visible{
-  background:#eaf3df!important;color:#10243b!important;transform:translateY(-1px)
-}
 .nav-glass-icon{width:15px!important;height:15px!important;stroke:#244a66!important}
 .services-chevron{color:#244a66!important;margin-left:2px!important}
-.nav-dropdown-menu{
-  border:1px solid rgba(16,36,59,.12)!important;border-radius:18px!important;
-  padding:9px!important;background:rgba(251,252,248,.97)!important;
-  box-shadow:0 20px 55px rgba(16,36,59,.16)!important;
-  -webkit-backdrop-filter:blur(20px)!important;backdrop-filter:blur(20px)!important;
-}
-.nav-dropdown-menu a{
-  border-radius:11px!important;padding:12px 14px!important;color:#10243b!important;
-  font-size:12px!important;transition:background .2s ease!important;
-}
-.nav-dropdown-menu a:hover{background:#edf4e6!important}
 
 /* Immersive hero, with a clear editorial headline */
 .hero{
@@ -418,18 +349,11 @@ button:focus-visible,a:focus-visible{outline:3px solid #a9d8f2!important;outline
   .header-inner{min-height:76px!important;flex-wrap:wrap!important;justify-content:center!important;gap:6px!important;padding:8px 14px 11px!important}
   .brand{margin:0 auto!important;display:flex!important;justify-content:center!important}
   .brand img{max-height:48px!important}
-  .header-tagline{display:none!important}
   .glass-nav{
     order:3!important;width:100%!important;margin:0!important;
     display:flex!important;justify-content:space-between!important;gap:2px!important;
     overflow:visible!important;padding:4px!important;
   }
-  .glass-nav>a,.glass-nav .nav-dropdown-toggle{
-    min-width:0!important;flex:1 1 0!important;justify-content:center!important;
-    padding:0 6px!important;min-height:39px!important;font-size:9px!important;
-    letter-spacing:.25px!important;white-space:nowrap!important;
-  }
-  .glass-nav>a .nav-glass-icon,.glass-nav .nav-dropdown-toggle .nav-glass-icon{width:13px!important;height:13px!important}
   .hero{min-height:690px!important;padding:74px 24px 78px!important;background-position:58% center!important}
   .hero-content{max-width:700px!important}
   .hero-animated-heading{font-size:clamp(44px,9vw,72px)!important;line-height:1.02!important}
@@ -440,16 +364,8 @@ button:focus-visible,a:focus-visible{outline:3px solid #a9d8f2!important;outline
 @media(max-width:600px){
   .header-inner{padding:7px 10px 10px!important;gap:5px!important}
   .brand img{max-height:43px!important}
-  .glass-nav{border-radius:17px!important;padding:4px!important}
-  .glass-nav>a,.glass-nav .nav-dropdown-toggle{
-    min-height:37px!important;padding:0 3px!important;font-size:8px!important;
-    letter-spacing:0!important;gap:3px!important;
-  }
-  .glass-nav>a .nav-glass-icon,.glass-nav .nav-dropdown-toggle .nav-glass-icon{display:none!important}
   .nav-dropdown{display:flex!important;align-items:center!important;flex:1 1 0!important;min-width:0!important}
-  .nav-dropdown-toggle{flex:1 1 auto!important}
   .services-chevron{font-size:14px!important;margin-left:0!important}
-  .nav-dropdown-menu{right:0!important;left:auto!important;min-width:220px!important}
   .hero{
     min-height:690px!important;padding:64px 18px 72px!important;
     background-image:linear-gradient(0deg,rgba(16,36,59,.78),rgba(16,36,59,.38)),url('/spiti.jpg')!important;
@@ -578,35 +494,9 @@ body > .hero .hero-note{
 .hero-service-icon:nth-child(1){
   animation:odysseyFloat 5s ease-in-out 0s infinite;
 }
-
-
-/* ODYSSEY wordmark: span the same visual width as the original logo artwork. */
-header .header-inner > a.brand .brand-wordmark{
-  display:block!important;
-  width:clamp(130px,14vw,184px)!important;
-  box-sizing:border-box!important;
-  white-space:nowrap!important;
-  text-align:center!important;
-  font-size:13px!important;
-  letter-spacing:5px!important;
-  text-indent:5px!important;
-  line-height:1.1!important;
-}
 @media(max-width:900px){
-  header .header-inner > a.brand .brand-wordmark{
-    width:130px!important;
-    font-size:12px!important;
-    letter-spacing:4.5px!important;
-    text-indent:4.5px!important;
-  }
 }
 @media(max-width:600px){
-  header .header-inner > a.brand .brand-wordmark{
-    width:118px!important;
-    font-size:11px!important;
-    letter-spacing:4px!important;
-    text-indent:4px!important;
-  }
 }
 
 
@@ -764,47 +654,6 @@ body > .hero::before,
 
 /* DESKTOP CTA COLOUR SYSTEM — replace champagne/gold button fills with the hero neon-lime. */
 @media(min-width:761px){
-  html body>header .header-inner>.header-cta,
-  html body>header.is-scrolled .header-inner>.header-cta,
-  html body>header .header-inner>nav.glass-nav>a:first-child,
-  html body .footer-package,
-  html body .enquiry-dropdown>summary,
-  html body .hero .hero-build-cta,
-  html body .btn,
-  html body a.btn,
-  html body button.btn{
-    background:linear-gradient(110deg,#a9d8f2 0%,#a9d8f2 48%,#a9d8f2 100%)!important;
-    color:#10243b!important;
-    border-color:rgba(169,216,242,.9)!important;
-    box-shadow:0 8px 24px rgba(0,0,0,.14),0 0 16px rgba(169,216,242,.13),inset 0 1px 0 rgba(255,255,255,.58)!important;
-  }
-  html body>header .header-inner>.header-cta:hover,
-  html body>header.is-scrolled .header-inner>.header-cta:hover,
-  html body>header .header-inner>nav.glass-nav>a:first-child:hover,
-  html body .footer-package:hover,
-  html body .enquiry-dropdown>summary:hover,
-  html body .btn:hover,
-  html body a.btn:hover,
-  html body button.btn:hover{
-    background:linear-gradient(110deg,#f2ffd9 0%,#a9d8f2 48%,#a9d8f2 100%)!important;
-    color:#10243b!important;
-    border-color:#efffd7!important;
-    box-shadow:0 13px 30px rgba(0,0,0,.18),0 0 24px rgba(169,216,242,.24),inset 0 1px 0 rgba(255,255,255,.7)!important;
-  }
-}
-
-
-/* DESKTOP HEADER — return to normal document flow; do not stick or follow page scroll. */
-@media(min-width:761px){
-  html body>header{
-    position:static!important;
-    top:auto!important;
-    right:auto!important;
-    bottom:auto!important;
-    left:auto!important;
-    inset:auto!important;
-    transform:none!important;
-  }
 }
 
 
@@ -839,63 +688,6 @@ body > .hero::before,
 }
 
 
-/* DESKTOP HEADER GREEN FROSTED GLASS — unify the header shell, navigation
-   pills and Plan Your Trip CTA in translucent forest-green glass, not solid lime. */
-@media(min-width:761px){
-  html body>header .header-inner{
-    background:linear-gradient(135deg,rgba(16,36,59,.34),rgba(16,36,59,.22) 52%,rgba(36,74,102,.30))!important;
-    border:1px solid rgba(169,216,242,.22)!important;
-    border-radius:30px!important;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 14px 38px rgba(0,0,0,.16)!important;
-    -webkit-backdrop-filter:blur(28px) saturate(165%)!important;
-    backdrop-filter:blur(28px) saturate(165%)!important;
-  }
-  html body>header .header-inner>nav.glass-nav{
-    background:linear-gradient(135deg,rgba(36,74,102,.48),rgba(16,36,59,.38) 58%,rgba(36,74,102,.32))!important;
-    border-color:rgba(169,216,242,.30)!important;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.17),0 8px 24px rgba(0,0,0,.14)!important;
-    -webkit-backdrop-filter:blur(24px) saturate(170%)!important;
-    backdrop-filter:blur(24px) saturate(170%)!important;
-  }
-  html body>header .header-inner>nav.glass-nav>a,
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle,
-  html body>header .header-inner>nav.glass-nav>a:first-child{
-    color:rgba(244,255,239,.96)!important;
-    background:linear-gradient(135deg,rgba(169,216,242,.15),rgba(36,74,102,.19))!important;
-    border:1px solid rgba(169,216,242,.18)!important;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.13),0 3px 12px rgba(0,0,0,.08)!important;
-    -webkit-backdrop-filter:blur(14px) saturate(155%)!important;
-    backdrop-filter:blur(14px) saturate(155%)!important;
-  }
-  html body>header .header-inner>nav.glass-nav>a:hover,
-  html body>header .header-inner>nav.glass-nav>a:focus-visible,
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:hover,
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle,
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:focus-visible{
-    color:#a9d8f2!important;
-    background:linear-gradient(135deg,rgba(169,216,242,.25),rgba(36,74,102,.28))!important;
-    border-color:rgba(169,216,242,.48)!important;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 0 18px rgba(169,216,242,.10)!important;
-  }
-  html body>header .header-inner>.header-cta,
-  html body>header.is-scrolled .header-inner>.header-cta{
-    color:#efffe8!important;
-    background:linear-gradient(135deg,rgba(169,216,242,.23),rgba(36,74,102,.34) 55%,rgba(16,36,59,.40))!important;
-    border:1px solid rgba(169,216,242,.48)!important;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.24),inset 0 -1px 0 rgba(255,255,255,.06),0 8px 24px rgba(0,0,0,.17),0 0 18px rgba(169,216,242,.09)!important;
-    -webkit-backdrop-filter:blur(22px) saturate(175%)!important;
-    backdrop-filter:blur(22px) saturate(175%)!important;
-  }
-  html body>header .header-inner>.header-cta:hover,
-  html body>header .header-inner>.header-cta:focus-visible{
-    color:#f5ffe9!important;
-    background:linear-gradient(135deg,rgba(169,216,242,.32),rgba(36,74,102,.42) 55%,rgba(36,74,102,.48))!important;
-    border-color:rgba(169,216,242,.72)!important;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 12px 30px rgba(0,0,0,.2),0 0 24px rgba(169,216,242,.16)!important;
-  }
-}
-
-
 /* DESKTOP HERO TAGLINE — tighten the gap beneath the animated headline. */
 @media(min-width:761px){
   .hero > .hero-content > h1.hero-animated-heading{
@@ -903,21 +695,6 @@ body > .hero::before,
   }
   .hero > .hero-content > .hero-go-line{
     margin-top:-7px!important;
-  }
-}
-
-
-/* DESKTOP HEADER GLASS BACKGROUND — remove the curved frame and visible outline.
-   Keep only the translucent forest-green frosted-glass surface. */
-@media(min-width:761px){
-  html body>header .header-inner{
-    border:0!important;
-    border-radius:0!important;
-    outline:0!important;
-    box-shadow:none!important;
-    background:linear-gradient(135deg,rgba(16,36,59,.42),rgba(16,36,59,.30) 52%,rgba(36,74,102,.38))!important;
-    -webkit-backdrop-filter:blur(28px) saturate(165%)!important;
-    backdrop-filter:blur(28px) saturate(165%)!important;
   }
 }
 
@@ -967,121 +744,6 @@ body > .hero::before,
     box-shadow:inset 0 2px 5px rgba(0,0,0,.16),0 5px 16px rgba(0,0,0,.2)!important;
   }
 }
-
-
-/* DESKTOP ULTRA-MINIMAL HEADER GLASS — remove the solid green fill from the
-   header shell only. Navigation buttons, dropdowns, CTA and their styling remain untouched. */
-@media(min-width:761px){
-  html body>header .header-inner{
-    background:rgba(16,36,59,.10)!important;
-    border:0!important;
-    border-radius:0!important;
-    outline:0!important;
-    box-shadow:none!important;
-    -webkit-backdrop-filter:blur(24px) saturate(135%)!important;
-    backdrop-filter:blur(24px) saturate(135%)!important;
-  }
-}
-
-
-/* MOBILE PARITY — carry the latest desktop visual refinements to mobile.
-   Preserve navigation pills, their spacing/typography, and the header Plan Your Trip CTA. */
-@media(max-width:760px){
-  /* Ultra-minimal glass header: remove the opaque forest-green slab while
-     keeping a subtle translucent surface and the existing sticky behaviour. */
-  html body>header{
-    background:rgba(16,36,59,.12)!important;
-    -webkit-backdrop-filter:blur(24px) saturate(135%)!important;
-    backdrop-filter:blur(24px) saturate(135%)!important;
-  }
-  html body>header .header-inner{
-    background:rgba(16,36,59,.10)!important;
-    border:0!important;
-    border-radius:0!important;
-    outline:0!important;
-    box-shadow:none!important;
-    -webkit-backdrop-filter:blur(24px) saturate(135%)!important;
-    backdrop-filter:blur(24px) saturate(135%)!important;
-  }
-
-  /* Keep the original logo artwork; add the same restrained travelling
-     Himalayan highlight without changing its size or position. */
-  html body>header .header-inner>a.brand{
-    position:relative!important;
-    isolation:isolate!important;
-  }
-  html body>header .header-inner>a.brand img{
-    position:relative!important;
-    z-index:1!important;
-  }
-  html body>header .header-inner>a.brand::before{
-    content:""!important;
-    position:absolute!important;
-    inset:0!important;
-    z-index:3!important;
-    display:block!important;
-    width:auto!important;
-    height:auto!important;
-    border:0!important;
-    border-radius:inherit!important;
-    pointer-events:none!important;
-    opacity:0!important;
-    background:linear-gradient(108deg,
-      transparent 0%,
-      transparent 38%,
-      rgba(234,255,220,.04) 44%,
-      rgba(255,255,244,.68) 49%,
-      rgba(169,216,242,.22) 53%,
-      transparent 61%,
-      transparent 100%)!important;
-    box-shadow:none!important;
-    transform:translateX(-115%) skewX(-12deg)!important;
-    animation:hoe-himalayan-light-sweep-mobile 8.5s ease-in-out infinite!important;
-  }
-  html body>header .header-inner>a.brand::after{
-    content:none!important;
-    display:none!important;
-    animation:none!important;
-  }
-
-  /* Restore the cursive supporting line below the hero heading on mobile,
-     scaled to fit narrow screens without altering the headline itself. */
-  .hero > .hero-content > .hero-go-line{
-    display:block!important;
-    width:100%!important;
-    max-width:100%!important;
-    margin:-10px auto 17px!important;
-    padding:0!important;
-    font-family:"Allura","Brush Script MT",cursive!important;
-    font-size:clamp(31px,8.4vw,43px)!important;
-    font-weight:400!important;
-    line-height:1!important;
-    letter-spacing:.01em!important;
-    text-align:center!important;
-    white-space:nowrap!important;
-    color:rgba(169,216,242,.96)!important;
-    text-shadow:0 2px 14px rgba(0,0,0,.38),0 0 16px rgba(169,216,242,.14)!important;
-    animation:heroGoLineReveal 1.15s .28s cubic-bezier(.2,.75,.25,1) both!important;
-  }
-
-  /* Match the mobile Build Your Trip action to the frosted-glass treatment.
-     The header Plan Your Trip button and navigation controls are untouched. */
-  body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta{
-    cursor:pointer!important;
-    color:#f1ffe9!important;
-    background:linear-gradient(135deg,rgba(169,216,242,.24),rgba(36,74,102,.18) 48%,rgba(16,36,59,.38))!important;
-    border:1px solid rgba(169,216,242,.52)!important;
-    -webkit-backdrop-filter:blur(24px) saturate(180%)!important;
-    backdrop-filter:blur(24px) saturate(180%)!important;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.36),inset 0 -1px 0 rgba(255,255,255,.08),0 8px 22px rgba(0,0,0,.22),0 0 18px rgba(169,216,242,.10)!important;
-    text-shadow:0 1px 8px rgba(0,0,0,.22)!important;
-  }
-  body > .hero > .hero-content > .hero-build-cta-wrap > .hero-build-cta:active{
-    background:linear-gradient(135deg,rgba(169,216,242,.30),rgba(36,74,102,.34) 48%,rgba(16,36,59,.52))!important;
-    box-shadow:inset 0 2px 5px rgba(0,0,0,.16),0 5px 16px rgba(0,0,0,.2)!important;
-    transform:scale(.985)!important;
-  }
-}
 @keyframes hoe-himalayan-light-sweep-mobile{
   0%,62%{opacity:0;transform:translateX(-115%) skewX(-12deg)}
   67%{opacity:.86}
@@ -1089,93 +751,8 @@ body > .hero::before,
   84%,100%{opacity:0;transform:translateX(115%) skewX(-12deg)}
 }
 @media(max-width:760px) and (prefers-reduced-motion:reduce){
-  html body>header .header-inner>a.brand::before,
-  .hero > .hero-content > .hero-go-line{
-    animation:none!important;
-    opacity:1!important;
-  }
-}
-
-
-/* MOBILE HEADER FIX — keep the header pinned at the top while scrolling.
-   Neutralize scroll-hide transforms/states on mobile only; preserve the existing
-   logo, navigation controls, dropdown and CTA dimensions and styling. */
-@media(max-width:760px){
-  html body>header,
-  html body>header.is-scrolled,
-  html body>header.is-hidden{
-    position:-webkit-sticky!important;
-    position:sticky!important;
-    top:0!important;
-    right:auto!important;
-    bottom:auto!important;
-    left:auto!important;
-    inset-block-start:0!important;
-    width:100%!important;
-    z-index:10000!important;
-    transform:none!important;
-    translate:none!important;
-    transition:background-color .25s ease,backdrop-filter .25s ease!important;
-    visibility:visible!important;
-    opacity:1!important;
-    pointer-events:auto!important;
-    will-change:auto!important;
-  }
-  html body>header .header-inner{
-    transform:none!important;
-  }
-}
-
-
-/* FROSTED GREEN HEADER — replace any remaining opaque forest-green header
-   fill with a translucent green glass surface on desktop and mobile.
-   Navigation controls, logo, spacing, dimensions and CTA are not changed. */
-html body>header{
-  background:rgba(36,74,102,.24)!important;
-  border-bottom:1px solid rgba(218,244,224,.16)!important;
-  box-shadow:0 8px 28px rgba(0,0,0,.10)!important;
-  -webkit-backdrop-filter:blur(30px) saturate(160%)!important;
-  backdrop-filter:blur(30px) saturate(160%)!important;
-}
-html body>header .header-inner{
-  background:rgba(36,74,102,.12)!important;
-  border:0!important;
-  box-shadow:none!important;
-  -webkit-backdrop-filter:blur(30px) saturate(160%)!important;
-  backdrop-filter:blur(30px) saturate(160%)!important;
 }
 @media(max-width:760px){
-  html body>header,
-  html body>header.is-scrolled,
-  html body>header.is-hidden{
-    background:rgba(36,74,102,.24)!important;
-  }
-  html body>header .header-inner{
-    background:rgba(36,74,102,.12)!important;
-  }
-}
-
-
-/* DESKTOP ONLY — Apple-style glass across the full logo/navigation header,
-   ending at the fine champagne-gold baseline. Mobile header styling is unchanged. */
-@media(min-width:761px){
-html body>header,
-html body>header.is-scrolled,
-html body>header.is-hidden{
-  background:linear-gradient(135deg,rgba(236,255,239,.19) 0%,rgba(36,74,102,.17) 38%,rgba(16,36,59,.27) 100%)!important;
-  border-bottom:1px solid rgba(169,216,242,.78)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(255,255,255,.07),0 9px 30px rgba(0,0,0,.13)!important;
-  -webkit-backdrop-filter:blur(34px) saturate(185%)!important;
-  backdrop-filter:blur(34px) saturate(185%)!important;
-}
-html body>header .header-inner{
-  background:linear-gradient(120deg,rgba(255,255,255,.075),rgba(255,255,255,.018))!important;
-  border:0!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.12)!important;
-  -webkit-backdrop-filter:blur(28px) saturate(175%)!important;
-  backdrop-filter:blur(28px) saturate(175%)!important;
-}
-
 }
 
 

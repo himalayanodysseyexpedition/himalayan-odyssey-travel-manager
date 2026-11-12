@@ -43,53 +43,11 @@ body :is(h1,h2,h3,h4,.section-title h2,.destination-info h3,.package-slide h3,.g
 }
 ::selection{background:var(--arctic-ice)!important;color:var(--arctic-navy)!important}
 :focus-visible{outline:3px solid var(--arctic-ice)!important;outline-offset:4px}
-
-/* Navigation: deep-blue glass, cool silver outlines. Original logo image is untouched. */
-header{
-  background:rgba(9,21,34,.92)!important;
-  border-bottom:1px solid rgba(220,229,238,.28)!important;
-  box-shadow:0 10px 34px rgba(4,13,24,.22)!important;
-  -webkit-backdrop-filter:blur(22px) saturate(145%)!important;
-  backdrop-filter:blur(22px) saturate(145%)!important;
-}
-header .brand,header .brand:hover{filter:none!important}
-header .brand:before{
-  border-color:rgba(220,238,250,.30)!important;
-  background:linear-gradient(110deg,transparent 15%,rgba(220,238,250,.15) 48%,transparent 78%)!important;
-}
-header .brand:after{
-  background:radial-gradient(circle at 8% 22%,rgba(220,238,250,.55) 0 1px,transparent 2px),
-             radial-gradient(circle at 91% 76%,rgba(220,238,250,.45) 0 1px,transparent 2px),
-             radial-gradient(ellipse at 50% 50%,rgba(169,216,242,.12),transparent 70%)!important;
-}
-.header-tagline{color:#dceefa!important}
-.glass-nav>a,.nav-dropdown-toggle{
-  color:#f5f8fc!important;
-  border-color:rgba(220,229,238,.25)!important;
-  background:rgba(255,255,255,.065)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.10)!important;
-}
-.glass-nav>a:hover,.nav-dropdown-toggle:hover,.nav-dropdown.open .nav-dropdown-toggle{
-  color:#ffffff!important;
-  border-color:rgba(169,216,242,.82)!important;
-  background:rgba(169,216,242,.16)!important;
-  box-shadow:0 9px 24px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.16)!important;
-}
-.glass-nav .services-chevron,.nav-dropdown-toggle span{color:var(--arctic-ice)!important}
 .nav-dropdown-menu{
   border:1px solid rgba(220,229,238,.24)!important;
   background:rgba(9,21,34,.97)!important;
   box-shadow:0 22px 55px rgba(0,0,0,.34)!important;
 }
-.nav-dropdown-menu a{color:#f3f7fb!important}
-.nav-dropdown-menu a:hover{background:rgba(169,216,242,.14)!important;color:#fff!important}
-.header-cta{
-  color:var(--arctic-navy)!important;
-  background:linear-gradient(135deg,#dff2fc,#a9d8f2)!important;
-  border:1px solid rgba(255,255,255,.58)!important;
-  box-shadow:0 8px 24px rgba(5,18,31,.22),inset 0 1px 0 rgba(255,255,255,.8)!important;
-}
-.header-cta:hover{background:#ffffff!important;color:var(--arctic-navy)!important}
 
 /* Cinematic hero: retain the existing mountain image, copy and interactive word rotation. */
 .hero{
@@ -122,15 +80,6 @@ header .brand:after{
 .hero .hero-note span:before{background:var(--arctic-ice)!important;box-shadow:0 0 8px rgba(169,216,242,.4)!important}
 .hero .hero-destination-list{color:rgba(245,249,253,.88)!important}
 .hero .hero-destination-list i{color:var(--arctic-ice)!important}
-
-/* Unified ice-blue action language; do not alter link destinations or click behaviour. */
-body :is(.btn,.button,.submit-btn,.hero-build-cta,.group-departure-cta,.header-cta){
-  background:linear-gradient(135deg,#e1f3fc,#a9d8f2)!important;
-  color:#10243d!important;
-  border:1px solid rgba(255,255,255,.68)!important;
-  box-shadow:0 9px 24px rgba(16,36,61,.14),inset 0 1px 0 rgba(255,255,255,.82)!important;
-  font-weight:800!important;
-}
 body :is(.btn,.button,.submit-btn,.hero-build-cta,.group-departure-cta):hover{
   background:#ffffff!important;color:#10243d!important;
   box-shadow:0 14px 30px rgba(16,36,61,.18),inset 0 1px 0 #ffffff!important;
@@ -255,9 +204,6 @@ body :is(.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card,.service,.p
 body :is(.section-title small,.eyebrow,.tag,.kicker){color:#527f9d!important}
 body :is(.section-title h2,.page-heading h1,.content h2):after{background:linear-gradient(90deg,#244b68,#c8e2f1)!important}
 body :is(.intro,.description,.muted,.card p){color:#63798e!important}
-body :is(.site-topbar,header,.top){background:rgba(13,31,51,.97)!important;border-bottom-color:rgba(210,235,248,.2)!important}
-body :is(.site-nav .site-nav-link,.glass-nav>a,.glass-nav .nav-dropdown-toggle){color:#f2f8fc!important}
-body :is(.site-nav .site-nav-link:hover,.glass-nav>a:hover,.glass-nav .nav-dropdown-toggle:hover){border-color:#c8e2f1!important}
 body :is(.related-guides,.related-links,.notice){background:#eaf2f7!important;border-color:#c8e2f1!important;color:#244b68!important}
 body :is(.related-guides a,.related-links a){color:#244b68!important}
 body :is(.btn,.button,.submit-btn,.primary){border:0!important;border-radius:999px!important;background:linear-gradient(120deg,#e4f2f8,#b9dced)!important;color:#142c46!important;box-shadow:none!important;font-weight:800!important}
