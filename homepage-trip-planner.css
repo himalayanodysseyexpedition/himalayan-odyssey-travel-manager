@@ -1,0 +1,49 @@
+
+/* Homepage inline trip planner — isolated Arctic Prestige mobile-first component */
+.home-trip-planner{padding:clamp(28px,5vw,64px) 0;background:linear-gradient(180deg,#f3f8fc,#eaf2f8);color:#142b40}
+.home-trip-planner .htp-inner{width:min(1120px,calc(100% - 28px));margin:auto}
+.home-trip-planner .htp-heading{max-width:720px;margin:0 auto 24px;text-align:center}
+.home-trip-planner .htp-eyebrow{color:#527a98;font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
+.home-trip-planner h2,.home-trip-planner h3{font-family:"Bodoni Moda","Cormorant Garamond",serif;color:#10243b}
+.home-trip-planner h2{font-size:clamp(32px,5vw,48px);line-height:1.05;margin:8px 0}
+.home-trip-planner .htp-heading p{color:#61778a;font-size:14px;margin:8px 0}
+.home-trip-planner .htp-shell{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:18px;align-items:start}
+.home-trip-planner .htp-main,.home-trip-planner .htp-summary{background:rgba(255,255,255,.92);border:1px solid #d8e5ef;border-radius:24px;box-shadow:0 16px 44px rgba(16,36,59,.08)}
+.home-trip-planner .htp-main{padding:clamp(16px,3vw,26px)}
+.home-trip-planner .htp-step{margin:0 0 22px}
+.home-trip-planner .htp-step:last-child{margin-bottom:0}
+.home-trip-planner .htp-step-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.home-trip-planner .htp-step-number{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:#e4f0f8;color:#173b58;font-size:12px;font-weight:800}
+.home-trip-planner h3{font-size:23px;margin:0}
+.home-trip-planner .htp-help{color:#71879a;font-size:11px;margin:3px 0 0}
+.home-trip-planner .htp-destinations{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.home-trip-planner .htp-destination{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid #dce7ef;border-radius:15px;padding:11px 10px;background:#fbfdff;min-width:0}
+.home-trip-planner .htp-destination strong{font-size:12px;color:#203c54}
+.home-trip-planner .htp-rate{display:block;color:#71879a;font-size:10px;margin-top:2px}
+.home-trip-planner .htp-stepper{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.home-trip-planner .htp-stepper button{width:30px;height:30px;border:1px solid #c9dbe8;border-radius:10px;background:#fff;color:#183d5b;font-size:18px;line-height:1;cursor:pointer}
+.home-trip-planner .htp-stepper button:disabled{opacity:.35;cursor:not-allowed}
+.home-trip-planner .htp-stepper output{min-width:15px;text-align:center;font-weight:800;font-size:13px;color:#10243b}
+.home-trip-planner .htp-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.home-trip-planner label{display:block;color:#526b80;font-size:11px;font-weight:700}
+.home-trip-planner input,.home-trip-planner select{width:100%;min-height:47px;margin-top:5px;padding:10px 12px;border:1px solid #d5e2ec;border-radius:12px;background:#fbfdff;color:#18334b;font:inherit;font-size:14px}
+.home-trip-planner .htp-travellers{display:flex;align-items:center;gap:12px}
+.home-trip-planner .htp-travellers select{max-width:180px}
+.home-trip-planner .htp-vehicle-note{font-size:11px;color:#71879a;margin:8px 0 0}
+.home-trip-planner .htp-summary{position:sticky;top:18px;padding:20px}
+.home-trip-planner .htp-summary h3{font-size:27px;margin:0 0 12px}
+.home-trip-planner .htp-summary-row{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #e5edf3;color:#5b7184;font-size:12px}
+.home-trip-planner .htp-summary-row strong{color:#18364f;text-align:right}
+.home-trip-planner .htp-total{padding:16px 0 8px}
+.home-trip-planner .htp-total span{display:block;color:#6b8193;font-size:11px}
+.home-trip-planner .htp-total strong{display:block;color:#10243b;font:700 34px "Bodoni Moda","Cormorant Garamond",serif}
+.home-trip-planner .htp-per-person{font-size:12px;color:#526b80;margin:0 0 14px}
+.home-trip-planner .htp-cta{display:block;width:100%;min-height:50px;padding:13px 16px;border:0;border-radius:14px;background:#173b59;color:#fff;font-size:12px;font-weight:800;letter-spacing:.04em;cursor:pointer}
+.home-trip-planner .htp-cta:disabled{opacity:.5;cursor:not-allowed}
+.home-trip-planner .htp-fine{font-size:10px;line-height:1.5;color:#7a8d9d;margin:12px 0 0}
+.home-trip-planner .htp-status{min-height:18px;color:#526b80;font-size:11px;margin-top:8px}
+.home-trip-planner .htp-no-vehicles{padding:11px;border-radius:12px;background:#f2f6f9;color:#667d90;font-size:11px}
+.home-trip-planner button:focus-visible,.home-trip-planner input:focus-visible,.home-trip-planner select:focus-visible{outline:3px solid #8bc5e3;outline-offset:2px}
+@media(max-width:760px){.home-trip-planner .htp-shell{grid-template-columns:1fr}.home-trip-planner .htp-summary{position:static;order:-1}.home-trip-planner .htp-main{padding:16px}.home-trip-planner .htp-destinations{grid-template-columns:1fr}.home-trip-planner .htp-destination{padding:10px 12px}.home-trip-planner .htp-summary{padding:17px}}
+@media(max-width:380px){.home-trip-planner .htp-fields{grid-template-columns:1fr}.home-trip-planner .htp-travellers{align-items:stretch;flex-direction:column}.home-trip-planner .htp-travellers select{max-width:none}}
+@media(prefers-reduced-motion:reduce){.home-trip-planner *{scroll-behavior:auto!important;transition:none!important}}
