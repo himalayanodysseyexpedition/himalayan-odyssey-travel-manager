@@ -568,3 +568,26 @@
   background:linear-gradient(180deg,#eaf2f9 0%,#f7f9fc 100%)!important;
   background-color:#eaf2f9!important;
 }
+
+
+/* Keep the Prepare WhatsApp Enquiry button solid black. */
+.home-trip-planner .htp-summary #htpCalculate,
+.home-trip-planner .htp-summary #htpCalculate:enabled{
+  background:#000!important;
+  background-color:#000!important;
+  color:#fff!important;
+  border:1px solid #000!important;
+  box-shadow:0 5px 14px rgba(0,0,0,.14)!important;
+}
+.home-trip-planner .htp-summary #htpCalculate:hover:enabled{
+  background:#222!important;
+  background-color:#222!important;
+  border-color:#222!important;
+}
+.home-trip-planner .htp-summary #htpCalculate:disabled{
+  background:#000!important;
+  background-color:#000!important;
+  color:#fff!important;
+  border-color:#000!important;
+  opacity:.55!important;
+}
