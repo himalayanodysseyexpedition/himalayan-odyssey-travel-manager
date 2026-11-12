@@ -23,7 +23,7 @@
   if(current&&!root.querySelector('[data-destination="'+current+'"]'))select.value=current;
  }
  function renderDestinations(){
-  $("htpDestinations").innerHTML=names.filter(n=>Object.prototype.hasOwnProperty.call(nights,n)).map(n=>'<div class="htp-destination" data-destination="'+n+'"><div><strong>'+n+'</strong><span class="htp-rate">'+money(rates[n])+' / person / night</span></div><div class="htp-stepper"><button type="button" data-place="'+n+'" data-delta="-1" aria-label="Remove one night in '+n+'" '+(nights[n]===1?'disabled':'')+'>−</button><output id="htpNight-'+n+'">'+nights[n]+'</output><button type="button" data-place="'+n+'" data-delta="1" aria-label="Add one night in '+n+'">+</button><button type="button" class="htp-remove" data-remove-place="'+n+'" aria-label="Remove '+n+' from trip">×</button></div></div>').join("");
+  $("htpDestinations").innerHTML=names.filter(n=>Object.prototype.hasOwnProperty.call(nights,n)).map(n=>'<div class="htp-destination" data-destination="'+n+'"><div><strong>'+n+'</strong><span class="htp-rate">'+money(rates[n])+' / person / night</span></div><div class="htp-stepper"><button type="button" data-place="'+n+'" data-delta="-1" aria-label="Remove one night in '+n+'" '>−</button><output id="htpNight-'+n+'">'+nights[n]+'</output><button type="button" data-place="'+n+'" data-delta="1" aria-label="Add one night in '+n+'">+</button><button type="button" class="htp-remove" data-remove-place="'+n+'" aria-label="Remove '+n+' from trip">×</button></div></div>').join("");
  }
  $("htpLocationSelect").addEventListener("change",()=>{
   const n=$("htpLocationSelect").value;if(!n)return;
@@ -64,9 +64,9 @@
   const remove=e.target.closest("[data-remove-place]");
   if(remove){delete nights[remove.dataset.removePlace];renderDestinations();renderLocationOptions();calculate();return;}
   const b=e.target.closest("[data-place][data-delta]");if(!b)return;
-  const n=b.dataset.place;nights[n]=Math.max(1,nights[n]+Number(b.dataset.delta));
-  $("htpNight-"+n).textContent=String(nights[n]);
-  root.querySelectorAll('[data-place="'+n+'"]').forEach(x=>{if(x.dataset.delta==="-1")x.disabled=nights[n]===1;});
+  const n=b.dataset.place,delta=Number(b.dataset.delta);
+  if(delta<0&&nights[n]<=1){delete nights[n];renderDestinations();renderLocationOptions();}
+  else{nights[n]=Math.max(1,nights[n]+delta);$("htpNight-"+n).textContent=String(nights[n]);}
   calculate();
  });
  ["htpTravellers","htpVehicle","htpStart","htpEnd"].forEach(id=>$(id).addEventListener("change",calculate));
