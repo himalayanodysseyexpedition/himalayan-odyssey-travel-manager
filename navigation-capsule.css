@@ -4,483 +4,27 @@
   --hoe-nav-ice-light:#dceefa;
   --hoe-nav-forest:rgba(16,36,59,.68);
 }
-header .header-inner>nav.glass-nav{
-  width:max-content!important;
-  max-width:min(100%,900px)!important;
-  min-width:0!important;
-  display:flex!important;
-  flex-wrap:nowrap!important;
-  align-items:center!important;
-  justify-content:center!important;
-  gap:clamp(3px,.55vw,8px)!important;
-  padding:5px!important;
-  border:1px solid rgba(169,216,242,.88)!important;
-  border-radius:999px!important;
-  background:linear-gradient(135deg,rgba(255,255,255,.105),rgba(16,36,59,.48) 52%,rgba(255,255,255,.035))!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 8px 26px rgba(0,0,0,.16),0 0 16px rgba(169,216,242,.07)!important;
-  -webkit-backdrop-filter:blur(25px) saturate(165%)!important;
-  backdrop-filter:blur(25px) saturate(165%)!important;
-  overflow:visible!important;
-}
-header .header-inner>nav.glass-nav>a,
-header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
-  display:inline-flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  min-height:40px!important;
-  padding:0 clamp(13px,1.3vw,21px)!important;
-  border:1px solid transparent!important;
-  border-radius:999px!important;
-  background:transparent!important;
-  color:rgba(241,247,251,.94)!important;
-  font-size:clamp(9px,.72vw,11px)!important;
-  font-weight:650!important;
-  letter-spacing:.045em!important;
-  line-height:1!important;
-  white-space:nowrap!important;
-  text-decoration:none!important;
-  transition:background .32s ease,border-color .32s ease,color .32s ease,box-shadow .32s ease,transform .32s ease!important;
-}
-header .header-inner>nav.glass-nav .nav-glass-icon{display:none!important}
-header .header-inner>nav.glass-nav>a:after{display:none!important}
-header .header-inner>nav.glass-nav>a:first-child{
-  color:#10243d!important;
-  background:linear-gradient(135deg,#e1f3fc 0%,#a9d8f2 100%)!important;
-  border-color:rgba(220,238,250,.76)!important;
-  box-shadow:0 3px 12px rgba(169,216,242,.19),inset 0 1px 0 rgba(255,255,255,.52)!important;
-}
-header .header-inner>nav.glass-nav>a:not(:first-child):hover,
-header .header-inner>nav.glass-nav>a:not(:first-child):focus-visible,
-header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:hover,
-header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle,
-header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:focus-visible{
-  color:var(--hoe-nav-ice-light)!important;
-  background:rgba(169,216,242,.13)!important;
-  border-color:rgba(169,216,242,.38)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 13px rgba(169,216,242,.08)!important;
-  transform:translateY(-1px);
-  outline:none!important;
-}
-header .header-inner>nav.glass-nav>.nav-dropdown{flex:0 0 auto!important;align-items:center!important}
-header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{width:auto!important;cursor:pointer!important}
-header .header-inner>nav.glass-nav .services-chevron{
-  color:var(--hoe-nav-ice-light)!important;
-  margin-left:-10px!important;
-  margin-right:7px!important;
-  font-size:15px!important;
-  transition:transform .3s ease,color .3s ease!important;
-}
-header .header-inner>nav.glass-nav>.nav-dropdown.open .services-chevron{transform:rotate(180deg)!important}
-header .header-inner>.header-cta{
-  display:inline-flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  min-height:44px!important;
-  padding:0 23px!important;
-  border:1px solid #a9d8f2!important;
-  border-radius:999px!important;
-  background:rgba(16,36,59,.34)!important;
-  color:#c9e9fa!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 5px 18px rgba(0,0,0,.12)!important;
-  font-size:11px!important;
-  font-weight:700!important;
-  letter-spacing:.02em!important;
-  white-space:nowrap!important;
-  text-decoration:none!important;
-  transition:background .32s ease,border-color .32s ease,color .32s ease,box-shadow .32s ease,transform .32s ease!important;
-  -webkit-backdrop-filter:blur(16px)!important;
-  backdrop-filter:blur(16px)!important;
-}
-header .header-inner>.header-cta:hover,
-header .header-inner>.header-cta:focus-visible{
-  background:rgba(169,216,242,.13)!important;
-  border-color:#dceefa!important;
-  color:#dceefa!important;
-  box-shadow:0 0 20px rgba(169,216,242,.16),inset 0 1px 0 rgba(255,255,255,.12)!important;
-  transform:translateY(-2px)!important;
-  outline:none!important;
-}
 @media(max-width:1050px){
-  header .header-inner>nav.glass-nav{width:max-content!important;max-width:100%!important}
 }
 @media(max-width:640px){
-  header .header-inner>nav.glass-nav{
-    width:100%!important;max-width:100%!important;min-width:0!important;
-    justify-content:space-between!important;gap:2px!important;padding:3px!important;
-    overflow-x:auto!important;overflow-y:visible!important;scrollbar-width:none!important;
-    -webkit-overflow-scrolling:touch!important;
-  }
-  header .header-inner>nav.glass-nav::-webkit-scrollbar{display:none!important}
-  header .header-inner>nav.glass-nav>a,
-  header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
-    flex:0 0 auto!important;width:auto!important;min-width:0!important;
-    min-height:34px!important;padding:0 clamp(7px,2.1vw,12px)!important;
-    font-size:clamp(7px,2.05vw,9px)!important;letter-spacing:0!important;
-  }
-  header .header-inner>nav.glass-nav>.nav-dropdown{flex:0 0 auto!important}
-  header .header-inner>nav.glass-nav .services-chevron{margin-left:-7px!important;margin-right:5px!important;font-size:13px!important}
-  header .header-inner>.header-cta{min-height:36px!important;padding:0 20px!important;font-size:9px!important}
 }
 @media(prefers-reduced-motion:reduce){
-  header .header-inner>nav.glass-nav,
-  header .header-inner>nav.glass-nav *,
-  header .header-inner>.header-cta{transition:none!important;animation:none!important}
-}
-
-/* Follow-up correction: CTA sits beneath the nav; every nav item rests in glass */
-header .header-inner{
-  display:flex!important;
-  flex-direction:column!important;
-  align-items:center!important;
-}
-header .header-inner>a.brand{order:0!important}
-header .header-inner>nav.glass-nav{order:1!important}
-header .header-inner>.header-cta{
-  order:2!important;
-  align-self:center!important;
-  position:static!important;
-  margin:2px 0 0!important;
-}
-
-/* Destinations must not stay gold after hover/focus; restore the shared glass state */
-header .header-inner>nav.glass-nav>a:first-child{
-  color:rgba(241,247,251,.94)!important;
-  background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.045))!important;
-  border-color:rgba(255,255,255,.22)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 3px 10px rgba(0,0,0,.08)!important;
-}
-header .header-inner>nav.glass-nav>a:first-child:hover,
-header .header-inner>nav.glass-nav>a:first-child:focus-visible{
-  color:var(--hoe-nav-ice-light)!important;
-  background:rgba(169,216,242,.13)!important;
-  border-color:rgba(169,216,242,.38)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 13px rgba(169,216,242,.08)!important;
-}
-
-
-/* Final refinement: clearly outlined Plan Your Trip pill and a premium Services arrow control */
-header .header-inner>.header-cta{
-  min-height:44px!important;
-  padding:0 25px!important;
-  border:1.5px solid rgba(220,238,250,.98)!important;
-  border-radius:999px!important;
-  background:linear-gradient(135deg,rgba(169,216,242,.16),rgba(16,36,59,.52))!important;
-  color:#dceefa!important;
-  box-shadow:
-    0 0 0 3px rgba(169,216,242,.10),
-    inset 0 1px 0 rgba(255,255,255,.16),
-    0 7px 22px rgba(0,0,0,.22)!important;
-}
-header .header-inner>.header-cta:hover,
-header .header-inner>.header-cta:focus-visible{
-  border-color:#eaf6fc!important;
-  background:linear-gradient(135deg,rgba(169,216,242,.28),rgba(16,36,59,.68))!important;
-  box-shadow:
-    0 0 0 4px rgba(169,216,242,.14),
-    0 0 24px rgba(169,216,242,.22),
-    inset 0 1px 0 rgba(255,255,255,.22)!important;
-}
-header .header-inner>nav.glass-nav .services-chevron{
-  flex:0 0 20px!important;
-  width:20px!important;
-  height:20px!important;
-  margin:0 0 0 5px!important;
-  display:inline-grid!important;
-  place-items:center!important;
-  border:1px solid rgba(220,238,250,.78)!important;
-  border-radius:50%!important;
-  background:linear-gradient(145deg,rgba(220,238,250,.22),rgba(169,216,242,.07))!important;
-  color:#dceefa!important;
-  font-size:15px!important;
-  font-weight:800!important;
-  line-height:1!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.24),0 2px 8px rgba(0,0,0,.18)!important;
-  transition:transform .32s cubic-bezier(.2,.8,.2,1),background .32s ease,border-color .32s ease,box-shadow .32s ease!important;
-}
-header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:hover .services-chevron,
-header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:focus-visible .services-chevron,
-header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle .services-chevron{
-  border-color:#eaf6fc!important;
-  background:linear-gradient(145deg,rgba(220,238,250,.34),rgba(169,216,242,.16))!important;
-  box-shadow:0 0 12px rgba(169,216,242,.24),inset 0 1px 0 rgba(255,255,255,.3)!important;
-}
-header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle .services-chevron{
-  transform:rotate(180deg)!important;
 }
 @media(max-width:640px){
-  header .header-inner>.header-cta{
-    min-height:38px!important;
-    padding:0 20px!important;
-    border-width:1.4px!important;
-    box-shadow:0 0 0 2px rgba(169,216,242,.10),0 5px 16px rgba(0,0,0,.2)!important;
-  }
-  header .header-inner>nav.glass-nav .services-chevron{
-    flex-basis:17px!important;width:17px!important;height:17px!important;
-    margin-left:3px!important;font-size:13px!important;
-  }
 }
 @media(prefers-reduced-motion:reduce){
-  header .header-inner>nav.glass-nav .services-chevron{transition:none!important}
-}
-
-
-/* CINEMATIC SCROLL-AWARE HEADER — transparent over hero, glass on scroll */
-body>header{
-  position:fixed!important;
-  top:0!important;left:0!important;right:0!important;width:100%!important;
-  z-index:1000!important;
-  background:transparent!important;
-  border:0!important;
-  box-shadow:none!important;
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
-  transform:translateY(0);
-  transition:transform .42s cubic-bezier(.22,.68,0,1),background .35s ease,border-color .35s ease,box-shadow .35s ease,backdrop-filter .35s ease;
-  will-change:transform;
-}
-body>header.is-scrolled{
-  background:rgba(16,36,59,.82)!important;
-  border-bottom:1px solid rgba(169,216,242,.46)!important;
-  box-shadow:0 10px 34px rgba(0,0,0,.2)!important;
-  -webkit-backdrop-filter:blur(24px) saturate(155%)!important;
-  backdrop-filter:blur(24px) saturate(155%)!important;
-}
-body>header.is-hidden{
-  transform:translateY(-110%);
-  pointer-events:none;
-}
-body>header.is-scrolled .header-inner>nav.glass-nav{
-  background:linear-gradient(135deg,rgba(16,36,59,.62),rgba(16,36,59,.38))!important;
-  border-color:rgba(169,216,242,.72)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 8px 26px rgba(0,0,0,.2)!important;
-}
-body>header.is-scrolled .header-inner>.header-cta{
-  background:linear-gradient(135deg,#e1f3fc,#a9d8f2)!important;
-  color:#10243d!important;
-  border-color:#e1f3fc!important;
-  box-shadow:0 5px 18px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.45)!important;
-}
-body>header .header-inner>.header-cta{
-  background:linear-gradient(135deg,#e1f3fc,#a9d8f2)!important;
-  color:#10243d!important;
-  border:1px solid rgba(169,216,242,.95)!important;
-  box-shadow:0 5px 18px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.5)!important;
-}
-body>header .header-inner>.header-cta:hover{
-  color:#10243d!important;
-  filter:brightness(1.07);
-  transform:translateY(-2px)!important;
-}
-body>header .header-inner>nav.glass-nav{
-  background:linear-gradient(135deg,rgba(255,255,255,.15),rgba(16,36,59,.26) 58%,rgba(255,255,255,.055))!important;
-  border-color:rgba(169,216,242,.58)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 8px 26px rgba(0,0,0,.16)!important;
 }
 .hero{padding-top:clamp(175px,21vh,225px)!important}
 @media(max-width:640px){
-  body>header .header-inner{padding-top:8px!important;padding-bottom:9px!important;gap:7px!important}
-  body>header .header-inner>.brand img{width:clamp(132px,39vw,172px)!important;max-height:55px!important}
-  body>header .header-inner>nav.glass-nav{background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(16,36,59,.3))!important}
-  body>header.is-scrolled .header-inner>nav.glass-nav{background:rgba(16,36,59,.62)!important}
   .hero{padding-top:185px!important}
 }
 @media(prefers-reduced-motion:reduce){
-  body>header{transition:none!important}
-  body>header.is-hidden{transform:none!important}
-}
-
-
-/* FINAL HEADER LAYOUT OVERRIDE — desktop horizontal, mobile compact one-row nav.
-   This intentionally comes last to neutralize legacy grid/stacking and icon-nav rules. */
-@media (min-width: 761px) {
-  html body>header .header-inner {
-    display:grid!important;
-    grid-template-columns:minmax(145px,205px) minmax(0,1fr) auto!important;
-    grid-template-rows:auto!important;
-    flex-direction:initial!important;
-    align-items:center!important;
-    justify-items:stretch!important;
-    gap:clamp(10px,1.5vw,22px)!important;
-    width:100%!important;
-    max-width:1480px!important;
-    min-height:88px!important;
-    margin:0 auto!important;
-    padding:9px clamp(16px,3vw,44px)!important;
-    box-sizing:border-box!important;
-  }
-  html body>header .header-inner>a.brand {
-    grid-column:1!important;grid-row:1!important;
-    justify-self:start!important;align-self:center!important;
-    width:max-content!important;max-width:100%!important;
-    margin:0!important;padding:0!important;
-  }
-  html body>header .header-inner>a.brand img {
-    width:clamp(120px,13vw,174px)!important;max-height:58px!important;
-  }
-  html body>header .header-inner>nav.glass-nav {
-    grid-column:2!important;grid-row:1!important;
-    justify-self:center!important;align-self:center!important;
-    width:max-content!important;max-width:100%!important;
-    min-width:0!important;overflow:visible!important;
-    flex-direction:row!important;flex-wrap:nowrap!important;
-    justify-content:center!important;gap:clamp(3px,.45vw,7px)!important;
-    padding:4px!important;
-  }
-  html body>header .header-inner>nav.glass-nav>a,
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle {
-    min-height:38px!important;height:38px!important;
-    padding:0 clamp(8px,.85vw,14px)!important;
-    font-size:clamp(8px,.68vw,10px)!important;
-    letter-spacing:.025em!important;white-space:nowrap!important;
-    flex-direction:row!important;gap:5px!important;
-  }
-  html body>header .header-inner>nav.glass-nav .nav-glass-icon {display:none!important}
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown {flex:0 0 auto!important;width:auto!important}
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle {width:auto!important}
-  html body>header .header-inner>.header-cta {
-    grid-column:3!important;grid-row:1!important;
-    justify-self:end!important;align-self:center!important;
-    margin:0!important;min-height:40px!important;
-    padding:0 17px!important;font-size:9px!important;
-    white-space:nowrap!important;
-  }
-  html body>header .header-inner>nav.glass-nav .services-chevron {
-    position:static!important;display:inline-grid!important;
-    width:15px!important;height:15px!important;flex:0 0 15px!important;
-    margin:0 0 0 2px!important;font-size:12px!important;
-  }
-  .hero {padding-top:clamp(125px,16vh,165px)!important}
 }
 @media (max-width: 760px) {
-  html body>header .header-inner {
-    display:flex!important;flex-direction:column!important;
-    align-items:center!important;justify-content:center!important;
-    width:100%!important;max-width:100%!important;
-    min-height:0!important;gap:7px!important;
-    padding:7px 10px 9px!important;margin:0!important;
-    box-sizing:border-box!important;
-  }
-  html body>header .header-inner>a.brand {
-    order:0!important;display:flex!important;
-    flex-direction:column!important;align-items:center!important;
-    justify-content:center!important;width:max-content!important;
-    max-width:100%!important;margin:0 auto!important;padding:0!important;
-  }
-  html body>header .header-inner>a.brand img {
-    width:clamp(112px,31vw,145px)!important;
-    max-height:43px!important;object-fit:contain!important;
-  }
-  html body>header .header-inner>a.brand .brand-wordmark {
-    margin-top:1px!important;font-size:8px!important;
-    letter-spacing:3px!important;line-height:1!important;
-  }
-  html body>header .header-inner>nav.glass-nav {
-    order:1!important;display:flex!important;
-    flex-direction:row!important;flex-wrap:nowrap!important;
-    align-items:center!important;justify-content:space-between!important;
-    width:100%!important;max-width:520px!important;min-width:0!important;
-    gap:3px!important;padding:3px!important;
-    overflow-x:auto!important;overflow-y:visible!important;
-    scrollbar-width:none!important;-webkit-overflow-scrolling:touch!important;
-    border-radius:999px!important;box-sizing:border-box!important;
-  }
-  html body>header .header-inner>nav.glass-nav::-webkit-scrollbar {display:none!important}
-  html body>header .header-inner>nav.glass-nav>a,
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown {
-    display:flex!important;flex:1 1 0!important;
-    width:0!important;min-width:0!important;max-width:none!important;
-    align-items:center!important;justify-content:center!important;
-    box-sizing:border-box!important;
-  }
-  html body>header .header-inner>nav.glass-nav>a,
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle {
-    flex-direction:row!important;gap:2px!important;
-    min-width:0!important;width:100%!important;max-width:100%!important;
-    min-height:34px!important;height:34px!important;
-    padding:0 3px!important;border-radius:999px!important;
-    font-size:clamp(7px,2.05vw,9px)!important;
-    line-height:1!important;letter-spacing:0!important;
-    white-space:nowrap!important;text-align:center!important;
-  }
-  html body>header .header-inner>nav.glass-nav .nav-glass-icon {display:none!important}
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown {
-    position:relative!important;overflow:visible!important;gap:0!important;
-  }
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle {
-    display:flex!important;flex:1 1 100%!important;
-    align-items:center!important;justify-content:center!important;
-  }
-  html body>header .header-inner>nav.glass-nav .services-chevron {
-    position:static!important;display:inline-grid!important;
-    flex:0 0 10px!important;width:10px!important;height:14px!important;
-    margin:0!important;padding:0!important;border:0!important;
-    background:transparent!important;font-size:11px!important;line-height:1!important;
-  }
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown-menu {
-    position:absolute!important;top:calc(100% + 9px)!important;
-    left:auto!important;right:0!important;z-index:1200!important;
-    min-width:205px!important;max-width:min(82vw,280px)!important;
-  }
-  html body>header .header-inner>.header-cta {
-    order:2!important;display:inline-flex!important;
-    align-self:center!important;justify-self:center!important;
-    position:static!important;margin:1px auto 0!important;
-    min-height:34px!important;padding:0 19px!important;
-    font-size:9px!important;white-space:nowrap!important;
-  }
-  html body>header.is-scrolled .header-inner {gap:5px!important;padding-top:5px!important;padding-bottom:6px!important}
   .hero {padding-top:clamp(150px,21vh,178px)!important}
 }
 @media (prefers-reduced-motion: reduce) {
-  html body>header {transition:none!important}
-  html body>header.is-hidden {transform:none!important}
 }
-
-
-/* HEADER REFINEMENT — keep the hero readable beneath a light, transparent header.
-   The header stays transparent at page top, becomes dark glass after scrolling,
-   hides on downward scroll and returns on upward scroll. */
-html body>header{
-  position:fixed!important;
-  inset:0 0 auto 0!important;
-  width:100%!important;
-  background:transparent!important;
-  border:0!important;
-  box-shadow:none!important;
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
-  isolation:isolate!important;
-}
-html body>header .header-inner{
-  background:transparent!important;
-}
-html body>header .header-inner>a.brand{
-  background:transparent!important;
-  box-shadow:none!important;
-}
-html body>header .header-inner>a.brand:before,
-html body>header .header-inner>a.brand:after{
-  opacity:0!important;
-}
-html body>header:not(.is-scrolled) .header-inner>nav.glass-nav{
-  background:rgba(16,36,59,.16)!important;
-  border:1px solid rgba(169,216,242,.42)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.16)!important;
-  -webkit-backdrop-filter:blur(9px) saturate(125%)!important;
-  backdrop-filter:blur(9px) saturate(125%)!important;
-}
-html body>header.is-scrolled{
-  background:rgba(16,36,59,.88)!important;
-  border-bottom:1px solid rgba(169,216,242,.42)!important;
-  box-shadow:0 8px 28px rgba(0,0,0,.16)!important;
-  -webkit-backdrop-filter:blur(22px) saturate(150%)!important;
-  backdrop-filter:blur(22px) saturate(150%)!important;
-}
-html body>header.is-scrolled .header-inner>nav.glass-nav{
-  background:rgba(255,255,255,.055)!important;
-  border-color:rgba(169,216,242,.34)!important;
-}
-html body>header.is-hidden{transform:translateY(-110%)!important;pointer-events:none!important}
 
 /* Reserve real breathing room so the fixed navigation never covers the hero copy. */
 html body>.hero{
@@ -488,64 +32,12 @@ html body>.hero{
   min-height:clamp(610px,82svh,850px)!important;
 }
 @media(max-width:760px){
-  html body>header .header-inner{
-    gap:5px!important;
-    padding:5px 9px 7px!important;
-  }
-  html body>header .header-inner>a.brand img{
-    width:clamp(104px,28vw,132px)!important;
-    max-height:37px!important;
-  }
-  html body>header .header-inner>a.brand .brand-wordmark{
-    font-size:7px!important;letter-spacing:2.7px!important;
-  }
-  html body>header .header-inner>nav.glass-nav{
-    max-width:460px!important;
-    padding:2px!important;
-    gap:2px!important;
-    background:rgba(16,36,59,.12)!important;
-    border-color:rgba(169,216,242,.36)!important;
-  }
-  html body>header .header-inner>nav.glass-nav>a,
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
-    min-height:31px!important;height:31px!important;
-    font-size:clamp(6.8px,1.9vw,8px)!important;
-    padding:0 2px!important;
-  }
-  html body>header .header-inner>.header-cta{
-    min-height:30px!important;
-    margin-top:0!important;
-    padding:0 16px!important;
-    font-size:8px!important;
-  }
   html body>.hero{
     padding:clamp(142px,19vh,168px) 16px 58px!important;
     min-height:0!important;
   }
 }
 @media(prefers-reduced-motion:reduce){
-  html body>header{transition:none!important}
-}
-
-
-/* HERO CLEARANCE FIX — the header occupies normal document space at page top.
-   It only becomes fixed after the visitor starts scrolling, so it cannot sit
-   over the hero photo or the Cabs / Hotels / Packages service icons. */
-html body>header{
-  position:relative!important;
-  top:auto!important;left:auto!important;right:auto!important;
-  width:100%!important;
-  transform:translateY(0)!important;
-  margin:0!important;
-}
-html body>header.is-scrolled{
-  position:fixed!important;
-  top:0!important;left:0!important;right:0!important;
-  width:100%!important;
-}
-html body>header.is-hidden{
-  transform:translateY(-110%)!important;
-  pointer-events:none!important;
 }
 html body>.hero{
   padding:clamp(34px,5vh,58px) 32px 54px!important;
@@ -557,285 +49,15 @@ html body>.hero{
     min-height:0!important;
   }
 }
-
-
-/* BRAND CONSISTENCY — use the same deep-green glass header at page top
-   and while scrolling; remove the white initial header appearance. */
-html body>header,
-html body>header:not(.is-scrolled){
-  background:rgba(16,36,59,.88)!important;
-  border-bottom:1px solid rgba(169,216,242,.42)!important;
-  box-shadow:0 8px 28px rgba(0,0,0,.16)!important;
-  -webkit-backdrop-filter:blur(22px) saturate(150%)!important;
-  backdrop-filter:blur(22px) saturate(150%)!important;
-}
-html body>header:not(.is-scrolled) .header-inner>nav.glass-nav{
-  background:rgba(255,255,255,.055)!important;
-  border-color:rgba(169,216,242,.34)!important;
-}
-
-
-
-/* STYLE 2 — UNDERLINE NAVIGATION
-   Editorial text links with a fine champagne-gold underline on hover/focus
-   and for the active page. Preserve original anchors, Services dropdown and CTA. */
-html body>header .header-inner>nav.glass-nav{
-  width:max-content!important;
-  max-width:100%!important;
-  gap:clamp(18px,2.4vw,34px)!important;
-  padding:5px 8px!important;
-  background:transparent!important;
-  border:0!important;
-  border-radius:0!important;
-  box-shadow:none!important;
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
-}
-html body>header .header-inner>nav.glass-nav>a,
-html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
-  position:relative!important;
-  display:inline-flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  gap:6px!important;
-  min-height:40px!important;
-  height:auto!important;
-  width:auto!important;
-  padding:8px 1px 10px!important;
-  border:0!important;
-  border-radius:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
-  color:rgba(255,250,239,.94)!important;
-  font:600 10px var(--sans)!important;
-  letter-spacing:.095em!important;
-  text-transform:uppercase!important;
-  white-space:nowrap!important;
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
-  transform:none!important;
-  transition:color .25s ease!important;
-}
-html body>header .header-inner>nav.glass-nav>a:after,
-html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:after{
-  content:""!important;
-  position:absolute!important;
-  left:0!important;
-  right:0!important;
-  bottom:2px!important;
-  display:block!important;
-  width:100%!important;
-  height:1px!important;
-  margin:0!important;
-  background:#a9d8f2!important;
-  opacity:.95!important;
-  transform:scaleX(0)!important;
-  transform-origin:left center!important;
-  transition:transform .28s ease!important;
-}
-html body>header .header-inner>nav.glass-nav>a:hover:after,
-html body>header .header-inner>nav.glass-nav>a:focus-visible:after,
-html body>header .header-inner>nav.glass-nav>a[aria-current="page"]:after,
-html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:hover:after,
-html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:focus-visible:after,
-html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle:after{
-  transform:scaleX(1)!important;
-}
-html body>header .header-inner>nav.glass-nav>a:hover,
-html body>header .header-inner>nav.glass-nav>a:focus-visible,
-html body>header .header-inner>nav.glass-nav>a[aria-current="page"],
-html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:hover,
-html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:focus-visible,
-html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle{
-  color:#dceefa!important;
-  background:transparent!important;
-  border:0!important;
-  box-shadow:none!important;
-  transform:none!important;
-}
-html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
-  cursor:pointer!important;
-}
-html body>header .header-inner>nav.glass-nav .services-chevron{
-  display:inline-grid!important;
-  place-items:center!important;
-  flex:0 0 auto!important;
-  width:auto!important;
-  height:auto!important;
-  margin:0 0 0 2px!important;
-  padding:0!important;
-  border:0!important;
-  border-radius:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
-  color:#a9d8f2!important;
-  font-size:14px!important;
-  line-height:1!important;
-  transition:transform .28s ease,color .25s ease!important;
-}
-html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-toggle .services-chevron{
-  transform:rotate(180deg)!important;
-  color:#dceefa!important;
-}
-html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:hover .services-chevron{
-  color:#dceefa!important;
-}
-html body>header .header-inner>nav.glass-nav .nav-dropdown-menu{
-  top:calc(100% + 8px)!important;
-}
 @media(max-width:760px){
-  html body>header .header-inner>nav.glass-nav{
-    width:100%!important;
-    max-width:520px!important;
-    justify-content:space-between!important;
-    gap:clamp(7px,2.1vw,15px)!important;
-    padding:3px 2px!important;
-    overflow-x:auto!important;
-    overflow-y:visible!important;
-    scrollbar-width:none!important;
-  }
-  html body>header .header-inner>nav.glass-nav::-webkit-scrollbar{display:none!important}
-  html body>header .header-inner>nav.glass-nav>a,
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
-    flex:0 0 auto!important;
-    width:auto!important;
-    min-width:0!important;
-    min-height:36px!important;
-    padding:7px 0 9px!important;
-    gap:3px!important;
-    font-size:clamp(7px,2.05vw,9px)!important;
-    letter-spacing:.015em!important;
-  }
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown{
-    flex:0 0 auto!important;
-    width:auto!important;
-  }
-  html body>header .header-inner>nav.glass-nav .services-chevron{
-    font-size:12px!important;
-    margin-left:1px!important;
-  }
 }
 @media(prefers-reduced-motion:reduce){
-  html body>header .header-inner>nav.glass-nav *,
-  html body>header .header-inner>nav.glass-nav *:after{
-    transition:none!important;
-  }
-}
-
-
-/* NAVIGATION TYPOGRAPHY REFINEMENT — Tiempos Text; no outer nav frame */
-html body>header .header-inner>nav.glass-nav{
-  border:0!important;
-  outline:0!important;
-  box-shadow:none!important;
-  background:transparent!important;
-}
-html body>header .header-inner>nav.glass-nav>a,
-html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
-  font-family:"Tiempos Text",Georgia,serif!important;
-  font-weight:500!important;
-  letter-spacing:.045em!important;
-  text-transform:uppercase!important;
 }
 @media(max-width:760px){
-  html body>header .header-inner>nav.glass-nav>a,
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
-    font-family:"Tiempos Text",Georgia,serif!important;
-    font-size:clamp(8px,2.15vw,9.5px)!important;
-    letter-spacing:.015em!important;
-  }
-}
-
-
-/* HEADER ALIGNMENT REFINEMENT — borderless navigation and six evenly spaced desktop positions */
-html body>header .header-inner>nav.glass-nav,
-html body>header.is-scrolled .header-inner>nav.glass-nav{
-  border:0!important;
-  outline:0!important;
-  background:transparent!important;
-  background-image:none!important;
-  box-shadow:none!important;
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
-}
-html body>header .header-inner>nav.glass-nav:before,
-html body>header .header-inner>nav.glass-nav:after{
-  content:none!important;
-  display:none!important;
-}
-html body>header .header-inner>nav.glass-nav>a,
-html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
-  border:0!important;
-  outline-offset:4px!important;
-  background:transparent!important;
-  box-shadow:none!important;
 }
 @media(min-width:761px){
-  html body>header .header-inner{
-    display:grid!important;
-    grid-template-columns:repeat(6,minmax(0,1fr))!important;
-    grid-template-rows:auto!important;
-    align-items:center!important;
-    justify-items:stretch!important;
-    gap:0!important;
-    width:100%!important;
-    max-width:1480px!important;
-    padding:9px clamp(16px,3vw,44px)!important;
-    box-sizing:border-box!important;
-  }
-  html body>header .header-inner>a.brand{
-    grid-column:1!important;
-    grid-row:1!important;
-    justify-self:center!important;
-    align-self:center!important;
-    margin:0!important;
-  }
-  html body>header .header-inner>nav.glass-nav{
-    display:contents!important;
-  }
-  html body>header .header-inner>nav.glass-nav>a:nth-of-type(1){
-    grid-column:2!important;grid-row:1!important;
-  }
-  html body>header .header-inner>nav.glass-nav>a:nth-of-type(2){
-    grid-column:3!important;grid-row:1!important;
-  }
-  html body>header .header-inner>nav.glass-nav>a:nth-of-type(3){
-    grid-column:4!important;grid-row:1!important;
-  }
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown{
-    grid-column:5!important;grid-row:1!important;
-    justify-self:center!important;
-    width:100%!important;
-    display:flex!important;
-    justify-content:center!important;
-  }
-  html body>header .header-inner>nav.glass-nav>a,
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
-    justify-self:center!important;
-    align-self:center!important;
-    min-width:0!important;
-    width:max-content!important;
-    max-width:100%!important;
-    padding:0 clamp(3px,.5vw,9px)!important;
-    font-size:clamp(8px,.66vw,10px)!important;
-    letter-spacing:.025em!important;
-    white-space:nowrap!important;
-  }
-  html body>header .header-inner>.header-cta{
-    grid-column:6!important;grid-row:1!important;
-    justify-self:center!important;
-    align-self:center!important;
-    margin:0!important;
-  }
 }
 @media(max-width:760px){
-  html body>header .header-inner>nav.glass-nav,
-  html body>header.is-scrolled .header-inner>nav.glass-nav{
-    border:0!important;
-    outline:0!important;
-    background:transparent!important;
-    box-shadow:none!important;
-  }
 }
 
 
@@ -1013,25 +235,6 @@ html body #footerContactBar.footer-contact-bar{
   }
 }
 
-/* DESKTOP STATIC HEADER — keep it in normal page flow and disable scroll-follow/hide states. */
-@media(min-width:761px){
-  html body>header,
-  html body>header.is-scrolled,
-  html body>header.is-hidden{
-    position:static!important;
-    inset:auto!important;
-    top:auto!important;
-    right:auto!important;
-    bottom:auto!important;
-    left:auto!important;
-    width:100%!important;
-    transform:none!important;
-    transition:none!important;
-    pointer-events:auto!important;
-    will-change:auto!important;
-  }
-}
-
 /* DESKTOP FLOATING PILL DROPDOWN — individual glass pills, no rectangular menu frame. */
 @media(min-width:761px){
   html body>header .header-inner>nav.glass-nav>.nav-dropdown{
@@ -1100,33 +303,6 @@ html body #footerContactBar.footer-contact-bar{
   html body>header .header-inner>nav.glass-nav>a,
   html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
     font-size:clamp(9px,.76vw,11px)!important;
-  }
-}
-
-
-/* DESKTOP DROPDOWN LAYER FIX — keep the static header in normal flow,
-   while placing its floating Services menu above header content and page sections. */
-@media(min-width:761px){
-  html body>header,
-  html body>header.is-scrolled,
-  html body>header.is-hidden{
-    position:relative!important;
-    z-index:10000!important;
-    isolation:isolate!important;
-  }
-  html body>header .header-inner,
-  html body>header .header-inner>nav.glass-nav{
-    position:relative!important;
-    z-index:10001!important;
-  }
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown{
-    position:relative!important;
-    z-index:10002!important;
-  }
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu{
-    z-index:10003!important;
-    visibility:visible!important;
-    pointer-events:auto!important;
   }
 }
 
@@ -1203,11 +379,6 @@ html body #footerContactBar.footer-contact-bar{
   90%{opacity:.85;transform:scale(1)}
 }
 @media(min-width:761px) and (prefers-reduced-motion:reduce){
-  html body>header .header-inner>a.brand::before,
-  html body>header .header-inner>a.brand::after{
-    animation:none!important;
-    opacity:0!important;
-  }
 }
 
 
@@ -1247,7 +418,6 @@ html body #footerContactBar.footer-contact-bar{
   50%{background-position:35% 15%,65% 100%,50% 15%;filter:drop-shadow(0 0 5px rgba(205,226,211,.12))}
 }
 @media(min-width:761px) and (prefers-reduced-motion:reduce){
-  html body>header .header-inner>a.brand{animation:none!important}
 }
 
 
@@ -1297,76 +467,6 @@ html body #footerContactBar.footer-contact-bar{
   84%,100%{opacity:0;transform:translateX(115%) skewX(-12deg)}
 }
 @media(min-width:761px) and (prefers-reduced-motion:reduce){
-  html body>header .header-inner>a.brand::before{
-    animation:none!important;
-    opacity:0!important;
-  }
-}
-
-
-
-/* DESKTOP SERVICES MENU STATE FIX — preserve the existing horizontal header layout,
-   but keep the dropdown hidden and non-interactive until its parent is opened. */
-@media(min-width:761px){
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu{
-    visibility:hidden!important;
-    pointer-events:none!important;
-  }
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-menu{
-    visibility:visible!important;
-    pointer-events:auto!important;
-  }
-}
-
-
-/* FINAL DROPDOWN VISIBILITY STATE — overrides legacy layer rules above.
-   Closed menus must never sit invisibly over the page or intercept taps. */
-html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu{
-  visibility:hidden!important;
-  opacity:0!important;
-  pointer-events:none!important;
-}
-html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-menu{
-  visibility:visible!important;
-  opacity:1!important;
-  pointer-events:auto!important;
-}
-
-
-/* DESKTOP HEADER ROW — keep the original logo left, navigation centered/right,
-   and desktop Plan Your Trip action on one aligned row. */
-@media(min-width:761px){
-  html body>header .header-inner{
-    display:grid!important;
-    grid-template-columns:minmax(112px,165px) minmax(0,1fr) auto!important;
-    grid-template-rows:auto!important;
-    align-items:center!important;
-    justify-content:stretch!important;
-    column-gap:clamp(8px,1.25vw,18px)!important;
-    row-gap:0!important;
-  }
-  html body>header .header-inner>a.brand{
-    grid-column:1!important;
-    grid-row:1!important;
-    justify-self:start!important;
-    align-self:center!important;
-    min-width:0!important;
-  }
-  html body>header .header-inner>nav.glass-nav{
-    grid-column:2!important;
-    grid-row:1!important;
-    justify-self:end!important;
-    align-self:center!important;
-    min-width:0!important;
-    max-width:100%!important;
-  }
-  html body>header .header-inner>.header-cta{
-    grid-column:3!important;
-    grid-row:1!important;
-    justify-self:end!important;
-    align-self:center!important;
-    margin:0!important;
-  }
 }
 
 
@@ -1489,78 +589,6 @@ html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-me
   }
 }
 
-
-/* MOBILE HEADER ROW — logo left, navigation centered between logo and Plan Your Trip. */
-@media(max-width:760px){
-  html body>header .header-inner{
-    display:grid!important;
-    grid-template-columns:auto minmax(0,1fr) auto!important;
-    grid-template-rows:1fr!important;
-    align-items:center!important;
-    justify-content:stretch!important;
-    column-gap:clamp(5px,1.5vw,10px)!important;
-    row-gap:0!important;
-    width:100%!important;
-    max-width:100%!important;
-    min-height:58px!important;
-    padding:6px 9px!important;
-    box-sizing:border-box!important;
-  }
-  html body>header .header-inner>a.brand{
-    grid-column:1!important;grid-row:1!important;
-    order:initial!important;justify-self:start!important;align-self:center!important;
-    width:auto!important;max-width:none!important;margin:0!important;padding:0!important;
-  }
-  html body>header .header-inner>a.brand img{
-    width:clamp(66px,19vw,88px)!important;
-    max-width:100%!important;max-height:36px!important;object-fit:contain!important;
-  }
-  html body>header .header-inner>nav.glass-nav{
-    grid-column:2!important;grid-row:1!important;
-    order:initial!important;display:flex!important;
-    flex-direction:row!important;flex-wrap:nowrap!important;
-    align-items:center!important;justify-content:flex-start!important;
-    width:100%!important;max-width:none!important;min-width:0!important;
-    gap:clamp(5px,1.4vw,9px)!important;padding:2px 0!important;
-    margin:0!important;overflow-x:auto!important;overflow-y:hidden!important;
-    scrollbar-width:none!important;-webkit-overflow-scrolling:touch!important;
-    border:0!important;border-radius:0!important;background:transparent!important;
-    box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;
-  }
-  html body>header .header-inner>nav.glass-nav::-webkit-scrollbar{display:none!important}
-  html body>header .header-inner>nav.glass-nav>a,
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
-    display:inline-flex!important;flex:0 0 auto!important;
-    flex-direction:row!important;align-items:center!important;justify-content:center!important;
-    width:auto!important;min-width:0!important;max-width:none!important;
-    min-height:30px!important;height:30px!important;padding:0!important;
-    gap:3px!important;border:0!important;border-radius:0!important;
-    background:transparent!important;box-shadow:none!important;
-    font-size:clamp(6.5px,1.85vw,8px)!important;
-    letter-spacing:0!important;line-height:1!important;white-space:nowrap!important;
-  }
-  html body>header .header-inner>nav.glass-nav .nav-glass-icon{
-    display:inline-block!important;flex:0 0 10px!important;
-    width:10px!important;height:10px!important;min-width:10px!important;
-  }
-  html body>header .header-inner>nav.glass-nav .services-chevron{
-    flex:0 0 8px!important;width:8px!important;height:12px!important;
-    margin:0!important;font-size:9px!important;
-  }
-  html body>header .header-inner>nav.glass-nav>.nav-dropdown{
-    display:flex!important;flex:0 0 auto!important;width:auto!important;min-width:0!important;
-  }
-  html body>header .header-inner>.header-cta{
-    grid-column:3!important;grid-row:1!important;
-    order:initial!important;display:inline-flex!important;
-    justify-self:end!important;align-self:center!important;
-    position:static!important;margin:0!important;
-    min-height:30px!important;height:30px!important;padding:0 clamp(7px,2vw,11px)!important;
-    font-size:clamp(6.5px,1.8vw,8px)!important;letter-spacing:0!important;
-    white-space:nowrap!important;
-  }
-}
-
 /* MOBILE ONLY — ensure every main navigation button visibly carries its own icon. */
 @media screen and (max-width:760px){
   html body>header .header-inner>nav.glass-nav>a,
@@ -1628,14 +656,6 @@ html body>header .header-inner>nav.glass-nav>.nav-dropdown.open>.nav-dropdown-me
   html body>header .header-inner>nav.glass-nav{
     margin-right:clamp(8px,2.5vw,14px)!important;
   }
-}
-
-
-/* SERVICES DROPDOWN — use the General Sans family consistently for every menu item. */
-html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu,
-html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu a,
-html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu a *{
-  font-family:"General Sans",Arial,sans-serif!important;
 }
 
 
@@ -2014,66 +1034,6 @@ html body>header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-menu a 
     color:inherit!important;font-size:10px!important;line-height:1!important;
   }
 }
-
-
-/* SITEWIDE CONSISTENCY LAYER — one shared navigation, control and button language.
-   Arctic navy + ice blue + restrained coral; no page-specific header recolouring. */
-:root{
-  --hoe-ink:#172b40;
-  --hoe-navy:#10243b;
-  --hoe-blue:#1769e8;
-  --hoe-ice:#dceefa;
-  --hoe-paper:#f4f8fc;
-  --hoe-white:#ffffff;
-  --hoe-coral:#ff8738;
-  --hoe-muted:#64748b;
-  --hoe-line:#dce6f0;
-  --hoe-radius:16px;
-}
-html body>header.sitewide-header,
-html body>header.sitewide-header.is-scrolled{
-  background:rgba(16,36,59,.96)!important;
-  background-image:none!important;
-  border-bottom:1px solid rgba(220,238,250,.28)!important;
-  box-shadow:0 10px 30px rgba(16,36,59,.16)!important;
-  -webkit-backdrop-filter:blur(20px) saturate(145%)!important;
-  backdrop-filter:blur(20px) saturate(145%)!important;
-}
-html body>header.sitewide-header .header-inner{background:transparent!important}
-html body>header.sitewide-header .glass-nav{
-  background:rgba(255,255,255,.075)!important;
-  border:1px solid rgba(220,238,250,.34)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 8px 24px rgba(0,0,0,.12)!important;
-}
-html body>header.sitewide-header .glass-nav>a,
-html body>header.sitewide-header .glass-nav>.nav-dropdown>.nav-dropdown-toggle{
-  color:#f4f8fc!important;
-  background:transparent!important;
-  border:1px solid transparent!important;
-  border-radius:999px!important;
-  box-shadow:none!important;
-  transition:background .22s ease,color .22s ease,border-color .22s ease,transform .22s ease!important;
-}
-html body>header.sitewide-header .glass-nav>a:hover,
-html body>header.sitewide-header .glass-nav>a[aria-current="page"],
-html body>header.sitewide-header .glass-nav>.nav-dropdown.open>.nav-dropdown-toggle,
-html body>header.sitewide-header .glass-nav>.nav-dropdown>.nav-dropdown-toggle:hover{
-  color:#fff!important;background:rgba(23,105,232,.28)!important;
-  border-color:rgba(169,216,242,.42)!important;transform:translateY(-1px)!important;
-}
-html body>header.sitewide-header .header-cta{
-  background:linear-gradient(120deg,#ff8738,#ff9d5b)!important;
-  color:#172b40!important;border:1px solid rgba(255,255,255,.55)!important;
-  border-radius:999px!important;font-weight:800!important;
-  box-shadow:0 6px 18px rgba(255,135,56,.2)!important;
-}
-html body>header.sitewide-header .header-cta:hover{filter:brightness(1.06)!important;transform:translateY(-1px)!important}
-html body :is(button,.btn,.button,.primary,.header-cta,.departure-cta,[type="submit"]){
-  border-radius:999px!important;
-  font-family:"DM Sans","Manrope",Arial,sans-serif!important;
-  font-weight:750!important;
-  transition:background .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease,transform .2s ease!important;
-}
 html body :is(.btn,.button,.primary,.departure-cta,[type="submit"]){
   background:linear-gradient(120deg,#ff8738,#ff9d5b)!important;
   color:#172b40!important;border:1px solid #ffc49f!important;
@@ -2100,23 +1060,8 @@ html body .mobile-app-dock a{color:#40566b!important}
 html body .mobile-app-dock a[aria-current="page"]{background:#dceefa!important;color:#10243b!important}
 html body .mobile-app-dock a.dock-plan{background:linear-gradient(120deg,#ff8738,#ff9d5b)!important;color:#172b40!important}
 @media(max-width:640px){
- html body>header.sitewide-header .header-inner{gap:8px!important}
- html body>header.sitewide-header .glass-nav{scroll-snap-type:x proximity!important}
- html body>header.sitewide-header .glass-nav>a,
- html body>header.sitewide-header .glass-nav>.nav-dropdown>.nav-dropdown-toggle{min-height:36px!important}
 }
 @media(prefers-reduced-motion:reduce){
- html body>header.sitewide-header,html body>header.sitewide-header *,
- html body :is(button,.btn,.button,.primary,.header-cta){transition:none!important;animation:none!important}
-}
-
-
-/* LEGACY PAGE BRIDGE — normalize older .site-topbar/.site-nav pages to the
-   same sitewide Arctic navy / ice-blue / coral system used by .sitewide-header. */
-:root{
-  --hoe-ink:#172b40;--hoe-navy:#10243b;--hoe-blue:#1769e8;
-  --hoe-ice:#dceefa;--hoe-paper:#f4f8fc;--hoe-coral:#ff8738;
-  --hoe-muted:#64748b;--hoe-line:#dce6f0;
 }
 html body .site-topbar{
   background:rgba(16,36,59,.96)!important;
@@ -2134,28 +1079,6 @@ html body .site-topbar .brand-mark{
 }
 html body .site-topbar .brand-copy strong{color:#f4f8fc!important}
 html body .site-topbar .brand-copy small{color:#b9dcf2!important}
-html body .site-topbar .site-nav .site-nav-link{
-  color:#f4f8fc!important;background:rgba(255,255,255,.055)!important;
-  border:1px solid rgba(220,238,250,.22)!important;border-radius:999px!important;
-  box-shadow:none!important;text-decoration:none!important;
-  font-family:"DM Sans","Manrope",Arial,sans-serif!important;
-  transition:background .22s ease,color .22s ease,border-color .22s ease,transform .22s ease!important;
-}
-html body .site-topbar .site-nav .site-nav-link:hover,
-html body .site-topbar .site-nav .site-nav-link[aria-current="page"],
-html body .site-topbar .site-nav .site-nav-link.active{
-  color:#fff!important;background:rgba(23,105,232,.28)!important;
-  border-color:rgba(169,216,242,.42)!important;transform:translateY(-1px)!important;
-}
-html body .site-topbar .site-nav .site-nav-contact{
-  color:#172b40!important;background:linear-gradient(120deg,#ff8738,#ff9d5b)!important;
-  border:1px solid rgba(255,255,255,.55)!important;
-  box-shadow:0 6px 18px rgba(255,135,56,.2)!important;
-}
-html body .site-topbar .site-nav .site-nav-contact:hover{
-  color:#172b40!important;background:linear-gradient(120deg,#ff9d5b,#ff8738)!important;
-  border-color:#ffc49f!important;
-}
 html body :is(button,.btn,.button,.primary,.site-nav-contact,.departure-cta,[type="submit"]){
   border-radius:999px!important;
   font-family:"DM Sans","Manrope",Arial,sans-serif!important;
@@ -2186,10 +1109,6 @@ html body footer a{color:#b9dcf2!important}
 @media(max-width:680px){
   html body .site-topbar{background:rgba(16,36,59,.96)!important}
   html body .site-topbar .site-nav{gap:5px!important}
-  html body .site-topbar .site-nav .site-nav-link{
-    min-height:38px!important;border-radius:999px!important;
-    font-size:clamp(8px,2.25vw,10px)!important;
-  }
 }
 @media(prefers-reduced-motion:reduce){
   html body .site-topbar,html body .site-topbar *,
