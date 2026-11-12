@@ -118,3 +118,168 @@ html body > header .header-menu-toggle svg path { stroke: #fff !important; strok
 html body > header .nav-dropdown-toggle { display: flex !important; align-items: center !important; justify-content: space-between !important; gap: 12px !important; }
 html body > header .services-chevron-icon { display: inline-block !important; flex: 0 0 16px !important; width: 16px !important; height: 16px !important; margin-left: auto !important; transition: transform .2s ease !important; }
 html body > header .nav-dropdown.open .services-chevron-icon { transform: rotate(180deg) !important; }
+
+
+/* Mobile homepage visual correction — reference supplied 12 Nov 2026. */
+@media (max-width: 760px) {
+  html body > header,
+  html body > header.is-scrolled,
+  html body > header.is-hidden,
+  html body > header.menu-open {
+    min-height: 104px !important;
+    height: 104px !important;
+    background: #000 !important;
+    background-color: #000 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  html body > header .header-inner {
+    min-height: 104px !important;
+    height: 104px !important;
+    padding: 0 14px 0 0 !important;
+    gap: 10px !important;
+    justify-content: space-between !important;
+  }
+  html body > header .header-inner > a.brand {
+    margin: 0 auto 0 0 !important;
+    padding: 0 !important;
+    max-width: calc(100vw - 92px) !important;
+    transform: none !important;
+  }
+  html body > header .header-inner > a.brand > img {
+    width: clamp(220px, 38vw, 270px) !important;
+    max-height: 78px !important;
+    height: auto !important;
+    object-fit: contain !important;
+  }
+  html body > header .header-menu-toggle {
+    width: 66px !important;
+    height: 66px !important;
+    flex: 0 0 66px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+  }
+  html body > header .header-menu-toggle svg {
+    width: 43px !important;
+    height: 43px !important;
+    stroke: #fff !important;
+  }
+  html body > header .header-menu-toggle svg path {
+    stroke: #fff !important;
+    stroke-width: 2.5 !important;
+    stroke-linecap: round !important;
+  }
+
+  body > .hero {
+    min-height: calc(100svh - 104px) !important;
+    padding: 42px 5% 104px !important;
+    display: flex !important;
+    align-items: stretch !important;
+    justify-content: center !important;
+    background-position: center center !important;
+  }
+  body > .hero .hero-content {
+    width: 100% !important;
+    max-width: none !important;
+    min-height: calc(100svh - 250px) !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 22px !important;
+    text-align: center !important;
+  }
+  body > .hero .hero-animated-heading {
+    width: 100% !important;
+    margin: 0 auto !important;
+    font-size: clamp(66px, 12.5vw, 92px) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -1.8px !important;
+    text-align: center !important;
+  }
+  body > .hero .hero-heading-prefix,
+  body > .hero .hero-word-slot,
+  body > .hero .hero-heading-suffix {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    line-height: 1.13 !important;
+  }
+  body > .hero .hero-heading-prefix { margin-bottom: 13px !important; }
+  body > .hero .hero-word-slot { margin-bottom: 13px !important; }
+  body > .hero .hero-word-rotator {
+    display: inline-block !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+    line-height: 1.13 !important;
+  }
+  body > .hero .hero-go-line {
+    width: 100% !important;
+    max-width: 560px !important;
+    margin: 0 auto !important;
+    font-size: 11px !important;
+    line-height: 1.8 !important;
+    letter-spacing: 2px !important;
+    text-align: center !important;
+  }
+  body > .hero .hero-service-icons {
+    width: min(100%, 520px) !important;
+    max-width: 520px !important;
+    margin: auto auto 0 !important;
+    gap: 12px !important;
+    justify-content: center !important;
+  }
+  body > .hero .hero-service-icon {
+    min-height: 82px !important;
+    padding: 12px 8px !important;
+    border-radius: 14px !important;
+  }
+  body > .hero .hero-service-icon svg {
+    width: 29px !important;
+    height: 29px !important;
+  }
+  body > .hero .hero-service-icon span {
+    font-size: 10px !important;
+    letter-spacing: 1px !important;
+  }
+  body > .hero .hero-build-cta-wrap {
+    width: 100% !important;
+    max-width: 520px !important;
+    margin: 0 auto !important;
+    justify-content: center !important;
+  }
+  body > .hero .hero-build-cta {
+    min-width: min(330px, 90%) !important;
+    min-height: 68px !important;
+    padding: 17px 28px !important;
+    margin: 0 auto !important;
+    border-radius: 999px !important;
+    font-size: 14px !important;
+    letter-spacing: 2px !important;
+  }
+  body > .hero .hero-content > p:not(.hero-go-line) {
+    width: 100% !important;
+    max-width: 560px !important;
+    margin: auto auto 0 !important;
+    font-size: 17px !important;
+    line-height: 1.8 !important;
+    text-align: center !important;
+  }
+  body > .hero .hero-destination-list {
+    width: 100% !important;
+    max-width: 560px !important;
+    margin: 0 auto !important;
+    justify-content: center !important;
+    text-align: center !important;
+    line-height: 2 !important;
+  }
+}
