@@ -3140,5 +3140,27 @@ html body #home.hero .hero-content h1.hero-animated-heading > .hero-word-slot{
 }
 </style>
 
+
+
+<style id="hero-rotating-words-larger-extra-bold">
+/* Make only the changing phrase larger and extra-bold while keeping the three-line lockup tight. */
+html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord,
+html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-in,
+html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-out{
+  font-size:1.14em!important;
+  font-weight:900!important;
+  -webkit-text-stroke:.45px currentColor!important;
+}
+@media(max-width:760px){
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord,
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-in,
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-out{
+    font-size:1.12em!important;
+    font-weight:900!important;
+    -webkit-text-stroke:.4px currentColor!important;
+  }
+}
+</style>
+
 </body>
 </html>
