@@ -3240,5 +3240,32 @@ html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is
 }
 </style>
 
+
+<style id="mobile-hero-tibetan-prayer-flags">
+/* A subtle five-colour Himalayan prayer-flag string behind the mobile hero headline. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-content h1.hero-animated-heading{
+    position:relative!important;
+    isolation:isolate!important;
+    overflow:visible!important;
+  }
+  html body #home.hero .hero-content h1.hero-animated-heading::before{
+    content:""!important;
+    position:absolute!important;
+    z-index:-1!important;
+    pointer-events:none!important;
+    top:34%!important;
+    left:-5%!important;
+    width:110%!important;
+    height:76px!important;
+    opacity:.52!important;
+    background-repeat:no-repeat!important;
+    background-position:center!important;
+    background-size:100% 100%!important;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 100'%3E%3Cpath d='M4 13 Q260 38 516 8' fill='none' stroke='%235b5149' stroke-width='2.5'/%3E%3Cg stroke='%23ffffff' stroke-opacity='.38' stroke-width='1'%3E%3Cpath fill='%230c91d2' d='M28 17l65 7-8 64-29-13-25 10z'/%3E%3Cpath fill='%23f7f5ed' d='M101 25l65 5-10 63-28-14-25 12z'/%3E%3Cpath fill='%23d93638' d='M174 31l65 4-12 62-27-15-24 13z'/%3E%3Cpath fill='%233d9b62' d='M247 35l65 1-13 62-26-16-23 14z'/%3E%3Cpath fill='%23f2c52e' d='M320 35l65-4-14 62-25-16-22 15z'/%3E%3Cpath fill='%230c91d2' d='M393 30l65-7-15 62-24-17-21 15z'/%3E%3C/g%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.52' stroke-width='1.5'%3E%3Cpath d='M40 27l43 5M113 35l42 5M186 41l42 5M259 45l42 5M332 44l42-1M405 38l42-4'/%3E%3C/g%3E%3C/svg%3E")!important;
+  }
+}
+</style>
+
 </body>
 </html>
