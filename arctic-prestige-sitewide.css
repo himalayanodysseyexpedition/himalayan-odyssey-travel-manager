@@ -118,3 +118,18 @@ html body #home .hero-service-icons > a.hero-service-icon:focus-visible{
   background:#f1f1f1!important;background-color:#f1f1f1!important;border-color:#f1f1f1!important;
   color:#000!important;-webkit-text-fill-color:#000!important;
 }
+
+
+/* Build Your Trip hero CTA — solid black with white typography */
+html body #home .hero-build-cta-wrap > a.hero-build-cta,
+html body #home .hero-build-cta-wrap > a.hero-build-cta:visited,
+html body #home .hero-build-cta-wrap > a.hero-build-cta:active{
+  background:#000!important;background-color:#000!important;background-image:none!important;
+  border:1px solid #000!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.22)!important;
+}
+html body #home .hero-build-cta-wrap > a.hero-build-cta:hover,
+html body #home .hero-build-cta-wrap > a.hero-build-cta:focus-visible{
+  background:#242424!important;background-color:#242424!important;background-image:none!important;
+  border-color:#242424!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+}
