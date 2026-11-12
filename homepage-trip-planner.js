@@ -72,8 +72,8 @@
  root.addEventListener("click",e=>{const b=e.target.closest("[data-vehicle-days]");if(!b)return;vehicleDays=Math.min(30,Math.max(1,vehicleDays+Number(b.dataset.vehicleDays)));renderVehicleSelection();calculate()});
  $("htpCalculate").addEventListener("click",()=>{
   const places=names.filter(n=>nights[n]>0),people=Number($("htpTravellers").value)||1,v=selectedVehicle(),days=tripDays();
-  if(!places.length||!days||!v||!cab){$("htpStatus").textContent="Select a destination, valid travel dates, number of travellers and a vehicle to calculate your complete trip estimate.";return}
   const stay=Number($("htpCalculate").dataset.stay),cab=Number($("htpCalculate").dataset.cab);
+  if(!places.length||!days||!v||!cab){$("htpStatus").textContent="Select a destination, valid travel dates, number of travellers and a vehicle to calculate your complete trip estimate.";return}
   const lines=["Hello Himalayan Odyssey Expedition! Please prepare my trip quotation.","Destinations: "+places.map(n=>n+" ("+nights[n]+" nights)").join(", "),"Dates: "+$("htpStart").value+" to "+$("htpEnd").value,"Duration: "+days+" days; selected stay: "+totalNights()+" nights","Travellers: "+people,"Stay estimate: "+money(stay),"Vehicle: "+(v?v.title+" × "+Math.ceil(people/Math.max(1,Number(v.capacity)||1)):"Please suggest a suitable vehicle"),"Vehicle rental days: "+(v?vehicleDays:"Not selected"),"Daily vehicle rate: "+(v?money(v.price):"Please quote"),"Cab estimate: "+(v&&cab?money(cab):"Please quote"),"Estimated total: "+money(stay+cab),"Estimated per person: "+money((stay+cab)/people),"Please confirm availability, route feasibility and final inclusions."];
   const url="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(lines.join("\n"));
   const w=window.open(url,"_blank");if(!w)window.location.href=url;
@@ -87,7 +87,6 @@
   $("htpSelectedVehicleName").textContent=v.title;
   $("htpSelectedVehicleRate").textContent=money(v.price)+" / day";
   $("htpVehicleDays").value=String(vehicleDays);
-  $("htpVehicleDaysOutput").textContent=String(vehicleDays);
  }
  function renderVehicles(){
   const s=$("htpVehicle"),old=s.value;
