@@ -419,3 +419,49 @@ html body > header .nav-dropdown.open .services-chevron-icon { transform: rotate
     stroke-linecap: round !important;
   }
 }
+
+
+/* Unified public-site header: borderless hamburger with an expandable Services submenu. */
+html body > header .header-menu-toggle,
+html body > header .header-menu-toggle:hover,
+html body > header .header-menu-toggle:focus,
+html body > header .header-menu-toggle[aria-expanded="true"] {
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+html body > header .header-menu-toggle:focus-visible {
+  outline: 2px solid rgba(255,255,255,.7) !important;
+  outline-offset: 3px !important;
+}
+html body > header .header-inner > nav.glass-nav {
+  border: 0 !important;
+  border-radius: 18px !important;
+  background: rgba(10,10,10,.97) !important;
+  color: #fff !important;
+  box-shadow: 0 18px 42px rgba(0,0,0,.24) !important;
+}
+html body > header .header-inner > nav.glass-nav > a,
+html body > header .header-inner > nav.glass-nav > .nav-dropdown > .nav-dropdown-toggle {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+html body > header .header-inner > nav.glass-nav > a:hover,
+html body > header .header-inner > nav.glass-nav > .nav-dropdown > .nav-dropdown-toggle:hover,
+html body > header .header-inner > nav.glass-nav > .nav-dropdown.open > .nav-dropdown-toggle {
+  background: rgba(255,255,255,.12) !important;
+}
+html body > header .header-inner > nav.glass-nav .nav-dropdown-menu {
+  background: rgba(255,255,255,.08) !important;
+}
+html body > header .header-inner > nav.glass-nav .nav-dropdown-menu a {
+  color: rgba(255,255,255,.9) !important;
+  -webkit-text-fill-color: rgba(255,255,255,.9) !important;
+}
+html body > header .header-inner > nav.glass-nav .nav-dropdown-menu a:hover {
+  background: rgba(255,255,255,.12) !important;
+  color: #fff !important;
+}
