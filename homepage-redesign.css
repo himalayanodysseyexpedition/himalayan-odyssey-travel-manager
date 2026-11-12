@@ -92,12 +92,6 @@ footer a{color:#dceefa!important}
 a:focus-visible,button:focus-visible{outline:2px solid var(--hoe-gold)!important;outline-offset:3px!important}
 /* Responsive layout */
 @media(max-width:900px){
- header .header-inner{grid-template-columns:1fr!important;grid-template-rows:auto auto!important;gap:8px!important;padding:8px 12px 10px!important}
- header .header-inner>.brand{justify-self:center!important}
- header .header-inner>.brand img{width:130px!important;max-height:48px!important}
- header .header-inner>nav.glass-nav{justify-self:center!important;width:100%!important;max-width:560px!important;gap:4px!important;padding:4px!important}
- header .header-inner>nav.glass-nav>a,header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{min-height:37px!important;padding:7px 10px!important;gap:5px!important;font-size:9px!important;letter-spacing:.45px!important}
- header .nav-glass-icon{width:14px!important;height:14px!important}
  .hero{min-height:650px!important;padding:76px 18px 76px!important;background-position:center!important}
  .hero .hero-animated-heading{font-size:clamp(30px,6vw,52px)!important}
  .content{padding:62px 20px!important}
@@ -376,12 +370,6 @@ button:focus-visible,a:focus-visible{outline:3px solid #a9d8f2!important;outline
     display:flex!important;justify-content:space-between!important;gap:2px!important;
     overflow:visible!important;padding:4px!important;
   }
-  .glass-nav>a,.glass-nav .nav-dropdown-toggle{
-    min-width:0!important;flex:1 1 0!important;justify-content:center!important;
-    padding:0 6px!important;min-height:39px!important;font-size:9px!important;
-    letter-spacing:.25px!important;white-space:nowrap!important;
-  }
-  .glass-nav>a .nav-glass-icon,.glass-nav .nav-dropdown-toggle .nav-glass-icon{width:13px!important;height:13px!important}
   .hero{min-height:690px!important;padding:74px 24px 78px!important;background-position:58% center!important}
   .hero-content{max-width:700px!important}
   .hero-animated-heading{font-size:clamp(44px,9vw,72px)!important;line-height:1.02!important}
@@ -685,33 +673,6 @@ body > .hero::before,
 
 /* DESKTOP CTA COLOUR SYSTEM — replace champagne/gold button fills with the hero neon-lime. */
 @media(min-width:761px){
-  html body>header .header-inner>.header-cta,
-  html body>header.is-scrolled .header-inner>.header-cta,
-  html body>header .header-inner>nav.glass-nav>a:first-child,
-  html body .footer-package,
-  html body .enquiry-dropdown>summary,
-  html body .hero .hero-build-cta,
-  html body .btn,
-  html body a.btn,
-  html body button.btn{
-    background:linear-gradient(110deg,#a9d8f2 0%,#a9d8f2 48%,#a9d8f2 100%)!important;
-    color:#10243b!important;
-    border-color:rgba(169,216,242,.9)!important;
-    box-shadow:0 8px 24px rgba(0,0,0,.14),0 0 16px rgba(169,216,242,.13),inset 0 1px 0 rgba(255,255,255,.58)!important;
-  }
-  html body>header .header-inner>.header-cta:hover,
-  html body>header.is-scrolled .header-inner>.header-cta:hover,
-  html body>header .header-inner>nav.glass-nav>a:first-child:hover,
-  html body .footer-package:hover,
-  html body .enquiry-dropdown>summary:hover,
-  html body .btn:hover,
-  html body a.btn:hover,
-  html body button.btn:hover{
-    background:linear-gradient(110deg,#f2ffd9 0%,#a9d8f2 48%,#a9d8f2 100%)!important;
-    color:#10243b!important;
-    border-color:#efffd7!important;
-    box-shadow:0 13px 30px rgba(0,0,0,.18),0 0 24px rgba(169,216,242,.24),inset 0 1px 0 rgba(255,255,255,.7)!important;
-  }
 }
 
 
