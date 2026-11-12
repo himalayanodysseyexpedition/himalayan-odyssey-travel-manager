@@ -345,3 +345,16 @@
  .home-trip-planner .htp-main{order:0}
  .home-trip-planner .htp-summary{order:1;position:static}
 }
+
+
+/* Desktop: keep the live estimate in view while scrolling through trip selections. */
+@media(min-width:761px){
+ .home-trip-planner .htp-shell{align-items:start;overflow:visible}
+ .home-trip-planner .htp-summary{
+  position:sticky!important;
+  top:24px!important;
+  align-self:start!important;
+  height:max-content;
+  z-index:5;
+ }
+}
