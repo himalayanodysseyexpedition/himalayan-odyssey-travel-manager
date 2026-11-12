@@ -8,7 +8,7 @@
  const WHATSAPP="919816929669";
  const rates={"Narkanda":1300,"Shimla":1300,"Kufri":1300,"Sangla":1600,"Kalpa":1500,"Tabo":1600,"Kaza":1500,"Manali":1300,"Jibhi":1400,"Kasol":1300};
  const names=Object.keys(rates);
- const nights=Object.fromEntries(names.map(n=>[n,0]));
+ const nights={};
  const $=id=>root.querySelector("#"+id);
  const money=n=>"₹"+Math.round(Number(n)||0).toLocaleString("en-IN");
  let vehicles=[];
@@ -17,7 +17,7 @@
  const today=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-")};
  dateInput.min=today();
  function renderLocationOptions(){
-  const select=$("htpLocationSelect"),added=names.filter(n=>Object.prototype.hasOwnProperty.call(nights,n)&&nights[n]>=0&&root.querySelector('[data-destination="'+n+'"]'));
+  const select=$("htpLocationSelect");
   const current=select.value;
   select.innerHTML='<option value="">Choose a destination</option>'+names.filter(n=>!root.querySelector('[data-destination="'+n+'"]')).map(n=>'<option value="'+n+'">'+n+'</option>').join("");
   if(current&&!root.querySelector('[data-destination="'+current+'"]'))select.value=current;
