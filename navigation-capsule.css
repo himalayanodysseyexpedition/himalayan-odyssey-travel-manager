@@ -1,4 +1,3 @@
-/* Himalayan Odyssey Expedition — Concept 14: single floating glass capsule */
 :root{
   --hoe-nav-ice:#a9d8f2;
   --hoe-nav-ice-light:#dceefa;
@@ -21,8 +20,7 @@
 @media (max-width: 760px) {.hero{padding-top:clamp(150px,21vh,178px)!important}
 }
 @media (prefers-reduced-motion: reduce) {
-}/* Reserve real breathing room so the fixed navigation never covers the hero copy. */
-html body>.hero{
+}html body>.hero{
   padding-top:clamp(150px,17vh,190px)!important;
   min-height:clamp(610px,82svh,850px)!important;
 }
@@ -50,9 +48,7 @@ html body>.hero{
 @media(min-width:761px){
 }
 @media(max-width:760px){
-}/* LUXURY GLASS FLOATING BAR — visual-only treatment.
-   Existing visibility classes,scroll-direction logic and transition timings remain untouched. */
-body #footerContactBar.footer-contact-bar{
+}body #footerContactBar.footer-contact-bar{
   left:50%!important;
   right:auto!important;
   bottom:max(18px,env(safe-area-inset-bottom))!important;
@@ -139,8 +135,7 @@ body #footerContactBar.footer-contact-bar{
   }body #footerContactBar .quick-nav-item svg{
     width:17px!important;height:17px!important;flex-basis:17px!important;
   }
-}/* FLOATING BAR CENTERING FIX — center by equal fixed-position side insets,not a translate transform,so the existing show/hide animation stays intact. */
-html body #footerContactBar.footer-contact-bar{
+}html body #footerContactBar.footer-contact-bar{
   position:fixed!important;
   left:0!important;
   right:0!important;
@@ -148,11 +143,7 @@ html body #footerContactBar.footer-contact-bar{
   margin-right:auto!important;
   translate:none!important;
   transform-origin:center bottom!important;
-}/* DEFINITIVE FLOATING BAR CENTER FIX.
-   The original visibility animation already includes translateX(-50%).
-   Pair it with left:50% and remove the separate translate property so the
-   horizontal offset is applied exactly once. Keep all Y/scale animation states. */
-html body #footerContactBar.footer-contact-bar{
+}html body #footerContactBar.footer-contact-bar{
   position:fixed!important;
   left:50%!important;
   right:auto!important;
@@ -167,71 +158,141 @@ html body #footerContactBar.footer-contact-bar{
     width:calc(100vw - 20px)!important;
     max-width:calc(100vw - 20px)!important;
   }
-}/* DESKTOP NAVIGATION TYPOGRAPHY — General Sans; mobile typography remains unchanged. */
+}
+
+
+/* DESKTOP NAVIGATION TYPOGRAPHY — General Sans; mobile typography remains unchanged. */
 @media(min-width:761px){
-}/* DESKTOP SERVICES DROPDOWN ARROW — vertically centered at the right edge. */
+}
+
+
+/* DESKTOP SERVICES DROPDOWN ARROW — vertically centered at the right edge. */
 @media(min-width:761px){
-}/* DESKTOP FLOATING PILL DROPDOWN — individual glass pills,no rectangular menu frame. */
+}
+
+/* DESKTOP FLOATING PILL DROPDOWN — individual glass pills, no rectangular menu frame. */
 @media(min-width:761px){
-}/* DESKTOP NAV LABEL SIZE — slightly larger for clearer hierarchy. */
+}
+
+/* DESKTOP NAV LABEL SIZE — slightly larger for clearer hierarchy. */
 @media(min-width:761px){
-}/* DESKTOP DESTINATIONS NAV — match the neutral glass treatment of sibling links,including active/current states; retain the shared hover treatment. */
+}
+
+
+/* DESKTOP DESTINATIONS NAV — match the neutral glass treatment of sibling links,
+   including active/current states; retain the shared hover treatment. */
 @media(min-width:761px){
-}/* DESKTOP MOUNTAIN-SPARK LOGO — tiny Himalayan starlight glints around the
-   original artwork. No logo replacement,scaling,rotation or layout shift. */
+}
+
+
+/* DESKTOP MOUNTAIN-SPARK LOGO — tiny Himalayan starlight glints around the
+   original artwork. No logo replacement, scaling, rotation or layout shift. */
 @media(min-width:761px){
 }
 @keyframes hoe-mountain-spark{0%,72%,100%{opacity:0;transform:scale(.35)}78%{opacity:.95;transform:scale(1.2)}84%{opacity:.35;transform:scale(.72)}90%{opacity:.85;transform:scale(1)}
 }
 @media(min-width:761px) and (prefers-reduced-motion:reduce){
-}/* DESKTOP NAV LABEL SIZE — one step larger while preserving the capsule fit. */
+}
+
+
+/* DESKTOP NAV LABEL SIZE — one step larger while preserving the capsule fit. */
 @media(min-width:761px){
-}/* DESKTOP PLAN YOUR TRIP CTA — match the navigation typography. */
+}
+
+
+/* DESKTOP PLAN YOUR TRIP CTA — match the navigation typography. */
 @media(min-width:761px){
-}/* DESKTOP MOUNTAIN MIST — soft translucent Himalayan fog drifts behind
+}
+
+
+/* DESKTOP MOUNTAIN MIST — soft translucent Himalayan fog drifts behind
    the original logo artwork; existing sparkle animation remains untouched. */
 @media(min-width:761px){
 }
 @keyframes hoe-mountain-mist{0%,100%{background-position:-65% 100%,165% 0%,50% 140%;filter:drop-shadow(0 0 0 rgba(205,226,211,0))}50%{background-position:35% 15%,65% 100%,50% 15%;filter:drop-shadow(0 0 5px rgba(205,226,211,.12))}
 }
 @media(min-width:761px) and (prefers-reduced-motion:reduce){
-}/* DESKTOP HIMALAYAN LIGHT SWEEP — replace Mountain Mist/Spark with one
+}
+
+
+/* DESKTOP HIMALAYAN LIGHT SWEEP — replace Mountain Mist/Spark with one
    refined travelling highlight across the unchanged original logo artwork. */
 @media(min-width:761px){
 }
 @keyframes hoe-himalayan-light-sweep{0%,62%{opacity:0;transform:translateX(-115%) skewX(-12deg)}67%{opacity:.9}79%{opacity:.72;transform:translateX(115%) skewX(-12deg)}84%,100%{opacity:0;transform:translateX(115%) skewX(-12deg)}
 }
 @media(min-width:761px) and (prefers-reduced-motion:reduce){
-}/* DESKTOP NAV POSITION — keep the navigation group truly centered in the
-   viewport,with the original logo anchored left and the CTA anchored right. */
-@media (min-width: 761px){
-}/* MOBILE NAV ICONS — give every navigation control its own matching symbol,including Services,while keeping the links in one compact horizontal row. */
+}
+
+
+/* DESKTOP NAV POSITION — keep the navigation group truly centered in the
+   viewport, with the original logo anchored left and the CTA anchored right. */
+@media (min-width: 761px) {
+}
+
+
+/* MOBILE NAV ICONS — give every navigation control its own matching symbol,
+   including Services, while keeping the links in one compact horizontal row. */
 @media(max-width:760px){
-}/* MOBILE ONLY — remove the navigation capsule's glass treatment; keep desktop unchanged. */
+}
+
+
+/* MOBILE ONLY — remove the navigation capsule's glass treatment; keep desktop unchanged. */
 @media(max-width:760px){
-}/* MOBILE ONLY — ensure every main navigation button visibly carries its own icon. */
+}
+
+/* MOBILE ONLY — ensure every main navigation button visibly carries its own icon. */
 @media screen and (max-width:760px){
-}/* MOBILE ONLY — stack each navigation icon centered above its heading. */
+}
+
+/* MOBILE ONLY — stack each navigation icon centered above its heading. */
 @media screen and (max-width:760px){
-}/* MOBILE ONLY — add two lines of breathing room before the Build Your Trip CTA. */
+}
+
+
+/* MOBILE ONLY — add two lines of breathing room before the Build Your Trip CTA. */
 @media screen and (max-width:760px){
-}/* MOBILE ONLY — reduce navigation label size by 1px so labels fit cleanly. */
+}
+
+
+/* MOBILE ONLY — reduce navigation label size by 1px so labels fit cleanly. */
 @media screen and (max-width:760px){
-}/* MOBILE ONLY — keep Services label identical in size to the other nav labels,and show a clear dropdown arrow without changing desktop navigation. */
+}
+
+
+/* MOBILE ONLY — keep Services label identical in size to the other nav labels,
+   and show a clear dropdown arrow without changing desktop navigation. */
 @media screen and (max-width:760px){
-}/* MOBILE FIX — Services must use the same label scale as sibling links.
+}
+
+
+/* MOBILE FIX — Services must use the same label scale as sibling links.
    Draw the dropdown indicator independently so earlier chevron-hide rules cannot suppress it. */
 @media screen and (max-width:760px){
-}/* MOBILE ONLY — remove the gold underline from Services while retaining its dropdown arrow. */
+}
+
+
+/* MOBILE ONLY — remove the gold underline from Services while retaining its dropdown arrow. */
 @media screen and (max-width:760px){
-}/* MOBILE ONLY — give Services the same champagne-gold treatment as the rotating hero words.
+}
+
+
+/* MOBILE ONLY — give Services the same champagne-gold treatment as the rotating hero words.
    Keep its dropdown arrow centered underneath the label. */
 @media screen and (max-width:760px){
-}/* MOBILE CORRECTION — explicitly restore the Services text and place one arrow beneath it. */
+}
+
+
+/* MOBILE CORRECTION — explicitly restore the Services text and place one arrow beneath it. */
 @media screen and (max-width:760px){
-}/* FINAL MOBILE NAV CLEANUP — one consistent glass style for every item. */
+}
+
+
+/* FINAL MOBILE NAV CLEANUP — one consistent glass style for every item. */
 @media (max-width:760px){
-}/* MOBILE NAV FINAL NORMALIZATION: equal pill geometry and readable labels. */
+}
+
+/* MOBILE NAV FINAL NORMALIZATION: equal pill geometry and readable labels. */
 @media screen and (max-width:760px){
 }html body :is(.btn,.button,.primary,.departure-cta,[type="submit"]){
   background:linear-gradient(120deg,#ff8738,#ff9d5b)!important;
@@ -268,5 +329,5 @@ html body #footerContactBar.footer-contact-bar{
 }html body footer a{color:#b9dcf2!important}
 @media(max-width:680px){
 }
-@media(prefers-reduced-motion:reduce){html body :is(button,.btn,.button,.primary,.site-nav-contact){transition:none!important;animation:none!important}
+@media(prefers-reduced-motion:reduce){html body :is(button,.btn,.button,.primary){transition:none!important;animation:none!important}
 }
