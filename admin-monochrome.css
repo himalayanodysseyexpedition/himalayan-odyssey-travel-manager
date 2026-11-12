@@ -1,0 +1,116 @@
+/* Himalayan Odyssey — monochrome admin skin.
+   Loaded after legacy admin styles: presentation overrides only.
+   Keep component layout, IDs, hidden states, forms and application logic intact. */
+:root{
+  --admin-bg:#f4f4f2;
+  --admin-surface:#fff;
+  --admin-ink:#171717;
+  --admin-muted:#737373;
+  --admin-line:#e5e5e3;
+  --admin-soft:#f0f0ee;
+  --admin-dark:#111;
+  --admin-radius:18px;
+  --admin-shadow:0 10px 30px rgba(0,0,0,.055);
+}
+html,body{background:var(--admin-bg)!important;color:var(--admin-ink)!important}
+body{font-family:Inter,Manrope,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important}
+body :is(h1,h2,h3,h4,h5,h6){color:var(--admin-ink)!important;font-family:Inter,Manrope,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;letter-spacing:-.035em}
+body :is(p,small,.muted,.status){color:var(--admin-muted)}
+body>header{
+  background:rgba(255,255,255,.94)!important;color:var(--admin-ink)!important;
+  border:0!important;border-bottom:1px solid var(--admin-line)!important;
+  box-shadow:0 5px 22px rgba(0,0,0,.045)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(160%)!important;
+  backdrop-filter:blur(20px) saturate(160%)!important;
+}
+body>header:after{display:none!important}
+body>header :is(h1,h2,h3,strong){color:var(--admin-ink)!important}
+body>header p{color:var(--admin-muted)!important}
+.admin-brand,.marketplace-admin-logo{
+  background:#fff!important;border:1px solid var(--admin-line)!important;
+  border-radius:14px!important;box-shadow:none!important;
+}
+.admin-brand:before,.admin-brand:after{display:none!important}
+.admin-brand img,.marketplace-admin-logo img{filter:none!important}
+.admin-brand img{animation:none!important}
+.marketplace-admin-header>strong{color:var(--admin-ink)!important}
+.marketplace-admin-header nav a{color:var(--admin-ink)!important}
+.marketplace-admin-header nav a:hover{color:#666!important}
+body>header nav{
+  background:rgba(255,255,255,.88)!important;border:1px solid var(--admin-line)!important;
+  border-radius:999px!important;box-shadow:0 5px 18px rgba(0,0,0,.04)!important;
+}
+body>header nav button{background:transparent!important;color:#444!important;border:1px solid transparent!important;box-shadow:none!important}
+body>header nav button:hover,body>header nav button.active{
+  background:#111!important;color:#fff!important;border-color:#111!important;
+}
+#app>nav{
+  background:rgba(255,255,255,.92)!important;border:1px solid var(--admin-line)!important;
+  border-radius:999px!important;box-shadow:0 5px 18px rgba(0,0,0,.045)!important;
+  scrollbar-color:#c8c8c5 transparent!important;
+}
+#app>nav button{background:transparent!important;color:#444!important;border:1px solid transparent!important;box-shadow:none!important}
+#app>nav button:hover,#app>nav button.active{background:#111!important;color:#fff!important;border-color:#111!important}
+#app>nav a{background:#111!important;color:#fff!important;border:1px solid #111!important;border-radius:999px!important}
+#app>nav a:hover{background:#333!important;color:#fff!important}
+body :is(button,input[type=button],input[type=submit],.btn,.button){
+  border:1px solid #111!important;border-radius:999px!important;
+  background:#111!important;color:#fff!important;box-shadow:none!important;
+  font-family:inherit!important;letter-spacing:.015em;
+}
+body :is(button,input[type=button],input[type=submit],.btn,.button):hover{
+  background:#333!important;border-color:#333!important;color:#fff!important;
+  transform:translateY(-1px);
+}
+body :is(button.secondary,.secondary,.btn.soft,.btn.ghost){
+  background:#fff!important;color:#222!important;border:1px solid #d8d8d5!important;
+}
+body :is(button.secondary,.secondary,.btn.soft,.btn.ghost):hover{background:#f0f0ee!important;color:#111!important}
+body :is(button.danger,.danger,.btn.danger){background:#a83232!important;border-color:#a83232!important;color:#fff!important}
+body :is(button:disabled,input:disabled,select:disabled,textarea:disabled){opacity:.55!important;cursor:not-allowed}
+body :is(.stat,.card,article,.panel,.finance-entry,.item,.enquiry,.section,.source-card){
+  background:#fff!important;border:1px solid var(--admin-line)!important;
+  border-radius:var(--admin-radius)!important;box-shadow:var(--admin-shadow)!important;
+}
+body :is(.stat,.card,article,.item,.enquiry){color:var(--admin-ink)}
+body :is(.stat,.card,.item,.enquiry):hover{border-color:#d1d1ce!important;box-shadow:0 14px 34px rgba(0,0,0,.075)!important}
+body :is(.stat strong,.finance-entry-head b,.finance-breakdown strong){color:var(--admin-ink)!important}
+body :is(label,.form-label){color:#444!important}
+body :is(input,select,textarea){
+  background:#fff!important;color:#171717!important;border:1px solid #dededb!important;
+  border-radius:11px!important;box-shadow:none!important;
+}
+body :is(input,select,textarea):focus{
+  outline:none!important;border-color:#777!important;box-shadow:0 0 0 3px rgba(0,0,0,.07)!important;
+}
+body input[type=checkbox],body input[type=radio]{accent-color:#111}
+body :is(dialog,.dialog){
+  background:#fff!important;color:#171717!important;border:1px solid var(--admin-line)!important;
+  border-radius:22px!important;box-shadow:0 24px 70px rgba(0,0,0,.18)!important;
+}
+body dialog::backdrop{background:rgba(0,0,0,.48)!important;backdrop-filter:blur(5px)}
+body :is(hr,.divider){border-color:var(--admin-line)!important}
+body a{color:#333}
+body a:hover{color:#000}
+body :is(.finance-quantity,.finance-breakdown>div,.finance-profit-line,.form-check){
+  background:#f5f5f3!important;color:#333!important;border-color:var(--admin-line)!important;
+}
+body :is(.finance-entry,.enquiry,#supplierSubmissions article,#supplierProfiles article,#supplierListings article,#supplierEnquiries article){
+  border-left-color:#777!important;
+}
+body :is(.tabs,.actions,.toolbar){gap:8px}
+body :is(.tabs button.active,[data-tab].active){background:#111!important;color:#fff!important}
+body :is(.hotel-photo,.day-entry){background:#fff!important;border:1px solid var(--admin-line)!important;border-radius:14px!important}
+body :is(.hotel-photo img,.cab-preview,.package-preview,.package-card-image,.item img){border-radius:12px!important}
+body :is(.hidden,[hidden]){display:none!important}
+:focus-visible{outline:2px solid #555!important;outline-offset:3px}
+@media(max-width:760px){
+  body>header{padding:12px 14px!important}
+  body main{padding-left:14px!important;padding-right:14px!important}
+  body .stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  body :is(nav,.tabs){max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+  body nav button{flex:0 0 auto}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+}
