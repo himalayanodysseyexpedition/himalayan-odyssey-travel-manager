@@ -66,3 +66,8 @@
     color:#10243b!important;
   }
 }
+
+
+/* Our Travel Packages: black card action buttons */
+#packages .package-slide :is(.btn,.button,.submit-btn,a[role="button"],a[class*="btn"],a[class*="button"],a[class*="cta"],a[class*="enquir"],a[class*="inquir"],button){background:#000!important;background-image:none!important;border:1px solid #000!important;color:#fff!important;-webkit-text-fill-color:#fff!important;box-shadow:none!important;}
+#packages .package-slide :is(.btn,.button,.submit-btn,a[role="button"],a[class*="btn"],a[class*="button"],a[class*="cta"],a[class*="enquir"],a[class*="inquir"],button):hover{background:#242424!important;background-image:none!important;border-color:#242424!important;color:#fff!important;-webkit-text-fill-color:#fff!important;}
