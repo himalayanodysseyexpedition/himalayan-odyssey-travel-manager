@@ -11,74 +11,6 @@
 html{scroll-behavior:smooth;scroll-padding-top:92px;background:var(--story-cream)}
 body{background:var(--story-cream);color:var(--story-ink);overflow-x:clip}
 ::selection{background:var(--story-gold);color:var(--story-deep)}
-/* Floating editorial header, sitting over the opening landscape. */
-body>header{
- position:absolute!important;top:0!important;left:0!important;right:0!important;z-index:1000!important;
- background:linear-gradient(180deg,rgba(16,36,59,.68),rgba(16,36,59,0))!important;
- border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
- transition:background .45s ease,box-shadow .45s ease,backdrop-filter .45s ease!important;
-}
-body>header.is-scrolled{
- position:fixed!important;background:rgba(16,36,59,.91)!important;
- border-bottom:1px solid rgba(169,216,242,.32)!important;
- box-shadow:0 12px 34px rgba(0,0,0,.18)!important;
- backdrop-filter:blur(22px) saturate(145%)!important;-webkit-backdrop-filter:blur(22px) saturate(145%)!important;
-}
-header .header-inner{
- width:100%!important;max-width:1600px!important;min-height:92px!important;margin:auto!important;
- padding:12px clamp(18px,4.2vw,68px)!important;
- display:grid!important;grid-template-columns:minmax(125px,190px) 1fr auto!important;
- grid-template-rows:1fr!important;align-items:center!important;justify-content:space-between!important;
- gap:20px!important;flex-direction:initial!important;
-}
-header .header-inner>.brand{
- grid-column:1;grid-row:1;justify-self:start!important;padding:4px 8px!important;
- border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;
-}
-header .header-inner>.brand:before,header .header-inner>.brand:after{display:none!important}
-header .header-inner>.brand img{
- width:clamp(116px,12vw,165px)!important;max-height:62px!important;object-fit:contain;
- filter:drop-shadow(0 2px 9px rgba(0,0,0,.45))!important;animation:none!important;
-}
-header .header-inner>nav.glass-nav{
- grid-column:2;grid-row:1;justify-self:center!important;align-self:center!important;
- display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;
- justify-content:center!important;align-items:center!important;width:max-content!important;
- max-width:100%!important;min-width:0!important;gap:clamp(16px,2.7vw,42px)!important;
- padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;
- box-shadow:none!important;overflow:visible!important;backdrop-filter:none!important;
- animation:none!important;
-}
-header .header-inner>nav.glass-nav>a,
-header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
- display:inline-flex!important;align-items:center!important;justify-content:center!important;
- min-height:40px!important;padding:8px 0!important;border:0!important;border-radius:0!important;
- background:transparent!important;box-shadow:none!important;color:rgba(255,255,255,.92)!important;
- font:600 9px/1.2 var(--story-sans)!important;letter-spacing:2px!important;
- white-space:nowrap!important;text-transform:uppercase!important;backdrop-filter:none!important;
- transition:color .25s ease,opacity .25s ease!important;
-}
-header .header-inner>nav.glass-nav>a:after{display:none!important}
-header .header-inner>nav.glass-nav>a:hover,
-header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle:hover{
- color:var(--story-champagne)!important;transform:none!important;opacity:.78;
-}
-header .header-inner>nav.glass-nav>.nav-dropdown{flex:0 0 auto!important}
-header .header-inner>nav.glass-nav .services-chevron{
- width:14px!important;height:14px!important;margin-left:5px!important;
- border:1px solid rgba(220,238,250,.65)!important;color:var(--story-champagne)!important;
-}
-header .header-inner>.header-cta{
- grid-column:3;grid-row:1;justify-self:end!important;display:inline-flex!important;
- align-items:center!important;justify-content:center!important;min-height:43px!important;
- padding:0 21px!important;border:1px solid rgba(220,238,250,.9)!important;border-radius:999px!important;
- background:linear-gradient(135deg,#dceefa,#a9d8f2)!important;color:#10243b!important;
- font:700 9px/1 var(--story-sans)!important;letter-spacing:1.25px!important;
- box-shadow:0 8px 24px rgba(0,0,0,.16)!important;animation:none!important;
- transition:transform .3s var(--story-ease),filter .3s ease!important;
-}
-header .header-inner>.header-cta:hover{transform:translateY(-2px)!important;filter:brightness(1.07)}
-header .nav-dropdown-menu{background:rgba(16,36,59,.97)!important;border:1px solid rgba(169,216,242,.42)!important;border-radius:12px!important;backdrop-filter:blur(20px)}
 /* Hero becomes a framed cinematic image rather than a conventional banner. */
 .hero{
  position:relative!important;isolation:isolate!important;overflow:hidden!important;
@@ -335,37 +267,12 @@ footer a{color:#dceefa!important}
 @keyframes storyHeroReveal{from{opacity:0;transform:translate3d(0,32px,0);filter:blur(5px)}to{opacity:1;transform:translate3d(0,0,0);filter:blur(0)}}
 @keyframes storyLight{from{opacity:.55;transform:scale(1)}to{opacity:1;transform:scale(1.035)}}
 @media(max-width:1000px){
- header .header-inner{grid-template-columns:120px 1fr auto!important;gap:10px!important;padding:10px 20px!important}
- header .header-inner>nav.glass-nav{gap:clamp(9px,1.7vw,18px)!important}
- header .header-inner>nav.glass-nav>a,header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{font-size:8px!important;letter-spacing:1px!important}
- header .header-inner>.header-cta{padding:0 13px!important;font-size:8px!important}
  .destination-gallery .destination-card{grid-column:span 6!important}
  .destination-gallery .destination-card:nth-child(1),.destination-gallery .destination-card:nth-child(4){height:430px!important}
  .destination-gallery .destination-card:nth-child(n+5){height:370px!important}
 }
 @media(max-width:700px){
  html{scroll-padding-top:105px}
- body>header{background:linear-gradient(180deg,rgba(16,36,59,.78),rgba(16,36,59,0))!important}
- header .header-inner{
-  display:grid!important;grid-template-columns:1fr auto!important;grid-template-rows:auto auto!important;
-  gap:4px 10px!important;padding:8px 14px 10px!important;min-height:0!important;
- }
- header .header-inner>.brand{grid-column:1;grid-row:1;justify-self:start!important}
- header .header-inner>.brand img{width:116px!important;max-height:48px!important}
- header .header-inner>nav.glass-nav{
-  grid-column:1/-1;grid-row:2;justify-self:stretch!important;width:100%!important;
-  display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;
-  justify-content:space-between!important;gap:3px!important;overflow:visible!important;
- }
- header .header-inner>nav.glass-nav>a,header .header-inner>nav.glass-nav>.nav-dropdown{flex:1 1 0!important;min-width:0!important}
- header .header-inner>nav.glass-nav>a,header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{
-  width:100%!important;min-width:0!important;min-height:32px!important;padding:6px 2px!important;
-  justify-content:center!important;font-size:clamp(6.3px,1.85vw,8px)!important;
-  letter-spacing:0!important;white-space:nowrap!important;
- }
- header .header-inner>nav.glass-nav .services-chevron{width:11px!important;height:11px!important;font-size:9px!important}
- header .header-inner>.header-cta{grid-column:2;grid-row:1;min-height:34px!important;padding:0 12px!important;font-size:7px!important;letter-spacing:.45px!important}
- body>header.is-scrolled{background:rgba(16,36,59,.96)!important}
  .hero{
   min-height:min(780px,100svh)!important;height:min(780px,100svh)!important;
   margin:7px!important;border-radius:20px!important;
@@ -410,108 +317,12 @@ footer a{color:#dceefa!important}
  .story-progress-label{display:none!important}
 }
 @media(max-width:370px){
- header .header-inner>nav.glass-nav>a,header .header-inner>nav.glass-nav>.nav-dropdown>.nav-dropdown-toggle{font-size:6px!important;padding-left:1px!important;padding-right:1px!important}
- header .header-inner>.brand img{width:105px!important}
- header .header-inner>.header-cta{font-size:6px!important;padding:0 8px!important}
 }
 @media(prefers-reduced-motion:reduce){
  *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
  .story-scene .section-inner{opacity:1!important;transform:none!important}
 }
-
-
-/* HEADER BEHAVIOUR FIX — keep the editorial header at the top only.
-   It is part of the opening hero composition and must scroll away naturally. */
-body>header,
-body>header.is-scrolled{
-  position:absolute!important;
-  top:0!important;left:0!important;right:0!important;
-  width:100%!important;
-  background:transparent!important;
-  border:0!important;
-  border-radius:0!important;
-  box-shadow:none!important;
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
-  transform:none!important;
-  opacity:1!important;
-  visibility:visible!important;
-  transition:none!important;
-}
-body>header:before,body>header:after,
-body>header .header-inner:before,body>header .header-inner:after{
-  content:none!important;display:none!important;
-}
-body>header .header-inner{
-  border:0!important;border-radius:0!important;
-  background:transparent!important;box-shadow:none!important;
-}
-body>header .header-inner>.brand{
-  border:0!important;border-radius:0!important;
-  background:transparent!important;box-shadow:none!important;
-  padding:4px 8px!important;
-}
-body>header .header-inner>.brand:before,
-body>header .header-inner>.brand:after{content:none!important;display:none!important}
-body>header .header-inner>nav.glass-nav{
-  border:0!important;border-radius:0!important;
-  background:transparent!important;box-shadow:none!important;
-  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
-}
-body>header .header-inner>.header-cta{box-shadow:0 8px 24px rgba(0,0,0,.16)!important}
-
-
-/* BORDERLESS CINEMATIC HEADER — final refinement */
-body>header,
-body>header.is-scrolled{
-  border:0!important;
-  border-radius:0!important;
-  outline:0!important;
-  box-shadow:none!important;
-  background:linear-gradient(180deg,rgba(16,36,59,.58),rgba(16,36,59,0))!important;
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
-}
-body>header:before,
-body>header:after{display:none!important;content:none!important}
-body>header .header-inner,
-body>header .header-inner>.brand,
-body>header .header-inner>nav.glass-nav{
-  border:0!important;
-  border-radius:0!important;
-  outline:0!important;
-  box-shadow:none!important;
-}
-body>header .header-inner>.brand{
-  padding:0!important;
-  background:transparent!important;
-}
-body>header .header-inner>.brand:before,
-body>header .header-inner>.brand:after{
-  display:none!important;
-  content:none!important;
-  animation:none!important;
-}
-body>header .header-inner>.brand img{
-  filter:drop-shadow(0 2px 8px rgba(0,0,0,.35))!important;
-}
-/* The header must never become a framed or tinted sticky panel on scroll. */
-body>header.is-scrolled{
-  position:absolute!important;
-  background:linear-gradient(180deg,rgba(16,36,59,.58),rgba(16,36,59,0))!important;
-}
 @media(max-width:760px){
-  body>header,
-  body>header.is-scrolled{
-    border:0!important;border-radius:0!important;box-shadow:none!important;
-  }
-}
- 
-/* HERO IMAGE EDGE-TO-EDGE + CLEARER ORIGINAL BRAND LOGO */
-body>header .header-inner>.brand img{
-  width:clamp(170px,15vw,205px)!important;
-  max-height:82px!important;
-  object-fit:contain!important;
 }
 .hero{
   margin:0!important;
@@ -519,10 +330,6 @@ body>header .header-inner>.brand img{
   box-shadow:none!important;
 }
 @media(max-width:760px){
-  body>header .header-inner>.brand img{
-    width:145px!important;
-    max-height:62px!important;
-  }
   .hero{
     margin:0!important;
     border-radius:0!important;
@@ -530,10 +337,6 @@ body>header .header-inner>.brand img{
   }
 }
 @media(max-width:370px){
-  body>header .header-inner>.brand img{
-    width:132px!important;
-    max-height:58px!important;
-  }
 }
 
 
@@ -552,56 +355,13 @@ body{
 body>*{max-width:100%}
 *,*::before,*::after{box-sizing:border-box}
 img,video,iframe{max-width:100%}
-
-/* Give the original brand mark enough visual space on small screens. */
-body>header .header-inner>.brand img{
-  width:clamp(210px,19vw,260px)!important;
-  max-width:100%!important;
-  max-height:100px!important;
-  height:auto!important;
-  object-fit:contain!important;
-}
 @media(max-width:760px){
-  body>header .header-inner>.brand{
-    max-width:100%!important;
-    min-width:0!important;
-  }
-  body>header .header-inner>.brand img{
-    width:220px!important;
-    max-width:min(62vw,220px)!important;
-    max-height:84px!important;
-    height:auto!important;
-  }
 }
 @media(max-width:370px){
-  body>header .header-inner>.brand img{
-    width:190px!important;
-    max-width:58vw!important;
-    max-height:76px!important;
-  }
-}
-
-
-/* MAIN BRAND LOGO SIZE ENHANCEMENT */
-body>header .header-inner>.brand img{
-  width:clamp(240px,22vw,290px)!important;
-  max-height:112px!important;
-  height:auto!important;
-  object-fit:contain!important;
 }
 @media(max-width:760px){
-  body>header .header-inner>.brand img{
-    width:250px!important;
-    max-width:min(72vw,250px)!important;
-    max-height:96px!important;
-  }
 }
 @media(max-width:370px){
-  body>header .header-inner>.brand img{
-    width:220px!important;
-    max-width:68vw!important;
-    max-height:88px!important;
-  }
 }
 
 
@@ -656,19 +416,6 @@ body>header .header-inner>.brand img{
     touch-action: pan-x pan-y pinch-zoom;
   }
 
-  /* Prevent long labels, cards, and flex/grid children from widening their parents. */
-  .section-inner > *,
-  .header-inner > *,
-  .journey-strip > *,
-  .destination-card,
-  .package-slide,
-  .itinerary-slide,
-  .cab-card,
-  .group-departure-card {
-    min-width: 0 !important;
-    max-width: 100%;
-  }
-
   img,
   video,
   iframe,
@@ -698,25 +445,6 @@ body>header .header-inner>.brand img{
     margin-right: 0 !important;
     overflow-x: hidden !important;
     position: relative;
-  }
-
-  body > header,
-  body > main,
-  body > footer,
-  main,
-  main > *,
-  section,
-  .story-scene,
-  .content,
-  .section-inner,
-  .homepage,
-  .page-content,
-  .destination-gallery,
-  .group-departures,
-  .cta {
-    box-sizing: border-box !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
   }
 
   .hero,
