@@ -358,3 +358,6 @@
   z-index:5;
  }
 }
+
+.home-trip-planner .htp-night-label{font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#61778a;margin-right:2px}
+@media(max-width:760px){.home-trip-planner .htp-night-label{font-size:9px}}
