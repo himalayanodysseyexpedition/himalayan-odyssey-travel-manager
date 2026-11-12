@@ -20,7 +20,7 @@
   $("htpAddLocation").disabled=!select.value;
  }
  function renderDestinations(){
-  $("htpDestinations").innerHTML=names.filter(n=>Object.hasOwn(nights,n)).map(n=>'<div class="htp-destination" data-destination="'+n+'"><div><strong>'+n+'</strong><span class="htp-rate"><strong>'+money(rates[n])+'</strong><small>per person · per night</small></span></div><div class="htp-stepper"><button type="button" data-place="'+n+'" data-delta="-1" aria-label="Remove one night in '+n+'">−</button><output id="htpNight-'+n+'">'+nights[n]+'</output><button type="button" data-place="'+n+'" data-delta="1" aria-label="Add one night in '+n+'">+</button><button type="button" class="htp-remove" data-remove-place="'+n+'" aria-label="Delete '+n+'">×</button></div></div>').join("");
+  $("htpDestinations").innerHTML=names.filter(n=>Object.hasOwn(nights,n)).map(n=>'<div class="htp-destination" data-destination="'+n+'"><div><strong>'+n+'</strong><span class="htp-rate"><strong>'+money(rates[n])+'</strong><small>stay + food · per person / night</small></span></div><div class="htp-stepper"><button type="button" data-place="'+n+'" data-delta="-1" aria-label="Remove one night in '+n+'">−</button><output id="htpNight-'+n+'">'+nights[n]+'</output><button type="button" data-place="'+n+'" data-delta="1" aria-label="Add one night in '+n+'">+</button><button type="button" class="htp-remove" data-remove-place="'+n+'" aria-label="Delete '+n+'">×</button></div></div>').join("");
   $("htpSelectedWrap").hidden=Object.keys(nights).length===0;
   renderLocationOptions();
  }
