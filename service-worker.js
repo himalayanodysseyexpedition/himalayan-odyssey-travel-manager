@@ -7,5 +7,5 @@ self.addEventListener('fetch',event=>{
  const req=event.request,url=new URL(req.url);
  if(req.method!=='GET'||url.origin!==self.location.origin||url.pathname.startsWith('/rest/')||url.pathname.includes('supabase'))return;
  if(req.mode==='navigate'){event.respondWith(fetch(req).then(response=>{if(response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put('/',copy))}return response}).catch(()=>caches.match('/')));return}
- if(SHELL.includes(url.pathname)){event.respondWith(caches.match(req).then(cached=>cached||fetch(req)))}
+ if(SHELL.includes(url.pathname)){event.respondWith(caches.match(url.pathname).then(cached=>cached||fetch(req).then(response=>{if(response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(url.pathname,copy))}return response})))}
 });
