@@ -2368,48 +2368,11 @@ function observeReveals() {
   elements.forEach(element => revealObserver.observe(element));
 }
 
-/* FLOATING CONTACT BUTTONS - HIDE WHEN FOOTER IS REACHED */
+/* FLOATING CONTACT BAR - KEEP VISIBLE THROUGHOUT PAGE SCROLL */
 const footerContactBar = document.getElementById("footerContactBar");
-const siteFooter = document.getElementById("siteFooter");
-const quickMenuToggleForBar = document.getElementById("quickMenuToggle");
-
-if (footerContactBar && siteFooter) {
-  let lastScrollY = Math.max(0, window.scrollY);
-  let scrollDirection = "up";
-  let scrollTicking = false;
-
-  function updateFloatingButtons() {
-    const currentY = Math.max(0, window.scrollY);
-    const delta = currentY - lastScrollY;
-
-    if (Math.abs(delta) >= 7) {
-      scrollDirection = delta > 0 ? "down" : "up";
-      lastScrollY = currentY;
-    }
-
-    const footerReached = siteFooter.getBoundingClientRect().top < window.innerHeight;
-    const menuOpen = quickMenuToggleForBar?.getAttribute("aria-expanded") === "true";
-    const atTop = currentY < 80;
-    const shouldShow = !footerReached && (atTop || scrollDirection === "up" || menuOpen);
-
-    footerContactBar.classList.toggle("visible", shouldShow);
-    footerContactBar.classList.toggle("scroll-hidden", !shouldShow);
-    scrollTicking = false;
-  }
-
-  function requestFloatingButtonUpdate() {
-    if (scrollTicking) return;
-    scrollTicking = true;
-    window.requestAnimationFrame(updateFloatingButtons);
-  }
-
-  window.addEventListener("scroll", requestFloatingButtonUpdate, { passive: true });
-  window.addEventListener("resize", requestFloatingButtonUpdate);
-  quickMenuToggleForBar?.addEventListener("click", requestFloatingButtonUpdate);
-
-  /* Show the bar on initial load; then follow scroll direction. */
+if (footerContactBar) {
+  footerContactBar.classList.remove("scroll-hidden");
   footerContactBar.classList.add("visible");
-  updateFloatingButtons();
 }
 
 
@@ -3612,5 +3575,22 @@ html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is
 }
 </style>
 
+
+<style id="persistent-floating-contact-bar">
+  #footerContactBar{
+    position:fixed!important;
+    z-index:99999!important;
+    opacity:1!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
+    transform:translate(-50%,0)!important;
+  }
+  #footerContactBar.scroll-hidden{
+    opacity:1!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
+    transform:translate(-50%,0)!important;
+  }
+</style>
 </body>
 </html>
