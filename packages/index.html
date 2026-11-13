@@ -516,10 +516,26 @@ html body .featured-departure .seat-status span {
   -webkit-text-fill-color: #fff !important;
 }
 html body .featured-departure .seat-track {
-  background: #444 !important;
+  /* The unbooked 8-seat section stays white. */
+  background: #fff !important;
+  border: 1px solid rgba(255,255,255,.85) !important;
+  height: 12px !important;
+  border-radius: 999px !important;
+  overflow: hidden !important;
 }
 html body .featured-departure .seat-track span {
-  background: #fff !important;
+  /* 32 booked seats (80%) use the Tibetan flag palette. */
+  display: block !important;
+  width: 80% !important;
+  height: 100% !important;
+  background: linear-gradient(90deg,
+    #d71920 0%,
+    #164b9b 22%,
+    #ffffff 43%,
+    #f5c400 63%,
+    #168447 82%,
+    #d71920 100%) !important;
+  border-radius: 999px 0 0 999px !important;
 }
 html body .featured-departure .departure-cta {
   color: #000 !important;
