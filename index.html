@@ -5215,5 +5215,19 @@ html body #footerContactBar.footer-contact-bar.scroll-hidden{
 
 
 
+
+<style id="hide-explore-itineraries-upcoming-enquire-bar-mobile">
+/* Remove the specific Explore / Itineraries / Upcoming Tours / Enquire
+   floating navigation bar on mobile only. Keep desktop navigation intact. */
+@media screen and (max-width:760px){
+  html body > nav#footerContactBar.footer-contact-bar{
+    display:none!important;
+    visibility:hidden!important;
+    opacity:0!important;
+    pointer-events:none!important;
+  }
+}
+</style>
+
 </body>
 </html>
