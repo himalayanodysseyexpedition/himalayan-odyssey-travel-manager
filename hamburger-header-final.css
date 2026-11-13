@@ -522,3 +522,54 @@ html body > header .header-inner > nav.glass-nav .nav-dropdown-menu a:hover {
     cursor:pointer!important;
   }
 }
+
+
+/* SITEWIDE MOBILE HAMBURGER — match the homepage's framed glass control.
+   Apply after all legacy borderless rules so every public page is consistent. */
+@media screen and (max-width:760px){
+  html body > header .header-menu-toggle,
+  html body > header .header-menu-toggle:hover,
+  html body > header .header-menu-toggle:focus,
+  html body > header .header-menu-toggle:focus-visible,
+  html body > header .header-menu-toggle[aria-expanded="true"]{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:46px!important;
+    height:46px!important;
+    min-width:46px!important;
+    min-height:46px!important;
+    max-width:46px!important;
+    max-height:46px!important;
+    flex:0 0 46px!important;
+    padding:0!important;
+    margin:0!important;
+    border:1px solid rgba(255,255,255,.34)!important;
+    border-radius:11px!important;
+    background:rgba(0,0,0,.48)!important;
+    background-color:rgba(0,0,0,.48)!important;
+    color:#fff!important;
+    -webkit-text-fill-color:#fff!important;
+    box-shadow:0 2px 10px rgba(0,0,0,.24)!important;
+    -webkit-backdrop-filter:blur(5px)!important;
+    backdrop-filter:blur(5px)!important;
+    outline:0!important;
+    opacity:1!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
+    touch-action:manipulation!important;
+    cursor:pointer!important;
+  }
+  html body > header .header-menu-toggle:focus-visible{
+    outline:2px solid rgba(255,255,255,.8)!important;
+    outline-offset:3px!important;
+  }
+  html body > header .header-menu-toggle svg,
+  html body > header .header-menu-toggle svg path{
+    display:block!important;
+    stroke:#fff!important;
+    stroke-width:2.3!important;
+    stroke-linecap:round!important;
+    filter:drop-shadow(0 1px 2px rgba(0,0,0,.65))!important;
+  }
+}
