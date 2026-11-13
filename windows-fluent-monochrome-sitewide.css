@@ -1,0 +1,106 @@
+/* Windows Fluent + Arctic Prestige — sitewide design layer
+   Visual-only overrides. Preserves page structure, routes, forms, data and integrations. */
+:root{
+  --fluent-ink:#111;
+  --fluent-muted:#686868;
+  --fluent-white:#fff;
+  --fluent-black:#050505;
+  --fluent-line:rgba(0,0,0,.12);
+  --fluent-glass:rgba(255,255,255,.78);
+  --fluent-radius:22px;
+  --fluent-shadow:0 18px 48px rgba(0,0,0,.10);
+}
+html{scroll-behavior:smooth}
+body{
+  color:var(--fluent-ink);
+  background:#fff;
+  font-family:"Segoe UI",Inter,-apple-system,BlinkMacSystemFont,"DM Sans",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:#111;color:#fff}
+:focus-visible{outline:2px solid #111;outline-offset:4px}
+
+/* Acrylic / Mica navigation */
+body>header,.site-header,.main-header{
+  background:rgba(255,255,255,.82)!important;
+  border-bottom:1px solid rgba(0,0,0,.10)!important;
+  box-shadow:0 6px 26px rgba(0,0,0,.06)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(165%);
+  backdrop-filter:blur(28px) saturate(165%);
+}
+body>header nav a,.site-header nav a,.main-header nav a{transition:background .2s ease,color .2s ease}
+body>header nav a:hover,.site-header nav a:hover,.main-header nav a:hover{
+  background:rgba(0,0,0,.055);border-radius:999px;
+}
+
+/* Cinematic monochrome hero; keep the existing mountain image and content */
+#home.hero{
+  background-color:#050505;
+  color:#fff;
+}
+#home.hero:before{pointer-events:none}
+#home.hero .eyebrow{color:rgba(255,255,255,.78)}
+#home.hero .hero-rule{background:#fff}
+#home.hero .hero-content{isolation:isolate}
+#home.hero .hero-service-icon{
+  border:1px solid rgba(255,255,255,.30);
+  border-radius:18px;
+  background:rgba(255,255,255,.12);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.20),0 12px 30px rgba(0,0,0,.18);
+  -webkit-backdrop-filter:blur(22px) saturate(150%);
+  backdrop-filter:blur(22px) saturate(150%);
+}
+#home.hero .hero-service-icon :is(span,svg){color:#fff;stroke:#fff}
+#home.hero .btn:not(.outline),#home.hero .hero-build-cta{
+  color:#000;background:#fff;border-color:#fff;border-radius:999px;
+}
+
+/* Alternating solid monochrome surfaces */
+#upcoming-packages,#journey-story,#itineraries,#gallery,#reviews,#contact{
+  background:#fff!important;color:#111;
+}
+#plan-your-trip,#packages,#cabs,#more-than-tours,#instagram,#siteFooter,#contact.cta{
+  background:#050505!important;color:#fff;
+}
+:is(#upcoming-packages,#journey-story,#itineraries,#gallery,#reviews,#contact) :is(h1,h2,h3,h4,.section-title h2){color:#111}
+:is(#plan-your-trip,#packages,#cabs,#more-than-tours,#instagram,#siteFooter,#contact.cta) :is(h1,h2,h3,h4,.section-title h2){color:#fff}
+:is(#upcoming-packages,#journey-story,#itineraries,#gallery,#reviews) .section-title small{color:#666}
+:is(#plan-your-trip,#packages,#cabs,#more-than-tours,#instagram) .section-title small{color:#c9c9c9}
+:is(#upcoming-packages,#journey-story,#itineraries,#gallery,#reviews) .intro{color:#666}
+:is(#plan-your-trip,#packages,#cabs,#more-than-tours,#instagram) .intro{color:#c7c7c7}
+:is(#upcoming-packages,#journey-story,#itineraries,#gallery,#reviews) .section-title h2:after{background:#111}
+:is(#plan-your-trip,#packages,#cabs,#more-than-tours,#instagram) .section-title h2:after{background:#fff}
+
+/* Fluent cards: crisp borders, restrained depth, soft elevation */
+:is(.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.card,.info-box,.review-point,.service-card,.property-card,.vehicle-card){
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:22px;
+  box-shadow:0 12px 34px rgba(0,0,0,.08);
+  overflow:hidden;
+  transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease;
+}
+@media(hover:hover){
+  :is(.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.card,.info-box,.review-point,.service-card,.property-card,.vehicle-card):hover{
+    transform:translateY(-5px);
+    box-shadow:0 22px 48px rgba(0,0,0,.14);
+    border-color:rgba(0,0,0,.25);
+  }
+}
+:is(.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.card,.info-box,.review-point,.service-card,.property-card,.vehicle-card) :is(h1,h2,h3,h4,strong,b){color:#111}
+:is(.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.card,.info-box,.review-point,.service-card,.property-card,.vehicle-card) p{color:#666}
+
+/* Native-feeling pill actions and accessible form controls */
+body :is(button,.btn,.button,.submit-btn,.group-departure-cta,a[role=button],a[class*=btn],a[class*=button],a[class*=cta]):not(header *){
+  border-radius:999px;
+  transition:transform .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease;
+}
+body :is(button,.btn,.button,.submit-btn):not(header *):active{transform:scale(.985)}
+body :is(input,select,textarea){border-radius:13px}
+body footer,body .site-footer{background:#050505;color:#fff}
+body footer :is(h2,h3,h4,strong,b,p,small),body footer a,body .site-footer :is(h2,h3,h4,p,small,a){color:#fff}
+
+/* Keep motion subtle and honor the device accessibility setting */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  body *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
