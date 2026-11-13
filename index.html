@@ -3910,5 +3910,20 @@ html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is
   }
 }
 </style>
+
+<style id="mobile-hero-rotating-words-fit-screen">
+/* Mobile only: reduce rotating phrase size and tighten its letter spacing so long words fit. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-content h1.hero-animated-heading > .hero-word-slot,
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord,
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-in,
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-out{
+    font-size:.82em!important;
+    letter-spacing:-.075em!important;
+    max-width:100%!important;
+    white-space:nowrap!important;
+  }
+}
+</style>
 </body>
 </html>
