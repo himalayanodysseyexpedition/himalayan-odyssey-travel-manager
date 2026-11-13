@@ -5238,7 +5238,7 @@ html body #footerContactBar.footer-contact-bar.scroll-hidden{
     padding:5px 8px!important;border:2px solid transparent!important;border-radius:10px!important;
     background:linear-gradient(transparent,transparent) padding-box,
       linear-gradient(100deg,#159bd0 0%,#f5f1e7 20%,#e44747 40%,#55aa72 60%,#f0c746 80%,#159bd0 100%) border-box!important;
-    background-size:auto,300% 100%!important;background-position:0 0,0% 0!important;
+    background-size:auto,300% 100%!important;background-position:0 0,0% 0;
     box-shadow:0 0 9px rgba(21,155,208,.16),0 0 13px rgba(228,71,71,.12),0 0 15px rgba(85,170,114,.12)!important;
     animation:mobileDestFlagBorderTravel 5s linear infinite!important;
   }
@@ -5265,9 +5265,7 @@ html body #footerContactBar.footer-contact-bar.scroll-hidden{
   from{background-position:0% 50%;transform:translateX(-5px)}
   to{background-position:200% 50%;transform:translateX(5px)}
 }
-@media screen and (max-width:760px) and (prefers-reduced-motion:reduce){
-  html body #home.hero .hero-destination-list,html body #home.hero .hero-destination-list::before{animation:none!important}
-}
+/* Keep this explicitly requested decorative flag animation active on mobile. */
 </style>
 
 </body>
