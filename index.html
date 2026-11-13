@@ -1450,7 +1450,7 @@ html body #home.hero .hero-build-cta-wrap > .hero-build-cta:active{
 <div class="hero" id="home">
   <div class="hero-content">
     <div class="mobile-tibetan-flag-line" aria-hidden="true"></div>
-    <h1 class="hero-animated-heading"><span class="hero-heading-static hero-heading-prefix">The</span><span class="hero-word-slot"><span id="heroRotatingWord" class="hero-word-rotator word-himalayas" aria-label="Himalayas are">Himalayas are</span></span><span class="hero-heading-static hero-heading-suffix">calling</span></h1>
+    <h1 class="hero-animated-heading"><span class="hero-heading-static hero-heading-prefix">The</span><span class="hero-word-slot"><span id="heroRotatingWord" class="hero-word-rotator word-himalayas" aria-label="Himalayas are"><span class="hero-rotating-line hero-rotating-line-first">Himalayas</span><span class="hero-rotating-line hero-rotating-line-second">are</span></span></span><span class="hero-heading-static hero-heading-suffix">calling</span></h1>
 
     <div class="hero-service-icons" aria-label="Our services">
       <a class="hero-service-icon" href="#cabs" aria-label="Explore cabs">
@@ -2662,21 +2662,24 @@ loadHotels();
 (() => {
   const word = document.getElementById("heroRotatingWord");
   if (!word) return;
+  const firstLine = word.querySelector(".hero-rotating-line-first");
+  const secondLine = word.querySelector(".hero-rotating-line-second");
+  if (!firstLine || !secondLine) return;
   const words = [
-    { text: "Himalayas are", className: "word-himalayas" },
-    { text: "Himachal is", className: "word-himachal" },
-    { text: "Spiti is", className: "word-spiti" },
-    { text: "Adventure is", className: "word-adventure" }
+    { first: "Himalayas", second: "are", className: "word-himalayas" },
+    { first: "Himachal", second: "is", className: "word-himachal" },
+    { first: "Spiti", second: "is", className: "word-spiti" },
+    { first: "Adventure", second: "is", className: "word-adventure" }
   ];
   const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduceMotion) return;
   let index = 0;
-  // Give each phrase time to fade out and fade back in; no vertical movement.
   window.setInterval(() => {
     word.classList.add("is-shuffling-out");
     window.setTimeout(() => {
       index = (index + 1) % words.length;
-      word.textContent = words[index].text;
+      firstLine.textContent = words[index].first;
+      secondLine.textContent = words[index].second;
       word.className = "hero-word-rotator " + words[index].className + " is-shuffling-in";
       window.requestAnimationFrame(() => {
         window.requestAnimationFrame(() => word.classList.remove("is-shuffling-in"));
@@ -3891,6 +3894,63 @@ html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is
   html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-in,
   html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-out{
     font-size:1.12em!important;
+  }
+}
+</style>
+
+
+<style id="mobile-hero-headline-four-line-layout">
+/* Mobile only: The / rotating first word / rotating second word / calling. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-content h1.hero-animated-heading{
+    display:flex!important;
+    flex-direction:column!important;
+    flex-wrap:nowrap!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:.015em!important;
+    row-gap:.015em!important;
+    white-space:normal!important;
+    text-wrap:initial!important;
+    line-height:.96!important;
+  }
+  html body #home.hero .hero-content h1.hero-animated-heading > .hero-heading-prefix,
+  html body #home.hero .hero-content h1.hero-animated-heading > .hero-heading-suffix{
+    display:block!important;
+    flex:none!important;
+    margin:0!important;
+    font-size:.76em!important;
+    line-height:1!important;
+    text-align:center!important;
+  }
+  html body #home.hero .hero-content h1.hero-animated-heading > .hero-word-slot{
+    display:flex!important;
+    flex:0 0 auto!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:auto!important;
+    min-width:0!important;
+    margin:0!important;
+    line-height:.92!important;
+    white-space:normal!important;
+  }
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:auto!important;
+    min-width:0!important;
+    font-size:1.12em!important;
+    line-height:.92!important;
+    text-align:center!important;
+    white-space:normal!important;
+  }
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord .hero-rotating-line{
+    display:block!important;
+    white-space:nowrap!important;
+    text-align:center!important;
   }
 }
 </style>
