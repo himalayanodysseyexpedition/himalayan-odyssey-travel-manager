@@ -5177,5 +5177,40 @@ html body #footerContactBar.footer-contact-bar.scroll-hidden{
 }
 </style>
 
+
+<style id="mobile-remove-extra-docked-hero-cta-v1">
+/* Keep the existing bottom navigation as the only floating mobile bar.
+   The Book Your Trip hero CTA remains in normal document flow, never docked. */
+@media screen and (max-width:760px){
+  html.mobile-hero-cta-docked #home.hero .hero-build-cta-wrap{
+    position:static!important;
+    left:auto!important;
+    right:auto!important;
+    bottom:auto!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:18px auto 0!important;
+    transform:none!important;
+    z-index:auto!important;
+  }
+  html body #home.hero .hero-content .hero-service-icons,
+  html body #home.hero .hero-content .hero-destination-list{
+    top:0!important;
+  }
+}
+</style>
+<script id="mobile-disable-extra-hero-cta-docking-v1">
+(() => {
+  const root=document.documentElement;
+  root.classList.remove("mobile-hero-cta-docked");
+  const hero=document.getElementById("home");
+  if(!hero || !("IntersectionObserver" in window)) return;
+  const observer=new IntersectionObserver(() => {
+    root.classList.remove("mobile-hero-cta-docked");
+  }, {threshold:[0,.35,.6,1]});
+  observer.observe(hero);
+})();
+</script>
+
 </body>
 </html>
