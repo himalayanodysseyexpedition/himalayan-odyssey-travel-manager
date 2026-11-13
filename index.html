@@ -4398,14 +4398,42 @@ id="mobile-hero-ticker-force-v3">
 })();
 </script>
 
-<style id="mobile-hero-trip-buttons-lower-v1">
-/* Move both homepage trip buttons slightly lower on mobile only. */
+
+<style id="mobile-hero-trip-buttons-above-floating-bar-v2">
+/* Dock the two homepage CTAs just above the mobile floating navigation while the hero is in view. */
 @media screen and (max-width:760px){
-  html body #home.hero .hero-build-cta-wrap{
-    margin-top:60px!important;
+  html.mobile-hero-cta-docked #home.hero .hero-build-cta-wrap{
+    position:fixed!important;
+    left:50%!important;
+    bottom:calc(max(12px,env(safe-area-inset-bottom)) + 76px)!important;
+    transform:translateX(-50%)!important;
+    width:min(540px,calc(100vw - 28px))!important;
+    max-width:calc(100vw - 28px)!important;
+    margin:0!important;
+    z-index:1200!important;
   }
 }
 </style>
+<script id="mobile-hero-cta-dock-controller-v2">
+(() => {
+  const hero = document.getElementById("home");
+  if (!hero || !("IntersectionObserver" in window)) return;
+  const mobile = window.matchMedia("(max-width: 760px)");
+  const setDocked = value => document.documentElement.classList.toggle("mobile-hero-cta-docked", value && mobile.matches);
+  const observer = new IntersectionObserver(entries => {
+    const entry = entries[0];
+    setDocked(entry.isIntersecting && entry.intersectionRatio >= 0.35);
+  }, { threshold: [0, 0.35, 0.6, 1] });
+  observer.observe(hero);
+  const update = () => {
+    if (!mobile.matches) document.documentElement.classList.remove("mobile-hero-cta-docked");
+  };
+  if (mobile.addEventListener) mobile.addEventListener("change", update);
+  else mobile.addListener(update);
+  update();
+})();
+</script>
+
 </body>
 </html>
 
