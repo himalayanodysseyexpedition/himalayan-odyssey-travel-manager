@@ -386,4 +386,32 @@ const firstDepartureDate=value=>{
 <script src="/site-navigation.js?v=9" defer></script>
 
  <script src="/arctic-prestige-motion.js?v=2" defer></script>
+
+<style id="package-card-black-white-final-override">
+/* Force a clear black/white contrast on package cards after all theme styles. */
+html body #packageList.package-cards-carousel > article.card h2,
+html body #packageList.package-cards-carousel > article.card p,
+html body #packageList.package-cards-carousel > article.card p:not(.package-departure-date):not(.price) {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+}
+html body #packageList.package-cards-carousel > article.card .package-departure-date {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  background: #000 !important;
+  border-left: 3px solid #000 !important;
+}
+html body #packageList.package-cards-carousel > article.card .price {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  font-weight: 800 !important;
+}
+html body #packageList.package-cards-carousel > article.card a.btn {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  background: #000 !important;
+  border: 1px solid #000 !important;
+}
+</style>
+
 </body></html>
