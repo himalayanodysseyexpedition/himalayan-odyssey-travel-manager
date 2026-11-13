@@ -1,30 +1,12 @@
-/* Mobile homepage: unify page-level surfaces with the light cream canvas. */
-@media(max-width:760px){
-  html,body{background:#f8f6ef!important}
+/* Mobile homepage: force the requested section canvases to the light cream surface. */
+@media (max-width:760px){
+  html,body{background:#f8f6ef!important;background-color:#f8f6ef!important}
   body{background-color:#f8f6ef!important}
-  /* Explicitly keep the four requested homepage sections on the cream canvas. */
-  body #upcoming-packages,
-  body #plan-your-trip,
-  body #journey-story,
-  body #more-than-tours{
-    background:#f8f6ef!important;
-    background-color:#f8f6ef!important;
-    background-image:none!important;
-  }
-  body #home.hero{
-    background:#f8f6ef!important;
-    background-image:none!important;
-    color:#10243b!important;
-  }
-  body #home.hero:before,
-  body #home.hero:after{background:none!important;opacity:0!important}
-  body>section{
-    background-color:#f8f6ef!important;
-    background-image:none!important;
-  }
-  body>footer,
-  body #siteFooter{
-    background-color:#f8f6ef!important;
-    background-image:none!important;
-  }
+  body #home.hero{background:#f8f6ef!important;background-color:#f8f6ef!important;background-image:none!important;color:#10243b!important}
+  body #home.hero:before,body #home.hero:after{content:none!important;display:none!important}
+  body #upcoming-packages,body #plan-your-trip,body #journey-story,body #more-than-tours{background:#f8f6ef!important;background-color:#f8f6ef!important;background-image:none!important;color:#10243b!important}
+  body #upcoming-packages>.section-inner,body #journey-story>.section-inner,body #more-than-tours>.section-inner,body #plan-your-trip>.htp-inner{background:#f8f6ef!important;background-color:#f8f6ef!important;background-image:none!important}
+  body #upcoming-packages:before,body #upcoming-packages:after,body #plan-your-trip:before,body #plan-your-trip:after,body #journey-story:before,body #journey-story:after,body #more-than-tours:before,body #more-than-tours:after{background:none!important;background-image:none!important;opacity:0!important;box-shadow:none!important}
+  body>section{background-color:#f8f6ef!important;background-image:none!important}
+  body>footer,body #siteFooter{background-color:#f8f6ef!important;background-image:none!important}
 }
