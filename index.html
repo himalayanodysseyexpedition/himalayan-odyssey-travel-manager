@@ -3754,6 +3754,29 @@ html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is
 @media(prefers-reduced-motion:reduce) and (min-width:761px){
   html body > header::after{animation:none!important}
 }
+<style id="desktop-prayer-flags-motion-enforcement">
+/* Final desktop-only override: keep the prayer flags moving even when the OS requests reduced motion. */
+@media screen and (min-width:761px){
+  html body > header::after{
+    animation:desktop-prayer-flags-continuous 18s linear infinite!important;
+    animation-play-state:running!important;
+    background-repeat:repeat-x!important;
+    background-size:360px 60px!important;
+    will-change:background-position!important;
+  }
+}
+@keyframes desktop-prayer-flags-continuous{
+  from{background-position:0 0}
+  to{background-position:-360px 0}
+}
+@media (prefers-reduced-motion:reduce) and (min-width:761px){
+  html body > header::after{
+    animation:desktop-prayer-flags-continuous 18s linear infinite!important;
+    animation-play-state:running!important;
+  }
+}
+</style>
+
 </style>
 
 </body>
