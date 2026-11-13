@@ -608,4 +608,47 @@ html body .featured-departure a.departure-cta {
 }
 </style>
 
+
+<style id="featured-departure-whatsapp-cta-animation">
+html body .featured-departure a.departure-cta {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate;
+  animation: departureCtaPulse 2.4s ease-in-out infinite !important;
+  transition: transform .25s ease, box-shadow .25s ease !important;
+}
+html body .featured-departure a.departure-cta::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -45%;
+  width: 28%;
+  height: 220%;
+  background: rgba(0,0,0,.10);
+  transform: skewX(-22deg);
+  animation: departureCtaSheen 3.8s ease-in-out infinite;
+  pointer-events: none;
+}
+html body .featured-departure a.departure-cta:hover {
+  transform: translateY(-2px) scale(1.015) !important;
+  box-shadow: 0 8px 22px rgba(255,255,255,.18) !important;
+}
+@keyframes departureCtaPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,.18); }
+  50% { box-shadow: 0 0 0 6px rgba(255,255,255,0); }
+}
+@keyframes departureCtaSheen {
+  0%, 65% { left: -45%; opacity: 0; }
+  72% { opacity: .8; }
+  100% { left: 125%; opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html body .featured-departure a.departure-cta,
+  html body .featured-departure a.departure-cta::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+</style>
+
 </body></html>
