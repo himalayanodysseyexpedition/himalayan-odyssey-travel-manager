@@ -93,6 +93,37 @@ footer a{color:#a9d8f2}
   }
 }
 </style>
+
+<style id="destination-header-logo-left-no-cta">
+/* Match the shared mobile header: original logo on the left, hamburger on the right. */
+@media (max-width: 760px) {
+  body > header .header-inner {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding: 0 10px 0 12px !important;
+    gap: 8px !important;
+  }
+  body > header .header-inner > a.brand {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: auto !important;
+    min-width: 0 !important;
+    margin: 0 auto 0 0 !important;
+    padding: 0 !important;
+    text-align: left !important;
+  }
+  body > header .header-inner > a.brand > img {
+    display: block !important;
+    object-position: left center !important;
+    margin: 0 !important;
+  }
+}
+</style>
 </head>
 <body>
 <header class="sitewide-header">
@@ -114,7 +145,6 @@ footer a{color:#a9d8f2}
         </div>
       </div>
     </nav>
-    <a class="header-cta" href="/build-your-trip/" aria-label="Plan your trip">Plan Your Trip</a>
   </div>
 </header>
 <main>
