@@ -20,6 +20,42 @@ main{max-width:1100px;margin:auto;padding:34px 5% 80px}.back{display:inline-flex
 
 <link rel="stylesheet" href="/monochrome-app-final.css?v=20261112-1">
  <link rel="stylesheet" href="/arctic-prestige-motion.css?v=2">
+
+<style id="itinerary-hero-mobile-layout">
+/* Rebalanced hero hierarchy: image first, clear title block, trip facts grouped below. */
+#itineraryContent .hero{min-height:clamp(390px,52vw,540px);align-items:stretch;border-radius:10px;background-color:#101820}
+#itineraryContent .hero>img{opacity:.82;object-position:center 48%}
+#itineraryContent .hero:after{background:linear-gradient(90deg,rgba(5,12,20,.82) 0%,rgba(5,12,20,.48) 58%,rgba(5,12,20,.12) 100%),linear-gradient(0deg,rgba(5,12,20,.82) 0%,rgba(5,12,20,0) 70%)}
+#itineraryContent .hero-content{display:flex;flex-direction:column;justify-content:flex-end;gap:24px;padding:clamp(26px,5vw,54px);max-width:100%}
+#itineraryContent .hero-copy{max-width:790px}
+#itineraryContent .eyebrow{display:flex;align-items:center;gap:8px;color:#fff;font-size:10px;line-height:1.5;letter-spacing:2px}
+#itineraryContent .eyebrow span{color:#b9dff4;opacity:.9}
+#itineraryContent .hero h1{max-width:760px;margin:14px 0 12px;font-size:clamp(42px,6.5vw,76px);line-height:.94;letter-spacing:-.025em;text-wrap:balance}
+#itineraryContent .hero-destination{display:flex;align-items:center;gap:8px;color:#f3f6f8;font-size:14px;font-weight:600;letter-spacing:.03em}
+#itineraryContent .destination-mark{color:#b9dff4;font-size:19px;line-height:1}
+#itineraryContent .hero-footer{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap}
+#itineraryContent .meta{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+#itineraryContent .meta span{padding:7px 12px;border:1px solid rgba(255,255,255,.48);background:rgba(8,16,24,.38);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:10px;line-height:1.3;letter-spacing:.04em}
+#itineraryContent .price{display:flex;align-items:baseline;gap:7px;margin:0;padding:9px 14px;border:1px solid rgba(255,255,255,.42);border-radius:5px;background:rgba(8,16,24,.48);color:#fff;white-space:nowrap}
+#itineraryContent .price small{font:700 9px/1.2 var(--sans);letter-spacing:1.3px;color:#dcecf6}
+#itineraryContent .price strong{font-size:20px;color:#fff}
+#itineraryContent .price span{font-size:10px;color:#e5edf2}
+@media(max-width:650px){
+ #itineraryContent .hero{min-height:440px;border-radius:8px}
+ #itineraryContent .hero>img{object-position:center center}
+ #itineraryContent .hero:after{background:linear-gradient(0deg,rgba(5,12,20,.94) 0%,rgba(5,12,20,.68) 42%,rgba(5,12,20,.12) 100%)}
+ #itineraryContent .hero-content{justify-content:flex-end;gap:20px;padding:24px 20px 22px}
+ #itineraryContent .eyebrow{max-width:100%;font-size:9px;letter-spacing:1.45px}
+ #itineraryContent .hero h1{font-size:clamp(39px,10vw,54px);line-height:.96;margin:11px 0 10px;max-width:100%}
+ #itineraryContent .hero-destination{font-size:13px}
+ #itineraryContent .hero-footer{align-items:flex-start;flex-direction:column;gap:12px}
+ #itineraryContent .meta{gap:7px}
+ #itineraryContent .meta span{font-size:9px;padding:7px 10px}
+ #itineraryContent .price{padding:8px 12px}
+ #itineraryContent .price strong{font-size:18px}
+}
+@media(prefers-reduced-motion:reduce){#itineraryContent .hero>img{transition:none}}
+</style>
 </head><body>
 <header class="sitewide-header"><div class="header-inner">
 <a class="brand" href="/" aria-label="Himalayan Odyssey Expedition — Home"><img src="/logo.webp" alt="Himalayan Odyssey Expedition"></a>
@@ -64,7 +100,7 @@ main{max-width:1100px;margin:auto;padding:34px 5% 80px}.back{display:inline-flex
    const twitterDescription=document.querySelector('meta[name="twitter:description"]');if(twitterDescription)twitterDescription.content=(item.summary||"Explore this Himalayan tour itinerary.").slice(0,200);
    const ogImage=document.querySelector('meta[property="og:image"]');if(ogImage)ogImage.content=shareImage;
    const twitterImage=document.querySelector('meta[name="twitter:image"]');if(twitterImage)twitterImage.content=shareImage;
-   root.innerHTML='<section class="hero">'+(cover?'<img src="'+safe(cover)+'" alt="'+title+'" onerror="this.remove()">':"")+'<div class="hero-content"><div class="eyebrow">HIMALAYAN ODYSSEY EXPEDITION · SIGNATURE JOURNEY</div><h1>'+title+'</h1><div class="hero-destination">'+safe(item.destination||"Himachal Pradesh, India")+'</div><div class="meta">'+(duration?'<span>'+safe(duration)+'</span>':"")+(days.length?'<span>'+days.length+' planned days</span>':"")+'<span>Local Himalayan travel team</span></div>'+(item.price?'<div class="price">Starting '+money(item.price)+' <small>/ person</small></div>':"")+'</div></section>'+(item.summary?'<section class="intro"><div class="section-kicker">THE EXPERIENCE</div><h2>About This Journey</h2><p>'+safe(item.summary)+'</p></section>':"")+'<section><div class="section-kicker">YOUR JOURNEY, DAY BY DAY</div><h2>Detailed Itinerary</h2><div class="days">'+(dayHtml||'<div class="status">Day-wise details will be shared by our team.</div>')+'</div></section>'+gallery+'<section class="cta"><div><h2>Ready to experience the Himalayas?</h2><p>Ask us about dates, availability, customisations and booking.</p></div><a class="btn" href="'+wa(item.title||"this tour")+'" target="_blank" rel="noopener">Enquire on WhatsApp</a></section>';
+   root.innerHTML='<section class="hero">'+(cover?'<img src="'+safe(cover)+'" alt="'+title+'" onerror="this.remove()">':"")+'<div class="hero-content"><div class="hero-copy"><div class="eyebrow">HIMALAYAN ODYSSEY EXPEDITION <span aria-hidden="true">/</span> SIGNATURE JOURNEY</div><h1>'+title+'</h1><div class="hero-destination"><span class="destination-mark" aria-hidden="true">⌖</span>'+safe(item.destination||"Himachal Pradesh, India")+'</div></div><div class="hero-footer"><div class="meta">'+(duration?'<span>'+safe(duration)+'</span>':"")+(days.length?'<span>'+days.length+' planned days</span>':"")+'<span>Local Himalayan travel team</span></div>'+(item.price?'<div class="price"><small>STARTING FROM</small><strong>'+money(item.price)+'</strong><span>/ person</span></div>':"")+'</div></div></section>'+(item.summary?'<section class="intro"><div class="section-kicker">THE EXPERIENCE</div><h2>About This Journey</h2><p>'+safe(item.summary)+'</p></section>':"")+'<section><div class="section-kicker">YOUR JOURNEY, DAY BY DAY</div><h2>Detailed Itinerary</h2><div class="days">'+(dayHtml||'<div class="status">Day-wise details will be shared by our team.</div>')+'</div></section>'+gallery+'<section class="cta"><div><h2>Ready to experience the Himalayas?</h2><p>Ask us about dates, availability, customisations and booking.</p></div><a class="btn" href="'+wa(item.title||"this tour")+'" target="_blank" rel="noopener">Enquire on WhatsApp</a></section>';
    const schema={"@context":"https://schema.org","@type":"TouristTrip","name":item.title,"description":item.summary||"Himalayan tour itinerary","itinerary":days.map(x=>({"@type":"TouristAttraction","name":x.title||("Day "+x.day_number),"description":x.description||""}))};
    const sc=document.createElement("script");sc.type="application/ld+json";sc.textContent=JSON.stringify(schema);document.head.appendChild(sc);
   }catch(e){console.error("Itinerary page error",e);fail()}
