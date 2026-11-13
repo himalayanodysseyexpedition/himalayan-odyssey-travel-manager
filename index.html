@@ -4830,6 +4830,79 @@ html body #home.hero .hero-service-icons .hero-service-icon span{
   }
 }
 </style>
+
+<!-- Final mobile hamburger binding: replace stale handlers and bind after the header exists. -->
+<style id="mobile-hamburger-final-interaction">
+@media (max-width:760px){
+  html body > header{position:sticky!important;top:0!important;overflow:visible!important;z-index:1500!important}
+  html body > header .header-inner{position:relative!important;overflow:visible!important}
+  html body > header .header-menu-toggle{position:relative!important;z-index:1503!important;pointer-events:auto!important;touch-action:manipulation!important;cursor:pointer!important}
+  html body > header #mobileMainNavigation{pointer-events:auto!important}
+  html body > header.menu-open #mobileMainNavigation{display:flex!important;visibility:visible!important;opacity:1!important}
+}
+</style>
+<script id="mobile-hamburger-final-interaction-js">
+(() => {
+  const boot = () => {
+    const header = document.querySelector('body > header');
+    if (!header) return;
+    let toggle = header.querySelector('.header-menu-toggle');
+    const nav = header.querySelector('#mobileMainNavigation');
+    if (!toggle || !nav || toggle.dataset.finalMenuBound === '1') return;
+
+    const freshToggle = toggle.cloneNode(true);
+    toggle.replaceWith(freshToggle);
+    toggle = freshToggle;
+    toggle.dataset.finalMenuBound = '1';
+
+    const setOpen = (open) => {
+      header.classList.toggle('menu-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+      nav.setAttribute('aria-hidden', open ? 'false' : 'true');
+    };
+    setOpen(false);
+
+    toggle.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    nav.addEventListener('click', (event) => {
+      const serviceButton = event.target.closest('.nav-dropdown-toggle');
+      if (serviceButton) {
+        event.preventDefault();
+        const dropdown = serviceButton.closest('.nav-dropdown');
+        const isOpen = dropdown.classList.toggle('open');
+        serviceButton.setAttribute('aria-expanded', String(isOpen));
+        return;
+      }
+      if (event.target.closest('a')) setOpen(false);
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!header.contains(event.target)) setOpen(false);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && header.classList.contains('menu-open')) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+    window.addEventListener('resize', () => {
+      if (window.matchMedia('(min-width: 761px)').matches) setOpen(false);
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+})();
+</script>
+
 </body>
 </html>
 
