@@ -1,0 +1,32 @@
+/* Mobile homepage: unify page-level surfaces with the light cream canvas. */
+@media(max-width:760px){
+  html,body{background:#f8f6ef!important}
+  body,body main{background-color:#f8f6ef!important}
+  body #home.hero{
+    background:#f8f6ef!important;
+    background-image:none!important;
+    color:#10243b!important;
+  }
+  body #home.hero:before,
+  body #home.hero:after{background:none!important;opacity:0!important}
+  body main>section,
+  body main>section.content,
+  body main>section.info,
+  body main>.home-trip-planner,
+  body main>.destination-gallery,
+  body main>.travel-guides-premium,
+  body main>.faq-section,
+  body main>.instagram-section,
+  body main>.group-departures-section,
+  body #siteFooter{
+    background-color:#f8f6ef!important;
+  }
+  body main>section.content.info,
+  body main>section.info,
+  body .faq-section,
+  body .destination-gallery,
+  body .travel-guides-premium,
+  body .instagram-section{
+    background-image:none!important;
+  }
+}
