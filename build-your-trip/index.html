@@ -147,6 +147,30 @@ footer{background:var(--forest);color:#dce4dc;padding:28px;text-align:center;fon
   }
 }
 </style>
+
+<style id="mobile-black-service-card-controls">
+@media screen and (max-width: 760px) {
+  html body #serviceCards .service .card-actions > button[data-add],
+  html body #serviceCards .service .card-actions > button[data-add]:hover,
+  html body #serviceCards .service .card-actions > button[data-add]:focus,
+  html body #serviceCards .service .duration-control .stepper > button,
+  html body #serviceCards .service .duration-control .stepper > button:hover,
+  html body #serviceCards .service .duration-control .stepper > button:focus,
+  html body #serviceCards .service .duration-control .stepper > button:active {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background: #000 !important;
+    background-color: #000 !important;
+    background-image: none !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+    border: 1px solid #000 !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+  }
+}
+</style>
+
 </head><body>
 <header class="sitewide-header"><div class="header-inner">
 <a class="brand" href="/" aria-label="Himalayan Odyssey Expedition — Home"><img src="/logo.webp" alt="Himalayan Odyssey Expedition"></a>
