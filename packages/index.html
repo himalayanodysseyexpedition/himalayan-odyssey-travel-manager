@@ -428,7 +428,7 @@ const firstDepartureDate=value=>{
     const label=String(p.name||"Himalayan Tour");
     const place=String(p.destination||"Himachal Pradesh");
     return showAll||!query||[label,place].join(" ").toLowerCase().includes(query);
-   }).slice(0,80);
+   });
    suggestions.innerHTML=matches.length?matches.map(p=>{
     const label=String(p.name||"Himalayan Tour");
     const place=String(p.destination||"Himachal Pradesh");
@@ -450,6 +450,7 @@ const firstDepartureDate=value=>{
    const selected=data.find(p=>String(p.id)===option.dataset.packageId);
    if(!selected)return;
    selectedPackageId=selected.id;
+   destination.value="all";
    search.value=selected.name||"Himalayan Tour";
    hideSuggestions();
    render();
