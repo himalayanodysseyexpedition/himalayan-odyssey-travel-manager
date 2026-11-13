@@ -4749,53 +4749,7 @@ html body #home.hero .hero-destination-list{
 </style>
 
 
-<style id="mobile-hero-tibetan-flag-text-overlay">
-/* Flowing Tibetan prayer-flag colours clipped inside THE and CALLING. */
-@media screen and (max-width:760px){
-  #home.hero .hero-content h1.hero-animated-heading>.hero-heading-prefix,
-  #home.hero .hero-content h1.hero-animated-heading>.hero-heading-suffix{
-    color:#f8f3e8!important;
-    background-image:linear-gradient(108deg,
-      #168bc5 0%,#168bc5 17%,
-      #f7f3e8 17%,#f7f3e8 34%,
-      #dc4144 34%,#dc4144 51%,
-      #279b61 51%,#279b61 68%,
-      #edc744 68%,#edc744 85%,
-      #168bc5 85%,#168bc5 100%)!important;
-    background-size:260% 100%!important;
-    background-position:0% 50%;
-    background-repeat:repeat!important;
-    -webkit-background-clip:text!important;
-    background-clip:text!important;
-    -webkit-text-fill-color:transparent!important;
-    text-shadow:0 0 14px rgba(255,245,218,.18)!important;
-    animation-name:hoeHeroPhraseReveal,hoeTibetanFlagColourFlow!important;
-    animation-duration:.85s,8s!important;
-    animation-timing-function:cubic-bezier(.2,.72,.2,1),linear!important;
-    animation-iteration-count:1,infinite!important;
-    animation-fill-mode:forwards,none!important;
-  }
-  #home.hero .hero-content h1.hero-animated-heading>.hero-heading-prefix{
-    animation-delay:.08s,0s!important;
-  }
-  #home.hero .hero-content h1.hero-animated-heading>.hero-heading-suffix{
-    animation-delay:.42s,0s!important;
-  }
-}
-@keyframes hoeTibetanFlagColourFlow{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-@media (prefers-reduced-motion:reduce){
-  #home.hero .hero-content h1.hero-animated-heading>.hero-heading-prefix,
-  #home.hero .hero-content h1.hero-animated-heading>.hero-heading-suffix{
-    animation:none!important;
-    background-position:50% 50%!important;
-    opacity:1!important;transform:none!important;filter:none!important;
-  }
-}
-</style>
+
 
   <script src="/arctic-prestige-motion.js?v=2" defer></script>
 </body>
