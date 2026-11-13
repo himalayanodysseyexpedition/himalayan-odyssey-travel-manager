@@ -3927,5 +3927,22 @@ html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is
   }
 }
 </style>
+
+<style id="mobile-floating-bar-remove-white-bottom-edge">
+@media screen and (max-width:760px){
+  html body #footerContactBar{
+    box-shadow:0 10px 28px rgba(16,36,59,.20)!important;
+    border-bottom:0!important;
+    outline:0!important;
+  }
+  html body #footerContactBar::before,
+  html body #footerContactBar::after{
+    display:none!important;
+    content:none!important;
+    box-shadow:none!important;
+    border:0!important;
+  }
+}
+</style>
 </body>
 </html>
