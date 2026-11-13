@@ -17,7 +17,7 @@ html{scroll-behavior:smooth;scroll-padding-top:112px}
 body{background:var(--arctic-paper)!important;color:var(--arctic-ink)!important;font-family:"General Sans","DM Sans",system-ui,sans-serif!important;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--arctic-ice);color:var(--arctic-deep)}
 /* Keep the established header, logo, flags and navigation geometry intact. */
-#home#home.hero{
+#home.hero{
   background-color:var(--arctic-deep)!important;
   background-image:
     linear-gradient(90deg,rgba(7,19,32,.86) 0%,rgba(10,27,44,.62) 46%,rgba(10,27,44,.16) 100%),
@@ -26,33 +26,33 @@ body{background:var(--arctic-paper)!important;color:var(--arctic-ink)!important;
   background-size:cover!important;background-position:center 48%!important;
   isolation:isolate;overflow:hidden;
 }
-#home#home.hero:before{
+#home.hero:before{
   background:
     radial-gradient(ellipse at 72% 24%,rgba(157,207,237,.16),transparent 34%),
     linear-gradient(135deg,rgba(255,255,255,.035),transparent 45%)!important;
   pointer-events:none;
 }
-#home#home.hero:after{pointer-events:none}
-#home#home.hero #home.hero .hero-content{max-width:900px!important}
-#home#home.hero .eyebrow,#home#home.hero .hero-note{color:rgba(238,247,252,.88)!important}
-#home#home.hero .hero-rule{background:linear-gradient(90deg,var(--arctic-ice),var(--arctic-blue),transparent)!important}
-#home#home.hero h1,#home#home.hero .hero-animated-heading{color:#f8fbfd!important;text-shadow:0 8px 38px rgba(0,0,0,.34)!important}
-#home#home.hero .hero-word-rotator,#home#home.hero .hero-word-rotator.word-himalayas,#home#home.hero .hero-word-rotator.word-spiti,#home#home.hero .hero-word-rotator.word-himachal,#home#home.hero .hero-word-rotator.word-adventure{color:#c9e7f8!important;-webkit-text-fill-color:#c9e7f8!important;background:none!important}
-#home#home.hero p{color:rgba(246,250,253,.86)!important}
-#home#home#home.hero .hero-note span:before{background:var(--arctic-blue)!important;box-shadow:0 0 10px rgba(111,169,206,.45)!important}
-#home.hero #home.hero .hero-service-icon{
+#home.hero:after{pointer-events:none}
+#home.hero .hero-content{max-width:900px!important}
+#home.hero .eyebrow,#home.hero .hero-note{color:rgba(238,247,252,.88)!important}
+#home.hero .hero-rule{background:linear-gradient(90deg,var(--arctic-ice),var(--arctic-blue),transparent)!important}
+#home.hero h1,#home.hero .hero-animated-heading{color:#f8fbfd!important;text-shadow:0 8px 38px rgba(0,0,0,.34)!important}
+#home.hero .hero-word-rotator,#home.hero .hero-word-rotator.word-himalayas,#home.hero .hero-word-rotator.word-spiti,#home.hero .hero-word-rotator.word-himachal,#home.hero .hero-word-rotator.word-adventure{color:#c9e7f8!important;-webkit-text-fill-color:#c9e7f8!important;background:none!important}
+#home.hero p{color:rgba(246,250,253,.86)!important}
+#home#home.hero .hero-note span:before{background:var(--arctic-blue)!important;box-shadow:0 0 10px rgba(111,169,206,.45)!important}
+#home.hero .hero-service-icon{
   border:1px solid rgba(210,234,248,.38)!important;
   background:linear-gradient(145deg,rgba(246,251,255,.16),rgba(194,222,241,.055))!important;
   color:#f5faff!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.17),0 12px 28px rgba(0,0,0,.16)!important;
   -webkit-backdrop-filter:blur(18px) saturate(140%)!important;backdrop-filter:blur(18px) saturate(140%)!important;
 }
-#home.hero #home.hero .hero-service-icon svg{stroke:var(--arctic-ice)!important}
-#home.hero #home.hero .hero-service-icon:focus-visible{outline-color:var(--arctic-ice)!important}
-html body #home#home.hero .hero-build-cta-wrap>.hero-build-cta{
+#home.hero .hero-service-icon svg{stroke:var(--arctic-ice)!important}
+#home.hero .hero-service-icon:focus-visible{outline-color:var(--arctic-ice)!important}
+html body #home.hero .hero-build-cta-wrap>.hero-build-cta{
   background:rgba(8,18,29,.88)!important;border-color:rgba(220,238,250,.7)!important;color:#f4f9fc!important;
   box-shadow:0 12px 30px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.15)!important;
 }
-html body #home#home.hero .hero-build-cta-wrap>.hero-build-cta:hover{background:#e5f2f9!important;color:#10263b!important;border-color:#e5f2f9!important}
+html body #home.hero .hero-build-cta-wrap>.hero-build-cta:hover{background:#e5f2f9!important;color:#10263b!important;border-color:#e5f2f9!important}
 /* Frosted journey panel */
 .journey-strip{
   border:1px solid rgba(160,197,221,.38)!important;border-radius:20px!important;
@@ -155,8 +155,8 @@ a:focus-visible,button:focus-visible{outline:2px solid #78afd1!important;outline
 @media(prefers-reduced-motion:no-preference){
   .arctic-reveal{opacity:0;transform:translate3d(0,22px,0);transition:opacity .72s var(--arctic-ease),transform .72s var(--arctic-ease);transition-delay:var(--arctic-delay,0ms)}
   .arctic-reveal.arctic-in{opacity:1;transform:translate3d(0,0,0)}
-  #home#home.hero #home.hero #home.hero .hero-content{animation:arcticHeroIn .95s var(--arctic-ease) both!important}
-  #home#home#home.hero:before{animation:arcticAtmosphere 18s ease-in-out infinite alternate}
+  #home.hero .hero-content{animation:arcticHeroIn .95s var(--arctic-ease) both!important}
+  #home.hero:before{animation:arcticAtmosphere 18s ease-in-out infinite alternate}
   @keyframes arcticHeroIn{from{opacity:0;transform:translate3d(0,20px,0);filter:blur(4px)}to{opacity:1;transform:translate3d(0,0,0);filter:blur(0)}}
   @keyframes arcticAtmosphere{from{opacity:.58}to{opacity:1}}
   @media(hover:hover) and (pointer:fine){
@@ -164,19 +164,19 @@ a:focus-visible,button:focus-visible{outline:2px solid #78afd1!important;outline
     .destination-card:hover,.group-departure-card:hover,.package-slide:hover,.itinerary-slide:hover,.cab-card:hover,.hotel-card:hover,.card:hover{transform:translateY(-5px)!important;box-shadow:0 22px 48px rgba(13,35,54,.15)!important;border-color:rgba(111,169,206,.5)!important}
     .destination-card img,.group-departure-photo img,.package-slide img,.card>img{transition:transform .85s var(--arctic-ease),filter .6s ease}
     .destination-card:hover img,.group-departure-card:hover img,.package-slide:hover img,.card:hover>img{transform:scale(1.045);filter:saturate(1.07)}
-    #home.hero #home.hero .hero-service-icon{transition:transform .3s var(--arctic-ease),background .3s ease,border-color .3s ease!important}
-    #home.hero #home.hero .hero-service-icon:hover{transform:translateY(-3px)!important;border-color:rgba(220,238,250,.75)!important}
+    #home.hero .hero-service-icon{transition:transform .3s var(--arctic-ease),background .3s ease,border-color .3s ease!important}
+    #home.hero .hero-service-icon:hover{transform:translateY(-3px)!important;border-color:rgba(220,238,250,.75)!important}
   }
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto!important}
   .arctic-reveal,.arctic-reveal.arctic-in{opacity:1!important;transform:none!important;transition:none!important}
-  .hero-content,#home#home#home.hero:before{animation:none!important}
-  .destination-card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card,#home.hero #home.hero .hero-service-icon{transition:none!important}
+  .hero-content,#home.hero:before{animation:none!important}
+  .destination-card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card,#home.hero .hero-service-icon{transition:none!important}
 }
 @media(max-width:760px){
   html{scroll-padding-top:120px}
-  #home#home.hero{background-position:center,center,58% center!important}
+  #home.hero{background-position:center,center,58% center!important}
   section.content{padding-left:17px!important;padding-right:17px!important}
   .destination-gallery{padding-left:16px!important;padding-right:16px!important}
   .destination-card{border-radius:13px!important}
@@ -185,5 +185,5 @@ a:focus-visible,button:focus-visible{outline:2px solid #78afd1!important;outline
   .home-trip-planner{padding-left:16px!important;padding-right:16px!important}
 }
 @media(max-width:380px){
-  #home.hero #home.hero .hero-service-icon span{font-size:8px!important;letter-spacing:.3px!important}
+  #home.hero .hero-service-icon span{font-size:8px!important;letter-spacing:.3px!important}
 }
