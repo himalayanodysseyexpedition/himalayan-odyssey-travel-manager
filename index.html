@@ -4269,5 +4269,16 @@ html body #home.hero .hero-build-cta-wrap>a.hero-build-cta:focus-visible{
   -webkit-text-fill-color:#fff!important;
 }
 </style>
+
+<style id="mobile-hero-height-refinement">
+/* Mobile-only: reduce hero height while preserving its content and weather overlays. */
+@media (max-width: 640px) {
+  html body #home.hero {
+    min-height: min(700px, 78vh);
+    padding: 72px 6% 60px;
+  }
+}
+</style>
+
 </body>
 </html>
