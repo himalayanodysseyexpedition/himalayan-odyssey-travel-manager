@@ -14,6 +14,7 @@
 <link rel="icon" href="/logo.webp"><link rel="preconnect" href="https://ynkoiuyjevclypumnyes.supabase.co"><link rel="preconnect" href="https://cdn.jsdelivr.net">
 <style>
 :root{--forest:#10243b;--gold:#a9d8f2;--cream:#f8f6f0;--paper:#fffefa;--muted:#718078;--serif:"Cormorant Garamond",Georgia,serif;--sans:"DM Sans",Arial,sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:#10243b;font:16px/1.8 var(--sans)}a{text-decoration:none;color:inherit}.top{background:#10243b;color:#f4f0e7;padding:15px 6%;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.top a{color:#a9d8f2}.hero{padding:80px 7%;background:linear-gradient(90deg,rgba(16,36,59,0.9294117647058824),rgba(16,36,59,0.5490196078431373)),url('/spiti.jpg') center/cover;color:white}.hero h1{font:500 clamp(44px,7vw,76px)/1 var(--serif);margin:12px 0}.hero p{max-width:720px}.wrap{max-width:1200px;margin:auto;padding:55px 6%}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}.card{background:var(--paper);border:1px solid #e8e1d5;padding:22px}.card img{width:100%;height:190px;object-fit:cover}.card h2{font:600 28px var(--serif);color:var(--forest);margin:10px 0}.card p{font-size:14px;color:var(--muted)}.price{font-weight:bold;color:#a9d8f2}.btn{display:inline-block;background:var(--gold);padding:12px 17px;color:var(--forest);font-size:12px;font-weight:bold;text-transform:uppercase;margin:6px 6px 0 0}.status{text-align:center;padding:30px;color:var(--muted)}.related-guides{margin:12px 0 28px;padding:15px 18px;background:#eeede5;border-left:3px solid var(--gold)}.related-guides p{margin:0;font-size:13px;line-height:2}.related-guides a{color:#70552e;text-decoration:underline}footer{background:var(--forest);color:white;padding:25px 7%;font-size:13px}@media(max-width:600px){.hero{padding:55px 7%}.wrap{padding:40px 5%}}
+@media(max-width:760px){.package-departure-date{font-weight:700;color:#315c78!important;background:#eaf2f7;padding:8px 10px;border-left:3px solid #a9d8f2;margin:10px 0!important;border-radius:3px}}
 .package-planning{margin:42px 0 18px;max-width:900px}.package-planning h2{font:500 clamp(30px,4vw,42px)/1.15 var(--serif);color:var(--forest);margin:0 0 12px}.package-planning h3{font:600 23px/1.2 var(--serif);color:var(--forest);margin:28px 0 8px}.package-planning p{color:#52645e}.package-planning details{padding:14px 0;border-bottom:1px solid #e5dfd3}.package-planning summary{cursor:pointer;font-weight:600;color:var(--forest)}
 .featured-departure{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);margin:0 0 58px;background:#fffefa;border:1px solid #a9d8f2;box-shadow:0 18px 50px rgba(16,36,59,.12);overflow:hidden}.departure-photo{position:relative;min-height:440px;background:#10243b}.departure-photo img{width:100%;height:100%;min-height:440px;object-fit:cover;display:block}.departure-tag{position:absolute;left:18px;top:18px;background:#10243b;color:#a9d8f2;padding:9px 12px;font-size:10px;font-weight:700;letter-spacing:1.2px}.departure-copy{padding:clamp(24px,4vw,46px)}.departure-kicker{color:#a9d8f2;font-size:10px;font-weight:700;letter-spacing:3px;margin:0}.departure-copy h2{font:500 clamp(36px,4.4vw,54px)/1.02 var(--serif);color:#10243b;margin:10px 0}.departure-date{font-weight:700;color:#70552e;font-size:17px;margin:10px 0 17px}.departure-facts{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.departure-facts span{background:#f0eee7;border:1px solid #e5dfd3;padding:7px 10px;font-size:12px;color:#10243b}.departure-copy>p:not(.departure-kicker):not(.departure-date):not(.departure-note){font-size:14px;color:#52645e;line-height:1.85}.seat-status{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:22px 0 9px;color:#10243b;font-size:13px}.seat-status span{color:#a04432;font-weight:700}.seat-track{height:9px;background:#e9e5dc;border-radius:10px;overflow:hidden}.seat-track span{display:block;width:80%;height:100%;background:#a9d8f2;border-radius:10px}.departure-cta{margin-top:22px!important}.departure-note{font-size:11px;line-height:1.7;color:#718078;margin:15px 0 0}@media(max-width:700px){.featured-departure{grid-template-columns:1fr}.departure-photo,.departure-photo img{min-height:260px;height:260px}.departure-copy{padding:25px 20px}.seat-status{align-items:flex-start;flex-direction:column}}
 /* Premium shared navigation */
@@ -101,6 +102,16 @@ const db=window.supabase?.createClient("https://ynkoiuyjevclypumnyes.supabase.co
 const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const wa=t=>"https://wa.me/919816929669?text="+encodeURIComponent(t);
 const parseDays=value=>{const m=String(value||"").match(/(\d+)\s*(?:days?|d)\b/i);return m?Number(m[1]):null;};
+const firstDepartureDate=value=>{
+ const raw=String(value||"").trim();if(!raw)return null;
+ const found=[];const add=(y,m,d)=>{const x=new Date(y,m-1,d);if(x.getFullYear()===y&&x.getMonth()===m-1&&x.getDate()===d)found.push(x);};
+ let m;const iso=/(20\d{2})-(\d{1,2})-(\d{1,2})/g;while((m=iso.exec(raw)))add(+m[1],+m[2],+m[3]);
+ const numeric=/(\d{1,2})[\/.](\d{1,2})[\/.](20\d{2})/g;while((m=numeric.exec(raw)))add(+m[3],+m[2],+m[1]);
+ const months={jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
+ const named=/(\d{1,2})\s+(Jan\w*|Feb\w*|Mar\w*|Apr\w*|May|Jun\w*|Jul\w*|Aug\w*|Sep\w*|Oct\w*|Nov\w*|Dec\w*)[,\s]+(20\d{2})/gi;while((m=named.exec(raw)))add(+m[3],months[m[2].slice(0,3).toLowerCase()],+m[1]);
+ const reverse=/(Jan\w*|Feb\w*|Mar\w*|Apr\w*|May|Jun\w*|Jul\w*|Aug\w*|Sep\w*|Oct\w*|Nov\w*|Dec\w*)\s+(\d{1,2})[,\s]+(20\d{2})/gi;while((m=reverse.exec(raw)))add(+m[3],months[m[1].slice(0,3).toLowerCase()],+m[2]);
+ return found.sort((a,b)=>a-b)[0]||null;
+};
 (async()=>{
  const list=document.getElementById("packageList");
  const search=document.getElementById("packageSearch");
@@ -136,6 +147,10 @@ const parseDays=value=>{const m=String(value||"").match(/(\d+)\s*(?:days?|d)\b/i
       (days!==null&&((selectedDuration==="short"&&days<=3)||(selectedDuration==="medium"&&days>=4&&days<=6)||(selectedDuration==="long"&&days>=7)));
     return (!query||haystack.includes(query))&&(selectedDestination==="all"||place===selectedDestination)&&matchesBudget&&matchesDuration;
    });
+   if(window.matchMedia("(max-width: 760px)").matches){
+    const today=new Date();today.setHours(0,0,0,0);
+    filtered.sort((a,b)=>{const da=firstDepartureDate(a.departure_dates),db=firstDepartureDate(b.departure_dates);if(!da&&!db)return 0;if(!da)return 1;if(!db)return -1;const ap=da<today,bp=db<today;if(ap!==bp)return ap?1:-1;return da-db;});
+   }
    count.textContent="Showing "+filtered.length+" of "+data.length+" published packages";
    if(!filtered.length){list.innerHTML='<div class="package-empty">No packages match these filters. Try another destination, budget or duration.</div>';return;}
    list.innerHTML=filtered.map(p=>{
@@ -145,7 +160,8 @@ const parseDays=value=>{const m=String(value||"").match(/(\d+)\s*(?:days?|d)\b/i
     const price=p.price_per_person==null||p.price_per_person===""?"":'<p class="price">₹'+Number(p.price_per_person).toLocaleString("en-IN")+' per person</p>';
     const inclusions=p.inclusions?'<p>'+esc(p.inclusions)+'</p>':"";
     const durationText=p.duration?'<p>'+esc(p.duration)+'</p>':"";
-    return '<article class="card"><div class="package-card-media"><img src="'+esc(image)+'" alt="'+esc(name)+' — '+esc(place)+'" loading="lazy" decoding="async"></div><h2>'+esc(name)+'</h2><p>'+esc(place)+'</p>'+durationText+inclusions+price+'<a class="btn" href="'+wa("Hello, I am interested in "+name+". Please share dates and details.")+'" target="_blank" rel="noopener noreferrer">Enquire on WhatsApp</a></article>';
+    const departureText=p.departure_dates?'<p class="package-departure-date">Departure: '+esc(p.departure_dates)+'</p>':"";
+    return '<article class="card"><div class="package-card-media"><img src="'+esc(image)+'" alt="'+esc(name)+' — '+esc(place)+'" loading="lazy" decoding="async"></div><h2>'+esc(name)+'</h2><p>'+esc(place)+'</p>"+departureText+durationText+inclusions+price+'<a class="btn" href="'+wa("Hello, I am interested in "+name+". Please share dates and details.")+'" target="_blank" rel="noopener noreferrer">Enquire on WhatsApp</a></article>';
    }).join("");
    list.scrollLeft=0;
   };
