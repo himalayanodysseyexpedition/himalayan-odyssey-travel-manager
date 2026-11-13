@@ -528,14 +528,30 @@ html body .featured-departure .seat-track span {
   display: block !important;
   width: 80% !important;
   height: 100% !important;
-  background: linear-gradient(90deg,
+  background: linear-gradient(110deg,
     #d71920 0%,
-    #164b9b 22%,
-    #ffffff 43%,
-    #f5c400 63%,
-    #168447 82%,
+    #164b9b 20%,
+    #ffffff 40%,
+    #f5c400 60%,
+    #168447 80%,
     #d71920 100%) !important;
+  background-size: 260% 100% !important;
+  background-position: 0% 50%;
+  animation: tibetanSeatGradientFlow 4s linear infinite !important;
   border-radius: 999px 0 0 999px !important;
+}
+@keyframes tibetanSeatGradientFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+/* Keep the remaining-seat track white; animate only the booked segment. */
+html body .featured-departure .seat-track {
+  background: #fff !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  html body .featured-departure .seat-track span {
+    animation: none !important;
+  }
 }
 html body .featured-departure .departure-cta {
   color: #000 !important;
