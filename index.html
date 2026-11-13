@@ -1546,6 +1546,7 @@ html body #home.hero .hero-build-cta-wrap > .hero-build-cta:active{
         <circle cx="250" cy="122" r="2"/><circle cx="580" cy="92" r="1.7"/><circle cx="760" cy="137" r="1.5"/><circle cx="1190" cy="72" r="2"/><circle cx="1350" cy="115" r="1.6"/>
       </g>
     </svg>
+    <div class="hero-mountain-snowfall" aria-hidden="true"></div>
   </div>
 </div>
 
@@ -5279,6 +5280,35 @@ html body #footerContactBar.footer-contact-bar.scroll-hidden{
     margin-top:8px!important;
     transform:translateY(-6px)!important;
   }
+}
+</style>
+
+
+<style id="mobile-mountain-graphic-snowfall-v1">
+/* Add a separate, gentle snowfall layer directly over the mountain illustration. */
+@media screen and (max-width:760px){
+  #home .hero-bottom-motion{isolation:isolate!important}
+  #home .hero-bottom-landscape{position:relative!important;z-index:0!important}
+  #home .hero-mountain-snowfall{
+    position:absolute!important;inset:8% 0 0!important;z-index:2!important;
+    pointer-events:none!important;overflow:hidden!important;
+    background-image:
+      radial-gradient(2px 2px at 18px 24px,rgba(255,255,255,.95) 98%,transparent 100%),
+      radial-gradient(1.5px 1.5px at 76px 68px,rgba(255,255,255,.9) 98%,transparent 100%),
+      radial-gradient(2.5px 2.5px at 142px 42px,rgba(255,255,255,.88) 98%,transparent 100%),
+      radial-gradient(1px 1px at 202px 104px,rgba(255,255,255,.95) 98%,transparent 100%);
+    background-size:230px 145px,190px 165px,270px 185px,160px 130px;
+    background-repeat:repeat;
+    animation:heroMountainSnowfallDrift 11s linear infinite!important;
+    opacity:.82!important;
+  }
+}
+@keyframes heroMountainSnowfallDrift{
+  from{background-position:0 -145px,35px -165px,80px -185px,15px -130px}
+  to{background-position:34px 290px,-18px 330px,112px 370px,42px 260px}
+}
+@media(prefers-reduced-motion:reduce){
+  #home .hero-mountain-snowfall{animation:none!important}
 }
 </style>
 
