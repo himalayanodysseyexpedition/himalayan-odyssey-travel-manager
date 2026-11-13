@@ -1,0 +1,189 @@
+/* Arctic Prestige — site-wide visual system for Himalayan Odyssey Expedition.
+   Visual-only layer: preserves existing page structure, data bindings and interactions. */
+:root{
+  --arctic-ink:#101c2b;
+  --arctic-navy:#14283d;
+  --arctic-deep:#091522;
+  --arctic-blue:#6fa9ce;
+  --arctic-ice:#dceefa;
+  --arctic-frost:#eef5f9;
+  --arctic-paper:#f8fafb;
+  --arctic-line:rgba(31,67,94,.14);
+  --arctic-muted:#63778a;
+  --arctic-shadow:0 22px 60px rgba(12,31,49,.12);
+  --arctic-ease:cubic-bezier(.22,.68,0,1);
+}
+html{scroll-behavior:smooth;scroll-padding-top:112px}
+body{background:var(--arctic-paper)!important;color:var(--arctic-ink)!important;font-family:"General Sans","DM Sans",system-ui,sans-serif!important;-webkit-font-smoothing:antialiased}
+::selection{background:var(--arctic-ice);color:var(--arctic-deep)}
+/* Keep the established header, logo, flags and navigation geometry intact. */
+.hero{
+  background-color:var(--arctic-deep)!important;
+  background-image:
+    linear-gradient(90deg,rgba(7,19,32,.86) 0%,rgba(10,27,44,.62) 46%,rgba(10,27,44,.16) 100%),
+    linear-gradient(0deg,rgba(7,19,32,.48),transparent 55%),
+    url("/spiti.jpg")!important;
+  background-size:cover!important;background-position:center 48%!important;
+  isolation:isolate;overflow:hidden;
+}
+.hero:before{
+  background:
+    radial-gradient(ellipse at 72% 24%,rgba(157,207,237,.16),transparent 34%),
+    linear-gradient(135deg,rgba(255,255,255,.035),transparent 45%)!important;
+  pointer-events:none;
+}
+.hero:after{pointer-events:none}
+.hero-content{max-width:900px!important}
+.hero .eyebrow,.hero .hero-note{color:rgba(238,247,252,.88)!important}
+.hero .hero-rule{background:linear-gradient(90deg,var(--arctic-ice),var(--arctic-blue),transparent)!important}
+.hero h1,.hero .hero-animated-heading{color:#f8fbfd!important;text-shadow:0 8px 38px rgba(0,0,0,.34)!important}
+.hero .hero-word-rotator,.hero .hero-word-rotator.word-himalayas,.hero .hero-word-rotator.word-spiti,.hero .hero-word-rotator.word-himachal,.hero .hero-word-rotator.word-adventure{color:#c9e7f8!important;-webkit-text-fill-color:#c9e7f8!important;background:none!important}
+.hero p{color:rgba(246,250,253,.86)!important}
+.hero .hero-note span:before{background:var(--arctic-blue)!important;box-shadow:0 0 10px rgba(111,169,206,.45)!important}
+.hero-service-icon{
+  border:1px solid rgba(210,234,248,.38)!important;
+  background:linear-gradient(145deg,rgba(246,251,255,.16),rgba(194,222,241,.055))!important;
+  color:#f5faff!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.17),0 12px 28px rgba(0,0,0,.16)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(140%)!important;backdrop-filter:blur(18px) saturate(140%)!important;
+}
+.hero-service-icon svg{stroke:var(--arctic-ice)!important}
+.hero-service-icon:focus-visible{outline-color:var(--arctic-ice)!important}
+html body #home.hero .hero-build-cta-wrap>.hero-build-cta{
+  background:rgba(8,18,29,.88)!important;border-color:rgba(220,238,250,.7)!important;color:#f4f9fc!important;
+  box-shadow:0 12px 30px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.15)!important;
+}
+html body #home.hero .hero-build-cta-wrap>.hero-build-cta:hover{background:#e5f2f9!important;color:#10263b!important;border-color:#e5f2f9!important}
+/* Frosted journey panel */
+.journey-strip{
+  border:1px solid rgba(160,197,221,.38)!important;border-radius:20px!important;
+  background:linear-gradient(135deg,rgba(15,36,56,.96),rgba(29,59,82,.92))!important;
+  box-shadow:0 24px 58px rgba(8,25,41,.20),inset 0 1px 0 rgba(255,255,255,.12)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(135%)!important;backdrop-filter:blur(22px) saturate(135%)!important;
+}
+.journey-item{background:transparent!important;border-color:rgba(220,238,250,.16)!important;box-shadow:none!important}
+.journey-item strong{color:#d9effb!important;font-family:"Boska","Cormorant Garamond",Georgia,serif!important}
+.journey-item span{color:rgba(233,244,250,.72)!important}
+.journey-item+.journey-item{border-left:1px solid rgba(220,238,250,.18)!important}
+.journey-strip:before{background:linear-gradient(90deg,transparent,rgba(164,207,232,.8),transparent)!important}
+/* Section rhythm and editorial typography */
+section.content{background:var(--arctic-paper)!important;color:var(--arctic-ink)!important}
+section.content.info,.faq-section{background:#edf3f7!important}
+.section-title small,.section-kicker,.group-departure-body>small{color:#547f9e!important}
+.section-title h2,.content h2,.section-inner h2{color:var(--arctic-navy)!important;font-family:"Boska","Cormorant Garamond",Georgia,serif!important;font-weight:500!important;letter-spacing:-.025em}
+.section-title h2:after{background:linear-gradient(90deg,transparent,var(--arctic-blue),transparent)!important}
+.intro,.content .intro{color:var(--arctic-muted)!important}
+.local-intro-copy h2,.info-box h3,.faq-list summary{color:var(--arctic-navy)!important}
+.local-intro-panel,.review-panel{
+  background:radial-gradient(ellipse at 85% 12%,rgba(111,169,206,.22),transparent 40%),linear-gradient(135deg,#10243a,#244b68)!important;
+  border:1px solid rgba(189,220,239,.48)!important;box-shadow:var(--arctic-shadow)!important;
+}
+.local-intro-panel small,.review-kicker{color:#c9e7f8!important}
+.local-intro-panel p,.review-panel p{color:rgba(239,247,252,.78)!important}
+/* Destinations: photographic editorial panels */
+.destination-gallery{
+  background:radial-gradient(ellipse at 50% 0%,rgba(111,169,206,.14),transparent 45%),linear-gradient(180deg,#10243a,#0b1b2b)!important;
+}
+.destination-gallery .section-title h2{color:#f5f9fc!important}
+.destination-gallery .section-title small,.destination-info small{color:#c9e7f8!important}
+.destination-gallery .intro{color:rgba(231,241,248,.72)!important}
+.destination-card{border:1px solid rgba(198,225,241,.24)!important;border-radius:15px!important;box-shadow:0 18px 48px rgba(0,0,0,.22)!important}
+.destination-card:after{background:linear-gradient(180deg,rgba(8,20,33,.02) 18%,rgba(8,20,33,.28) 52%,rgba(8,20,33,.94) 100%)!important}
+.destination-card:before{border-color:rgba(220,238,250,0)!important}
+.destination-info h3{color:#f8fbfd!important;font-family:"Boska","Cormorant Garamond",Georgia,serif!important}
+.destination-info span{color:#e4f1f8!important}
+.destination-info small:before,.destination-info span:after{background:var(--arctic-blue)!important}
+/* Package, departure, itinerary, cab and hotel cards */
+.group-departures-section{background:linear-gradient(180deg,#f5f9fc,#e9f1f6)!important}
+.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.card{
+  background:#fbfdfe!important;border:1px solid var(--arctic-line)!important;border-radius:16px!important;
+  box-shadow:0 12px 34px rgba(18,43,64,.075)!important;overflow:hidden!important;
+}
+.group-departure-photo{background:#dce9f1!important}
+.group-departure-status{background:rgba(239,247,251,.94)!important;color:#254a66!important;border:1px solid rgba(111,169,206,.28)!important;border-radius:999px!important}
+.group-departure-body h3,.package-slide h3,.itinerary-slide h3,.cab-card h3,.hotel-card h3,.guide-card h3,.card h3{
+  color:var(--arctic-navy)!important;font-family:"General Sans","DM Sans",sans-serif!important;font-weight:650!important;
+}
+.group-departure-date,.group-departure-highlights,.card p,.hotel-facilities,.cab-details{color:var(--arctic-muted)!important}
+.group-departure-meta,.itinerary-meta,.hotel-location{color:#4c7897!important}
+.group-departure-meta{border-color:var(--arctic-line)!important}
+.group-occupancy-track{background:#e4edf3!important}
+.group-occupancy-track span{background:linear-gradient(90deg,#a9d2e9,#4f83a5)!important}
+.group-departure-cta,.group-departure-cta:hover{background:#17344e!important;color:#f5faff!important;border-radius:999px!important}
+.card>img,.package-slide>img,.hotel-card>img,.itinerary-slide img{background:#e4edf3!important}
+.card-body{background:#fbfdfe!important}
+.price{color:#477d9f!important}
+.card-body .btn,.hotel-detail-content .btn,.group-departure-cta{
+  background:#17344e!important;border:1px solid #17344e!important;color:#f5faff!important;border-radius:999px!important;
+}
+.card-body .btn:hover,.hotel-detail-content .btn:hover{background:#e3f0f7!important;border-color:#9fc5dd!important;color:#17344e!important}
+.packages-carousel,.group-departures-rail,.itineraries-carousel,.cabs-carousel,.destinations-carousel{scrollbar-color:#9bbbd0 transparent}
+/* Trip planner — premium light/dark balance without changing calculator logic */
+.home-trip-planner{background:linear-gradient(180deg,#edf4f8,#f9fbfc)!important;color:var(--arctic-ink)!important}
+.home-trip-planner h2,.home-trip-planner h3,.home-trip-planner label{color:var(--arctic-navy)!important}
+.home-trip-planner .htp-panel,.home-trip-planner .htp-card,.home-trip-planner .htp-summary,.home-trip-planner .planner-card{
+  background:#fbfdfe!important;border-color:var(--arctic-line)!important;box-shadow:0 14px 36px rgba(18,43,64,.07)!important;border-radius:17px!important
+}
+.home-trip-planner input,.home-trip-planner select{background:#fff!important;border-color:#cfdae3!important;color:var(--arctic-ink)!important}
+.home-trip-planner input:focus,.home-trip-planner select:focus{border-color:#6fa9ce!important;box-shadow:0 0 0 3px rgba(111,169,206,.15)!important}
+.home-trip-planner button,.home-trip-planner .btn{border-radius:999px!important}
+.home-trip-planner .htp-total,.home-trip-planner .htp-price{color:#315f7e!important}
+/* Forms, FAQ, reviews, Instagram and footer */
+.enquiry-section{background:radial-gradient(ellipse at 85% 5%,rgba(111,169,206,.17),transparent 38%),linear-gradient(135deg,#10243a,#091522)!important}
+.enquiry-box{background:#fafdff!important;border-color:rgba(155,196,222,.6)!important;border-top-color:#6fa9ce!important;border-radius:17px!important}
+.enquiry-box label{color:var(--arctic-navy)!important}
+.enquiry-box input,.enquiry-box select,.enquiry-box textarea{background:#fff!important;border-color:#d2dfe8!important;color:var(--arctic-ink)!important;border-radius:10px!important}
+.enquiry-box input:focus,.enquiry-box select:focus,.enquiry-box textarea:focus{border-color:#6fa9ce!important;box-shadow:0 0 0 3px rgba(111,169,206,.14)!important}
+.faq-list details{background:#fbfdfe!important;border:1px solid var(--arctic-line)!important;border-radius:13px!important}
+.faq-list details[open]{border-color:rgba(111,169,206,.62)!important}
+.faq-list summary:after{color:#5b91b4!important}
+.faq-list details p{color:var(--arctic-muted)!important}
+#reviews .review-panel{border-radius:20px!important}
+#reviews .review-panel h2{color:#f6fbfe!important}
+#reviews .review-kicker{color:#c9e7f8!important}
+#reviews .review-point{background:rgba(255,255,255,.07)!important;border-color:rgba(220,238,250,.2)!important;border-radius:13px!important}
+#reviews .review-point strong{color:#d9effb!important}
+#reviews .review-point span{color:rgba(239,247,252,.76)!important}
+.instagram-section{background:#eaf2f7!important;color:var(--arctic-navy)!important}
+.instagram-section .section-title h2{color:var(--arctic-navy)!important}
+.instagram-content{background:linear-gradient(145deg,#142d45,#294f6b)!important;border:1px solid rgba(111,169,206,.4)!important;border-radius:18px!important}
+footer#siteFooter,footer,.site-footer{background:linear-gradient(145deg,#0a1725,#142d45)!important;color:rgba(239,247,252,.82)!important;border-top:1px solid rgba(169,207,230,.22)!important}
+footer b,footer strong,footer h2,footer h3,footer h4{color:#e2f1fa!important}
+footer a{color:#c6e3f4!important}
+.footer-contact-bar{background:rgba(13,31,48,.9)!important;border-color:rgba(183,218,239,.32)!important}
+a:focus-visible,button:focus-visible{outline:2px solid #78afd1!important;outline-offset:3px!important}
+/* Motion language: slow reveals, no perpetual movement or hover dependency. */
+@media(prefers-reduced-motion:no-preference){
+  .arctic-reveal{opacity:0;transform:translate3d(0,22px,0);transition:opacity .72s var(--arctic-ease),transform .72s var(--arctic-ease);transition-delay:var(--arctic-delay,0ms)}
+  .arctic-reveal.arctic-in{opacity:1;transform:translate3d(0,0,0)}
+  .hero-content{animation:arcticHeroIn .95s var(--arctic-ease) both!important}
+  .hero:before{animation:arcticAtmosphere 18s ease-in-out infinite alternate}
+  @keyframes arcticHeroIn{from{opacity:0;transform:translate3d(0,20px,0);filter:blur(4px)}to{opacity:1;transform:translate3d(0,0,0);filter:blur(0)}}
+  @keyframes arcticAtmosphere{from{opacity:.58}to{opacity:1}}
+  @media(hover:hover) and (pointer:fine){
+    .destination-card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card{transition:transform .48s var(--arctic-ease),box-shadow .48s ease,border-color .3s ease!important}
+    .destination-card:hover,.group-departure-card:hover,.package-slide:hover,.itinerary-slide:hover,.cab-card:hover,.hotel-card:hover,.card:hover{transform:translateY(-5px)!important;box-shadow:0 22px 48px rgba(13,35,54,.15)!important;border-color:rgba(111,169,206,.5)!important}
+    .destination-card img,.group-departure-photo img,.package-slide img,.card>img{transition:transform .85s var(--arctic-ease),filter .6s ease}
+    .destination-card:hover img,.group-departure-card:hover img,.package-slide:hover img,.card:hover>img{transform:scale(1.045);filter:saturate(1.07)}
+    .hero-service-icon{transition:transform .3s var(--arctic-ease),background .3s ease,border-color .3s ease!important}
+    .hero-service-icon:hover{transform:translateY(-3px)!important;border-color:rgba(220,238,250,.75)!important}
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+  .arctic-reveal,.arctic-reveal.arctic-in{opacity:1!important;transform:none!important;transition:none!important}
+  .hero-content,.hero:before{animation:none!important}
+  .destination-card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card,.hero-service-icon{transition:none!important}
+}
+@media(max-width:760px){
+  html{scroll-padding-top:120px}
+  .hero{background-position:center,center,58% center!important}
+  section.content{padding-left:17px!important;padding-right:17px!important}
+  .destination-gallery{padding-left:16px!important;padding-right:16px!important}
+  .destination-card{border-radius:13px!important}
+  .group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card{border-radius:14px!important}
+  .journey-strip{border-radius:15px!important}
+  .home-trip-planner{padding-left:16px!important;padding-right:16px!important}
+}
+@media(max-width:380px){
+  .hero-service-icon span{font-size:8px!important;letter-spacing:.3px!important}
+}
