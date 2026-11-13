@@ -4,21 +4,21 @@
   #home.hero{min-height:0!important;padding:24px 17px 66px!important;align-items:stretch!important;background-position:center,center,58% 38%!important}
   #home.hero>.hero-content{width:100%!important;max-width:560px!important;margin:0 auto!important}
   #home.hero .hero-animated-heading{display:none!important}
-  #home.hero .mobile-next-departure{position:relative;isolation:isolate;display:block;width:100%;max-width:520px;margin:0 auto 22px;padding:19px 18px 17px;overflow:hidden;border:1px solid rgba(220,238,250,.52);border-radius:19px;color:#f7fbfe;text-align:left;background:linear-gradient(145deg,rgba(8,24,42,.91),rgba(17,47,70,.82));box-shadow:0 18px 44px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.18);-webkit-backdrop-filter:blur(18px) saturate(135%);backdrop-filter:blur(18px) saturate(135%);animation:mobileDepartureReveal .8s cubic-bezier(.2,.75,.25,1) both}
+  #home.hero .mobile-next-departure{position:relative;isolation:isolate;display:block;width:100%;max-width:520px;margin:0 auto 22px;padding:19px 18px 17px;overflow:hidden;border:1px solid rgba(255,255,255,.92);border-radius:19px;color:#fff;text-align:left;background:linear-gradient(145deg,rgba(245,250,253,.96),rgba(224,239,248,.94));box-shadow:0 18px 44px rgba(15,35,52,.16),inset 0 1px 0 rgba(255,255,255,.95);-webkit-backdrop-filter:blur(18px) saturate(135%);backdrop-filter:blur(18px) saturate(135%);animation:mobileDepartureReveal .8s cubic-bezier(.2,.75,.25,1) both}
   #home.hero .mobile-next-departure:before{content:"";position:absolute;z-index:-1;inset:-1px;padding:1px;border-radius:inherit;background:linear-gradient(115deg,rgba(255,255,255,.05),rgba(169,216,242,.9),rgba(255,255,255,.08),rgba(169,216,242,.42));background-size:240% 100%;animation:mobileDepartureBorder 6s linear infinite;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
-  #home.hero .mobile-departure-topline{display:flex;align-items:center;gap:7px;flex-wrap:wrap;color:#dff2fc;font:700 9px/1.4 "DM Sans",Arial,sans-serif;letter-spacing:1.45px}
+  #home.hero .mobile-departure-topline{display:flex;align-items:center;gap:7px;flex-wrap:wrap;color:#fff;text-shadow:0 1px 5px rgba(9,29,47,.85);font:700 9px/1.4 "DM Sans",Arial,sans-serif;letter-spacing:1.45px}
   #home.hero .mobile-departure-live-dot{width:7px;height:7px;flex:none;border-radius:50%;background:#a9d8f2;box-shadow:0 0 0 4px rgba(169,216,242,.13);animation:mobileDeparturePulse 1.8s ease-in-out infinite}
-  #home.hero .mobile-departure-season{margin-left:auto;color:rgba(239,247,252,.7);font-size:8px;letter-spacing:1px}
-  #home.hero .mobile-departure-kicker{margin:17px 0 5px;color:#a9d8f2;font:700 8px/1.4 "DM Sans",Arial,sans-serif;letter-spacing:2.2px}
-  #home.hero .mobile-next-departure h2{margin:0;color:#fff;font:500 clamp(38px,10vw,52px)/.88 "Cormorant Garamond",Georgia,serif;letter-spacing:-.7px}
-  #home.hero .mobile-next-departure h2 em{color:#bfe5f8;font-style:normal}
-  #home.hero .mobile-departure-date{margin:13px 0 9px;color:#fff;font:700 12px/1.4 "DM Sans",Arial,sans-serif;letter-spacing:1.15px}
+  #home.hero .mobile-departure-season{margin-left:auto;color:#fff;text-shadow:0 1px 5px rgba(9,29,47,.9);font-size:8px;letter-spacing:1px}
+  #home.hero .mobile-departure-kicker{margin:17px 0 5px;color:#fff;text-shadow:0 1px 5px rgba(9,29,47,.9);font:700 8px/1.4 "DM Sans",Arial,sans-serif;letter-spacing:2.2px}
+  #home.hero .mobile-next-departure h2{margin:0;color:#fff;text-shadow:0 2px 9px rgba(9,29,47,.95);font:500 clamp(38px,10vw,52px)/.88 "Cormorant Garamond",Georgia,serif;letter-spacing:-.7px}
+  #home.hero .mobile-next-departure h2 em{color:#fff;text-shadow:0 2px 8px rgba(9,29,47,.95);font-style:normal}
+  #home.hero .mobile-departure-date{margin:13px 0 9px;color:#fff;text-shadow:0 1px 6px rgba(9,29,47,.95);font:700 12px/1.4 "DM Sans",Arial,sans-serif;letter-spacing:1.15px}
   #home.hero .mobile-departure-date span{padding:0 4px;color:#a9d8f2}
   #home.hero .mobile-departure-facts{display:flex;flex-wrap:wrap;gap:6px}
-  #home.hero .mobile-departure-facts span{padding:6px 8px;border:1px solid rgba(220,238,250,.2);border-radius:6px;background:rgba(255,255,255,.07);color:#e9f4fa;font:500 9px/1.35 "DM Sans",Arial,sans-serif}
-  #home.hero .mobile-departure-price{margin:13px 0 9px;color:#fff;font:700 25px/1 "DM Sans",Arial,sans-serif;letter-spacing:-.8px}
-  #home.hero .mobile-departure-price small{color:#d0e0e9;font:500 10px/1 "DM Sans",Arial,sans-serif;letter-spacing:0}
-  #home.hero .mobile-departure-seats{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:13px 0 7px;color:#eaf5fb;font:600 9px/1.4 "DM Sans",Arial,sans-serif}
+  #home.hero .mobile-departure-facts span{padding:6px 8px;border:1px solid rgba(220,238,250,.2);border-radius:6px;background:rgba(16,39,59,.82);color:#fff;font:500 9px/1.35 "DM Sans",Arial,sans-serif}
+  #home.hero .mobile-departure-price{margin:13px 0 9px;color:#fff;text-shadow:0 1px 7px rgba(9,29,47,.95);font:700 25px/1 "DM Sans",Arial,sans-serif;letter-spacing:-.8px}
+  #home.hero .mobile-departure-price small{color:#fff;text-shadow:0 1px 5px rgba(9,29,47,.95);font:500 10px/1 "DM Sans",Arial,sans-serif;letter-spacing:0}
+  #home.hero .mobile-departure-seats{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:13px 0 7px;color:#fff;text-shadow:0 1px 5px rgba(9,29,47,.95);font:600 9px/1.4 "DM Sans",Arial,sans-serif}
   #home.hero .mobile-departure-seats span{color:#fff;font-weight:700}
   #home.hero .mobile-departure-track{height:6px;overflow:hidden;border-radius:99px;background:rgba(255,255,255,.24)}
   #home.hero .mobile-departure-track span{display:block;width:80%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#e9f7ff,#a9d8f2,#f7fcff);background-size:200% 100%;animation:mobileDepartureFill 1.4s ease-out both,mobileDepartureShimmer 3.2s linear infinite}
