@@ -71,6 +71,28 @@ footer a{color:#a9d8f2}
   }
 }
 </style>
+
+<style id="destination-hamburger-no-underline">
+@media (max-width: 760px) {
+  body > header .header-inner > nav.glass-nav > a,
+  body > header .header-inner > nav.glass-nav > a span,
+  body > header .header-inner > nav.glass-nav > .nav-dropdown > .nav-dropdown-toggle,
+  body > header .header-inner > nav.glass-nav > .nav-dropdown > .nav-dropdown-toggle span,
+  body > header .header-inner > nav.glass-nav .nav-dropdown-menu a {
+    text-decoration: none !important;
+    text-decoration-line: none !important;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+  }
+  body > header .header-inner > nav.glass-nav > a::before,
+  body > header .header-inner > nav.glass-nav > a::after,
+  body > header .header-inner > nav.glass-nav .nav-dropdown-menu a::before,
+  body > header .header-inner > nav.glass-nav .nav-dropdown-menu a::after {
+    content: none !important;
+    display: none !important;
+  }
+}
+</style>
 </head>
 <body>
 <header class="sitewide-header">
