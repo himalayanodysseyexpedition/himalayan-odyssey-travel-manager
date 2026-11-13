@@ -3995,5 +3995,29 @@ html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is
   html body > header .header-inner > .header-menu-toggle{display:none!important}
 }
 </style>
+
+
+<style id="mobile-hero-content-spacing-tighten">
+/* Mobile only: bring the headline, service buttons, moving destinations and Build Your Trip CTA closer together. */
+@media screen and (max-width:760px){
+  #home.hero>.hero-content{
+    justify-content:flex-start!important;
+    gap:0!important;
+  }
+  #home.hero .hero-animated-heading{
+    margin:0!important;
+  }
+  #home.hero .hero-service-icons{
+    margin:22px auto 0!important;
+  }
+  #home.hero .hero-destination-list{
+    margin:12px auto 0!important;
+  }
+  #home.hero .hero-build-cta-wrap{
+    margin:13px auto 0!important;
+  }
+}
+</style>
+
 </body>
 </html>
