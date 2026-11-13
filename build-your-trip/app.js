@@ -21,7 +21,7 @@ const travelDateInput=document.getElementById("travelDate");
 if(travelDateInput)travelDateInput.min=todayISO();
 const money=value=>"₹"+(Number(value)||0).toLocaleString("en-IN",{maximumFractionDigits:0});
 const esc=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-let services=[],cart=[],category="all",serviceDays={};
+let services=[],cart=[],category="package",serviceDays={};
 const CART_DRAFT_KEY="hoe_trip_cart_v1";
 function saveCartDraft(){
  try{
@@ -58,15 +58,26 @@ function serviceCard(x){
  return '<article class="service">'+(x.image_url?'<img src="'+esc(x.image_url)+'" alt="'+esc(x.title)+'" loading="lazy">':'<div style="height:190px;display:grid;place-items:center;background:#e9eee8;color:#718078">Himalayan Odyssey Expedition</div>')+
  '<div class="service-body"><div class="tag">'+esc(categoryLabel[x.category])+'</div><h3>'+esc(x.title)+'</h3><div class="muted">'+esc(specs)+'</div><p class="desc">'+esc(x.description||"A curated Himalayan travel service.")+'</p><div class="price">'+money(x.price)+' <span class="muted">'+esc(unitLabel[x.price_unit]||"")+'</span></div><p class="muted">'+(soldOut?"Currently unavailable":(x.category==="cab"?"Vehicle quantity can be requested (final availability confirmed)":x.category==="hotel"?"Stay + meals estimate; final availability confirmed on enquiry":"Group size: up to "+(x.capacity||available)+" guests"))+'</p><div class="card-actions"><div class="duration-control"><span>'+(x.category==="hotel"?"Nights":"Days")+'</span><div class="stepper"><button type="button" data-day-step="'+x.id+'" data-dir="-1" disabled>−</button><output data-day-value="'+x.id+'">1</output><button type="button" data-day-step="'+x.id+'" data-dir="1">＋</button></div></div><button data-add="'+x.id+'" data-days="1" '+(soldOut?"disabled":"")+'>Add to trip</button></div></div></article>';
 }
+function packageInCart(){return cart.some(line=>services.find(x=>x.id===line.id)?.category==="package");}
+function syncPackageLock(){
+ const locked=packageInCart();
+ $("tabs").querySelectorAll("button[data-category]").forEach(button=>{
+  const blocked=locked&&button.dataset.category!=="package";
+  button.disabled=blocked;button.setAttribute("aria-disabled",String(blocked));
+  button.title=blocked?"Remove the selected tour package to choose another service.":"";
+  button.classList.toggle("active",button.dataset.category===category);
+ });
+}
 function renderServices(){
  const query=$("search").value.trim().toLowerCase();
- const filtered=services.filter(x=>(category==="all"||x.category===category)&&(!query||(x.title+" "+x.destination+" "+x.description).toLowerCase().includes(query))).sort((a,b)=>a.category==="package"&&b.category!=="package"?-1:b.category==="package"&&a.category!=="package"?1:0);
+ const filtered=services.filter(x=>(x.category===category)&&(!query||(x.title+" "+x.destination+" "+x.description).toLowerCase().includes(query))).sort((a,b)=>a.category==="package"&&b.category!=="package"?-1:b.category==="package"&&a.category!=="package"?1:0);
  $("serviceCards").innerHTML=filtered.length?filtered.map(serviceCard).join(""):'<div class="empty">No services match this search yet. Try another category or destination.</div>';
 }
 function addToCart(id){
  const service=services.find(x=>x.id===id);if(!service)return;
+ if(packageInCart()||(service.category==="package"&&cart.some(line=>services.find(x=>x.id===line.id)?.category==="package")))return;
  const days=Math.max(1,Math.min(100,Number(serviceDays[id])||1));cart.push({key:(crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random()),id:service.id,days,nights:days,people:1,quantity:1});
- saveCartDraft();renderCart();
+ saveCartDraft();renderCart();syncPackageLock();renderServices();
 }
 function changeLine(key,field,value){
  const line=cart.find(x=>x.key===key);if(!line)return;
@@ -103,7 +114,7 @@ async function load(){
   const rows=await apiRequest("marketplace_services?select=id,category,title,destination,description,price,price_unit,inventory,capacity,image_url,sort_order,created_at&is_active=eq.true&order=sort_order.asc,created_at.desc");
   services=Array.isArray(rows)?rows:[];
   cart=restoreCartDraft();
-  renderCart();renderServices();
+  renderCart();syncPackageLock();renderServices();
   if(!services.length)container.innerHTML='<div class="empty">No services are published yet. Please contact us on WhatsApp and we will help plan your trip.</div>';
  }catch(error){
   console.error("Build Your Trip catalogue failed:",error);
@@ -111,7 +122,7 @@ async function load(){
  }
 }
 $("serviceCards").addEventListener("click",e=>{if(e.target.closest("[data-retry-catalogue]"))load();});
-$("tabs").addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(!b)return;category=b.dataset.category;$("tabs").querySelectorAll("button").forEach(x=>x.classList.toggle("active",x===b));renderServices();});
+$("tabs").addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(!b)return;if(packageInCart()&&b.dataset.category!=="package")return;category=b.dataset.category;syncPackageLock();renderServices();});
 $("search").addEventListener("input",renderServices);
 $("serviceCards").addEventListener("click",e=>{const step=e.target.closest("[data-day-step]");if(step){const id=step.dataset.dayStep;const next=Math.max(1,Math.min(100,(Number(serviceDays[id])||1)+Number(step.dataset.dir)));serviceDays[id]=next;const card=step.closest(".service");card.querySelector("[data-day-value]").textContent=next;card.querySelectorAll("[data-day-step]").forEach(x=>{if(x.dataset.dir==="-1")x.disabled=next===1;});card.querySelector("[data-add]").dataset.days=next;return;}const b=e.target.closest("[data-add]");if(b){serviceDays[b.dataset.add]=Number(b.dataset.days)||1;addToCart(b.dataset.add);}});
 $("cartItems").addEventListener("click",e=>{
@@ -122,10 +133,10 @@ $("cartItems").addEventListener("click",e=>{
   if(!line||!service||service.category!=="package")return;
   const maxPeople=Math.max(1,Number(service.inventory)||1);
   line.people=Math.max(1,Math.min(maxPeople,line.people+Number(step.dataset.dir)));
-  saveCartDraft();renderCart();return;
+  saveCartDraft();renderCart();syncPackageLock();renderServices();return;
  }
  const b=e.target.closest("[data-remove]");
- if(b){cart=cart.filter(x=>x.key!==b.dataset.remove);saveCartDraft();renderCart();}
+ if(b){cart=cart.filter(x=>x.key!==b.dataset.remove);saveCartDraft();renderCart();syncPackageLock();renderServices();}
 });
 $("cartItems").addEventListener("change",e=>{const input=e.target.closest("[data-line][data-field]");if(input)changeLine(input.dataset.line,input.dataset.field,input.value);});
 $("guestForm").addEventListener("submit",async e=>{
