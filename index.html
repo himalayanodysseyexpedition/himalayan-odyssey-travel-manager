@@ -5322,5 +5322,16 @@ html body #footerContactBar.footer-contact-bar.scroll-hidden{
 }
 </style>
 
+
+
+<style id="mobile-hero-mountain-height-refine-v2">
+/* Further reduce the mobile hero height so the mountain image sits closer to the destination ticker. */
+@media screen and (max-width:760px){
+  html body #home.hero{
+    min-height:clamp(530px,calc(100svh - 158px),690px)!important;
+  }
+}
+</style>
+
 </body>
 </html>
