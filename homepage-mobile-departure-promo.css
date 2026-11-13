@@ -35,3 +35,26 @@
 @keyframes mobileDepartureFill{from{width:0}to{width:80%}}
 @keyframes mobileDepartureShimmer{to{background-position:200% 0}}
 @media(prefers-reduced-motion:reduce){#home.hero .mobile-next-departure,#home.hero .mobile-next-departure:before,#home.hero .mobile-departure-live-dot,#home.hero .mobile-departure-track span{animation:none!important}#home.hero .mobile-departure-track span{width:80%}}
+
+/* Explicit final palette override for the mobile promotional tour card. */
+@media(max-width:760px){
+  html body #home.hero .mobile-next-departure{
+    background:#f7f7f7!important;
+    background-image:linear-gradient(145deg,#fff 0%,#f3f5f6 100%)!important;
+    color:#fff!important;
+  }
+  html body #home.hero .mobile-next-departure :is(h2,h2 em,p,small,span,strong,.mobile-departure-topline,.mobile-departure-season,.mobile-departure-kicker,.mobile-departure-date,.mobile-departure-price,.mobile-departure-seats){
+    color:#fff!important;
+  }
+  html body #home.hero .mobile-next-departure :is(h2,h2 em,p,small,span,strong,.mobile-departure-topline,.mobile-departure-season,.mobile-departure-kicker,.mobile-departure-date,.mobile-departure-price,.mobile-departure-seats){
+    text-shadow:0 1px 5px rgba(16,36,59,.72)!important;
+  }
+  html body #home.hero .mobile-next-departure .mobile-departure-facts span{
+    color:#fff!important;background:#dfe5e9!important;border-color:#fff!important;
+    text-shadow:0 1px 4px rgba(16,36,59,.8)!important;
+  }
+  html body #home.hero .mobile-next-departure .mobile-departure-cta{
+    color:#fff!important;background:#e8edf0!important;
+    text-shadow:0 1px 4px rgba(16,36,59,.8)!important;
+  }
+}
