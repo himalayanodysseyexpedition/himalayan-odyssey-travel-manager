@@ -247,3 +247,14 @@ a:focus-visible,button:focus-visible{outline:2px solid #78afd1!important;outline
   html body>header.sitewide-header .header-inner>a.brand,
   html body>header.sitewide-header .header-inner>.header-menu-toggle{position:relative!important;z-index:2!important}
 }
+
+
+/* MOBILE ONLY: remove the Plan Your Trip CTA from every page header.
+   Keep in-page Plan Your Trip actions and all desktop headers unchanged. */
+@media screen and (max-width:760px){
+  html body > header :is(.header-cta,a[aria-label="Plan your trip"],a[aria-label="Plan Your Trip"]){
+    display:none!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+  }
+}
