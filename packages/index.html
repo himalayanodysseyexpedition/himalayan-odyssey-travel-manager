@@ -405,7 +405,7 @@ const firstDepartureDate=value=>{
     filtered.sort((a,b)=>{const da=firstDepartureDate(a.departure_dates),db=firstDepartureDate(b.departure_dates);if(!da&&!db)return 0;if(!da)return 1;if(!db)return -1;const ap=da<today,bp=db<today;if(ap!==bp)return ap?1:-1;return da-db;});
    }
    count.textContent="Showing "+filtered.length+" of "+data.length+" published packages";
-   if(!filtered.length){list.innerHTML='<div class="package-empty">No packages match these filters. Try another destination, budget or duration.</div>';return;}
+   if(!filtered.length){list.innerHTML='<div class="package-empty">No packages match this search. Try another package or destination.</div>';return;}
    list.innerHTML=filtered.map(p=>{
     const name=p.name||"Himalayan Tour";
     const place=p.destination||"Himachal Pradesh";
