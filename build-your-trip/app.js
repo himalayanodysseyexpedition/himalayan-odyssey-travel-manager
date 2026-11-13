@@ -62,13 +62,27 @@ function packageInCart(){return cart.some(line=>services.find(x=>x.id===line.id)
 function syncPackageLock(){
  const locked=packageInCart();
  if(locked)category="package";
- $("search").placeholder=category==="package"?"Search tour packages or destination":category==="cab"?"Search cabs or destination":"Search hotels or destination";
+ $("search").placeholder=category==="package"?"Search packages or select from list":category==="cab"?"Search cabs or destination":"Search hotels or destination";
  $("tabs").querySelectorAll("button[data-category]").forEach(button=>{
   const blocked=locked&&button.dataset.category!=="package";
   button.disabled=blocked;button.setAttribute("aria-disabled",String(blocked));
   button.title=blocked?"Remove the selected tour package to choose another service.":"";
   button.classList.toggle("active",button.dataset.category===category);
  });
+}
+function renderPackageSuggestions(forceAll=false){
+ const input=$("search"),menu=$("packageSuggestions");
+ if(!input||!menu)return;
+ if(category!=="package"){menu.hidden=true;input.setAttribute("aria-expanded","false");return;}
+ const query=forceAll?"":input.value.trim().toLowerCase();
+ const matches=services.filter(x=>x.category==="package"&&(!query||(x.title+" "+(x.destination||"")+" "+(x.description||"")).toLowerCase().includes(query)));
+ menu.innerHTML=matches.length?matches.map(x=>'<button type="button" class="package-suggestion" role="option" data-package-choice="'+esc(x.id)+'"><strong>'+esc(x.title)+'</strong><small>'+esc(x.destination||"Himalayan tour package")+' · '+money(x.price)+' per person</small></button>').join(""):'<div class="package-suggestion-empty">No matching tour packages found.</div>';
+ menu.hidden=false;input.setAttribute("aria-expanded","true");
+}
+function hidePackageSuggestions(){
+ const menu=$("packageSuggestions"),input=$("search");
+ if(menu)menu.hidden=true;
+ if(input)input.setAttribute("aria-expanded","false");
 }
 function renderServices(){
  const query=$("search").value.trim().toLowerCase();
@@ -131,8 +145,22 @@ async function load(){
  }
 }
 $("serviceCards").addEventListener("click",e=>{if(e.target.closest("[data-retry-catalogue]"))load();});
-$("tabs").addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(!b||b.disabled)return;if(packageInCart()&&b.dataset.category!=="package")return;category=b.dataset.category;$("search").value="";$("search").placeholder=category==="package"?"Search tour packages or destination":category==="cab"?"Search cabs or destination":"Search hotels or destination";syncPackageLock();renderServices();});
-$("search").addEventListener("input",renderServices);
+$("tabs").addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(!b||b.disabled)return;if(packageInCart()&&b.dataset.category!=="package")return;category=b.dataset.category;$("search").value="";$("search").placeholder=category==="package"?"Search packages or select from list":category==="cab"?"Search cabs or destination":"Search hotels or destination";hidePackageSuggestions();syncPackageLock();renderServices();});
+$("search").addEventListener("focus",()=>{if(category==="package")renderPackageSuggestions(true);});
+$("search").addEventListener("click",()=>{if(category==="package")renderPackageSuggestions(true);});
+$("search").addEventListener("input",()=>{renderServices();if(category==="package")renderPackageSuggestions();});
+$("packageSuggestions").addEventListener("click",e=>{
+ const choice=e.target.closest("[data-package-choice]");if(!choice)return;
+ const id=choice.dataset.packageChoice;
+ if(cart.length&&!packageInCart())return;
+ $("search").value="";addToCart(id);hidePackageSuggestions();
+});
+document.addEventListener("click",e=>{if(!e.target.closest(".search-wrap"))hidePackageSuggestions();});
+$("search").addEventListener("keydown",e=>{
+ if(e.key==="Escape"){hidePackageSuggestions();return;}
+ if(e.key==="ArrowDown"&&!$("packageSuggestions").hidden){const first=$("packageSuggestions").querySelector("[data-package-choice]");if(first){e.preventDefault();first.focus();}}
+});
+$("packageSuggestions").addEventListener("keydown",e=>{if(e.key==="Escape"){hidePackageSuggestions();$("search").focus();}});
 $("serviceCards").addEventListener("click",e=>{const step=e.target.closest("[data-day-step]");if(step){const id=step.dataset.dayStep;const next=Math.max(1,Math.min(100,(Number(serviceDays[id])||1)+Number(step.dataset.dir)));serviceDays[id]=next;const card=step.closest(".service");card.querySelector("[data-day-value]").textContent=next;card.querySelectorAll("[data-day-step]").forEach(x=>{if(x.dataset.dir==="-1")x.disabled=next===1;});card.querySelector("[data-add]").dataset.days=next;return;}const b=e.target.closest("[data-add]");if(b){serviceDays[b.dataset.add]=Number(b.dataset.days)||1;addToCart(b.dataset.add);}});
 $("cartItems").addEventListener("click",e=>{
  const step=e.target.closest("[data-person-step]");
@@ -145,7 +173,7 @@ $("cartItems").addEventListener("click",e=>{
   saveCartDraft();renderCart();syncPackageLock();renderServices();return;
  }
  const b=e.target.closest("[data-remove]");
- if(b){cart=cart.filter(x=>x.key!==b.dataset.remove);saveCartDraft();renderCart();syncPackageLock();renderServices();}
+ if(b){cart=cart.filter(x=>x.key!==b.dataset.remove);saveCartDraft();renderCart();syncPackageLock();renderServices();if(category==="package"&&!packageInCart())renderPackageSuggestions(true);}
 });
 $("cartItems").addEventListener("change",e=>{const input=e.target.closest("[data-line][data-field]");if(input)changeLine(input.dataset.line,input.dataset.field,input.value);});
 $("guestForm").addEventListener("submit",async e=>{
