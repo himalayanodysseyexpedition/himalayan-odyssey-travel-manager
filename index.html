@@ -3849,5 +3849,22 @@ html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is
  html body #home.hero .mobile-tibetan-flag-line{display:none!important;visibility:hidden!important;opacity:0!important;animation:none!important;background:none!important;}
 }
 </style>
+
+<style id="mobile-floating-bar-remove-white-backplate">
+@media screen and (max-width:760px){
+ html body nav#footerContactBar.footer-contact-bar{
+  background:transparent!important;
+  background-image:none!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+ }
+ html body nav#footerContactBar.footer-contact-bar::before,
+ html body nav#footerContactBar.footer-contact-bar::after{
+  display:none!important;content:none!important;opacity:0!important;
+ }
+}
+</style>
 </body>
 </html>
