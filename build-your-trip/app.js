@@ -61,6 +61,8 @@ function serviceCard(x){
 function packageInCart(){return cart.some(line=>services.find(x=>x.id===line.id)?.category==="package");}
 function syncPackageLock(){
  const locked=packageInCart();
+ if(locked)category="package";
+ $("search").placeholder=category==="package"?"Search tour packages or destination":category==="cab"?"Search cabs or destination":"Search hotels or destination";
  $("tabs").querySelectorAll("button[data-category]").forEach(button=>{
   const blocked=locked&&button.dataset.category!=="package";
   button.disabled=blocked;button.setAttribute("aria-disabled",String(blocked));
@@ -75,8 +77,13 @@ function renderServices(){
 }
 function addToCart(id){
  const service=services.find(x=>x.id===id);if(!service)return;
- if(packageInCart()||(service.category==="package"&&cart.some(line=>services.find(x=>x.id===line.id)?.category==="package")))return;
- const days=Math.max(1,Math.min(100,Number(serviceDays[id])||1));cart.push({key:(crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random()),id:service.id,days,nights:days,people:1,quantity:1});
+ const hasPackage=packageInCart();
+ if(hasPackage)return;
+ if(service.category==="package"&&cart.length)return;
+ if(service.category==="package"&&cart.some(line=>services.find(x=>x.id===line.id)?.category==="package"))return;
+ const days=Math.max(1,Math.min(100,Number(serviceDays[id])||1));
+ cart.push({key:(crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random()),id:service.id,days,nights:days,people:1,quantity:1});
+ if(service.category==="package")category="package";
  saveCartDraft();renderCart();syncPackageLock();renderServices();
 }
 function changeLine(key,field,value){
@@ -114,6 +121,8 @@ async function load(){
   const rows=await apiRequest("marketplace_services?select=id,category,title,destination,description,price,price_unit,inventory,capacity,image_url,sort_order,created_at&is_active=eq.true&order=sort_order.asc,created_at.desc");
   services=Array.isArray(rows)?rows:[];
   cart=restoreCartDraft();
+  const savedPackage=cart.find(line=>services.find(x=>x.id===line.id)?.category==="package");
+  if(savedPackage)cart=[savedPackage];
   renderCart();syncPackageLock();renderServices();
   if(!services.length)container.innerHTML='<div class="empty">No services are published yet. Please contact us on WhatsApp and we will help plan your trip.</div>';
  }catch(error){
@@ -122,7 +131,7 @@ async function load(){
  }
 }
 $("serviceCards").addEventListener("click",e=>{if(e.target.closest("[data-retry-catalogue]"))load();});
-$("tabs").addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(!b)return;if(packageInCart()&&b.dataset.category!=="package")return;category=b.dataset.category;syncPackageLock();renderServices();});
+$("tabs").addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(!b||b.disabled)return;if(packageInCart()&&b.dataset.category!=="package")return;category=b.dataset.category;$("search").value="";$("search").placeholder=category==="package"?"Search tour packages or destination":category==="cab"?"Search cabs or destination":"Search hotels or destination";syncPackageLock();renderServices();});
 $("search").addEventListener("input",renderServices);
 $("serviceCards").addEventListener("click",e=>{const step=e.target.closest("[data-day-step]");if(step){const id=step.dataset.dayStep;const next=Math.max(1,Math.min(100,(Number(serviceDays[id])||1)+Number(step.dataset.dir)));serviceDays[id]=next;const card=step.closest(".service");card.querySelector("[data-day-value]").textContent=next;card.querySelectorAll("[data-day-step]").forEach(x=>{if(x.dataset.dir==="-1")x.disabled=next===1;});card.querySelector("[data-add]").dataset.days=next;return;}const b=e.target.closest("[data-add]");if(b){serviceDays[b.dataset.add]=Number(b.dataset.days)||1;addToCart(b.dataset.add);}});
 $("cartItems").addEventListener("click",e=>{
