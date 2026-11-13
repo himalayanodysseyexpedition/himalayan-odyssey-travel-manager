@@ -1327,6 +1327,83 @@
 <link rel="stylesheet" href="/monochrome-app-final.css?v=20261112-1">
   <link rel="stylesheet" href="/hamburger-header-final.css?v=8">
   <link rel="stylesheet" href="/homepage-trip-planner.css?v=49">
+
+<style id="homepage-build-trip-cta-fix">
+/* Homepage Build Your Trip CTA: centered type, monochrome finish, restrained motion. */
+html body #home.hero .hero-build-cta-wrap{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  width:min(540px,100%)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+html body #home.hero .hero-build-cta-wrap > .hero-build-cta{
+  position:relative!important;
+  isolation:isolate!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  text-align-last:center!important;
+  white-space:nowrap!important;
+  min-width:min(230px,100%)!important;
+  min-height:54px!important;
+  padding:0 30px!important;
+  margin:0!important;
+  overflow:hidden!important;
+  border:1px solid #000!important;
+  border-radius:999px!important;
+  background:#050505!important;
+  color:#fff!important;
+  font-family:"General Sans","DM Sans",sans-serif!important;
+  font-size:12px!important;
+  font-weight:800!important;
+  letter-spacing:1.25px!important;
+  line-height:1!important;
+  box-shadow:0 9px 24px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.12)!important;
+  text-shadow:none!important;
+  transform:translateZ(0);
+  transition:transform .28s ease,box-shadow .28s ease,background .28s ease!important;
+  animation:buildTripButtonBreathe 3.8s ease-in-out infinite!important;
+}
+html body #home.hero .hero-build-cta-wrap > .hero-build-cta::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:-1!important;
+  top:-40%!important;
+  bottom:-40%!important;
+  left:-65%!important;
+  width:38%!important;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.24),transparent)!important;
+  transform:skewX(-22deg)!important;
+  animation:buildTripButtonSheen 4.8s ease-in-out infinite!important;
+  pointer-events:none!important;
+}
+html body #home.hero .hero-build-cta-wrap > .hero-build-cta:hover{
+  background:#111!important;
+  color:#fff!important;
+  border-color:#111!important;
+  transform:translateY(-2px)!important;
+  box-shadow:0 13px 30px rgba(0,0,0,.3)!important;
+}
+html body #home.hero .hero-build-cta-wrap > .hero-build-cta:active{
+  transform:scale(.98)!important;
+}
+@keyframes buildTripButtonBreathe{
+  0%,100%{box-shadow:0 9px 24px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.12)}
+  50%{box-shadow:0 12px 29px rgba(0,0,0,.3),0 0 0 4px rgba(255,255,255,.08),inset 0 1px 0 rgba(255,255,255,.14)}
+}
+@keyframes buildTripButtonSheen{
+  0%,18%{left:-65%;opacity:0}
+  30%{opacity:1}
+  58%,100%{left:135%;opacity:0}
+}
+@media(prefers-reduced-motion:reduce){
+  html body #home.hero .hero-build-cta-wrap > .hero-build-cta,
+  html body #home.hero .hero-build-cta-wrap > .hero-build-cta::after{animation:none!important;transition:none!important}
+}
+</style>
 </head>
 
 <body>
