@@ -387,6 +387,65 @@ const firstDepartureDate=value=>{
 
  <script src="/arctic-prestige-motion.js?v=2" defer></script>
 
+<style id="fixed-group-departure-black-theme">
+/* Fixed group departure: solid black panel with high-contrast white details. */
+html body .featured-departure {
+  background: #000 !important;
+  border: 1px solid #000 !important;
+  box-shadow: 0 18px 50px rgba(0,0,0,.18) !important;
+}
+html body .featured-departure .departure-copy {
+  background: #000 !important;
+  color: #fff !important;
+}
+html body .featured-departure .departure-kicker {
+  display: inline-block !important;
+  width: fit-content !important;
+  padding: 7px 10px !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  background: #000 !important;
+  border: 1px solid #fff !important;
+}
+html body .featured-departure .departure-copy h2,
+html body .featured-departure .departure-date,
+html body .featured-departure .departure-copy > p:not(.departure-kicker):not(.departure-date):not(.departure-note),
+html body .featured-departure .seat-status,
+html body .featured-departure .departure-note {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+html body .featured-departure .departure-facts span {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  background: #fff !important;
+  border-color: #fff !important;
+}
+html body .featured-departure .seat-status span {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+html body .featured-departure .seat-track {
+  background: #444 !important;
+}
+html body .featured-departure .seat-track span {
+  background: #fff !important;
+}
+html body .featured-departure .departure-cta {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  background: #fff !important;
+  border: 1px solid #fff !important;
+  box-shadow: none !important;
+}
+@media (max-width: 700px) {
+  html body .featured-departure,
+  html body .featured-departure .departure-copy {
+    background: #000 !important;
+  }
+}
+</style>
+
 <style id="package-card-black-white-final-override-v2">
 /* Final, high-specificity black-and-white treatment for live package cards. */
 html body #packageList.package-cards-carousel > article.card {
