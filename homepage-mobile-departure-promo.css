@@ -78,3 +78,4 @@
   }
   html body #home.hero .mobile-next-departure .mobile-departure-cta span{color:#000!important}
 }
+@media(prefers-reduced-motion:reduce){html body #home.hero .mobile-next-departure .mobile-departure-track span{animation:none!important;background-position:50% 0!important}}
