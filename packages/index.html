@@ -226,6 +226,38 @@ body .package-content {
   }
 }
 </style>
+
+<style id="mobile-tour-cards-black-white-typography">
+/* Mobile tour cards: crisp black-and-white typography, without changing card layout. */
+@media (max-width: 760px) {
+  #packageList .card h2 {
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+  }
+  #packageList .card > p:not(.price):not(.package-departure-date) {
+    color: #222 !important;
+    -webkit-text-fill-color: #222 !important;
+  }
+  #packageList .card .package-departure-date {
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+    background: #000 !important;
+    border-left-color: #000 !important;
+  }
+  #packageList .card .price {
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+    font-weight: 800 !important;
+  }
+  #packageList .card .btn {
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+    background: #000 !important;
+    border: 1px solid #000 !important;
+  }
+}
+</style>
+
 </head><body>
 <header class="sitewide-header">
   <div class="header-inner">
