@@ -1404,6 +1404,17 @@ html body #home.hero .hero-build-cta-wrap > .hero-build-cta:active{
   html body #home.hero .hero-build-cta-wrap > .hero-build-cta::after{animation:none!important;transition:none!important}
 }
 </style>
+<style id="desktop-header-persistent-on-scroll">
+/* Keep the existing desktop header composition pinned at the top during page scroll. */
+@media screen and (min-width:761px){
+  html body > header{
+    position:sticky!important;
+    top:0!important;
+    z-index:1200!important;
+  }
+}
+</style>
+
 </head>
 
 <body>
