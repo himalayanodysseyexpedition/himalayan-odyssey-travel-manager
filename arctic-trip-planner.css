@@ -85,3 +85,20 @@ body{background:#fff!important}
  background:#f7fafc!important;
  box-shadow:0 10px 22px rgba(16,36,59,.10)!important
 }
+
+
+/* MOBILE ONLY: black category buttons under “Choose the services you need”. */
+@media screen and (max-width:760px){
+  html body .toolbar .tabs > button,
+  html body .toolbar .tabs > button.active,
+  html body .toolbar .tabs > button:hover,
+  html body .toolbar .tabs > button:focus-visible{
+    background:#000!important;
+    background-color:#000!important;
+    background-image:none!important;
+    color:#fff!important;
+    -webkit-text-fill-color:#fff!important;
+    border:1px solid #000!important;
+    box-shadow:none!important;
+  }
+}
