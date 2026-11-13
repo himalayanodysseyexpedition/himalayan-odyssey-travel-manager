@@ -4092,5 +4092,66 @@ html body #home.hero .hero-build-cta-wrap > .hero-book-cta:hover{
 }
 </style>
 
+
+<style id="mobile-trip-calculator-hero-overlay">
+@media screen and (max-width:760px){
+  #home.hero{
+    display:block!important;
+    min-height:0!important;
+    height:auto!important;
+    overflow:visible!important;
+    padding:86px 5% 34px!important;
+    background-position:center,center,58% center!important;
+  }
+  #home.hero>.hero-content{
+    width:100%!important;
+    max-width:none!important;
+  }
+  #home.hero .hero-build-cta-wrap{margin-bottom:18px!important}
+  #home.hero #plan-your-trip{
+    display:block!important;
+    width:100%!important;
+    margin:18px auto 0!important;
+    padding:18px 0 0!important;
+    background:transparent!important;
+    color:#142b40!important;
+  }
+  #home.hero #plan-your-trip .htp-inner{width:100%!important;max-width:680px!important}
+  #home.hero #plan-your-trip .htp-heading{margin:0 auto 14px!important}
+  #home.hero #plan-your-trip .htp-heading h2{
+    color:#fff!important;
+    font-size:clamp(27px,7vw,36px)!important;
+    text-shadow:0 2px 12px rgba(0,0,0,.55)!important;
+  }
+  #home.hero #plan-your-trip .htp-eyebrow{color:#dceefa!important;text-shadow:0 1px 6px rgba(0,0,0,.5)!important}
+  #home.hero #plan-your-trip .htp-shell{grid-template-columns:minmax(0,1fr)!important;gap:12px!important}
+  #home.hero #plan-your-trip .htp-summary{position:static!important}
+}
+</style>
+<script id="mobile-trip-calculator-move-into-hero">
+(()=>{
+  const moveCalculator=()=>{
+    const mobile=window.matchMedia("(max-width:760px)").matches;
+    const hero=document.querySelector("#home.hero");
+    const planner=document.querySelector("#plan-your-trip");
+    const ctas=hero?.querySelector(".hero-build-cta-wrap");
+    if(!hero||!planner||!ctas)return;
+    let marker=document.getElementById("plan-your-trip-original-position");
+    if(!marker){
+      marker=document.createComment("Original Plan Your Trip section position");
+      planner.parentNode.insertBefore(marker,planner);
+    }
+    if(mobile){
+      if(planner.parentNode!==hero.querySelector(".hero-content")) ctas.insertAdjacentElement("afterend",planner);
+    }else if(marker.parentNode&&planner.parentNode!==marker.parentNode){
+      marker.parentNode.insertBefore(planner,marker.nextSibling);
+    }
+  };
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",moveCalculator,{once:true});
+  else moveCalculator();
+  window.addEventListener("resize",moveCalculator,{passive:true});
+})();
+</script>
+
 </body>
 </html>
