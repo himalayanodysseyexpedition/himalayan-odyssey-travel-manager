@@ -1456,10 +1456,6 @@ html body #home.hero .hero-build-cta-wrap > .hero-build-cta:active{
       </a>
     </div>
 
-    <div class="hero-build-cta-wrap">
-      <a class="hero-build-cta" href="#plan-your-trip" aria-label="Build Your Trip"><span class="hero-build-cta-label">Build Your Trip</span></a>
-    </div>
-
     <div class="hero-destination-list" aria-label="Destinations we offer">
       <div class="hero-destination-marquee">
         <div class="hero-destination-track">
@@ -1467,6 +1463,10 @@ html body #home.hero .hero-build-cta-wrap > .hero-build-cta:active{
           <span aria-hidden="true">Spiti Valley</span><i aria-hidden="true">·</i><span aria-hidden="true">Kinnaur</span><i aria-hidden="true">·</i><span aria-hidden="true">Narkanda</span><i aria-hidden="true">·</i><span aria-hidden="true">Shimla</span><i aria-hidden="true">·</i><span aria-hidden="true">Manali</span><i aria-hidden="true">·</i><span aria-hidden="true">Kasol</span><i aria-hidden="true">·</i><span aria-hidden="true">Jibhi</span><i aria-hidden="true">·</i>
         </div>
       </div>
+    </div>
+
+    <div class="hero-build-cta-wrap">
+      <a class="hero-build-cta" href="#plan-your-trip" aria-label="Build Your Trip"><span class="hero-build-cta-label">Build Your Trip</span></a>
     </div>
 
     
@@ -3548,6 +3548,29 @@ html body #home.hero .hero-service-icons .hero-service-icon span{
 <style id="homepage-service-buttons-bold-labels">
 html body #home.hero .hero-service-icons .hero-service-icon span{
   font-weight:700!important;
+}
+</style>
+
+
+<style id="homepage-destination-marquee-between-services-and-build-trip">
+/* Keep the destination ticker between the service buttons and Build Your Trip CTA. */
+html body #home.hero .hero-service-icons{
+  margin-bottom:0!important;
+}
+html body #home.hero .hero-destination-list{
+  margin-top:22px!important;
+  margin-bottom:0!important;
+}
+html body #home.hero .hero-build-cta-wrap{
+  margin-top:22px!important;
+}
+@media screen and (max-width:760px){
+  html body #home.hero .hero-destination-list{
+    margin-top:18px!important;
+  }
+  html body #home.hero .hero-build-cta-wrap{
+    margin-top:20px!important;
+  }
 }
 </style>
 
