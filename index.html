@@ -4019,5 +4019,19 @@ html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is
 }
 </style>
 
+
+
+<style id="mobile-shuffling-words-slightly-bolder">
+/* Mobile only: make the changing destination words slightly bolder without changing their size or font. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord,
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-in,
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-out{
+    font-weight:800!important;
+    -webkit-text-stroke:.55px currentColor!important;
+  }
+}
+</style>
+
 </body>
 </html>
