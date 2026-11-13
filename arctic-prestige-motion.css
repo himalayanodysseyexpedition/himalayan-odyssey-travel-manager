@@ -258,3 +258,24 @@ a:focus-visible,button:focus-visible{outline:2px solid #78afd1!important;outline
     pointer-events:none!important;
   }
 }
+
+
+/* FINAL MOBILE OVERRIDE: Build Your Trip category tabs must render black.
+   Kept at the end of the last-loaded shared stylesheet to beat earlier theme rules. */
+@media screen and (max-width:760px){
+  html body main.wrap .toolbar #tabs.tabs > button,
+  html body main.wrap .toolbar #tabs.tabs > button.active,
+  html body main.wrap .toolbar #tabs.tabs > button:active,
+  html body main.wrap .toolbar #tabs.tabs > button:hover,
+  html body main.wrap .toolbar #tabs.tabs > button:focus,
+  html body main.wrap .toolbar #tabs.tabs > button:focus-visible{
+    background:#000!important;
+    background-color:#000!important;
+    background-image:none!important;
+    color:#fff!important;
+    -webkit-text-fill-color:#fff!important;
+    border:1px solid #000!important;
+    box-shadow:none!important;
+    opacity:1!important;
+  }
+}
