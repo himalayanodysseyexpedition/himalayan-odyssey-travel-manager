@@ -1464,7 +1464,7 @@ html body #home.hero .hero-build-cta-wrap > .hero-build-cta:active{
 <div class="hero" id="home">
   <div class="hero-content">
     <div class="mobile-tibetan-flag-line" aria-hidden="true"></div>
-    <h1 class="hero-animated-heading"><span class="hero-heading-static hero-heading-prefix">The</span><span class="hero-word-slot"><span id="heroRotatingWord" class="hero-word-rotator word-himalayas" aria-label="Himalayas are"><span class="hero-rotating-line">Himalayas</span><span class="hero-rotating-line">are</span></span></span><span class="hero-heading-static hero-heading-suffix">calling</span></h1>
+    <h1 class="hero-animated-heading"><span class="hero-heading-static hero-heading-prefix">The</span><br class="mobile-hero-word-break"><span class="hero-word-slot"><span id="heroRotatingWord" class="hero-word-rotator word-himalayas" aria-label="Himalayas are"><span class="hero-rotating-line">Himalayas</span><br class="mobile-hero-word-break"><span class="hero-rotating-line">are</span></span></span><br class="mobile-hero-word-break"><span class="hero-heading-static hero-heading-suffix">calling</span></h1>
 
     <div class="hero-service-icons" aria-label="Our services">
       <a class="hero-service-icon" href="#cabs" aria-label="Explore cabs">
@@ -4289,6 +4289,12 @@ html body #home.hero .hero-build-cta-wrap>a.hero-build-cta:focus-visible{
     display: block !important;
     white-space: normal !important;
     text-align: center !important;
+  }
+  html body #home.hero .hero-content h1.hero-animated-heading .mobile-hero-word-break {
+    display: block !important;
+    height: 0 !important;
+    width: 100% !important;
+    visibility: hidden !important;
   }
   html body #home.hero .hero-content h1.hero-animated-heading > .hero-heading-prefix,
   html body #home.hero .hero-content h1.hero-animated-heading > .hero-word-slot,
