@@ -1,0 +1,21 @@
+/* Mobile homepage: unify page-level surfaces with the light cream canvas. */
+@media(max-width:760px){
+  html,body{background:#f8f6ef!important}
+  body{background-color:#f8f6ef!important}
+  body #home.hero{
+    background:#f8f6ef!important;
+    background-image:none!important;
+    color:#10243b!important;
+  }
+  body #home.hero:before,
+  body #home.hero:after{background:none!important;opacity:0!important}
+  body>section{
+    background-color:#f8f6ef!important;
+    background-image:none!important;
+  }
+  body>footer,
+  body #siteFooter{
+    background-color:#f8f6ef!important;
+    background-image:none!important;
+  }
+}
