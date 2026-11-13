@@ -2783,18 +2783,11 @@ loadHotels();
   const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduceMotion) return;
   let index = 0;
-  // Preserve the existing fade timing and transition; avoid calling a function scoped to another script.
-  window.setInterval(() => {
-    word.classList.add("is-shuffling-out");
-    window.setTimeout(() => {
-      index = (index + 1) % words.length;
-      word.textContent = words[index].text;
-      word.className = "hero-word-rotator " + words[index].className + " is-shuffling-in";
-      window.requestAnimationFrame(() => {
-        window.requestAnimationFrame(() => word.classList.remove("is-shuffling-in"));
-      });
-    }, 850);
-  }, 1500);
+  word.addEventListener("animationiteration", () => {
+    index = (index + 1) % words.length;
+    word.textContent = words[index].text;
+    word.className = "hero-word-rotator " + words[index].className;
+  });
 })();
 </script>
 
@@ -4284,3 +4277,36 @@ html body #home.hero .hero-build-cta-wrap>a.hero-build-cta:focus-visible{
 
 </body>
 </html>
+
+
+
+<style id="mobile-hero-words-continuous-ticker">
+/* Mobile only: cycle each hero phrase continuously from left to right. */
+@media screen and (max-width:760px){
+  #home.hero .hero-content h1.hero-animated-heading>.hero-word-slot{
+    display:block!important;
+    width:100%!important;
+    min-width:0!important;
+    overflow:hidden!important;
+    white-space:nowrap!important;
+  }
+  #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord{
+    display:inline-block!important;
+    width:max-content!important;
+    max-width:none!important;
+    white-space:nowrap!important;
+    will-change:transform;
+    animation:mobileHeroTickerLeftToRight 6.5s linear infinite!important;
+  }
+}
+@keyframes mobileHeroTickerLeftToRight{
+  from{transform:translateX(-105%)}
+  to{transform:translateX(105%)}
+}
+@media(prefers-reduced-motion:reduce){
+  #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord{
+    animation:none!important;
+    transform:none!important;
+  }
+}
+</style>
