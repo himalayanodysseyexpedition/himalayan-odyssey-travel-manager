@@ -4903,6 +4903,27 @@ html body #home.hero .hero-service-icons .hero-service-icon span{
 })();
 </script>
 
+
+<script id="mobile-hamburger-page-routes">
+(function(){
+  const nav=document.getElementById('mobileMainNavigation');
+  if(!nav) return;
+  const upcoming=nav.querySelector('a[href="#upcoming-packages"]');
+  const itinerary=nav.querySelector('a[href="#itineraries"]');
+  if(!upcoming||!itinerary) return;
+  const desktopUpcoming='#upcoming-packages';
+  const desktopItinerary='#itineraries';
+  const mobileQuery=window.matchMedia('(max-width: 760px)');
+  function syncRoutes(){
+    upcoming.setAttribute('href',mobileQuery.matches?'/packages/#packageList':desktopUpcoming);
+    itinerary.setAttribute('href',mobileQuery.matches?'/itineraries/':desktopItinerary);
+  }
+  syncRoutes();
+  if(mobileQuery.addEventListener) mobileQuery.addEventListener('change',syncRoutes);
+  else mobileQuery.addListener(syncRoutes);
+})();
+</script>
+
 </body>
 </html>
 
