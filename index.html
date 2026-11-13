@@ -4939,6 +4939,44 @@ html body #home.hero .hero-service-icons .hero-service-icon span{
 })();
 </script>
 
+
+<!-- Final mobile homepage cream canvas override: intentionally last in the document cascade. -->
+<style id="mobile-homepage-cream-final-override">
+@media (max-width:760px){
+  html,html body,html body main,html body .content,
+  html body section#upcoming-packages,
+  html body section#plan-your-trip,
+  html body section#journey-story,
+  html body section#more-than-tours{
+    background:#f8f6ef!important;
+    background-color:#f8f6ef!important;
+    background-image:none!important;
+  }
+  html body section#upcoming-packages::before,
+  html body section#upcoming-packages::after,
+  html body section#plan-your-trip::before,
+  html body section#plan-your-trip::after,
+  html body section#journey-story::before,
+  html body section#journey-story::after,
+  html body section#more-than-tours::before,
+  html body section#more-than-tours::after{
+    background:none!important;
+    background-image:none!important;
+    opacity:0!important;
+    box-shadow:none!important;
+    content:none!important;
+  }
+  html body section#upcoming-packages>.section-inner,
+  html body section#journey-story>.section-inner,
+  html body section#more-than-tours>.section-inner,
+  html body section#plan-your-trip>.htp-inner{
+    background:#f8f6ef!important;
+    background-color:#f8f6ef!important;
+    background-image:none!important;
+  }
+}
+</style>
+
 </body>
 </html>
 
