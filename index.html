@@ -4977,8 +4977,43 @@ html body #home.hero .hero-service-icons .hero-service-icon span{
 }
 </style>
 
+
+<style id="floating-bar-fixed-position-scroll-state">
+html body #footerContactBar.footer-contact-bar{
+  position:fixed!important;
+  left:50%!important;
+  right:auto!important;
+  bottom:max(12px,env(safe-area-inset-bottom))!important;
+  margin:0!important;
+  translate:none!important;
+  transform:translate3d(-50%,22px,0)!important;
+  transform-origin:center bottom!important;
+  z-index:1200!important;
+  will-change:transform,opacity;
+}
+html body #footerContactBar.footer-contact-bar.visible{
+  opacity:1!important;
+  transform:translate3d(-50%,0,0)!important;
+  pointer-events:auto!important;
+}
+html body #footerContactBar.footer-contact-bar.scroll-hidden{
+  opacity:0!important;
+  transform:translate3d(-50%,calc(100% + 36px),0)!important;
+  pointer-events:none!important;
+}
+@media(max-width:760px){
+  html body #footerContactBar.footer-contact-bar{
+    width:calc(100vw - 20px)!important;
+    max-width:calc(100vw - 20px)!important;
+    box-sizing:border-box!important;
+    bottom:max(12px,env(safe-area-inset-bottom))!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  html body #footerContactBar.footer-contact-bar{
+    transition:none!important;
+  }
+}
+</style>
 </body>
 </html>
-
-
-
