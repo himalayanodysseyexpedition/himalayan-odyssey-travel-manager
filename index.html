@@ -1444,6 +1444,11 @@ html body #home.hero .hero-build-cta-wrap > .hero-build-cta:active{
         </div>
       </div>
     </nav>
+    <button class="header-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMainNavigation">
+      <svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+        <path d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
   </div>
 </header>
 <!-- HERO -->
@@ -2461,6 +2466,38 @@ if (footerContactBar) {
   update();
 })();
 
+
+/* Mobile header hamburger: toggle the existing main navigation. */
+(() => {
+  const header=document.querySelector('body > header');
+  const toggle=header?.querySelector('.header-menu-toggle');
+  const nav=header?.querySelector('.glass-nav');
+  if(!header||!toggle||!nav)return;
+  const close=()=>{
+    header.classList.remove('menu-open');
+    toggle.setAttribute('aria-expanded','false');
+    toggle.setAttribute('aria-label','Open navigation menu');
+  };
+  toggle.addEventListener('click',event=>{
+    event.preventDefault();
+    const open=!header.classList.contains('menu-open');
+    header.classList.toggle('menu-open',open);
+    toggle.setAttribute('aria-expanded',String(open));
+    toggle.setAttribute('aria-label',open?'Close navigation menu':'Open navigation menu');
+  });
+  nav.addEventListener('click',event=>{
+    if(event.target.closest('a'))close();
+  });
+  document.addEventListener('click',event=>{
+    if(!header.contains(event.target))close();
+  });
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape'){close();toggle.focus();}
+  });
+  window.addEventListener('resize',()=>{
+    if(window.matchMedia('(min-width:761px)').matches)close();
+  });
+})();
 
 /* Accessible Services menu */
 (() => {
@@ -3930,6 +3967,26 @@ html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is
     box-shadow:none!important;
     border:0!important;
   }
+}
+</style>
+
+<style id="mobile-header-hamburger-functional-fix">
+@media (max-width:760px){
+  html body > header .header-inner > .header-menu-toggle{
+    display:inline-flex!important;flex:0 0 42px!important;width:42px!important;height:42px!important;
+    align-items:center!important;justify-content:center!important;margin:0!important;padding:0!important;
+    cursor:pointer!important;position:relative!important;z-index:1401!important;
+    color:#fff!important;-webkit-text-fill-color:#fff!important;
+  }
+  html body > header .header-inner > nav.glass-nav{
+    display:none!important;
+  }
+  html body > header.menu-open .header-inner > nav.glass-nav{
+    display:flex!important;
+  }
+}
+@media (min-width:761px){
+  html body > header .header-inner > .header-menu-toggle{display:none!important}
 }
 </style>
 </body>
