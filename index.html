@@ -3898,5 +3898,17 @@ html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is
 
 
 
+
+<style id="mobile-hero-rotating-words-smaller">
+/* Mobile only: reduce the changing phrase without altering fixed words or font family. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-content h1.hero-animated-heading > .hero-word-slot,
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord,
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-in,
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-out{
+    font-size:.92em!important;
+  }
+}
+</style>
 </body>
 </html>
