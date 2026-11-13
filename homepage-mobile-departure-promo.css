@@ -63,7 +63,14 @@
     background:#3a3a3a!important;
   }
   html body #home.hero .mobile-next-departure .mobile-departure-track span{
-    background:#fff!important;
+    background:linear-gradient(100deg,#1b4fa3 0%,#fff 20%,#d92332 40%,#f4c542 60%,#168b58 80%,#1b4fa3 100%)!important;
+    background-size:260% 100%!important;
+    animation:mobileDepartureTibetanFlow 3.2s linear infinite!important;
+    box-shadow:0 0 10px rgba(255,255,255,.2);
+  }
+  @keyframes mobileDepartureTibetanFlow{
+    from{background-position:100% 0}
+    to{background-position:-160% 0}
   }
   html body #home.hero .mobile-next-departure .mobile-departure-cta{
     color:#000!important;background:#fff!important;border:1px solid #fff!important;
