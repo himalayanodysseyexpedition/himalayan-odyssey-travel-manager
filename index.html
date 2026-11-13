@@ -4455,6 +4455,57 @@ html body #home.hero .hero-destination-list{
   top:8px!important;
 }
 </style>
+
+<style id="desktop-hero-continuous-ticker-v1">
+/* Desktop: mirror the mobile continuous left-to-right hero phrase ticker. */
+@media screen and (min-width:761px){
+  #home.hero .hero-content h1.hero-animated-heading>.hero-word-slot{
+    display:block!important;flex:0 0 100%!important;width:100%!important;
+    max-width:100%!important;overflow:hidden!important;white-space:nowrap!important;
+  }
+  #home.hero .hero-content h1.hero-animated-heading .hero-word-track{
+    display:inline-flex!important;flex-wrap:nowrap!important;align-items:baseline!important;
+    width:max-content!important;max-width:none!important;white-space:nowrap!important;
+    will-change:transform!important;animation:desktopHeroSequenceRightV1 32s linear infinite!important;
+  }
+  #home.hero .hero-content h1.hero-animated-heading .hero-word-track .hero-word-rotator{
+    display:inline-block!important;flex:none!important;width:auto!important;max-width:none!important;
+    white-space:nowrap!important;margin-right:1.1em!important;
+    font-family:"Cinzel",serif!important;font-weight:700!important;
+  }
+}
+@keyframes desktopHeroSequenceRightV1{
+  from{transform:translateX(-50%)}
+  to{transform:translateX(0)}
+}
+</style>
+<script id="desktop-hero-continuous-ticker-v1">
+(() => {
+  const phrases=["Himalayas are","Spiti is","Himachal is","Adventure is"];
+  const setup=()=>{
+    if(!window.matchMedia||!window.matchMedia("(min-width:761px)").matches)return;
+    const slot=document.querySelector("#home.hero .hero-content h1.hero-animated-heading > .hero-word-slot");
+    const original=document.getElementById("heroRotatingWord");
+    if(!slot||!original||slot.dataset.desktopTickerReady==="true")return;
+    const track=document.createElement("span");
+    track.className="hero-word-track";
+    track.setAttribute("aria-label",phrases.join(", "));
+    const addSet=()=>phrases.forEach((phrase,index)=>{
+      const item=document.createElement("span");
+      item.className="hero-word-rotator "+["word-himalayas","word-spiti","word-himachal","word-adventure"][index];
+      item.textContent=phrase;track.appendChild(item);
+    });
+    addSet();addSet();
+    original.remove();
+    slot.appendChild(track);
+    slot.dataset.desktopTickerReady="true";
+  };
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",setup,{once:true});
+  else setup();
+  window.addEventListener("resize",setup,{passive:true});
+})();
+</script>
+
 </body>
 </html>
 
