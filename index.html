@@ -2776,21 +2776,20 @@ loadHotels();
   if (!word) return;
   const words = [
     { text: "Himalayas are", className: "word-himalayas" },
-    { text: "Himachal is", className: "word-himachal" },
     { text: "Spiti is", className: "word-spiti" },
+    { text: "Himachal is", className: "word-himachal" },
     { text: "Adventure is", className: "word-adventure" }
   ];
   const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduceMotion) return;
   let index = 0;
-  // Give each phrase time to fade out and fade back in; no vertical movement.
+  // Preserve the existing fade timing and transition; avoid calling a function scoped to another script.
   window.setInterval(() => {
     word.classList.add("is-shuffling-out");
     window.setTimeout(() => {
       index = (index + 1) % words.length;
       word.textContent = words[index].text;
       word.className = "hero-word-rotator " + words[index].className + " is-shuffling-in";
-      applyResponsiveRotatingFont();
       window.requestAnimationFrame(() => {
         window.requestAnimationFrame(() => word.classList.remove("is-shuffling-in"));
       });
