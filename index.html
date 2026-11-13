@@ -4275,15 +4275,11 @@ html body #home.hero .hero-build-cta-wrap>a.hero-build-cta:focus-visible{
 
 
 
-</body>
-</html>
-
-
-
-<style id="mobile-hero-words-continuous-ticker">
-/* Mobile only: cycle each hero phrase continuously from left to right. */
+<style id="mobile-hero-words-continuous-ticker-v2">
+/* Mobile-only continuous left-to-right ticker for the rotating hero phrase. */
 @media screen and (max-width:760px){
   #home.hero .hero-content h1.hero-animated-heading>.hero-word-slot{
+    position:relative!important;
     display:block!important;
     width:100%!important;
     min-width:0!important;
@@ -4291,17 +4287,19 @@ html body #home.hero .hero-build-cta-wrap>a.hero-build-cta:focus-visible{
     white-space:nowrap!important;
   }
   #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord{
+    position:relative!important;
     display:inline-block!important;
     width:max-content!important;
     max-width:none!important;
     white-space:nowrap!important;
+    transform:translateX(-100%);
     will-change:transform;
-    animation:mobileHeroTickerLeftToRight 6.5s linear infinite!important;
+    animation:mobileHeroTickerLeftToRightV2 6.5s linear infinite!important;
   }
 }
-@keyframes mobileHeroTickerLeftToRight{
-  from{transform:translateX(-105%)}
-  to{transform:translateX(105%)}
+@keyframes mobileHeroTickerLeftToRightV2{
+  from{transform:translateX(-100%)}
+  to{transform:translateX(100vw)}
 }
 @media(prefers-reduced-motion:reduce){
   #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord{
@@ -4310,3 +4308,8 @@ html body #home.hero .hero-build-cta-wrap>a.hero-build-cta:focus-visible{
   }
 }
 </style>
+</body>
+</html>
+
+
+
