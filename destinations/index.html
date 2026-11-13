@@ -128,6 +128,43 @@ footer a{color:#a9d8f2}
   }
 }
 </style>
+
+<style id="destination-logo-screen-left-v2">
+/* Pin the destination-page logo close to the physical left edge on mobile. */
+@media (max-width: 760px) {
+  html body > header.sitewide-header {
+    width: 100% !important;
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  html body > header.sitewide-header .header-inner {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding-left: 4px !important;
+    padding-right: 8px !important;
+    box-sizing: border-box !important;
+    justify-content: space-between !important;
+  }
+  html body > header.sitewide-header .header-inner > a.brand {
+    flex: 0 1 auto !important;
+    width: auto !important;
+    max-width: calc(100vw - 64px) !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    padding: 0 !important;
+    transform: translateX(-8px) !important;
+    justify-content: flex-start !important;
+  }
+  html body > header.sitewide-header .header-inner > a.brand > img {
+    display: block !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    object-position: left center !important;
+  }
+}
+</style>
 </head>
 <body>
 <header class="sitewide-header">
