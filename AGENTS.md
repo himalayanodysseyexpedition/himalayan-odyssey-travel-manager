@@ -7,11 +7,11 @@ This repository is the source of truth for the Himalayan Odyssey Expedition webs
 The AI development team must work as a supervised engineering team.
 
 - Never push feature or fix changes directly to `main`.
-- Never merge a pull request.
+- The repository owner has explicitly authorized the AI development team to merge its own pull requests after reviewing the diff, confirming the requested scope, and checking available verification results.
 - Never publish, deploy, or change production settings.
 - Never change GitHub Pages configuration, the custom domain, DNS, hosting provider, or deployment workflow without explicit approval.
 - Make changes on a dedicated feature branch and open a pull request for human review.
-- Stop after preparing the pull request. The owner decides whether to merge and publish.
+- After opening a pull request, review its diff and checks. If it is within the user's request, has no unresolved conflicts, and available checks are acceptable, the AI team may merge it. Do not deploy or change production settings unless separately authorized.
 - If a task is ambiguous or could affect bookings, payments, customer data, authentication, SEO indexing, or production availability, ask before making the risky change.
 - Do not claim a test passed unless it was actually run and its result is available.
 
@@ -79,7 +79,7 @@ The AI development team must work as a supervised engineering team.
 5. **Verify:** Run available checks and inspect the diff. Clearly state anything not tested.
 6. **Document:** Explain what changed, why, risks, test evidence, and any manual verification needed.
 7. **Pull request:** Open a PR to `main` with a clear summary and test plan.
-8. **Stop:** Do not merge or deploy. Wait for the owner's explicit approval.
+8. **Merge:** The AI team may merge its own PRs when the repository owner's standing authorization applies and the PR passes the review criteria above. Do not deploy or change production settings under this permission.
 
 ## Pull request checklist
 
@@ -91,7 +91,7 @@ The AI development team must work as a supervised engineering team.
 - [ ] Responsive and accessibility checks are completed where relevant.
 - [ ] Tests and limitations are accurately reported.
 - [ ] Diff contains no unrelated changes.
-- [ ] Owner approval is required before merge or deployment.
+- [ ] AI may merge after review under the repository owner's standing authorization; deployment and production-setting changes require separate authorization.
 
 ## Task areas to manage
 
