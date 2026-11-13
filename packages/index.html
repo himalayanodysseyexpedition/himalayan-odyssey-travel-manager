@@ -54,9 +54,9 @@
 <link rel="stylesheet" href="/mobile-layout.css?v=25">
 <link rel="stylesheet" href="/arctic-prestige-sitewide.css?v=4">
 <link rel="stylesheet" href="/navigation-capsule.css?v=36">
-<link rel="stylesheet" href="/packages/bright-package-discovery.css?v=1">
+<link rel="stylesheet" href="/packages/bright-package-discovery.css?v=20261113-bw2">
 
-<link rel="stylesheet" href="/monochrome-app-final.css?v=20261112-1">
+<link rel="stylesheet" href="/monochrome-app-final.css?v=20261113-bw2">
  <link rel="stylesheet" href="/arctic-prestige-motion.css?v=2">
 <style id="packages-page-light-cream-background">
 /* Use the site's light cream canvas throughout the Find Your Next Journey page. */
@@ -387,30 +387,53 @@ const firstDepartureDate=value=>{
 
  <script src="/arctic-prestige-motion.js?v=2" defer></script>
 
-<style id="package-card-black-white-final-override">
-/* Force a clear black/white contrast on package cards after all theme styles. */
-html body #packageList.package-cards-carousel > article.card h2,
+<style id="package-card-black-white-final-override-v2">
+/* Final, high-specificity black-and-white treatment for live package cards. */
+html body #packageList.package-cards-carousel > article.card {
+  background: #fff !important;
+  color: #000 !important;
+  border: 2px solid #000 !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,.10) !important;
+}
+html body #packageList.package-cards-carousel > article.card h2 {
+  display: block !important;
+  margin-top: 14px !important;
+  padding: 12px 14px !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  background: #000 !important;
+  font-weight: 800 !important;
+}
 html body #packageList.package-cards-carousel > article.card p,
 html body #packageList.package-cards-carousel > article.card p:not(.package-departure-date):not(.price) {
   color: #000 !important;
   -webkit-text-fill-color: #000 !important;
 }
 html body #packageList.package-cards-carousel > article.card .package-departure-date {
+  padding: 9px 12px !important;
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
   background: #000 !important;
-  border-left: 3px solid #000 !important;
+  border: 1px solid #000 !important;
 }
 html body #packageList.package-cards-carousel > article.card .price {
   color: #000 !important;
   -webkit-text-fill-color: #000 !important;
-  font-weight: 800 !important;
+  font-weight: 900 !important;
 }
 html body #packageList.package-cards-carousel > article.card a.btn {
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
   background: #000 !important;
-  border: 1px solid #000 !important;
+  background-image: none !important;
+  border: 2px solid #000 !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+html body #packageList.package-cards-carousel > article.card a.btn:hover {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  background: #fff !important;
 }
 </style>
 
