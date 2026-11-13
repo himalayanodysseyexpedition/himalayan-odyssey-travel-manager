@@ -4704,6 +4704,50 @@ html body #home.hero .hero-destination-list{
 }
 </style>
 
+
+<style id="mobile-hero-heading-motion-graphics">
+/* Mobile-only staggered motion for the three hero headline phrases. */
+@media screen and (max-width:760px){
+  #home.hero .hero-content h1.hero-animated-heading{
+    perspective:700px;
+  }
+  #home.hero .hero-content h1.hero-animated-heading>.hero-heading-prefix,
+  #home.hero .hero-content h1.hero-animated-heading>.hero-word-slot,
+  #home.hero .hero-content h1.hero-animated-heading>.hero-heading-suffix{
+    opacity:0;
+    transform:translate3d(0,16px,0) rotateX(-12deg);
+    filter:blur(4px);
+    animation:hoeHeroPhraseReveal .85s cubic-bezier(.2,.72,.2,1) forwards;
+    will-change:transform,opacity,filter;
+  }
+  #home.hero .hero-content h1.hero-animated-heading>.hero-heading-prefix{
+    animation-delay:.08s;
+  }
+  #home.hero .hero-content h1.hero-animated-heading>.hero-word-slot{
+    animation-delay:.25s;
+  }
+  #home.hero .hero-content h1.hero-animated-heading>.hero-heading-suffix{
+    animation-delay:.42s;
+  }
+  #home.hero .hero-content h1.hero-animated-heading>.hero-heading-prefix,
+  #home.hero .hero-content h1.hero-animated-heading>.hero-heading-suffix{
+    text-shadow:0 0 18px rgba(255,245,218,.22);
+  }
+}
+@keyframes hoeHeroPhraseReveal{
+  0%{opacity:0;transform:translate3d(0,16px,0) rotateX(-12deg);filter:blur(4px)}
+  65%{opacity:1;filter:blur(0);text-shadow:0 0 20px rgba(255,245,218,.28)}
+  100%{opacity:1;transform:translate3d(0,0,0) rotateX(0);filter:blur(0)}
+}
+@media (prefers-reduced-motion:reduce){
+  #home.hero .hero-content h1.hero-animated-heading>.hero-heading-prefix,
+  #home.hero .hero-content h1.hero-animated-heading>.hero-word-slot,
+  #home.hero .hero-content h1.hero-animated-heading>.hero-heading-suffix{
+    animation:none!important;opacity:1!important;transform:none!important;filter:none!important;
+  }
+}
+</style>
+
   <script src="/arctic-prestige-motion.js?v=2" defer></script>
 </body>
 </html>
