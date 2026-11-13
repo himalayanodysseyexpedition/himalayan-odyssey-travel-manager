@@ -68,10 +68,10 @@ html body #home.hero .hero-build-cta-wrap>.hero-build-cta:hover{background:#e5f2
 /* Section rhythm and editorial typography */
 section.content{background:var(--arctic-paper)!important;color:var(--arctic-ink)!important}
 section.content.info,.faq-section{background:#edf3f7!important}
-.section-title small,.section-kicker,.group-departure-body>small{color:#547f9e!important}
-.section-title h2,.content h2,.section-inner h2{color:var(--arctic-navy)!important;font-family:"Boska","Cormorant Garamond",Georgia,serif!important;font-weight:500!important;letter-spacing:-.025em}
+.section-title small,.section-kicker,.group-departure-body>small,.page-heading small{color:#547f9e!important}
+.section-title h2,.content h2,.section-inner h2,.page-heading h1{color:var(--arctic-navy)!important;font-family:"Boska","Cormorant Garamond",Georgia,serif!important;font-weight:500!important;letter-spacing:-.025em}
 .section-title h2:after{background:linear-gradient(90deg,transparent,var(--arctic-blue),transparent)!important}
-.intro,.content .intro{color:var(--arctic-muted)!important}
+.intro,.content .intro,.page-heading p{color:var(--arctic-muted)!important}
 .local-intro-copy h2,.info-box h3,.faq-list summary{color:var(--arctic-navy)!important}
 .local-intro-panel,.review-panel{
   background:radial-gradient(ellipse at 85% 12%,rgba(111,169,206,.22),transparent 40%),linear-gradient(135deg,#10243a,#244b68)!important;
