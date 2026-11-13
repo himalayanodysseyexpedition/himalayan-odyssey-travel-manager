@@ -1483,7 +1483,8 @@ html body #home.hero .hero-build-cta-wrap > .hero-build-cta:active{
 
     <div class="hero-build-cta-wrap">
       <a class="hero-build-cta" href="#plan-your-trip" aria-label="Build Your Trip"><span class="hero-build-cta-label">Build Your Trip</span></a>
-    </div>
+           <a class="hero-build-cta hero-book-cta" href="#packages" aria-label="Book Your Trip"><span class="hero-build-cta-label">Book Your Trip</span></a>
+     </div>
 
     
   </div>
@@ -4064,6 +4065,22 @@ html body #home.hero .hero-content h1.hero-animated-heading > .hero-heading-suff
 }
 </style>
 
+
+
+<style id="homepage-book-your-trip-cta">
+html body #home.hero .hero-build-cta-wrap{flex-direction:column!important;gap:10px!important;}
+html body #home.hero .hero-build-cta-wrap > .hero-book-cta{
+  background:rgba(255,255,255,.12)!important;
+  color:#fff!important;
+  border:1px solid rgba(255,255,255,.78)!important;
+  box-shadow:0 7px 20px rgba(0,0,0,.16)!important;
+  animation:none!important;
+}
+html body #home.hero .hero-build-cta-wrap > .hero-book-cta::after{display:none!important;content:none!important;}
+html body #home.hero .hero-build-cta-wrap > .hero-book-cta:hover{
+  background:#fff!important;color:#152638!important;border-color:#fff!important;
+}
+</style>
 
 </body>
 </html>
