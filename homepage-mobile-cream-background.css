@@ -2,6 +2,15 @@
 @media(max-width:760px){
   html,body{background:#f8f6ef!important}
   body{background-color:#f8f6ef!important}
+  /* Explicitly keep the four requested homepage sections on the cream canvas. */
+  body #upcoming-packages,
+  body #plan-your-trip,
+  body #journey-story,
+  body #more-than-tours{
+    background:#f8f6ef!important;
+    background-color:#f8f6ef!important;
+    background-image:none!important;
+  }
   body #home.hero{
     background:#f8f6ef!important;
     background-image:none!important;
