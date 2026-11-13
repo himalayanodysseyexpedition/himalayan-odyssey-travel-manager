@@ -279,3 +279,33 @@ a:focus-visible,button:focus-visible{outline:2px solid #78afd1!important;outline
     opacity:1!important;
   }
 }
+
+
+/* MOBILE ONLY: unify every page footer to solid black with high-contrast text. */
+@media screen and (max-width:760px){
+  html body footer,
+  html body footer#siteFooter,
+  html body .site-footer{
+    background:#000!important;
+    background-color:#000!important;
+    background-image:none!important;
+    color:#f5f5f5!important;
+    border-top:1px solid rgba(255,255,255,.18)!important;
+  }
+  html body footer :is(h1,h2,h3,h4,h5,strong,b),
+  html body .site-footer :is(h1,h2,h3,h4,h5,strong,b){
+    color:#fff!important;
+  }
+  html body footer a,
+  html body .site-footer a{
+    color:#e5e5e5!important;
+  }
+  html body footer .footer-contact-bar,
+  html body .site-footer .footer-contact-bar{
+    background:#111!important;
+    background-color:#111!important;
+    background-image:none!important;
+    color:#fff!important;
+    border-color:rgba(255,255,255,.2)!important;
+  }
+}
