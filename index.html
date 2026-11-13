@@ -3877,5 +3877,23 @@ html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is
 }
 </style>
 
+
+<style id="mobile-hero-headline-size-hierarchy-only">
+/* Mobile only: make the fixed words smaller and the rotating middle phrase larger.
+   Keep the existing font family, weight, style, and other typography unchanged. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-content h1.hero-animated-heading > .hero-heading-prefix,
+  html body #home.hero .hero-content h1.hero-animated-heading > .hero-heading-suffix{
+    font-size:.76em!important;
+  }
+  html body #home.hero .hero-content h1.hero-animated-heading > .hero-word-slot,
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord,
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-in,
+  html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-out{
+    font-size:1.12em!important;
+  }
+}
+</style>
+
 </body>
 </html>
