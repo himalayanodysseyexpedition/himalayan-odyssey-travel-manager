@@ -4506,6 +4506,64 @@ html body #home.hero .hero-destination-list{
 })();
 </script>
 
+
+<style id="desktop-hero-ticker-layout-fix-v2">
+@media screen and (min-width:761px){
+  #home.hero .hero-content h1.hero-animated-heading>.hero-word-slot{
+    display:block!important;flex:0 0 auto!important;
+    width:100%!important;min-width:0!important;max-width:100%!important;
+    height:1.08em!important;min-height:1.08em!important;
+    overflow:hidden!important;white-space:nowrap!important;
+    position:relative!important;align-self:stretch!important;
+  }
+  #home.hero .hero-content h1.hero-animated-heading>.hero-word-slot>.hero-word-track{
+    display:inline-flex!important;flex-flow:row nowrap!important;align-items:baseline!important;
+    width:max-content!important;max-width:none!important;
+    white-space:nowrap!important;position:absolute!important;left:0!important;top:0!important;
+    animation:desktopHeroTickerVisibleV2 32s linear infinite!important;
+    will-change:transform!important;
+  }
+  #home.hero .hero-content h1.hero-animated-heading .hero-word-track>.hero-word-rotator{
+    display:inline-block!important;flex:0 0 auto!important;width:auto!important;max-width:none!important;
+    margin:0 1.1em 0 0!important;white-space:nowrap!important;
+    font-family:"Cinzel",serif!important;font-size:.92em!important;font-weight:700!important;
+  }
+}
+@keyframes desktopHeroTickerVisibleV2{
+  from{transform:translateX(-50%)}
+  to{transform:translateX(0)}
+}
+</style>
+<script id="desktop-hero-ticker-layout-fix-v2">
+(() => {
+  const phrases=["Himalayas are","Spiti is","Himachal is","Adventure is"];
+  const init=()=>{
+    if(!window.matchMedia||!window.matchMedia("(min-width:761px)").matches)return;
+    const slot=document.querySelector("#home.hero .hero-content h1.hero-animated-heading>.hero-word-slot");
+    if(!slot||slot.querySelector(".hero-word-track"))return;
+    const original=slot.querySelector("#heroRotatingWord");
+    if(!original)return;
+    const track=document.createElement("span");
+    track.className="hero-word-track";
+    track.setAttribute("aria-label",phrases.join(", "));
+    for(let repeat=0;repeat<2;repeat++){
+      phrases.forEach((phrase,index)=>{
+        const item=document.createElement("span");
+        item.className="hero-word-rotator "+["word-himalayas","word-spiti","word-himachal","word-adventure"][index];
+        item.textContent=phrase;
+        track.appendChild(item);
+      });
+    }
+    original.replaceWith(track);
+    slot.dataset.desktopTickerReady="true";
+  };
+  init();
+  document.addEventListener("DOMContentLoaded",init,{once:true});
+  window.addEventListener("load",init,{once:true});
+  window.addEventListener("resize",init,{passive:true});
+})();
+</script>
+
 </body>
 </html>
 
