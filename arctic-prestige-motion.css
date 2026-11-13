@@ -39,7 +39,7 @@ body{background:var(--arctic-paper)!important;color:var(--arctic-ink)!important;
 #home.hero h1,#home.hero .hero-animated-heading{color:#f8fbfd!important;text-shadow:0 8px 38px rgba(0,0,0,.34)!important}
 #home.hero .hero-word-rotator,#home.hero .hero-word-rotator.word-himalayas,#home.hero .hero-word-rotator.word-spiti,#home.hero .hero-word-rotator.word-himachal,#home.hero .hero-word-rotator.word-adventure{color:#c9e7f8!important;-webkit-text-fill-color:#c9e7f8!important;background:none!important}
 #home.hero p{color:rgba(246,250,253,.86)!important}
-#home#home.hero .hero-note span:before{background:var(--arctic-blue)!important;box-shadow:0 0 10px rgba(111,169,206,.45)!important}
+#home.hero .hero-note span:before{background:var(--arctic-blue)!important;box-shadow:0 0 10px rgba(111,169,206,.45)!important}
 #home.hero .hero-service-icon{
   border:1px solid rgba(210,234,248,.38)!important;
   background:linear-gradient(145deg,rgba(246,251,255,.16),rgba(194,222,241,.055))!important;
@@ -171,7 +171,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #78afd1!important;outline
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto!important}
   .arctic-reveal,.arctic-reveal.arctic-in{opacity:1!important;transform:none!important;transition:none!important}
-  .hero-content,#home.hero:before{animation:none!important}
+  #home.hero .hero-content,#home.hero:before{animation:none!important}
   .destination-card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card,#home.hero .hero-service-icon{transition:none!important}
 }
 @media(max-width:760px){
