@@ -171,6 +171,18 @@ footer{background:var(--forest);color:#dce4dc;padding:28px;text-align:center;fon
 }
 </style>
 
+
+<style id="mobile-build-trip-header-cta-hidden">
+@media screen and (max-width:760px){
+  html body > header.sitewide-header .header-inner > a.header-cta,
+  html body > header.sitewide-header a[aria-label="Plan your trip"]{
+    display:none!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+  }
+}
+</style>
+
 </head><body>
 <header class="sitewide-header"><div class="header-inner">
 <a class="brand" href="/" aria-label="Himalayan Odyssey Expedition — Home"><img src="/logo.webp" alt="Himalayan Odyssey Expedition"></a>
