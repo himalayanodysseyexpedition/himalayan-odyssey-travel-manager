@@ -161,7 +161,7 @@ const firstDepartureDate=value=>{
     const inclusions=p.inclusions?'<p>'+esc(p.inclusions)+'</p>':"";
     const durationText=p.duration?'<p>'+esc(p.duration)+'</p>':"";
     const departureText=p.departure_dates?'<p class="package-departure-date">Departure: '+esc(p.departure_dates)+'</p>':"";
-    return '<article class="card"><div class="package-card-media"><img src="'+esc(image)+'" alt="'+esc(name)+' — '+esc(place)+'" loading="lazy" decoding="async"></div><h2>'+esc(name)+'</h2><p>'+esc(place)+'</p>"+departureText+durationText+inclusions+price+'<a class="btn" href="'+wa("Hello, I am interested in "+name+". Please share dates and details.")+'" target="_blank" rel="noopener noreferrer">Enquire on WhatsApp</a></article>';
+    return '<article class="card"><div class="package-card-media"><img src="'+esc(image)+'" alt="'+esc(name)+' — '+esc(place)+'" loading="lazy" decoding="async"></div><h2>'+esc(name)+'</h2><p>'+esc(place)+'</p>'+departureText+durationText+inclusions+price+'<a class="btn" href="'+wa("Hello, I am interested in "+name+". Please share dates and details.")+'" target="_blank" rel="noopener noreferrer">Enquire on WhatsApp</a></article>';
    }).join("");
    list.scrollLeft=0;
   };
