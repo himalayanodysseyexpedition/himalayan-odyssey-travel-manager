@@ -133,3 +133,53 @@ html body #home .hero-build-cta-wrap > a.hero-build-cta:focus-visible{
   background:#242424!important;background-color:#242424!important;background-image:none!important;
   border-color:#242424!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
 }
+
+
+/* Mobile sitewide header: reuse the homepage Tibetan prayer-flag overlay on every page. */
+@media screen and (max-width:760px){
+  html body > header{
+    position:sticky!important;
+    top:0!important;
+    isolation:isolate!important;
+    overflow:hidden!important;
+  }
+  html body > header::after{
+    content:""!important;
+    display:block!important;
+    position:absolute!important;
+    inset:0!important;
+    z-index:0!important;
+    width:100%!important;
+    height:100%!important;
+    margin:0!important;
+    pointer-events:none!important;
+    opacity:.52!important;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 150'%3E%3Cpath d='M0 10 Q220 -2 450 12 T900 8' fill='none' stroke='%23483f39' stroke-width='3'/%3E%3Cg stroke='%23ffffff' stroke-opacity='.25' stroke-width='1.5'%3E%3Cpath fill='%230c8fc7' d='M18 11h78v112l-39-12-39 12z'/%3E%3Cpath fill='%23f5f1e7' d='M105 10h78v112l-39-12-39 12z'/%3E%3Cpath fill='%23d83b3b' d='M192 10h78v112l-39-12-39 12z'/%3E%3Cpath fill='%233e9560' d='M279 10h78v112l-39-12-39 12z'/%3E%3Cpath fill='%23edc43b' d='M366 10h78v112l-39-12-39 12z'/%3E%3Cpath fill='%230c8fc7' d='M453 10h78v112l-39-12-39 12z'/%3E%3Cpath fill='%23f5f1e7' d='M540 10h78v112l-39-12-39 12z'/%3E%3Cpath fill='%23d83b3b' d='M627 10h78v112l-39-12-39 12z'/%3E%3Cpath fill='%233e9560' d='M714 10h78v112l-39-12-39 12z'/%3E%3Cpath fill='%23edc43b' d='M801 10h78v112l-39-12-39 12z'/%3E%3C/g%3E%3Cg fill='none' stroke='%23433b35' stroke-opacity='.48' stroke-width='2'%3E%3Ccircle cx='57' cy='57' r='17'/%3E%3Ccircle cx='144' cy='57' r='17'/%3E%3Ccircle cx='231' cy='57' r='17'/%3E%3Ccircle cx='318' cy='57' r='17'/%3E%3Ccircle cx='405' cy='57' r='17'/%3E%3Ccircle cx='492' cy='57' r='17'/%3E%3Ccircle cx='579' cy='57' r='17'/%3E%3Ccircle cx='666' cy='57' r='17'/%3E%3Ccircle cx='753' cy='57' r='17'/%3E%3Ccircle cx='840' cy='57' r='17'/%3E%3Cpath d='M57 39v36m-18-18h36m-18-18 13 13m-26 0 26 13m-26 0 26-26M144 39v36m-18-18h36m-18-18 13 13m-26 0 26 13m-26 0 26-26M231 39v36m-18-18h36m-18-18 13 13m-26 0 26 13m-26 0 26-26M318 39v36m-18-18h36m-18-18 13 13m-26 0 26 13m-26 0 26-26M405 39v36m-18-18h36m-18-18 13 13m-26 0 26 13m-26 0 26-26M492 39v36m-18-18h36m-18-18 13 13m-26 0 26 13m-26 0 26-26M579 39v36m-18-18h36m-18-18 13 13m-26 0 26 13m-26 0 26-26M666 39v36m-18-18h36m-18-18 13 13m-26 0 26 13m-26 0 26-26M753 39v36m-18-18h36m-18-18 13 13m-26 0 26 13m-26 0 26-26M840 39v36m-18-18h36m-18-18 13 13m-26 0 26 13m-26 0 26-26'/%3E%3C/g%3E%3C/svg%3E")!important;
+    background-repeat:repeat-x!important;
+    background-size:360px 60px!important;
+    background-position:0 0!important;
+    animation:mobile-header-prayer-flags-overlay-flow 18s linear infinite!important;
+    animation-play-state:running!important;
+    will-change:background-position!important;
+    filter:drop-shadow(0 2px 5px rgba(255,255,255,.08))!important;
+  }
+  html body > header .header-inner{
+    position:relative!important;
+    z-index:1!important;
+  }
+  html body > header .header-inner > a.brand,
+  html body > header .header-inner > .header-menu-toggle{
+    position:relative!important;
+    z-index:2!important;
+  }
+}
+@keyframes mobile-header-prayer-flags-overlay-flow{
+  from{background-position:0 0}
+  to{background-position:-360px 0}
+}
+@media(prefers-reduced-motion:reduce) and (max-width:760px){
+  html body > header::after{
+    animation:mobile-header-prayer-flags-overlay-flow 18s linear infinite!important;
+    animation-play-state:running!important;
+  }
+}
