@@ -5213,40 +5213,7 @@ html body #footerContactBar.footer-contact-bar.scroll-hidden{
 </script>
 
 
-<style id="mobile-remove-book-your-trip-floating-pill-final">
-/* Remove only the extra floating Book Your Trip pill on mobile.
-   Preserve the existing white-and-black Explore / Itineraries / Upcoming Tours / Enquire bar. */
-@media screen and (max-width:760px){
-  html body #home.hero .hero-build-cta-wrap,
-  html body #home.hero .hero-build-cta-wrap > .hero-build-cta,
-  html body #home.hero .hero-build-cta-wrap > .hero-book-cta{
-    display:none!important;
-    visibility:hidden!important;
-    opacity:0!important;
-    pointer-events:none!important;
-    position:static!important;
-    inset:auto!important;
-    transform:none!important;
-    animation:none!important;
-  }
-  html.mobile-hero-cta-docked #home.hero .hero-build-cta-wrap{
-    display:none!important;
-  }
-}
-</style>
-<script id="mobile-disable-book-trip-dock-final">
-(() => {
-  const clearExtraDock = () => {
-    document.documentElement.classList.remove("mobile-hero-cta-docked");
-    const wrap=document.querySelector("#home.hero .hero-build-cta-wrap");
-    if(wrap && window.matchMedia("(max-width:760px)").matches){
-      wrap.style.setProperty("display","none","important");
-    }
-  };
-  clearExtraDock();
-  window.addEventListener("resize",clearExtraDock,{passive:true});
-})();
-</script>
+
 
 </body>
 </html>
