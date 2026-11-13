@@ -354,3 +354,8 @@
   html body *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   html body .arctic-reveal{opacity:1!important;transform:none!important}
 }
+
+@media screen and (max-width:760px){
+  html body #contact.cta :is(h1,h2,h3,h4,small,p){color:#fff!important}
+  html body #contact.cta :is(.btn,.button,.submit-btn){background:#fff!important;color:#000!important;-webkit-text-fill-color:#000!important;border-color:#fff!important}
+}
