@@ -5266,44 +5266,13 @@ html body #footerContactBar.footer-contact-bar.scroll-hidden{
 }
 </style>
 
-<style id="mobile-ticker-visible-flag-motion-v3">
+<style id="mobile-ticker-remove-rotating-center-border-v1">
 @media screen and (max-width:760px){
-  html body #home.hero .hero-destination-list{
-    border:0!important;
-    background:transparent!important;
-    box-shadow:none!important;
-    overflow:visible!important;
-  }
+  /* Remove only the rotating conic-gradient frame; keep ticker text and motion. */
   html body #home.hero .hero-destination-list::after{
-    content:""!important;
-    position:absolute!important;
-    z-index:0!important;
-    inset:-2px!important;
-    padding:2px!important;
-    border-radius:10px!important;
-    pointer-events:none!important;
-    background:conic-gradient(from 0deg,#159bd0 0deg,#f5f1e7 65deg,#e44747 135deg,#55aa72 215deg,#f0c746 290deg,#159bd0 360deg)!important;
-    -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0)!important;
-    -webkit-mask-composite:xor!important;
-    mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0)!important;
-    mask-composite:exclude!important;
-    animation:mobileTickerFlagColorOrbit 3.2s linear infinite!important;
-    will-change:transform!important;
-  }
-  html body #home.hero .hero-destination-marquee,
-  html body #home.hero .hero-destination-track{
-    position:relative!important;z-index:1!important;
-  }
-}
-@keyframes mobileTickerFlagColorOrbit{
-  from{transform:rotate(0deg)}
-  to{transform:rotate(360deg)}
-}
-/* The requested flag-color motion remains active even when device-level
-   reduced-motion preferences are enabled; it is decorative and localized. */
-@media screen and (max-width:760px) and (prefers-reduced-motion:reduce){
-  html body #home.hero .hero-destination-list::after{
-    animation:mobileTickerFlagColorOrbit 3.2s linear infinite!important;
+    content:none!important;
+    display:none!important;
+    animation:none!important;
   }
 }
 </style>
