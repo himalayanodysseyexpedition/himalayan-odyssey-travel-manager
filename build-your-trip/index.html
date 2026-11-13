@@ -28,7 +28,7 @@ footer{background:var(--forest);color:#dce4dc;padding:28px;text-align:center;fon
 <link rel="stylesheet" href="/navigation-capsule.css?v=36">
 
 <link rel="stylesheet" href="/monochrome-app-final.css?v=20261112-1">
- <link rel="stylesheet" href="/arctic-prestige-motion.css?v=3">
+ <link rel="stylesheet" href="/arctic-prestige-motion.css?v=4">
 
 <style id="mobile-plan-trip-hero-polish">
 @media (max-width: 760px) {
@@ -125,7 +125,29 @@ footer{background:var(--forest);color:#dce4dc;padding:28px;text-align:center;fon
  .package-guest-control .stepper button:disabled{opacity:.35;cursor:not-allowed}
  .package-guest-control .stepper output{min-width:24px;text-align:center;font-weight:700;color:var(--forest)}
 }
-</style></head><body>
+</style>
+<style id="force-mobile-build-trip-category-tabs">
+@media screen and (max-width: 760px) {
+  html body #tabs.tabs > button[data-category],
+  html body #tabs.tabs > button[data-category].active,
+  html body #tabs.tabs > button[data-category]:hover,
+  html body #tabs.tabs > button[data-category]:focus,
+  html body #tabs.tabs > button[data-category]:focus-visible,
+  html body #tabs.tabs > button[data-category]:active {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background: #000 !important;
+    background-color: #000 !important;
+    background-image: none !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+    border: 1px solid #000 !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+  }
+}
+</style>
+</head><body>
 <header class="sitewide-header"><div class="header-inner">
 <a class="brand" href="/" aria-label="Himalayan Odyssey Expedition — Home"><img src="/logo.webp" alt="Himalayan Odyssey Expedition"></a>
 <nav class="glass-nav" aria-label="Main navigation"><a href="/destinations/"><span>Destinations</span></a><a href="/packages/#packageList"><span>Upcoming Tours</span></a><a href="/itineraries/"><span>Itinerary</span></a>
