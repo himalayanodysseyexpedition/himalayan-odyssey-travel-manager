@@ -359,3 +359,54 @@
   html body #contact.cta :is(h1,h2,h3,h4,small,p){color:#fff!important}
   html body #contact.cta :is(.btn,.button,.submit-btn){background:#fff!important;color:#000!important;-webkit-text-fill-color:#000!important;border-color:#fff!important}
 }
+
+
+/* Mobile UX pass: thumb-friendly controls, legible type and clean card rhythm. */
+@media screen and (max-width:760px){
+  html{scroll-padding-top:76px}
+  body{font-size:15px;line-height:1.65;overflow-x:hidden}
+  section.content{padding:54px 18px!important}
+  .section-inner{width:100%!important;max-width:100%!important}
+  .section-title{margin-bottom:24px!important;padding-inline:2px}
+  .section-title h2{font-size:clamp(30px,8vw,40px)!important;line-height:1.08!important;letter-spacing:-.025em!important}
+  .section-title small,.eyebrow{font-size:10px!important;letter-spacing:2px!important}
+  .intro{font-size:14px!important;line-height:1.75!important;margin-bottom:26px!important}
+  body>header .header-inner{min-height:64px!important;width:calc(100% - 24px)!important;gap:10px!important}
+  body>header .brand img{max-height:46px!important;max-width:min(58vw,190px)!important}
+  body>header .header-menu-toggle{width:44px!important;height:44px!important;min-width:44px!important;display:flex!important}
+  body>header nav#mobileMainNavigation{max-height:calc(100dvh - 82px);overflow-y:auto;overscroll-behavior:contain}
+  body>header nav#mobileMainNavigation a,body>header nav#mobileMainNavigation button{
+    min-height:48px!important;display:flex!important;align-items:center!important;padding:12px 16px!important;
+    font-size:14px!important;line-height:1.35!important
+  }
+  body :is(.btn,.button,.submit-btn,.group-departure-cta,a[role=button]){
+    min-height:48px!important;padding:12px 18px!important;font-size:12px!important;letter-spacing:.04em!important
+  }
+  body :is(input,select,textarea){min-height:50px!important;font-size:16px!important}
+  body :is(.cards,.destination-grid){grid-template-columns:minmax(0,1fr)!important;gap:16px!important}
+  body :is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.service-card,.info-box,.review-point){
+    border-radius:18px!important
+  }
+  body :is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.service-card,.info-box,.review-point) :is(h2,h3,h4){
+    font-size:clamp(21px,6vw,27px)!important;line-height:1.18!important
+  }
+  body :is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.service-card,.info-box,.review-point) p{
+    font-size:14px!important;line-height:1.65!important
+  }
+  body :is(.card-body,.package-slide-content,.itinerary-slide-content){padding:18px!important}
+  body :is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.service-card,.info-box,.review-point) img{
+    max-width:100%;object-fit:cover
+  }
+  .date-fields{grid-template-columns:minmax(0,1fr)!important;gap:8px!important}
+  .enquiry-box{padding:22px 18px!important;border-radius:20px!important}
+  .hotel-detail-content{padding:22px 16px!important;margin:12px auto!important;border-radius:18px!important}
+  body :is(.destination-card){height:clamp(280px,88vw,390px)!important;border-radius:18px!important}
+  body :is(.destination-info){left:20px!important;right:16px!important;bottom:20px!important}
+  body :is(.destination-info h3){font-size:34px!important}
+  body :is(.footer-contact-bar,#footerContactBar){max-width:calc(100vw - 24px)!important}
+}
+@media(max-width:380px){
+  body>header .brand img{max-width:155px!important}
+  #home.hero .hero-service-icon span{font-size:8px!important;letter-spacing:.25px!important}
+  section.content{padding-inline:15px!important}
+}
