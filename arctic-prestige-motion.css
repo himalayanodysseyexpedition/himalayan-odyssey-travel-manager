@@ -280,3 +280,34 @@ a:focus-visible,button:focus-visible{outline:2px solid #78afd1!important;outline
   }
 }
 
+
+
+/* MOBILE FOOTER FIX: remove the white footer panel and restore Arctic dark styling. */
+@media screen and (max-width:760px){
+  html body > footer#siteFooter,
+  html body > footer.site-footer,
+  html body > footer,
+  html body footer#siteFooter,
+  html body footer.site-footer{
+    background:#0a1725!important;
+    background-image:linear-gradient(145deg,#091522 0%,#10243a 52%,#173b59 100%)!important;
+    color:rgba(239,247,252,.88)!important;
+    border:0!important;
+    border-top:1px solid rgba(185,220,242,.24)!important;
+    border-radius:0!important;
+    box-shadow:none!important;
+  }
+  html body > footer :is(b,strong,h2,h3,h4),
+  html body footer#siteFooter :is(b,strong,h2,h3,h4){
+    color:#e2f1fa!important;
+  }
+  html body > footer a,
+  html body footer#siteFooter a{
+    color:#c6e3f4!important;
+  }
+  html body > footer p,
+  html body footer#siteFooter p,
+  html body > footer small{
+    color:rgba(220,234,244,.72)!important;
+  }
+}
