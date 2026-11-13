@@ -3574,5 +3574,33 @@ html body #home.hero .hero-build-cta-wrap{
 }
 </style>
 
+
+<link rel="preconnect" href="https://st.1001fonts.net" crossorigin>
+<style id="hero-headline-progo-cinzel-fonts">
+@font-face{
+  font-family:"PROGO";
+  src:url("https://st.1001fonts.net/download/font/progo.bold.otf") format("opentype");
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+}
+/* Fixed headline words: THE and CALLING use PROGO Bold. */
+html body #home.hero .hero-content h1.hero-animated-heading > .hero-heading-prefix,
+html body #home.hero .hero-content h1.hero-animated-heading > .hero-heading-suffix{
+  font-family:"PROGO","Arial Black",sans-serif!important;
+  font-weight:700!important;
+  letter-spacing:.005em!important;
+}
+/* Every rotating phrase uses Cinzel, including all shuffle transition states. */
+html body #home.hero .hero-content h1.hero-animated-heading > .hero-word-slot,
+html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord,
+html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-in,
+html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is-shuffling-out{
+  font-family:"Cinzel",serif!important;
+  font-weight:700!important;
+  letter-spacing:-.035em!important;
+}
+</style>
+
 </body>
 </html>
