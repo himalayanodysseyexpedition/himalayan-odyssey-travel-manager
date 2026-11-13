@@ -5018,5 +5018,46 @@ html body #footerContactBar.footer-contact-bar.scroll-hidden{
   }
 }
 </style>
+
+<style id="mobile-floating-bar-bottom-dock-v3">
+@media screen and (max-width:760px){
+  html body > #footerContactBar.footer-contact-bar{
+    position:fixed!important;
+    top:auto!important;
+    right:auto!important;
+    left:50%!important;
+    bottom:calc(12px + env(safe-area-inset-bottom, 0px))!important;
+    width:calc(100% - 20px)!important;
+    max-width:540px!important;
+    margin:0!important;
+    translate:none!important;
+    transform:none!important;
+    z-index:2147483000!important;
+    opacity:1!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
+    transition:bottom .28s ease,opacity .2s ease,visibility .2s ease!important;
+    will-change:bottom,opacity;
+  }
+  html body > #footerContactBar.footer-contact-bar.visible{
+    bottom:calc(12px + env(safe-area-inset-bottom, 0px))!important;
+    transform:none!important;
+    opacity:1!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
+  }
+  html body > #footerContactBar.footer-contact-bar.scroll-hidden{
+    bottom:-120px!important;
+    transform:none!important;
+    opacity:0!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+  }
+}
+@media screen and (max-width:760px) and (prefers-reduced-motion:reduce){
+  html body > #footerContactBar.footer-contact-bar{transition:none!important}
+}
+</style>
+
 </body>
 </html>
