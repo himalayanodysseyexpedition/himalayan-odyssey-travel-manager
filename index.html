@@ -4682,6 +4682,27 @@ html body #home.hero .hero-destination-list{
 }
 </style>
 
+
+<style id="mobile-service-row-destination-move-up-v2">
+/* Move the Cabs / Hotels / Packages row and destination marquee visibly upward on mobile.
+   The Build Your Trip / Book Your Trip dock remains fixed above the bottom navigation. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-content .hero-service-icons,
+  html body #home.hero .hero-content .hero-destination-list{
+    position:relative!important;
+    top:-18px!important;
+  }
+  html body #home.hero .hero-content .hero-service-icons{
+    margin-top:14px!important;
+    margin-bottom:0!important;
+  }
+  html body #home.hero .hero-content .hero-destination-list{
+    margin-top:8px!important;
+    margin-bottom:0!important;
+  }
+}
+</style>
+
 </body>
 </html>
 
