@@ -314,3 +314,36 @@
 @media screen and (max-width:760px){html body #home.hero .mobile-animated-mountain .mobile-mountain-layer{position:absolute!important;z-index:1!important;inset:4% 0 0!important;width:100%!important;height:96%!important;opacity:.78!important;filter:blur(.35px)!important;animation:mm-distant-range 10s ease-in-out infinite alternate!important;pointer-events:none!important}html body #home.hero .mobile-animated-mountain>svg:not(.mobile-mountain-layer){z-index:2!important}}
 @keyframes mm-distant-range{from{transform:translateX(5px) scale(1);opacity:.58}to{transform:translateX(-5px) scale(1.025);opacity:.88}}
 @media(prefers-reduced-motion:reduce){html body #home.hero .mobile-animated-mountain .mobile-mountain-layer{animation:none!important}}
+
+
+/* MOBILE HERO — use a real Himachal Himalayan photograph instead of illustrated SVG peaks. */
+@media screen and (max-width:760px){
+  html body #home.hero .mobile-animated-mountain{
+    position:relative!important;display:block!important;
+    width:min(100%,390px)!important;height:clamp(150px,43vw,205px)!important;
+    margin:0 auto 14px!important;overflow:hidden!important;
+    border-radius:12px!important;isolation:isolate!important;
+    box-shadow:0 12px 28px rgba(6,28,48,.22)!important;
+    background:#29465f!important;
+  }
+  html body #home.hero .mobile-mountain-photo{
+    display:block!important;width:100%!important;height:100%!important;
+    max-width:none!important;object-fit:cover!important;object-position:center 62%!important;
+    border:0!important;border-radius:12px!important;
+    filter:saturate(.94) contrast(1.03)!important;
+    animation:mm-real-photo-drift 18s ease-in-out infinite alternate!important;
+  }
+  html body #home.hero .mobile-animated-mountain:after{
+    content:""!important;position:absolute!important;inset:45% 0 0!important;
+    z-index:1!important;pointer-events:none!important;
+    background:linear-gradient(180deg,transparent,rgba(9,29,48,.40))!important;
+  }
+  html body #home.hero .mobile-mountain-credit{
+    position:absolute!important;z-index:2!important;right:8px!important;bottom:7px!important;
+    margin:0!important;color:#fff!important;font:600 7px/1.2 sans-serif!important;
+    letter-spacing:.15px!important;text-shadow:0 1px 4px rgba(0,0,0,.8)!important;
+  }
+  html body #home.hero .mobile-mountain-credit a{color:#fff!important;text-decoration:underline!important}
+}
+@keyframes mm-real-photo-drift{from{transform:scale(1.015)}to{transform:scale(1.07)}}
+@media(prefers-reduced-motion:reduce){html body #home.hero .mobile-mountain-photo{animation:none!important}}
