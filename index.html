@@ -4309,7 +4309,58 @@ html body #home.hero .hero-build-cta-wrap>a.hero-build-cta:focus-visible{
 }
 </style>
 
-<style id="mobile-hero-ticker-force-v3">
+<style 
+<style id="mobile-hero-continuous-sequence-v4">
+@media screen and (max-width:760px){
+  @keyframes mobileHeroSequenceRightV4 {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+  }
+  #home.hero .hero-word-slot{
+    display:block!important;flex:0 0 100vw!important;width:100vw!important;
+    max-width:100vw!important;overflow:hidden!important;white-space:nowrap!important;
+  }
+  #home.hero .hero-word-track{
+    display:inline-flex!important;flex-wrap:nowrap!important;align-items:baseline!important;
+    width:max-content!important;max-width:none!important;white-space:nowrap!important;
+    will-change:transform!important;animation:mobileHeroSequenceRightV4 28s linear infinite!important;
+  }
+  #home.hero .hero-word-track .hero-word-rotator{
+    display:inline-block!important;flex:none!important;width:auto!important;max-width:none!important;
+    white-space:nowrap!important;margin-right:1.1em!important;
+  }
+}
+</style>
+<script id="mobile-hero-continuous-sequence-v4-init">
+(() => {
+  const phrases = ["Himalayas are", "Spiti is", "Himachal is", "Adventure is"];
+  const setup = () => {
+    if (!window.matchMedia || !window.matchMedia("(max-width: 760px)").matches) return;
+    const slot = document.querySelector("#home.hero .hero-content h1.hero-animated-heading > .hero-word-slot");
+    const original = document.getElementById("heroRotatingWord");
+    if (!slot || !original || slot.dataset.sequenceReady === "true") return;
+    const track = document.createElement("span");
+    track.className = "hero-word-track";
+    track.setAttribute("aria-label", phrases.join(", "));
+    const makeSet = () => {
+      phrases.forEach((phrase, index) => {
+        const item = document.createElement("span");
+        item.className = "hero-word-rotator " + ["word-himalayas","word-spiti","word-himachal","word-adventure"][index];
+        item.textContent = phrase;
+        track.appendChild(item);
+      });
+    };
+    makeSet();
+    makeSet();
+    original.replaceWith(track);
+    slot.dataset.sequenceReady = "true";
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", setup, {once:true});
+  else setup();
+  window.addEventListener("resize", setup, {passive:true});
+})();
+</script>
+id="mobile-hero-ticker-force-v3">
 @media screen and (max-width:760px){
   @keyframes mobileHeroTickerLeftToRightV3 {
     0% { transform: translateX(-100%); }
