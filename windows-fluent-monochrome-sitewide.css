@@ -104,3 +104,10 @@ body footer :is(h2,h3,h4,strong,b,p,small),body footer a,body .site-footer :is(h
   html{scroll-behavior:auto}
   body *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+
+/* Remove decorative short underlines beneath all heading levels sitewide. */
+body :is(h1,h2,h3,h4,h5,h6)::after{
+  content:none!important;
+  display:none!important;
+}
