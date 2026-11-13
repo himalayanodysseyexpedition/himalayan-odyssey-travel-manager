@@ -60,7 +60,7 @@ function serviceCard(x){
 }
 function renderServices(){
  const query=$("search").value.trim().toLowerCase();
- const filtered=services.filter(x=>(category==="all"||x.category===category)&&(!query||(x.title+" "+x.destination+" "+x.description).toLowerCase().includes(query)));
+ const filtered=services.filter(x=>(category==="all"||x.category===category)&&(!query||(x.title+" "+x.destination+" "+x.description).toLowerCase().includes(query))).sort((a,b)=>a.category==="package"&&b.category!=="package"?-1:b.category==="package"&&a.category!=="package"?1:0);
  $("serviceCards").innerHTML=filtered.length?filtered.map(serviceCard).join(""):'<div class="empty">No services match this search yet. Try another category or destination.</div>';
 }
 function addToCart(id){
@@ -82,7 +82,11 @@ function renderCart(){
   let fields="";
   if(s.category==="cab")fields='<div class="controls"><label>Days<input type="number" min="1" max="100" value="'+line.days+'" data-line="'+line.key+'" data-field="days"></label><label>Vehicles<input type="number" min="1" max="10" value="'+line.quantity+'" data-line="'+line.key+'" data-field="quantity"></label></div>';
   if(s.category==="hotel")fields='<div class="controls"><label>Nights<input type="number" min="1" max="100" value="'+line.nights+'" data-line="'+line.key+'" data-field="nights"></label><label>Guests<input type="number" min="1" max="100" value="'+line.people+'" data-line="'+line.key+'" data-field="people"></label></div>';
-  if(s.category==="package")fields='<div class="controls"><label>Guests<input type="number" min="1" max="'+Math.max(1,Number(s.inventory)||1)+'" value="'+line.people+'" data-line="'+line.key+'" data-field="people"></label></div>';
+  if(s.category==="package"){
+   const maxPeople=Math.max(1,Number(s.inventory)||1);
+   line.people=Math.max(1,Math.min(maxPeople,Number(line.people)||1));
+   fields='<div class="package-guest-control"><span>People</span><div class="stepper"><button type="button" data-person-step="'+line.key+'" data-dir="-1" aria-label="Decrease people" '+(line.people<=1?'disabled':'')+'>−</button><output>'+line.people+'</output><button type="button" data-person-step="'+line.key+'" data-dir="1" aria-label="Increase people" '+(line.people>=maxPeople?'disabled':'')+'>＋</button></div></div>';
+  }
   return '<div class="cart-line"><div class="line-head"><b>'+esc(s.title)+'</b><button type="button" class="remove" data-remove="'+line.key+'">Remove</button></div><div class="muted">'+esc(s.destination||categoryLabel[s.category])+' · '+money(s.price)+' '+esc(unitLabel[s.price_unit])+'</div>'+fields+'<div class="line-total">'+money(amount)+'</div></div>';
  }).join("");
  $("grandTotal").textContent=money(total);
@@ -110,7 +114,19 @@ $("serviceCards").addEventListener("click",e=>{if(e.target.closest("[data-retry-
 $("tabs").addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(!b)return;category=b.dataset.category;$("tabs").querySelectorAll("button").forEach(x=>x.classList.toggle("active",x===b));renderServices();});
 $("search").addEventListener("input",renderServices);
 $("serviceCards").addEventListener("click",e=>{const step=e.target.closest("[data-day-step]");if(step){const id=step.dataset.dayStep;const next=Math.max(1,Math.min(100,(Number(serviceDays[id])||1)+Number(step.dataset.dir)));serviceDays[id]=next;const card=step.closest(".service");card.querySelector("[data-day-value]").textContent=next;card.querySelectorAll("[data-day-step]").forEach(x=>{if(x.dataset.dir==="-1")x.disabled=next===1;});card.querySelector("[data-add]").dataset.days=next;return;}const b=e.target.closest("[data-add]");if(b){serviceDays[b.dataset.add]=Number(b.dataset.days)||1;addToCart(b.dataset.add);}});
-$("cartItems").addEventListener("click",e=>{const b=e.target.closest("[data-remove]");if(b){cart=cart.filter(x=>x.key!==b.dataset.remove);saveCartDraft();renderCart();}});
+$("cartItems").addEventListener("click",e=>{
+ const step=e.target.closest("[data-person-step]");
+ if(step){
+  const line=cart.find(x=>x.key===step.dataset.personStep);
+  const service=line&&services.find(x=>x.id===line.id);
+  if(!line||!service||service.category!=="package")return;
+  const maxPeople=Math.max(1,Number(service.inventory)||1);
+  line.people=Math.max(1,Math.min(maxPeople,line.people+Number(step.dataset.dir)));
+  saveCartDraft();renderCart();return;
+ }
+ const b=e.target.closest("[data-remove]");
+ if(b){cart=cart.filter(x=>x.key!==b.dataset.remove);saveCartDraft();renderCart();}
+});
 $("cartItems").addEventListener("change",e=>{const input=e.target.closest("[data-line][data-field]");if(input)changeLine(input.dataset.line,input.dataset.field,input.value);});
 $("guestForm").addEventListener("submit",async e=>{
  e.preventDefault();const button=$("submitEnquiry"),status=$("status");
