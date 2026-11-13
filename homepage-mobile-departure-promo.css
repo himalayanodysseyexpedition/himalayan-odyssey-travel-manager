@@ -79,3 +79,14 @@
   html body #home.hero .mobile-next-departure .mobile-departure-cta span{color:#000!important}
 }
 @media(prefers-reduced-motion:reduce){html body #home.hero .mobile-next-departure .mobile-departure-track span{animation:none!important;background-position:50% 0!important}}
+
+
+/* Keep the hero promotion's Explore CTA label black on every mobile state. */
+@media(max-width:760px){
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta,
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta:visited,
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta span{
+    color:#000!important;
+    -webkit-text-fill-color:#000!important;
+  }
+}
