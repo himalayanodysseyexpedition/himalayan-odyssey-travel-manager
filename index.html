@@ -2379,11 +2379,22 @@ function observeReveals() {
   elements.forEach(element => revealObserver.observe(element));
 }
 
-/* FLOATING CONTACT BAR - KEEP VISIBLE THROUGHOUT PAGE SCROLL */
+/* FLOATING CONTACT BAR - HIDE ON SCROLL DOWN, SHOW ON SCROLL UP */
 const footerContactBar = document.getElementById("footerContactBar");
 if (footerContactBar) {
-  footerContactBar.classList.remove("scroll-hidden");
+  let lastBarScrollY = window.scrollY;
   footerContactBar.classList.add("visible");
+  window.addEventListener("scroll", () => {
+    const currentY = window.scrollY;
+    if (currentY < 40 || currentY < lastBarScrollY - 4) {
+      footerContactBar.classList.remove("scroll-hidden");
+      footerContactBar.classList.add("visible");
+    } else if (currentY > lastBarScrollY + 4) {
+      footerContactBar.classList.add("scroll-hidden");
+      footerContactBar.classList.remove("visible");
+    }
+    lastBarScrollY = currentY;
+  }, { passive: true });
 }
 
 
@@ -3650,30 +3661,7 @@ html body #home.hero .hero-content h1.hero-animated-heading #heroRotatingWord.is
 </style>
 
 
-<style id="persistent-floating-contact-bar">
-  #footerContactBar{
-    position:fixed!important;
-    z-index:99999!important;
-    opacity:1!important;
-    visibility:visible!important;
-    pointer-events:auto!important;
-    transform:translate(-50%,0)!important;
-    box-shadow:0 12px 30px rgba(16,36,59,.20),inset 0 1px 0 rgba(255,255,255,.42)!important;
-    border-bottom-color:rgba(255,255,255,.18)!important;
-    background-clip:padding-box!important;
-  }
-  #footerContactBar::before,
-  #footerContactBar::after{
-    display:none!important;
-    content:none!important;
-  }
-  #footerContactBar.scroll-hidden{
-    opacity:1!important;
-    visibility:visible!important;
-    pointer-events:auto!important;
-    transform:translate(-50%,0)!important;
-  }
-</style>
+
 <style id="desktop-header-tibetan-prayer-flags">
 /* Moving Tibetan prayer flags directly beneath the desktop header border. */
 @media screen and (min-width:761px){
