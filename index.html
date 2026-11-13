@@ -5230,39 +5230,33 @@ html body #footerContactBar.footer-contact-bar.scroll-hidden{
 
 
 <style id="mobile-destination-ticker-even-spacing-flag-border-v2">
+/* Mobile ticker: keep even word spacing and continuous movement without an outer colour frame. */
 @media screen and (max-width:760px){
   html body #home.hero .hero-destination-list{
-    position:relative!important;isolation:isolate!important;box-sizing:border-box!important;
-    /* Keep the flag frame close to the ticker text: only a small breathing gap. */
-    padding:5px 8px!important;border:2px solid transparent!important;border-radius:10px!important;
-    background:linear-gradient(transparent,transparent) padding-box,
-      linear-gradient(100deg,#159bd0 0%,#f5f1e7 20%,#e44747 40%,#55aa72 60%,#f0c746 80%,#159bd0 100%) border-box!important;
-    background-size:auto,300% 100%!important;background-position:0 0,0% 0;
-    box-shadow:0 0 9px rgba(21,155,208,.16),0 0 13px rgba(228,71,71,.12),0 0 15px rgba(85,170,114,.12)!important;
-    animation:mobileDestFlagBorderTravel 5s linear infinite!important;
+    position:relative!important;
+    isolation:isolate!important;
+    box-sizing:border-box!important;
+    padding:5px 0!important;
+    border:0!important;
+    border-radius:0!important;
+    background:none!important;
+    box-shadow:none!important;
+    animation:none!important;
   }
   html body #home.hero .hero-destination-list::before{
-    content:""!important;position:absolute!important;z-index:-1!important;inset:-3px -8px!important;border-radius:12px!important;
-    background:linear-gradient(105deg,rgba(21,155,208,0) 0%,rgba(21,155,208,.42) 16%,rgba(245,241,231,.38) 32%,rgba(228,71,71,.42) 48%,rgba(85,170,114,.42) 64%,rgba(240,199,70,.42) 80%,rgba(21,155,208,0) 100%)!important;
-    background-size:260% 100%!important;filter:blur(7px)!important;opacity:.72!important;pointer-events:none!important;
-    animation:mobileDestFlagShadowTravel 4.5s linear infinite!important;
+    content:none!important;
+    display:none!important;
+    animation:none!important;
   }
   html body #home.hero .hero-destination-marquee{position:relative!important;z-index:1!important}
   html body #home.hero .hero-destination-track{
-    gap:18px!important;animation:hero-destinations-rightward 24s linear infinite!important;animation-play-state:running!important;
+    gap:18px!important;
+    animation:hero-destinations-rightward 24s linear infinite!important;
+    animation-play-state:running!important;
   }
   html body #home.hero .hero-destination-track span,
   html body #home.hero .hero-destination-track i{flex:0 0 auto!important;margin:0!important}
   html body #home.hero .hero-destination-track i{opacity:.88!important}
-}
-@keyframes mobileDestFlagBorderTravel{
-  0%{background-position:0 0,0% 0;box-shadow:0 0 8px rgba(21,155,208,.16),0 0 12px rgba(228,71,71,.1)}
-  50%{background-position:0 0,50% 0;box-shadow:0 0 12px rgba(85,170,114,.2),0 0 17px rgba(240,199,70,.17)}
-  100%{background-position:0 0,100% 0;box-shadow:0 0 8px rgba(21,155,208,.16),0 0 12px rgba(228,71,71,.1)}
-}
-@keyframes mobileDestFlagShadowTravel{
-  from{background-position:0% 50%;transform:translateX(-5px)}
-  to{background-position:200% 50%;transform:translateX(5px)}
 }
 </style>
 
