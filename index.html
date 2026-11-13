@@ -4191,5 +4191,31 @@ html body #home.hero .hero-build-cta-wrap > .hero-book-cta:hover{
   #home .hero-cloud-bank,#home .hero-falling-snow{animation:none!important}
 }
 </style>
+
+<style id="hero-three-line-equal-spacing-final">
+/* Keep the three hero headline lines evenly spaced on desktop and mobile. */
+#home.hero .hero-content h1.hero-animated-heading{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  row-gap:.10em!important;
+  column-gap:0!important;
+  line-height:1!important;
+}
+#home.hero .hero-content h1.hero-animated-heading>.hero-heading-prefix,
+#home.hero .hero-content h1.hero-animated-heading>.hero-word-slot,
+#home.hero .hero-content h1.hero-animated-heading>.hero-heading-suffix{
+  display:block!important;
+  margin-block:0!important;
+  padding-block:0!important;
+  line-height:1!important;
+}
+#home.hero .hero-content h1.hero-animated-heading>.hero-word-slot{
+  min-height:1em!important;
+}
+#home.hero .hero-content h1.hero-animated-heading #heroRotatingWord{
+  line-height:1!important;
+}
+</style>
 </body>
 </html>
