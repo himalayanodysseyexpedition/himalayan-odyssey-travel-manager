@@ -4308,6 +4308,44 @@ html body #home.hero .hero-build-cta-wrap>a.hero-build-cta:focus-visible{
   }
 }
 </style>
+
+<style id="mobile-hero-ticker-force-v3">
+@media screen and (max-width:760px){
+  @keyframes mobileHeroTickerLeftToRightV3 {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100vw); }
+  }
+}
+</style>
+<script id="mobile-hero-ticker-force-v3-init">
+(() => {
+  const apply = () => {
+    if (!window.matchMedia || !window.matchMedia("(max-width: 760px)").matches) return;
+    const slot = document.querySelector("#home.hero .hero-content h1.hero-animated-heading > .hero-word-slot");
+    const word = document.getElementById("heroRotatingWord");
+    if (!slot || !word) return;
+    slot.style.setProperty("display", "block", "important");
+    slot.style.setProperty("flex", "0 0 100vw", "important");
+    slot.style.setProperty("width", "100vw", "important");
+    slot.style.setProperty("max-width", "100vw", "important");
+    slot.style.setProperty("overflow", "hidden", "important");
+    slot.style.setProperty("white-space", "nowrap", "important");
+    word.style.setProperty("display", "inline-block", "important");
+    word.style.setProperty("width", "max-content", "important");
+    word.style.setProperty("max-width", "none", "important");
+    word.style.setProperty("white-space", "nowrap", "important");
+    word.style.setProperty("transition", "none", "important");
+    word.style.setProperty("will-change", "transform", "important");
+    word.style.setProperty("animation", "mobileHeroTickerLeftToRightV3 8.5s linear infinite", "important");
+  };
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", apply, { once: true });
+  } else {
+    apply();
+  }
+  window.addEventListener("resize", apply, { passive: true });
+})();
+</script>
 </body>
 </html>
 
