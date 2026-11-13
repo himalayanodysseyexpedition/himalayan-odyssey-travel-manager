@@ -1497,6 +1497,33 @@ html body #home.hero .hero-build-cta-wrap > .hero-build-cta:active{
 
     
   </div>
+  <div class="hero-bottom-motion" aria-hidden="true">
+    <svg class="hero-bottom-landscape" viewBox="0 0 1440 230" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="heroMountainBack" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#dcecf6" stop-opacity=".38"/>
+          <stop offset="1" stop-color="#9dbbd0" stop-opacity=".12"/>
+        </linearGradient>
+        <linearGradient id="heroMountainFront" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#d8e8f3" stop-opacity=".5"/>
+          <stop offset="1" stop-color="#8ba9bf" stop-opacity=".28"/>
+        </linearGradient>
+      </defs>
+      <g class="hero-drifting-cloud hero-cloud-one" fill="#edf6fc" opacity=".34">
+        <ellipse cx="170" cy="76" rx="94" ry="13"/><ellipse cx="215" cy="67" rx="52" ry="16"/><ellipse cx="119" cy="68" rx="43" ry="11"/>
+      </g>
+      <g class="hero-drifting-cloud hero-cloud-two" fill="#edf6fc" opacity=".25">
+        <ellipse cx="1020" cy="112" rx="120" ry="12"/><ellipse cx="1074" cy="101" rx="55" ry="16"/><ellipse cx="956" cy="104" rx="48" ry="10"/>
+      </g>
+      <path d="M0 174 125 99 205 145 342 53 470 150 600 82 735 158 875 62 1015 150 1152 84 1290 157 1380 110 1440 142V230H0Z" fill="url(#heroMountainBack)"/>
+      <path d="m300 78 42-25 44 27-25-8-19 10-17-9Z M833 88l42-26 43 27-26-8-17 10-17-9Z M1110 108l42-24 41 25-25-7-17 9-16-8Z" fill="#f5fbff" opacity=".62"/>
+      <path d="M0 198 155 139 250 181 405 105 535 183 690 124 835 190 990 111 1135 183 1280 127 1440 188V230H0Z" fill="url(#heroMountainFront)"/>
+      <path d="m368 124 37-19 39 21-23-6-16 8-15-8Z M952 130l38-19 39 21-24-6-15 8-16-8Z" fill="#f5fbff" opacity=".58"/>
+      <g class="hero-snow-specks" fill="#f4faff">
+        <circle cx="250" cy="122" r="2"/><circle cx="580" cy="92" r="1.7"/><circle cx="760" cy="137" r="1.5"/><circle cx="1190" cy="72" r="2"/><circle cx="1350" cy="115" r="1.6"/>
+      </g>
+    </svg>
+  </div>
 </div>
 
 <!-- QUICK TRUST / SERVICE STRIP -->
@@ -4095,5 +4122,25 @@ html body #home.hero .hero-build-cta-wrap > .hero-book-cta:hover{
 
 
 
+<style id="mobile-hero-bottom-motion">
+@media (max-width:760px){
+  #home.hero{position:relative;isolation:isolate}
+  #home .hero-bottom-motion{
+    position:absolute;left:0;right:0;bottom:0;height:clamp(112px,19vh,170px);
+    z-index:1;overflow:hidden;pointer-events:none;
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 24%);
+    mask-image:linear-gradient(to bottom,transparent 0%,#000 24%);
+  }
+  #home .hero-bottom-landscape{display:block;width:100%;height:100%}
+  #home .hero-drifting-cloud{animation:heroCloudDrift 34s linear infinite;will-change:transform}
+  #home .hero-cloud-two{animation-duration:46s;animation-direction:reverse}
+  #home .hero-snow-specks{animation:heroSnowTwinkle 4.5s ease-in-out infinite alternate}
+}
+@keyframes heroCloudDrift{from{transform:translateX(-55px)}to{transform:translateX(85px)}}
+@keyframes heroSnowTwinkle{from{opacity:.28}to{opacity:.9}}
+@media(prefers-reduced-motion:reduce){
+  #home .hero-drifting-cloud,#home .hero-snow-specks{animation:none!important}
+}
+</style>
 </body>
 </html>
