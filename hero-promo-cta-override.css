@@ -1,0 +1,13 @@
+/* Final override: hero promotion CTA label must remain black after all theme styles. */
+@media (max-width: 760px) {
+  html body #home.hero section.mobile-next-departure > a.mobile-departure-cta,
+  html body #home.hero section.mobile-next-departure > a.mobile-departure-cta:link,
+  html body #home.hero section.mobile-next-departure > a.mobile-departure-cta:visited,
+  html body #home.hero section.mobile-next-departure > a.mobile-departure-cta:hover,
+  html body #home.hero section.mobile-next-departure > a.mobile-departure-cta:active,
+  html body #home.hero section.mobile-next-departure > a.mobile-departure-cta > span {
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+    text-shadow: none !important;
+  }
+}
