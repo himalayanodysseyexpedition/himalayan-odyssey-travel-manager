@@ -1576,64 +1576,6 @@ html body #home.hero .hero-build-cta-wrap > .hero-build-cta:active{
  </div>
 </section>
 
-<!-- HOMEPAGE LIVE TRIP PLANNER -->
-<section class="home-trip-planner" id="plan-your-trip">
- <div class="htp-inner">
-  <div class="htp-heading">
-   <span class="htp-eyebrow">DESIGN YOUR OWN JOURNEY</span>
-   <h2>Plan Your Himalayan Trip</h2>
-   </div>
-  <div class="htp-shell">
-   <div class="htp-main">
-    <div class="htp-step">
-     <div class="htp-step-head"><span class="htp-step-number">1</span><div><h3>Location</h3><p class="htp-help">Choose a destination from the list. You can add multiple locations to your trip.</p></div></div>
-     <div class="htp-location-picker"><label class="htp-location-label" for="htpLocationSelect">Choose destination</label><div class="htp-location-dropdown htp-native-picker"><select id="htpLocationSelect" class="htp-location-select" aria-label="Choose a destination"><option value="">Select a destination</option></select><span class="htp-native-chevron" aria-hidden="true">⌄</span></div></div>
-     <div class="htp-selected-wrap" id="htpSelectedWrap" hidden>
-      <p class="htp-selected-title">Your selected locations</p>
-      <div class="htp-destinations" id="htpDestinations" aria-live="polite"></div>
-     </div>
-    </div>
-    <div class="htp-step">
-     <div class="htp-step-head"><span class="htp-step-number">2</span><div><h3>Travel dates</h3><p class="htp-help">Select your departure and return dates.</p></div></div>
-     <div class="htp-fields">
-      <label>Departure date<input id="htpStart" type="date" required></label>
-      <label>Return date<input id="htpEnd" type="date" required></label>
-     </div>
-    </div>
-    <div class="htp-step">
-     <div class="htp-step-head"><span class="htp-step-number">3</span><div><h3>Travellers</h3><p class="htp-help">Choose from 1 to 30 travellers.</p></div></div>
-     <div class="htp-travellers"><label>Number of travellers</label><div class="htp-traveller-control" role="group" aria-label="Number of travellers"><button type="button" data-travellers-delta="-1" aria-label="Remove one traveller">−</button><output id="htpTravellersOutput" aria-live="polite">1</output><button type="button" data-travellers-delta="1" aria-label="Add one traveller">+</button></div><input id="htpTravellers" type="hidden" value="1"></div>
-    </div>
-    <div class="htp-step">
-     <div class="htp-step-head"><span class="htp-step-number">4</span><div><h3>Select your vehicle</h3><p class="htp-help">Live vehicle options and rates from our published cab catalogue.</p></div></div>
-     <label for="htpVehicle">Choose a vehicle</label><select id="htpVehicle"><option value="">Loading vehicles…</option></select>
-     <div class="htp-vehicle-selection" id="htpVehicleSelection" hidden>
-      <div class="htp-vehicle-selected-top"><div><span>Selected vehicle</span><strong id="htpSelectedVehicleName"></strong></div><strong class="htp-vehicle-daily-rate" id="htpSelectedVehicleRate"></strong></div>
-      <div class="htp-vehicle-days-row"><label for="htpVehicleDays">Vehicle days</label><div class="htp-vehicle-days-control"><button type="button" data-vehicle-days="-1" aria-label="Remove one vehicle day">−</button><input id="htpVehicleDays" type="number" min="0" max="30" value="0" inputmode="numeric" aria-label="Number of vehicle days"><button type="button" data-vehicle-days="1" aria-label="Add one vehicle day">+</button></div></div>
-     </div>
-     <p class="htp-vehicle-note" id="htpVehicleHint" aria-live="polite">Loading published vehicle rates…</p>
-    </div>
-   </div>
-   <aside class="htp-summary" aria-live="polite">
-    <h3>Your trip estimate</h3>
-    <div class="htp-summary-row"><span>Selected stay</span><strong id="htpTotalNights">0 nights</strong></div>
-    <div class="htp-summary-row"><span>Trip duration</span><strong id="htpTripDays">1 day</strong></div>
-    <div class="htp-summary-row"><span>Stay estimate</span><strong id="htpStayTotal">₹0</strong></div>
-    <div class="htp-summary-row"><span>Vehicle</span><strong id="htpVehicleCount">Select a vehicle</strong></div>
-    <div class="htp-summary-row"><span>Cab estimate</span><strong id="htpCabTotal">Not selected</strong></div>
-    <div class="htp-total"><span>Estimated trip total</span><strong id="htpGrandTotal">₹0</strong></div>
-    <p class="htp-per-person" id="htpPerPerson">Choose your trip details to see the estimate.</p>
-    <button class="htp-cta" id="htpCalculate" type="button" disabled>PREPARE WHATSAPP ENQUIRY →</button>
-    <p class="htp-status" id="htpStatus" role="status"></p>
-    <p class="htp-fine">Stay estimates use the destination rates shown. Cab estimates use currently published per-vehicle/day rates. Final route, availability, inclusions and price are confirmed by our team.</p>
-   </aside>
-  </div>
- </div>
-</section>
-
-
-
-
 <!-- INTRODUCTION -->
 <section class="content" id="journey-story">
   <div class="section-inner reveal">
