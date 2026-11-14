@@ -2105,7 +2105,7 @@ async function loadCabs() {
       const name = cab.name || "Himalayan Travel Vehicle";
       const model = cab.model || "";
       const capacity = cab.seating_capacity || "Contact us";
-      const description = cab.description || "Contact us for vehicle details.";
+      const description = cab.description || "";
       const image = cab.image_url || "";
 
       const message =
@@ -2141,11 +2141,9 @@ async function loadCabs() {
               ${safe(capacity)}${cab.seating_capacity ? " passengers" : ""}
             </p>
 
-            <p>${safe(description)}</p>
+            ${description ? `<p>${safe(description)}</p>` : ""}
 
             <div class="price">${price} <small>per day</small></div>
-
-            <p class="cab-details">Please confirm inclusions, route charges and availability with our team before booking.</p>
 
             <a class="btn"
                href="/?topic=${encodeURIComponent("Cab enquiry: "+(cab.name||"Vehicle"))}/build-your-trip/">Enquire About This Cab</a>
