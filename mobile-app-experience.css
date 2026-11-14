@@ -109,3 +109,86 @@
     pointer-events:none!important;
   }
 }
+
+
+/* DESKTOP APP DOCK — use the same four-item navigation as the mobile dock.
+   The legacy desktop contact bar is hidden only at desktop breakpoints. */
+@media (min-width:761px){
+  html body #footerContactBar.footer-contact-bar{
+    display:none!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+  }
+  html body .desktop-app-dock{
+    position:fixed!important;
+    z-index:1200!important;
+    left:50%!important;
+    right:auto!important;
+    bottom:18px!important;
+    width:min(600px,calc(100vw - 48px))!important;
+    box-sizing:border-box!important;
+    transform:translateX(-50%)!important;
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:4px!important;
+    padding:8px 7px!important;
+    border:1px solid rgba(255,255,255,.9)!important;
+    border-radius:22px!important;
+    background:rgba(246,250,253,.96)!important;
+    box-shadow:0 14px 42px rgba(8,25,44,.20),inset 0 1px 0 #fff!important;
+    -webkit-backdrop-filter:blur(24px) saturate(170%)!important;
+    backdrop-filter:blur(24px) saturate(170%)!important;
+    transition:transform .28s ease,opacity .28s ease!important;
+  }
+  html body .desktop-app-dock.is-hidden{
+    transform:translate(-50%,130%)!important;
+    opacity:0!important;
+    pointer-events:none!important;
+  }
+  html body .desktop-app-dock a{
+    display:flex!important;
+    min-width:0!important;
+    min-height:52px!important;
+    align-items:center!important;
+    justify-content:center!important;
+    flex-direction:column!important;
+    gap:4px!important;
+    border-radius:14px!important;
+    color:#40566b!important;
+    text-decoration:none!important;
+    font:700 10px/1.1 "DM Sans",system-ui,sans-serif!important;
+    letter-spacing:.02em!important;
+  }
+  html body .desktop-app-dock a[aria-current="page"]{
+    background:#e0eff8!important;
+    color:#10243b!important;
+  }
+  html body .desktop-app-dock a.dock-plan{
+    background:linear-gradient(135deg,#dceefa,#acd4ed)!important;
+    color:#10243b!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.9)!important;
+  }
+  html body .desktop-app-dock .dock-icon{
+    display:block!important;
+    width:20px!important;
+    height:20px!important;
+    stroke:currentColor!important;
+    fill:none!important;
+    stroke-width:1.7!important;
+    stroke-linecap:round!important;
+    stroke-linejoin:round!important;
+  }
+  html body .desktop-app-dock a:hover,
+  html body .desktop-app-dock a:focus-visible{
+    background:#eaf4fa!important;
+    color:#10243b!important;
+    outline:2px solid #a9d8f2!important;
+    outline-offset:2px!important;
+  }
+  html body .desktop-app-dock a.dock-plan:hover{
+    background:linear-gradient(135deg,#cce7f6,#9dcde8)!important;
+  }
+}
+@media (min-width:761px) and (prefers-reduced-motion:reduce){
+  html body .desktop-app-dock{transition:none!important}
+}
