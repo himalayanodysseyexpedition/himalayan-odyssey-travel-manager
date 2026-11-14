@@ -1698,6 +1698,21 @@ html body #upcoming-packages .group-departure-card.winter-spiti-featured a.group
   }
 }
 </style>
+
+<!-- Desktop guest itinerary popup: open the selected itinerary without leaving the homepage -->
+<style id="desktop-guest-itinerary-popup-style">
+@media screen and (min-width:761px) {
+ #guest-itinerary-popup{position:fixed;inset:0;z-index:11000;display:none;align-items:center;justify-content:center;padding:28px;background:rgba(5,12,20,.78);backdrop-filter:blur(10px)}
+ #guest-itinerary-popup.is-open{display:flex}
+ #guest-itinerary-popup .guest-itinerary-dialog{width:min(1050px,96vw);height:min(850px,88vh);display:flex;flex-direction:column;overflow:hidden;background:#f8f6f0;border:1px solid rgba(255,255,255,.6);border-radius:18px;box-shadow:0 28px 90px rgba(0,0,0,.4)}
+ #guest-itinerary-popup .guest-itinerary-head{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 22px;background:#000;color:#fff}
+ #guest-itinerary-popup .guest-itinerary-head small{display:block;color:#c6d7e3;font-size:10px;letter-spacing:2px;font-weight:700}
+ #guest-itinerary-popup .guest-itinerary-head h2{margin:3px 0 0;color:#fff;font-size:25px;line-height:1.2}
+ #guest-itinerary-popup .guest-itinerary-close{width:40px;height:40px;flex:0 0 40px;border:1px solid #fff;border-radius:50%;background:#fff;color:#000;font-size:26px;line-height:1;cursor:pointer}
+ #guest-itinerary-popup iframe{display:block;width:100%;height:100%;min-height:0;flex:1;border:0;background:#f8f6f0}
+ body.guest-itinerary-popup-open{overflow:hidden}
+}
+</style>
 </head>
 
 <body>
@@ -6390,6 +6405,66 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 })();
 </script>
 
+
+<div id="guest-itinerary-popup" aria-hidden="true">
+ <section class="guest-itinerary-dialog" role="dialog" aria-modal="true" aria-labelledby="guest-itinerary-popup-title">
+  <header class="guest-itinerary-head">
+   <div><small>HIMALAYAN ODYSSEY EXPEDITION · TOUR ITINERARY</small><h2 id="guest-itinerary-popup-title">Explore Full Itinerary</h2></div>
+   <button class="guest-itinerary-close" type="button" aria-label="Close itinerary popup">×</button>
+  </header>
+  <iframe title="Selected tour itinerary" src="about:blank" loading="lazy"></iframe>
+ </section>
+</div>
+<script id="desktop-guest-itinerary-popup-behavior">
+(() => {
+ const modal=document.getElementById("guest-itinerary-popup");
+ const list=document.getElementById("itineraryList");
+ if(!modal||!list)return;
+ const frame=modal.querySelector("iframe");
+ const closeButton=modal.querySelector(".guest-itinerary-close");
+ const title=modal.querySelector("#guest-itinerary-popup-title");
+ let lastFocus=null;
+ const desktop=()=>window.matchMedia("(min-width: 761px)").matches;
+ const open=(url,label)=>{
+  lastFocus=document.activeElement;
+  title.textContent=label||"Explore Full Itinerary";
+  frame.src=url;
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden","false");
+  document.body.classList.add("guest-itinerary-popup-open");
+  closeButton.focus();
+ };
+ const close=()=>{
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden","true");
+  document.body.classList.remove("guest-itinerary-popup-open");
+  frame.src="about:blank";
+  if(lastFocus&&typeof lastFocus.focus==="function")lastFocus.focus();
+ };
+ list.addEventListener("click",event=>{
+  const link=event.target.closest("a.btn");
+  if(!link||!link.textContent.trim().toLowerCase().includes("explore full itinerary")||!desktop())return;
+  event.preventDefault();
+  const card=link.closest(".itinerary-slide");
+  const heading=card&&card.querySelector(".card-body h3");
+  open(link.href,heading?heading.textContent.trim():"Explore Full Itinerary");
+ });
+ frame.addEventListener("load",()=>{
+  try{
+   const doc=frame.contentDocument;
+   if(!doc)return;
+   const injected=doc.createElement("style");
+   injected.textContent="header.sitewide-header,main>.back,body>footer{display:none!important}main{max-width:100%!important;padding:24px 4% 48px!important}body{background:#f8f6f0!important}#itineraryContent{max-width:1000px;margin:0 auto}";
+   doc.head.appendChild(injected);
+  }catch(error){console.warn("Could not compact itinerary popup view",error)}
+ });
+ closeButton.addEventListener("click",close);
+ modal.addEventListener("click",event=>{if(event.target===modal)close()});
+ document.addEventListener("keydown",event=>{
+  if(modal.classList.contains("is-open")&&event.key==="Escape"){event.preventDefault();close()}
+ });
+})();
+</script>
 </body>
 </html>
 
