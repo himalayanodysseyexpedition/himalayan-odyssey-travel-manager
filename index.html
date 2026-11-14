@@ -6564,6 +6564,30 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
  });
 })();
 </script>
+
+<script id="mobile-hotel-enquiry-whatsapp">
+(() => {
+  const gallery = document.getElementById("galleryList");
+  if (!gallery) return;
+
+  gallery.addEventListener("click", event => {
+    const link = event.target.closest("a.btn");
+    if (!link || link.textContent.trim().toLowerCase() !== "enquire now") return;
+    if (!window.matchMedia("(max-width: 760px)").matches) return;
+
+    const card = link.closest(".hotel-card");
+    if (!card) return;
+
+    event.preventDefault();
+    const name = card.querySelector(".card-body h3")?.textContent.trim() || "Mountain property";
+    const location = card.querySelector(".hotel-location")?.textContent.replace(/^📍\s*/, "").trim() || "Himachal Pradesh";
+    const message = "Hello Himalayan Odyssey Expedition, I am interested in enquiring about " +
+      name + " in " + location + ". Please share room options, rates, availability and booking details.";
+    window.location.href = "https://wa.me/919816929669?text=" + encodeURIComponent(message);
+  });
+})();
+</script>
+
 </body>
 </html>
 
