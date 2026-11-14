@@ -532,3 +532,19 @@
     -webkit-text-fill-color:#12345a!important;
   }
 }
+
+
+/* MOBILE ONLY — add a Packages shortcut to the floating navigation. */
+@media screen and (max-width:760px){
+  html body #footerContactBar.footer-contact-bar{
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  }
+  html body #footerContactBar .quick-nav-packages{
+    display:flex!important;
+  }
+}
+@media screen and (min-width:761px){
+  html body #footerContactBar .quick-nav-packages{
+    display:none!important;
+  }
+}
