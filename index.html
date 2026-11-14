@@ -1700,17 +1700,25 @@ html body #upcoming-packages .group-departure-card.winter-spiti-featured a.group
 </style>
 
 <!-- Desktop guest itinerary popup: open the selected itinerary without leaving the homepage -->
-<style id="desktop-guest-itinerary-popup-style">
-@media screen and (min-width:761px) {
- #guest-itinerary-popup{position:fixed;inset:0;z-index:11000;display:none;align-items:center;justify-content:center;padding:28px;background:rgba(5,12,20,.78);backdrop-filter:blur(10px)}
- #guest-itinerary-popup.is-open{display:flex}
- #guest-itinerary-popup .guest-itinerary-dialog{width:min(1050px,96vw);height:min(850px,88vh);display:flex;flex-direction:column;overflow:hidden;background:#f8f6f0;border:1px solid rgba(255,255,255,.6);border-radius:18px;box-shadow:0 28px 90px rgba(0,0,0,.4)}
- #guest-itinerary-popup .guest-itinerary-head{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 22px;background:#000;color:#fff}
- #guest-itinerary-popup .guest-itinerary-head small{display:block;color:#c6d7e3;font-size:10px;letter-spacing:2px;font-weight:700}
- #guest-itinerary-popup .guest-itinerary-head h2{margin:3px 0 0;color:#fff;font-size:25px;line-height:1.2}
- #guest-itinerary-popup .guest-itinerary-close{width:40px;height:40px;flex:0 0 40px;border:1px solid #fff;border-radius:50%;background:#fff;color:#000;font-size:26px;line-height:1;cursor:pointer}
- #guest-itinerary-popup iframe{display:block;width:100%;height:100%;min-height:0;flex:1;border:0;background:#f8f6f0}
- body.guest-itinerary-popup-open{overflow:hidden}
+<style id="guest-itinerary-popup-responsive-style">
+#guest-itinerary-popup{position:fixed;inset:0;z-index:11000;display:none;align-items:center;justify-content:center;padding:28px;background:rgba(5,12,20,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#guest-itinerary-popup.is-open{display:flex}
+#guest-itinerary-popup .guest-itinerary-dialog{width:min(1050px,96vw);height:min(850px,88vh);display:flex;flex-direction:column;overflow:hidden;background:#f8f6f0;border:1px solid rgba(255,255,255,.6);border-radius:18px;box-shadow:0 28px 90px rgba(0,0,0,.4)}
+#guest-itinerary-popup .guest-itinerary-head{position:relative;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 22px;background:#000;color:#fff;flex:0 0 auto;touch-action:pan-y}
+#guest-itinerary-popup .guest-itinerary-head small{display:block;color:#c6d7e3;font-size:10px;letter-spacing:2px;font-weight:700}
+#guest-itinerary-popup .guest-itinerary-head h2{margin:3px 0 0;color:#fff;font-size:25px;line-height:1.2}
+#guest-itinerary-popup .guest-itinerary-close{width:40px;height:40px;flex:0 0 40px;border:1px solid #fff;border-radius:50%;background:#fff;color:#000;font-size:26px;line-height:1;cursor:pointer}
+#guest-itinerary-popup iframe{display:block;width:100%;height:100%;min-height:0;flex:1;border:0;background:#f8f6f0;overscroll-behavior:contain}
+body.guest-itinerary-popup-open{overflow:hidden}
+@media screen and (max-width:760px){
+ #guest-itinerary-popup{align-items:flex-end;justify-content:center;padding:0;background:rgba(0,0,0,.72)}
+ #guest-itinerary-popup .guest-itinerary-dialog{width:100%;height:94vh;height:94dvh;max-height:960px;border:0;border-radius:22px 22px 0 0;box-shadow:0 -16px 50px rgba(0,0,0,.35)}
+ #guest-itinerary-popup .guest-itinerary-head{padding:17px 16px 15px;border-radius:22px 22px 0 0}
+ #guest-itinerary-popup .guest-itinerary-head:before{content:"";position:absolute;top:7px;left:50%;width:42px;height:4px;border-radius:4px;background:rgba(255,255,255,.48);transform:translateX(-50%)}
+ #guest-itinerary-popup .guest-itinerary-head small{font-size:8px;letter-spacing:1.2px}
+ #guest-itinerary-popup .guest-itinerary-head h2{font-size:18px;max-width:270px}
+ #guest-itinerary-popup .guest-itinerary-close{width:36px;height:36px;flex-basis:36px;font-size:24px}
+ #guest-itinerary-popup iframe{min-height:0;-webkit-overflow-scrolling:touch}
 }
 </style>
 </head>
@@ -6415,7 +6423,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   <iframe title="Selected tour itinerary" src="about:blank" loading="lazy"></iframe>
  </section>
 </div>
-<script id="desktop-guest-itinerary-popup-behavior">
+<script id="guest-itinerary-popup-responsive-behavior">
 (() => {
  const modal=document.getElementById("guest-itinerary-popup");
  const list=document.getElementById("itineraryList");
@@ -6423,8 +6431,14 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
  const frame=modal.querySelector("iframe");
  const closeButton=modal.querySelector(".guest-itinerary-close");
  const title=modal.querySelector("#guest-itinerary-popup-title");
+ const dragHandle=modal.querySelector(".guest-itinerary-head");
+ let touchStartY=0,touchCurrentY=0,dragging=false;
+ if(dragHandle){
+  dragHandle.addEventListener("touchstart",event=>{if(event.touches.length!==1)return;touchStartY=event.touches[0].clientY;touchCurrentY=touchStartY;dragging=true},{passive:true});
+  dragHandle.addEventListener("touchmove",event=>{if(!dragging||event.touches.length!==1)return;touchCurrentY=event.touches[0].clientY},{passive:true});
+  dragHandle.addEventListener("touchend",()=>{if(dragging&&touchCurrentY-touchStartY>85)close();dragging=false;touchStartY=0;touchCurrentY=0},{passive:true});
+ }
  let lastFocus=null;
- const desktop=()=>window.matchMedia("(min-width: 761px)").matches;
  const open=(url,label)=>{
   lastFocus=document.activeElement;
   title.textContent=label||"Explore Full Itinerary";
@@ -6443,7 +6457,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
  };
  list.addEventListener("click",event=>{
   const link=event.target.closest("a.btn");
-  if(!link||!link.textContent.trim().toLowerCase().includes("explore full itinerary")||!desktop())return;
+  if(!link||!link.textContent.trim().toLowerCase().includes("explore full itinerary"))return;
   event.preventDefault();
   const card=link.closest(".itinerary-slide");
   const heading=card&&card.querySelector(".card-body h3");
