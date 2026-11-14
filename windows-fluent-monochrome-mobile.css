@@ -462,13 +462,13 @@
   }
 }
 
-/* MOBILE ONLY — compact Instagram card with the logo beside the handle. */
+/* MOBILE ONLY — centered Instagram logo above the centered handle. */
 @media(max-width:760px){
   html body section#instagram .instagram-content{
     display:grid!important;
-    grid-template-columns:34px minmax(0,1fr)!important;
+    grid-template-columns:minmax(0,1fr)!important;
     align-items:center!important;
-    column-gap:10px!important;
+    column-gap:0!important;
     row-gap:8px!important;
     width:min(100%,360px)!important;
     max-width:360px!important;
@@ -478,6 +478,7 @@
   html body section#instagram .instagram-content .instagram-logo{
     grid-column:1!important;
     grid-row:1!important;
+    justify-self:center!important;
     width:34px!important;
     height:34px!important;
     margin:0!important;
@@ -487,10 +488,11 @@
     font-size:25px!important;
   }
   html body section#instagram .instagram-content h3{
-    grid-column:2!important;
-    grid-row:1!important;
+    grid-column:1!important;
+    grid-row:2!important;
     margin:0!important;
-    text-align:left!important;
+    text-align:center!important;
+    justify-self:center!important;
     font-size:20px!important;
   }
   html body section#instagram .instagram-content p{
