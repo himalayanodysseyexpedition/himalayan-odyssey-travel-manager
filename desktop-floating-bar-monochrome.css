@@ -1,19 +1,18 @@
-/* Desktop dock mirrors the mobile dock's geometry and interaction.
-   Desktop-only monochrome palette; mobile styles are not touched. */
+/* Desktop-only centered monochrome floating navigation. Mobile styles are untouched. */
 @media (min-width:761px){
   html body #footerContactBar.footer-contact-bar,
   html body nav.desktop-app-dock{
     position:fixed!important;
     z-index:1200!important;
-    left:12px!important;
-    right:12px!important;
+    left:50%!important;
+    right:auto!important;
     bottom:9px!important;
-    width:auto!important;
-    max-width:none!important;
+    width: min(560px, calc(100vw - 32px))!important;
+    max-width:560px!important;
     min-width:0!important;
     margin:0!important;
     box-sizing:border-box!important;
-    transform:none!important;
+    transform:translateX(-50%)!important;
     translate:none!important;
     display:grid!important;
     grid-template-columns:repeat(4,minmax(0,1fr))!important;
@@ -32,7 +31,7 @@
     transition:transform .28s ease,opacity .28s ease!important;
   }
   html body nav.desktop-app-dock.is-hidden{
-    transform:translateY(130%)!important;
+    transform:translate(-50%,130%)!important;
     opacity:0!important;
     pointer-events:none!important;
   }
