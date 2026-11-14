@@ -4,10 +4,8 @@
 
   const MENU_ITEMS = [
     ["/destinations/", "Destinations"],
-    ["/travel-guides/", "Travel Guides"],
     ["/#cabs", "Vacation Cabs"],
     ["/#gallery", "Hotels & Properties"],
-    ["/suppliers/", "List Your Vacation Property"]
   ];
 
   function init() {
@@ -51,7 +49,7 @@
       const link = document.createElement("link");
       link.id = "sitewide-hamburger-stylesheet";
       link.rel = "stylesheet";
-      link.href = "/hamburger-header-final.css?v=13";
+      link.href = "/hamburger-header-final.css?v=14";
       document.head.appendChild(link);
     }
 
