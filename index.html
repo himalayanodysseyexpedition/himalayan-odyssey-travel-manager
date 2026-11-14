@@ -5437,92 +5437,60 @@ html body #gallery .hotel-card .card-body small{
 </style>
 
 
-<style id="homepage-card-typography-match-upcoming-v3">
-/* Apply the Upcoming Packages typography system across every text node in each card. */
+<style id="homepage-card-typography-match-upcoming-v4">
+/* Distinct typography for the complete cards in Packages, Itineraries, Cabs and Hotels. */
+/* Descriptive/card copy uses General Sans; card names and prices use Boska. */
 html body #packages .package-slide .card-body,
 html body #itineraries .itinerary-slide .card-body,
 html body #cabs .cab-card .card-body,
-html body #gallery .hotel-card .card-body{
-  font-family:"DM Sans",Arial,sans-serif!important;
+html body #gallery .hotel-card .card-body,
+html body #packages .package-slide .card-body *,
+html body #itineraries .itinerary-slide .card-body *,
+html body #cabs .cab-card .card-body *,
+html body #gallery .hotel-card .card-body *{
+  font-family:"General Sans","DM Sans",Arial,sans-serif!important;
+}
+html body #packages .package-slide .card-body h3,
+html body #itineraries .itinerary-slide .card-body h3,
+html body #cabs .cab-card .card-body h3,
+html body #gallery .hotel-card .card-body h3{
+  font-family:"Boska","Cormorant Garamond",Georgia,serif!important;
+  font-size:27px!important;
+  font-weight:600!important;
+  line-height:1.12!important;
+  letter-spacing:-.2px!important;
+  color:#10243b!important;
+}
+html body #packages .package-slide .card-body p,
+html body #itineraries .itinerary-slide .card-body p,
+html body #cabs .cab-card .card-body p,
+html body #gallery .hotel-card .card-body p,
+html body #packages .package-slide .card-body .hotel-facilities,
+html body #itineraries .itinerary-slide .card-body .itinerary-meta,
+html body #cabs .cab-card .card-body .cab-details,
+html body #gallery .hotel-card .card-body .hotel-location,
+html body #gallery .hotel-card .card-body .hotel-facilities{
+  font-family:"General Sans","DM Sans",Arial,sans-serif!important;
   font-size:13px!important;
   font-weight:400!important;
   line-height:1.7!important;
   letter-spacing:0!important;
   color:#617168!important;
 }
-html body #packages .package-slide .card-body *,
-html body #itineraries .itinerary-slide .card-body *,
-html body #cabs .cab-card .card-body *,
-html body #gallery .hotel-card .card-body *{
-  font-family:"DM Sans",Arial,sans-serif!important;
-}
-html body #packages .package-slide .card-body h3,
-html body #itineraries .itinerary-slide .card-body h3,
-html body #cabs .cab-card .card-body h3,
-html body #gallery .hotel-card .card-body h3{
-  font-family:"Cormorant Garamond",Georgia,serif!important;
-  font-size:25px!important;
+html body #packages .package-slide .card-body .price,
+html body #itineraries .itinerary-slide .card-body .price,
+html body #cabs .cab-card .card-body .price,
+html body #gallery .hotel-card .card-body .price{
+  font-family:"Boska","Cormorant Garamond",Georgia,serif!important;
+  font-size:23px!important;
   font-weight:600!important;
-  line-height:1.12!important;
-  letter-spacing:0!important;
-  color:#10243b!important;
-  margin:8px 0 10px!important;
 }
-html body #packages .package-slide .card-body p,
-html body #itineraries .itinerary-slide .card-body p,
-html body #cabs .cab-card .card-body p,
-html body #gallery .hotel-card .card-body p{
-  font-family:"DM Sans",Arial,sans-serif!important;
-  font-size:13px!important;
-  font-weight:400!important;
-  line-height:1.75!important;
-  letter-spacing:0!important;
-  color:#617168!important;
-}
-html body #packages .package-slide .card-body small,
-html body #itineraries .itinerary-slide .card-body small,
-html body #cabs .cab-card .card-body small,
-html body #gallery .hotel-card .card-body small,
-html body #itineraries .itinerary-slide .itinerary-meta,
-html body #gallery .hotel-card .hotel-location{
-  font-family:"DM Sans",Arial,sans-serif!important;
-  font-size:10px!important;
-  font-weight:700!important;
-  line-height:1.5!important;
-  letter-spacing:1.5px!important;
-  text-transform:uppercase!important;
-}
-html body #packages .package-slide .price,
-html body #itineraries .itinerary-slide .price,
-html body #cabs .cab-card .price,
-html body #gallery .hotel-card .price{
-  font-family:"Cormorant Garamond",Georgia,serif!important;
-  font-size:25px!important;
-  font-weight:700!important;
-  line-height:1.1!important;
-  letter-spacing:0!important;
-  color:#a9d8f2!important;
-}
-html body #packages .package-slide .price small,
-html body #itineraries .itinerary-slide .price small,
-html body #cabs .cab-card .price small,
-html body #gallery .hotel-card .price small{
-  font-family:"DM Sans",Arial,sans-serif!important;
-  font-size:10px!important;
-  font-weight:700!important;
-}
-html body #packages .package-slide .btn,
-html body #itineraries .itinerary-slide .btn,
-html body #itineraries .itinerary-slide .pdf-actions a,
-html body #cabs .cab-card .btn,
-html body #gallery .hotel-card .btn,
-html body #gallery .hotel-card a.btn{
-  font-family:"DM Sans",Arial,sans-serif!important;
-  font-size:10px!important;
-  font-weight:800!important;
-  letter-spacing:1.5px!important;
-  line-height:1.35!important;
-  text-transform:uppercase!important;
+html body #packages .package-slide .card-body .btn,
+html body #itineraries .itinerary-slide .card-body .btn,
+html body #cabs .cab-card .card-body .btn,
+html body #gallery .hotel-card .card-body .btn{
+  font-family:"General Sans","DM Sans",Arial,sans-serif!important;
+  font-weight:600!important;
 }
 </style>
 
