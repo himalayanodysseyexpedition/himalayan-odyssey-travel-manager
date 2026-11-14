@@ -1531,6 +1531,47 @@ html body #upcoming-packages .group-departure-card.winter-spiti-featured a.group
   }
 }
 </style>
+
+<style id="desktop-travel-package-card-button-alignment-v1">
+/* Desktop only: keep both package actions level and consistently positioned. */
+@media screen and (min-width: 761px) {
+  html body #packageList > article.card {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+  }
+  html body #packageList > article.card > .card-body {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  html body #packageList > article.card .package-card-actions {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    width: 100% !important;
+    margin-top: auto !important;
+    padding-top: 18px !important;
+  }
+  html body #packageList > article.card .package-card-actions > a.btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 52px !important;
+    height: 52px !important;
+    margin: 0 !important;
+    padding: 8px 10px !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    line-height: 1.25 !important;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -2121,11 +2162,12 @@ async function loadPackages() {
               <div class="price">${rupees(p.price_per_person)} <small>per person</small></div>
             ` : ""}
 
-            <a class="btn" href="/?package=${encodeURIComponent(p.id)}/build-your-trip/">Enquire About This Package</a>
-
-            ${p.linkedItineraryPage ? `
-              <a class="btn" href="${safe(p.linkedItineraryPage)}">Explore Full Itinerary</a>
-            ` : ""}
+            <div class="package-card-actions">
+              <a class="btn" href="/?package=${encodeURIComponent(p.id)}/build-your-trip/">Enquire About This Package</a>
+              ${p.linkedItineraryPage ? `
+                <a class="btn" href="${safe(p.linkedItineraryPage)}">Explore Full Itinerary</a>
+              ` : ""}
+            </div>
 
           </div>
         </article>`;
