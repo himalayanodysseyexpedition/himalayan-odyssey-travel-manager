@@ -5891,5 +5891,148 @@ html body .section-title h3{
 }
 </style>
 
+
+<style id="hero-desktop-mountain-snow-and-heading-underline-removal">
+/* Remove the decorative heading rule on both desktop and mobile. */
+html body .section-title h2::before,
+html body .section-title h2::after{
+  content:none!important;
+  display:none!important;
+  width:0!important;
+  height:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:none!important;
+  box-shadow:none!important;
+}
+
+/* Desktop: reveal the same layered mountain ridge and snowfall used on mobile. */
+@media screen and (min-width:761px){
+  html body #home.hero{
+    position:relative!important;
+    isolation:isolate!important;
+    overflow:hidden!important;
+  }
+  html body #home .hero-weather-motion{
+    position:absolute!important;
+    inset:0!important;
+    z-index:1!important;
+    overflow:hidden!important;
+    pointer-events:none!important;
+  }
+  html body #home .hero-cloud-bank{
+    position:absolute;
+    width:58%;
+    height:17%;
+    left:-65%;
+    filter:blur(7px);
+    opacity:.28;
+    will-change:transform;
+    background:
+      radial-gradient(ellipse at 20% 68%,rgba(239,248,255,.9) 0 18%,transparent 42%),
+      radial-gradient(ellipse at 42% 42%,rgba(239,248,255,.82) 0 22%,transparent 48%),
+      radial-gradient(ellipse at 64% 63%,rgba(239,248,255,.78) 0 19%,transparent 44%),
+      radial-gradient(ellipse at 82% 72%,rgba(239,248,255,.7) 0 14%,transparent 39%);
+  }
+  html body #home .hero-cloud-bank-one{
+    top:20%;
+    animation:heroCloudsAcrossDesktop 34s linear infinite;
+  }
+  html body #home .hero-cloud-bank-two{
+    top:42%;
+    left:-80%;
+    opacity:.2;
+    transform:scale(.82);
+    animation:heroCloudsAcrossDesktop 46s linear infinite reverse;
+  }
+  html body #home .hero-falling-snow{
+    position:absolute;
+    inset:-100% 0 0;
+    will-change:background-position;
+    pointer-events:none;
+  }
+  html body #home .hero-snow-layer-one{
+    opacity:.72;
+    background-image:
+      radial-gradient(2px 2px at 20px 30px,#fff 98%,transparent),
+      radial-gradient(1.5px 1.5px at 110px 90px,rgba(255,255,255,.95) 98%,transparent),
+      radial-gradient(2px 2px at 190px 160px,rgba(255,255,255,.9) 98%,transparent);
+    background-size:230px 250px;
+    animation:heroSnowfallDesktop 13s linear infinite;
+  }
+  html body #home .hero-snow-layer-two{
+    opacity:.52;
+    background-image:
+      radial-gradient(2.7px 2.7px at 55px 45px,rgba(255,255,255,.95) 98%,transparent),
+      radial-gradient(2px 2px at 155px 135px,rgba(255,255,255,.9) 98%,transparent);
+    background-size:290px 310px;
+    animation:heroSnowfallDesktop 19s linear infinite;
+  }
+  html body #home .hero-snow-layer-three{
+    opacity:.34;
+    background-image:
+      radial-gradient(1px 1px at 35px 70px,#fff 98%,transparent),
+      radial-gradient(1.2px 1.2px at 175px 175px,#fff 98%,transparent);
+    background-size:190px 220px;
+    animation:heroSnowfallDesktop 9s linear infinite;
+  }
+  html body #home .hero-bottom-motion{
+    position:absolute!important;
+    left:0!important;
+    right:0!important;
+    bottom:0!important;
+    height:clamp(145px,22vh,220px)!important;
+    z-index:1!important;
+    overflow:hidden!important;
+    pointer-events:none!important;
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 22%);
+    mask-image:linear-gradient(to bottom,transparent 0%,#000 22%);
+  }
+  html body #home .hero-bottom-landscape{
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+  }
+  html body #home .hero-drifting-cloud{
+    animation:heroCloudDriftDesktop 34s linear infinite;
+    will-change:transform;
+  }
+  html body #home .hero-cloud-two{
+    animation-duration:46s;
+    animation-direction:reverse;
+  }
+  html body #home .hero-snow-specks{
+    animation:heroSnowTwinkleDesktop 4.5s ease-in-out infinite alternate;
+  }
+  html body #home .hero-mountain-snowfall{
+    position:absolute;
+    inset:-100% 0 0;
+    opacity:.4;
+    background-image:
+      radial-gradient(1px 1px at 30px 45px,#fff 98%,transparent),
+      radial-gradient(1.5px 1.5px at 140px 115px,rgba(255,255,255,.9) 98%,transparent);
+    background-size:180px 210px;
+    animation:heroSnowfallDesktop 15s linear infinite;
+    pointer-events:none;
+  }
+  html body #home .hero-content{
+    position:relative!important;
+    z-index:2!important;
+  }
+}
+@keyframes heroCloudsAcrossDesktop{from{translate:0 0}to{translate:235vw 0}}
+@keyframes heroSnowfallDesktop{from{background-position:0 -80px}to{background-position:45px 620px}}
+@keyframes heroCloudDriftDesktop{from{transform:translateX(-55px)}to{transform:translateX(85px)}}
+@keyframes heroSnowTwinkleDesktop{from{opacity:.28}to{opacity:.9}}
+@media(prefers-reduced-motion:reduce){
+  html body #home .hero-cloud-bank,
+  html body #home .hero-falling-snow,
+  html body #home .hero-drifting-cloud,
+  html body #home .hero-snow-specks,
+  html body #home .hero-mountain-snowfall{animation:none!important}
+}
+</style>
+
 </body>
 </html>
