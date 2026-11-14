@@ -5774,5 +5774,26 @@ html body section#more-than-tours .info-grid .info-box a.btn:visited{
 }
 </style>
 
+<!-- DESKTOP-JOURNEY-STRIP-REMOVE-OUTER-BLUE-PANEL-V1 -->
+<style>
+@media (min-width: 761px) {
+  html body .journey-strip {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+  }
+  html body .journey-strip::before,
+  html body .journey-strip::after {
+    content: none !important;
+    display: none !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+}
+</style>
+
 </body>
 </html>
