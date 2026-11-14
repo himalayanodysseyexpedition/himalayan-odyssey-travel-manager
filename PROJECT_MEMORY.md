@@ -73,3 +73,12 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Admin dashboards and backend/data workflows were intentionally excluded from this public-site visual pass.
 - No page content, routes, SEO metadata, JavaScript behaviour, Supabase schema/data, bookings, payments, hosting or deployment settings were intentionally changed.
 - PR #345 merged as commit `f74241bd04d49817a723e2cd1ba1e510a4e336b9`. The public CSS asset URL was fetched successfully after merge. Full visual browser/device inspection remains unverified.
+
+## 2026-11-14 — Homepage section backgrounds through Hotels & Properties
+- User specified backgrounds for the homepage, with Hero and Upcoming Packages explicitly unchanged.
+- Applied solid near-black backgrounds to `#journey-story` (Travel With Us), `#itineraries` (Tour Itineraries), and `#gallery` (Hotels & Properties).
+- Applied light cream backgrounds to `#packages` (Our Travel Packages) and `#cabs` (Our Vehicles & Cabs).
+- The later `#more-than-tours` section/cards were intentionally left unchanged because the user said to stop at Hotels & Properties.
+- Only `index.html` was changed for the implementation; a final scoped style block was appended after existing homepage styles to ensure precedence.
+- PR #347 merged on 2026-11-14 as commit `e35ea39ebdec0cfea13379811a3053ca44cdeb0d`.
+- Static site quality check for the implementation commit `67968ba58b5c4735d954c29f0b2aa60ba6f498cd` completed successfully (run #789). GitHub Pages deployment for the merge commit was queued at the time this entry was written; live visual verification remains pending.
