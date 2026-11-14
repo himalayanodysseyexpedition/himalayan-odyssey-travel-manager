@@ -520,3 +520,15 @@
 @media(min-width:761px){
   html body #contact.cta .mobile-whatsapp-enquiry{display:none!important}
 }
+
+
+/* MOBILE ONLY — dark blue pricing on Travel Packages and Vehicles & Cabs cards. */
+@media screen and (max-width:760px){
+  html body #packages .package-slide .card-body .price,
+  html body #packages .package-slide .card-body .price small,
+  html body #cabs .cab-card .card-body .price,
+  html body #cabs .cab-card .card-body .price small{
+    color:#12345a!important;
+    -webkit-text-fill-color:#12345a!important;
+  }
+}
