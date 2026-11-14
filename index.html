@@ -2045,20 +2045,6 @@ async function loadPackages() {
         </article>`;
     }).join("");
 
-    // Apply the black button treatment specifically to the Hotel Survi listing.
-    list.querySelectorAll(".hotel-card").forEach(card => {
-      const propertyName = card.querySelector(".card-body h3")?.textContent?.trim().toLowerCase() || "";
-      if (propertyName.includes("survi")) {
-        card.querySelectorAll(".card-body > .btn").forEach(button => {
-          button.style.setProperty("background", "#000000", "important");
-          button.style.setProperty("background-color", "#000000", "important");
-          button.style.setProperty("color", "#ffffff", "important");
-          button.style.setProperty("-webkit-text-fill-color", "#ffffff", "important");
-          button.style.setProperty("border-color", "#000000", "important");
-        });
-      }
-    });
-
     observeReveals();
 
   } catch (error) {
@@ -2264,6 +2250,27 @@ async function loadHotels() {
           </div>
         </article>`;
     }).join("");
+
+    // Style only Hotel Survi's two action buttons on desktop after hotel cards render.
+    if (window.matchMedia("(min-width: 761px)").matches) {
+      list.querySelectorAll(".hotel-card").forEach(card => {
+        const propertyName = (
+          card.getAttribute("data-property-name") ||
+          card.querySelector(".card-body h3")?.textContent ||
+          ""
+        ).trim().toLowerCase();
+
+        if (propertyName.includes("survi")) {
+          card.querySelectorAll(".card-body > button.btn, .card-body > a.btn").forEach(button => {
+            button.style.setProperty("background", "#000000", "important");
+            button.style.setProperty("background-color", "#000000", "important");
+            button.style.setProperty("color", "#ffffff", "important");
+            button.style.setProperty("-webkit-text-fill-color", "#ffffff", "important");
+            button.style.setProperty("border-color", "#000000", "important");
+          });
+        }
+      });
+    }
 
     observeReveals();
 
