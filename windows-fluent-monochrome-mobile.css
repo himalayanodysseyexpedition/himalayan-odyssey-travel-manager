@@ -451,3 +451,13 @@
     display:none!important;
   }
 }
+
+/* MOBILE ONLY — show the Instagram handle in black on its white profile card. */
+@media(max-width:760px){
+  html body section#instagram .instagram-content h3{
+    color:#111!important;
+    -webkit-text-fill-color:#111!important;
+    visibility:visible!important;
+    opacity:1!important;
+  }
+}
