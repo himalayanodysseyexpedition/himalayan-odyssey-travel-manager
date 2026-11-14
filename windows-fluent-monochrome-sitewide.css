@@ -179,3 +179,37 @@ body footer a,body>header a{ text-underline-offset:3px }
   html{scroll-behavior:auto}
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+
+/* Desktop: remove the short decorative accent line below homepage section headings. */
+@media (min-width:761px){
+  html body :is(
+    #upcoming-packages,
+    #journey-story,
+    #packages,
+    #itineraries,
+    #cabs,
+    #gallery,
+    #more-than-tours,
+    #instagram
+  ) .section-title h2::after,
+  html body :is(
+    #upcoming-packages,
+    #journey-story,
+    #packages,
+    #itineraries,
+    #cabs,
+    #gallery,
+    #more-than-tours,
+    #instagram
+  ) .section-title h2::before{
+    content:none!important;
+    display:none!important;
+    width:0!important;
+    height:0!important;
+    background:none!important;
+    border:0!important;
+    box-shadow:none!important;
+    animation:none!important;
+  }
+}
