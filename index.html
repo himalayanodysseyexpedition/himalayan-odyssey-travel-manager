@@ -6560,3 +6560,29 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   }
 }
 </style>
+
+
+<style id="mobile-service-card-typography-v1">
+/* Typography hierarchy for package, itinerary, vehicle and property cards — mobile only. */
+@media screen and (max-width:760px){
+  html body :is(#packageList,#itineraryList,#cabList,#galleryList) :is(.card-body,.package-slide-content,.itinerary-slide-content) h3,
+  html body :is(#packageList,#itineraryList,#cabList,#galleryList) > article :is(h3,.card-title){
+    font-weight:750!important;
+  }
+  html body :is(#packageList,#itineraryList,#cabList,#galleryList) :is(.card-body,.package-slide-content,.itinerary-slide-content) p,
+  html body :is(#packageList,#itineraryList,#cabList,#galleryList) > article p{
+    font-weight:400!important;
+  }
+  html body :is(#packageList,#itineraryList,#cabList,#galleryList) :is(.price,.package-price,.rate,.amount){
+    font-weight:650!important;
+  }
+  html body :is(#packageList,#itineraryList,#cabList,#galleryList) :is(.price,.package-price,.rate,.amount) small{
+    font-weight:400!important;
+  }
+  html body :is(#packageList,#itineraryList,#cabList,#galleryList) :is(.btn,.button,a[class*="btn"],a[class*="button"],button){
+    font-weight:700!important;
+    text-transform:uppercase!important;
+    letter-spacing:.09em!important;
+  }
+}
+</style>
