@@ -5852,5 +5852,44 @@ html body section#more-than-tours .info-grid .info-box a.btn:visited{
 }
 </style>
 
+
+<style id="all-device-section-heading-accent-removal-v4">
+/* Remove decorative heading rules on both desktop and mobile, regardless of section ID. */
+html body .section-title::before,
+html body .section-title::after,
+html body .section-title h1::before,
+html body .section-title h1::after,
+html body .section-title h2::before,
+html body .section-title h2::after,
+html body .section-title h3::before,
+html body .section-title h3::after,
+html body .section-title small::before,
+html body .section-title small::after,
+html body .section-title .title-line,
+html body .section-title hr{
+  content:none!important;
+  display:none!important;
+  visibility:hidden!important;
+  width:0!important;
+  height:0!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:none!important;
+  background-image:none!important;
+}
+html body .section-title h1,
+html body .section-title h2,
+html body .section-title h3{
+  border-bottom:0!important;
+  box-shadow:none!important;
+  text-decoration:none!important;
+  background-image:none!important;
+}
+</style>
+
 </body>
 </html>
