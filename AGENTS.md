@@ -98,3 +98,14 @@ The AI development team must work as a supervised engineering team.
 The team may help with all areas of the existing product: public website pages, destinations, packages and itineraries, group departures, enquiry and WhatsApp flows, supplier/property listings, admin dashboard, leads and CRM, bookings, customers, vendors, transactions, invoices, payment tracking, analytics, technical SEO, performance, accessibility, and security.
 
 Always inspect the current implementation and database before changing any of these areas.
+
+## Advanced web-agent instructions and project memory
+
+- Before every task, read `PROJECT_MEMORY.md` and `.github/skills/himalayan-odyssey-web-agent/SKILL.md` in addition to these instructions.
+- The dedicated skill defines the required command interpretation, strict scope lock, UI/UX audit method, project-memory maintenance, verification and completion report.
+- **Strict scope rule:** a command targeting one element, component or page authorizes changes only to that target and the minimum dependencies required. Do not edit unrelated files, pages, global styles, data, configuration or business logic. Do not perform opportunistic refactors or redesigns.
+- If a safe implementation requires expanding beyond the requested scope, explain the dependency and obtain approval before expanding it.
+- Inspect the full diff before committing; remove unrelated changes and preserve pre-existing user work.
+- Update `PROJECT_MEMORY.md` after significant completed work with factual scope, changed files, PR/commit and verification status. Never store secrets or customer/private data.
+- **Current design preference (updated 2026-11-14):** the user's latest direction is premium luxury Himalayan branding with mixed dark/light sections and avoidance of green, gold, bronze and copper palettes unless explicitly requested. This newer preference supersedes the older green-palette note above. Preserve the existing logo.
+- A merge is not proof of deployment. Never claim that the live site changed until the deployment is independently verified.
