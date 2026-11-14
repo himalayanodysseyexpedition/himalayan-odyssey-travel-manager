@@ -6531,6 +6531,14 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
    window.location.href="https://wa.me/919816929669?text="+encodeURIComponent(message);
    return;
   }
+  if(cardSelector==="#itineraryList > article.itinerary-slide" && label.includes("enquire about this itinerary")){
+   event.preventDefault();
+   const heading=card.querySelector(".card-body h3");
+   const itineraryName=heading?heading.textContent.trim():"Himalayan tour itinerary";
+   const message="Hello Himalayan Odyssey Expedition, I am interested in the "+itineraryName+" itinerary. Please share the full details, dates, inclusions, availability and booking information.";
+   window.location.href="https://wa.me/919816929669?text="+encodeURIComponent(message);
+   return;
+  }
   if(!label.includes("explore full itinerary"))return;
   event.preventDefault();
   const heading=card.querySelector(".card-body h3");
