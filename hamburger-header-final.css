@@ -625,3 +625,18 @@ html body > header .header-inner > nav.glass-nav > .nav-dropdown.open > .nav-dro
     background:rgba(255,255,255,.13)!important;
   }
 }
+
+
+/* Sitewide hamburger glass control and transparent black dropdown. */
+html body > header .header-menu-toggle,
+html body > header .header-menu-toggle[aria-expanded="false"],
+html body > header .header-menu-toggle[aria-expanded="true"] {
+ border:1px solid rgba(255,255,255,.92)!important;border-radius:13px!important;
+ background:rgba(255,255,255,.055)!important;background-color:rgba(255,255,255,.055)!important;
+ color:#fff!important;-webkit-text-fill-color:#fff!important;
+ box-shadow:0 4px 18px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.12)!important;
+ backdrop-filter:blur(18px) saturate(125%)!important;-webkit-backdrop-filter:blur(18px) saturate(125%)!important;
+}
+html body > header .header-menu-toggle svg,html body > header .header-menu-toggle svg path{stroke:#fff!important}
+html body > header.menu-open .header-inner > nav.glass-nav{background:rgba(0,0,0,.76)!important;background-color:rgba(0,0,0,.76)!important;border:1px solid rgba(255,255,255,.2)!important;backdrop-filter:blur(22px) saturate(125%)!important;-webkit-backdrop-filter:blur(22px) saturate(125%)!important}
+html body > header.menu-open .header-inner > nav.glass-nav > a{color:#fff!important;-webkit-text-fill-color:#fff!important}
