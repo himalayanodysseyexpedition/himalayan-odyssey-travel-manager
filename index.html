@@ -1803,7 +1803,7 @@ html body #home.hero .hero-build-cta-wrap > .hero-build-cta:active{
 
   Narkanda, Himachal Pradesh<br>
 
-  WhatsApp: +91 98169 29669<br>
+  <span class="footer-whatsapp-contact">WhatsApp: +91 98169 29669</span><br>
 
   <a href="https://www.instagram.com/kxnwxrvineet/"
      target="_blank"
@@ -5661,6 +5661,15 @@ html body section#more-than-tours .info-grid .info-box a.btn:visited{
 @media (min-width:761px){
   html body footer#siteFooter > a[href*="instagram.com"],
   html body footer#siteFooter > nav.footer-seo-links{
+    display:none!important;
+  }
+}
+</style>
+
+
+<style id="desktop-footer-hide-whatsapp-contact-v1">
+@media (min-width:761px){
+  html body footer#siteFooter .footer-whatsapp-contact{
     display:none!important;
   }
 }
