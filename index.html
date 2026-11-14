@@ -6631,6 +6631,25 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 }
 </style>
 
+
+<style id="floating-packages-shortcut-visible-all-devices-v1">
+/* Keep the Packages shortcut visible in the existing floating navigation on desktop and mobile. */
+html body > nav#footerContactBar.footer-contact-bar{
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+}
+html body > nav#footerContactBar.footer-contact-bar .quick-nav-packages{
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+@media screen and (max-width:760px){
+  html body > nav#footerContactBar.footer-contact-bar{
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  }
+}
+</style>
+
 </body>
 </html>
 
