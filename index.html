@@ -1731,14 +1731,21 @@ body.guest-itinerary-popup-open{overflow:hidden}
 </style>
 <style id="mobile-upcoming-card-border-final-fix">
 @media screen and (max-width:760px){
-  html body #upcoming-packages .group-departures-rail .group-departure-card.winter-spiti-featured,
-  html body #upcoming-packages .group-departure-card.winter-spiti-featured{
+  /* Remove the visible outer frame from the actual carousel card, regardless of which card class is rendered. */
+  html body #upcoming-packages .group-departures-rail > .group-departure-card,
+  html body #upcoming-packages .group-departures-rail .group-departure-card.winter-spiti-featured{
     border:0!important;
     border-width:0!important;
     border-color:transparent!important;
     outline:0!important;
     box-shadow:none!important;
+    -webkit-box-shadow:none!important;
+    filter:none!important;
+    -webkit-filter:none!important;
+    background-clip:padding-box!important;
   }
+  html body #upcoming-packages .group-departures-rail > .group-departure-card::before,
+  html body #upcoming-packages .group-departures-rail > .group-departure-card::after,
   html body #upcoming-packages .group-departure-card.winter-spiti-featured::before,
   html body #upcoming-packages .group-departure-card.winter-spiti-featured::after{
     content:none!important;
