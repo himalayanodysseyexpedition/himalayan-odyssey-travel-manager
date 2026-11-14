@@ -1501,6 +1501,14 @@ html body #upcoming-packages .group-departure-card.winter-spiti-featured a.group
   -webkit-text-fill-color:#000000!important;
 }
 
+/* Mobile: remove the outer border/outline from the featured Upcoming Packages card. */
+@media (max-width:760px){
+  html body #upcoming-packages .group-departure-card.winter-spiti-featured{
+    border:0!important;
+    outline:0!important;
+  }
+}
+
 /* Desktop: remove the outer outline from the featured Upcoming Packages card. */
 @media (min-width:761px){
   html body #upcoming-packages .group-departure-card.winter-spiti-featured{
@@ -1719,6 +1727,60 @@ body.guest-itinerary-popup-open{overflow:hidden}
  #guest-itinerary-popup .guest-itinerary-head h2{font-size:18px;max-width:270px}
  #guest-itinerary-popup .guest-itinerary-close{width:36px;height:36px;flex-basis:36px;font-size:24px}
  #guest-itinerary-popup iframe{min-height:0;-webkit-overflow-scrolling:touch}
+}
+</style>
+<style id="mobile-upcoming-card-border-final-fix">
+@media screen and (max-width:760px){
+  /* Remove the visible outer frame from the actual carousel card, regardless of which card class is rendered. */
+  html body #upcoming-packages .group-departures-rail > .group-departure-card,
+  html body #upcoming-packages .group-departures-rail .group-departure-card.winter-spiti-featured{
+    border:0!important;
+    border-width:0!important;
+    border-color:transparent!important;
+    outline:0!important;
+    box-shadow:none!important;
+    -webkit-box-shadow:none!important;
+    filter:none!important;
+    -webkit-filter:none!important;
+    background-clip:padding-box!important;
+  }
+  html body #upcoming-packages .group-departures-rail > .group-departure-card::before,
+  html body #upcoming-packages .group-departures-rail > .group-departure-card::after,
+  html body #upcoming-packages .group-departure-card.winter-spiti-featured::before,
+  html body #upcoming-packages .group-departure-card.winter-spiti-featured::after{
+    content:none!important;
+    display:none!important;
+    border:0!important;
+    outline:0!important;
+    box-shadow:none!important;
+  }
+}
+</style>
+<style id="mobile-upcoming-card-border-hard-override">
+@media (max-width:760px){
+  html body section#upcoming-packages #groupDeparturesCarousel,
+  html body section#upcoming-packages #groupDeparturesCarousel > article.group-departure-card,
+  html body section#upcoming-packages #groupDeparturesCarousel article.group-departure-card,
+  html body section#upcoming-packages .group-departure-card.winter-spiti-featured{
+    border:0!important;
+    border-style:none!important;
+    border-width:0!important;
+    outline:none!important;
+    box-shadow:none!important;
+    -webkit-box-shadow:none!important;
+    filter:none!important;
+    background-clip:padding-box!important;
+  }
+  html body section#upcoming-packages #groupDeparturesCarousel > article.group-departure-card::before,
+  html body section#upcoming-packages #groupDeparturesCarousel > article.group-departure-card::after,
+  html body section#upcoming-packages #groupDeparturesCarousel article.group-departure-card::before,
+  html body section#upcoming-packages #groupDeparturesCarousel article.group-departure-card::after{
+    content:none!important;
+    display:none!important;
+    border:0!important;
+    outline:0!important;
+    box-shadow:none!important;
+  }
 }
 </style>
 </head>
