@@ -92,3 +92,17 @@
     -webkit-text-fill-color:#000!important;
   }
 }
+
+
+/* Equal vertical spacing between the seat progress bar and both promotion CTAs. */
+@media(max-width:760px){
+  html body #home.hero .mobile-next-departure .mobile-departure-track{
+    margin-bottom:12px!important;
+  }
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta{
+    margin-top:0!important;
+  }
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta + a.mobile-departure-cta{
+    margin-top:12px!important;
+  }
+}
