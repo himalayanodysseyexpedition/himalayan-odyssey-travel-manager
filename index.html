@@ -6034,5 +6034,90 @@ html body .section-title h2::after{
 }
 </style>
 
+
+<!-- PROMOTIONAL DEPARTURE: SCROLLABLE ITINERARY POPUP -->
+<style id="promo-itinerary-modal-styles">
+#promo-itinerary-modal{position:fixed;inset:0;z-index:10050;display:none;align-items:center;justify-content:center;padding:clamp(12px,3vw,30px);background:rgba(5,12,20,.78);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+#promo-itinerary-modal.is-open{display:flex}
+#promo-itinerary-modal .promo-itinerary-dialog{position:relative;width:min(1080px,100%);max-height:min(88vh,900px);display:flex;flex-direction:column;overflow:hidden;background:#f7f9fb;color:#101820;border:1px solid rgba(255,255,255,.45);border-radius:20px;box-shadow:0 28px 90px rgba(0,0,0,.38)}
+#promo-itinerary-modal .promo-itinerary-head{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 24px;background:#101820;color:#fff;border-bottom:1px solid rgba(255,255,255,.12)}
+#promo-itinerary-modal .promo-itinerary-head small{display:block;margin-bottom:4px;color:#b9d2e3;font-size:10px;font-weight:700;letter-spacing:2px}
+#promo-itinerary-modal .promo-itinerary-head h2{margin:0;color:#fff;font-size:clamp(21px,3vw,30px);line-height:1.15}
+#promo-itinerary-modal .promo-itinerary-close{flex:0 0 42px;width:42px;height:42px;border:1px solid rgba(255,255,255,.35);border-radius:50%;background:rgba(255,255,255,.1);color:#fff;font-size:26px;line-height:1;cursor:pointer}
+#promo-itinerary-modal .promo-itinerary-scroll{min-height:150px;overflow:auto;overscroll-behavior:contain;padding:22px;scrollbar-gutter:stable}
+#promo-itinerary-modal .promo-itinerary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+#promo-itinerary-modal .promo-itinerary-grid>.itinerary-slide{min-width:0;opacity:1!important;transform:none!important;animation:none!important}
+#promo-itinerary-modal .promo-itinerary-grid .card{height:100%;background:#fff;border:1px solid #dbe3e9;border-radius:14px;overflow:hidden}
+#promo-itinerary-modal .promo-itinerary-grid .card-body{padding:18px}
+#promo-itinerary-modal .promo-itinerary-empty{margin:0;padding:28px 12px;text-align:center;color:#4b5c68}
+body.promo-itinerary-modal-open{overflow:hidden!important}
+@media(max-width:650px){
+ #promo-itinerary-modal{padding:8px;align-items:flex-end}
+ #promo-itinerary-modal .promo-itinerary-dialog{max-height:91vh;border-radius:18px 18px 10px 10px}
+ #promo-itinerary-modal .promo-itinerary-head{padding:16px}
+ #promo-itinerary-modal .promo-itinerary-scroll{padding:14px}
+ #promo-itinerary-modal .promo-itinerary-grid{grid-template-columns:1fr;gap:14px}
+}
+@media(prefers-reduced-motion:no-preference){
+ #promo-itinerary-modal.is-open .promo-itinerary-dialog{animation:promoItineraryEnter .22s ease-out both}
+ @keyframes promoItineraryEnter{from{opacity:0;transform:translateY(14px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
+}
+</style>
+<div id="promo-itinerary-modal" aria-hidden="true">
+ <section class="promo-itinerary-dialog" role="dialog" aria-modal="true" aria-labelledby="promo-itinerary-title">
+  <header class="promo-itinerary-head">
+   <div><small>WINTER SPITI EXPEDITION</small><h2 id="promo-itinerary-title">Explore Tour Itineraries</h2></div>
+   <button class="promo-itinerary-close" type="button" aria-label="Close itineraries popup">×</button>
+  </header>
+  <div class="promo-itinerary-scroll" tabindex="0"><div class="promo-itinerary-grid" id="promo-itinerary-grid"><p class="promo-itinerary-empty">Loading published itineraries…</p></div></div>
+ </section>
+</div>
+<script id="promo-itinerary-modal-behavior">
+(() => {
+ const modal=document.getElementById("promo-itinerary-modal");
+ const grid=document.getElementById("promo-itinerary-grid");
+ const rail=document.getElementById("itineraryList");
+ const trigger=document.querySelector("#home .mobile-next-departure .mobile-departure-itinerary");
+ if(!modal||!grid||!trigger)return;
+ const closeButton=modal.querySelector(".promo-itinerary-close");
+ let lastFocus=null;
+ const refresh=()=>{
+   const cards=rail?[...rail.querySelectorAll(".itinerary-slide")]:[];
+   if(!cards.length){
+     grid.innerHTML='<p class="promo-itinerary-empty">Published itineraries are not available right now. Please try again shortly.</p>';
+     return;
+   }
+   grid.replaceChildren(...cards.map(card=>{
+     const copy=card.cloneNode(true);
+     copy.classList.remove("reveal","arctic-reveal","arctic-in");
+     copy.querySelectorAll("[id]").forEach(node=>node.removeAttribute("id"));
+     return copy;
+   }));
+ };
+ const open=()=>{
+   lastFocus=document.activeElement;
+   refresh();
+   modal.classList.add("is-open");
+   modal.setAttribute("aria-hidden","false");
+   document.body.classList.add("promo-itinerary-modal-open");
+   closeButton.focus();
+ };
+ const close=()=>{
+   modal.classList.remove("is-open");
+   modal.setAttribute("aria-hidden","true");
+   document.body.classList.remove("promo-itinerary-modal-open");
+   if(lastFocus&&typeof lastFocus.focus==="function")lastFocus.focus();
+ };
+ trigger.addEventListener("click",event=>{event.preventDefault();open()});
+ closeButton.addEventListener("click",close);
+ modal.addEventListener("click",event=>{if(event.target===modal)close()});
+ document.addEventListener("keydown",event=>{
+   if(!modal.classList.contains("is-open"))return;
+   if(event.key==="Escape"){event.preventDefault();close()}
+ });
+ if(rail)new MutationObserver(()=>{if(modal.classList.contains("is-open"))refresh()}).observe(rail,{childList:true,subtree:true});
+})();
+</script>
+
 </body>
 </html>
