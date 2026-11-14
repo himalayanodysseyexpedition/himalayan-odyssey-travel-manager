@@ -1445,6 +1445,33 @@ html body #home.hero .hero-build-cta-wrap > .hero-build-cta:active{
 #upcoming-packages .group-departures-head .section-title h2:after{margin-left:auto!important;margin-right:auto!important}
 #upcoming-packages .group-departures-head .intro{max-width:680px;margin:0 auto 28px!important;text-align:center!important}
 </style>
+<style id="winter-spiti-group-card-theme">
+/* Featured Winter Spiti departure: black premium card on desktop and mobile */
+html body #upcoming-packages .group-departure-card.winter-spiti-featured{
+  background:#050607!important;background-image:linear-gradient(155deg,#11161c 0%,#050607 58%,#090c10 100%)!important;
+  color:#f5f7fa!important;border:1px solid rgba(210,228,241,.28)!important;border-radius:20px!important;
+  box-shadow:0 18px 44px rgba(0,0,0,.22)!important;font-family:Inter,"Helvetica Neue",Arial,sans-serif!important;
+}
+html body #upcoming-packages .winter-spiti-featured .group-departure-body{background:transparent!important;color:#f5f7fa!important;padding:22px!important}
+html body #upcoming-packages .winter-spiti-featured .group-departure-body small{color:#a9d8f2!important;font:700 10px/1.4 Inter,"Helvetica Neue",Arial,sans-serif!important;letter-spacing:2px!important}
+html body #upcoming-packages .winter-spiti-featured .group-departure-body h3{color:#fff!important;font:650 clamp(23px,2vw,28px)/1.16 Inter,"Helvetica Neue",Arial,sans-serif!important;letter-spacing:-.035em!important;margin:9px 0 10px!important}
+html body #upcoming-packages .winter-spiti-featured .group-departure-date{color:#c1cbd4!important;font:500 12px/1.6 Inter,"Helvetica Neue",Arial,sans-serif!important;letter-spacing:.025em!important}
+html body #upcoming-packages .winter-spiti-featured .group-departure-meta{color:#c7d0d8!important;border-top:1px solid rgba(255,255,255,.18)!important;border-bottom:1px solid rgba(255,255,255,.18)!important;font:500 11px/1.5 Inter,"Helvetica Neue",Arial,sans-serif!important}
+html body #upcoming-packages .winter-spiti-featured .group-departure-meta strong{color:#fff!important;font-weight:700!important}
+html body #upcoming-packages .winter-spiti-featured .group-occupancy-label{color:#c7d0d8!important;font:500 11px/1.5 Inter,"Helvetica Neue",Arial,sans-serif!important}
+html body #upcoming-packages .winter-spiti-featured .group-occupancy-label strong{color:#fff!important;font-weight:700!important}
+html body #upcoming-packages .winter-spiti-featured .group-occupancy-track{background:#303943!important}
+html body #upcoming-packages .winter-spiti-featured .group-occupancy-track span{background:linear-gradient(90deg,#d9eaf5,#8fb9d2)!important}
+html body #upcoming-packages .winter-spiti-featured .group-departure-highlights{color:#b8c2cb!important;font:400 12px/1.75 Inter,"Helvetica Neue",Arial,sans-serif!important}
+html body #upcoming-packages .winter-spiti-featured .group-departure-status{background:#fff!important;color:#080a0d!important;font:800 9px/1.3 Inter,"Helvetica Neue",Arial,sans-serif!important;letter-spacing:1.2px!important}
+html body #upcoming-packages .winter-spiti-featured .group-departure-cta{background:#fff!important;color:#080a0d!important;border:1px solid #fff!important;font:800 10px/1.35 Inter,"Helvetica Neue",Arial,sans-serif!important;letter-spacing:1.1px!important}
+html body #upcoming-packages .winter-spiti-featured .group-departure-cta:hover{background:#dcecf6!important;color:#080a0d!important;border-color:#dcecf6!important}
+@media(max-width:760px){
+ html body #upcoming-packages .group-departure-card.winter-spiti-featured{border-radius:18px!important}
+ html body #upcoming-packages .winter-spiti-featured .group-departure-body{padding:19px!important}
+ html body #upcoming-packages .winter-spiti-featured .group-departure-body h3{font-size:24px!important}
+}
+</style>
 </head>
 
 <body>
@@ -2582,7 +2609,8 @@ loadHotels();
    const joined=Number(item.joined_count||0),capacity=Math.max(1,Number(item.max_travellers||1)),pct=Math.min(100,Math.round(joined/capacity*100)),full=item.status==="full"||joined>=capacity;
    const msg=encodeURIComponent("Hello Himalayan Odyssey Expedition, I am interested in joining the "+item.title+" to "+item.destination+" departing on "+date(item.start_date)+". Please share booking details.");
    const image=item.image_url||"https://himalayanexpedition.co.in/spiti.jpg";
-   return '<article class="group-departure-card"><div class="group-departure-photo"><img src="'+safe(image)+'" alt="'+safe(item.destination)+' group tour" loading="lazy" decoding="async"><span class="group-departure-status">'+(full?"GROUP FULL":"OPEN FOR BOOKINGS")+'</span></div><div class="group-departure-body"><small>'+safe(item.destination)+'</small><h3>'+safe(item.title)+'</h3><div class="group-departure-date">'+date(item.start_date)+(item.end_date?" – "+date(item.end_date):"")+(item.duration?" · "+safe(item.duration):"")+'</div><div class="group-departure-meta"><span>Package price</span><strong>'+money(item.price_per_person)+' / person</strong></div><div class="group-occupancy"><div class="group-occupancy-label"><span>Travellers joined</span><strong>'+joined+' / '+capacity+'</strong></div><div class="group-occupancy-track"><span style="width:'+pct+'%"></span></div></div><p class="group-departure-highlights">'+safe(item.highlights||"A memorable Himalayan group journey with local support.")+'</p><a class="group-departure-cta" href="/build-your-trip/?topic='+encodeURIComponent("Group departure: "+item.title+" · "+date(item.start_date))+'">'+(full?"Ask About Next Departure":"Enquire / Book This Group")+'</a></div></article>';
+   const featuredWinterSpiti=/winter\s+spiti/i.test(item.title||"");
+   return '<article class="group-departure-card'+(featuredWinterSpiti?" winter-spiti-featured":"")+'"><div class="group-departure-photo"><img src="'+safe(image)+'" alt="'+safe(item.destination)+' group tour" loading="lazy" decoding="async"><span class="group-departure-status">'+(full?"GROUP FULL":"OPEN FOR BOOKINGS")+'</span></div><div class="group-departure-body"><small>'+safe(item.destination)+'</small><h3>'+safe(item.title)+'</h3><div class="group-departure-date">'+date(item.start_date)+(item.end_date?" – "+date(item.end_date):"")+(item.duration?" · "+safe(item.duration):"")+'</div><div class="group-departure-meta"><span>Package price</span><strong>'+money(item.price_per_person)+' / person</strong></div><div class="group-occupancy"><div class="group-occupancy-label"><span>Travellers joined</span><strong>'+joined+' / '+capacity+'</strong></div><div class="group-occupancy-track"><span style="width:'+pct+'%"></span></div></div><p class="group-departure-highlights">'+safe(item.highlights||"A memorable Himalayan group journey with local support.")+'</p><a class="group-departure-cta" href="/build-your-trip/?topic='+encodeURIComponent("Group departure: "+item.title+" · "+date(item.start_date))+'">'+(full?"Ask About Next Departure":"Enquire / Book This Group")+'</a></div></article>';
   }).join("");
   const count=document.getElementById("groupDeparturesCount");
   const step=()=>{const card=rail.querySelector(".group-departure-card");return card?card.getBoundingClientRect().width+parseFloat(getComputedStyle(rail).gap||0):280;};
