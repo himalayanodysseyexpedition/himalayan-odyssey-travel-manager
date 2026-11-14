@@ -1756,6 +1756,33 @@ body.guest-itinerary-popup-open{overflow:hidden}
   }
 }
 </style>
+<style id="mobile-upcoming-card-border-hard-override">
+@media (max-width:760px){
+  html body section#upcoming-packages #groupDeparturesCarousel,
+  html body section#upcoming-packages #groupDeparturesCarousel > article.group-departure-card,
+  html body section#upcoming-packages #groupDeparturesCarousel article.group-departure-card,
+  html body section#upcoming-packages .group-departure-card.winter-spiti-featured{
+    border:0!important;
+    border-style:none!important;
+    border-width:0!important;
+    outline:none!important;
+    box-shadow:none!important;
+    -webkit-box-shadow:none!important;
+    filter:none!important;
+    background-clip:padding-box!important;
+  }
+  html body section#upcoming-packages #groupDeparturesCarousel > article.group-departure-card::before,
+  html body section#upcoming-packages #groupDeparturesCarousel > article.group-departure-card::after,
+  html body section#upcoming-packages #groupDeparturesCarousel article.group-departure-card::before,
+  html body section#upcoming-packages #groupDeparturesCarousel article.group-departure-card::after{
+    content:none!important;
+    display:none!important;
+    border:0!important;
+    outline:0!important;
+    box-shadow:none!important;
+  }
+}
+</style>
 </head>
 
 <body>
