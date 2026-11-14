@@ -410,3 +410,15 @@
   #home.hero .hero-service-icon span{font-size:8px!important;letter-spacing:.25px!important}
   section.content{padding-inline:15px!important}
 }
+
+
+/* MOBILE ONLY — keep the Instagram handle legible on the dark Instagram panel. */
+@media(max-width:760px){
+  html body #instagram .instagram-content h3{
+    display:block!important;
+    visibility:visible!important;
+    opacity:1!important;
+    color:#fff!important;
+    -webkit-text-fill-color:#fff!important;
+  }
+}
