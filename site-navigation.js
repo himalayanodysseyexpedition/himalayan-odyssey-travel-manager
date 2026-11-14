@@ -49,11 +49,16 @@
       const link = document.createElement("link");
       link.id = "sitewide-hamburger-stylesheet";
       link.rel = "stylesheet";
-      link.href = "/hamburger-header-final.css?v=14";
+      link.href = "/hamburger-header-final.css?v=15";
       document.head.appendChild(link);
     }
 
     const applyOpenStyles = () => {
+      header.style.setProperty("background", "#000", "important");
+      header.style.setProperty("background-color", "#000", "important");
+      header.style.setProperty("background-image", "none", "important");
+      header.style.setProperty("color", "#fff", "important");
+      header.style.setProperty("border-bottom", "1px solid rgba(255,255,255,.14)", "important");
       header.style.setProperty("position", "relative", "important");
       header.style.setProperty("overflow", "visible", "important");
       header.style.setProperty("z-index", "1400", "important");
@@ -89,7 +94,11 @@
         a.style.setProperty("padding", "0 14px", "important");
         a.style.setProperty("color", "#fff", "important");
         a.style.setProperty("-webkit-text-fill-color", "#fff", "important");
-        a.style.setProperty("background", "transparent", "important");
+        a.style.setProperty("background", "rgba(255,255,255,.075)", "important");
+        a.style.setProperty("border-radius", "999px", "important");
+        a.style.setProperty("border", "1px solid rgba(255,255,255,.16)", "important");
+        a.style.setProperty("backdrop-filter", "blur(12px)", "important");
+        a.style.setProperty("-webkit-backdrop-filter", "blur(12px)", "important");
         a.style.setProperty("text-decoration", "none", "important");
         a.style.setProperty("border", "0", "important");
       });
@@ -102,8 +111,13 @@
       nav.setAttribute("aria-hidden", "true");
       ["display","visibility","opacity","pointer-events","position","top","right","left","z-index","width","max-height","overflow-y","flex-direction","align-items","gap","padding","background","background-color","border","border-radius","box-shadow","backdrop-filter","-webkit-backdrop-filter"].forEach(p => nav.style.removeProperty(p));
       nav.querySelectorAll("a").forEach(a => {
-        ["display","align-items","min-height","padding","color","-webkit-text-fill-color","background","text-decoration","border"].forEach(p => a.style.removeProperty(p));
+        ["display","align-items","min-height","padding","color","-webkit-text-fill-color","background","text-decoration","border","border-radius","backdrop-filter","-webkit-backdrop-filter"].forEach(p => a.style.removeProperty(p));
       });
+      header.style.removeProperty("background");
+      header.style.removeProperty("background-color");
+      header.style.removeProperty("background-image");
+      header.style.removeProperty("color");
+      header.style.removeProperty("border-bottom");
       header.style.removeProperty("position");
       header.style.removeProperty("overflow");
       header.style.removeProperty("z-index");
