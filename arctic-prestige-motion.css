@@ -311,3 +311,28 @@ a:focus-visible,button:focus-visible{outline:2px solid #78afd1!important;outline
     color:rgba(220,234,244,.72)!important;
   }
 }
+
+
+/* Replace the removed Plan Your Trip header action with the live Packages link. */
+@media screen and (max-width:760px){
+  html body>header.sitewide-header .header-cta,
+  html body>header .header-cta,
+  html body>header a[aria-label="Browse tour packages"]{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
+    flex:0 0 auto!important;
+    min-height:38px!important;
+    padding:8px 12px!important;
+    margin:0!important;
+    white-space:nowrap!important;
+    font-size:9px!important;
+    letter-spacing:.07em!important;
+    border-radius:999px!important;
+  }
+  html body>header.sitewide-header .header-inner{
+    gap:7px!important;
+  }
+}
