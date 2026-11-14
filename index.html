@@ -6066,7 +6066,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 <div id="promo-itinerary-modal" aria-hidden="true">
  <section class="promo-itinerary-dialog" role="dialog" aria-modal="true" aria-labelledby="promo-itinerary-title">
   <header class="promo-itinerary-head">
-   <div><small>WINTER SPITI EXPEDITION</small><h2 id="promo-itinerary-title">Explore Tour Itineraries</h2></div>
+   <div><small>WINTER SPITI EXPEDITION</small><h2 id="promo-itinerary-title">This Departure’s Itinerary</h2></div>
    <button class="promo-itinerary-close" type="button" aria-label="Close itineraries popup">×</button>
   </header>
   <div class="promo-itinerary-scroll" tabindex="0"><div class="promo-itinerary-grid" id="promo-itinerary-grid"><p class="promo-itinerary-empty">Loading published itineraries…</p></div></div>
@@ -6083,16 +6083,18 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
  let lastFocus=null;
  const refresh=()=>{
    const cards=rail?[...rail.querySelectorAll(".itinerary-slide")]:[];
-   if(!cards.length){
-     grid.innerHTML='<p class="promo-itinerary-empty">Published itineraries are not available right now. Please try again shortly.</p>';
+   const matching=cards.find(card=>{
+     const title=(card.querySelector("h3")?.textContent||card.textContent||"").toLowerCase();
+     return title.includes("winter")&&title.includes("spiti");
+   });
+   if(!matching){
+     grid.innerHTML='<p class="promo-itinerary-empty">The Winter Spiti departure itinerary is not available right now. Please contact our team for details.</p>';
      return;
    }
-   grid.replaceChildren(...cards.map(card=>{
-     const copy=card.cloneNode(true);
-     copy.classList.remove("reveal","arctic-reveal","arctic-in");
-     copy.querySelectorAll("[id]").forEach(node=>node.removeAttribute("id"));
-     return copy;
-   }));
+   const copy=matching.cloneNode(true);
+   copy.classList.remove("reveal","arctic-reveal","arctic-in");
+   copy.querySelectorAll("[id]").forEach(node=>node.removeAttribute("id"));
+   grid.replaceChildren(copy);
  };
  const open=()=>{
    lastFocus=document.activeElement;
