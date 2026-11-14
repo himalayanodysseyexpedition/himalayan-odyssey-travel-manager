@@ -9,7 +9,7 @@
 
     const finalCss = document.createElement("link");
     finalCss.rel = "stylesheet";
-    finalCss.href = "/hamburger-header-final.css?v=10";
+    finalCss.href = "/hamburger-header-final.css?v=11";
     document.head.appendChild(finalCss);
 
     nav.classList.add("glass-nav");
