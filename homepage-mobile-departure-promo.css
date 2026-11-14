@@ -165,3 +165,24 @@
 }
 @keyframes mobileDepartureTibetanFlow{from{background-position:100% 0}to{background-position:-160% 0}}
 @media(prefers-reduced-motion:reduce){html body #home.hero .mobile-next-departure,html body #home.hero .mobile-next-departure:before,html body #home.hero .mobile-departure-live-dot,html body #home.hero .mobile-departure-track span{animation:none!important}}
+
+
+/* Desktop hero promotion: both departure buttons use white backgrounds with black text. */
+@media(min-width:761px){
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta,
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta:visited,
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta:hover,
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta:focus,
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta:active{
+    background:#fff!important;
+    background-image:none!important;
+    color:#000!important;
+    -webkit-text-fill-color:#000!important;
+    border:1px solid #fff!important;
+    text-shadow:none!important;
+  }
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta span{
+    color:#000!important;
+    -webkit-text-fill-color:#000!important;
+  }
+}
