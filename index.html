@@ -6562,24 +6562,46 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 </style>
 
 
-<style id="mobile-service-card-typography-v1">
-/* Typography hierarchy for package, itinerary, vehicle and property cards — mobile only. */
+<style id="mobile-service-card-typography-v2">
+/* Apply the requested typography to the actual rendered card classes on mobile. */
 @media screen and (max-width:760px){
-  html body :is(#packageList,#itineraryList,#cabList,#galleryList) :is(.card-body,.package-slide-content,.itinerary-slide-content) h3,
-  html body :is(#packageList,#itineraryList,#cabList,#galleryList) > article :is(h3,.card-title){
+  html body #packages #packageList .package-slide .card-body h3,
+  html body #itineraries #itineraryList .itinerary-slide .card-body h3,
+  html body #cabs #cabList .cab-card .card-body h3,
+  html body #gallery #galleryList .hotel-card .card-body h3{
     font-weight:750!important;
   }
-  html body :is(#packageList,#itineraryList,#cabList,#galleryList) :is(.card-body,.package-slide-content,.itinerary-slide-content) p,
-  html body :is(#packageList,#itineraryList,#cabList,#galleryList) > article p{
+
+  html body #packages #packageList .package-slide .card-body > p,
+  html body #itineraries #itineraryList .itinerary-slide .card-body > p,
+  html body #cabs #cabList .cab-card .card-body > p,
+  html body #gallery #galleryList .hotel-card .card-body > p{
     font-weight:400!important;
   }
-  html body :is(#packageList,#itineraryList,#cabList,#galleryList) :is(.price,.package-price,.rate,.amount){
+
+  html body #packages #packageList .package-slide .card-body > p b,
+  html body #itineraries #itineraryList .itinerary-slide .card-body > p b,
+  html body #cabs #cabList .cab-card .card-body > p b,
+  html body #gallery #galleryList .hotel-card .card-body > p b{
     font-weight:650!important;
   }
-  html body :is(#packageList,#itineraryList,#cabList,#galleryList) :is(.price,.package-price,.rate,.amount) small{
+
+  html body #packages #packageList .package-slide .card-body .price,
+  html body #cabs #cabList .cab-card .card-body .price,
+  html body #itineraries #itineraryList .itinerary-slide .card-body .itinerary-meta,
+  html body #gallery #galleryList .hotel-card .card-body .hotel-location{
+    font-weight:650!important;
+  }
+
+  html body #packages #packageList .package-slide .card-body .price small,
+  html body #cabs #cabList .cab-card .card-body .price small{
     font-weight:400!important;
   }
-  html body :is(#packageList,#itineraryList,#cabList,#galleryList) :is(.btn,.button,a[class*="btn"],a[class*="button"],button){
+
+  html body #packages #packageList .package-slide .card-body .package-card-actions .btn,
+  html body #itineraries #itineraryList .itinerary-slide .card-body .itinerary-card-actions .btn,
+  html body #cabs #cabList .cab-card .card-body .btn,
+  html body #gallery #galleryList .hotel-card .card-body .btn{
     font-weight:700!important;
     text-transform:uppercase!important;
     letter-spacing:.09em!important;
