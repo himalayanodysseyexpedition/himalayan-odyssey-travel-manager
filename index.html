@@ -6468,7 +6468,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
    const doc=frame.contentDocument;
    if(!doc)return;
    const injected=doc.createElement("style");
-   injected.textContent="header.sitewide-header,main>.back,body>footer{display:none!important}main{max-width:100%!important;padding:24px 4% 48px!important}body{background:#f8f6f0!important}#itineraryContent{max-width:1000px;margin:0 auto}";
+   injected.textContent="header.sitewide-header,main>.back,body>footer{display:none!important}main{max-width:100%!important;padding:24px 4% 48px!important}body{background:#f8f6f0!important}#itineraryContent{max-width:1000px;margin:0 auto}#itineraryContent .journey-heading{background:#000!important;color:#fff!important;padding:24px 26px!important;border:0!important;border-radius:12px!important;margin:0 0 26px!important}#itineraryContent .journey-heading .eyebrow{color:#fff!important}#itineraryContent .journey-heading h1{color:#fff!important}#itineraryContent .journey-heading .hero-destination{display:none!important}#itineraryContent .cta h2{color:#fff!important}";
    doc.head.appendChild(injected);
   }catch(error){console.warn("Could not compact itinerary popup view",error)}
  });
