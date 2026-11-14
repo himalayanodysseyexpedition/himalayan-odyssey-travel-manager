@@ -548,3 +548,27 @@
     display:none!important;
   }
 }
+
+
+/* MOBILE FLOATING NAV — keep the existing pill design; show Home, Explore, Packages and WhatsApp only. */
+@media screen and (max-width:760px){
+  html body #footerContactBar.footer-contact-bar{
+    display:flex!important;
+    justify-content:space-between!important;
+    gap:clamp(2px,.8vw,9px)!important;
+  }
+  html body #footerContactBar .quick-nav-home{
+    display:flex!important;
+  }
+  html body #footerContactBar .quick-nav-item:not(.quick-nav-home):not(.quick-nav-packages):not(.quick-nav-whatsapp):not([aria-label="Explore destinations"]){
+    display:none!important;
+  }
+  html body #footerContactBar .quick-nav-item{
+    flex:1 1 0!important;
+  }
+}
+@media screen and (min-width:761px){
+  html body #footerContactBar .quick-nav-home{
+    display:none!important;
+  }
+}
