@@ -2,6 +2,30 @@
 (() => {
   "use strict";
 
+  // A real refresh should reopen the page at its header, not restore a stale scroll offset.
+  (() => {
+    let type = "";
+    try {
+      const entry = performance.getEntriesByType("navigation")[0];
+      type = entry ? entry.type : "";
+      if (!type && performance.navigation) type = performance.navigation.type === 1 ? "reload" : "";
+    } catch (_) {}
+    if (type !== "reload") return;
+    try { history.scrollRestoration = "manual"; } catch (_) {}
+    const reset = () => {
+      window.scrollTo(0, 0);
+      requestAnimationFrame(() => window.scrollTo(0, 0));
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        try { history.scrollRestoration = "auto"; } catch (_) {}
+      }, 200);
+    };
+    window.addEventListener("pageshow", reset, { once: true });
+    if (document.readyState === "complete") reset();
+    else window.addEventListener("load", reset, { once: true });
+  })();
+
+
   const MENU_ITEMS = [
     ["/destinations/", "Destinations"],
     ["/#cabs", "Cabs"],
