@@ -3,7 +3,7 @@
   "use strict";
   const init = () => {
     const header = document.querySelector("body>header");
-    const nav = header?.querySelector("nav.glass-nav");
+    const nav = header?.querySelector("nav.glass-nav, nav.site-nav");
     const inner = header?.querySelector(".header-inner");
     if (!header || !nav || !inner) return;
 
@@ -12,7 +12,9 @@
     finalCss.href = "/hamburger-header-final.css?v=10";
     document.head.appendChild(finalCss);
 
-    nav.id = nav.id || "siteMainNavigation";
+    nav.classList.add("glass-nav");
+    nav.id = "mobileMainNavigation";
+    nav.innerHTML = `<a href="/destinations/"><span>Destinations</span></a><a href="/travel-guides/"><span>Travel Guides</span></a><a href="/#cabs"><span>Vacation Cabs</span></a><a href="/#gallery"><span>Hotels &amp; Properties</span></a><a href="/suppliers/"><span>List Your Vacation Property</span></a>`;
     let button = header.querySelector(".header-menu-toggle");
     if (!button) {
       button = document.createElement("button");
