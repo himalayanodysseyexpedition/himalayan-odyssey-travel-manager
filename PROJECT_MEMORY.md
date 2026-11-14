@@ -82,3 +82,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Only `index.html` was changed for the implementation; a final scoped style block was appended after existing homepage styles to ensure precedence.
 - PR #347 merged on 2026-11-14 as commit `e35ea39ebdec0cfea13379811a3053ca44cdeb0d`.
 - Static site quality check for the implementation commit `67968ba58b5c4735d954c29f0b2aa60ba6f498cd` completed successfully (run #789). GitHub Pages deployment for the merge commit was queued at the time this entry was written; live visual verification remains pending.
+
+
+## 2026-11-14 — Remove white inset frame from homepage card buttons
+- User clarified that the pill-shaped CTA buttons in Our Travel Packages, Tour Itineraries, Vehicles & Cabs, and Hotels & Properties must not have a white rectangular inset border.
+- Root cause identified in the existing global CSS: `.btn:after` creates an inset pseudo-element with a white/ice border. The previous button reset removed the real border but did not disable this pseudo-element.
+- Added narrowly scoped pseudo-element resets for buttons/links inside the four requested homepage card groups. Existing pill radius, button fill, text styling, hover colours and click behaviour are preserved.
+- Implementation is on branch `fix/homepage-card-button-white-inset-border`; PR and deployment verification pending.
