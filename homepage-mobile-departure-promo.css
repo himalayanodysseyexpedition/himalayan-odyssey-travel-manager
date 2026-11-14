@@ -106,3 +106,16 @@
     margin-top:12px!important;
   }
 }
+
+
+/* Match the Spiti word exactly to the Winter and Expedition heading typography. */
+@media(max-width:760px){
+  html body #home.hero .mobile-next-departure h2 em{
+    font-family:inherit!important;
+    font-size:inherit!important;
+    font-weight:inherit!important;
+    font-style:normal!important;
+    line-height:inherit!important;
+    letter-spacing:inherit!important;
+  }
+}
