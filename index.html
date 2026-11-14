@@ -1572,6 +1572,47 @@ html body #upcoming-packages .group-departure-card.winter-spiti-featured a.group
 }
 </style>
 
+
+<style id="desktop-tour-itinerary-card-button-alignment-v1">
+/* Desktop only: align both itinerary actions consistently across every card. */
+@media screen and (min-width: 761px) {
+  html body #itineraryList > article.itinerary-slide {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+  }
+  html body #itineraryList > article.itinerary-slide > .card-body {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  html body #itineraryList > article.itinerary-slide .itinerary-card-actions {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    width: 100% !important;
+    margin-top: auto !important;
+    padding-top: 18px !important;
+  }
+  html body #itineraryList > article.itinerary-slide .itinerary-card-actions > a.btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 52px !important;
+    height: 52px !important;
+    margin: 0 !important;
+    padding: 8px 10px !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    line-height: 1.25 !important;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -2199,7 +2240,7 @@ async function loadItineraries() {
       const cover=item.cover_image||(gallery[0]&&gallery[0].url)||"";
       const pageUrl="/itinerary.html?id="+encodeURIComponent(item.id);
       const coverHtml=cover?'<img src="'+safe(cover)+'" alt="'+safe(item.title||"Himalayan tour")+'" loading="lazy" decoding="async">':'<div class="itinerary-cover-placeholder"><span>✧</span><b>HIMALAYAN ODYSSEY EXPEDITION</b><small>CURATED HIMALAYAN JOURNEY</small></div>';
-      return '<article class="card package-slide itinerary-slide reveal"><a class="itinerary-cover-link" href="'+safe(pageUrl)+'"><div class="itinerary-cover">'+coverHtml+'</div></a><div class="card-body"><h3>'+safe(item.title||"Himalayan Tour")+'</h3><p>'+safe(item.destination||"Himalayan Tour")+'</p>'+(duration?'<p class="itinerary-meta">'+safe(duration)+'</p>':"")+(item.price!=null&&item.price!==""?'<div class="price">'+rupees(item.price)+' <small>per person</small></div>':"")+'<a class="btn" href="'+safe(pageUrl)+'">Explore Full Itinerary</a><a class="btn" href="/?itinerary='+encodeURIComponent(item.id)+'&topic='+encodeURIComponent("Itinerary enquiry: "+(item.title||"Himalayan tour"))+'/build-your-trip/">Enquire About This Itinerary</a></div></article>';
+      return '<article class="card package-slide itinerary-slide reveal"><a class="itinerary-cover-link" href="'+safe(pageUrl)+'"><div class="itinerary-cover">'+coverHtml+'</div></a><div class="card-body"><h3>'+safe(item.title||"Himalayan Tour")+'</h3><p>'+safe(item.destination||"Himalayan Tour")+'</p>'+(duration?'<p class="itinerary-meta">'+safe(duration)+'</p>':"")+(item.price!=null&&item.price!==""?'<div class="price">'+rupees(item.price)+' <small>per person</small></div>':"")+'<div class="itinerary-card-actions"><a class="btn" href="'+safe(pageUrl)+'">Explore Full Itinerary</a><a class="btn" href="/?itinerary='+encodeURIComponent(item.id)+'&topic='+encodeURIComponent("Itinerary enquiry: "+(item.title||"Himalayan tour"))+'/build-your-trip/">Enquire About This Itinerary</a></div></div></article>';
     }).join("");
     observeReveals();
   }catch(error){console.error("Itinerary loading error:",error);showLoadingError(list,"Itineraries Temporarily Unavailable","Please contact us on WhatsApp for current tour details.","Please share your tour itineraries.");}
