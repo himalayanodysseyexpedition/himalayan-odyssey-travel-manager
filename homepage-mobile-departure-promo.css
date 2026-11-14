@@ -186,3 +186,14 @@
     -webkit-text-fill-color:#000!important;
   }
 }
+
+
+/* Remove the pale-blue outline treatment behind the promotion date and duration on both layouts. */
+html body #home.hero .mobile-next-departure .mobile-departure-date,
+html body #home.hero .mobile-next-departure .mobile-departure-facts span:first-child{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  background-image:none!important;
+}
