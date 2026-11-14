@@ -66,10 +66,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Never claim tests, browser checks or deployment succeeded unless they were actually performed.
 
 
-## 2026-11-14 — Premium public-site design layer (PR in progress)
+## 2026-11-14 — Premium public-site design layer (merged in PR #345)
 - User explicitly requested a separate premium UI/UX improvement across the public website.
 - Added `premium-design-system.css` as a visual-only shared layer: monochrome black/white surfaces, cool ice-blue micro accents, Windows Fluent/Mica-style headers, consistent editorial typography, cards, buttons, forms, responsive spacing and reduced-motion handling.
 - Linked the shared layer from 24 public-facing pages, including homepage, destinations, tour/package/itinerary pages, guides, supplier submission, marketplace and policy pages.
 - Admin dashboards and backend/data workflows were intentionally excluded from this public-site visual pass.
 - No page content, routes, SEO metadata, JavaScript behaviour, Supabase schema/data, bookings, payments, hosting or deployment settings were intentionally changed.
-- Browser/device visual verification and live deployment remain to be checked after merge; do not claim the live site has updated until verified.
+- PR #345 merged as commit `f74241bd04d49817a723e2cd1ba1e510a4e336b9`. The public CSS asset URL was fetched successfully after merge. Full visual browser/device inspection remains unverified.
