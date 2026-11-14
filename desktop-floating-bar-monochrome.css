@@ -1,0 +1,54 @@
+/* Desktop floating navigation: hard monochrome override for both legacy and app docks.
+   Loaded after the homepage's existing styles so earlier blue/ice rules cannot win. */
+@media (min-width:761px){
+  html body #footerContactBar.footer-contact-bar,
+  html body nav.desktop-app-dock{
+    background:#080808!important;
+    background-image:none!important;
+    color:#fff!important;
+    border:1px solid rgba(255,255,255,.82)!important;
+    box-shadow:0 14px 42px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,255,255,.12)!important;
+    -webkit-backdrop-filter:blur(24px)!important;
+    backdrop-filter:blur(24px)!important;
+  }
+  html body #footerContactBar .quick-nav-item,
+  html body nav.desktop-app-dock a{
+    color:#fff!important;
+    -webkit-text-fill-color:#fff!important;
+    background:transparent!important;
+    border-color:transparent!important;
+    text-shadow:none!important;
+  }
+  html body #footerContactBar .quick-nav-item svg,
+  html body nav.desktop-app-dock .dock-icon{
+    color:currentColor!important;
+    stroke:currentColor!important;
+    fill:none!important;
+  }
+  html body #footerContactBar .quick-nav-item[aria-current="page"],
+  html body #footerContactBar .quick-nav-item.active,
+  html body nav.desktop-app-dock a[aria-current="page"],
+  html body nav.desktop-app-dock a.dock-plan{
+    background:#fff!important;
+    color:#000!important;
+    -webkit-text-fill-color:#000!important;
+    border-color:#fff!important;
+  }
+  html body #footerContactBar .quick-nav-item[aria-current="page"] svg,
+  html body #footerContactBar .quick-nav-item.active svg,
+  html body nav.desktop-app-dock a[aria-current="page"] .dock-icon,
+  html body nav.desktop-app-dock a.dock-plan .dock-icon{
+    color:#000!important;stroke:#000!important;
+  }
+  html body #footerContactBar .quick-nav-item:hover,
+  html body nav.desktop-app-dock a:hover,
+  html body nav.desktop-app-dock a:focus-visible{
+    background:#292929!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+  }
+  html body #footerContactBar .quick-nav-whatsapp{
+    background:#fff!important;color:#000!important;-webkit-text-fill-color:#000!important;
+  }
+}
+@media (min-width:761px) and (prefers-reduced-motion:reduce){
+  html body #footerContactBar,html body nav.desktop-app-dock{transition:none!important}
+}
