@@ -16,6 +16,21 @@
     if (!header) return;
 
     const inner = header.querySelector(".header-inner") || header;
+
+    // The old trip-planner destination was removed. Repoint the existing
+    // header CTA to the live packages catalogue on both desktop and mobile.
+    const packagesCta = header.querySelector(
+      ".header-cta, a[aria-label='Plan your trip'], a[aria-label='Plan Your Trip']"
+    );
+    if (packagesCta) {
+      packagesCta.setAttribute("href", "/packages/#packageList");
+      packagesCta.textContent = "Packages";
+      packagesCta.setAttribute("aria-label", "Browse tour packages");
+      packagesCta.setAttribute("title", "Browse tour packages");
+      packagesCta.style.setProperty("display", "inline-flex", "important");
+      packagesCta.style.setProperty("visibility", "visible", "important");
+      packagesCta.style.setProperty("pointer-events", "auto", "important");
+    }
     let nav = inner.querySelector("nav.glass-nav, nav.site-nav, nav[aria-label='Main navigation']");
     if (!nav) {
       nav = document.createElement("nav");
