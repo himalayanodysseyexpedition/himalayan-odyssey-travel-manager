@@ -1501,6 +1501,14 @@ html body #upcoming-packages .group-departure-card.winter-spiti-featured a.group
   -webkit-text-fill-color:#000000!important;
 }
 
+/* Mobile: remove the outer border/outline from the featured Upcoming Packages card. */
+@media (max-width:760px){
+  html body #upcoming-packages .group-departure-card.winter-spiti-featured{
+    border:0!important;
+    outline:0!important;
+  }
+}
+
 /* Desktop: remove the outer outline from the featured Upcoming Packages card. */
 @media (min-width:761px){
   html body #upcoming-packages .group-departure-card.winter-spiti-featured{
