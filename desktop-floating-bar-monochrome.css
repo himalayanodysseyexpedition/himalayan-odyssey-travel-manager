@@ -7,8 +7,8 @@
     left:50%!important;
     right:auto!important;
     bottom:9px!important;
-    width: min(560px, calc(100vw - 32px))!important;
-    max-width:560px!important;
+    width:min(480px, calc(100vw - 32px))!important;
+    max-width:480px!important;
     min-width:0!important;
     margin:0!important;
     box-sizing:border-box!important;
