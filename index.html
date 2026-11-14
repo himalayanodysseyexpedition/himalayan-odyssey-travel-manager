@@ -6307,3 +6307,30 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 
 </body>
 </html>
+
+
+<style id="desktop-travel-package-cards-remove-motion-v1">
+/* Desktop only: remove reveal, hover and image motion from Travel Packages cards. */
+@media screen and (min-width:761px){
+  html body #packages #packageList > .package-slide,
+  html body #packages #packageList > .package-slide.reveal,
+  html body #packages #packageList > .package-slide:hover,
+  html body #packages #packageList > .package-slide:focus,
+  html body #packages #packageList > .package-slide *,
+  html body #packages #packageList > .package-slide *:hover,
+  html body #packages #packageList > .package-slide *:focus{
+    animation:none!important;
+    transition:none!important;
+    transform:none!important;
+    translate:none!important;
+    rotate:none!important;
+    scale:none!important;
+    filter:none!important;
+    opacity:1!important;
+    will-change:auto!important;
+  }
+  html body #packages #packageList > .package-slide{
+    box-shadow:0 12px 35px rgba(16,36,59,.08)!important;
+  }
+}
+</style>
