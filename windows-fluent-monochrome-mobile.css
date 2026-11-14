@@ -506,3 +506,13 @@
     margin-inline:auto!important;
   }
 }
+
+
+/* MOBILE ONLY — route the main contact CTA directly to WhatsApp. */
+@media(max-width:760px){
+  html body #contact.cta .desktop-enquiry-link{display:none!important}
+  html body #contact.cta .mobile-whatsapp-enquiry{display:inline-flex!important}
+}
+@media(min-width:761px){
+  html body #contact.cta .mobile-whatsapp-enquiry{display:none!important}
+}
