@@ -1,0 +1,16 @@
+/* Desktop-only typography refinement for the homepage Winter Spiti Expedition card. */
+@media (min-width: 761px){
+  html body #home.hero section.mobile-next-departure h2,
+  html body #home.hero section.mobile-next-departure h2 em{
+    color:#fff!important;
+    -webkit-text-fill-color:#fff!important;
+  }
+  html body #home.hero section.mobile-next-departure h2 em{
+    font-family:inherit!important;
+    font-size:inherit!important;
+    font-weight:inherit!important;
+    font-style:normal!important;
+    letter-spacing:inherit!important;
+    line-height:inherit!important;
+  }
+}
