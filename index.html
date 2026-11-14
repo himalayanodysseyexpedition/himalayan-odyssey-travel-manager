@@ -1729,6 +1729,26 @@ body.guest-itinerary-popup-open{overflow:hidden}
  #guest-itinerary-popup iframe{min-height:0;-webkit-overflow-scrolling:touch}
 }
 </style>
+<style id="mobile-upcoming-card-border-final-fix">
+@media screen and (max-width:760px){
+  html body #upcoming-packages .group-departures-rail .group-departure-card.winter-spiti-featured,
+  html body #upcoming-packages .group-departure-card.winter-spiti-featured{
+    border:0!important;
+    border-width:0!important;
+    border-color:transparent!important;
+    outline:0!important;
+    box-shadow:none!important;
+  }
+  html body #upcoming-packages .group-departure-card.winter-spiti-featured::before,
+  html body #upcoming-packages .group-departure-card.winter-spiti-featured::after{
+    content:none!important;
+    display:none!important;
+    border:0!important;
+    outline:0!important;
+    box-shadow:none!important;
+  }
+}
+</style>
 </head>
 
 <body>
