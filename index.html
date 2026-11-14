@@ -2241,36 +2241,15 @@ async function loadHotels() {
             <p class="hotel-facilities">${hotelPhotos.length} photograph(s)</p>
 
             <button type="button"
-                    class="btn"
+                    class="btn${String(hotel.name || "").toLowerCase().includes("survi") ? " hotel-survi-action-btn" : ""}"
                     data-view-hotel="${safe(hotel.id)}">View Property</button>
 
-            <a class="btn"
+            <a class="btn${String(hotel.name || "").toLowerCase().includes("survi") ? " hotel-survi-action-btn" : ""}"
                href="/?topic=${encodeURIComponent("Property enquiry: "+(hotel.name||"Accommodation"))}/build-your-trip/">Enquire Now</a>
 
           </div>
         </article>`;
     }).join("");
-
-    // Style only Hotel Survi's two action buttons on desktop after hotel cards render.
-    if (window.matchMedia("(min-width: 761px)").matches) {
-      list.querySelectorAll(".hotel-card").forEach(card => {
-        const propertyName = (
-          card.getAttribute("data-property-name") ||
-          card.querySelector(".card-body h3")?.textContent ||
-          ""
-        ).trim().toLowerCase();
-
-        if (propertyName.includes("survi")) {
-          card.querySelectorAll(".card-body > button.btn, .card-body > a.btn").forEach(button => {
-            button.style.setProperty("background", "#000000", "important");
-            button.style.setProperty("background-color", "#000000", "important");
-            button.style.setProperty("color", "#ffffff", "important");
-            button.style.setProperty("-webkit-text-fill-color", "#ffffff", "important");
-            button.style.setProperty("border-color", "#000000", "important");
-          });
-        }
-      });
-    }
 
     observeReveals();
 
@@ -5757,16 +5736,19 @@ html body section#more-than-tours .info-grid .info-box a.btn:visited{
 </style>
 
 
-<style id="desktop-hotel-survi-buttons-black-v1">
+<style id="desktop-hotel-survi-buttons-black-v2">
 @media (min-width: 761px) {
-  #gallery .hotel-card[data-property-name*="Survi" i] .card-body > .btn,
-  #gallery .hotel-card[data-property-name*="Survi" i] .card-body > button.btn,
-  #gallery .hotel-card[data-property-name*="Survi" i] .card-body > a.btn {
+  html body #gallery .hotel-card .card-body > .hotel-survi-action-btn,
+  html body #gallery .hotel-card .card-body > button.hotel-survi-action-btn,
+  html body #gallery .hotel-card .card-body > a.hotel-survi-action-btn,
+  html body #gallery .hotel-card .card-body > .hotel-survi-action-btn:hover,
+  html body #gallery .hotel-card .card-body > .hotel-survi-action-btn:focus {
     background: #000000 !important;
     background-color: #000000 !important;
     color: #ffffff !important;
     -webkit-text-fill-color: #ffffff !important;
     border-color: #000000 !important;
+    box-shadow: none !important;
   }
 }
 </style>
