@@ -461,3 +461,46 @@
     opacity:1!important;
   }
 }
+
+/* MOBILE ONLY — compact Instagram card with the logo beside the handle. */
+@media(max-width:760px){
+  html body section#instagram .instagram-content{
+    display:grid!important;
+    grid-template-columns:34px minmax(0,1fr)!important;
+    align-items:center!important;
+    column-gap:10px!important;
+    row-gap:8px!important;
+    width:min(100%,360px)!important;
+    max-width:360px!important;
+    margin-inline:auto!important;
+    padding:16px 18px!important;
+  }
+  html body section#instagram .instagram-content .instagram-logo{
+    grid-column:1!important;
+    grid-row:1!important;
+    width:34px!important;
+    height:34px!important;
+    margin:0!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    font-size:25px!important;
+  }
+  html body section#instagram .instagram-content h3{
+    grid-column:2!important;
+    grid-row:1!important;
+    margin:0!important;
+    text-align:left!important;
+    font-size:20px!important;
+  }
+  html body section#instagram .instagram-content p{
+    grid-column:1 / -1!important;
+    margin:2px 0!important;
+    text-align:center!important;
+  }
+  html body section#instagram .instagram-content .instagram-btn{
+    grid-column:1 / -1!important;
+    justify-self:center!important;
+    margin-inline:auto!important;
+  }
+}
