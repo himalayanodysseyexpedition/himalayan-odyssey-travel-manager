@@ -4,7 +4,8 @@
  const icon=(body)=>'<svg class="dock-icon" viewBox="0 0 24 24" aria-hidden="true">'+body+'</svg>';
  const items=[
   {label:'Home',href:'/#home',path:'home',svg:'<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>'},
-  {label:'Explore',href:'/#packages',path:'packages',svg:'<circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5M10.8 7.5v6.6M7.5 10.8h6.6"/>'},
+  {label:'Explore',href:'/destinations/',path:'explore',svg:'<circle cx="12" cy="12" r="9"/><path d="m15.8 8.2-2.5 5.1-5.1 2.5 2.5-5.1z"/>'},
+  {label:'Packages',href:'/#packages',path:'packages',svg:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5M16 4v5M7 13h4M7 16h7"/>'},
   {label:'WhatsApp',href:'https://wa.me/919816929669?text='+encodeURIComponent('Hello Himalayan Odyssey Expedition, I would like to plan a Himalayan trip.'),path:'whatsapp',svg:'<path d="M20.2 11.7a8.2 8.2 0 0 1-12.1 7.2L3 20l1.2-4.8a8.2 8.2 0 1 1 16-3.5Z"/><path d="M8.5 8.2c.3-.6.6-.6.9-.6h.5c.2 0 .4.1.5.4l.7 1.7c.1.3.1.5-.1.7l-.5.6c-.2.2-.2.4 0 .7.5.8 1.2 1.5 2 2 .3.2.5.2.7 0l.7-.8c.2-.2.4-.3.7-.2l1.6.8c.3.1.4.3.4.5 0 .4-.2 1.2-.7 1.6-.5.5-1.2.7-1.9.6-1.1-.2-2.4-.8-3.8-2-1.2-1.1-2.1-2.4-2.4-3.4-.3-1 0-1.9.7-2.6Z"/>'}
  ];
  function mountDock(){
