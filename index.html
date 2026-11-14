@@ -2250,8 +2250,6 @@ async function loadHotels() {
 
             <p class="hotel-location">📍 ${safe(hotel.location || "Himachal Pradesh")}</p>
 
-            <p>${safe(hotel.description || "Contact us for property details.")}</p>
-
             ${facilities ? `<p class="hotel-facilities"><b>Facilities:</b> ${safe(facilities)}</p>` : ""}
 
             <p class="hotel-facilities">${hotelPhotos.length} photograph(s)</p>
