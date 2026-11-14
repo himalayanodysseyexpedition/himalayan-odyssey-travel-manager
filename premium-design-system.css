@@ -1,0 +1,189 @@
+/* Himalayan Odyssey — Premium sitewide design system
+   Arctic Prestige × Windows Fluent. Visual-only layer; no structural or data behaviour changes. */
+:root{
+  --forest:#090b0f!important;
+  --forest2:#171a20!important;
+  --green:#252a31!important;
+  --gold:#cfe5f2!important;
+  --gold-light:#edf6fb!important;
+  --champagne:#edf6fb!important;
+  --cream:#ffffff!important;
+  --paper:#ffffff!important;
+  --ink:#111318!important;
+  --muted:#666d76!important;
+  --line:#e5e7eb!important;
+  --tour-forest:#090b0f!important;
+  --tour-deep:#050608!important;
+  --tour-moss:#5b6570!important;
+  --tour-gold:#cfe5f2!important;
+  --tour-champagne:#edf6fb!important;
+  --tour-cream:#fff!important;
+  --tour-paper:#fff!important;
+  --tour-ink:#111318!important;
+  --tour-muted:#666d76!important;
+  --tour-line:#e5e7eb!important;
+  --premium-radius:20px;
+  --premium-shadow:0 16px 42px rgba(0,0,0,.075);
+}
+html{background:#fff!important;color-scheme:light;scroll-behavior:smooth;scroll-padding-top:104px}
+body{
+  background:#fff!important;color:#111318!important;
+  font-family:"DM Sans","Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.68;overflow-x:clip;
+}
+::selection{background:#dceefa;color:#090b0f}
+:focus-visible{outline:3px solid #8abbd7!important;outline-offset:3px!important}
+p{color:inherit}
+img{max-width:100%}
+
+/* Consistent content rhythm and editorial hierarchy */
+section.content{padding:clamp(54px,7vw,92px) clamp(18px,5vw,72px)!important}
+.section-inner{width:min(100%,1280px)!important;margin-inline:auto!important}
+.section-title{max-width:850px;margin:0 auto clamp(24px,4vw,42px)!important}
+.section-title small,.eyebrow,.section-kicker{
+  color:#68717b!important;font-size:10px!important;font-weight:700!important;
+  letter-spacing:.18em!important;text-transform:uppercase;
+}
+.section-title h2,.content h2,.section-inner h2,.page-heading h1{
+  color:#111318!important;letter-spacing:-.035em;line-height:1.08;
+  text-wrap:balance;
+}
+.section-title h2{font-size:clamp(34px,4.6vw,58px)!important}
+.section-title h2:after{background:#cfe5f2!important;width:48px!important;height:2px!important}
+.intro{max-width:760px;color:#626a73!important;line-height:1.85!important}
+
+/* Mica glass headers; preserve existing header structure and logo */
+body>header,.site-header,.main-header,header.top{
+  background:rgba(255,255,255,.88)!important;color:#111318!important;
+  border-bottom:1px solid rgba(0,0,0,.10)!important;
+  box-shadow:0 8px 28px rgba(0,0,0,.055)!important;
+  -webkit-backdrop-filter:blur(26px) saturate(160%)!important;
+  backdrop-filter:blur(26px) saturate(160%)!important;
+}
+body>header a,.site-header a,.main-header a,header.top a{color:inherit}
+body>header nav a,.site-header nav a,.main-header nav a{
+  transition:background .2s ease,color .2s ease;
+}
+body>header nav a:hover,.site-header nav a:hover,.main-header nav a:hover{
+  background:rgba(0,0,0,.055);border-radius:999px;
+}
+
+/* Monochrome cards with restrained elevation */
+:is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,
+.guide-card,.info-box,.review-point,.service-card,.property-card,.vehicle-card,
+.faq-item,.faq-list details,.form-card,.contact-card,.booking-card,.seo-section,.seo-copy){
+  min-width:0;border:1px solid #e5e7eb!important;border-radius:var(--premium-radius)!important;
+  box-shadow:var(--premium-shadow)!important;
+}
+:is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,
+.guide-card,.info-box,.review-point,.service-card,.property-card,.vehicle-card,
+.faq-item,.faq-list details,.form-card,.contact-card,.booking-card,.seo-section,.seo-copy){
+  background:#fff!important;
+}
+:is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,
+.guide-card,.info-box,.review-point,.service-card,.property-card,.vehicle-card) :is(h2,h3,h4){
+  color:#111318!important;line-height:1.2;text-wrap:balance;
+}
+:is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,
+.guide-card,.info-box,.review-point,.service-card,.property-card,.vehicle-card) p{
+  color:#626a73!important;line-height:1.7;
+}
+@media(hover:hover){
+  :is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,
+  .guide-card,.info-box,.review-point,.service-card,.property-card,.vehicle-card){
+    transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease;
+  }
+  :is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,
+  .guide-card,.info-box,.review-point,.service-card,.property-card,.vehicle-card):hover{
+    transform:translateY(-4px);border-color:#cbd5df!important;
+    box-shadow:0 22px 48px rgba(0,0,0,.12)!important;
+  }
+}
+
+/* Black primary actions, white secondary actions; retain danger/disabled states */
+body :is(button,.btn,.button,.submit-btn,.group-departure-cta,a[role=button],
+a[class*=btn],a[class*=button],a[class*=cta]):not(header *):not(.outline):not(.danger):not(.delete):not(.remove):not(:disabled):not([aria-disabled=true]){
+  min-height:44px;border-radius:999px!important;
+  background:#08090b!important;background-image:none!important;
+  border:1px solid #08090b!important;color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  box-shadow:0 7px 18px rgba(0,0,0,.12)!important;
+  font-weight:700;letter-spacing:.015em;
+  transition:transform .2s ease,background .2s ease,box-shadow .2s ease;
+}
+body :is(button,.btn,.button,.submit-btn,.group-departure-cta,a[role=button],
+a[class*=btn],a[class*=button],a[class*=cta]):not(header *):not(.outline):not(.danger):not(.delete):not(.remove):not(:disabled):not([aria-disabled=true]):hover{
+  background:#292d33!important;border-color:#292d33!important;
+  transform:translateY(-1px);
+}
+body :is(.btn.outline,.button.outline,a.outline){
+  background:transparent!important;background-image:none!important;
+  color:inherit!important;-webkit-text-fill-color:currentColor!important;
+  border:1px solid currentColor!important;box-shadow:none!important;
+}
+#home.hero :is(.btn.outline,.button.outline){color:#fff!important;-webkit-text-fill-color:#fff!important}
+body :is(button,.btn,.button,.submit-btn):active{transform:scale(.985)}
+body :is(button,.btn,.button,.submit-btn):disabled,
+body :is(button[disabled],[aria-disabled=true]){
+  opacity:.48!important;cursor:not-allowed!important;transform:none!important;box-shadow:none!important;
+}
+body :is(.danger,.btn-danger,.button-danger,.delete,.delete-btn,.remove,.remove-btn,[data-variant=danger]){
+  background:#fff1f1!important;color:#8b2028!important;-webkit-text-fill-color:#8b2028!important;
+  border:1px solid #efc3c5!important;box-shadow:none!important;
+}
+
+/* Inputs: calm surfaces, clear focus and comfortable touch targets */
+body :is(input,select,textarea){
+  min-height:48px;background:#fff!important;color:#111318!important;
+  border:1px solid #d9dde2!important;border-radius:12px!important;
+  padding:11px 14px;
+}
+body :is(input,select,textarea):focus{
+  border-color:#8abbd7!important;box-shadow:0 0 0 3px rgba(138,187,215,.18)!important;outline:0;
+}
+body :is(input,select,textarea)::placeholder{color:#858b93!important;opacity:1}
+
+/* Alternating dark editorial bands; keep their content readable */
+section.content.info,.enquiry-section,.cta-band,.site-cta{
+  background:#08090b!important;color:#fff!important;
+}
+section.content.info :is(h1,h2,h3,h4,.section-title h2),
+.enquiry-section :is(h1,h2,h3,h4,.section-title h2),
+.cta-band :is(h1,h2,h3,h4),.site-cta :is(h1,h2,h3,h4){color:#fff!important}
+section.content.info .section-title small,
+.enquiry-section .section-title small{color:#c8d0d8!important}
+section.content.info .intro,.enquiry-section .intro{color:#c2c7ce!important}
+section.content.info .section-title h2:after,
+.enquiry-section .section-title h2:after{background:#dceefa!important}
+
+/* Image-led destinations and hero media retain their existing imagery */
+.destination-card,.guide-card,.package-slide,.itinerary-slide{overflow:hidden}
+.destination-info h2,.destination-info h3{color:#fff!important}
+.destination-info small,.destination-info span{color:#edf6fb!important}
+#home.hero{background-color:#050608!important}
+#home.hero .hero h1,#home.hero h1{color:#fff!important}
+#home.hero .hero-service-icon{border-radius:16px}
+.price,.package-price,.rate,.amount,.itinerary-meta{color:#303943!important}
+
+/* Footer and mobile layout */
+body footer,body .site-footer{
+  background:#050608!important;color:#e9edf1!important;
+  border-top:1px solid rgba(255,255,255,.12)!important;
+}
+body footer :is(h2,h3,h4,p,small,a),body .site-footer :is(h2,h3,h4,p,small,a){color:#e9edf1!important}
+@media(max-width:760px){
+  section.content{padding:46px 17px 52px!important}
+  .section-inner{width:min(100% - 4px,680px)!important}
+  .section-title{margin-bottom:25px!important}
+  .section-title h2{font-size:clamp(30px,8vw,42px)!important}
+  .intro{font-size:14px!important;line-height:1.75!important}
+  :is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,
+  .guide-card,.info-box,.review-point,.service-card,.property-card,.vehicle-card){border-radius:18px!important}
+  body :is(button,.btn,.button,.submit-btn){min-height:46px}
+  body{padding-bottom:env(safe-area-inset-bottom)}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}

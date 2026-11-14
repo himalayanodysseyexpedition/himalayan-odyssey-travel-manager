@@ -64,3 +64,12 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Do not change DNS, custom domain, GitHub Pages settings, hosting provider or deployment workflows without explicit approval.
 - Do not create real bookings, send real messages or alter live customer records during tests.
 - Never claim tests, browser checks or deployment succeeded unless they were actually performed.
+
+
+## 2026-11-14 — Premium public-site design layer (PR in progress)
+- User explicitly requested a separate premium UI/UX improvement across the public website.
+- Added `premium-design-system.css` as a visual-only shared layer: monochrome black/white surfaces, cool ice-blue micro accents, Windows Fluent/Mica-style headers, consistent editorial typography, cards, buttons, forms, responsive spacing and reduced-motion handling.
+- Linked the shared layer from 24 public-facing pages, including homepage, destinations, tour/package/itinerary pages, guides, supplier submission, marketplace and policy pages.
+- Admin dashboards and backend/data workflows were intentionally excluded from this public-site visual pass.
+- No page content, routes, SEO metadata, JavaScript behaviour, Supabase schema/data, bookings, payments, hosting or deployment settings were intentionally changed.
+- Browser/device visual verification and live deployment remain to be checked after merge; do not claim the live site has updated until verified.
