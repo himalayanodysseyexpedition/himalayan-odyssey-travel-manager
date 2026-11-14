@@ -197,3 +197,31 @@ html body #home.hero .mobile-next-departure .mobile-departure-facts span:first-c
   background:transparent!important;
   background-image:none!important;
 }
+
+
+/* Hard reset: date and duration labels must not render inside pale-blue outlined chips. */
+html body #home.hero section.mobile-next-departure .mobile-departure-date,
+html body #home.hero section.mobile-next-departure .mobile-departure-facts,
+html body #home.hero section.mobile-next-departure .mobile-departure-facts span,
+html body #home.hero section.mobile-next-departure .mobile-departure-date *,
+html body #home.hero section.mobile-next-departure .mobile-departure-facts *{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+}
+html body #home.hero section.mobile-next-departure .mobile-departure-date::before,
+html body #home.hero section.mobile-next-departure .mobile-departure-date::after,
+html body #home.hero section.mobile-next-departure .mobile-departure-facts::before,
+html body #home.hero section.mobile-next-departure .mobile-departure-facts::after,
+html body #home.hero section.mobile-next-departure .mobile-departure-facts span::before,
+html body #home.hero section.mobile-next-departure .mobile-departure-facts span::after{
+  content:none!important;
+  display:none!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:none!important;
+}
