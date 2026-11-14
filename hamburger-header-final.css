@@ -640,3 +640,19 @@ html body > header .header-menu-toggle[aria-expanded="true"] {
 html body > header .header-menu-toggle svg,html body > header .header-menu-toggle svg path{stroke:#fff!important}
 html body > header.menu-open .header-inner > nav.glass-nav{background:rgba(0,0,0,.76)!important;background-color:rgba(0,0,0,.76)!important;border:1px solid rgba(255,255,255,.2)!important;backdrop-filter:blur(22px) saturate(125%)!important;-webkit-backdrop-filter:blur(22px) saturate(125%)!important}
 html body > header.menu-open .header-inner > nav.glass-nav > a{color:#fff!important;-webkit-text-fill-color:#fff!important}
+
+
+/* Individual service links use rounded translucent glass pills. */
+@media screen and (max-width:760px){
+ html body > header.menu-open .header-inner > nav.glass-nav > a{
+  min-height:46px!important;margin:2px 0!important;padding:0 16px!important;
+  border:1px solid rgba(255,255,255,.16)!important;border-radius:999px!important;
+  background:rgba(255,255,255,.075)!important;
+  -webkit-backdrop-filter:blur(12px)!important;backdrop-filter:blur(12px)!important;
+  color:#fff!important;-webkit-text-fill-color:#fff!important;
+ }
+ html body > header.menu-open .header-inner > nav.glass-nav > a:active,
+ html body > header.menu-open .header-inner > nav.glass-nav > a:hover{
+  background:rgba(255,255,255,.15)!important;border-color:rgba(255,255,255,.28)!important;
+ }
+}
