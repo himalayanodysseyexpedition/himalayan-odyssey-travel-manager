@@ -4,7 +4,7 @@
 
   const MENU_ITEMS = [
     ["/destinations/", "Destinations"],
-    ["/#cabs", "Vacation Cabs"],
+    ["/#cabs", "Cabs"],
     ["/#gallery", "Hotels & Properties"],
   ];
 
