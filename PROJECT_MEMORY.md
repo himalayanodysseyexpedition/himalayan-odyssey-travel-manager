@@ -246,3 +246,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - The previous relative offset (`top:-2px`) produced no clearly visible downward movement for the user. Increased the mobile carousel offset to `top:10px!important`, a 12px downward change from the previous setting, and bumped the stylesheet URL to `v=3` to bypass cached CSS.
 - Only the mobile Featured Travel Photography carousel positioning and its stylesheet cache version changed; desktop layout and all content/behaviour remain unchanged.
 - PR review and verification pending; no production deployment performed.
+
+
+## 2026-11-16 — Add refined light effects to the hero departure promotion
+- Added soft corner glows, a slow diagonal shimmer sweep and a subtle animated edge highlight treatment to the homepage group-departure promotion card.
+- Added a restrained lift on desktop hover and a gentle glow response on mobile touch; retained reduced-motion support.
+- Preserved promotion content, black-and-white styling, CTA behaviour and card layout. Bumped the promotion stylesheet cache version to v11.
+- Files: `homepage-mobile-departure-promo.css`, `index.html`, `PROJECT_MEMORY.md`. PR review/verification pending; no production deployment performed.
