@@ -711,3 +711,22 @@ html body > header.menu-open .header-inner > nav.glass-nav > a{color:#fff!import
     html body > header .header-menu-toggle .burger-line{transition:none!important}
   }
 }
+
+
+/* MOBILE HAMBURGER BUTTON — remove its container fill and outline.
+   Keep the dropdown panel styling and the animated white bars unchanged. */
+@media screen and (max-width:760px){
+  html body > header .header-menu-toggle,
+  html body > header .header-menu-toggle:hover,
+  html body > header .header-menu-toggle:focus,
+  html body > header .header-menu-toggle:focus-visible,
+  html body > header .header-menu-toggle[aria-expanded="true"]{
+    border:0!important;
+    background:transparent!important;
+    background-color:transparent!important;
+    background-image:none!important;
+    box-shadow:none!important;
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+  }
+}
