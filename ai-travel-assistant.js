@@ -224,7 +224,8 @@
           budget: Number(document.getElementById("hoe-ai-budget").value || 0),
           notes: document.getElementById("hoe-ai-notes").value,
           website: document.getElementById("hoe-ai-website").value,
-          sourceDetails: "AI Travel Assistant"
+          sourceDetails: "AI Travel Assistant",
+          consent: document.getElementById("hoe-ai-consent").checked
         };
         await callFunction(payload);
         status.textContent = "Your enquiry has been sent to our team.";
