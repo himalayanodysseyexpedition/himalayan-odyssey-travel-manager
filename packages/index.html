@@ -686,4 +686,88 @@ html body .featured-departure a.departure-cta:hover {
 }
 </style>
 
+
+<style id="mobile-upcoming-tour-3d-tilt">
+/* Mobile-only 3D interaction for live Upcoming Tours cards. Desktop remains unchanged. */
+@media (max-width: 760px) {
+  html body #packageList.package-cards-carousel > article.card {
+    position: relative !important;
+    transform: perspective(900px)
+      rotateX(var(--tour-tilt-x, 0deg))
+      rotateY(var(--tour-tilt-y, 0deg))
+      scale(var(--tour-tilt-scale, 1)) !important;
+    transform-style: preserve-3d;
+    transform-origin: center;
+    transition: transform 220ms ease-out, box-shadow 220ms ease-out !important;
+    will-change: transform;
+    overflow: hidden;
+    isolation: isolate;
+    -webkit-tap-highlight-color: transparent;
+  }
+  html body #packageList.package-cards-carousel > article.card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    opacity: var(--tour-glare-opacity, 0);
+    background: radial-gradient(
+      circle at var(--tour-glare-x, 50%) var(--tour-glare-y, 30%),
+      rgba(255,255,255,.42),
+      rgba(255,255,255,0) 58%
+    );
+    transition: opacity 180ms ease-out;
+  }
+  html body #packageList.package-cards-carousel > article.card.is-touch-tilting {
+    --tour-tilt-scale: .985;
+    box-shadow: 0 16px 34px rgba(0,0,0,.18) !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  @media (max-width: 760px) {
+    html body #packageList.package-cards-carousel > article.card {
+      transition: none !important;
+    }
+  }
+}
+</style>
+<script id="mobile-upcoming-tour-3d-tilt-script">
+(() => {
+  const list = document.getElementById("packageList");
+  if (!list || !window.matchMedia("(max-width: 760px)").matches) return;
+  let activeCard = null;
+  const reset = () => {
+    if (!activeCard) return;
+    activeCard.classList.remove("is-touch-tilting");
+    ["--tour-tilt-x", "--tour-tilt-y", "--tour-tilt-scale", "--tour-glare-x", "--tour-glare-y", "--tour-glare-opacity"]
+      .forEach(property => activeCard.style.removeProperty(property));
+    activeCard = null;
+  };
+  list.addEventListener("pointerdown", event => {
+    if (event.pointerType !== "touch") return;
+    const card = event.target.closest("article.card");
+    if (!card || !list.contains(card)) return;
+    reset();
+    activeCard = card;
+    card.classList.add("is-touch-tilting");
+    card.style.setProperty("--tour-glare-opacity", ".85");
+  }, { passive: true });
+  list.addEventListener("pointermove", event => {
+    if (event.pointerType !== "touch" || !activeCard) return;
+    const rect = activeCard.getBoundingClientRect();
+    const x = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+    const y = Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height));
+    activeCard.style.setProperty("--tour-tilt-x", ((.5 - y) * 7).toFixed(2) + "deg");
+    activeCard.style.setProperty("--tour-tilt-y", ((x - .5) * 7).toFixed(2) + "deg");
+    activeCard.style.setProperty("--tour-glare-x", (x * 100).toFixed(1) + "%");
+    activeCard.style.setProperty("--tour-glare-y", (y * 100).toFixed(1) + "%");
+  }, { passive: true });
+  ["pointerup", "pointercancel", "pointerleave"].forEach(type => {
+    list.addEventListener(type, event => {
+      if (event.pointerType === "touch") reset();
+    }, { passive: true });
+  });
+})();
+</script>
+
 </body></html>
