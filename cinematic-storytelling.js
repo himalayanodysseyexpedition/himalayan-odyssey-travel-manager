@@ -84,4 +84,37 @@
       if (target) target.classList.add("story-inview");
     });
   });
+
+  // Add lightweight, decorative hero atmosphere only on mobile. No external assets or libraries.
+  const mobileHeroMotion = window.matchMedia("(max-width: 760px)");
+  const addMobileHeroAtmosphere = () => {
+    if (!hero || !mobileHeroMotion.matches || reduceMotion || hero.querySelector(".hero-cinematic-atmosphere")) return;
+    const atmosphere = document.createElement("div");
+    atmosphere.className = "hero-cinematic-atmosphere";
+    atmosphere.setAttribute("aria-hidden", "true");
+
+    const cloudOne = document.createElement("span");
+    cloudOne.className = "hero-cinematic-cloud hero-cinematic-cloud--one";
+    const cloudTwo = document.createElement("span");
+    cloudTwo.className = "hero-cinematic-cloud hero-cinematic-cloud--two";
+    const snow = document.createElement("span");
+    snow.className = "hero-cinematic-snow";
+
+    const flags = document.createElement("span");
+    flags.className = "hero-cinematic-flags";
+    for (let i = 0; i < 7; i += 1) {
+      const flag = document.createElement("span");
+      flag.className = "hero-cinematic-flag";
+      flags.appendChild(flag);
+    }
+    atmosphere.append(cloudOne, cloudTwo, snow, flags);
+    hero.insertBefore(atmosphere, hero.firstChild);
+  };
+  addMobileHeroAtmosphere();
+  if (mobileHeroMotion.addEventListener) {
+    mobileHeroMotion.addEventListener("change", addMobileHeroAtmosphere);
+  } else if (mobileHeroMotion.addListener) {
+    mobileHeroMotion.addListener(addMobileHeroAtmosphere);
+  }
+
 })();
