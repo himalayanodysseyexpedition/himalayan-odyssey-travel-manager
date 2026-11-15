@@ -90,7 +90,7 @@
       const link = document.createElement("link");
       link.id = "sitewide-hamburger-stylesheet";
       link.rel = "stylesheet";
-      link.href = "/hamburger-header-final.css?v=17";
+      link.href = "/hamburger-header-final.css?v=18";
       document.head.appendChild(link);
     }
 
@@ -178,7 +178,7 @@
         button.setAttribute("aria-expanded", "true");
         button.setAttribute("aria-label", "Close navigation menu");
         nav.setAttribute("aria-hidden", "false");
-        if (window.matchMedia("(max-width: 760px)").matches) applyOpenStyles();
+        applyOpenStyles();
       } else {
         close();
       }
@@ -197,7 +197,7 @@
       }
     });
     window.addEventListener("resize", () => {
-      if (!window.matchMedia("(max-width: 760px)").matches) close();
+      if (button.getAttribute("aria-expanded") === "true") applyOpenStyles();
     }, { passive: true });
   }
 
