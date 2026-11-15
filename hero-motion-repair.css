@@ -45,6 +45,12 @@
     inset: 0 !important;
     z-index: 1 !important;
     pointer-events: none !important;
+    border: 0 !important;
+    border-left: 0 !important;
+    border-radius: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
     opacity: .48 !important;
     background-image:
       radial-gradient(ellipse at 18% 72%, rgba(235,247,255,.18) 0%, transparent 38%),
