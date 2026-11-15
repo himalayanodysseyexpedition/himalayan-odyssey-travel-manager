@@ -176,3 +176,8 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Changed only the mobile ticker's relative vertical offset from -12px to -6px, moving it 6px lower within the gap between the Winter Spiti promotion card and mountain artwork.
 - Kept ticker z-index, margin, text, animation, service row, promotion card, mountain artwork and desktop layout unchanged.
 - Files: `index.html`, `PROJECT_MEMORY.md`. PR and validation pending; no deployment performed.
+
+## 2026-11-16 — Set Featured Travel Photography section background to pure black
+- Changed only the Featured Travel Photography section background from near-black `#080b10` to pure black `#000` in its dedicated stylesheet.
+- Preserved text colours, carousel/card surface, photographs, spacing, responsive rules, autoplay and admin functionality.
+- Files: `featured-travel-photography.css`, `PROJECT_MEMORY.md`. PR and validation pending; no deployment performed.
