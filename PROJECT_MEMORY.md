@@ -332,3 +332,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Kept the hero image asset, gradient overlays, starfield/snowfall canvas, hero content, departure card and ticker unchanged.
 - Mobile-only rule remains scoped to viewports up to 760px. Desktop styles and all other pages are untouched. Existing prefers-reduced-motion rule continues to disable the animation.
 - File changed: index.html. Visual verification on a real iPhone remains pending; no deployment or hosting configuration changed.
+
+
+## 2026-11-16 — Correct Ken Burns interpolation for mobile Safari
+- User reported no visible Ken Burns motion after PR #467. Reviewing the merged CSS showed the image zoom used an `auto 112%` to `auto 120%` background-size interpolation, which can fail to interpolate consistently in mobile Safari because of the auto component.
+- Replaced it with explicit numeric background-size values for all three layers: gradients stay at 100% 100%, while the image zooms from 112% 112% to 124% 124%, and the focal position drifts slightly over a 22-second alternating cycle.
+- Kept the animation mobile-only and retained the existing reduced-motion opt-out. This corrects the animation method; real-device visual confirmation remains pending.
