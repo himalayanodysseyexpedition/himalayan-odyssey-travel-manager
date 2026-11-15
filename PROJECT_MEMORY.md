@@ -292,3 +292,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Live HTML and CSS were fetched from the public site; the deployed stylesheet v3 still used a `100vw` width plus centered negative viewport margins on the homepage hero, which is a direct child of `body`.
 - Replaced that viewport breakout with normal `width:100%` sizing, zero horizontal margins, border-box sizing and no border. This removes the unnecessary viewport-width/negative-margin calculation while keeping the mobile-only hero image, overlays, content, animation and desktop layout unchanged.
 - Updated the stylesheet cache key to v4. Browser-level iPhone visual confirmation is still pending because the available remote browser session could not start; the live HTML/CSS source fetch succeeded.
+
+
+## 2026-11-16 — Remove residual mobile hero overlay edge
+- After the user supplied a fresh iPhone screenshot, identified legacy edge styling on the mobile hero image pseudo-element as the likely source of the narrow grey-white strip.
+- Explicitly reset the mobile image overlay's border, radius, outline and box shadow while retaining its existing inset, image URL, gradients, crop and animation.
+- Scoped to the mobile hero pseudo-element only; desktop and hero content remain unchanged. Visual confirmation after publish is still required.
