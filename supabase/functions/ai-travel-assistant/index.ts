@@ -182,6 +182,7 @@ async function saveLead(payload: Record<string, unknown>) {
   const dateText = safeText(payload.travelDate, 10);
   const travelDate = /^\d{4}-\d{2}-\d{2}$/.test(dateText) ? dateText : null;
   const notes = safeText(payload.notes, 1200);
+  if (payload.consent !== true) throw new Error("Please agree to be contacted about this enquiry.");
   if (name.length < 2 || !/^[6-9]\d{9}$/.test(phone) || !destination ||
       !Number.isInteger(persons) || persons < 1 || persons > 100 ||
       !Number.isFinite(budget) || budget < 0 || budget > 50000000) {
