@@ -225,3 +225,8 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Strengthened the intro paragraph color rule with the section ID and `!important` so competing paragraph styles cannot override the requested black text.
 - Bumped the homepage stylesheet query version to `v=2` to avoid a stale cached CSS file.
 - The sentence content, section background, heading, carousel, images, layout, and desktop/mobile behaviour are otherwise unchanged. Files: `featured-travel-photography.css`, `index.html`, `PROJECT_MEMORY.md`. PR review and deployment verification pending; no production deployment performed.
+
+
+## 2026-11-16 — Change Featured Travel Photography intro to matte black
+- Changed only the intro sentence text color from pure black to matte black (`#1C1C1C`).
+- Preserved the sentence, background, heading, carousel, imagery, layout, and responsive behaviour. Files: `featured-travel-photography.css`, `PROJECT_MEMORY.md`. PR review and deployment verification pending; no production deployment performed.
