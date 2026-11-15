@@ -360,6 +360,6 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 
 ## 2026-11-16 — Apply monochrome styling to the actual mobile app dock
 - Traced the visible Home / Explore / Packages / WhatsApp bar to `.mobile-app-dock`, which is injected by `mobile-app-experience.js` on mobile. That script removes the legacy `#footerContactBar`, so earlier styling applied to `#footerContactBar` could not affect the visible dock.
-- Added a mobile-only CSS override for the generated `.mobile-app-dock`: solid white capsule, black icons and labels, and a black circular WhatsApp control with a white icon and label.
+- Added a mobile-only CSS override for the generated `.mobile-app-dock`: solid white capsule, black icons and labels, and a black circular WhatsApp control with a white icon and label. Bumped the homepage stylesheet reference from v11 to v12 to force mobile browsers to fetch the corrected CSS.
 - Preserved the JavaScript-generated links, item order, route/active-state logic, scroll hide/show behaviour, and dock positioning. Desktop dock styling and website content remain unchanged.
 - Files: `windows-fluent-monochrome-mobile.css`, `PROJECT_MEMORY.md`. PR and CI review pending; visual confirmation on an iPhone remains pending.
