@@ -7072,3 +7072,49 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   }
 }
 </style>
+
+
+<style id="mobile-hero-single-background-edge-fix-v1">
+/* Final mobile hero paint layer: use the hero element itself for the photograph.
+   This avoids a transformed pseudo-element edge and removes the stale pseudo
+   border-left/padding inherited from the earlier scroll-indicator rule. */
+@media screen and (max-width:760px){
+  html body #home.hero{
+    box-sizing:border-box!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin:0!important;
+    border:0!important;
+    outline:0!important;
+    box-shadow:none!important;
+    background-color:#050f1d!important;
+    background-image:
+      linear-gradient(90deg,rgba(16,36,59,.88) 0%,rgba(16,36,59,.62) 47%,rgba(16,36,59,.08) 100%),
+      linear-gradient(0deg,rgba(16,36,59,.46),transparent 45%),
+      url("/IMG_8475.jpeg?v=2")!important;
+    background-position:center,center,58% 42%!important;
+    background-size:auto,auto,cover!important;
+    background-repeat:no-repeat!important;
+    background-origin:border-box!important;
+    background-clip:border-box!important;
+    background-attachment:scroll!important;
+    animation:mobileHeroBackgroundPan 24s ease-in-out infinite alternate!important;
+  }
+  html body #home.hero::before,
+  html body #home.hero::after{
+    content:none!important;
+    display:none!important;
+    border:0!important;
+    outline:0!important;
+    box-shadow:none!important;
+    background:none!important;
+  }
+}
+@keyframes mobileHeroBackgroundPan{
+  from{background-position:center,center,56% 40%}
+  to{background-position:center,center,60% 44%}
+}
+@media screen and (max-width:760px) and (prefers-reduced-motion:reduce){
+  html body #home.hero{animation:none!important}
+}
+</style>
