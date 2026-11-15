@@ -85,21 +85,4 @@
     });
   });
 
-  // Give the mobile hero its own image layer so later theme background rules
-  // cannot cancel the cinematic zoom animation.
-  const mobileHeroMotion = window.matchMedia("(max-width: 760px)");
-  const addMobileHeroBackdrop = () => {
-    if (!hero || !mobileHeroMotion.matches || hero.querySelector(".hero-cinematic-backdrop")) return;
-    const backdrop = document.createElement("div");
-    backdrop.className = "hero-cinematic-backdrop";
-    backdrop.setAttribute("aria-hidden", "true");
-    hero.insertBefore(backdrop, hero.firstChild);
-  };
-  addMobileHeroBackdrop();
-  if (mobileHeroMotion.addEventListener) {
-    mobileHeroMotion.addEventListener("change", addMobileHeroBackdrop);
-  } else if (mobileHeroMotion.addListener) {
-    mobileHeroMotion.addListener(addMobileHeroBackdrop);
-  }
-
 })();
