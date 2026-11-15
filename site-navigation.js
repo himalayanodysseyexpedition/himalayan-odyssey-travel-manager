@@ -121,10 +121,10 @@
       nav.style.setProperty("align-items", "stretch", "important");
       nav.style.setProperty("gap", "5px", "important");
       nav.style.setProperty("padding", "10px", "important");
-      nav.style.setProperty("background", "rgba(0,0,0,.78)", "important");
-      nav.style.setProperty("background-color", "rgba(0,0,0,.78)", "important");
-      nav.style.setProperty("border", "1px solid rgba(255,255,255,.16)", "important");
-      nav.style.setProperty("border-radius", "18px", "important");
+      nav.style.setProperty("background", "#0d1117", "important");
+      nav.style.setProperty("background-color", "#0d1117", "important");
+      nav.style.setProperty("border", "1px solid rgba(255,255,255,.10)", "important");
+      nav.style.setProperty("border-radius", "12px", "important");
       nav.style.setProperty("box-shadow", "0 18px 46px rgba(0,0,0,.34)", "important");
       nav.style.setProperty("backdrop-filter", "blur(22px) saturate(125%)", "important");
       nav.style.setProperty("-webkit-backdrop-filter", "blur(22px) saturate(125%)", "important");
@@ -135,13 +135,13 @@
         a.style.setProperty("padding", "0 14px", "important");
         a.style.setProperty("color", "#fff", "important");
         a.style.setProperty("-webkit-text-fill-color", "#fff", "important");
-        a.style.setProperty("background", "rgba(255,255,255,.075)", "important");
-        a.style.setProperty("border-radius", "999px", "important");
-        a.style.setProperty("border", "1px solid rgba(255,255,255,.16)", "important");
+        a.style.setProperty("background", "transparent", "important");
+        a.style.setProperty("border-radius", "9px", "important");
+        a.style.setProperty("border", "1px solid transparent", "important");
         a.style.setProperty("backdrop-filter", "blur(12px)", "important");
         a.style.setProperty("-webkit-backdrop-filter", "blur(12px)", "important");
         a.style.setProperty("text-decoration", "none", "important");
-        a.style.setProperty("border", "0", "important");
+        a.style.setProperty("border", "1px solid transparent", "important");
       });
     };
 
