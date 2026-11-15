@@ -7094,13 +7094,13 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
       linear-gradient(0deg,rgba(16,36,59,.46),transparent 45%),
       url("/IMG_8475.jpeg?v=2")!important;
     background-position:center,center,56% 40%;
-    background-size:auto,auto,auto 112%;
+    background-size:100% 100%,100% 100%,112% 112%!important;
     will-change:background-position,background-size;
     background-repeat:no-repeat!important;
     background-origin:border-box!important;
     background-clip:border-box!important;
     background-attachment:scroll!important;
-    animation:mobileHeroKenBurns 28s ease-in-out infinite alternate!important;
+    animation:mobileHeroKenBurnsSafari 22s ease-in-out infinite alternate!important;
   }
   html body #home.hero::before,
   html body #home.hero::after{
@@ -7112,9 +7112,9 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
     background:none!important;
   }
 }
-@keyframes mobileHeroKenBurns{
-  0%{background-position:center,center,56% 40%;background-size:auto,auto,auto 112%}
-  100%{background-position:center,center,60% 44%;background-size:auto,auto,auto 120%}
+@keyframes mobileHeroKenBurnsSafari{
+  0%{background-position:center,center,54% 40%;background-size:100% 100%,100% 100%,112% 112%}
+  100%{background-position:center,center,60% 46%;background-size:100% 100%,100% 100%,124% 124%}
 }
 @media screen and (max-width:760px) and (prefers-reduced-motion:reduce){
   html body #home.hero{animation:none!important}
