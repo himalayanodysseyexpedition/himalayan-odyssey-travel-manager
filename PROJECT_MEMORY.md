@@ -160,3 +160,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Changed the independent homepage Featured Travel Photography carousel auto-advance interval from 10,000 ms to 2,000 ms.
 - Kept manual swipe, keyboard navigation, dot controls, hover/focus pause, hidden-tab pause, reduced-motion handling, images, admin controls and desktop/mobile layout unchanged.
 - Files: `featured-travel-photography.js`, `PROJECT_MEMORY.md`. PR and validation pending; no deployment performed.
+
+
+## 2026-11-16 — Center mobile destination ticker between promotion and mountain artwork
+- Replaced the old 88px mobile-only ticker offset with normal-flow placement, then shifted the ticker upward 12px to position it in the gap between the Winter Spiti promotion card and mountain artwork.
+- Kept the ticker above the mountain layer with z-index 4; content, marquee animation, promotion card, service row, mountain art and desktop layout remain unchanged.
+- Files: `index.html`, `PROJECT_MEMORY.md`. Replacement PR and validation pending; no deployment performed.
