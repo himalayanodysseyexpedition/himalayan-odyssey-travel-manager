@@ -317,3 +317,11 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - The pseudo-element also inherited positioning/decorative properties from earlier hero rules (including the scroll-indicator ::after border-left), so resetting only the hero box width/border and only the ::before border did not remove all competing paint layers.
 - Added a final mobile-only rule at the very end of index.html: the hero element itself is now the single photo/gradient layer, both hero pseudo-elements are disabled, and a gentle background-position pan preserves subtle photo motion without a transformed image edge. Existing real child cloud and mountain overlays remain.
 - Desktop styles, hero content, promotion card, ticker, header, and other homepage sections are unchanged. Visual confirmation on an iPhone is still required.
+
+
+## 2026-11-16 — Add mobile hero starfield and snowfall
+- Added a lightweight canvas particle layer to the homepage hero on viewports up to 760px: 76 subtle twinkling stars and a restrained field of softly falling snow particles.
+- Particles render above the hero photograph and below all hero content; the departure card, ticker, headline and navigation remain interactive and unobstructed.
+- Animation pauses when the hero is off-screen or the document is hidden, caps canvas device-pixel-ratio at 1.5, and respects prefers-reduced-motion with a static particle composition.
+- Added hero-atmosphere.js, mobile canvas styling in hero-motion-repair.css, and loaded the script from index.html; bumped the hero stylesheet cache key from v6 to v7.
+- Desktop, other pages, hero image, copy, booking/enquiry actions, and hosting/deployment configuration are unchanged. Visual verification on a real iPhone remains pending.
