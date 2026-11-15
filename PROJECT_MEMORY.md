@@ -349,3 +349,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Added a dedicated decorative `img.hero-ken-burns-photo` as the first hero child and animated its CSS transform from scale(1.04) to scale(1.20), with a slight pan. The mobile hero background now supplies only the dark gradients; the image element is the sole moving photo layer.
 - Preserved the mobile-only scope, existing photo asset, gradient treatment, starfield/snowfall canvas, weather/cloud and mountain layers, departure card, ticker, and reduced-motion behaviour. Desktop and all other pages remain unchanged.
 - Source-level validation confirms the image layer, animation keyframes, mobile-only rules, and reduced-motion fallback are present. Real-device visual verification is still required; merge does not itself verify the live appearance.
+
+
+## 2026-11-16 — Refine mobile floating navigation to black and white
+- Updated only the mobile floating quick-navigation capsule: solid white surface, black Home/Explore/Packages icons and labels, and a black WhatsApp action with white icon/text.
+- Preserved the existing floating navigation markup, destinations, links, four visible items, responsive fixed-position behaviour, and desktop styling.
+- Bumped the homepage stylesheet reference for `windows-fluent-monochrome-mobile.css` from v10 to v11 so iPhone Safari fetches the updated CSS instead of reusing the previous cached response.
+- Files: `windows-fluent-monochrome-mobile.css`, `index.html`, `PROJECT_MEMORY.md`. PR #471 validation passed at source/check level; live visual verification and deployment remain pending.
