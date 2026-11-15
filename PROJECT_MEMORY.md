@@ -303,3 +303,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 ## 2026-11-16 — Bust the mobile hero overlay stylesheet cache
 - Updated the homepage reference to hero-motion-repair.css v5 so mobile browsers fetch the merged overlay-edge reset instead of reusing a cached v4 response.
 - No visual rules or desktop styling changed; the stylesheet content and all other homepage assets remain unchanged.
+
+
+## 2026-11-16 — Remove inherited left border from mobile hero overlay
+- Full homepage cascade inspection found the exact cause of the persistent left-edge line: `homepage-hero-final.css` assigns `border-left:1px solid rgba(223,242,252,.68)` to `#home.hero:after` for a scroll cue, while `hero-motion-repair.css` later reuses the same pseudo-element as a viewport-sized light overlay without clearing that border.
+- Explicitly reset border, border-left, radius, outline, shadow and padding on the mobile `#home.hero::after` overlay. This removes the inherited scroll-cue edge while preserving the overlay gradients and animation.
+- Bumped the homepage stylesheet reference to v6 to bypass cached v5 CSS. Desktop styling, hero image, promotion card, ticker and hero content remain unchanged.
+- Exact cause identified from source; browser screenshot verification on iPhone remains pending.
