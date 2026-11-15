@@ -230,3 +230,8 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 ## 2026-11-16 — Change Featured Travel Photography intro to matte black
 - Changed only the intro sentence text color from pure black to matte black (`#1C1C1C`).
 - Preserved the sentence, background, heading, carousel, imagery, layout, and responsive behaviour. Files: `featured-travel-photography.css`, `PROJECT_MEMORY.md`. PR review and deployment verification pending; no production deployment performed.
+
+## 2026-11-16 — Lower Featured Travel Photography images slightly on mobile
+- Shifted only the mobile Featured Travel Photography carousel/images 6px downward by changing its relative top offset from -14px to -8px.
+- Kept desktop positioning, heading and intro text, dots, hint, image content, carousel behaviour and all other homepage sections unchanged.
+- Files: `featured-travel-photography.css`, `PROJECT_MEMORY.md`. PR review pending; no production deployment performed.
