@@ -169,3 +169,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Mobile-only; desktop, promotion card, service row, mountain artwork, ticker content and animation unchanged.
 - Supersedes the previous attempt to place the ticker at the mountain artwork's upper ridge.
 - PR #436 updated; validation and deployment verification pending.
+
+
+## 2026-11-16 — Center mobile destination ticker between promo and mountain artwork
+- Adjusted only the mobile destination ticker's visual position: shifted it upward 12px from its prior position immediately below the Winter Spiti promotion card, placing it more centrally in the gap before the mountain artwork.
+- Retained normal document flow, foreground stacking, 10px top margin, ticker content and animation; desktop remains unchanged.
+- Updated the existing ticker placement PR #436. Validation and deployment status remain pending.
