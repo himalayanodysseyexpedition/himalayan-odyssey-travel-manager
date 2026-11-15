@@ -682,27 +682,27 @@ html body > header.menu-open .header-inner > nav.glass-nav > a{color:#fff!import
     transform-origin:left center!important;
     pointer-events:none!important;
   }
-  html body > header .header-menu-toggle .burger-line:nth-of-type(2){
+  html body > header .header-menu-toggle .burger-line:nth-child(2){
     top:8px!important;
   }
-  html body > header .header-menu-toggle .burger-line:nth-of-type(3){
+  html body > header .header-menu-toggle .burger-line:nth-child(3){
     top:50%!important;
     transform:translateY(-50%)!important;
   }
-  html body > header .header-menu-toggle .burger-line:nth-of-type(4){
+  html body > header .header-menu-toggle .burger-line:nth-child(4){
     top:calc(100% - 8px)!important;
     transform:translateY(-100%)!important;
   }
-  html body > header .header-menu-toggle[aria-expanded="true"] .burger-line:nth-of-type(2){
+  html body > header .header-menu-toggle[aria-expanded="true"] .burger-line:nth-child(2){
     top:8px!important;
     left:14px!important;
     transform:rotate(45deg)!important;
   }
-  html body > header .header-menu-toggle[aria-expanded="true"] .burger-line:nth-of-type(3){
+  html body > header .header-menu-toggle[aria-expanded="true"] .burger-line:nth-child(3){
     width:0!important;
     opacity:0!important;
   }
-  html body > header .header-menu-toggle[aria-expanded="true"] .burger-line:nth-of-type(4){
+  html body > header .header-menu-toggle[aria-expanded="true"] .burger-line:nth-child(4){
     top:calc(100% - 8px)!important;
     left:14px!important;
     transform:rotate(-45deg)!important;
