@@ -363,3 +363,13 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Added a mobile-only CSS override for the generated `.mobile-app-dock`: solid white capsule, black icons and labels, and a black circular WhatsApp control with a white icon and label. Bumped the homepage stylesheet reference from v11 to v12 to force mobile browsers to fetch the corrected CSS.
 - Preserved the JavaScript-generated links, item order, route/active-state logic, scroll hide/show behaviour, and dock positioning. Desktop dock styling and website content remain unchanged.
 - Files: `windows-fluent-monochrome-mobile.css`, `PROJECT_MEMORY.md`. PR and CI review pending; visual confirmation on an iPhone remains pending.
+
+
+## 2026-11-16 — iOS glass / black-and-white mobile floating dock
+- Applied the selected iOS Floating Glass + Black & White design to the actual JavaScript-injected `.mobile-app-dock`.
+- Dock surface: translucent white glass, 26px blur, subtle white border, soft shadow and 28px capsule corners.
+- Navigation: black Home / Explore / Packages icons and labels; active destination gets a restrained light-grey highlight.
+- WhatsApp: black circular icon with white glyph; its label remains black below the icon.
+- Preserved the four generated navigation destinations, links, active-state logic, safe-area positioning and existing scroll hide/reveal behaviour.
+- New dedicated stylesheet is loaded last in the homepage head to override legacy styles. CSS is scoped to mobile widths only; desktop is unchanged.
+- Files: `mobile-ios-glass-monochrome-dock.css`, `index.html`, `PROJECT_MEMORY.md`. Browser/device visual verification pending.
