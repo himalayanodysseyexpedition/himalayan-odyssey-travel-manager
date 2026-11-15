@@ -95,6 +95,7 @@
     }
 
     const applyOpenStyles = () => {
+      const mobileMenu = window.matchMedia("(max-width: 760px)").matches;
       header.style.setProperty("background", "#000", "important");
       header.style.setProperty("background-color", "#000", "important");
       header.style.setProperty("background-image", "none", "important");
@@ -136,12 +137,11 @@
         a.style.setProperty("color", "#fff", "important");
         a.style.setProperty("-webkit-text-fill-color", "#fff", "important");
         a.style.setProperty("background", "transparent", "important");
-        a.style.setProperty("border-radius", "0", "important");
-        a.style.setProperty("border", "0", "important");
-        a.style.setProperty("backdrop-filter", "none", "important");
-        a.style.setProperty("-webkit-backdrop-filter", "none", "important");
+        a.style.setProperty("border-radius", mobileMenu ? "0" : "9px", "important");
+        a.style.setProperty("border", mobileMenu ? "0" : "1px solid transparent", "important");
+        a.style.setProperty("backdrop-filter", mobileMenu ? "none" : "blur(12px)", "important");
+        a.style.setProperty("-webkit-backdrop-filter", mobileMenu ? "none" : "blur(12px)", "important");
         a.style.setProperty("text-decoration", "none", "important");
-        a.style.setProperty("border", "1px solid transparent", "important");
       });
     };
 
