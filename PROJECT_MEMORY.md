@@ -154,3 +154,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Reduced the mobile-only destination ticker offset from 104px to 88px, moving the ticker 16px upward after the prior placement felt too low.
 - Kept the service buttons, desktop layout, ticker content and animation unchanged.
 - PR and checks pending; no production deployment performed.
+
+
+## 2026-11-16 — Place mobile destination ticker above mountain artwork
+- Removed the previous 88px downward offset from the mobile homepage destination ticker and raised it to its natural position at the upper edge of the mountain artwork.
+- Set the ticker's mobile stacking order above the mountain layer so it remains visually in the foreground.
+- Kept desktop layout, mountain graphics, service buttons, ticker content and animation unchanged.
+- PR and checks pending; deployment not yet verified.
