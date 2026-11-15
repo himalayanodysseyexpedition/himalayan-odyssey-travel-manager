@@ -298,3 +298,8 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - After the user supplied a fresh iPhone screenshot, identified legacy edge styling on the mobile hero image pseudo-element as the likely source of the narrow grey-white strip.
 - Explicitly reset the mobile image overlay's border, radius, outline and box shadow while retaining its existing inset, image URL, gradients, crop and animation.
 - Scoped to the mobile hero pseudo-element only; desktop and hero content remain unchanged. Visual confirmation after publish is still required.
+
+
+## 2026-11-16 — Bust the mobile hero overlay stylesheet cache
+- Updated the homepage reference to hero-motion-repair.css v5 so mobile browsers fetch the merged overlay-edge reset instead of reusing a cached v4 response.
+- No visual rules or desktop styling changed; the stylesheet content and all other homepage assets remain unchanged.
