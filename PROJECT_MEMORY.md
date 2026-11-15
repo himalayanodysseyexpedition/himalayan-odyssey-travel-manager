@@ -134,5 +134,5 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Added a separate homepage carousel directly below the hero, independent of Destination Photos. Uses only existing site images: `/spiti.jpg`, `/kinnaur.jpg`, `/narkanda.jpg`, and `/manali.jpg`; no new or generated photos.
 - Includes 10-second autoplay, touch/pointer swipe, keyboard arrows, active-slide scaling, dots, pause behaviour and reduced-motion support.
 - Added independent admin create/edit/replace/reorder/publish/unpublish/delete controls and a dedicated additive Supabase migration. Migration is not applied; requires separate owner approval and backup/rollback review.
-- Fresh conflict-resolution branch is based on current main commit `a677ba378db358369812bb74688a9ffbb6e7901d`; original PR #429 remains unchanged pending replacement PR review.
+- Fresh conflict-resolution branch is based on current main commit `a677ba378db358369812bb74688a9ffbb6e7901d`; original conflicted PR #429 was closed as superseded by replacement PR #432.
 - Browser/device and Supabase migration verification pending; no deployment performed.
