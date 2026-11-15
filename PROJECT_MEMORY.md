@@ -136,3 +136,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Added independent admin create/edit/replace/reorder/publish/unpublish/delete controls and a dedicated additive Supabase migration. Migration is not applied; requires separate owner approval and backup/rollback review.
 - Fresh conflict-resolution branch is based on current main commit `a677ba378db358369812bb74688a9ffbb6e7901d`; original conflicted PR #429 was closed as superseded by replacement PR #432.
 - Browser/device and Supabase migration verification pending; no deployment performed.
+
+## 2026-11-16 — Remove cinematic homepage opening
+- Removed the full-screen first-visit cinematic overlay, pre-paint session trigger, skip/timer markup and homepage script/style references from `index.html` at the user's request.
+- Preserved the existing homepage hero, photography, featured gallery, navigation, scroll animations and all other site functionality.
+- Dedicated CSS/JS asset files remain in the repository but are no longer loaded by the homepage; they are inert unless referenced elsewhere.
+- PR and automated verification pending; no deployment performed.
