@@ -6828,9 +6828,8 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
     will-change:transform;
     isolation:isolate;
   }
-  html body #home .mobile-next-departure::after,
-  html body #upcoming-packages .group-departure-card::after{
-    content:"";
+  html body #home .mobile-next-departure .home-tour-glare-layer,
+  html body #upcoming-packages .group-departure-card .home-tour-glare-layer{
     position:absolute;
     inset:0;
     z-index:5;
@@ -6846,8 +6845,8 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
     transition:transform .06s linear,box-shadow .2s ease;
     box-shadow:0 22px 48px rgba(0,0,0,.28);
   }
-  html body #home .mobile-next-departure.is-home-tour-tilting::after,
-  html body #upcoming-packages .group-departure-card.is-home-tour-tilting::after{opacity:1}
+  html body #home .mobile-next-departure.is-home-tour-tilting .home-tour-glare-layer,
+  html body #upcoming-packages .group-departure-card.is-home-tour-tilting .home-tour-glare-layer{opacity:1}
 }
 @media(prefers-reduced-motion:reduce){
   html body #home .mobile-next-departure,
@@ -6874,6 +6873,12 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
     if(!card)return;
     if(active&&active!==card)reset(active);
     active=card;
+    if(!card.querySelector(":scope > .home-tour-glare-layer")){
+      const glare=document.createElement("span");
+      glare.className="home-tour-glare-layer";
+      glare.setAttribute("aria-hidden","true");
+      card.appendChild(glare);
+    }
     card.classList.add("is-home-tour-tilting");
     const rect=card.getBoundingClientRect();
     const x=Math.max(0,Math.min(1,(event.clientX-rect.left)/rect.width));
