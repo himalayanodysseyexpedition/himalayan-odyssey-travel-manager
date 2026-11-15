@@ -120,3 +120,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Intro is shown once per browser tab session; reloads/navigation within the same tab do not replay it. Respects `prefers-reduced-motion` and avoids autoplay audio. The existing homepage remains in the document underneath the overlay for SEO and normal page loading.
 - Scope: homepage only. Existing header, hero, cards, navigation, admin, Supabase, enquiries, bookings, payments, and deployment configuration unchanged.
 - Files: `index.html`, `cinematic-opening.css`, `cinematic-opening.js`, this project-memory entry. PR and checks pending; no deployment performed.
+
+
+## 2026-11-16 — Shorten cinematic homepage intro
+- Adjusted the existing homepage opening sequence from 5 seconds to approximately 2.6 seconds total: the timed hold ends at 2.15 seconds and the overlay fades out over 0.45 seconds.
+- Shortened the background camera/progress animation to 2.1 seconds and the DOM cleanup delay to match the faster close.
+- No changes to the logo, imagery, intro copy, homepage content, admin, Supabase, navigation, SEO or deployment configuration.
+- Implementation PR and checks pending; no production deployment performed.
