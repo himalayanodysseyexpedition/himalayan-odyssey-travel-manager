@@ -240,3 +240,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Shifted only the mobile carousel/images another 6px downward by changing its relative top offset from -8px to -2px.
 - Desktop positioning and all headings, text, dots, hints, image content and carousel behaviour remain unchanged.
 - Files: `featured-travel-photography.css`, `PROJECT_MEMORY.md`. PR review pending; no production deployment performed.
+
+
+## 2026-11-16 — Force a clearer downward shift for mobile Featured Travel Photography images
+- The previous relative offset (`top:-2px`) produced no clearly visible downward movement for the user. Increased the mobile carousel offset to `top:10px!important`, a 12px downward change from the previous setting, and bumped the stylesheet URL to `v=3` to bypass cached CSS.
+- Only the mobile Featured Travel Photography carousel positioning and its stylesheet cache version changed; desktop layout and all content/behaviour remain unchanged.
+- PR review and verification pending; no production deployment performed.
