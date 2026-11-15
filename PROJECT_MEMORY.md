@@ -286,3 +286,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Replaced the earlier 1px hero width/margin nudge with a mobile-only full-viewport hero width/alignment rule (`100vw`, centered viewport margins) to eliminate any parent-container gutter at the image edge. Kept the hero border-left disabled and extended only the existing image pseudo-element 2px beyond each horizontal edge to prevent subpixel gaps.
 - No hero content, promo card, ticker, navigation, image asset, animation, or desktop styles changed. Updated the linked CSS cache key from v2 to v3.
 - Visual confirmation on the user's iPhone remains pending.
+
+
+## 2026-11-16 — Mobile hero left-edge correction (pending review)
+- Live HTML and CSS were fetched from the public site; the deployed stylesheet v3 still used a `100vw` width plus centered negative viewport margins on the homepage hero, which is a direct child of `body`.
+- Replaced that viewport breakout with normal `width:100%` sizing, zero horizontal margins, border-box sizing and no border. This removes the unnecessary viewport-width/negative-margin calculation while keeping the mobile-only hero image, overlays, content, animation and desktop layout unchanged.
+- Updated the stylesheet cache key to v4. Browser-level iPhone visual confirmation is still pending because the available remote browser session could not start; the live HTML/CSS source fetch succeeded.
