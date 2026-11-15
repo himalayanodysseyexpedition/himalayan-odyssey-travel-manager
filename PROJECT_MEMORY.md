@@ -171,3 +171,8 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Removed the homepage-only mobile 3D Our Destinations section from `index.html`; the dedicated `/destinations/` page and its hamburger-menu link remain unchanged.
 - The removed section was mobile-only; desktop homepage content was already unaffected. No destination page, destination data, menu navigation, Supabase data, SEO routes, or other homepage sections were changed.
 - PR and verification pending; no deployment performed.
+
+## 2026-11-16 — Lower mobile hero destination ticker by 6px
+- Changed only the mobile ticker's relative vertical offset from -12px to -6px, moving it 6px lower within the gap between the Winter Spiti promotion card and mountain artwork.
+- Kept ticker z-index, margin, text, animation, service row, promotion card, mountain artwork and desktop layout unchanged.
+- Files: `index.html`, `PROJECT_MEMORY.md`. PR and validation pending; no deployment performed.
