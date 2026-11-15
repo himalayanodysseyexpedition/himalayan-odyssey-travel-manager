@@ -279,3 +279,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - User reported a thin white vertical line along the left edge of the mobile hero after the new background image appeared.
 - Added a mobile-only 1px full-bleed extension to `#home.hero` (width calc(100% + 1px), margin-left -1px) and explicitly removed any left border. The existing hero image, pseudo-element crop, content and animations are unchanged.
 - Desktop rules are outside the mobile media query and remain untouched. Browser visual verification remains pending.
+
+
+## 2026-11-16 — Target mobile hero image left edge only
+- User clarified the thin white line is confined to the left edge of the hero image and appeared with both the previous and current background images; therefore the image asset is not the cause.
+- Replaced the earlier 1px hero width/margin nudge with a mobile-only full-viewport hero width/alignment rule (`100vw`, centered viewport margins) to eliminate any parent-container gutter at the image edge. Kept the hero border-left disabled and extended only the existing image pseudo-element 2px beyond each horizontal edge to prevent subpixel gaps.
+- No hero content, promo card, ticker, navigation, image asset, animation, or desktop styles changed. Updated the linked CSS cache key from v2 to v3.
+- Visual confirmation on the user's iPhone remains pending.
