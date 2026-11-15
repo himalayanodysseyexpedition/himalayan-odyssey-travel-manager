@@ -1847,6 +1847,7 @@ body.guest-itinerary-popup-open{overflow:hidden}
 </header>
 <!-- HERO -->
 <div class="hero" id="home">
+  <img class="hero-ken-burns-photo" src="/IMG_8475.jpeg?v=2" alt="" aria-hidden="true" decoding="async" fetchpriority="high">
   <div class="hero-content">
     <div class="mobile-tibetan-flag-line" aria-hidden="true"></div>
     <h1 class="hero-animated-heading"><span class="hero-heading-static hero-heading-prefix">The</span><span class="hero-word-slot"><span id="heroRotatingWord" class="hero-word-rotator word-himalayas" aria-label="Himalayas are">Himalayas are</span></span><span class="hero-heading-static hero-heading-suffix">calling</span></h1>
@@ -7075,10 +7076,9 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 </style>
 
 
-<style id="mobile-hero-single-background-edge-fix-v1">
-/* Final mobile hero paint layer: use the hero element itself for the photograph.
-   This avoids a transformed pseudo-element edge and removes the stale pseudo
-   border-left/padding inherited from the earlier scroll-indicator rule. */
+<style id="mobile-hero-single-background-edge-fix-v2">
+/* Mobile hero: dedicated photo element gives Ken Burns a transformable image layer.
+   This avoids all legacy background-size: ... !important rules on #home.hero. */
 @media screen and (max-width:760px){
   html body #home.hero{
     box-sizing:border-box!important;
@@ -7088,21 +7088,51 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
     border:0!important;
     outline:0!important;
     box-shadow:none!important;
+    overflow:hidden!important;
+    isolation:isolate!important;
     background-color:#050f1d!important;
-    background-image:
-      linear-gradient(90deg,rgba(16,36,59,.88) 0%,rgba(16,36,59,.62) 47%,rgba(16,36,59,.08) 100%),
-      linear-gradient(0deg,rgba(16,36,59,.46),transparent 45%),
-      url("/IMG_8475.jpeg?v=2")!important;
-    background-position:center,center,56% 40%;
-    background-size:100% 100%,100% 100%,112% 112%;
-    will-change:background-position,background-size;
+    background-image:none!important;
+    background-size:auto!important;
+    background-position:center!important;
     background-repeat:no-repeat!important;
-    background-origin:border-box!important;
-    background-clip:border-box!important;
     background-attachment:scroll!important;
-    animation:mobileHeroKenBurnsSafari 22s ease-in-out infinite alternate!important;
   }
-  html body #home.hero::before,
+  html body #home.hero > .hero-ken-burns-photo{
+    position:absolute!important;
+    display:block!important;
+    inset:-8%!important;
+    z-index:0!important;
+    width:116%!important;
+    max-width:none!important;
+    height:116%!important;
+    max-height:none!important;
+    margin:0!important;
+    padding:0!important;
+    border:0!important;
+    object-fit:cover!important;
+    object-position:58% 42%!important;
+    pointer-events:none!important;
+    user-select:none!important;
+    transform-origin:50% 50%!important;
+    transform:scale(1.04) translate3d(0,0,0)!important;
+    will-change:transform;
+    animation:hoMobileKenBurnsPhoto 26s cubic-bezier(.45,0,.55,1) infinite alternate!important;
+  }
+  html body #home.hero::before{
+    content:""!important;
+    display:block!important;
+    position:absolute!important;
+    inset:0!important;
+    z-index:1!important;
+    margin:0!important;
+    padding:0!important;
+    border:0!important;
+    background:
+      linear-gradient(90deg,rgba(16,36,59,.88) 0%,rgba(16,36,59,.62) 47%,rgba(16,36,59,.08) 100%),
+      linear-gradient(0deg,rgba(16,36,59,.46),transparent 45%)!important;
+    pointer-events:none!important;
+    animation:none!important;
+  }
   html body #home.hero::after{
     content:none!important;
     display:none!important;
@@ -7112,11 +7142,14 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
     background:none!important;
   }
 }
-@keyframes mobileHeroKenBurnsSafari{
-  0%{background-position:center,center,54% 40%;background-size:100% 100%,100% 100%,112% 112%}
-  100%{background-position:center,center,60% 46%;background-size:100% 100%,100% 100%,124% 124%}
+@keyframes hoMobileKenBurnsPhoto{
+  0%{transform:scale(1.04) translate3d(0,0,0)}
+  100%{transform:scale(1.20) translate3d(-1.2%,.7%,0)}
 }
 @media screen and (max-width:760px) and (prefers-reduced-motion:reduce){
-  html body #home.hero{animation:none!important}
+  html body #home.hero > .hero-ken-burns-photo{
+    animation:none!important;
+    transform:scale(1.08)!important;
+  }
 }
 </style>
