@@ -96,3 +96,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Kept the existing native button and uses its `aria-expanded` state instead of adding a nested checkbox/label, preserving keyboard activation, screen-reader state, and existing open/close handlers.
 - Desktop continues to display the existing SVG hamburger icon. The mobile dropdown, outside-click, Escape, and navigation interactions are unchanged.
 - Files: `site-navigation.js`, `hamburger-header-final.css`. Mobile browser/device visual verification pending.
+
+
+## 2026-11-15 — FH638-inspired mobile hamburger dropdown styling
+- Styled the opened mobile navigation as a compact dark menu with individual icon-and-label rows, subtle hover/focus state, and a blue active indicator inspired by the supplied Uiverse FH638 example.
+- Kept the actual site navigation destinations and labels (Destinations, Cabs, Hotels & Properties); did not substitute the demo's Public profile / Account / Appearance / Accessibility / Notifications entries.
+- Scoped dropdown presentation to mobile screens up to 760px. Desktop navigation and the hamburger open/close behaviour remain unchanged.
+- Updated the mobile stylesheet cache version to v17.
