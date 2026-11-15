@@ -104,3 +104,11 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Scoped dropdown visuals to mobile screens up to 760px; desktop navigation and existing menu open/close behavior remain unchanged.
 - Bumped the shared hamburger stylesheet URL to v17 to avoid stale CSS cache.
 - Live deployment pending merge and GitHub Pages workflow verification.
+
+
+## 2026-11-15 — Apply FH638 hamburger dropdown to desktop
+- Extended the same compact dark FH638-inspired vertical navigation menu to desktop screens (761px and wider).
+- Desktop menu uses the same menu labels, icons, row spacing, focus/hover treatment and blue active indicator as mobile.
+- Applied the three-bar animated hamburger icon to desktop as well, morphing into an X while open.
+- Updated shared navigation logic to apply dropdown styles at all viewport widths and retain the menu when resizing; outside-click, Escape and link-close behaviour remain intact.
+- Mobile styling remains unchanged; desktop change is limited to the hamburger control and its opened dropdown. Stylesheet cache URL bumped to v18.
