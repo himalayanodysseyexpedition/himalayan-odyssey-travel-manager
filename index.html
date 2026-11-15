@@ -1783,6 +1783,37 @@ body.guest-itinerary-popup-open{overflow:hidden}
   }
 }
 </style>
+
+<style id="winter-spiti-promo-holographic-effect">
+/* Mobile-only decorative holographic title on the featured Winter Spiti promo photo. */
+@media (max-width:760px){
+  html body #upcoming-packages .winter-spiti-featured .group-departure-photo{position:relative;isolation:isolate}
+  html body #upcoming-packages .winter-spiti-featured .winter-spiti-holo{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    perspective:900px;pointer-events:none;z-index:1;overflow:hidden;
+  }
+  html body #upcoming-packages .winter-spiti-featured .winter-spiti-holo__layer{
+    position:absolute;font:900 clamp(42px,13vw,58px)/1 Inter,"Helvetica Neue",Arial,sans-serif;
+    letter-spacing:-3px;white-space:nowrap;color:transparent;
+    -webkit-text-stroke:1px rgba(0,123,255,.7);
+    background:linear-gradient(90deg,rgba(0,123,255,.18),rgba(0,123,255,.92) 35%,rgba(0,180,255,.7) 60%,rgba(0,123,255,.22));
+    -webkit-background-clip:text;background-clip:text;
+    filter:drop-shadow(0 8px 18px rgba(0,0,0,.55));
+    transform-style:preserve-3d;animation:winter-spiti-holo-wobble 6.2s ease-in-out infinite;
+  }
+  html body #upcoming-packages .winter-spiti-featured .winter-spiti-holo__back{opacity:.18;filter:blur(1px);transform:translateZ(-70px)}
+  html body #upcoming-packages .winter-spiti-featured .winter-spiti-holo__mid{opacity:.42;filter:blur(.4px);transform:translateZ(-34px)}
+  html body #upcoming-packages .winter-spiti-featured .winter-spiti-holo__front{opacity:.82;transform:translateZ(0)}
+  html body #upcoming-packages .winter-spiti-featured .group-departure-status{z-index:2}
+}
+@keyframes winter-spiti-holo-wobble{
+  0%,100%{transform:rotateX(16deg) rotateY(-18deg)}
+  50%{transform:rotateX(18deg) rotateY(18deg)}
+}
+@media (prefers-reduced-motion:reduce){
+  html body #upcoming-packages .winter-spiti-featured .winter-spiti-holo__layer{animation:none!important}
+}
+</style>
 </head>
 
 <body>
@@ -2922,7 +2953,7 @@ loadHotels();
    const msg=encodeURIComponent("Hello Himalayan Odyssey Expedition, I am interested in the "+(full?"next departure for ":"booking ")+item.title+" to "+item.destination+". Departure: "+date(item.start_date)+(item.end_date?" to "+date(item.end_date):"")+". Duration: "+(item.duration||"Please confirm")+". Package price: "+money(item.price_per_person)+" per person. Travellers joined: "+joined+" of "+capacity+". Please share "+(full?"the next available departure and booking details.":"booking details, availability and payment process."));
    const image=item.image_url||"https://himalayanexpedition.co.in/spiti.jpg";
    const featuredWinterSpiti=/winter\s+spiti/i.test(item.title||"");
-   return '<article class="group-departure-card'+(featuredWinterSpiti?" winter-spiti-featured":"")+'"><div class="group-departure-photo"><img src="'+safe(image)+'" alt="'+safe(item.destination)+' group tour" loading="lazy" decoding="async"><span class="group-departure-status">'+(full?"GROUP FULL":"OPEN FOR BOOKINGS")+'</span></div><div class="group-departure-body"><small>'+safe(item.destination)+'</small><h3>'+safe(item.title)+'</h3><div class="group-departure-date">'+date(item.start_date)+(item.end_date?" – "+date(item.end_date):"")+(item.duration?" · "+safe(item.duration):"")+'</div><div class="group-departure-meta"><span>Package price</span><strong>'+money(item.price_per_person)+' / person</strong></div><div class="group-occupancy"><div class="group-occupancy-label"><span>Travellers joined</span><strong>'+joined+' / '+capacity+'</strong></div><div class="group-occupancy-track"><span style="width:'+pct+'%"></span></div></div><p class="group-departure-highlights">'+safe(item.highlights||"A memorable Himalayan group journey with local support.")+'</p><a class="group-departure-cta" href="https://wa.me/919816929669?text='+msg+'" target="_blank" rel="noopener noreferrer">'+(full?"Ask About Next Departure":"Enquire / Book This Group")+'</a></div></article>';
+   return '<article class="group-departure-card'+(featuredWinterSpiti?" winter-spiti-featured":"")+'"><div class="group-departure-photo"><img src="'+safe(image)+'" alt="'+safe(item.destination)+' group tour" loading="lazy" decoding="async">'+(featuredWinterSpiti?'<div class="winter-spiti-holo" aria-hidden="true"><span class="winter-spiti-holo__layer winter-spiti-holo__back">SPITI</span><span class="winter-spiti-holo__layer winter-spiti-holo__mid">SPITI</span><span class="winter-spiti-holo__layer winter-spiti-holo__front">SPITI</span></div>':'')+'<span class="group-departure-status">'+(full?"GROUP FULL":"OPEN FOR BOOKINGS")+'</span></div><div class="group-departure-body"><small>'+safe(item.destination)+'</small><h3>'+safe(item.title)+'</h3><div class="group-departure-date">'+date(item.start_date)+(item.end_date?" – "+date(item.end_date):"")+(item.duration?" · "+safe(item.duration):"")+'</div><div class="group-departure-meta"><span>Package price</span><strong>'+money(item.price_per_person)+' / person</strong></div><div class="group-occupancy"><div class="group-occupancy-label"><span>Travellers joined</span><strong>'+joined+' / '+capacity+'</strong></div><div class="group-occupancy-track"><span style="width:'+pct+'%"></span></div></div><p class="group-departure-highlights">'+safe(item.highlights||"A memorable Himalayan group journey with local support.")+'</p><a class="group-departure-cta" href="https://wa.me/919816929669?text='+msg+'" target="_blank" rel="noopener noreferrer">'+(full?"Ask About Next Departure":"Enquire / Book This Group")+'</a></div></article>';
   }).join("");
   const count=document.getElementById("groupDeparturesCount");
   const step=()=>{const card=rail.querySelector(".group-departure-card");return card?card.getBoundingClientRect().width+parseFloat(getComputedStyle(rail).gap||0):280;};
