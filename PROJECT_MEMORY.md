@@ -142,3 +142,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Preserved the existing homepage hero, photography, featured gallery, navigation, scroll animations and all other site functionality.
 - Dedicated CSS/JS asset files remain in the repository but are no longer loaded by the homepage; they are inert unless referenced elsewhere.
 - PR and automated verification pending; no deployment performed.
+
+
+## 2026-11-16 — Lower mobile hero destination ticker
+- Shifted only the homepage destination ticker down by an additional 8px on mobile (from its existing 96px offset to 104px).
+- Kept the Cabs / Hotels / Packages service row, desktop layout, ticker content and animation unchanged.
+- PR pending; no production deployment performed.
