@@ -210,6 +210,7 @@
 (() => {
   "use strict";
   const path = location.pathname.toLowerCase();
+  if (!window.matchMedia("(max-width: 760px)").matches) return;
   if (/\/(admin|dashboard|login)(\/|\.|$)/.test(path) || /(^|\/)(admin|dashboard|login)\.html$/.test(path)) return;
   if (window.__HOE_AI_ASSISTANT_ASSETS__) return;
   window.__HOE_AI_ASSISTANT_ASSETS__ = true;
