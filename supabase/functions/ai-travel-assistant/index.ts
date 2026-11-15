@@ -59,7 +59,9 @@ async function rest(path: string, method = "GET", body?: unknown, prefer?: strin
     method, headers, body: body === undefined ? undefined : JSON.stringify(body),
   });
   if (!response.ok) throw new Error("Database request failed.");
-  return response.status === 204 ? null : await response.json();
+  if (response.status === 204) return null;
+  const responseText = await response.text();
+  return responseText ? JSON.parse(responseText) : null;
 }
 
 function safeText(value: unknown, max = 1200) {
