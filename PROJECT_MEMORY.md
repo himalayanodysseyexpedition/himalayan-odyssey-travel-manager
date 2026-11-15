@@ -127,3 +127,12 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Shortened the background camera/progress animation to 2.1 seconds and the DOM cleanup delay to match the faster close.
 - No changes to the logo, imagery, intro copy, homepage content, admin, Supabase, navigation, SEO or deployment configuration.
 - Implementation PR and checks pending; no production deployment performed.
+
+
+## 2026-11-16 — Independent homepage Featured Travel Photography (conflict-resolved PR)
+- Rebased the gallery implementation conceptually onto the current main snapshot after the original PR #429 became conflicted; preserved newer main-branch homepage, admin and application changes.
+- Added a separate homepage carousel directly below the hero, independent of Destination Photos. Uses only existing site images: `/spiti.jpg`, `/kinnaur.jpg`, `/narkanda.jpg`, and `/manali.jpg`; no new or generated photos.
+- Includes 10-second autoplay, touch/pointer swipe, keyboard arrows, active-slide scaling, dots, pause behaviour and reduced-motion support.
+- Added independent admin create/edit/replace/reorder/publish/unpublish/delete controls and a dedicated additive Supabase migration. Migration is not applied; requires separate owner approval and backup/rollback review.
+- Fresh conflict-resolution branch is based on current main commit `a677ba378db358369812bb74688a9ffbb6e7901d`; original conflicted PR #429 was closed as superseded by replacement PR #432.
+- Browser/device and Supabase migration verification pending; no deployment performed.
