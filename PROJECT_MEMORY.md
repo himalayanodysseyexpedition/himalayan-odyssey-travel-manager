@@ -89,3 +89,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Root cause identified in the existing global CSS: `.btn:after` creates an inset pseudo-element with a white/ice border. The previous button reset removed the real border but did not disable this pseudo-element.
 - Added narrowly scoped pseudo-element resets for buttons/links inside the four requested homepage card groups. Existing pill radius, button fill, text styling, hover colours and click behaviour are preserved.
 - Implementation is on branch `fix/homepage-card-button-white-inset-border`; PR and deployment verification pending.
+
+
+## 2026-11-15 — Mobile hamburger animation (Cevorob-inspired)
+- Updated the public-site mobile hamburger control (screens up to 760px) to use three animated CSS bars that morph into a close icon when the menu opens.
+- Kept the existing native button and uses its `aria-expanded` state instead of adding a nested checkbox/label, preserving keyboard activation, screen-reader state, and existing open/close handlers.
+- Desktop continues to display the existing SVG hamburger icon. The mobile dropdown, outside-click, Escape, and navigation interactions are unchanged.
+- Files: `site-navigation.js`, `hamburger-header-final.css`. Mobile browser/device visual verification pending.
