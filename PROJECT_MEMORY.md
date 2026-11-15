@@ -310,3 +310,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Explicitly reset border, border-left, radius, outline, shadow and padding on the mobile `#home.hero::after` overlay. This removes the inherited scroll-cue edge while preserving the overlay gradients and animation.
 - Bumped the homepage stylesheet reference to v6 to bypass cached v5 CSS. Desktop styling, hero image, promotion card, ticker and hero content remain unchanged.
 - Exact cause identified from source; browser screenshot verification on iPhone remains pending.
+
+
+## 2026-11-16 — Consolidate mobile hero photograph into one paint layer
+- Full source-order audit found the mobile hero photo was painted twice: the hero element received /IMG_8475.jpeg from a late inline style, while hero-motion-repair.css separately painted the same image on a transformed ::before pseudo-element. The earlier final stylesheet was in the document head, but additional inline style blocks followed it in the HTML source.
+- The pseudo-element also inherited positioning/decorative properties from earlier hero rules (including the scroll-indicator ::after border-left), so resetting only the hero box width/border and only the ::before border did not remove all competing paint layers.
+- Added a final mobile-only rule at the very end of index.html: the hero element itself is now the single photo/gradient layer, both hero pseudo-elements are disabled, and a gentle background-position pan preserves subtle photo motion without a transformed image edge. Existing real child cloud and mountain overlays remain.
+- Desktop styles, hero content, promotion card, ticker, header, and other homepage sections are unchanged. Visual confirmation on an iPhone is still required.
