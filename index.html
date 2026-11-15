@@ -6811,3 +6811,88 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   }
 }
 </style>
+
+
+<style id="mobile-homepage-upcoming-tour-holographic-v1">
+/* Touch-driven 3D holographic treatment for Homepage upcoming-departure cards only. */
+@media screen and (max-width:760px){
+  html body #home .mobile-next-departure,
+  html body #upcoming-packages .group-departure-card{
+    --home-tour-tilt-x:0deg;
+    --home-tour-tilt-y:0deg;
+    position:relative;
+    transform:perspective(900px) rotateX(var(--home-tour-tilt-x)) rotateY(var(--home-tour-tilt-y));
+    transform-style:preserve-3d;
+    backface-visibility:hidden;
+    transition:transform .22s ease-out,box-shadow .3s ease;
+    will-change:transform;
+    isolation:isolate;
+  }
+  html body #home .mobile-next-departure::after,
+  html body #upcoming-packages .group-departure-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:5;
+    border-radius:inherit;
+    pointer-events:none;
+    opacity:0;
+    background:radial-gradient(circle at var(--home-tour-glare-x,50%) var(--home-tour-glare-y,50%),rgba(255,255,255,.28),rgba(169,216,242,.12) 18%,transparent 58%);
+    mix-blend-mode:screen;
+    transition:opacity .2s ease;
+  }
+  html body #home .mobile-next-departure.is-home-tour-tilting,
+  html body #upcoming-packages .group-departure-card.is-home-tour-tilting{
+    transition:transform .06s linear,box-shadow .2s ease;
+    box-shadow:0 22px 48px rgba(0,0,0,.28);
+  }
+  html body #home .mobile-next-departure.is-home-tour-tilting::after,
+  html body #upcoming-packages .group-departure-card.is-home-tour-tilting::after{opacity:1}
+}
+@media(prefers-reduced-motion:reduce){
+  html body #home .mobile-next-departure,
+  html body #upcoming-packages .group-departure-card{transition:none!important}
+}
+</style>
+<script id="mobile-homepage-upcoming-tour-holographic-behavior">
+(() => {
+  if(!window.matchMedia("(max-width:760px)").matches)return;
+  const selector="#home .mobile-next-departure, #upcoming-packages .group-departure-card";
+  let active=null;
+  const reset=card=>{
+    if(!card)return;
+    card.classList.remove("is-home-tour-tilting");
+    card.style.setProperty("--home-tour-tilt-x","0deg");
+    card.style.setProperty("--home-tour-tilt-y","0deg");
+    card.style.setProperty("--home-tour-glare-x","50%");
+    card.style.setProperty("--home-tour-glare-y","50%");
+    if(active===card)active=null;
+  };
+  document.addEventListener("pointerdown",event=>{
+    if(event.pointerType!=="touch")return;
+    const card=event.target.closest(selector);
+    if(!card)return;
+    if(active&&active!==card)reset(active);
+    active=card;
+    card.classList.add("is-home-tour-tilting");
+    const rect=card.getBoundingClientRect();
+    const x=Math.max(0,Math.min(1,(event.clientX-rect.left)/rect.width));
+    const y=Math.max(0,Math.min(1,(event.clientY-rect.top)/rect.height));
+    card.style.setProperty("--home-tour-tilt-x",((.5-y)*9).toFixed(2)+"deg");
+    card.style.setProperty("--home-tour-tilt-y",((x-.5)*11).toFixed(2)+"deg");
+    card.style.setProperty("--home-tour-glare-x",(x*100).toFixed(1)+"%");
+    card.style.setProperty("--home-tour-glare-y",(y*100).toFixed(1)+"%");
+  },{passive:true});
+  document.addEventListener("pointermove",event=>{
+    if(!active||event.pointerType!=="touch")return;
+    const rect=active.getBoundingClientRect();
+    const x=Math.max(0,Math.min(1,(event.clientX-rect.left)/rect.width));
+    const y=Math.max(0,Math.min(1,(event.clientY-rect.top)/rect.height));
+    active.style.setProperty("--home-tour-tilt-x",((.5-y)*11).toFixed(2)+"deg");
+    active.style.setProperty("--home-tour-tilt-y",((x-.5)*13).toFixed(2)+"deg");
+    active.style.setProperty("--home-tour-glare-x",(x*100).toFixed(1)+"%");
+    active.style.setProperty("--home-tour-glare-y",(y*100).toFixed(1)+"%");
+  },{passive:true});
+  ["pointerup","pointercancel"].forEach(type=>document.addEventListener(type,()=>{if(active)reset(active)},{passive:true}));
+})();
+</script>
