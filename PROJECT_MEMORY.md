@@ -273,3 +273,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Changed only that pseudo-element's mobile background image to `/IMG_8475.jpeg?v=2`; retained its gradients, Ken Burns animation, cloud overlay, layout and reduced-motion handling.
 - Bumped the homepage stylesheet URL to `hero-motion-repair.css?v=2` to avoid stale CSS caching. The rule remains inside the existing max-width:760px media query; desktop is unchanged.
 - Browser visual verification and Pages deployment verification remain pending; no deployment performed.
+
+
+## 2026-11-16 — Remove 1px left-edge seam on mobile hero
+- User reported a thin white vertical line along the left edge of the mobile hero after the new background image appeared.
+- Added a mobile-only 1px full-bleed extension to `#home.hero` (width calc(100% + 1px), margin-left -1px) and explicitly removed any left border. The existing hero image, pseudo-element crop, content and animations are unchanged.
+- Desktop rules are outside the mobile media query and remain untouched. Browser visual verification remains pending.
