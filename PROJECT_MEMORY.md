@@ -192,3 +192,8 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Moved the homepage destination ticker down by a further 6px on mobile by changing its relative top offset from 6px to 12px.
 - Kept the ticker content, animation, promotion card, service buttons, mountain artwork and desktop layout unchanged.
 - Files: `index.html`, `PROJECT_MEMORY.md`. PR and verification pending; no production deployment performed.
+
+## 2026-11-16 — Lower mobile hero destination ticker another 6px
+- Moved the homepage destination ticker down by a further 6px on mobile by changing its relative top offset from 12px to 18px.
+- Kept ticker content, animation, promotion card, service buttons, mountain artwork and desktop layout unchanged.
+- Files: `index.html`, `PROJECT_MEMORY.md`. PR pending; no production deployment performed.
