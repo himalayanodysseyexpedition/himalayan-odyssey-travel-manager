@@ -161,3 +161,11 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Set the ticker's mobile stacking order above the mountain layer so it remains visually in the foreground.
 - Kept desktop layout, mountain graphics, service buttons, ticker content and animation unchanged.
 - PR and checks pending; deployment not yet verified.
+
+
+## 2026-11-16 — Position mobile destination ticker just below promotion card
+- Corrected the intended placement: the ticker belongs directly below the mobile Winter Spiti promotion card, not at the top of the mountain graphic.
+- Kept it in normal document flow with a 10px top gap after the promotion card and foreground stacking above the mountain artwork.
+- Mobile-only; desktop, promotion card, service row, mountain artwork, ticker content and animation unchanged.
+- Supersedes the previous attempt to place the ticker at the mountain artwork's upper ridge.
+- PR #436 updated; validation and deployment verification pending.
