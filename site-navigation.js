@@ -205,3 +205,29 @@
     init();
   }
 })();
+
+/* Site-wide AI Travel Assistant — loaded only on public website pages. */
+(() => {
+  "use strict";
+  const path = location.pathname.toLowerCase();
+  if (/\/(admin|dashboard|login)(\/|\.|$)/.test(path) || /(^|\/)(admin|dashboard|login)\.html$/.test(path)) return;
+  if (window.__HOE_AI_ASSISTANT_ASSETS__) return;
+  window.__HOE_AI_ASSISTANT_ASSETS__ = true;
+  if (!document.getElementById("hoe-ai-assistant-styles")) {
+    const css = document.createElement("link");
+    css.id = "hoe-ai-assistant-styles";
+    css.rel = "stylesheet";
+    css.href = "/ai-travel-assistant.css?v=1";
+    document.head.appendChild(css);
+  }
+  const loadScript = () => {
+    if (document.getElementById("hoe-ai-assistant-script")) return;
+    const script = document.createElement("script");
+    script.id = "hoe-ai-assistant-script";
+    script.src = "/ai-travel-assistant.js?v=1";
+    script.defer = true;
+    document.body.appendChild(script);
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", loadScript, { once: true });
+  else loadScript();
+})();
