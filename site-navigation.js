@@ -73,11 +73,12 @@
       button = document.createElement("button");
       button.className = "header-menu-toggle";
       button.type = "button";
-      button.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>';
+      button.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg><span class="burger-line" aria-hidden="true"></span><span class="burger-line" aria-hidden="true"></span><span class="burger-line" aria-hidden="true"></span>';
       inner.insertBefore(button, nav);
     } else if (button.parentElement !== inner) {
       inner.insertBefore(button, nav);
     }
+    button.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg><span class="burger-line" aria-hidden="true"></span><span class="burger-line" aria-hidden="true"></span><span class="burger-line" aria-hidden="true"></span>';
 
     button.setAttribute("aria-label", "Open navigation menu");
     button.setAttribute("aria-expanded", "false");
@@ -88,7 +89,7 @@
       const link = document.createElement("link");
       link.id = "sitewide-hamburger-stylesheet";
       link.rel = "stylesheet";
-      link.href = "/hamburger-header-final.css?v=15";
+      link.href = "/hamburger-header-final.css?v=16";
       document.head.appendChild(link);
     }
 
