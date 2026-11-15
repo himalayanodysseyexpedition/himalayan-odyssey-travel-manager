@@ -6965,3 +6965,24 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   }
 }
 </style>
+
+<style id="mobile-hero-disable-snow-dot-layers-final-v3">
+/* Final mobile-only removal of every decorative snow-dot layer over the hero photograph and mountain artwork. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-weather-motion .hero-falling-snow,
+  html body #home.hero .hero-bottom-motion .hero-mountain-snowfall,
+  html body #home.hero .hero-bottom-motion .hero-snow-specks,
+  html body #home.hero .hero-bottom-motion g.hero-snow-specks{
+    display:none!important;
+    visibility:hidden!important;
+    background:transparent!important;
+    background-image:none!important;
+    opacity:0!important;
+    animation:none!important;
+  }
+  html body #home.hero .hero-bottom-motion g.hero-snow-specks circle{
+    display:none!important;
+    opacity:0!important;
+  }
+}
+</style>
