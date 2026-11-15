@@ -6951,3 +6951,17 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   }
 }
 </style>
+
+<style id="mobile-hero-remove-all-even-dot-overlays-v2">
+/* Remove the repeated snow/dot overlays across the complete mobile hero image and mountain graphic. Keep the hero photo, clouds, mountain artwork, ticker and text intact. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-weather-motion .hero-falling-snow,
+  html body #home.hero .hero-bottom-motion .hero-mountain-snowfall,
+  html body #home.hero .hero-bottom-motion .hero-snow-specks{
+    display:none!important;
+    background-image:none!important;
+    opacity:0!important;
+    animation:none!important;
+  }
+}
+</style>
