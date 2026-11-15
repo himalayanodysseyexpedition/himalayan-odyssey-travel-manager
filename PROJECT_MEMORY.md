@@ -148,3 +148,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Shifted only the homepage destination ticker down by an additional 8px on mobile (from its existing 96px offset to 104px).
 - Kept the Cabs / Hotels / Packages service row, desktop layout, ticker content and animation unchanged.
 - PR pending; no production deployment performed.
+
+
+## 2026-11-16 — Raise mobile hero destination ticker slightly
+- Reduced the mobile-only destination ticker offset from 104px to 88px, moving the ticker 16px upward after the prior placement felt too low.
+- Kept the service buttons, desktop layout, ticker content and animation unchanged.
+- PR and checks pending; no production deployment performed.
