@@ -6940,3 +6940,14 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   html body #home.hero .hero-content .hero-destination-track{animation:none!important}
 }
 </style>
+
+<style id="mobile-hero-photo-remove-snow-dots-v1">
+/* Remove the falling-snow dot overlay from the hero photo on mobile; retain cloud motion and all other hero content. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-weather-motion .hero-falling-snow{
+    display:none!important;
+    background-image:none!important;
+    animation:none!important;
+  }
+}
+</style>
