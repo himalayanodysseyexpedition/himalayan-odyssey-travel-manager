@@ -6986,3 +6986,31 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   }
 }
 </style>
+
+<style id="mobile-hero-remove-repeating-dot-pattern-v4">
+/* Definitively remove the regularly repeated snow-dot pattern from the mobile hero photo and mountain artwork. Preserve cloud layers and all hero imagery. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-weather-motion > .hero-falling-snow,
+  html body #home.hero .hero-bottom-motion > .hero-mountain-snowfall,
+  html body #home.hero .hero-bottom-motion .hero-snow-specks,
+  html body #home.hero .hero-bottom-motion .hero-snow-specks circle{
+    display:none!important;
+    visibility:hidden!important;
+    opacity:0!important;
+    background:none!important;
+    background-image:none!important;
+    animation:none!important;
+    fill:transparent!important;
+    stroke:transparent!important;
+  }
+  html body #home.hero .hero-weather-motion > .hero-falling-snow::before,
+  html body #home.hero .hero-weather-motion > .hero-falling-snow::after,
+  html body #home.hero .hero-bottom-motion > .hero-mountain-snowfall::before,
+  html body #home.hero .hero-bottom-motion > .hero-mountain-snowfall::after{
+    content:none!important;
+    display:none!important;
+    background:none!important;
+    background-image:none!important;
+  }
+}
+</style>
