@@ -325,3 +325,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Animation pauses when the hero is off-screen or the document is hidden, caps canvas device-pixel-ratio at 1.5, and respects prefers-reduced-motion with a static particle composition.
 - Added hero-atmosphere.js, mobile canvas styling in hero-motion-repair.css, and loaded the script from index.html; bumped the hero stylesheet cache key from v6 to v7.
 - Desktop, other pages, hero image, copy, booking/enquiry actions, and hosting/deployment configuration are unchanged. Visual verification on a real iPhone remains pending.
+
+
+## 2026-11-16 — Apply Ken Burns motion to the single mobile hero image layer
+- Replaced the prior subtle background-position-only pan with a 28-second alternating Ken Burns animation on the existing single hero background layer: proportional image-height zoom from 112% to 120%, with a restrained position drift from 56%/40% to 60%/44%.
+- Kept the hero image asset, gradient overlays, starfield/snowfall canvas, hero content, departure card and ticker unchanged.
+- Mobile-only rule remains scoped to viewports up to 760px. Desktop styles and all other pages are untouched. Existing prefers-reduced-motion rule continues to disable the animation.
+- File changed: index.html. Visual verification on a real iPhone remains pending; no deployment or hosting configuration changed.
