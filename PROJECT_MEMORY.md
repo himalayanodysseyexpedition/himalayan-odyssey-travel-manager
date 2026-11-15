@@ -266,3 +266,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Removed the early override and placed a final, mobile-only background shorthand override immediately before the closing body tag, after all legacy inline styles. Added an image query version to bypass stale browser image cache.
 - Desktop remains on `/spiti.jpg`; mobile points to `/IMG_8475.jpeg?v=2`. Existing hero content, weather effects and overlays remain.
 - Browser visual verification remains pending; no claim of visual success until checked.
+
+
+## 2026-11-16 — Correct the mobile hero image animation overlay
+- Confirmed from the user's iPhone screenshot that the visible old village photo came from the separate `#home.hero::before` layer in `hero-motion-repair.css`, which still loaded `/spiti.jpg` above the parent hero background.
+- Changed only that pseudo-element's mobile background image to `/IMG_8475.jpeg?v=2`; retained its gradients, Ken Burns animation, cloud overlay, layout and reduced-motion handling.
+- Bumped the homepage stylesheet URL to `hero-motion-repair.css?v=2` to avoid stale CSS caching. The rule remains inside the existing max-width:760px media query; desktop is unchanged.
+- Browser visual verification and Pages deployment verification remain pending; no deployment performed.
