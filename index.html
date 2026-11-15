@@ -1814,31 +1814,9 @@ body.guest-itinerary-popup-open{overflow:hidden}
 <link rel="stylesheet" href="/hero-motion-repair.css?v=1">
 <link rel="stylesheet" href="/featured-travel-photography.css?v=1">
 
-<!-- Show the cinematic opening before first paint on a fresh homepage tab. -->
-<script>
-(()=>{try{if(!sessionStorage.getItem("hoe-cinematic-intro-seen")&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("cinematic-intro-pending");}catch(e){if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("cinematic-intro-pending");}})();
-</script>
-<link rel="stylesheet" href="/cinematic-opening.css?v=1">
 </head>
 
 <body>
-<!-- CINEMATIC HOMEPAGE OPENING -->
-<div id="cinematicOpening" class="cinematic-opening" role="dialog" aria-modal="true" aria-label="Himalayan Odyssey cinematic introduction">
- <div class="cinematic-opening-backdrop" aria-hidden="true"></div>
- <div class="cinematic-opening-grain" aria-hidden="true"></div>
- <div class="cinematic-opening-topline"><span>HIMACHAL PRADESH · INDIA</span><span>EST. FOR THE JOURNEY</span></div>
- <div class="cinematic-opening-content">
-  <img class="cinematic-opening-logo" src="/logo.webp" alt="Himalayan Odyssey Expedition" width="118" height="118">
-  <p class="cinematic-opening-eyebrow">PRESENTS</p>
-  <h1><span>THE JOURNEY</span><em>BEGINS</em></h1>
-  <div class="cinematic-opening-rule" aria-hidden="true"><span></span></div>
-  <p class="cinematic-opening-tagline">BEYOND THE ORDINARY. INTO THE HIMALAYAS.</p>
- </div>
- <div class="cinematic-opening-bottomline"><span>HIMALAYAN ODYSSEY EXPEDITION</span><span>EXPLORE · DISCOVER · EXPERIENCE</span></div>
- <button class="cinematic-opening-skip" type="button" id="cinematicOpeningSkip">SKIP INTRO <span aria-hidden="true">↗</span></button>
- <div class="cinematic-opening-progress" aria-hidden="true"><span></span></div>
-</div>
-
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <!-- HEADER -->
@@ -6742,7 +6720,6 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 </style>
 
 <script src="/featured-travel-photography.js?v=1" defer></script>
-<script src="/cinematic-opening.js?v=1" defer></script>
 </body>
 </html>
 
