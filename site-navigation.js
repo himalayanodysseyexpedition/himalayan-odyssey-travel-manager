@@ -136,10 +136,10 @@
         a.style.setProperty("color", "#fff", "important");
         a.style.setProperty("-webkit-text-fill-color", "#fff", "important");
         a.style.setProperty("background", "transparent", "important");
-        a.style.setProperty("border-radius", "9px", "important");
-        a.style.setProperty("border", "1px solid transparent", "important");
-        a.style.setProperty("backdrop-filter", "blur(12px)", "important");
-        a.style.setProperty("-webkit-backdrop-filter", "blur(12px)", "important");
+        a.style.setProperty("border-radius", "0", "important");
+        a.style.setProperty("border", "0", "important");
+        a.style.setProperty("backdrop-filter", "none", "important");
+        a.style.setProperty("-webkit-backdrop-filter", "none", "important");
         a.style.setProperty("text-decoration", "none", "important");
         a.style.setProperty("border", "1px solid transparent", "important");
       });
