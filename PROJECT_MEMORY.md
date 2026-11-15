@@ -154,3 +154,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Reduced the mobile-only destination ticker offset from 104px to 88px, moving the ticker 16px upward after the prior placement felt too low.
 - Kept the service buttons, desktop layout, ticker content and animation unchanged.
 - PR and checks pending; no production deployment performed.
+
+
+## 2026-11-16 — Set Featured Travel Photography autoplay to 2 seconds
+- Changed the independent homepage Featured Travel Photography carousel auto-advance interval from 10,000 ms to 2,000 ms.
+- Kept manual swipe, keyboard navigation, dot controls, hover/focus pause, hidden-tab pause, reduced-motion handling, images, admin controls and desktop/mobile layout unchanged.
+- Files: `featured-travel-photography.js`, `PROJECT_MEMORY.md`. PR and validation pending; no deployment performed.
