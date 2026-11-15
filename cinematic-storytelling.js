@@ -85,36 +85,21 @@
     });
   });
 
-  // Add lightweight, decorative hero atmosphere only on mobile. No external assets or libraries.
+  // Give the mobile hero its own image layer so later theme background rules
+  // cannot cancel the cinematic zoom animation.
   const mobileHeroMotion = window.matchMedia("(max-width: 760px)");
-  const addMobileHeroAtmosphere = () => {
-    if (!hero || !mobileHeroMotion.matches || reduceMotion || hero.querySelector(".hero-cinematic-atmosphere")) return;
-    const atmosphere = document.createElement("div");
-    atmosphere.className = "hero-cinematic-atmosphere";
-    atmosphere.setAttribute("aria-hidden", "true");
-
-    const cloudOne = document.createElement("span");
-    cloudOne.className = "hero-cinematic-cloud hero-cinematic-cloud--one";
-    const cloudTwo = document.createElement("span");
-    cloudTwo.className = "hero-cinematic-cloud hero-cinematic-cloud--two";
-    const snow = document.createElement("span");
-    snow.className = "hero-cinematic-snow";
-
-    const flags = document.createElement("span");
-    flags.className = "hero-cinematic-flags";
-    for (let i = 0; i < 7; i += 1) {
-      const flag = document.createElement("span");
-      flag.className = "hero-cinematic-flag";
-      flags.appendChild(flag);
-    }
-    atmosphere.append(cloudOne, cloudTwo, snow, flags);
-    hero.insertBefore(atmosphere, hero.firstChild);
+  const addMobileHeroBackdrop = () => {
+    if (!hero || !mobileHeroMotion.matches || hero.querySelector(".hero-cinematic-backdrop")) return;
+    const backdrop = document.createElement("div");
+    backdrop.className = "hero-cinematic-backdrop";
+    backdrop.setAttribute("aria-hidden", "true");
+    hero.insertBefore(backdrop, hero.firstChild);
   };
-  addMobileHeroAtmosphere();
+  addMobileHeroBackdrop();
   if (mobileHeroMotion.addEventListener) {
-    mobileHeroMotion.addEventListener("change", addMobileHeroAtmosphere);
+    mobileHeroMotion.addEventListener("change", addMobileHeroBackdrop);
   } else if (mobileHeroMotion.addListener) {
-    mobileHeroMotion.addListener(addMobileHeroAtmosphere);
+    mobileHeroMotion.addListener(addMobileHeroBackdrop);
   }
 
 })();
