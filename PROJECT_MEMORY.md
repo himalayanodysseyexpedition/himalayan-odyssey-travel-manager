@@ -253,3 +253,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Added a restrained lift on desktop hover and a gentle glow response on mobile touch; retained reduced-motion support.
 - Preserved promotion content, black-and-white styling, CTA behaviour and card layout. Bumped the promotion stylesheet cache version to v11.
 - Files: `homepage-mobile-departure-promo.css`, `index.html`, `PROJECT_MEMORY.md`. PR review/verification pending; no production deployment performed.
+
+
+## 2026-11-16 — Set the mobile homepage hero background to IMG_8475.jpeg
+- Changed only the mobile homepage hero photograph to the repository-root asset `/IMG_8475.jpeg`, preserving the existing gradient overlays, hero content, animation layers and layout.
+- Scoped the new background and its high-priority preload to viewports up to 760px; desktop keeps the existing `/spiti.jpg` hero image and preload.
+- Files: `index.html`, `PROJECT_MEMORY.md`. PR review, responsive visual verification and deployment verification pending; no production deployment performed.
