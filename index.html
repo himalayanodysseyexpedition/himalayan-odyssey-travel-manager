@@ -23,7 +23,7 @@
 <meta name="twitter:title" content="Spiti Valley & Himachal Tour Packages | Himalayan Odyssey">
 <meta name="twitter:description" content="Explore Spiti Valley tour packages, Kinnaur and Himachal holidays with a Narkanda-based team. Compare group departures, private trips and mountain stays.">
 <link rel="preload" as="image" href="/spiti.jpg" fetchpriority="high" media="(min-width: 761px)">
-<link rel="preload" as="image" href="/IMG_8475.jpeg" fetchpriority="high" media="(max-width: 760px)">
+<link rel="preload" as="image" href="/IMG_8475.jpeg?v=2" fetchpriority="high" media="(max-width: 760px)">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=1">
 <link rel="alternate icon" href="/logo.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1816,20 +1816,7 @@ body.guest-itinerary-popup-open{overflow:hidden}
 <link rel="stylesheet" href="/featured-travel-photography.css?v=3">
 
 
-<style id="mobile-hero-img-8475">
-/* Use the user's Milky Way photograph as the homepage hero background on mobile only. */
-@media screen and (max-width:760px){
-  html body #home.hero{
-    background-image:
-      linear-gradient(90deg,rgba(16,36,59,.88) 0%,rgba(16,36,59,.62) 47%,rgba(16,36,59,.08) 100%),
-      linear-gradient(0deg,rgba(16,36,59,.46),transparent 45%),
-      url("/IMG_8475.jpeg")!important;
-    background-position:center,center,center 48%!important;
-    background-size:auto,auto,cover!important;
-    background-repeat:no-repeat!important;
-  }
-}
-</style>
+
 
 </head>
 
@@ -6716,6 +6703,21 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 </style>
 
 <script src="/featured-travel-photography.js?v=1" defer></script>
+
+<style id="mobile-hero-img-8475-final">
+/* Final cascade override: place after every legacy hero style so the mobile hero uses IMG_8475. */
+@media screen and (max-width:760px){
+  html body #home.hero{
+    background:linear-gradient(90deg,rgba(16,36,59,.88) 0%,rgba(16,36,59,.62) 47%,rgba(16,36,59,.08) 100%),linear-gradient(0deg,rgba(16,36,59,.46),transparent 45%),url("/IMG_8475.jpeg?v=2") center 48%/cover no-repeat!important;
+    background-image:linear-gradient(90deg,rgba(16,36,59,.88) 0%,rgba(16,36,59,.62) 47%,rgba(16,36,59,.08) 100%),linear-gradient(0deg,rgba(16,36,59,.46),transparent 45%),url("/IMG_8475.jpeg?v=2")!important;
+    background-position:center,center,center 48%!important;
+    background-size:auto,auto,cover!important;
+    background-repeat:no-repeat!important;
+    background-attachment:scroll!important;
+  }
+}
+</style>
+
 </body>
 </html>
 

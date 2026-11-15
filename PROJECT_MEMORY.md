@@ -259,3 +259,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Changed only the mobile homepage hero photograph to the repository-root asset `/IMG_8475.jpeg`, preserving the existing gradient overlays, hero content, animation layers and layout.
 - Scoped the new background and its high-priority preload to viewports up to 760px; desktop keeps the existing `/spiti.jpg` hero image and preload.
 - Files: `index.html`, `PROJECT_MEMORY.md`. PR review, responsive visual verification and deployment verification pending; no production deployment performed.
+
+
+## 2026-11-16 — Correct mobile hero background cascade
+- The first mobile hero image override was placed in the document head, before later legacy inline styles in the body; those later styles could override it. The first merge therefore did not reliably change the visible hero image.
+- Removed the early override and placed a final, mobile-only background shorthand override immediately before the closing body tag, after all legacy inline styles. Added an image query version to bypass stale browser image cache.
+- Desktop remains on `/spiti.jpg`; mobile points to `/IMG_8475.jpeg?v=2`. Existing hero content, weather effects and overlays remain.
+- Browser visual verification remains pending; no claim of visual success until checked.
