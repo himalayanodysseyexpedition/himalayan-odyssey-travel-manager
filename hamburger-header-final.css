@@ -656,3 +656,58 @@ html body > header.menu-open .header-inner > nav.glass-nav > a{color:#fff!import
   background:rgba(255,255,255,.15)!important;border-color:rgba(255,255,255,.28)!important;
  }
 }
+
+
+/* MOBILE ONLY — Cevorob-inspired animated three-line hamburger.
+   The existing button's aria-expanded state replaces the demo checkbox,
+   preserving native button semantics and the shared navigation behaviour. */
+@media screen and (max-width:760px){
+  html body > header .header-menu-toggle{
+    position:relative!important;
+  }
+  html body > header .header-menu-toggle svg{
+    display:none!important;
+  }
+  html body > header .header-menu-toggle .burger-line{
+    display:block!important;
+    position:absolute!important;
+    left:9px!important;
+    width:28px!important;
+    height:3px!important;
+    background:#fff!important;
+    border-radius:9px!important;
+    opacity:1!important;
+    transform:rotate(0deg)!important;
+    transition:transform .25s ease-in-out,top .25s ease-in-out,left .25s ease-in-out,width .25s ease-in-out,opacity .2s ease-in-out!important;
+    transform-origin:left center!important;
+    pointer-events:none!important;
+  }
+  html body > header .header-menu-toggle .burger-line:nth-of-type(2){
+    top:8px!important;
+  }
+  html body > header .header-menu-toggle .burger-line:nth-of-type(3){
+    top:50%!important;
+    transform:translateY(-50%)!important;
+  }
+  html body > header .header-menu-toggle .burger-line:nth-of-type(4){
+    top:calc(100% - 8px)!important;
+    transform:translateY(-100%)!important;
+  }
+  html body > header .header-menu-toggle[aria-expanded="true"] .burger-line:nth-of-type(2){
+    top:8px!important;
+    left:14px!important;
+    transform:rotate(45deg)!important;
+  }
+  html body > header .header-menu-toggle[aria-expanded="true"] .burger-line:nth-of-type(3){
+    width:0!important;
+    opacity:0!important;
+  }
+  html body > header .header-menu-toggle[aria-expanded="true"] .burger-line:nth-of-type(4){
+    top:calc(100% - 8px)!important;
+    left:14px!important;
+    transform:rotate(-45deg)!important;
+  }
+  @media (prefers-reduced-motion:reduce){
+    html body > header .header-menu-toggle .burger-line{transition:none!important}
+  }
+}
