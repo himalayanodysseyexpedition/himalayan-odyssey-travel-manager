@@ -112,3 +112,11 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Applied the three-bar animated hamburger icon to desktop as well, morphing into an X while open.
 - Updated shared navigation logic to apply dropdown styles at all viewport widths and retain the menu when resizing; outside-click, Escape and link-close behaviour remain intact.
 - Mobile styling remains unchanged; desktop change is limited to the hamburger control and its opened dropdown. Stylesheet cache URL bumped to v18.
+
+
+## 2026-11-16 — Cinematic homepage opening intro (PR pending)
+- Added a full-screen cinematic opening overlay shown on a fresh homepage tab before the homepage is revealed. Uses existing `/spiti.jpg` hero photography and existing `/logo.webp`; no new image assets, audio or paid dependencies.
+- 5-second sequence: slow background camera push, brand/title reveal, animated rule and progress line, then smooth fade to homepage. Includes a Skip Intro button and Escape key support.
+- Intro is shown once per browser tab session; reloads/navigation within the same tab do not replay it. Respects `prefers-reduced-motion` and avoids autoplay audio. The existing homepage remains in the document underneath the overlay for SEO and normal page loading.
+- Scope: homepage only. Existing header, hero, cards, navigation, admin, Supabase, enquiries, bookings, payments, and deployment configuration unchanged.
+- Files: `index.html`, `cinematic-opening.css`, `cinematic-opening.js`, this project-memory entry. PR and checks pending; no deployment performed.
