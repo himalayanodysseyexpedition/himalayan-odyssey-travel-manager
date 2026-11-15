@@ -207,3 +207,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 ## 2026-11-16 — Raise Featured Travel Photography slideshow cards a further 6px on mobile
 - Shifted the mobile slideshow carousel/cards upward by a further 6px, changing its relative top offset from -8px to -14px within the existing mobile breakpoint.
 - Desktop positioning, heading, dots, hint, images and carousel behaviour remain unchanged. Files: `featured-travel-photography.css`, `PROJECT_MEMORY.md`. PR pending; no production deployment performed.
+
+
+## 2026-11-16 — Remove Featured Travel Photography introductory sentence
+- Removed only the white introductory sentence beneath the Featured Travel Photography heading on the homepage.
+- Preserved the slideshow photos, visible destination names and captions, image alt text, carousel controls and behaviour; no other page or desktop/mobile styling changed.
+- Files: `index.html`, `PROJECT_MEMORY.md`. PR review and verification pending; no production deployment performed.
