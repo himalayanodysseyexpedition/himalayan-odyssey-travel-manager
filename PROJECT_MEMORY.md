@@ -166,3 +166,8 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Replaced the old 88px mobile-only ticker offset with normal-flow placement, then shifted the ticker upward 12px to position it in the gap between the Winter Spiti promotion card and mountain artwork.
 - Kept the ticker above the mountain layer with z-index 4; content, marquee animation, promotion card, service row, mountain art and desktop layout remain unchanged.
 - Files: `index.html`, `PROJECT_MEMORY.md`. Replacement PR and validation pending; no deployment performed.
+
+## 2026-11-16 — Remove homepage Our Destinations section
+- Removed the homepage-only mobile 3D Our Destinations section from `index.html`; the dedicated `/destinations/` page and its hamburger-menu link remain unchanged.
+- The removed section was mobile-only; desktop homepage content was already unaffected. No destination page, destination data, menu navigation, Supabase data, SEO routes, or other homepage sections were changed.
+- PR and verification pending; no deployment performed.
