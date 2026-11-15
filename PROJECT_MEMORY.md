@@ -235,3 +235,8 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Shifted only the mobile Featured Travel Photography carousel/images 6px downward by changing its relative top offset from -14px to -8px.
 - Kept desktop positioning, heading and intro text, dots, hint, image content, carousel behaviour and all other homepage sections unchanged.
 - Files: `featured-travel-photography.css`, `PROJECT_MEMORY.md`. PR review pending; no production deployment performed.
+
+## 2026-11-16 — Lower Featured Travel Photography images another 6px on mobile
+- Shifted only the mobile carousel/images another 6px downward by changing its relative top offset from -8px to -2px.
+- Desktop positioning and all headings, text, dots, hints, image content and carousel behaviour remain unchanged.
+- Files: `featured-travel-photography.css`, `PROJECT_MEMORY.md`. PR review pending; no production deployment performed.
