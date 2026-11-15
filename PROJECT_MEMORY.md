@@ -197,3 +197,8 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Moved the homepage destination ticker down by a further 6px on mobile by changing its relative top offset from 12px to 18px.
 - Kept ticker content, animation, promotion card, service buttons, mountain artwork and desktop layout unchanged.
 - Files: `index.html`, `PROJECT_MEMORY.md`. PR pending; no production deployment performed.
+
+
+## 2026-11-16 — Raise Featured Travel Photography slideshow cards on mobile
+- Shifted the Featured Travel Photography carousel upward by 8px only within the mobile breakpoint using a relative top offset; the heading, dots, hint, desktop layout, images and carousel behaviour remain unchanged.
+- Files: `featured-travel-photography.css`, `PROJECT_MEMORY.md`. PR pending; no production deployment performed.
