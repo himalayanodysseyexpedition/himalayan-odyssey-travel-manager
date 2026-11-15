@@ -64,8 +64,9 @@
 
     nav.classList.add("glass-nav");
     nav.id = "mobileMainNavigation";
+    const MENU_ICONS = {"/destinations/":"<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 20 9 4l6 16 6-16M5 15h14M7 9h10\"/></svg>","/#cabs":"<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 13l2-6h14l2 6v6h-2v-2H5v2H3zM5 13h14M7 16h.01M17 16h.01\"/></svg>","/#gallery":"<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 20V8l9-5 9 5v12M7 20v-7h10v7M9 9h.01M15 9h.01\"/></svg>"};
     nav.innerHTML = MENU_ITEMS.map(([href, label]) =>
-      '<a href="' + href + '"><span>' + label + '</span></a>'
+      '<a href="' + href + '">' + MENU_ICONS[href] + '<span>' + label + '</span></a>'
     ).join("");
 
     let button = inner.querySelector(".header-menu-toggle") || header.querySelector(".header-menu-toggle");
@@ -89,7 +90,7 @@
       const link = document.createElement("link");
       link.id = "sitewide-hamburger-stylesheet";
       link.rel = "stylesheet";
-      link.href = "/hamburger-header-final.css?v=16";
+      link.href = "/hamburger-header-final.css?v=17";
       document.head.appendChild(link);
     }
 
