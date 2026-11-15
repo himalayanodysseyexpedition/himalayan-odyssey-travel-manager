@@ -37,11 +37,9 @@
     opacity: .48 !important;
     background-image:
       radial-gradient(ellipse at 18% 72%, rgba(235,247,255,.18) 0%, transparent 38%),
-      radial-gradient(ellipse at 78% 30%, rgba(235,247,255,.15) 0%, transparent 34%),
-      radial-gradient(circle, rgba(255,255,255,.72) 0 1px, transparent 1.8px),
-      radial-gradient(circle, rgba(255,255,255,.45) 0 1px, transparent 2px) !important;
-    background-size: 150% 130%, 140% 120%, 37px 43px, 61px 67px !important;
-    background-position: 0 0, 100% 0, 0 0, 17px 29px !important;
+      radial-gradient(ellipse at 78% 30%, rgba(235,247,255,.15) 0%, transparent 34%) !important;
+    background-size: 150% 130%, 140% 120% !important;
+    background-position: 0 0, 100% 0 !important;
     mix-blend-mode: screen;
     will-change: background-position;
   }
