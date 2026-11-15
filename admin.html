@@ -158,6 +158,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
   <button data-tab="packages">Packages</button>
   <button data-tab="itineraries">Itineraries</button>
   <button data-tab="destinations">Destinations</button>
+  <button data-tab="featuredPhotography">Featured Photos</button>
   <button data-tab="groupDepartures">Group Departures</button>
   <button data-tab="hotels">Hotels & Properties</button>
   <button data-tab="cabs">Cabs</button>
@@ -211,6 +212,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
   <div id="destinationList">Loading destinations...</div>
 </section>
 
+<section id="featuredPhotography" class="panel"><div class="topline"><div><h2>Featured Travel Photography</h2><small>Independent homepage gallery, separate from Destination Photos.</small></div><button id="newFeaturedPhoto">+ Add Photo</button></div><div id="featuredPhotoNotice" class="wa-info"><p>Loading featured photos…</p></div><div id="featuredPhotoList"></div></section>
 <section id="groupDepartures" class="panel">
   <div class="topline"><div><h2>Group Departures</h2><small>Manage upcoming group tours, joined travellers, seat limits, prices and photos shown to guests.</small></div><button id="newGroupDeparture">+ Add Departure</button></div>
   <div id="groupDepartureList">Loading group departures...</div>
@@ -546,6 +548,7 @@ Publish this cab on the guest website
 </form></dialog>
 
 
+<dialog id="featuredPhotoForm"><form id="featuredPhotoF"><h2 id="featuredPhotoDialogTitle">Add Featured Photo</h2><label>Photo Title</label><input id="featuredPhotoTitle" required maxlength="120"><label>Caption / Location</label><input id="featuredPhotoCaption" maxlength="160"><label>Image Alt Text</label><input id="featuredPhotoAlt" maxlength="180"><label>Photograph</label><input id="featuredPhotoFile" type="file" accept="image/jpeg,image/png,image/webp"><small>JPG, PNG or WebP, maximum 5 MB. Leave blank when editing to keep the current image.</small><div id="featuredPhotoPreview" class="hotel-photo-grid"></div><label>Display Order</label><input id="featuredPhotoOrder" type="number" min="1" step="1" value="1"><label><input id="featuredPhotoPublished" type="checkbox" style="width:auto" checked> Publish on homepage</label><div style="margin-top:15px"><button type="submit" id="featuredPhotoSave">Save Photo</button><button type="button" data-close class="secondary">Cancel</button></div></form></dialog>
 <!-- GROUP DEPARTURE FORM -->
 <dialog id="groupDepartureForm"><form id="groupDepartureF">
 <h2 id="groupDepartureDialogTitle">Add Group Departure</h2>
@@ -599,7 +602,7 @@ Publish this cab on the guest website
 </form>
 </dialog>
 
-<script src="app.js?v=111"></script>
+<script src="app.js?v=112"></script>
 <script src="whatsapp-automation.js?v=1"></script>
 </body>
 </html>
