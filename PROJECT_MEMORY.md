@@ -219,3 +219,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Restored the sentence “A closer look at the landscapes and places waiting along your journey.” beneath the Featured Travel Photography heading.
 - Changed only `.featured-travel-heading p` text color to black (`#000`). Left section background and all other typography, images, captions, carousel layout/behaviour and desktop/mobile rules unchanged.
 - Files: `index.html`, `featured-travel-photography.css`, `PROJECT_MEMORY.md`. PR review pending; no deployment performed.
+
+
+## 2026-11-16 — Enforce black Featured Travel Photography intro text
+- Strengthened the intro paragraph color rule with the section ID and `!important` so competing paragraph styles cannot override the requested black text.
+- Bumped the homepage stylesheet query version to `v=2` to avoid a stale cached CSS file.
+- The sentence content, section background, heading, carousel, images, layout, and desktop/mobile behaviour are otherwise unchanged. Files: `featured-travel-photography.css`, `index.html`, `PROJECT_MEMORY.md`. PR review and deployment verification pending; no production deployment performed.
