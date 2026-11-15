@@ -112,3 +112,12 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Applied the three-bar animated hamburger icon to desktop as well, morphing into an X while open.
 - Updated shared navigation logic to apply dropdown styles at all viewport widths and retain the menu when resizing; outside-click, Escape and link-close behaviour remain intact.
 - Mobile styling remains unchanged; desktop change is limited to the hamburger control and its opened dropdown. Stylesheet cache URL bumped to v18.
+
+
+## 2026-11-16 — Independent homepage Featured Travel Photography (PR pending)
+- Added separate homepage swipe carousel directly below hero, independent of Destination Photos.
+- Includes 10-second autoplay, pointer swipe/drag, keyboard arrows, active-slide scaling, dots, pause on hover/focus/hidden tab and reduced-motion support.
+- Added separate admin CRUD for title, caption, alt text, upload/replacement, display order and publish visibility, backed by dedicated Supabase bucket/table.
+- Added additive SQL migration `supabase/migrations/202611160001_featured_travel_photos.sql` with RLS, storage policies and four starter records using existing site-owned image assets. Migration is not applied; separate owner approval and backup/rollback are required.
+- Files: `index.html`, `featured-travel-photography.css`, `featured-travel-photography.js`, `admin.html`, `app.js`, migration SQL and this entry. Public section remains hidden until migration and active photos exist.
+- Verification and PR status pending.
