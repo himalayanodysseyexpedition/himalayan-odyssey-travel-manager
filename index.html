@@ -7063,11 +7063,14 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 }
 </style>
 
-<style id="mobile-destination-ticker-lower-v1">
-/* Move only the mobile destination ticker slightly lower; keep the service buttons in place. */
+<style id="mobile-destination-ticker-between-promo-mountains-v2">
+/* Place the mobile destination ticker slightly above the gap's midpoint between the promotion card and mountain artwork. */
 @media screen and (max-width:760px){
   html body #home.hero .hero-content .hero-destination-list{
-    top:88px!important;
+    position:relative!important;
+    top:-12px!important;
+    z-index:4!important;
+    margin-top:10px!important;
   }
 }
 </style>
