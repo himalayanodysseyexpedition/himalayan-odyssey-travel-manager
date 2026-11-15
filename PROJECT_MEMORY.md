@@ -213,3 +213,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Removed only the white introductory sentence beneath the Featured Travel Photography heading on the homepage.
 - Preserved the slideshow photos, visible destination names and captions, image alt text, carousel controls and behaviour; no other page or desktop/mobile styling changed.
 - Files: `index.html`, `PROJECT_MEMORY.md`. PR review and verification pending; no production deployment performed.
+
+
+## 2026-11-16 — Restore Featured Travel Photography intro with black text
+- Restored the sentence “A closer look at the landscapes and places waiting along your journey.” beneath the Featured Travel Photography heading.
+- Changed only `.featured-travel-heading p` text color to black (`#000`). Left section background and all other typography, images, captions, carousel layout/behaviour and desktop/mobile rules unchanged.
+- Files: `index.html`, `featured-travel-photography.css`, `PROJECT_MEMORY.md`. PR review pending; no deployment performed.
