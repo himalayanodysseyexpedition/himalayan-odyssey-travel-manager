@@ -1783,6 +1783,35 @@ body.guest-itinerary-popup-open{overflow:hidden}
   }
 }
 </style>
+
+<style id="mobile-destination-cylinder-styles">
+.mobile-destination-cylinder{display:none}
+@media(max-width:760px){
+  .mobile-destination-cylinder{display:block!important;position:relative;isolation:isolate;overflow:hidden;padding:38px 0 32px;background:radial-gradient(ellipse at 50% 44%,rgba(169,216,242,.18),transparent 58%),linear-gradient(180deg,#f3f8fc,#eaf1f7);color:#10243b}
+  .mobile-destination-inner{width:100%;max-width:680px;margin:0 auto}
+  .mobile-destination-heading{text-align:center;padding:0 20px}
+  .mobile-destination-heading>small{color:#527a98;font-size:9px;font-weight:850;letter-spacing:2.2px}
+  .mobile-destination-heading h2{margin:7px 0 5px;color:#10243b;font:750 clamp(29px,8vw,38px)/1.04 "General Sans",Inter,Arial,sans-serif;letter-spacing:-.055em}
+  .mobile-destination-heading p{margin:0 auto;color:#647b90;font-size:12px;line-height:1.65;max-width:290px}
+  .mdc-stage{height:420px;position:relative;perspective:1100px;perspective-origin:50% 47%;overflow:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+  .mdc-stage:before{content:"";position:absolute;left:15%;right:15%;bottom:40px;height:46px;border-radius:50%;background:rgba(16,36,59,.18);filter:blur(23px);transform:rotateX(70deg)}
+  .mdc-ring{position:absolute;inset:0;transform-style:preserve-3d;outline:none;cursor:grab}
+  .mdc-ring.is-dragging{cursor:grabbing}
+  .mdc-ring .destination-card{position:absolute!important;left:50%!important;top:47%!important;width:min(58vw,220px)!important;height:276px!important;max-width:220px!important;margin:0!important;overflow:hidden!important;border:1px solid rgba(255,255,255,.62)!important;border-radius:17px!important;background:#10243b!important;box-shadow:0 18px 38px rgba(16,36,59,.25)!important;backface-visibility:hidden;transform:translate(-50%,-50%) rotateY(var(--mdc-angle)) translateZ(var(--mdc-radius))!important;transform-origin:center center;transition:filter .35s ease,opacity .35s ease;will-change:transform}
+  .mdc-ring .destination-card img{width:100%!important;height:100%!important;object-fit:cover!important;filter:brightness(.88) saturate(1.05)!important}
+  .mdc-ring .destination-card:after{content:"";position:absolute;inset:28% 0 0;z-index:1;background:linear-gradient(180deg,transparent,rgba(7,20,33,.94))!important;pointer-events:none}
+  .mdc-ring .destination-info{position:absolute!important;z-index:2!important;left:0!important;right:0!important;bottom:0!important;padding:17px!important;transform:none!important}
+  .mdc-ring .destination-info small{color:#dceefa!important;font-size:7px!important;letter-spacing:1.35px!important}
+  .mdc-ring .destination-info h3{margin:7px 0 9px!important;color:#fff!important;font:650 24px/1.04 "General Sans",Inter,Arial,sans-serif!important;letter-spacing:-.04em!important}
+  .mdc-ring .destination-info span{color:#fff!important;font-size:8px!important;letter-spacing:.8px!important}
+  .mdc-ring .destination-info span:after{display:none!important}
+  .mdc-controls{display:flex;align-items:center;justify-content:center;gap:16px;margin:0 auto}
+  .mdc-controls>span{min-width:60px;color:#4d657a;font-size:10px;font-weight:800;letter-spacing:1.4px;text-align:center}
+  .mdc-controls button{width:39px;height:39px;border:1px solid rgba(16,36,59,.2);border-radius:50%;background:rgba(255,255,255,.88);color:#10243b;font-size:20px;box-shadow:0 5px 14px rgba(16,36,59,.08)}
+  .mdc-hint{text-align:center;margin:14px 0 0;color:#7b8da0;font-size:8px;font-weight:800;letter-spacing:1.5px}
+}
+@media(prefers-reduced-motion:reduce){.mdc-ring .destination-card{transition:none!important}}
+</style>
 </head>
 
 <body>
@@ -1899,6 +1928,30 @@ body.guest-itinerary-popup-open{overflow:hidden}
 
 
 
+
+<!-- MOBILE-ONLY 3D DESTINATION CYLINDER -->
+<section class="mobile-destination-cylinder" id="mobile-destinations" aria-label="Explore our destinations">
+  <div class="mobile-destination-inner">
+    <div class="mobile-destination-heading">
+      <small>EXPLORE THE HIMALAYAS</small>
+      <h2>Our Destinations</h2>
+      <p>Discover the places that make every Himalayan journey memorable.</p>
+    </div>
+    <div class="mdc-stage" id="mobileDestinationsStage">
+      <div class="mdc-ring" id="destinationsCarousel" tabindex="0" role="group" aria-label="Rotating destination cards">
+        <a class="destination-card" href="/spiti-valley-tours/"><img src="/spiti.jpg" alt="Spiti Valley mountain landscape" loading="lazy"><div class="destination-info"><small>THE MIDDLE LAND</small><h3>Spiti Valley</h3><span>Explore the journey</span></div></a>
+        <a class="destination-card" href="/kinnaur-tours/"><img src="/kinnaur.jpg" alt="Kinnaur Himalayas" loading="lazy"><div class="destination-info"><small>LAND OF GODS</small><h3>Kinnaur</h3><span>Explore the journey</span></div></a>
+        <a class="destination-card" href="/narkanda-tours/"><img src="/narkanda.jpg" alt="Narkanda mountains" loading="lazy"><div class="destination-info"><small>PEACE IN THE MOUNTAINS</small><h3>Narkanda</h3><span>Explore the journey</span></div></a>
+        <a class="destination-card" href="/manali-tours/"><img src="/manali.jpg" alt="Manali Himalayan mountains" loading="lazy"><div class="destination-info"><small>THE MOUNTAIN ESCAPE</small><h3>Manali</h3><span>Explore the journey</span></div></a>
+        <a class="destination-card" href="/kasol-tours/"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/The_Parbati_River%2C_Kasol%2C_Himachal_Pradesh.jpg/960px-The_Parbati_River%2C_Kasol%2C_Himachal_Pradesh.jpg" alt="Parvati River and pine-covered mountains in Kasol" loading="lazy"><div class="destination-info"><small>RIVERSIDE HIDEAWAY</small><h3>Kasol</h3><span>Explore the journey</span></div></a>
+        <a class="destination-card" href="/jibhi-tours/"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Jibhi_Waterfall%2C_Jibhi%2C_Himachal_Pradesh.jpg/960px-Jibhi_Waterfall%2C_Jibhi%2C_Himachal_Pradesh.jpg" alt="Jibhi waterfall and forest" loading="lazy"><div class="destination-info"><small>THE QUIET HIMALAYAS</small><h3>Jibhi</h3><span>Explore the journey</span></div></a>
+        <a class="destination-card" href="/shimla-tours/"><img src="https://staticimg.amarujala.com/assets/images/2021/02/17/christ-church-shimla_1613564278.jpeg" alt="Christ Church on the Ridge in Shimla" loading="lazy"><div class="destination-info"><small>THE QUEEN OF HILLS</small><h3>Shimla</h3><span>Explore the journey</span></div></a>
+      </div>
+    </div>
+    <div class="mdc-controls"><span id="destinationsCount" aria-live="polite">01 / 07</span><button type="button" id="destinationsPrev" aria-label="Previous destination">←</button><button type="button" id="destinationsNext" aria-label="Next destination">→</button></div>
+    <p class="mdc-hint">DRAG TO ROTATE · TAP A CARD TO FOCUS</p>
+  </div>
+</section>
 
 <!-- UPCOMING PACKAGES -->
 <section class="content group-departures-section" id="upcoming-packages">
@@ -6637,6 +6690,48 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 
 
 
+
+<script id="mobile-destination-cylinder-controller">
+(()=>{
+ const stage=document.getElementById("mobileDestinationsStage"),ring=document.getElementById("destinationsCarousel");
+ if(!stage||!ring||!window.matchMedia("(max-width:760px)").matches)return;
+ const count=document.getElementById("destinationsCount"),prev=document.getElementById("destinationsPrev"),next=document.getElementById("destinationsNext");
+ const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+ let cards=[],rotation=0,velocity=.22,dragging=false,startX=0,lastX=0,lastTime=0,paused=false,focused=-1,frame=0;
+ const normalize=v=>((v%360)+360)%360;
+ const setup=()=>{
+   cards=[...ring.querySelectorAll(".destination-card")];
+   const n=cards.length;if(!n)return;
+   const width=Math.min(stage.clientWidth*.58,220);
+   const radius=Math.max(205,Math.round((width+25)/(2*Math.tan(Math.PI/n))));
+   ring.style.setProperty("--mdc-radius",radius+"px");
+   cards.forEach((card,i)=>{card.style.setProperty("--mdc-angle",(i*360/n)+"deg");card.dataset.mdcIndex=String(i);});
+   update();
+ };
+ const nearestIndex=()=>cards.length?Math.round(normalize(-rotation)/(360/cards.length))%cards.length:0;
+ const update=()=>{
+   ring.style.transform="rotateY("+rotation+"deg)";
+   const i=nearestIndex();
+   if(count)count.textContent=String(i+1).padStart(2,"0")+" / "+String(cards.length).padStart(2,"0");
+   cards.forEach((card,index)=>{const distance=Math.abs((((index*360/cards.length+rotation+180)%360)+360)%360-180);card.style.filter=distance<28?"brightness(1)":"brightness(.78)";card.style.opacity=distance>145?".72":"1";});
+ };
+ const tick=()=>{if(!reduce&&!dragging&&!paused&&cards.length){rotation=normalize(rotation+velocity);update();}frame=requestAnimationFrame(tick);};
+ const focusCard=i=>{if(!cards.length)return;focused=(i+cards.length)%cards.length;rotation=-focused*360/cards.length;update();};
+ const step=d=>{focusCard(nearestIndex()+d);paused=true;window.setTimeout(()=>{paused=false;},2600);};
+ prev?.addEventListener("click",()=>step(-1));next?.addEventListener("click",()=>step(1));
+ ring.addEventListener("pointerdown",e=>{if(e.target.closest("button"))return;dragging=true;paused=true;startX=e.clientX;lastX=e.clientX;lastTime=performance.now();ring.classList.add("is-dragging");ring.setPointerCapture?.(e.pointerId);});
+ ring.addEventListener("pointermove",e=>{if(!dragging)return;const dx=e.clientX-lastX;rotation=normalize(rotation+dx*.48);lastX=e.clientX;lastTime=performance.now();update();});
+ const release=()=>{if(!dragging)return;dragging=false;ring.classList.remove("is-dragging");paused=false;};
+ ring.addEventListener("pointerup",release);ring.addEventListener("pointercancel",release);ring.addEventListener("lostpointercapture",release);
+ ring.addEventListener("click",e=>{const card=e.target.closest(".destination-card");if(!card)return;const index=Number(card.dataset.mdcIndex);if(nearestIndex()!==index){e.preventDefault();focusCard(index);paused=true;window.setTimeout(()=>{paused=false;},2600);}});
+ ring.addEventListener("keydown",e=>{if(e.key==="ArrowLeft"){e.preventDefault();step(-1)}if(e.key==="ArrowRight"){e.preventDefault();step(1)}});
+ stage.addEventListener("mouseenter",()=>paused=true);stage.addEventListener("mouseleave",()=>paused=false);
+ const observer=new MutationObserver(()=>setup());observer.observe(ring,{childList:true});
+ setup();if(!reduce)tick();
+ window.addEventListener("resize",setup,{passive:true});
+ window.addEventListener("pagehide",()=>cancelAnimationFrame(frame),{once:true});
+})();
+</script>
 </body>
 </html>
 
