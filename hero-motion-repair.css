@@ -6,6 +6,9 @@
     position: relative !important;
     isolation: isolate !important;
     overflow: hidden !important;
+    width: calc(100% + 1px) !important;
+    margin-left: -1px !important;
+    border-left: 0 !important;
   }
 
   html body #home.hero::before {
