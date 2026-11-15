@@ -572,3 +572,53 @@
     display:none!important;
   }
 }
+
+
+/* MOBILE ONLY — high-contrast black-on-white floating navigation, based on the supplied iPhone screenshot. */
+@media screen and (max-width:760px){
+  html body #footerContactBar.footer-contact-bar{
+    background:#fff!important;
+    background-color:#fff!important;
+    background-image:none!important;
+    color:#000!important;
+    border:1px solid rgba(0,0,0,.18)!important;
+    border-radius:28px!important;
+    box-shadow:0 12px 34px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,1)!important;
+    -webkit-backdrop-filter:blur(22px) saturate(100%)!important;
+    backdrop-filter:blur(22px) saturate(100%)!important;
+  }
+  html body #footerContactBar .quick-nav-item{
+    color:#000!important;
+    -webkit-text-fill-color:#000!important;
+    opacity:1!important;
+    text-shadow:none!important;
+    font-weight:650!important;
+  }
+  html body #footerContactBar .quick-nav-item span{
+    color:#000!important;
+    -webkit-text-fill-color:#000!important;
+    font-weight:650!important;
+  }
+  html body #footerContactBar .quick-nav-item svg{
+    color:#000!important;
+    stroke:#000!important;
+    fill:none!important;
+    opacity:1!important;
+  }
+  html body #footerContactBar .quick-nav-whatsapp{
+    background:#000!important;
+    background-image:none!important;
+    color:#fff!important;
+    -webkit-text-fill-color:#fff!important;
+    border:1px solid #000!important;
+    border-radius:18px!important;
+  }
+  html body #footerContactBar .quick-nav-whatsapp span{
+    color:#fff!important;
+    -webkit-text-fill-color:#fff!important;
+  }
+  html body #footerContactBar .quick-nav-whatsapp svg{
+    color:#fff!important;
+    stroke:#fff!important;
+  }
+}
