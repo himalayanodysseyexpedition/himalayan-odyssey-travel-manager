@@ -395,7 +395,7 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Removed the obsolete `mobile-ios-glass-monochrome-dock.css` homepage reference. Its high-specificity mobile rules were forcing the Home/Explore labels and icons to black and adding a black circular background behind the WhatsApp glyph.
 - Kept mobile dock labels and all navigation icons white. WhatsApp now uses the same full-size pill surface and dimensions as Home and Explore, with no separate circular icon background. Menu remains a solid black full-size button with a matching border footprint.
 - Bumped `mobile-app-experience.js` and its injected `himalayan-bottom-navigation.css` cache versions so mobile browsers fetch the corrected rules. Navigation destinations, WhatsApp URL, menu interaction and desktop styles are unchanged.
-- Files: `index.html`, `mobile-app-experience.js`, `himalayan-bottom-navigation.css`, `PROJECT_MEMORY.md`. PR #512 open; implementation checks passed (static site quality workflow and GitGuardian security checks); merge and GitHub Pages deployment verification pending. Live device screenshot verification has not been performed.
+- Files: `index.html`, `mobile-app-experience.js`, `himalayan-bottom-navigation.css`, `PROJECT_MEMORY.md`. PR #512 merged as `905f02b934a95d166ef2890994ddebbefa7fdf31`; static-site quality checks, GitGuardian security checks and GitHub Pages deployment succeeded. Live device screenshot verification was not performed.
 
 
 ## 2026-11-16 — Fix mobile Explore icon and align Menu tile with desktop dock (PR #513)
