@@ -3,12 +3,12 @@
 @media screen and (min-width: 761px) {
   html body section#featured-travel-photography.featured-travel-section {
     background: #ffffff !important;
-    background-color: #111111 !important;
+    background-color: #ffffff !important;
     background-image: none !important;
-    color: #ffffff !important;
+    color: #111111 !important;
   }
 
   html body section#featured-travel-photography .featured-travel-heading p {
-    color: #ffffff !important;
+    color: #111111 !important;
   }
 }
