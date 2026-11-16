@@ -422,3 +422,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - The prior 16px translate moved the photo layer, but did not sufficiently correct the visible crop. Adjusted the mobile image element's object-position from 58% 42% to 58% 58%, shifting the photograph content upward within the same hero frame.
 - Kept the image layer's existing 16px upward translation and zoom animation, and left the promotion card, destination ticker, mountain artwork, spacing, and desktop hero unchanged.
 - File: `index.html`. PR and checks pending; live mobile screenshot verification and deployment have not been performed.
+
+
+## 2026-11-16 — Shift mobile hero photograph further upward
+- Moved the mobile-only hero photograph layer 16px further upward (from -16px to -32px) in its base transform, both Ken Burns animation keyframes, and reduced-motion state. Kept the current photo crop, image scale, hero height, promotional card, ticker, mountain artwork, spacing, and all other content unchanged.
+- Scope is limited to the homepage hero at viewports up to 760px; desktop styling and functionality are unchanged.
+- Files: `index.html`, `PROJECT_MEMORY.md`. PR review, responsive visual verification, and deployment verification pending.
