@@ -434,4 +434,4 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Hid the hamburger control in the mobile header (up to 760px) while retaining the hidden native control required by the existing bottom-dock Menu handler.
 - Kept the bottom-dock Menu pop-up and its three existing destinations: Destinations (/destinations/), Cabs (/#cabs), and Hotels & Properties (/#gallery).
 - Desktop hamburger navigation, desktop dock, menu destinations and section routes remain unchanged.
-- Files: `hamburger-header-final.css`, `site-navigation.js`. Mobile visual/device verification and deployment verification remain pending.
+- Files: `hamburger-header-final.css`, `site-navigation.js`. PR #519 merged as `6143bcb4be705388e79d19ebda8af05cd97cdb62`; JavaScript syntax validation, site metadata/offline-shell validation, and GitGuardian checks succeeded. Real-device visual verification and live deployment verification were not performed.
