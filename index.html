@@ -7379,3 +7379,33 @@ html body #home .hero-weather-motion .hero-cloud-bank::after{
   top:9%;
 }
 </style>
+
+<style id="desktop-hero-snowfall-only">
+/* Desktop-only snowfall overlay; mobile hero remains untouched. */
+@media screen and (min-width:761px){
+  html body #home.hero .hero-weather-motion::after{
+    content:"";
+    position:absolute;
+    inset:-35% -8% -25%;
+    z-index:3;
+    display:block;
+    pointer-events:none;
+    opacity:.68;
+    background-image:
+      radial-gradient(2px 2px at 24px 36px,rgba(255,255,255,.95) 98%,transparent 100%),
+      radial-gradient(1.5px 1.5px at 112px 84px,rgba(255,255,255,.9) 98%,transparent 100%),
+      radial-gradient(2.7px 2.7px at 188px 142px,rgba(255,255,255,.88) 98%,transparent 100%),
+      radial-gradient(1px 1px at 76px 178px,rgba(255,255,255,.8) 98%,transparent 100%);
+    background-size:230px 250px,290px 310px,360px 390px,175px 205px;
+    animation:desktopHeroSnowfall 16s linear infinite;
+    will-change:background-position;
+  }
+}
+@keyframes desktopHeroSnowfall{
+  from{background-position:0 -120px,40px -180px,90px -240px,20px -100px}
+  to{background-position:55px 620px,-35px 760px,145px 900px,75px 700px}
+}
+@media(prefers-reduced-motion:reduce){
+  @media screen and (min-width:761px){html body #home.hero .hero-weather-motion::after{animation:none!important}}
+}
+</style>
