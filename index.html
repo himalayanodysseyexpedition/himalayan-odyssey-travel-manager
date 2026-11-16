@@ -6768,6 +6768,53 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 
 
 
+
+
+<style id="mobile-bottom-navigation-final-fix-v1">
+/* Mobile bottom navigation: keep all four icons white, remove the WhatsApp disc,
+   and keep the bar pinned and visible while the page scrolls. */
+@media screen and (max-width:760px){
+  html body > #footerContactBar.footer-contact-bar{
+    position:fixed!important;left:50%!important;right:auto!important;
+    bottom:max(12px,env(safe-area-inset-bottom))!important;top:auto!important;
+    transform:translate3d(-50%,0,0)!important;
+    opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+    display:grid!important;z-index:2147483000!important;
+    transition:none!important;will-change:auto!important;
+  }
+  html body > #footerContactBar.footer-contact-bar.scroll-hidden,
+  html body > #footerContactBar.footer-contact-bar:not(.visible){
+    transform:translate3d(-50%,0,0)!important;
+    opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+  }
+  html body > #footerContactBar.footer-contact-bar .quick-nav-item,
+  html body > #footerContactBar.footer-contact-bar .quick-nav-item:hover,
+  html body > #footerContactBar.footer-contact-bar .quick-nav-item:focus,
+  html body > #footerContactBar.footer-contact-bar .quick-nav-item:active{
+    color:#fff!important;
+  }
+  html body > #footerContactBar.footer-contact-bar .quick-nav-item svg,
+  html body > #footerContactBar.footer-contact-bar .quick-nav-item:hover svg,
+  html body > #footerContactBar.footer-contact-bar .quick-nav-item:active svg{
+    color:#fff!important;stroke:#fff!important;fill:none!important;
+  }
+  html body > #footerContactBar.footer-contact-bar .quick-nav-whatsapp,
+  html body > #footerContactBar.footer-contact-bar .quick-nav-whatsapp:hover,
+  html body > #footerContactBar.footer-contact-bar .quick-nav-whatsapp:active{
+    width:58px!important;height:58px!important;min-height:58px!important;
+    border:0!important;border-radius:0!important;
+    background:transparent!important;background-color:transparent!important;
+    box-shadow:none!important;filter:none!important;
+    color:#fff!important;transform:none!important;
+  }
+  html body > #footerContactBar.footer-contact-bar .quick-nav-whatsapp svg{
+    width:27px!important;height:27px!important;
+    color:#fff!important;stroke:#fff!important;fill:none!important;
+  }
+  html body > #footerContactBar.footer-contact-bar .quick-nav-whatsapp span{color:#fff!important;}
+}
+</style>
+
 </body>
 </html>
 
