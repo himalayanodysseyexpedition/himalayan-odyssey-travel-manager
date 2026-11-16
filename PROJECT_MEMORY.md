@@ -373,3 +373,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Preserved the four generated navigation destinations, links, active-state logic, safe-area positioning and existing scroll hide/reveal behaviour.
 - New dedicated stylesheet is loaded last in the homepage head to override legacy styles. CSS is scoped to mobile widths only; desktop is unchanged.
 - Files: `mobile-ios-glass-monochrome-dock.css`, `index.html`, `PROJECT_MEMORY.md`. Browser/device visual verification pending.
+
+
+## 2026-11-16 — Remove packages subtitle browse link
+- Removed the inline “Browse all current packages” link from the homepage “Our Travel Packages” subtitle, leaving the descriptive sentence unchanged.
+- The homepage uses one shared subtitle markup for responsive layouts, so this single content edit applies to both mobile and desktop.
+- Only the homepage subtitle was changed; package cards, carousel controls, package routes, navigation and all other content remain untouched. Live-site visual verification is pending.
