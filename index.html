@@ -1846,6 +1846,9 @@ body.guest-itinerary-popup-open{overflow:hidden}
       <svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
         <path d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
+      <span class="burger-line" aria-hidden="true"></span>
+      <span class="burger-line" aria-hidden="true"></span>
+      <span class="burger-line" aria-hidden="true"></span>
     </button>
   </div>
 </header>
@@ -4376,7 +4379,21 @@ html body #home.hero .hero-content h1.hero-animated-heading > .hero-heading-suff
   }
 }
 @media (min-width:761px){
-  html body > header .header-inner > .header-menu-toggle{display:none!important}
+  /* Desktop uses the same visible hamburger control as mobile. */
+  html body > header .header-inner > .header-menu-toggle{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    flex:0 0 46px!important;
+    width:46px!important;
+    height:46px!important;
+    min-width:46px!important;
+    min-height:46px!important;
+    position:relative!important;
+    z-index:1600!important;
+    cursor:pointer!important;
+    pointer-events:auto!important;
+  }
 }
 </style>
 
