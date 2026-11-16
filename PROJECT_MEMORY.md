@@ -403,3 +403,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Explicitly set all Explore SVG path strokes to white with no fill. Standardised all four mobile dock control tiles to the desktop dock's 19px corner radius and shared transition curve; Menu retains its black face while using the same grid-cell dimensions and interaction geometry as Home, Explore and WhatsApp.
 - Bumped the mobile stylesheet and script cache versions. Desktop-specific rules, navigation destinations, menu open/close behaviour and WhatsApp URL are unchanged.
 - Files: `windows-fluent-monochrome-mobile.css`, `himalayan-bottom-navigation.css`, `mobile-app-experience.js`, `index.html`, `PROJECT_MEMORY.md`. PR #513 merged as `361081384fcecadb1016da6932e5f77a1feabfbd`; static-site quality validation, GitGuardian security checks, and GitHub Pages deployment all succeeded. Live device screenshot verification has not been performed.
+
+
+## 2026-11-16 — Restore mobile hero vertical stage and reduce photo crop
+- Restored vertical breathing room in the mobile homepage hero by extending the hero stage by a responsive 28–36px and shifting the complete content column down by the same amount. The destination ticker's automatic centering, promo-to-ticker spacing, and mountain artwork's bottom anchoring are preserved.
+- Reduced the dedicated mobile hero photo layer from 116% overscan plus 1.04–1.20 zoom to 106% overscan plus 1.01–1.08 zoom so more of the source photograph remains visible while retaining restrained Ken Burns motion.
+- Scope is limited to the mobile homepage hero (viewports up to 760px). Desktop layout, hero copy, promotion details/actions, ticker content, mountain artwork, navigation, business flows and hosting/deployment configuration are unchanged.
+- Files: `index.html`. PR and checks pending; live mobile screenshot verification and deployment have not been performed.
