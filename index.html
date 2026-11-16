@@ -6815,41 +6815,6 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 }
 </style>
 
-<style id="mobile-hero-content-start-alignment-restore-v1">
-/* Restore mobile hero elements to the top edge of the hero image; prevent the promo,
-   destination ticker, or mountain artwork from being pulled upward/overlapping. */
-@media screen and (max-width:760px){
-  html body #home.hero{
-    margin-top:0!important;
-    transform:none!important;
-    padding-top:32px!important;
-    overflow:hidden!important;
-  }
-  html body #home.hero > .hero-content{
-    position:relative!important;
-    top:0!important;
-    transform:none!important;
-    margin-top:0!important;
-  }
-  html body #home.hero section.mobile-next-departure{
-    position:relative!important;
-    top:0!important;
-    transform:none!important;
-    margin-top:0!important;
-  }
-  html body #home.hero .hero-content .hero-destination-list{
-    position:relative!important;
-    top:0!important;
-    transform:none!important;
-    margin-top:10px!important;
-  }
-  html body #home.hero .hero-bottom-motion{
-    bottom:0!important;
-    top:auto!important;
-    transform:none!important;
-  }
-}
-</style>
 
 </body>
 
@@ -7198,13 +7163,14 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 </style>
 
 <style id="mobile-destination-ticker-between-promo-mountains-v2">
-/* Place the mobile destination ticker slightly lower within the gap between the promotion card and mountain artwork. */
+/* Keep the destination ticker in normal flow directly beneath the promotion card. */
 @media screen and (max-width:760px){
   html body #home.hero .hero-content .hero-destination-list{
     position:relative!important;
-    top:18px!important;
+    top:0!important;
+    transform:none!important;
     z-index:4!important;
-    margin-top:10px!important;
+    margin:10px auto 0!important;
   }
 }
 </style>
@@ -7485,3 +7451,71 @@ html body #packages #packageList .package-slide:before{
 }
 html body #packages #packageList .package-slide .card-body>.price{display:none!important}
 </style>
+
+
+<style id="mobile-hero-alignment-final-v2">
+/* Final mobile-only hero layout override. Keep the promo, destination rail and mountain
+   artwork anchored to the same hero image container after all legacy inline styles. */
+@media screen and (max-width:760px){
+  html body #home.hero{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    justify-content:flex-start!important;
+    min-height:0!important;
+    height:auto!important;
+    margin:0!important;
+    padding:24px 17px 66px!important;
+    box-sizing:border-box!important;
+    overflow:hidden!important;
+    transform:none!important;
+  }
+  html body #home.hero > .hero-content{
+    position:relative!important;
+    z-index:3!important;
+    display:flex!important;
+    flex:0 0 auto!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    width:100%!important;
+    max-width:520px!important;
+    margin:0 auto!important;
+    padding:0!important;
+    top:0!important;
+    transform:none!important;
+  }
+  html body #home.hero > .hero-content > .mobile-tibetan-flag-line{
+    display:none!important;
+  }
+  html body #home.hero section.mobile-next-departure{
+    position:relative!important;
+    top:0!important;
+    align-self:stretch!important;
+    width:100%!important;
+    max-width:520px!important;
+    margin:0 auto!important;
+    transform:none!important;
+  }
+  html body #home.hero .hero-content .hero-destination-list{
+    position:relative!important;
+    top:0!important;
+    width:100%!important;
+    margin:10px auto 0!important;
+    transform:none!important;
+  }
+  html body #home.hero > .hero-bottom-motion{
+    position:absolute!important;
+    left:0!important;
+    right:0!important;
+    top:auto!important;
+    bottom:0!important;
+    height:clamp(112px,19vh,170px)!important;
+    margin:0!important;
+    transform:none!important;
+    z-index:1!important;
+    pointer-events:none!important;
+  }
+}
+</style>
+
