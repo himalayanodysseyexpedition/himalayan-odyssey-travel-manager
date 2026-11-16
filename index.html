@@ -6550,7 +6550,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   const link=event.target.closest("a.btn");
   if(!link)return;
   const card=link.closest(cardSelector);
-  if(!card||window.matchMedia("(min-width:761px)").matches)return;
+  if(!card)return;
   const label=link.textContent.trim().toLowerCase();
   if(cardSelector==="#packageList > article.package-slide" && label.includes("enquire about this package")){
    event.preventDefault();
@@ -6568,7 +6568,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
    window.location.href="https://wa.me/919816929669?text="+encodeURIComponent(message);
    return;
   }
-  if(!label.includes("explore full itinerary"))return;
+  if(!label.includes("explore full itinerary") && !label.includes("view itinerary"))return;
   event.preventDefault();
   const heading=card.querySelector(".card-body h3");
   open(link.href,heading?heading.textContent.trim():"Explore Full Itinerary");
