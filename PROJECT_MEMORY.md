@@ -428,3 +428,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Moved the mobile-only hero photograph layer 16px further upward (from -16px to -32px) in its base transform, both Ken Burns animation keyframes, and reduced-motion state. Kept the current photo crop, image scale, hero height, promotional card, ticker, mountain artwork, spacing, and all other content unchanged.
 - Scope is limited to the homepage hero at viewports up to 760px; desktop styling and functionality are unchanged.
 - Files: `index.html`, `PROJECT_MEMORY.md`. PR review, responsive visual verification, and deployment verification pending.
+
+
+## 2026-11-16 — Move mobile header menu access to the bottom navigation
+- Hid the hamburger control in the mobile header (up to 760px) while retaining the hidden native control required by the existing bottom-dock Menu handler.
+- Kept the bottom-dock Menu pop-up and its three existing destinations: Destinations (/destinations/), Cabs (/#cabs), and Hotels & Properties (/#gallery).
+- Desktop hamburger navigation, desktop dock, menu destinations and section routes remain unchanged.
+- Files: `hamburger-header-final.css`, `site-navigation.js`. Mobile visual/device verification and deployment verification remain pending.

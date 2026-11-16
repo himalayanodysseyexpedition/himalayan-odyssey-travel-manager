@@ -930,3 +930,19 @@ html body > header.menu-open .header-inner > nav.glass-nav > a{color:#fff!import
     transform:translateX(4px)!important;
   }
 }
+
+
+/* Mobile navigation: keep the three menu destinations accessible from the
+   bottom dock's Menu control, not from a second hamburger in the header.
+   The hidden native control remains in place for the existing dock handler. */
+@media screen and (max-width:760px){
+  html body > header .header-menu-toggle,
+  html body > header .header-menu-toggle:hover,
+  html body > header .header-menu-toggle:focus,
+  html body > header .header-menu-toggle:focus-visible,
+  html body > header .header-menu-toggle[aria-expanded="true"]{
+    display:none!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+  }
+}

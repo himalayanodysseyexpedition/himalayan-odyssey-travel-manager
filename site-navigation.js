@@ -90,7 +90,7 @@
       const link = document.createElement("link");
       link.id = "sitewide-hamburger-stylesheet";
       link.rel = "stylesheet";
-      link.href = "/hamburger-header-final.css?v=18";
+      link.href = "/hamburger-header-final.css?v=19";
       document.head.appendChild(link);
     }
 
