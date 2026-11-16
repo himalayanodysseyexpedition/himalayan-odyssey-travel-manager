@@ -94,7 +94,7 @@
       document.head.appendChild(link);
     }
 
-    const applyOpenStyles = () => {
+    const applyOpenStyles = (dockMenu = false) => {
       const mobileMenu = window.matchMedia("(max-width: 760px)").matches;
       header.style.setProperty("background", "#000", "important");
       header.style.setProperty("background-color", "#000", "important");
@@ -110,25 +110,27 @@
       nav.style.setProperty("visibility", "visible", "important");
       nav.style.setProperty("opacity", "1", "important");
       nav.style.setProperty("pointer-events", "auto", "important");
-      nav.style.setProperty("position", "absolute", "important");
-      nav.style.setProperty("top", "calc(100% + 7px)", "important");
-      nav.style.setProperty("right", "10px", "important");
-      nav.style.setProperty("left", "auto", "important");
-      nav.style.setProperty("z-index", "1500", "important");
-      nav.style.setProperty("width", "min(310px, calc(100vw - 20px))", "important");
-      nav.style.setProperty("max-height", "min(72vh, 520px)", "important");
+      nav.style.setProperty("position", dockMenu ? "fixed" : "absolute", "important");
+      nav.style.setProperty("top", dockMenu ? "auto" : "calc(100% + 7px)", "important");
+      nav.style.setProperty("bottom", dockMenu ? (mobileMenu ? "calc(98px + env(safe-area-inset-bottom))" : "108px") : "auto", "important");
+      nav.style.setProperty("right", dockMenu ? "auto" : "10px", "important");
+      nav.style.setProperty("left", dockMenu ? "50%" : "auto", "important");
+      nav.style.setProperty("transform", dockMenu ? "translateX(-50%)" : "none", "important");
+      nav.style.setProperty("z-index", "1900", "important");
+      nav.style.setProperty("width", dockMenu ? "min(360px, calc(100vw - 24px))" : "min(310px, calc(100vw - 20px))", "important");
+      nav.style.setProperty("max-height", dockMenu ? "min(58vh, 460px)" : "min(72vh, 520px)", "important");
       nav.style.setProperty("overflow-y", "auto", "important");
       nav.style.setProperty("flex-direction", "column", "important");
       nav.style.setProperty("align-items", "stretch", "important");
       nav.style.setProperty("gap", "5px", "important");
       nav.style.setProperty("padding", "10px", "important");
-      nav.style.setProperty("background", "#0d1117", "important");
-      nav.style.setProperty("background-color", "#0d1117", "important");
-      nav.style.setProperty("border", "1px solid rgba(255,255,255,.10)", "important");
-      nav.style.setProperty("border-radius", "12px", "important");
-      nav.style.setProperty("box-shadow", "0 18px 46px rgba(0,0,0,.34)", "important");
-      nav.style.setProperty("backdrop-filter", "blur(22px) saturate(125%)", "important");
-      nav.style.setProperty("-webkit-backdrop-filter", "blur(22px) saturate(125%)", "important");
+      nav.style.setProperty("background", dockMenu ? "rgba(55,59,65,.97)" : "#0d1117", "important");
+      nav.style.setProperty("background-color", dockMenu ? "rgba(55,59,65,.97)" : "#0d1117", "important");
+      nav.style.setProperty("border", "1px solid rgba(255,255,255,.28)", "important");
+      nav.style.setProperty("border-radius", dockMenu ? "22px" : "12px", "important");
+      nav.style.setProperty("box-shadow", "0 20px 48px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.16)", "important");
+      nav.style.setProperty("backdrop-filter", "blur(28px) saturate(145%)", "important");
+      nav.style.setProperty("-webkit-backdrop-filter", "blur(28px) saturate(145%)", "important");
       nav.querySelectorAll("a").forEach(a => {
         a.style.setProperty("display", "flex", "important");
         a.style.setProperty("align-items", "center", "important");
@@ -137,10 +139,10 @@
         a.style.setProperty("color", "#fff", "important");
         a.style.setProperty("-webkit-text-fill-color", "#fff", "important");
         a.style.setProperty("background", "transparent", "important");
-        a.style.setProperty("border-radius", mobileMenu ? "0" : "9px", "important");
-        a.style.setProperty("border", mobileMenu ? "0" : "1px solid transparent", "important");
-        a.style.setProperty("backdrop-filter", mobileMenu ? "none" : "blur(12px)", "important");
-        a.style.setProperty("-webkit-backdrop-filter", mobileMenu ? "none" : "blur(12px)", "important");
+        a.style.setProperty("border-radius", dockMenu ? "13px" : (mobileMenu ? "0" : "9px"), "important");
+        a.style.setProperty("border", "1px solid transparent", "important");
+        a.style.setProperty("backdrop-filter", "none", "important");
+        a.style.setProperty("-webkit-backdrop-filter", "none", "important");
         a.style.setProperty("text-decoration", "none", "important");
       });
     };
@@ -150,7 +152,9 @@
       button.setAttribute("aria-expanded", "false");
       button.setAttribute("aria-label", "Open navigation menu");
       nav.setAttribute("aria-hidden", "true");
-      ["display","visibility","opacity","pointer-events","position","top","right","left","z-index","width","max-height","overflow-y","flex-direction","align-items","gap","padding","background","background-color","border","border-radius","box-shadow","backdrop-filter","-webkit-backdrop-filter"].forEach(p => nav.style.removeProperty(p));
+      document.querySelectorAll(".dock-menu-trigger").forEach(trigger => { trigger.setAttribute("aria-expanded", "false"); trigger.setAttribute("aria-label", "Open navigation menu"); trigger.classList.remove("is-open"); });
+      document.querySelectorAll(".mobile-app-dock,.desktop-app-dock").forEach(dock => dock.classList.remove("menu-open"));
+      ["display","visibility","opacity","pointer-events","position","top","bottom","right","left","transform","z-index","width","max-height","overflow-y","flex-direction","align-items","gap","padding","background","background-color","border","border-radius","box-shadow","backdrop-filter","-webkit-backdrop-filter"].forEach(p => nav.style.removeProperty(p));
       nav.querySelectorAll("a").forEach(a => {
         ["display","align-items","min-height","padding","color","-webkit-text-fill-color","background","text-decoration","border","border-radius","backdrop-filter","-webkit-backdrop-filter"].forEach(p => a.style.removeProperty(p));
       });
@@ -178,7 +182,12 @@
         button.setAttribute("aria-expanded", "true");
         button.setAttribute("aria-label", "Close navigation menu");
         nav.setAttribute("aria-hidden", "false");
-        applyOpenStyles();
+        const openedFromDock = button.dataset.openedFromDock === "true";
+        if (openedFromDock) {
+          document.querySelectorAll(".dock-menu-trigger").forEach(trigger => { trigger.setAttribute("aria-expanded", "true"); trigger.setAttribute("aria-label", "Close navigation menu"); trigger.classList.add("is-open"); });
+          document.querySelectorAll(".mobile-app-dock,.desktop-app-dock").forEach(dock => dock.classList.add("menu-open"));
+        }
+        applyOpenStyles(openedFromDock);
       } else {
         close();
       }
@@ -193,11 +202,12 @@
     document.addEventListener("keydown", event => {
       if (event.key === "Escape" && button.getAttribute("aria-expanded") === "true") {
         close();
-        button.focus();
+        const dockTrigger = document.querySelector(".dock-menu-trigger");
+        if (dockTrigger) dockTrigger.focus(); else button.focus();
       }
     });
     window.addEventListener("resize", () => {
-      if (button.getAttribute("aria-expanded") === "true") applyOpenStyles();
+      if (button.getAttribute("aria-expanded") === "true") applyOpenStyles(button.dataset.openedFromDock === "true");
     }, { passive: true });
   }
 
