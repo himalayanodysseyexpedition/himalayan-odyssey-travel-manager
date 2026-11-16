@@ -96,6 +96,14 @@
 
     const applyOpenStyles = (dockMenu = false) => {
       const mobileMenu = window.matchMedia("(max-width: 760px)").matches;
+      // A fixed-position descendant of the sticky header is still constrained by
+      // the header's stacking/containing block. Reparent the mobile dock popup
+      // to body so it can sit immediately above the fixed bottom navigation.
+      if (dockMenu && mobileMenu) {
+        if (nav.parentNode !== document.body) document.body.appendChild(nav);
+      } else if (nav.parentNode === document.body) {
+        inner.appendChild(nav);
+      }
       header.style.setProperty("background", "#000", "important");
       header.style.setProperty("background-color", "#000", "important");
       header.style.setProperty("background-image", "none", "important");
@@ -103,7 +111,7 @@
       header.style.setProperty("border-bottom", "1px solid rgba(255,255,255,.14)", "important");
       header.style.setProperty("position", "relative", "important");
       header.style.setProperty("overflow", "visible", "important");
-      header.style.setProperty("z-index", dockMenu && mobileMenu ? "2000" : "1400", "important");
+      header.style.setProperty("z-index", dockMenu && mobileMenu ? "1000" : "1400", "important");
       inner.style.setProperty("position", "relative", "important");
       inner.style.setProperty("overflow", "visible", "important");
       nav.style.setProperty("display", "flex", "important");
@@ -116,7 +124,7 @@
       nav.style.setProperty("right", dockMenu ? "auto" : "10px", "important");
       nav.style.setProperty("left", dockMenu ? "50%" : "auto", "important");
       nav.style.setProperty("transform", dockMenu ? "translateX(-50%)" : "none", "important");
-      nav.style.setProperty("z-index", dockMenu && mobileMenu ? "2100" : "1900", "important");
+      nav.style.setProperty("z-index", dockMenu && mobileMenu ? "1900" : "1900", "important");
       nav.style.setProperty("width", dockMenu ? "min(360px, calc(100vw - 24px))" : "min(310px, calc(100vw - 20px))", "important");
       nav.style.setProperty("max-height", dockMenu ? "min(58vh, 460px)" : "min(72vh, 520px)", "important");
       nav.style.setProperty("overflow-y", "auto", "important");
@@ -148,6 +156,9 @@
     };
 
     const close = () => {
+      // Return the shared navigation panel to its original header location
+      // before clearing its temporary fixed-position styles.
+      if (nav.parentNode === document.body) inner.appendChild(nav);
       header.classList.remove("menu-open");
       button.setAttribute("aria-expanded", "false");
       button.setAttribute("aria-label", "Open navigation menu");
@@ -197,7 +208,7 @@
       if (event.target.closest("a")) close();
     });
     document.addEventListener("click", event => {
-      if (!header.contains(event.target) && button.getAttribute("aria-expanded") === "true") close();
+      if (!header.contains(event.target) && !nav.contains(event.target) && button.getAttribute("aria-expanded") === "true") close();
     });
     document.addEventListener("keydown", event => {
       if (event.key === "Escape" && button.getAttribute("aria-expanded") === "true") {
