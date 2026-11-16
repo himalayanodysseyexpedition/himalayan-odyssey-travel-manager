@@ -101,3 +101,44 @@
     left: auto !important;
   }
 }
+
+
+/* Desktop gallery: three vertical photographs move continuously, one card per step. */
+@media screen and (min-width: 761px) {
+  html body #featured-travel-photography .featured-travel-carousel {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 0;
+    background: transparent;
+    cursor: grab;
+    touch-action: pan-y;
+  }
+  html body #featured-travel-photography .featured-travel-track {
+    display: flex;
+    width: 300%;
+    align-items: stretch;
+    will-change: transform;
+  }
+  html body #featured-travel-photography .featured-travel-slide {
+    box-sizing: border-box;
+    flex: 0 0 11.111111%;
+    min-width: 0;
+    padding: 0 12px;
+  }
+  html body #featured-travel-photography .featured-travel-slide img,
+  html body #featured-travel-photography .featured-travel-slide.is-active img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 14px;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html body #featured-travel-photography .featured-travel-arrow {
+    z-index: 10;
+  }
+}
