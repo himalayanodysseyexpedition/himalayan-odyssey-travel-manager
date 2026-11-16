@@ -227,7 +227,7 @@ footer a{color:#a9d8f2}
  db.from("destinations").select("title,tagline,image_url,link_url,sort_order").eq("is_active",true).order("sort_order",{ascending:true}).then(({data,error})=>{
   if(error||!data?.length)return;
   const safe=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-  rail.innerHTML=data.map(item=>'<a class="destination-card" href="'+safe(item.link_url||"/build-your-trip/")+'"><img src="'+safe(item.image_url||"/spiti.jpg")+'" alt="'+safe(item.title)+'" loading="lazy" decoding="async"><div class="destination-info"><small>'+safe(item.tagline||"EXPLORE HIMACHAL")+'</small><h2>'+safe(item.title)+'</h2><span>Enquire on WhatsApp ↗</span></div></a>').join("");
+  rail.innerHTML=data.map(item=>{const title=String(item.title||"Himachal destination");const message="Hello Himalayan Odyssey Expedition, I am interested in exploring "+title+". Please share the available tour packages, itinerary and pricing.";const whatsapp="https://wa.me/919816929669?text="+encodeURIComponent(message);return '<a class="destination-card" href="'+whatsapp+'"><img src="'+safe(item.image_url||"/spiti.jpg")+'" alt="'+safe(title)+'" loading="lazy" decoding="async"><div class="destination-info"><small>'+safe(item.tagline||"EXPLORE HIMACHAL")+'</small><h2>'+safe(title)+'</h2><span>Enquire on WhatsApp ↗</span></div></a>';}).join("");
   rail.scrollLeft=0;update();
  });
  }
