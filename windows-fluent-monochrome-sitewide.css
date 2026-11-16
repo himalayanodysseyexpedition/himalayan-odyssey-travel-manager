@@ -213,3 +213,11 @@ body footer a,body>header a{ text-underline-offset:3px }
     animation:none!important;
   }
 }
+
+
+/* Desktop only: monochrome kicker for the Upcoming Packages heading. */
+@media (min-width: 761px){
+  html body #upcoming-packages .group-departures-head .section-title small{
+    color:#111!important;
+  }
+}
