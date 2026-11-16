@@ -6791,6 +6791,25 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   }
 }
 </style>
+
+<style id="desktop-hero-restore-spiti-v1">
+/* Desktop only: restore the original Spiti hero and keep the mobile photo layer out of desktop flow. */
+@media screen and (min-width:761px){
+  html body #home.hero > .hero-ken-burns-photo{
+    display:none!important;
+    visibility:hidden!important;
+  }
+  html body #home.hero{
+    background-image:
+      linear-gradient(90deg,rgba(16,36,59,.88),rgba(16,36,59,.58) 52%,rgba(16,36,59,.12)),
+      url("/spiti.jpg")!important;
+    background-position:center,center 48%!important;
+    background-size:auto,cover!important;
+    background-repeat:no-repeat,no-repeat!important;
+  }
+}
+</style>
+
 </body>
 </html>
 
