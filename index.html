@@ -7340,3 +7340,42 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   }
 }
 </style>
+
+<style id="hero-cloud-organic-silhouette-both-viewports">
+/* Give the moving hero cloud banks a soft, recognisable cloud silhouette on desktop and mobile. */
+html body #home .hero-weather-motion .hero-cloud-bank{
+  height:clamp(48px,8vw,112px)!important;
+  border-radius:999px!important;
+  overflow:visible!important;
+  filter:blur(3px) drop-shadow(0 2px 8px rgba(226,240,250,.12))!important;
+  background:
+    radial-gradient(ellipse at 18% 68%,rgba(239,248,255,.88) 0 18%,transparent 19%),
+    radial-gradient(ellipse at 34% 43%,rgba(239,248,255,.86) 0 25%,transparent 26%),
+    radial-gradient(ellipse at 52% 31%,rgba(239,248,255,.82) 0 27%,transparent 28%),
+    radial-gradient(ellipse at 70% 48%,rgba(239,248,255,.8) 0 24%,transparent 25%),
+    radial-gradient(ellipse at 84% 69%,rgba(239,248,255,.74) 0 17%,transparent 18%),
+    radial-gradient(ellipse at 50% 76%,rgba(239,248,255,.78) 0 31%,transparent 32%)!important;
+}
+html body #home .hero-weather-motion .hero-cloud-bank::before,
+html body #home .hero-weather-motion .hero-cloud-bank::after{
+  content:"";
+  position:absolute;
+  display:block;
+  pointer-events:none;
+  border-radius:50%;
+  background:rgba(239,248,255,.72);
+  filter:blur(5px);
+}
+html body #home .hero-weather-motion .hero-cloud-bank::before{
+  width:27%;
+  height:72%;
+  left:29%;
+  top:2%;
+}
+html body #home .hero-weather-motion .hero-cloud-bank::after{
+  width:24%;
+  height:66%;
+  left:51%;
+  top:9%;
+}
+</style>
