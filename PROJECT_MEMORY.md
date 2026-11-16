@@ -442,3 +442,11 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Keep the normal header menu and desktop menu stacking values unchanged.
 - Bump the `site-navigation.js` cache version from v16 to v17.
 - Files: `site-navigation.js`, `index.html`. Responsive visual verification and deployment verification pending.
+
+
+## 2026-11-16 — Re-anchor mobile bottom-dock menu popup above the dock
+- Corrected the previous stacking-only approach: the mobile popup is now temporarily reparented from the sticky header into `document.body` while opened from the bottom-dock Menu control. This removes the header stacking/containing-block constraint that kept the popup at the top of the page.
+- The popup remains fixed-positioned and bottom-anchored at approximately 98px plus the device safe-area inset, placing it directly above the bottom navigation dock. Its layer is 1900, above the dock at 1800.
+- The popup is returned to the header when closed or when the viewport is no longer mobile. Outside-click handling treats the reparented popup as part of the menu.
+- Scope: mobile dock menu only (up to 760px); desktop menu and desktop layout are unchanged.
+- Files: `site-navigation.js`, `index.html`. Responsive visual verification and deployment verification pending.
