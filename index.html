@@ -6765,6 +6765,17 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 }
 @media screen and (min-width:761px) and (prefers-reduced-motion:reduce){html body #home.hero .hero-content .hero-destination-track{animation:none!important}}
 </style>
+
+<style id="desktop-destination-ticker-above-mountain-graphics-v1">
+/* Lift only the desktop destination ticker so it sits just above the mountain artwork. */
+@media screen and (min-width:761px){
+  html body #home.hero .hero-content .hero-destination-list{
+    position:relative!important;
+    top:-88px!important;
+    z-index:4!important;
+  }
+}
+</style>
 </body>
 </html>
 
