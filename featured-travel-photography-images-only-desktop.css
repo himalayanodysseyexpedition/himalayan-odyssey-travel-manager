@@ -63,3 +63,53 @@
     line-height: 1.7 !important;
   }
 }
+
+
+/* Desktop gallery: three vertical, uncropped photo cards per carousel page. */
+@media screen and (min-width: 761px) {
+  html body #featured-travel-photography .featured-travel-inner {
+    width: min(1440px, 96vw) !important;
+    max-width: 1440px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+  }
+  html body #featured-travel-photography .featured-travel-carousel {
+    overflow: hidden !important;
+    padding: 0 62px !important;
+    box-sizing: border-box !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+  }
+  html body #featured-travel-photography .featured-travel-track {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 18px !important;
+    width: 100% !important;
+    align-items: stretch !important;
+  }
+  html body #featured-travel-photography .featured-travel-slide {
+    flex: 0 0 calc((100% - 36px) / 3) !important;
+    width: calc((100% - 36px) / 3) !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+  html body #featured-travel-photography .featured-travel-slide img,
+  html body #featured-travel-photography .featured-travel-slide.is-active img {
+    display: block !important;
+    width: 100% !important;
+    aspect-ratio: 3 / 4 !important;
+    height: clamp(340px, 36vw, 500px) !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    border: 1px solid #e6e8eb !important;
+    border-radius: 12px !important;
+    background: #f3f5f7 !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.08) !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  html body #featured-travel-photography #featuredTravelPrev { left: 4px !important; }
+  html body #featured-travel-photography #featuredTravelNext { right: 4px !important; }
+}
