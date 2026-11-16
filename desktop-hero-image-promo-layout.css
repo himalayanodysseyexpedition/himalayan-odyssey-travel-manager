@@ -1,0 +1,70 @@
+/* Desktop-only hero photo and group-departure card layering correction.
+   The animated photo element is mobile-first markup; on desktop it must become
+   a full-bleed background layer instead of taking up flex layout space. */
+@media screen and (min-width: 761px) {
+  html body #home.hero {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    isolation: isolate !important;
+    overflow: hidden !important;
+    min-height: clamp(650px, 82svh, 900px) !important;
+  }
+
+  html body #home.hero > img.hero-ken-burns-photo {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: 100% !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    transform: none !important;
+    animation: none !important;
+    pointer-events: none !important;
+    user-select: none !important;
+  }
+
+  html body #home.hero::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 1 !important;
+    border: 0 !important;
+    background:
+      linear-gradient(90deg, rgba(5, 16, 29, .78) 0%, rgba(5, 16, 29, .56) 42%, rgba(5, 16, 29, .18) 100%),
+      linear-gradient(0deg, rgba(5, 16, 29, .42), rgba(5, 16, 29, .03) 52%, rgba(5, 16, 29, .14)) !important;
+    pointer-events: none !important;
+  }
+
+  html body #home.hero > .hero-content {
+    position: relative !important;
+    z-index: 3 !important;
+    flex: 0 1 760px !important;
+    width: min(760px, 100%) !important;
+    max-width: 760px !important;
+    margin: 0 auto !important;
+  }
+
+  html body #home.hero section.mobile-next-departure {
+    position: relative !important;
+    z-index: 1 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: min(560px, 100%) !important;
+    max-width: 560px !important;
+  }
+
+  html body #home.hero::after {
+    z-index: 4 !important;
+  }
+}
