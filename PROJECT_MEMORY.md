@@ -415,4 +415,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 ## 2026-11-16 — Nudge mobile hero photo layer upward
 - Shifted only the dedicated mobile hero photograph layer upward by 16px in its base state, both Ken Burns keyframes and the reduced-motion state. The promotion card, destination ticker, mountain artwork, and their spacing remain unchanged.
 - Scope: homepage mobile hero photo only (viewports up to 760px); desktop and all other site functionality remain untouched.
-- File: `index.html`. PR and checks pending; live device visual verification and deployment have not been performed.
+- File: `index.html`. PR #516 merged as `71b9c89b0e568f89911748efef1e4aa00b613cad`; GitGuardian, static-site validation, GitHub Pages build and deployment succeeded. Live mobile visual verification was unavailable.
+
+
+## 2026-11-16 — Shift mobile hero image crop upward within frame
+- The prior 16px translate moved the photo layer, but did not sufficiently correct the visible crop. Adjusted the mobile image element's object-position from 58% 42% to 58% 58%, shifting the photograph content upward within the same hero frame.
+- Kept the image layer's existing 16px upward translation and zoom animation, and left the promotion card, destination ticker, mountain artwork, spacing, and desktop hero unchanged.
+- File: `index.html`. PR and checks pending; live mobile screenshot verification and deployment have not been performed.
