@@ -202,11 +202,12 @@
     document.addEventListener("keydown", event => {
       if (event.key === "Escape" && button.getAttribute("aria-expanded") === "true") {
         close();
-        button.focus();
+        const dockTrigger = document.querySelector(".dock-menu-trigger");
+        if (dockTrigger) dockTrigger.focus(); else button.focus();
       }
     });
     window.addEventListener("resize", () => {
-      if (button.getAttribute("aria-expanded") === "true") applyOpenStyles();
+      if (button.getAttribute("aria-expanded") === "true") applyOpenStyles(button.dataset.openedFromDock === "true");
     }, { passive: true });
   }
 
