@@ -2400,7 +2400,7 @@ async function loadPackages() {
         ". Please share details.";
 
       return `
-        <article class="card package-slide" data-package-id="${safe(p.id)}">
+        <article class="card package-slide" data-package-id="${safe(p.id)}" data-price="${p.price_per_person != null && p.price_per_person !== "" ? safe(rupees(p.price_per_person)) : "Price on request"}">
           ${photo}
 
           <div class="card-body">
@@ -7408,4 +7408,20 @@ html body #home .hero-weather-motion .hero-cloud-bank::after{
 @media(prefers-reduced-motion:reduce){
   @media screen and (min-width:761px){html body #home.hero .hero-weather-motion::after{animation:none!important}}
 }
+</style>
+
+
+<style id="travel-package-photo-price-badge-v1">
+/* Match the rounded vehicle-card price badge on travel-package photographs across desktop and mobile. */
+html body #packages #packageList .package-slide{position:relative!important}
+html body #packages #packageList .package-slide:before{
+  content:attr(data-price)!important;position:absolute!important;z-index:3!important;
+  top:14px!important;right:14px!important;max-width:calc(100% - 28px)!important;
+  padding:9px 13px!important;border:1px solid rgba(255,255,255,.78)!important;
+  border-radius:999px!important;background:rgba(255,255,255,.94)!important;color:#10151b!important;
+  box-shadow:0 5px 18px rgba(0,0,0,.14)!important;
+  -webkit-backdrop-filter:blur(12px)!important;backdrop-filter:blur(12px)!important;
+  font:800 14px/1.2 Inter,"Helvetica Neue",Arial,sans-serif!important;
+}
+html body #packages #packageList .package-slide .card-body>.price{display:none!important}
 </style>
