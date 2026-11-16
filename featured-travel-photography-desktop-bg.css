@@ -1,0 +1,14 @@
+/* Desktop-only background correction for Featured Travel Photography.
+   Keep the entire section matte black and maintain readable intro contrast. */
+@media screen and (min-width: 761px) {
+  html body section#featured-travel-photography.featured-travel-section {
+    background: #050505 !important;
+    background-color: #050505 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+  }
+
+  html body section#featured-travel-photography .featured-travel-heading p {
+    color: #ffffff !important;
+  }
+}
