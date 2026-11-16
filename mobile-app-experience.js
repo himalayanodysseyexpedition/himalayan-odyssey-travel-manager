@@ -72,6 +72,7 @@
   },{passive:true});
   document.addEventListener('click',()=>requestAnimationFrame(()=>syncMenuState(nav)));
   document.addEventListener('keydown',event=>{if(event.key==='Escape')requestAnimationFrame(()=>syncMenuState(nav))});
+  syncMenuState(nav);
  }
  function reveal(){
   if(!mobile()||!('IntersectionObserver'in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
