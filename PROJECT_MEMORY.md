@@ -384,3 +384,8 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Follow-up source-order audit found PR #509's inline alignment block was placed before later inline mobile styles in `index.html`; later rules reset the destination ticker to `top:18px` and reinstated a larger ticker margin, so the earlier reset did not win the cascade.
 - Replaced the ineffective earlier block, normalized the ticker to normal flow, and added one final mobile-only alignment override after the legacy inline styles. The hero uses a top-starting flex layout; the promo card and ticker remain in the image container; the mountain artwork remains anchored to the bottom of that hero.
 - Desktop rules, page content, image asset, navigation and booking/enquiry behaviour are unchanged. GitHub Pages deployment of PR #509 succeeded; browser visual verification is still pending.
+ 
+## 2026-11-16 — Center the mobile destination ticker between the promo card and mountain artwork
+- Adjusted only the homepage mobile hero. The hero now reserves viewport height and the content column extends down to the mountain illustration's visible upper reveal edge.
+- The destination ticker uses equal automatic top and bottom margins in the remaining flex space, centering it vertically between the bottom of the Winter Spiti promotion card and the upper visible mountain ridge. The content bottom inset matches the mountain layer's 24% top-mask reveal (76% of its clamped height), so the midpoint tracks the actual visible illustration boundary.
+- Desktop styling, promotion-card content/actions, destination ticker content, mountain artwork and image assets remain unchanged. Source-level layout check completed; device screenshot verification remains pending.
