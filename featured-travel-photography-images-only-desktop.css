@@ -1,0 +1,30 @@
+/* Desktop-only: Featured Travel Photography is a pure image gallery with no required text UI. */
+@media screen and (min-width: 761px) {
+  html body #featured-travel-photography .featured-travel-heading,
+  html body #featured-travel-photography .featured-travel-caption,
+  html body #featured-travel-photography .featured-travel-dots,
+  html body #featured-travel-photography .featured-travel-hint,
+  html body #featured-travel-photography .featured-travel-edge {
+    display: none !important;
+  }
+  html body #featured-travel-photography .featured-travel-inner {
+    width: 100% !important;
+    max-width: none !important;
+  }
+  html body #featured-travel-photography .featured-travel-carousel {
+    border-radius: 0 !important;
+    background: transparent !important;
+  }
+  html body #featured-travel-photography .featured-travel-slide {
+    padding: 0 !important;
+  }
+  html body #featured-travel-photography .featured-travel-slide img,
+  html body #featured-travel-photography .featured-travel-slide.is-active img {
+    width: 100% !important;
+    aspect-ratio: 16 / 7 !important;
+    object-fit: cover !important;
+    border-radius: 0 !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
