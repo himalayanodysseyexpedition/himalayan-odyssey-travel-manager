@@ -389,3 +389,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Adjusted only the homepage mobile hero. The hero now reserves viewport height and the content column extends down to the mountain illustration's visible upper reveal edge.
 - The destination ticker uses equal automatic top and bottom margins in the remaining flex space, centering it vertically between the bottom of the Winter Spiti promotion card and the upper visible mountain ridge. The content bottom inset matches the mountain layer's 24% top-mask reveal (76% of its clamped height), so the midpoint tracks the actual visible illustration boundary.
 - Desktop styling, promotion-card content/actions, destination ticker content, mountain artwork and image assets remain unchanged. Source-level layout check completed; device screenshot verification remains pending.
+
+
+## 2026-11-16 — Correct mobile bottom navigation contrast and button surfaces (PR #512)
+- Removed the obsolete `mobile-ios-glass-monochrome-dock.css` homepage reference. Its high-specificity mobile rules were forcing the Home/Explore labels and icons to black and adding a black circular background behind the WhatsApp glyph.
+- Kept mobile dock labels and all navigation icons white. WhatsApp now uses the same full-size pill surface and dimensions as Home and Explore, with no separate circular icon background. Menu remains a solid black full-size button with a matching border footprint.
+- Bumped `mobile-app-experience.js` and its injected `himalayan-bottom-navigation.css` cache versions so mobile browsers fetch the corrected rules. Navigation destinations, WhatsApp URL, menu interaction and desktop styles are unchanged.
+- Files: `index.html`, `mobile-app-experience.js`, `himalayan-bottom-navigation.css`, `PROJECT_MEMORY.md`. PR #512 open; checks and deployment verification pending. Live device screenshot verification has not been performed.
