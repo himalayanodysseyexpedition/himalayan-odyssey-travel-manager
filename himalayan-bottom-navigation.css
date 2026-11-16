@@ -139,4 +139,11 @@ html body{scroll-padding-bottom:112px}
   background:#050607!important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.20),0 2px 3px rgba(0,0,0,.24)!important;
  }
+ html body nav.mobile-app-dock>button.dock-menu-trigger:hover,
+ html body nav.mobile-app-dock>button.dock-menu-trigger:focus-visible{
+  background:#050607!important;border-color:rgba(255,255,255,.38)!important;
+ }
+ html body nav.mobile-app-dock>button.dock-menu-trigger:active{
+  background:#111315!important;border-color:rgba(255,255,255,.38)!important;
+ }
 }
