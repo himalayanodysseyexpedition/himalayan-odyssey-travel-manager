@@ -7200,11 +7200,11 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   html body #home.hero > .hero-ken-burns-photo{
     position:absolute!important;
     display:block!important;
-    inset:-8%!important;
+    inset:-3%!important;
     z-index:0!important;
-    width:116%!important;
+    width:106%!important;
     max-width:none!important;
-    height:116%!important;
+    height:106%!important;
     max-height:none!important;
     margin:0!important;
     padding:0!important;
@@ -7214,7 +7214,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
     pointer-events:none!important;
     user-select:none!important;
     transform-origin:50% 50%!important;
-    transform:scale(1.04) translate3d(0,0,0);
+    transform:scale(1.01) translate3d(0,0,0);
     will-change:transform;
     animation:hoMobileKenBurnsPhoto 26s cubic-bezier(.45,0,.55,1) infinite alternate!important;
   }
@@ -7243,13 +7243,13 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   }
 }
 @keyframes hoMobileKenBurnsPhoto{
-  0%{transform:scale(1.04) translate3d(0,0,0)}
-  100%{transform:scale(1.20) translate3d(-1.2%,.7%,0)}
+  0%{transform:scale(1.01) translate3d(0,0,0)}
+  100%{transform:scale(1.08) translate3d(-1.2%,.7%,0)}
 }
 @media screen and (max-width:760px) and (prefers-reduced-motion:reduce){
   html body #home.hero > .hero-ken-burns-photo{
     animation:none!important;
-    transform:scale(1.08)!important;
+    transform:scale(1.04)!important;
   }
 }
 </style>
@@ -7520,16 +7520,17 @@ html body #packages #packageList .package-slide .card-body>.price{display:none!i
 </style>
 
  
-<style id="mobile-hero-ticker-middle-gap-v3">
-/* Mobile only: center the destination ticker in the free vertical space between
-   the departure card and the visible upper edge of the mountain illustration. */
+<style id="mobile-hero-ticker-middle-gap-v4">
+/* Mobile only: restore the full hero stage. Shift the promo, ticker and mountain artwork
+   down together without changing their internal spacing, and leave more of the photo visible. */
 @media screen and (max-width:760px){
   html body #home.hero{
+    --mobile-hero-stage-shift:clamp(28px,4svh,36px);
     display:flex!important;
     flex-direction:column!important;
     align-items:stretch!important;
     justify-content:flex-start!important;
-    min-height:100svh!important;
+    min-height:calc(100svh + var(--mobile-hero-stage-shift))!important;
     height:auto!important;
     margin:0!important;
     padding:24px 17px 0!important;
@@ -7540,7 +7541,7 @@ html body #packages #packageList .package-slide .card-body>.price{display:none!i
     position:relative!important;
     z-index:3!important;
     display:flex!important;
-    flex:1 0 auto!important;
+    flex:0 0 auto!important;
     flex-direction:column!important;
     align-items:center!important;
     justify-content:flex-start!important;
@@ -7550,7 +7551,7 @@ html body #packages #packageList .package-slide .card-body>.price{display:none!i
     margin:0 auto!important;
     padding:0 0 clamp(85px,14.44vh,129px)!important;
     box-sizing:border-box!important;
-    top:0!important;
+    top:var(--mobile-hero-stage-shift)!important;
     transform:none!important;
   }
   html body #home.hero section.mobile-next-departure{
