@@ -435,3 +435,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Kept the bottom-dock Menu pop-up and its three existing destinations: Destinations (/destinations/), Cabs (/#cabs), and Hotels & Properties (/#gallery).
 - Desktop hamburger navigation, desktop dock, menu destinations and section routes remain unchanged.
 - Files: `hamburger-header-final.css`, `site-navigation.js`. PR #519 merged as `6143bcb4be705388e79d19ebda8af05cd97cdb62`; JavaScript syntax validation, site metadata/offline-shell validation, and GitGuardian checks succeeded. Real-device visual verification and live deployment verification were not performed.
+
+
+## 2026-11-16 — Raise mobile bottom-dock menu popup above the dock
+- Fixed the mobile stacking order when the bottom-dock Menu opens the Destinations/Cabs/Hotels & Properties panel: raise the header stacking context to 2000 and the dock-open menu panel to 2100, above the dock at 1800.
+- Keep the normal header menu and desktop menu stacking values unchanged.
+- Bump the `site-navigation.js` cache version from v16 to v17.
+- Files: `site-navigation.js`, `index.html`. Responsive visual verification and deployment verification pending.

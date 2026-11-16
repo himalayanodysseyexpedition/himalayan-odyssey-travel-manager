@@ -103,7 +103,7 @@
       header.style.setProperty("border-bottom", "1px solid rgba(255,255,255,.14)", "important");
       header.style.setProperty("position", "relative", "important");
       header.style.setProperty("overflow", "visible", "important");
-      header.style.setProperty("z-index", "1400", "important");
+      header.style.setProperty("z-index", dockMenu && mobileMenu ? "2000" : "1400", "important");
       inner.style.setProperty("position", "relative", "important");
       inner.style.setProperty("overflow", "visible", "important");
       nav.style.setProperty("display", "flex", "important");
@@ -116,7 +116,7 @@
       nav.style.setProperty("right", dockMenu ? "auto" : "10px", "important");
       nav.style.setProperty("left", dockMenu ? "50%" : "auto", "important");
       nav.style.setProperty("transform", dockMenu ? "translateX(-50%)" : "none", "important");
-      nav.style.setProperty("z-index", "1900", "important");
+      nav.style.setProperty("z-index", dockMenu && mobileMenu ? "2100" : "1900", "important");
       nav.style.setProperty("width", dockMenu ? "min(360px, calc(100vw - 24px))" : "min(310px, calc(100vw - 20px))", "important");
       nav.style.setProperty("max-height", dockMenu ? "min(58vh, 460px)" : "min(72vh, 520px)", "important");
       nav.style.setProperty("overflow-y", "auto", "important");
