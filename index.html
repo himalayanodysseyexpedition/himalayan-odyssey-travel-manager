@@ -6815,7 +6815,46 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 }
 </style>
 
+<style id="mobile-hero-content-start-alignment-restore-v1">
+/* Restore mobile hero elements to the top edge of the hero image; prevent the promo,
+   destination ticker, or mountain artwork from being pulled upward/overlapping. */
+@media screen and (max-width:760px){
+  html body #home.hero{
+    margin-top:0!important;
+    transform:none!important;
+    padding-top:32px!important;
+    overflow:hidden!important;
+  }
+  html body #home.hero > .hero-content{
+    position:relative!important;
+    top:0!important;
+    transform:none!important;
+    margin-top:0!important;
+  }
+  html body #home.hero section.mobile-next-departure{
+    position:relative!important;
+    top:0!important;
+    transform:none!important;
+    margin-top:0!important;
+  }
+  html body #home.hero .hero-content .hero-destination-list{
+    position:relative!important;
+    top:0!important;
+    transform:none!important;
+    margin-top:10px!important;
+  }
+  html body #home.hero .hero-bottom-motion{
+    bottom:0!important;
+    top:auto!important;
+    transform:none!important;
+  }
+}
+</style>
+
 </body>
+
+
+
 </html>
 
 
