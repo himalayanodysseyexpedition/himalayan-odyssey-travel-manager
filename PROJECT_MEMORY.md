@@ -409,4 +409,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Restored vertical breathing room in the mobile homepage hero by extending the hero stage by a responsive 28–36px and shifting the complete content column down by the same amount. The destination ticker's automatic centering, promo-to-ticker spacing, and mountain artwork's bottom anchoring are preserved.
 - Reduced the dedicated mobile hero photo layer from 116% overscan plus 1.04–1.20 zoom to 106% overscan plus 1.01–1.08 zoom so more of the source photograph remains visible while retaining restrained Ken Burns motion.
 - Scope is limited to the mobile homepage hero (viewports up to 760px). Desktop layout, hero copy, promotion details/actions, ticker content, mountain artwork, navigation, business flows and hosting/deployment configuration are unchanged.
-- Files: `index.html`. PR and checks pending; live mobile screenshot verification and deployment have not been performed.
+- Files: `index.html`. PR #515 merged as `34e86ced8808b3e61b2e35d7c1c3197b0fe0d498`; GitGuardian, static-site validation, GitHub Pages build and deployment checks all succeeded. Live mobile screenshot verification was not available.
+
+
+## 2026-11-16 — Nudge mobile hero photo layer upward
+- Shifted only the dedicated mobile hero photograph layer upward by 16px in its base state, both Ken Burns keyframes and the reduced-motion state. The promotion card, destination ticker, mountain artwork, and their spacing remain unchanged.
+- Scope: homepage mobile hero photo only (viewports up to 760px); desktop and all other site functionality remain untouched.
+- File: `index.html`. PR and checks pending; live device visual verification and deployment have not been performed.
