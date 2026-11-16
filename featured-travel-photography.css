@@ -46,3 +46,58 @@
 @media screen and (max-width: 760px) {
   #featured-travel-photography .featured-travel-arrow { display: none !important; }
 }
+
+
+/* Mobile-only gallery controls: replace the pagination dots with tappable side arrows. */
+@media screen and (max-width: 760px) {
+  html body #featured-travel-photography .featured-travel-dots {
+    display: none !important;
+  }
+  html body #featured-travel-photography .featured-travel-arrow {
+    position: absolute !important;
+    z-index: 8 !important;
+    top: 50% !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    border: 1px solid rgba(255,255,255,.82) !important;
+    border-radius: 50% !important;
+    background: rgba(10,16,24,.62) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,.28) !important;
+    cursor: pointer !important;
+    transform: translateY(-50%) !important;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    touch-action: manipulation;
+  }
+  html body #featured-travel-photography .featured-travel-arrow:active {
+    background: rgba(255,255,255,.94) !important;
+    color: #101820 !important;
+    transform: translateY(-50%) scale(.94) !important;
+  }
+  html body #featured-travel-photography .featured-travel-arrow:focus-visible {
+    outline: 2px solid #fff !important;
+    outline-offset: 3px !important;
+  }
+  html body #featured-travel-photography .featured-travel-arrow svg {
+    width: 21px !important;
+    height: 21px !important;
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 2 !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+  }
+  html body #featured-travel-photography .featured-travel-arrow-left {
+    left: 13px !important;
+    right: auto !important;
+  }
+  html body #featured-travel-photography .featured-travel-arrow-right {
+    right: 13px !important;
+    left: auto !important;
+  }
+}
