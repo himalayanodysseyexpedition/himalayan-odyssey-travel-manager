@@ -15,12 +15,13 @@
     background: transparent !important;
   }
   html body #featured-travel-photography .featured-travel-slide {
-    padding: 0 !important;
+    padding: 0 12px !important;
   }
   html body #featured-travel-photography .featured-travel-slide img,
   html body #featured-travel-photography .featured-travel-slide.is-active img {
     width: 100% !important;
-    aspect-ratio: 16 / 7 !important;
+    aspect-ratio: 3 / 4 !important;
+    height: auto !important;
     object-fit: cover !important;
     border-radius: 0 !important;
     opacity: 1 !important;
