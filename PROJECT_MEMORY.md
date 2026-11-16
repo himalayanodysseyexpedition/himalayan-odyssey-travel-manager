@@ -379,3 +379,8 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Removed the inline “Browse all current packages” link from the homepage “Our Travel Packages” subtitle, leaving the descriptive sentence unchanged.
 - The homepage uses one shared subtitle markup for responsive layouts, so this single content edit applies to both mobile and desktop.
 - Only the homepage subtitle was changed; package cards, carousel controls, package routes, navigation and all other content remain untouched. Live-site visual verification is pending.
+ 
+## 2026-11-16 — Correct mobile hero alignment cascade after PR #509
+- Follow-up source-order audit found PR #509's inline alignment block was placed before later inline mobile styles in `index.html`; later rules reset the destination ticker to `top:18px` and reinstated a larger ticker margin, so the earlier reset did not win the cascade.
+- Replaced the ineffective earlier block, normalized the ticker to normal flow, and added one final mobile-only alignment override after the legacy inline styles. The hero uses a top-starting flex layout; the promo card and ticker remain in the image container; the mountain artwork remains anchored to the bottom of that hero.
+- Desktop rules, page content, image asset, navigation and booking/enquiry behaviour are unchanged. GitHub Pages deployment of PR #509 succeeded; browser visual verification is still pending.
