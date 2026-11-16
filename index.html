@@ -6724,6 +6724,47 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 }
 </style>
 
+
+<style id="desktop-basalt-destination-ticker-match-mobile-v1">
+/* Desktop destination ticker: match the mobile Basalt Fade Edge treatment and lift it slightly. */
+@media screen and (min-width:761px){
+  html body #home.hero .hero-content .hero-destination-list{
+    display:block!important;box-sizing:border-box!important;
+    width:100vw!important;max-width:none!important;
+    margin:8px 0 12px calc(50% - 50vw)!important;
+    padding:14px 0!important;overflow:hidden!important;
+    border:0!important;border-radius:6px!important;
+    background:#111318!important;color:#8b98a9!important;
+    text-align:left!important;white-space:nowrap!important;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 18%,#000 82%,transparent 100%)!important;
+    mask-image:linear-gradient(90deg,transparent 0%,#000 18%,#000 82%,transparent 100%)!important;
+    box-shadow:none!important;
+  }
+  html body #home.hero .hero-content .hero-destination-marquee{display:flex!important;width:100%!important;overflow:hidden!important;white-space:nowrap!important}
+  html body #home.hero .hero-content .hero-destination-track{
+    display:flex!important;align-items:center!important;flex:0 0 auto!important;
+    width:max-content!important;min-width:max-content!important;gap:0!important;
+    animation:hoe-desktop-basalt-destination-drift 24s linear infinite!important;
+    animation-play-state:running!important;will-change:transform;
+    color:#8b98a9!important;
+    font:300 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace!important;
+    letter-spacing:.22em!important;text-transform:uppercase!important;
+  }
+  html body #home.hero .hero-content .hero-destination-track span{
+    display:inline-block!important;flex:none!important;padding:0 18px 0 0!important;
+    color:#c4ccd6!important;-webkit-text-fill-color:#c4ccd6!important;
+    background:none!important;font:inherit!important;font-weight:300!important;
+    letter-spacing:inherit!important;text-transform:inherit!important;white-space:nowrap!important;
+  }
+  html body #home.hero .hero-content .hero-destination-track i{
+    display:inline-block!important;flex:none!important;padding:0 18px 0 0!important;
+    color:#718096!important;-webkit-text-fill-color:#718096!important;
+    font-style:normal!important;font-size:13px!important;line-height:1!important;
+  }
+  @keyframes hoe-desktop-basalt-destination-drift{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+}
+@media screen and (min-width:761px) and (prefers-reduced-motion:reduce){html body #home.hero .hero-content .hero-destination-track{animation:none!important}}
+</style>
 </body>
 </html>
 
