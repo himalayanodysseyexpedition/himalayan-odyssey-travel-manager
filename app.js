@@ -3166,9 +3166,66 @@ async function deleteDestination(id){
 const FEATURED_PHOTO_BUCKET="featured-travel-photos",MAX_FEATURED_PHOTO_SIZE=5*1024*1024;let editingFeaturedPhotoId=null;
 async function loadFeaturedPhotosAdmin(){const n=$("featuredPhotoNotice"),t=$("featuredPhotoList");if(!t)return;try{const {data,error}=await db.from("featured_travel_photos").select("*").order("sort_order",{ascending:true});if(error)throw error;D.featured_travel_photos=data||[];if(n)n.innerHTML="<p>Independent gallery ready. Published photographs appear below the homepage hero.</p>";renderFeaturedPhotosAdmin();}catch(e){if(n)n.innerHTML="<p><b>Gallery setup required.</b> Apply <code>supabase/migrations/202611160001_featured_travel_photos.sql</code> in Supabase SQL Editor, then refresh. "+esc(e.message)+"</p>";t.innerHTML="";}}
 function renderFeaturedPhotosAdmin(){const t=$("featuredPhotoList");if(!t)return;const a=[...(D.featured_travel_photos||[])].sort((x,y)=>(x.sort_order||0)-(y.sort_order||0));if(!a.length){t.innerHTML="<p>No featured photos yet. Add your first photo.</p>";return;}t.innerHTML='<div class="hotel-photo-grid">'+a.map(x=>'<article class="hotel-photo" style="min-width:220px">'+(x.image_url?'<img src="'+esc(x.image_url)+'" alt="'+esc(x.alt_text||"Featured Himalayan photograph")+'">':'')+'<strong>'+(x.title?'<strong>'+esc(x.title)+'</strong>':'')+'<small>'+esc(x.caption||"")+'</small><small>Order: '+(+x.sort_order||0)+' · '+(x.is_active?"Published":"Hidden")+'</small><button type="button" data-edit-featured-photo="'+esc(x.id)+'">Edit</button><button type="button" class="danger" data-delete-featured-photo="'+esc(x.id)+'">Delete</button></article>').join("")+'</div>';}
-function resetFeaturedPhotoForm(){editingFeaturedPhotoId=null;$("featuredPhotoF")?.reset();$("featuredPhotoDialogTitle").textContent="Add Featured Photo";$("featuredPhotoOrder").value=String((D.featured_travel_photos||[]).length+1);$("featuredPhotoPublished").checked=true;setHTML("featuredPhotoPreview","");}
-function openEditFeaturedPhoto(id){const x=(D.featured_travel_photos||[]).find(v=>String(v.id)===String(id));if(!x)return;editingFeaturedPhotoId=x.id;$("featuredPhotoDialogTitle").textContent="Edit Featured Photo";$("featuredPhotoTitle").value=x.title||"";$("featuredPhotoCaption").value=x.caption||"";$("featuredPhotoAlt").value=x.alt_text||"";$("featuredPhotoOrder").value=x.sort_order||1;$("featuredPhotoPublished").checked=!!x.is_active;$("featuredPhotoFile").value="";setHTML("featuredPhotoPreview",x.image_url?'<div class="hotel-photo"><img src="'+esc(x.image_url)+'" alt="Current featured image"><small>Current image — upload a replacement if needed.</small></div>':"");show("featuredPhotoForm");}
-async function saveFeaturedPhoto(e){e.preventDefault();const b=$("featuredPhotoSave");if(b)b.disabled=true;let path=null;try{const title=$("featuredPhotoTitle").value.trim()||null;const old=(D.featured_travel_photos||[]).find(x=>String(x.id)===String(editingFeaturedPhotoId)),p={title,caption:$("featuredPhotoCaption").value.trim()||null,alt_text:$("featuredPhotoAlt").value.trim()||"Featured Himalayan photograph",sort_order:Math.max(1,+$("featuredPhotoOrder").value||1),is_active:$("featuredPhotoPublished").checked,updated_at:new Date().toISOString()},f=$("featuredPhotoFile").files?.[0];if(f){if(!["image/jpeg","image/png","image/webp"].includes(f.type))throw Error("Only JPG, PNG and WebP images are allowed.");if(f.size>MAX_FEATURED_PHOTO_SIZE)throw Error("Photo must be smaller than 5 MB.");const id=editingFeaturedPhotoId||crypto.randomUUID();path=id+"/"+Date.now()+"-"+safeFileName(f.name);const up=await db.storage.from(FEATURED_PHOTO_BUCKET).upload(path,f,{contentType:f.type,upsert:false});if(up.error)throw up.error;p.storage_path=path;p.image_url=db.storage.from(FEATURED_PHOTO_BUCKET).getPublicUrl(path).data.publicUrl;}if(editingFeaturedPhotoId){const r=await db.from("featured_travel_photos").update(p).eq("id",editingFeaturedPhotoId);if(r.error)throw r.error;}else{if(!p.image_url)throw Error("Please upload a photograph.");const r=await db.from("featured_travel_photos").insert(p);if(r.error)throw r.error;}if(f&&old?.storage_path)await db.storage.from(FEATURED_PHOTO_BUCKET).remove([old.storage_path]);$("featuredPhotoForm").close();await loadFeaturedPhotosAdmin();message("Featured photograph saved.");}catch(e){if(path)await db.storage.from(FEATURED_PHOTO_BUCKET).remove([path]);alert("Could not save featured photo: "+e.message);}finally{if(b)b.disabled=false;}}
+function resetFeaturedPhotoForm(){editingFeaturedPhotoId=null;$("featuredPhotoF")?.reset();$("featuredPhotoFile").multiple=true;$("featuredPhotoSave").textContent="Upload Photos";$("featuredPhotoDialogTitle").textContent="Add Featured Photos";$("featuredPhotoOrder").value=String((D.featured_travel_photos||[]).length+1);$("featuredPhotoPublished").checked=true;setHTML("featuredPhotoPreview","");}
+function openEditFeaturedPhoto(id){const x=(D.featured_travel_photos||[]).find(v=>String(v.id)===String(id));if(!x)return;editingFeaturedPhotoId=x.id;$("featuredPhotoFile").multiple=false;$("featuredPhotoSave").textContent="Save Photo";$("featuredPhotoDialogTitle").textContent="Edit Featured Photo";$("featuredPhotoTitle").value=x.title||"";$("featuredPhotoCaption").value=x.caption||"";$("featuredPhotoAlt").value=x.alt_text||"";$("featuredPhotoOrder").value=x.sort_order||1;$("featuredPhotoPublished").checked=!!x.is_active;$("featuredPhotoFile").value="";setHTML("featuredPhotoPreview",x.image_url?'<div class="hotel-photo"><img src="'+esc(x.image_url)+'" alt="Current featured image"><small>Current image — upload a replacement if needed.</small></div>':"");show("featuredPhotoForm");}
+async function saveFeaturedPhoto(e){
+  e.preventDefault();
+  const b=$("featuredPhotoSave"),input=$("featuredPhotoFile"),files=Array.from(input?.files||[]);
+  if(b)b.disabled=true;
+  const uploadedPaths=[];
+  try{
+    const title=$("featuredPhotoTitle").value.trim()||null;
+    const caption=$("featuredPhotoCaption").value.trim()||null;
+    const altText=$("featuredPhotoAlt").value.trim()||"Featured Himalayan photograph";
+    const isActive=$("featuredPhotoPublished").checked;
+    const baseOrder=Math.max(1,+$("featuredPhotoOrder").value||1);
+    if(!editingFeaturedPhotoId){
+      if(!files.length)throw Error("Please select at least one photograph.");
+      for(const file of files){
+        if(!["image/jpeg","image/png","image/webp"].includes(file.type))throw Error(file.name+": only JPG, PNG and WebP images are allowed.");
+        if(file.size>MAX_FEATURED_PHOTO_SIZE)throw Error(file.name+": photo must be smaller than 5 MB.");
+      }
+      const rows=[];
+      for(let i=0;i<files.length;i++){
+        const file=files[i],id=crypto.randomUUID();
+        const path=id+"/"+Date.now()+"-"+safeFileName(file.name);
+        message("Uploading photo "+(i+1)+" of "+files.length+"…");
+        const up=await db.storage.from(FEATURED_PHOTO_BUCKET).upload(path,file,{contentType:file.type,upsert:false});
+        if(up.error)throw up.error;
+        uploadedPaths.push(path);
+        const imageUrl=db.storage.from(FEATURED_PHOTO_BUCKET).getPublicUrl(path).data.publicUrl;
+        rows.push({title,caption,alt_text:altText,sort_order:baseOrder+i,is_active:isActive,storage_path:path,image_url:imageUrl,updated_at:new Date().toISOString()});
+      }
+      const {error}=await db.from("featured_travel_photos").insert(rows);
+      if(error)throw error;
+      $("featuredPhotoForm").close();
+      await loadFeaturedPhotosAdmin();
+      message(files.length+" featured photo"+(files.length===1?"":"s")+" uploaded successfully.");
+      return;
+    }
+    if(files.length>1)throw Error("When editing an existing entry, select only one replacement photo.");
+    const old=(D.featured_travel_photos||[]).find(x=>String(x.id)===String(editingFeaturedPhotoId));
+    const p={title,caption,alt_text:altText,sort_order:baseOrder,is_active:isActive,updated_at:new Date().toISOString()};
+    const f=files[0];
+    if(f){
+      if(!["image/jpeg","image/png","image/webp"].includes(f.type))throw Error("Only JPG, PNG and WebP images are allowed.");
+      if(f.size>MAX_FEATURED_PHOTO_SIZE)throw Error("Photo must be smaller than 5 MB.");
+      const path=editingFeaturedPhotoId+"/"+Date.now()+"-"+safeFileName(f.name);
+      const up=await db.storage.from(FEATURED_PHOTO_BUCKET).upload(path,f,{contentType:f.type,upsert:false});
+      if(up.error)throw up.error;
+      uploadedPaths.push(path);p.storage_path=path;p.image_url=db.storage.from(FEATURED_PHOTO_BUCKET).getPublicUrl(path).data.publicUrl;
+    }
+    const {error}=await db.from("featured_travel_photos").update(p).eq("id",editingFeaturedPhotoId);
+    if(error)throw error;
+    if(f&&old?.storage_path)await db.storage.from(FEATURED_PHOTO_BUCKET).remove([old.storage_path]);
+    $("featuredPhotoForm").close();
+    await loadFeaturedPhotosAdmin();
+    message("Featured photograph updated.");
+  }catch(error){
+    if(uploadedPaths.length)await db.storage.from(FEATURED_PHOTO_BUCKET).remove(uploadedPaths);
+    alert("Could not save featured photo"+(files.length>1?"s":"")+": "+error.message);
+  }finally{if(b)b.disabled=false;}
+}
 async function deleteFeaturedPhoto(id){const x=(D.featured_travel_photos||[]).find(v=>String(v.id)===String(id));if(!x||!confirm("Delete this featured photograph and its uploaded photo permanently?"))return;try{const r=await db.from("featured_travel_photos").delete().eq("id",id);if(r.error)throw r.error;if(x.storage_path)await db.storage.from(FEATURED_PHOTO_BUCKET).remove([x.storage_path]);await loadFeaturedPhotosAdmin();message("Featured photograph deleted.");}catch(e){alert("Could not delete featured photo: "+e.message);}}
 
 /* GROUP DEPARTURE MANAGEMENT */
@@ -3288,7 +3345,7 @@ async function initialize() {
     $("newFeaturedPhoto")?.addEventListener("click",()=>{resetFeaturedPhotoForm();show("featuredPhotoForm");});
     $("featuredPhotoF")?.addEventListener("submit",saveFeaturedPhoto);
     $("featuredPhotoList")?.addEventListener("click",e=>{const a=e.target.closest("[data-edit-featured-photo]"),d=e.target.closest("[data-delete-featured-photo]");if(a)openEditFeaturedPhoto(a.dataset.editFeaturedPhoto);if(d)deleteFeaturedPhoto(d.dataset.deleteFeaturedPhoto);});
-    $("featuredPhotoFile")?.addEventListener("change",()=>{const f=$("featuredPhotoFile").files?.[0];if(f){const u=URL.createObjectURL(f);setHTML("featuredPhotoPreview",'<div class="hotel-photo"><img src="'+u+'" alt="New featured photo preview"><small>New photo preview</small></div>');}});
+    $("featuredPhotoFile")?.addEventListener("change",()=>{const files=Array.from($("featuredPhotoFile").files||[]);if(!files.length){setHTML("featuredPhotoPreview","");return;}setHTML("featuredPhotoPreview",'<div class="hotel-photo-grid">'+files.map((f,i)=>'<div class="hotel-photo"><img src="'+URL.createObjectURL(f)+'" alt="Selected featured photo '+(i+1)+'"><small>'+esc(f.name)+' · '+(f.size/1024/1024).toFixed(2)+' MB</small></div>').join("")+'</div><small>'+files.length+' photo(s) selected. Uploads will be processed one by one.</small>');});
     $("newDestination")?.addEventListener("click",()=>{resetDestinationForm();show("destinationForm");});
     $("destinationF")?.addEventListener("submit",saveDestination);
     $("destinationList")?.addEventListener("click",event=>{
