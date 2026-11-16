@@ -2419,9 +2419,7 @@ async function loadPackages() {
 
             <div class="package-card-actions">
               <a class="btn package-enquire-link" href="/?package=${encodeURIComponent(p.id)}/build-your-trip/">Enquire About This Package</a>
-              ${p.linkedItineraryPage ? `
-                <a class="btn" href="${safe(p.linkedItineraryPage)}">Explore Full Itinerary</a>
-              ` : ""}
+              <a class="btn package-itinerary-link" href="${safe(p.linkedItineraryPage || "/itineraries/")}">View Itinerary</a>
             </div>
 
           </div>
