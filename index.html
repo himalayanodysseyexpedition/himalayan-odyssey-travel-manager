@@ -7157,3 +7157,38 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   }
 }
 </style>
+
+<style id="mobile-featured-travel-arrow-controls-clean-v1">
+/* Mobile-only: remove circular arrow chrome and keep the existing arrow controls fully clickable. */
+@media screen and (max-width:760px){
+ html body #featured-travel-photography #featuredTravelCarousel{position:relative!important;}
+ html body #featured-travel-photography #featuredTravelPrev,
+ html body #featured-travel-photography #featuredTravelNext{
+  position:absolute!important;top:50%!important;z-index:12!important;
+  display:grid!important;place-items:center!important;
+  width:42px!important;height:48px!important;min-width:42px!important;min-height:48px!important;
+  margin:0!important;padding:0!important;
+  border:0!important;border-radius:0!important;
+  background:transparent!important;background-color:transparent!important;
+  box-shadow:none!important;color:#fff!important;
+  opacity:1!important;cursor:pointer!important;
+  transform:translateY(-50%)!important;
+  -webkit-appearance:none!important;appearance:none!important;
+  touch-action:manipulation!important;pointer-events:auto!important;
+ }
+ html body #featured-travel-photography #featuredTravelPrev{left:4px!important;right:auto!important;}
+ html body #featured-travel-photography #featuredTravelNext{right:4px!important;left:auto!important;}
+ html body #featured-travel-photography #featuredTravelPrev svg,
+ html body #featured-travel-photography #featuredTravelNext svg{
+  display:block!important;width:27px!important;height:27px!important;
+  fill:none!important;stroke:currentColor!important;stroke-width:2.2!important;
+  stroke-linecap:round!important;stroke-linejoin:round!important;pointer-events:none!important;
+ }
+ html body #featured-travel-photography #featuredTravelPrev:focus-visible,
+ html body #featured-travel-photography #featuredTravelNext:focus-visible{
+  outline:2px solid #fff!important;outline-offset:2px!important;
+ }
+ html body #featured-travel-photography #featuredTravelPrev:active,
+ html body #featured-travel-photography #featuredTravelNext:active{opacity:.65!important;}
+}
+</style>
