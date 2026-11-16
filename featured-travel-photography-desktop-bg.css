@@ -1,14 +1,14 @@
 /* Desktop-only background correction for Featured Travel Photography.
-   Use a visible Arctic navy backdrop and maintain readable intro contrast. */
+   Use a clean white background across the entire desktop section. */
 @media screen and (min-width: 761px) {
   html body section#featured-travel-photography.featured-travel-section {
-    background: #14283b !important;
-    background-color: #14283b !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
     background-image: none !important;
-    color: #ffffff !important;
+    color: #111111 !important;
   }
 
   html body section#featured-travel-photography .featured-travel-heading p {
-    color: #ffffff !important;
+    color: #111111 !important;
   }
 }
