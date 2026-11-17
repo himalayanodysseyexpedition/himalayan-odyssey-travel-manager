@@ -1889,7 +1889,7 @@ body.guest-itinerary-popup-open{overflow:hidden}
               <p><strong>DAY 2</strong> Narkanda → Sangla → Chitkul · Lepcha La &amp; Chitkul border sightseeing</p>
               <p><strong>DAY 3</strong> Sangla → Khab Sangam → Nako → Tabo</p>
               <p><strong>DAY 4</strong> Tabo → Kaza</p>
-              <p><strong>DAY 5</strong> Kaza local sightseeing</p>
+              <p><strong>DAY 5</strong> Kaza local sightseeing · Overnight in Kaza</p>
               <p><strong>DAY 6</strong> Kaza → Kalpa</p>
               <p><strong>DAY 7</strong> Kalpa → Chandigarh drop</p>
             </div>
@@ -6864,7 +6864,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
     });
   };
   dots.forEach((dot, index) => dot.addEventListener('click', () => {
-    slides[index].scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest', inline: 'start' });
+    track.scrollTo({ left: slides[index].offsetLeft, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
     setActive(index);
   }));
   let ticking = false;
