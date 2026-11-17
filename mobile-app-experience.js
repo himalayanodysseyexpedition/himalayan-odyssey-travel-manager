@@ -10,7 +10,7 @@
  ];
  function loadStyles(){
   if(document.getElementById('himalayan-bottom-navigation-css'))return;
-  const link=document.createElement('link');link.id='himalayan-bottom-navigation-css';link.rel='stylesheet';link.href='/himalayan-bottom-navigation.css?v=4';document.head.appendChild(link);
+  const link=document.createElement('link');link.id='himalayan-bottom-navigation-css';link.rel='stylesheet';link.href='/himalayan-bottom-navigation.css?v=5';document.head.appendChild(link);
  }
  function removeLegacy(){
   document.querySelectorAll('#footerContactBar,.footer-contact-bar,nav.quick-nav-bar,nav.quick-nav').forEach(el=>el.remove());
@@ -37,14 +37,14 @@
   nav.setAttribute('aria-label','Bottom navigation');
   nav.innerHTML=items.map(x=>'<a href="'+x.href+'" data-dock="'+x.path+'" aria-label="'+x.label+'">'+icon(x.svg)+'<span>'+x.label+'</span></a>').join('')+
    '<button type="button" class="dock-menu-trigger" data-dock-menu aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMainNavigation">'+
-   icon('<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect class="icon-side" x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect class="icon-side" x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/>')+
+   icon(mobile()?'<path d="M12 4v16M4 12h16"/>':'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect class="icon-side" x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect class="icon-side" x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/>')+
    '<span>Menu</span></button>';
   document.body.appendChild(nav);
   const menuTrigger=nav.querySelector('.dock-menu-trigger');
   {
    // Mobile and desktop share an independent body-level popup anchored above the bottom dock.
    const menuPopup=document.createElement('div');
-   menuPopup.className='dock-menu-popup';
+   menuPopup.className='dock-menu-popup '+(mobile()?'dock-fab-popup':'dock-panel-popup');
    menuPopup.setAttribute('role','menu');
    menuPopup.setAttribute('aria-label','Website menu');
    menuPopup.setAttribute('aria-hidden','true');
@@ -55,41 +55,46 @@
    Object.assign(menuPopup.style,{
     display:'none',position:'fixed',left:'50%',bottom:'calc(98px + env(safe-area-inset-bottom))',
     transform:'translateX(-50%)',width:'min(360px, calc(100vw - 24px))',
-    maxHeight:'min(58vh, 460px)',overflowY:'auto',boxSizing:'border-box',
-    flexDirection:'column',gap:'5px',padding:'10px',
-    border:'1px solid rgba(255,255,255,.28)',borderRadius:'22px',
-    background:'rgba(55,59,65,.97)',color:'#fff',
-    boxShadow:'0 20px 48px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.16)',
-    backdropFilter:'blur(28px) saturate(145%)',WebkitBackdropFilter:'blur(28px) saturate(145%)',
+    maxHeight:'none',overflow:'visible',boxSizing:'border-box',
+    flexDirection:'column',alignItems:'flex-end',gap:'10px',padding:'0',
+    border:'0',borderRadius:'0',background:'transparent',color:'#fff',
+    boxShadow:'none',backdropFilter:'none',WebkitBackdropFilter:'none',
     zIndex:'1901'
    });
+   if(!mobile())Object.assign(menuPopup.style,{width:'min(360px, calc(100vw - 24px))',maxHeight:'min(58vh, 460px)',overflowY:'auto',flexDirection:'column',alignItems:'stretch',gap:'5px',padding:'10px',border:'1px solid rgba(255,255,255,.28)',borderRadius:'22px',background:'rgba(55,59,65,.97)',boxShadow:'0 20px 48px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.16)',backdropFilter:'blur(28px) saturate(145%)',WebkitBackdropFilter:'blur(28px) saturate(145%)'});
    menuPopup.querySelectorAll('a').forEach(a=>{
     Object.assign(a.style,{
-     display:'flex',alignItems:'center',gap:'12px',minHeight:'46px',
-     padding:'0 14px',boxSizing:'border-box',border:'1px solid transparent',
-     borderRadius:'13px',background:'rgba(255,255,255,.055)',color:'#fff',
+     display:'flex',position:'relative',alignItems:'center',justifyContent:'center',
+     width:'54px',height:'54px',minHeight:'54px',padding:'0',boxSizing:'border-box',
+     border:'1px solid rgba(255,255,255,.34)',borderRadius:'50%',
+     background:'linear-gradient(145deg,rgba(104,110,118,.98),rgba(39,43,49,.98))',color:'#fff',
      textDecoration:'none',fontFamily:'Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif',
-     fontSize:'14px',fontWeight:'500'
+     fontSize:'11px',fontWeight:'600',boxShadow:'0 8px 22px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.32)'
     });
     const svg=a.querySelector('svg');
-    Object.assign(svg.style,{width:'20px',height:'20px',flex:'0 0 20px',fill:'none',stroke:'#aeb7c2',strokeWidth:'1.7',strokeLinecap:'round',strokeLinejoin:'round'});
+    Object.assign(svg.style,{width:'23px',height:'23px',flex:'0 0 23px',fill:'none',stroke:'#fff',strokeWidth:'1.7',strokeLinecap:'round',strokeLinejoin:'round'});
+    const label=a.querySelector('span');
+    Object.assign(label.style,{position:'absolute',right:'64px',top:'50%',transform:'translateY(-50%)',padding:'7px 11px',border:'1px solid rgba(255,255,255,.20)',borderRadius:'999px',background:'rgba(38,42,48,.94)',color:'#fff',whiteSpace:'nowrap',fontSize:'11px',fontWeight:'600',letterSpacing:'.02em',boxShadow:'0 5px 14px rgba(0,0,0,.24)',pointerEvents:'none'});
+    if(!mobile()){
+     Object.assign(a.style,{position:'static',width:'auto',height:'auto',minHeight:'46px',justifyContent:'flex-start',gap:'12px',padding:'0 14px',border:'1px solid transparent',borderRadius:'13px',background:'rgba(255,255,255,.055)',boxShadow:'none'});
+     Object.assign(svg.style,{width:'20px',height:'20px',flex:'0 0 20px',stroke:'#aeb7c2'});
+     Object.assign(label.style,{position:'static',right:'auto',top:'auto',transform:'none',padding:'0',border:'0',borderRadius:'0',background:'transparent',fontSize:'14px',boxShadow:'none'});
+    }
    });
    document.body.appendChild(menuPopup);
    const positionMenuPopup=()=>{
     const rect=nav.getBoundingClientRect();
     const bottom=Math.max(0,Math.ceil(window.innerHeight-rect.top+10));
     menuPopup.style.setProperty('bottom',bottom+'px','important');
+    const triggerRect=menuTrigger.getBoundingClientRect();
     if(nav.classList.contains('mobile-app-dock')){
-     // Keep the mobile popup centered above the dock.
-     menuPopup.style.setProperty('left','50%','important');
-     menuPopup.style.setProperty('right','auto','important');
-     menuPopup.style.setProperty('transform','translateX(-50%)','important');
+     const right=Math.max(8,Math.ceil(window.innerWidth-(triggerRect.left+triggerRect.width/2+27)));
+     menuPopup.style.setProperty('width','54px','important');
+     menuPopup.style.setProperty('left','auto','important');
+     menuPopup.style.setProperty('right',right+'px','important');
+     menuPopup.style.setProperty('transform','none','important');
     }else{
-     // Anchor desktop popup to the actual Menu button, not the centered dock container.
-     const triggerRect=menuTrigger.getBoundingClientRect();
      const right=Math.max(8,Math.ceil(window.innerWidth-triggerRect.right));
-     // A narrow desktop panel stays over the right-hand Menu area instead of
-     // extending across the visual center of the centered navigation dock.
      menuPopup.style.setProperty('width','min(260px, calc(100vw - 24px))','important');
      menuPopup.style.setProperty('left','auto','important');
      menuPopup.style.setProperty('right',right+'px','important');
