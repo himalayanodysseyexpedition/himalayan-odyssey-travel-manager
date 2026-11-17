@@ -352,8 +352,8 @@ html body #home.hero .hero-promo-pagination button.is-active{width:24px!importan
   html body #home.hero .hero-promo-slide .mobile-departure-itinerary-list p{margin:0!important;color:#fff!important;font:500 11px/1.45 "DM Sans",Arial,sans-serif!important}
   html body #home.hero .hero-promo-slide .mobile-departure-itinerary-list strong{display:inline-block!important;min-width:48px!important;color:#fff!important;font-size:10px!important;letter-spacing:.5px!important}
   html body #home.hero .hero-promo-slide .mobile-next-departure:not(.mobile-departure-secondary){grid-template-areas:"top top" "kicker kicker" "title title" "date date" "facts facts" "price seats" "progress progress" "itinerary itinerary" "explore explore"!important;column-gap:12px!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-secondary{grid-template-areas:"top top" "kicker kicker" "title title" "date date" "facts facts" "price price" "progress progress" "itinerary itinerary" "explore explore"!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-secondary .mobile-departure-track>span{width:100%!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-secondary{grid-template-areas:"top top" "kicker kicker" "title title" "date date" "facts facts" "price seats" "progress progress" "itinerary itinerary" "explore explore"!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-secondary .mobile-departure-track>span{width:33.333%!important}
   html body #home.hero .hero-promo-slide .mobile-departure-secondary .mobile-departure-itinerary-details[open] .mobile-departure-itinerary-list{grid-column:1/-1!important}
   html body #home.hero .hero-promo-pagination{display:flex!important;justify-content:center!important;align-items:center!important;gap:9px!important;width:100%!important;padding:12px 0 0!important}
   html body #home.hero .hero-promo-pagination button{display:block!important;width:8px!important;height:8px!important;padding:0!important;border:1px solid rgba(255,255,255,.95)!important;border-radius:50%!important;background:rgba(255,255,255,.35)!important}
