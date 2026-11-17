@@ -4290,41 +4290,10 @@ html body #home.hero .hero-content h1.hero-animated-heading > .hero-heading-suff
     position:relative!important;
     z-index:1!important;
   }
-  /* Keep the hamburger at the right while centering the logo against the full header width. */
-  html body > header .header-inner{
-    width:100%!important;
-    box-sizing:border-box!important;
-  }
-  html body > header .header-inner > a.brand{
-    position:absolute!important;
-    left:50%!important;
-    right:auto!important;
-    top:50%!important;
-    bottom:auto!important;
-    transform:translate(-50%,-50%)!important;
-    display:flex!important;
-    align-items:center!important;
-    justify-content:center!important;
-    flex:0 0 auto!important;
-    width:max-content!important;
-    max-width:calc(100% - 112px)!important;
-    margin:0!important;
-    padding:0!important;
-    z-index:1402!important;
-  }
-  html body > header .header-inner > a.brand > img{
-    display:block!important;
-    width:auto!important;
-    height:auto!important;
-    max-height:36px!important;
-    max-width:min(44vw,150px)!important;
-    object-fit:contain!important;
-    object-position:center center!important;
-  }
+  html body > header .header-inner > a.brand,
   html body > header .header-inner > .header-menu-toggle{
     position:relative!important;
-    z-index:1403!important;
-    margin-left:auto!important;
+    z-index:2!important;
   }
   html body > header .header-menu-toggle{
     min-width:46px!important;
@@ -4408,10 +4377,41 @@ html body #home.hero .hero-content h1.hero-animated-heading > .hero-heading-suff
     position:relative!important;
     z-index:1!important;
   }
-  html body > header .header-inner > a.brand,
+  /* Keep the hamburger at the right while centering the logo against the full header width. */
+  html body > header .header-inner{
+    width:100%!important;
+    box-sizing:border-box!important;
+  }
+  html body > header .header-inner > a.brand{
+    position:absolute!important;
+    left:50%!important;
+    right:auto!important;
+    top:50%!important;
+    bottom:auto!important;
+    transform:translate(-50%,-50%)!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    flex:0 0 auto!important;
+    width:max-content!important;
+    max-width:calc(100% - 112px)!important;
+    margin:0!important;
+    padding:0!important;
+    z-index:1402!important;
+  }
+  html body > header .header-inner > a.brand > img{
+    display:block!important;
+    width:auto!important;
+    height:auto!important;
+    max-height:36px!important;
+    max-width:min(44vw,150px)!important;
+    object-fit:contain!important;
+    object-position:center center!important;
+  }
   html body > header .header-inner > .header-menu-toggle{
     position:relative!important;
-    z-index:2!important;
+    z-index:1403!important;
+    margin-left:auto!important;
   }
 }
 @keyframes mobile-header-prayer-flags-overlay-flow{
