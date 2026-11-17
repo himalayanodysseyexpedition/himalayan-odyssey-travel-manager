@@ -26,7 +26,7 @@
     }
     addText("h3", "Itinerary");
     const items = Array.isArray(record.itinerary_items) ? record.itinerary_items : [];
-    const itineraryText = items.map(item => String(item || "")).filter(Boolean).join("\\n");
+    const itineraryText = items.map(item => String(item || "")).filter(Boolean).join("\n");
     if (itineraryText.trim()) {
       const itinerary = addText("p", itineraryText, "promo-itinerary-body");
       itinerary.style.whiteSpace = "pre-line";
