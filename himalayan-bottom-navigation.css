@@ -269,3 +269,80 @@ html body .dock-menu-popup.dock-fab-popup>a[role="menuitem"]:focus-visible{
   pointer-events:auto!important;
  }
 }
+
+
+/* MOBILE ONLY — one translucent blue glass capsule with four unfilled controls. */
+@media(max-width:760px){
+ html body nav.mobile-app-dock{
+  background:linear-gradient(135deg,rgba(91,177,239,.24) 0%,rgba(39,119,190,.18) 48%,rgba(13,61,111,.24) 100%)!important;
+  border:1px solid rgba(190,228,255,.34)!important;
+  box-shadow:0 14px 36px rgba(2,22,48,.24),0 0 22px rgba(79,164,231,.13),inset 0 1px 0 rgba(255,255,255,.30),inset 0 -1px 0 rgba(70,150,215,.18)!important;
+  -webkit-backdrop-filter:blur(32px) saturate(185%)!important;
+  backdrop-filter:blur(32px) saturate(185%)!important;
+ }
+ html body nav.mobile-app-dock::before{
+  background:linear-gradient(112deg,rgba(255,255,255,.18) 0%,rgba(111,190,246,.10) 34%,transparent 68%,rgba(18,86,150,.12) 100%)!important;
+ }
+ /* The four controls sit inside the single shared capsule; none has its own fill. */
+ html body nav.mobile-app-dock>a[data-dock],
+ html body nav.mobile-app-dock>button.dock-menu-trigger,
+ html body nav.mobile-app-dock>a[data-dock][aria-current="page"],
+ html body nav.mobile-app-dock>a[data-dock]:hover,
+ html body nav.mobile-app-dock>button.dock-menu-trigger:hover,
+ html body nav.mobile-app-dock>a[data-dock]:focus-visible,
+ html body nav.mobile-app-dock>button.dock-menu-trigger:focus-visible{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+ }
+ html body nav.mobile-app-dock>a[data-dock]:active,
+ html body nav.mobile-app-dock>button.dock-menu-trigger:active{
+  background:transparent!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+  transform:scale(.96)!important;
+ }
+ html body nav.mobile-app-dock span{
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  text-shadow:0 1px 3px rgba(0,22,48,.68),0 0 8px rgba(104,188,246,.24)!important;
+  font-weight:700!important;
+ }
+ html body nav.mobile-app-dock .dock-icon{
+  color:#fff!important;
+  stroke:#fff!important;
+  fill:none!important;
+  stroke-width:1.8!important;
+  filter:drop-shadow(0 1px 0 rgba(0,18,42,.74)) drop-shadow(0 3px 5px rgba(43,137,207,.52))!important;
+  transform-origin:50% 55%!important;
+  animation:dockWhiteGlyphFloat 4.6s ease-in-out infinite!important;
+ }
+ html body nav.mobile-app-dock .dock-icon .icon-side{
+  fill:rgba(255,255,255,.12)!important;
+  stroke:#fff!important;
+ }
+ html body nav.mobile-app-dock .dock-icon .icon-detail{
+  stroke:rgba(255,255,255,.94)!important;
+ }
+ html body nav.mobile-app-dock>a:nth-of-type(2) .dock-icon{animation-delay:.18s!important}
+ html body nav.mobile-app-dock>a:nth-of-type(3) .dock-icon{animation-delay:.36s!important}
+ html body nav.mobile-app-dock>button.dock-menu-trigger .dock-icon{animation-delay:.54s!important}
+ html body nav.mobile-app-dock>button.dock-menu-trigger .dock-icon{
+  transition:transform .28s cubic-bezier(.2,.8,.2,1)!important;
+ }
+ html body nav.mobile-app-dock>button.dock-menu-trigger.is-open .dock-icon{
+  animation:none!important;
+  transform:rotate(45deg)!important;
+ }
+}
+@keyframes dockWhiteGlyphFloat{
+ 0%,100%{transform:translateY(0) scale(1);filter:drop-shadow(0 1px 0 rgba(0,18,42,.72)) drop-shadow(0 3px 5px rgba(43,137,207,.42))}
+ 50%{transform:translateY(-1.5px) scale(1.035);filter:drop-shadow(0 1px 0 rgba(0,18,42,.72)) drop-shadow(0 4px 8px rgba(72,168,235,.66))}
+}
+@media(max-width:760px) and (prefers-reduced-motion:reduce){
+ html body nav.mobile-app-dock .dock-icon{animation:none!important}
+}
