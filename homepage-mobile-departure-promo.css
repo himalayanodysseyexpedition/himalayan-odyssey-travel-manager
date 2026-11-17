@@ -341,3 +341,67 @@ html body #home.hero .hero-promo-slide a.mobile-departure-cta:not(.mobile-depart
     padding:18px 17px 16px!important;
   }
 }
+
+
+/* Mobile-only hero carousel sizing correction.
+   Match the old single-card flex footprint and stop the carousel from shrinking vertically. */
+@media screen and (max-width:760px){
+  html body #home.hero > .hero-content > .hero-promo-carousel{
+    display:block!important;
+    position:relative!important;
+    flex:0 0 auto!important;
+    align-self:stretch!important;
+    width:100%!important;
+    max-width:520px!important;
+    min-width:0!important;
+    margin:0 auto!important;
+    padding:0!important;
+    box-sizing:border-box!important;
+    overflow:hidden!important;
+    transform:none!important;
+  }
+  html body #home.hero .hero-promo-track{
+    display:flex!important;
+    flex:0 0 auto!important;
+    align-items:flex-start!important;
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+  }
+  html body #home.hero .hero-promo-slide{
+    display:block!important;
+    flex:0 0 100%!important;
+    width:100%!important;
+    min-width:100%!important;
+    max-width:100%!important;
+    height:auto!important;
+    box-sizing:border-box!important;
+  }
+  html body #home.hero .hero-promo-slide .mobile-next-departure{
+    display:grid!important;
+    flex:0 0 auto!important;
+    align-self:stretch!important;
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+    height:auto!important;
+    min-height:max-content!important;
+    margin:0!important;
+    box-sizing:border-box!important;
+  }
+  html body #home.hero .hero-content .hero-destination-list{
+    position:relative!important;
+    top:0!important;
+    align-self:stretch!important;
+    flex:0 0 auto!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin:auto 0 0!important;
+    padding-top:14px!important;
+    transform:none!important;
+    z-index:4!important;
+  }
+}

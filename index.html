@@ -1427,7 +1427,7 @@ html body #home.hero .hero-build-cta-wrap > .hero-build-cta:active{
 }
 </style>
   <link rel="stylesheet" href="/arctic-prestige-motion.css?v=3">
-  <link rel="stylesheet" href="/homepage-mobile-departure-promo.css?v=13">
+  <link rel="stylesheet" href="/homepage-mobile-departure-promo.css?v=14">
   <link rel="stylesheet" href="/homepage-mobile-cream-background.css?v=2">
 
 <link rel="stylesheet" href="/windows-fluent-monochrome-sitewide.css?v=2">
@@ -6858,16 +6858,15 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   const dots = Array.from(carousel.querySelectorAll('.hero-promo-pagination button'));
   if (!slides.length || slides.length !== dots.length) return;
   let activeIndex = 0, ticking = false;
-  const getBaseHeight = () => {
-    const firstCard = slides[0]?.querySelector('.mobile-next-departure');
-    return firstCard ? Math.ceil(firstCard.getBoundingClientRect().height) : 0;
-  };
-  const updateHeight = (index) => {
-    const card = slides[index]?.querySelector('.mobile-next-departure');
-    if (!card) return;
-    const expanded = card.querySelector('.mobile-departure-itinerary-details[open]');
-    const activeHeight = Math.ceil(card.getBoundingClientRect().height);
-    track.style.height = Math.max(getBaseHeight(), expanded ? activeHeight : 0) + 'px';
+  // Keep the viewport tall enough for whichever departure has the tallest content.
+  // This prevents the longer card from being clipped when it is swiped into view.
+  const updateHeight = () => {
+    const heights = slides
+      .map(slide => slide.querySelector('.mobile-next-departure'))
+      .filter(Boolean)
+      .map(card => Math.ceil(card.getBoundingClientRect().height));
+    const maxHeight = Math.max(0, ...heights);
+    if (maxHeight > 0) track.style.height = maxHeight + 'px';
   };
   const setActive = (index) => {
     activeIndex = Math.max(0, Math.min(index, slides.length - 1));
@@ -6876,7 +6875,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
       if (i === activeIndex) dot.setAttribute('aria-current', 'true');
       else dot.removeAttribute('aria-current');
     });
-    updateHeight(activeIndex);
+    updateHeight();
   };
   const goTo = (index) => {
     const slide = slides[index];
@@ -6910,11 +6909,11 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   track.addEventListener('lostpointercapture',stopDrag);
   slides.forEach(slide => {
     const details = slide.querySelector('.mobile-departure-itinerary-details');
-    if (details) details.addEventListener('toggle', () => updateHeight(activeIndex));
+    if (details) details.addEventListener('toggle', () => updateHeight());
   });
-  window.addEventListener('resize',()=>updateHeight(activeIndex),{passive:true});
+  window.addEventListener('resize',()=>updateHeight(),{passive:true});
   if('ResizeObserver'in window){
-    const observer=new ResizeObserver(()=>updateHeight(activeIndex));
+    const observer=new ResizeObserver(()=>updateHeight());
     slides.forEach(slide=>{const card=slide.querySelector('.mobile-next-departure');if(card)observer.observe(card);});
   }
   setActive(0);
