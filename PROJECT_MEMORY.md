@@ -463,3 +463,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Kept the desktop carousel implementation and all other website sections unchanged. Retained mobile swipe, previous/next arrows, pagination dots, keyboard navigation, reduced-motion handling, and the existing 2-second autoplay interval.
 - Bumped the homepage gallery CSS and JavaScript cache versions. No Supabase schema, gallery records, hosting, or deployment settings were changed.
 - Files: `featured-travel-photography.js`, `featured-travel-photography.css`, `index.html`, `PROJECT_MEMORY.md`. PR #533 opened; automated validation and deployment status pending.
+
+## 2026-11-17 — Fix mobile homepage departure promotion sizing
+- Corrected the primary promotional card's mobile CSS grid: it now declares a single-column grid template for every content region, matching the named grid areas already assigned to the card elements.
+- Prevented the mobile CTA from stretching vertically by setting a consistent 48px control height and explicit box sizing. Kept the secondary departure's existing mobile layout and all desktop rules unchanged.
+- Bumped `homepage-mobile-departure-promo.css` to v15 for cache refresh.
+- Files: `homepage-mobile-departure-promo.css`, `index.html`. Live iPhone verification remains pending.
