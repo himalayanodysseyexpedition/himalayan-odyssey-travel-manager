@@ -502,3 +502,11 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Added public homepage rendering from Supabase table public.site_hero_promotions, ordered by sort_order and limited to active cards. Existing two hero promotions were seeded with their current content and prices (Winter Spiti ₹17,000; Kinnaur & Spiti ₹15,000, 4/12 booked).
 - Added RLS: public can read active cards; only the existing admin auth UID can read/manage all cards and perform mutations.
 - Explicitly left the existing Tour Packages admin section and its data/functions untouched.
+
+## 2026-11-17 — Hero promo button labels and floating day-wise itinerary popup
+- Hero promotional card primary action is fixed as **VIEW ITINERARY** and opens a centered floating dialog/modal; no redirect and no inline expansion.
+- The popup renders the saved itinerary_items array as separate day rows. Each admin textarea line is one day; an explicit DAY N prefix is shown as the day label, otherwise the line position becomes the day number.
+- Secondary hero promotional action is fixed as **ENQUIRE ON WHATSAPP** and continues to use each card's saved WhatsApp URL.
+- Both CTA texts are bold on mobile and desktop. Only the CTA text weight/labels and popup surface are styled; card layout, spacing, colours, and carousel geometry are unchanged.
+- The admin page clarifies day-wise entry (one line per day); fixed button labels are read-only there. No database schema change was required.
+- Updated active promo rows' stored labels to VIEW ITINERARY and ENQUIRE ON WHATSAPP.
