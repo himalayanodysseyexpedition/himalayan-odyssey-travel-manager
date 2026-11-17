@@ -88,6 +88,9 @@
      // Anchor desktop popup to the actual Menu button, not the centered dock container.
      const triggerRect=menuTrigger.getBoundingClientRect();
      const right=Math.max(8,Math.ceil(window.innerWidth-triggerRect.right));
+     // A narrow desktop panel stays over the right-hand Menu area instead of
+     // extending across the visual center of the centered navigation dock.
+     menuPopup.style.setProperty('width','min(260px, calc(100vw - 24px))','important');
      menuPopup.style.setProperty('left','auto','important');
      menuPopup.style.setProperty('right',right+'px','important');
      menuPopup.style.setProperty('transform','none','important');
