@@ -511,3 +511,11 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Files: `index.html`, `hero-promotions.js`, `hero-promo-itinerary-modal.js`, `hero-promo-itinerary-popup.css`.
 - Mobile-only styling and interaction; no Supabase schema/data, admin workflow, booking flow, desktop layout, SEO metadata, hosting or deployment settings changed.
 - Merged via PR #560 as commit `ce98607f093dd189b6b664ebe3358578ab8b3159`. GitHub validation and GitGuardian checks passed. Automated browser/device verification was not run; GitHub Pages deployment/live visual behaviour was not independently verified.
+
+
+## 2026-11-17 — Simplify mobile homepage carousel navigation
+- Removed the arrow buttons, decorative blue progress strips and redundant swipe-instruction captions beneath the mobile homepage carousel sections.
+- Centered the live page counters for Travel Packages, Tour Itineraries, Vehicles & Cabs, Upcoming Packages and matching guide/destination controls.
+- Preserved horizontal touch swiping, scroll snapping, carousel counter updates, keyboard handling and all desktop carousel controls/layouts.
+- Added a mobile stylesheet cache-bust in the homepage HTML so iPhone Safari fetches the updated rules.
+- Files: `windows-fluent-monochrome-mobile.css`, `index.html`, `PROJECT_MEMORY.md`. Browser/device visual verification remains pending.
