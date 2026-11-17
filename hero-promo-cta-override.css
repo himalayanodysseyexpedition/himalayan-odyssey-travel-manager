@@ -75,3 +75,11 @@
 @media screen and (max-width:760px) and (prefers-reduced-motion:reduce){
   html body #home.hero .hero-destination-track{animation:none!important}
 }
+
+/* Ensure itinerary labels are bold on every hero promotion card, including summary-based cards. */
+html body #home.hero .hero-promo-slide section.mobile-next-departure > details.mobile-departure-itinerary-details > summary.mobile-departure-cta,
+html body #home.hero .hero-promo-slide section.mobile-next-departure > a.mobile-departure-cta.mobile-departure-itinerary,
+html body #home.hero .hero-promo-slide section.mobile-next-departure > a.mobile-departure-cta {
+  font-weight: 800 !important;
+  -webkit-text-fill-color: #000 !important;
+}
