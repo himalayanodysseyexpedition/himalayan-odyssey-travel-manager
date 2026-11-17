@@ -476,3 +476,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Improve carousel height measurement: size slides to the tallest card and remeasure after web fonts and page load settle. Desktop rules remain unchanged.
 - Bump `homepage-mobile-departure-promo.css` to v16.
 - Files: `homepage-mobile-departure-promo.css`, `index.html`, `PROJECT_MEMORY.md`. Live device screenshot verification pending.
+
+## 2026-11-17 — Mobile promo cards: replace conflicting grid layout with flex document flow
+- User screenshots showed the second carousel card rendered as a mostly blank black panel with only its itinerary and WhatsApp controls visible, despite its content being present in HTML. Earlier fixes kept appending CSS grid-area overrides and did not eliminate conflicting mobile grid templates.
+- Final mobile-only override switches both promo cards to normal flex-column document flow, resets all child grid-area/position/visibility/opacity overrides, and explicitly orders each content block. This avoids Safari's implicit/empty grid tracks and restores content visibility.
+- Restore the 19 December card's animated Tibetan-colour progress strip with a dedicated keyframe definition and visible full-width span.
+- Bump stylesheet cache to v17. Desktop styles remain untouched. Screenshot validation on physical iPhone still required.
