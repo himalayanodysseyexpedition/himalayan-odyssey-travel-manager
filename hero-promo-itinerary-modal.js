@@ -40,7 +40,7 @@
       items.forEach((item, index) => {
         const li = document.createElement("li");
         const raw = String(item || "").trim();
-        const split = raw.match(/^(DAY\s*\d+\s*[·—:-]?)\s*(.*)$/i);
+        const split = raw.match(/^([^·—:-]+?)\s*[·—:-]\s*(.*)$/);
         const strong = document.createElement("strong");
         strong.textContent = split ? split[1].replace(/[·—:-]$/, "").trim() : "Day " + (index + 1);
         li.appendChild(strong);
