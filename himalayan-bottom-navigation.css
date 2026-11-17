@@ -258,3 +258,14 @@ html body .dock-menu-popup.dock-fab-popup>a[role="menuitem"]:focus-visible{
 @media(prefers-reduced-motion:reduce){
  html body .dock-menu-popup.dock-fab-popup>a[role="menuitem"]{animation:none!important}
 }
+
+
+/* Mobile bottom navigation is persistent; never move or fade it out on scroll. */
+@media(max-width:760px){
+ html body nav.mobile-app-dock.is-hidden{
+  transform:translate3d(-50%,0,0)!important;
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+ }
+}

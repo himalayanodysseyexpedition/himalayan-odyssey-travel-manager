@@ -149,16 +149,22 @@
    },{rootMargin:'-35% 0px -55% 0px',threshold:[0,.2,.5]});
    targets.forEach(t=>observer.observe(t));
   }
-  let last=window.scrollY,raf=false;
-  window.addEventListener('scroll',()=>{
-   if(raf)return;raf=true;
-   requestAnimationFrame(()=>{
-    const y=window.scrollY;
-    nav.classList.toggle('is-hidden',y>last+8&&y>220);
-    if(y<100||y<last-10)nav.classList.remove('is-hidden');
-    last=y;raf=false;
-   });
-  },{passive:true});
+  // The mobile bottom dock stays visible while scrolling in either direction.
+  // Preserve the existing hide/reveal interaction on desktop only.
+  if(mobile()){
+   nav.classList.remove('is-hidden');
+  }else{
+   let last=window.scrollY,raf=false;
+   window.addEventListener('scroll',()=>{
+    if(raf)return;raf=true;
+    requestAnimationFrame(()=>{
+     const y=window.scrollY;
+     nav.classList.toggle('is-hidden',y>last+8&&y>220);
+     if(y<100||y<last-10)nav.classList.remove('is-hidden');
+     last=y;raf=false;
+    });
+   },{passive:true});
+  }
   document.addEventListener('click',()=>requestAnimationFrame(()=>syncMenuState(nav)));
   document.addEventListener('keydown',event=>{if(event.key==='Escape')requestAnimationFrame(()=>syncMenuState(nav))});
   syncMenuState(nav);
