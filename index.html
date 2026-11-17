@@ -1427,7 +1427,7 @@ html body #home.hero .hero-build-cta-wrap > .hero-build-cta:active{
 }
 </style>
   <link rel="stylesheet" href="/arctic-prestige-motion.css?v=3">
-  <link rel="stylesheet" href="/homepage-mobile-departure-promo.css?v=15">
+  <link rel="stylesheet" href="/homepage-mobile-departure-promo.css?v=16">
   <link rel="stylesheet" href="/homepage-mobile-cream-background.css?v=2">
 
 <link rel="stylesheet" href="/windows-fluent-monochrome-sitewide.css?v=2">
@@ -1883,6 +1883,7 @@ body.guest-itinerary-popup-open{overflow:hidden}
             <div class="mobile-departure-date">19 DEC 2026</div>
             <div class="mobile-departure-facts"><span>6 Nights / 7 Days</span><span>Chandigarh Pickup &amp; Drop</span></div>
             <div class="mobile-departure-price">₹14,000 <small>/ person</small></div>
+            <div class="mobile-departure-track" aria-hidden="true"><span></span></div>
             <details class="mobile-departure-itinerary-details">
               <summary class="mobile-departure-cta mobile-departure-itinerary">VIEW 7-DAY ITINERARY <span aria-hidden="true">＋</span></summary>
               <div class="mobile-departure-itinerary-list" aria-label="Tour itinerary">
@@ -6866,7 +6867,10 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
       .filter(Boolean)
       .map(card => Math.ceil(card.getBoundingClientRect().height));
     const maxHeight = Math.max(0, ...heights);
-    if (maxHeight > 0) track.style.height = maxHeight + 'px';
+    if (maxHeight > 0) {
+      track.style.height = (maxHeight + 2) + 'px';
+      slides.forEach(slide => { slide.style.height = maxHeight + 'px'; });
+    }
   };
   const setActive = (index) => {
     activeIndex = Math.max(0, Math.min(index, slides.length - 1));
@@ -6917,6 +6921,9 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
     slides.forEach(slide=>{const card=slide.querySelector('.mobile-next-departure');if(card)observer.observe(card);});
   }
   setActive(0);
+  const refreshHeight = () => requestAnimationFrame(() => requestAnimationFrame(updateHeight));
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(refreshHeight);
+  window.addEventListener('load', refreshHeight, {once:true});
 })();
 </script>
 </body>
