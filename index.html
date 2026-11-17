@@ -6912,11 +6912,12 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   const scheduleAutoAdvance = () => {
     window.clearTimeout(autoAdvanceTimer);
     if (!autoAdvanceEnabled || slides.length < 2 || interactionPaused ||
-        document.hidden || carousel.matches(':hover') ||
+        document.hidden || (window.matchMedia('(hover: hover) and (pointer: fine)').matches && carousel.matches(':hover')) ||
         carousel.contains(document.activeElement) ||
         carousel.querySelector('.mobile-departure-itinerary-details[open]') ||
         document.body.classList.contains('promo-itinerary-modal-open')) return;
     autoAdvanceTimer = window.setTimeout(() => {
+      if (document.body.classList.contains('promo-itinerary-modal-open')) return;
       goTo((activeIndex + 1) % slides.length);
       scheduleAutoAdvance();
     }, 10000);
