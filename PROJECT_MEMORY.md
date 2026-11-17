@@ -450,3 +450,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - The popup is returned to the header when closed or when the viewport is no longer mobile. Outside-click handling treats the reparented popup as part of the menu.
 - Scope: mobile dock menu only (up to 760px); desktop menu and desktop layout are unchanged.
 - Files: `site-navigation.js`, `index.html`. Responsive visual verification and deployment verification pending.
+
+
+## 2026-11-17 — Anchor bottom-dock menu popup consistently across public pages
+- Updated public HTML pages to load the current shared `site-navigation.js` cache version so the dock-popup positioning fix is not limited to the homepage.
+- On mobile, calculate the popup's fixed bottom offset from the live top edge of the visible bottom navigation dock, preserving a 10px gap above it; retain the safe-area fallback when the dock position is unavailable.
+- Desktop navigation layout and header-menu positioning remain unchanged.
+- Responsive real-device visual verification remains pending.
