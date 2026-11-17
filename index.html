@@ -2063,6 +2063,51 @@ body.guest-itinerary-popup-open{overflow:hidden}
   </div>
 </section>
 
+<!-- MOBILE: HIMALAYAN ODYSSEY DIFFERENCE -->
+<section id="odyssey-difference-mobile" aria-labelledby="odyssey-difference-title">
+  <div class="odyssey-difference-inner">
+    <div class="odyssey-difference-visual">
+      <div class="odyssey-difference-photo" role="img" aria-label="Himalayan mountain landscape"></div>
+      <div class="odyssey-difference-photo-copy">
+        <span class="odyssey-kicker">THE HIMALAYAN ODYSSEY DIFFERENCE</span>
+        <h2 id="odyssey-difference-title">Beyond the Usual.<br>Into the Real Himalayas.</h2>
+        <p>More than the familiar tourist circuit. Discover offbeat Himalayan places and shared mountain experiences, thoughtfully planned around your journey.</p>
+      </div>
+    </div>
+
+    <div class="odyssey-difference-heading">
+      <span class="odyssey-kicker">GO A LITTLE FURTHER</span>
+      <h3>Places beyond the ordinary</h3>
+      <p>Depending on your route, travel dates and local conditions, we can plan visits to:</p>
+    </div>
+
+    <div class="odyssey-place-grid">
+      <article class="odyssey-place-card"><span>01 / KINNAUR</span><h4>Chitkul Border</h4><p>Explore the far end of the Baspa Valley, subject to current access rules.</p></article>
+      <article class="odyssey-place-card"><span>02 / KINNAUR</span><h4>Shipki La</h4><p>A remote high-altitude border region, visited only when access and permissions allow.</p></article>
+      <article class="odyssey-place-card"><span>03 / KINNAUR</span><h4>Lepcha La</h4><p>An offbeat mountain experience considered according to route feasibility.</p></article>
+      <article class="odyssey-place-card"><span>04 / SPITI</span><h4>Gue Village</h4><p>A distinctive high-altitude village with a remarkable cultural story.</p></article>
+      <article class="odyssey-place-card"><span>05 / SPITI</span><h4>Pin Valley</h4><p>Explore the dramatic landscapes and villages of this quieter Himalayan valley.</p></article>
+    </div>
+
+    <div class="odyssey-experiences">
+      <div class="odyssey-experience-card">
+        <span class="odyssey-experience-mark" aria-hidden="true">✦</span>
+        <div><span class="odyssey-kicker">TOGETHER UNDER THE STARS</span><h4>Bonfire Evenings</h4><p>Unwind, share stories and enjoy the mountain atmosphere with your travel group.</p></div>
+      </div>
+      <div class="odyssey-experience-card">
+        <span class="odyssey-experience-mark" aria-hidden="true">♫</span>
+        <div><span class="odyssey-kicker">MAKE IT A CELEBRATION</span><h4>DJ & Group Parties</h4><p>Add music and group celebrations to selected departures where arrangements permit.</p></div>
+      </div>
+    </div>
+
+    <div class="odyssey-flex-note">
+      <strong>No one-size-fits-all route.</strong>
+      <p>Stops and experiences are planned around travel dates, weather, road conditions, official permissions and traveller preferences. Remote and border-area access is never guaranteed.</p>
+    </div>
+    <a class="odyssey-difference-cta" href="https://wa.me/919816929669?text=Hi%2C%20I%20want%20to%20plan%20a%20Himalayan%20trip%20with%20offbeat%20places%20and%20experiences.">Plan Your Himalayan Experience <span aria-hidden="true">↗</span></a>
+  </div>
+</section>
+
 <!-- CABS -->
 <section class="content info" id="cabs">
   <div class="section-inner">
@@ -6907,6 +6952,65 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 })();
 </script>
 <script src="/mobile-scroll-indicators.js?v=2" defer></script>
+
+<style id="mobile-odyssey-difference-section-v1">
+/* Mobile-only replacement for the homepage Tour Itineraries section. Desktop remains unchanged. */
+#odyssey-difference-mobile{display:none}
+@media screen and (max-width:760px){
+  html body #itineraries{display:none!important}
+  html body #odyssey-difference-mobile{
+    display:block!important;
+    padding:38px 16px 44px!important;
+    margin:0!important;
+    color:#f4f6f8!important;
+    background:#080d14!important;
+    overflow:hidden!important;
+  }
+  #odyssey-difference-mobile *{box-sizing:border-box}
+  #odyssey-difference-mobile .odyssey-difference-inner{width:100%;max-width:560px;margin:0 auto}
+  #odyssey-difference-mobile .odyssey-difference-visual{
+    position:relative;min-height:390px;display:flex;align-items:flex-end;overflow:hidden;
+    border:1px solid rgba(220,238,250,.22);border-radius:18px;background:#172638;
+    box-shadow:0 18px 44px rgba(0,0,0,.28);isolation:isolate;
+  }
+  #odyssey-difference-mobile .odyssey-difference-photo{
+    position:absolute;inset:0;z-index:-2;
+    background-image:linear-gradient(180deg,rgba(4,10,17,.04) 0%,rgba(4,10,17,.28) 38%,rgba(4,10,17,.94) 100%),url('/spiti.jpg');
+    background-size:cover;background-position:center 54%;transform:scale(1.02);
+  }
+  #odyssey-difference-mobile .odyssey-difference-photo-copy{padding:26px 21px 24px}
+  #odyssey-difference-mobile .odyssey-kicker{display:block;color:#c5dff1;font:700 9px/1.5 'DM Sans',Arial,sans-serif;letter-spacing:2px;text-transform:uppercase}
+  #odyssey-difference-mobile h2{margin:11px 0 12px;color:#fff;font:500 clamp(36px,10vw,49px)/.98 'Cormorant Garamond',Georgia,serif;letter-spacing:-.5px}
+  #odyssey-difference-mobile .odyssey-difference-photo-copy p{max-width:440px;margin:0;color:rgba(255,255,255,.86);font:400 12px/1.8 'DM Sans',Arial,sans-serif}
+  #odyssey-difference-mobile .odyssey-difference-heading{padding:32px 3px 17px}
+  #odyssey-difference-mobile .odyssey-difference-heading h3{margin:7px 0 5px;color:#fff;font:500 31px/1.05 'Cormorant Garamond',Georgia,serif}
+  #odyssey-difference-mobile .odyssey-difference-heading p{margin:0;color:#aeb8c2;font:400 12px/1.7 'DM Sans',Arial,sans-serif}
+  #odyssey-difference-mobile .odyssey-place-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  #odyssey-difference-mobile .odyssey-place-card{
+    min-height:142px;padding:16px 13px;border:1px solid rgba(210,226,239,.15);border-radius:13px;
+    background:linear-gradient(145deg,#172330,#101820);box-shadow:0 8px 20px rgba(0,0,0,.16)
+  }
+  #odyssey-difference-mobile .odyssey-place-card span{display:block;color:#a9c6dc;font:700 8px/1.4 'DM Sans',Arial,sans-serif;letter-spacing:1.4px}
+  #odyssey-difference-mobile .odyssey-place-card h4{margin:9px 0 5px;color:#fff;font:600 22px/1 'Cormorant Garamond',Georgia,serif}
+  #odyssey-difference-mobile .odyssey-place-card p{margin:0;color:#aeb8c2;font:400 10px/1.65 'DM Sans',Arial,sans-serif}
+  #odyssey-difference-mobile .odyssey-experiences{display:grid;grid-template-columns:1fr;gap:10px;margin-top:19px}
+  #odyssey-difference-mobile .odyssey-experience-card{display:flex;gap:14px;align-items:flex-start;padding:17px 15px;border:1px solid rgba(210,226,239,.18);border-radius:13px;background:#111b25}
+  #odyssey-difference-mobile .odyssey-experience-mark{display:grid;place-items:center;flex:0 0 38px;width:38px;height:38px;border:1px solid rgba(197,223,241,.4);border-radius:50%;color:#d6eafa;font-size:19px}
+  #odyssey-difference-mobile .odyssey-experience-card h4{margin:4px 0 4px;color:#fff;font:600 23px/1 'Cormorant Garamond',Georgia,serif}
+  #odyssey-difference-mobile .odyssey-experience-card p{margin:0;color:#aeb8c2;font:400 10px/1.7 'DM Sans',Arial,sans-serif}
+  #odyssey-difference-mobile .odyssey-flex-note{margin-top:17px;padding:17px 16px;border-left:2px solid #c5dff1;background:rgba(255,255,255,.055)}
+  #odyssey-difference-mobile .odyssey-flex-note strong{color:#fff;font:600 15px/1.3 'DM Sans',Arial,sans-serif}
+  #odyssey-difference-mobile .odyssey-flex-note p{margin:6px 0 0;color:#b5c0ca;font:400 10px/1.75 'DM Sans',Arial,sans-serif}
+  #odyssey-difference-mobile .odyssey-difference-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;padding:15px 17px;border:1px solid #d5e7f4;border-radius:10px;background:#eaf3f9;color:#101820;font:700 11px/1.3 'DM Sans',Arial,sans-serif;letter-spacing:.5px;text-transform:uppercase}
+  #odyssey-difference-mobile .odyssey-difference-cta span{font-size:17px}
+}
+@media screen and (max-width:380px){
+  #odyssey-difference-mobile .odyssey-place-grid{grid-template-columns:1fr}
+  #odyssey-difference-mobile .odyssey-place-card{min-height:0}
+}
+@media (prefers-reduced-motion:reduce){#odyssey-difference-mobile *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+
 </body>
 
 
