@@ -6902,6 +6902,45 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
     track.scrollTo({left:slide.offsetLeft,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
     setActive(index);
   };
+
+  // Mobile hero promotions advance automatically every 10 seconds.
+  // Manual swipe, focus, hover, open itinerary details and hidden tabs pause the rotation.
+  const autoAdvanceEnabled = window.matchMedia('(max-width: 760px)').matches &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let autoAdvanceTimer = null;
+  let interactionPaused = false;
+  const scheduleAutoAdvance = () => {
+    window.clearTimeout(autoAdvanceTimer);
+    if (!autoAdvanceEnabled || slides.length < 2 || interactionPaused ||
+        document.hidden || carousel.matches(':hover') ||
+        carousel.contains(document.activeElement) ||
+        carousel.querySelector('.mobile-departure-itinerary-details[open]') ||
+        document.body.classList.contains('promo-itinerary-modal-open')) return;
+    autoAdvanceTimer = window.setTimeout(() => {
+      goTo((activeIndex + 1) % slides.length);
+      scheduleAutoAdvance();
+    }, 10000);
+  };
+  const pauseForInteraction = () => {
+    interactionPaused = true;
+    window.clearTimeout(autoAdvanceTimer);
+  };
+  const resumeAfterInteraction = () => {
+    interactionPaused = false;
+    scheduleAutoAdvance();
+  };
+  carousel.addEventListener('pointerdown', pauseForInteraction, {passive:true});
+  window.addEventListener('pointerup', resumeAfterInteraction, {passive:true});
+  window.addEventListener('pointercancel', resumeAfterInteraction, {passive:true});
+  carousel.addEventListener('mouseenter', pauseForInteraction);
+  carousel.addEventListener('mouseleave', resumeAfterInteraction);
+  carousel.addEventListener('focusin', pauseForInteraction);
+  carousel.addEventListener('focusout', () => {
+    window.setTimeout(() => {
+      if (!carousel.contains(document.activeElement)) resumeAfterInteraction();
+    }, 0);
+  });
+  document.addEventListener('visibilitychange', scheduleAutoAdvance);
   dots.forEach((dot,index)=>dot.addEventListener('click',()=>goTo(index)));
   track.addEventListener('scroll',()=>{
     if(ticking)return;ticking=true;
@@ -6913,6 +6952,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
         if(d<distance){distance=d;nearest=index;}
       });
       setActive(nearest);ticking=false;
+      scheduleAutoAdvance();
     });
   },{passive:true});
   let startX=0,startScroll=0,dragging=false;
@@ -6922,7 +6962,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
     track.classList.add('is-dragging');track.setPointerCapture(e.pointerId);
   });
   track.addEventListener('pointermove',(e)=>{if(dragging)track.scrollLeft=startScroll-(e.clientX-startX);});
-  const stopDrag=()=>{dragging=false;track.classList.remove('is-dragging');};
+  const stopDrag=()=>{dragging=false;track.classList.remove('is-dragging');scheduleAutoAdvance();};
   track.addEventListener('pointerup',stopDrag);
   track.addEventListener('pointercancel',stopDrag);
   track.addEventListener('lostpointercapture',stopDrag);
@@ -6936,6 +6976,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
     slides.forEach(slide=>{const card=slide.querySelector('.mobile-next-departure');if(card)observer.observe(card);});
   }
   setActive(0);
+  scheduleAutoAdvance();
   const refreshHeight = () => requestAnimationFrame(() => requestAnimationFrame(updateHeight));
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(refreshHeight);
   window.addEventListener('load', refreshHeight, {once:true});
