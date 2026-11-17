@@ -41,14 +41,92 @@
    '<span>Menu</span></button>';
   document.body.appendChild(nav);
   const menuTrigger=nav.querySelector('.dock-menu-trigger');
-  menuTrigger.addEventListener('click',event=>{
-   event.preventDefault();event.stopPropagation();
-   const headerToggle=document.querySelector('header .header-menu-toggle');
-   if(!headerToggle)return;
-   headerToggle.dataset.openedFromDock='true';
-   headerToggle.click();
-   syncMenuState(nav);
-  });
+  if(mobile()){
+   // Mobile Menu is an independent body-level popup. It never invokes or
+   // inherits positioning from the header navigation.
+   const menuPopup=document.createElement('div');
+   menuPopup.className='dock-menu-popup';
+   menuPopup.setAttribute('role','menu');
+   menuPopup.setAttribute('aria-label','Website menu');
+   menuPopup.setAttribute('aria-hidden','true');
+   menuPopup.innerHTML=
+    '<a role="menuitem" href="/destinations/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20 9 4l6 16 6-16M5 15h14M7 9h10"/></svg><span>Destinations</span></a>'+
+    '<a role="menuitem" href="/#cabs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13l2-6h14l2 6v6h-2v-2H5v2H3zM5 13h14M7 16h.01M17 16h.01"/></svg><span>Cabs</span></a>'+
+    '<a role="menuitem" href="/#gallery"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20V8l9-5 9 5v12M7 20v-7h10v7M9 9h.01M15 9h.01"/></svg><span>Hotels &amp; Properties</span></a>';
+   Object.assign(menuPopup.style,{
+    display:'none',position:'fixed',left:'50%',bottom:'calc(98px + env(safe-area-inset-bottom))',
+    transform:'translateX(-50%)',width:'min(360px, calc(100vw - 24px))',
+    maxHeight:'min(58vh, 460px)',overflowY:'auto',boxSizing:'border-box',
+    flexDirection:'column',gap:'5px',padding:'10px',
+    border:'1px solid rgba(255,255,255,.28)',borderRadius:'22px',
+    background:'rgba(55,59,65,.97)',color:'#fff',
+    boxShadow:'0 20px 48px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.16)',
+    backdropFilter:'blur(28px) saturate(145%)',WebkitBackdropFilter:'blur(28px) saturate(145%)',
+    zIndex:'1901'
+   });
+   menuPopup.querySelectorAll('a').forEach(a=>{
+    Object.assign(a.style,{
+     display:'flex',alignItems:'center',gap:'12px',minHeight:'46px',
+     padding:'0 14px',boxSizing:'border-box',border:'1px solid transparent',
+     borderRadius:'13px',background:'rgba(255,255,255,.055)',color:'#fff',
+     textDecoration:'none',fontFamily:'Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif',
+     fontSize:'14px',fontWeight:'500'
+    });
+    const svg=a.querySelector('svg');
+    Object.assign(svg.style,{width:'20px',height:'20px',flex:'0 0 20px',fill:'none',stroke:'#aeb7c2',strokeWidth:'1.7',strokeLinecap:'round',strokeLinejoin:'round'});
+   });
+   document.body.appendChild(menuPopup);
+   const positionMenuPopup=()=>{
+    const rect=nav.getBoundingClientRect();
+    const bottom=Math.max(0,Math.ceil(window.innerHeight-rect.top+10));
+    menuPopup.style.setProperty('bottom',bottom+'px','important');
+   };
+   const closeDockPopup=()=>{
+    menuPopup.style.display='none';
+    menuPopup.setAttribute('aria-hidden','true');
+    menuTrigger.setAttribute('aria-expanded','false');
+    menuTrigger.setAttribute('aria-label','Open navigation menu');
+    menuTrigger.classList.remove('is-open');
+    nav.classList.remove('menu-open');
+   };
+   menuTrigger.addEventListener('click',event=>{
+    event.preventDefault();event.stopPropagation();
+    const opening=menuPopup.getAttribute('aria-hidden')!=='false';
+    if(opening){
+     positionMenuPopup();
+     menuPopup.style.display='flex';
+     menuPopup.setAttribute('aria-hidden','false');
+     menuTrigger.setAttribute('aria-expanded','true');
+     menuTrigger.setAttribute('aria-label','Close navigation menu');
+     menuTrigger.classList.add('is-open');
+     nav.classList.add('menu-open');
+    }else closeDockPopup();
+   });
+   menuPopup.addEventListener('click',event=>{
+    if(event.target.closest('a'))closeDockPopup();
+   });
+   document.addEventListener('click',event=>{
+    if(menuPopup.getAttribute('aria-hidden')==='false'&&!menuPopup.contains(event.target)&&!menuTrigger.contains(event.target))closeDockPopup();
+   });
+   document.addEventListener('keydown',event=>{
+    if(event.key==='Escape'&&menuPopup.getAttribute('aria-hidden')==='false')closeDockPopup();
+   });
+   window.addEventListener('resize',()=>{
+    if(menuPopup.getAttribute('aria-hidden')==='false')positionMenuPopup();
+   },{passive:true});
+   window.addEventListener('scroll',()=>{
+    if(menuPopup.getAttribute('aria-hidden')==='false')positionMenuPopup();
+   },{passive:true});
+  }else{
+   menuTrigger.addEventListener('click',event=>{
+    event.preventDefault();event.stopPropagation();
+    const headerToggle=document.querySelector('header .header-menu-toggle');
+    if(!headerToggle)return;
+    headerToggle.dataset.openedFromDock='true';
+    headerToggle.click();
+    syncMenuState(nav);
+   });
+  }
   const targets=['home-promo','home','packages','upcoming-packages'].map(id=>document.getElementById(id)).filter(Boolean);
   if('IntersectionObserver'in window&&targets.length){
    const observer=new IntersectionObserver(entries=>{
