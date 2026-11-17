@@ -206,3 +206,10 @@ html body #home .hero-build-cta-wrap > a.hero-build-cta:focus-visible{
 *::-webkit-scrollbar-thumb:hover {
   background: #000000;
 }
+
+/* MOBILE CUSTOM SCROLL INDICATORS — visual indicators are injected by mobile-scroll-indicators.js */
+@media screen and (max-width:760px){
+  html{scrollbar-width:none!important}
+  body{scrollbar-width:none!important}
+  body::-webkit-scrollbar{display:none!important}
+}
