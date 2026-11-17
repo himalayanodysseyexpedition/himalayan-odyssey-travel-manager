@@ -183,3 +183,26 @@ html body #home .hero-build-cta-wrap > a.hero-build-cta:focus-visible{
     animation-play-state:running!important;
   }
 }
+
+
+/* SITEWIDE MONOCHROME SCROLLBARS — public pages and admin UI */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #222222 #eeeeee;
+}
+*::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+*::-webkit-scrollbar-track {
+  background: #eeeeee;
+  border-radius: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #222222;
+  border: 3px solid #eeeeee;
+  border-radius: 10px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #000000;
+}
