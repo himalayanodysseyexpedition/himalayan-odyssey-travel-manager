@@ -10,7 +10,7 @@
  ];
  function loadStyles(){
   if(document.getElementById('himalayan-bottom-navigation-css'))return;
-  const link=document.createElement('link');link.id='himalayan-bottom-navigation-css';link.rel='stylesheet';link.href='/himalayan-bottom-navigation-v6.css';document.head.appendChild(link);
+  const link=document.createElement('link');link.id='himalayan-bottom-navigation-css';link.rel='stylesheet';link.href='/himalayan-bottom-navigation.css?v=6';document.head.appendChild(link);
  }
  function removeLegacy(){
   document.querySelectorAll('#footerContactBar,.footer-contact-bar,nav.quick-nav-bar,nav.quick-nav').forEach(el=>el.remove());

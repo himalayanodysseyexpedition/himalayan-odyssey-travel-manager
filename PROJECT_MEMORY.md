@@ -536,3 +536,11 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Desktop navigation styling remains unchanged.
 - Updated the shared injected stylesheet URL to v6 and service-worker cache to v19.
 - Files: `himalayan-bottom-navigation.css`, `mobile-app-experience.js`, `service-worker.js`, `PROJECT_MEMORY.md`.
+
+
+## 2026-11-18 — Fix homepage blue-glass dock stylesheet loader
+- Found the live homepage loads `mobile-app-experience-v13.js`, whose loader still pointed to the legacy `himalayan-bottom-navigation-v6.css` file; this bypassed the newly updated shared blue-glass stylesheet.
+- Updated the homepage v13 loader to request `/himalayan-bottom-navigation.css?v=6`, matching the shared mobile dock used by the rest of the public pages.
+- Bumped the homepage v13 script URL to `?v=14` and the service-worker shell cache to v20 to invalidate stale assets.
+- No homepage content, navigation destinations, interactions, or desktop layout changes.
+- Files: `mobile-app-experience-v13.js`, `index.html`, `service-worker.js`, `PROJECT_MEMORY.md`.
