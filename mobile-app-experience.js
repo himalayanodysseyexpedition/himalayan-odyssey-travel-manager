@@ -79,6 +79,18 @@
     const rect=nav.getBoundingClientRect();
     const bottom=Math.max(0,Math.ceil(window.innerHeight-rect.top+10));
     menuPopup.style.setProperty('bottom',bottom+'px','important');
+    if(mobile()){
+     // Keep the mobile popup centered above the dock.
+     menuPopup.style.setProperty('left','50%','important');
+     menuPopup.style.setProperty('right','auto','important');
+     menuPopup.style.setProperty('transform','translateX(-50%)','important');
+    }else{
+     // Desktop popup opens from the dock's right edge, directly above Menu.
+     const right=Math.max(12,Math.ceil(window.innerWidth-rect.right));
+     menuPopup.style.setProperty('left','auto','important');
+     menuPopup.style.setProperty('right',right+'px','important');
+     menuPopup.style.setProperty('transform','none','important');
+    }
    };
    const closeDockPopup=()=>{
     menuPopup.style.display='none';
