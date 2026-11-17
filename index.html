@@ -6589,7 +6589,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   if(content)content.innerHTML='<p class="package-itinerary-loading">Select a package to view its itinerary.</p>';
   if(lastFocus&&typeof lastFocus.focus==="function")lastFocus.focus();
  };
- const openFromCard=(event,cardSelector)=>{
+ const openFromCard=async (event,cardSelector)=>{
   const link=event.target.closest("a.btn");
   if(!link)return;
   const card=link.closest(cardSelector);
@@ -6673,7 +6673,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
  if(itineraryList)itineraryList.addEventListener("click",event=>openFromCard(event,"#itineraryList > article.itinerary-slide"));
  const packageList=document.getElementById("packageList");
  if(packageList)packageList.addEventListener("click",event=>openFromCard(event,"#packageList > article.package-slide"));
- frame.addEventListener("load",()=>{
+ if(frame)frame.addEventListener("load",()=>{
   try{
    const doc=frame.contentDocument;
    if(!doc)return;
