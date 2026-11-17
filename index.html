@@ -23,7 +23,7 @@
 <meta name="twitter:title" content="Spiti Valley & Himachal Tour Packages | Himalayan Odyssey">
 <meta name="twitter:description" content="Explore Spiti Valley tour packages, Kinnaur and Himachal holidays with a Narkanda-based team. Compare group departures, private trips and mountain stays.">
 <link rel="preload" as="image" href="/spiti.jpg" fetchpriority="high" media="(min-width: 761px)">
-<link rel="preload" as="image" href="/IMG_8475.jpeg?v=2" fetchpriority="high" media="(max-width: 760px)">
+<link rel="preload" as="image" href="/IMG_8475.jpeg?v=3" fetchpriority="high" media="(max-width: 760px)">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=1">
 <link rel="alternate icon" href="/logo.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1856,7 +1856,7 @@ body.guest-itinerary-popup-open{overflow:hidden}
 </header>
 <!-- HERO -->
 <div class="hero" id="home">
-  <img class="hero-ken-burns-photo" src="/IMG_8475.jpeg?v=2" alt="" aria-hidden="true" decoding="async" fetchpriority="high">
+  <img class="hero-ken-burns-photo" src="/IMG_8475.jpeg?v=3" alt="" aria-hidden="true" decoding="async" fetchpriority="high">
   <div class="hero-content">
     <div class="mobile-tibetan-flag-line" aria-hidden="true"></div>
     <h1 class="hero-animated-heading"><span class="hero-heading-static hero-heading-prefix">The</span><span class="hero-word-slot"><span id="heroRotatingWord" class="hero-word-rotator word-himalayas" aria-label="Himalayas are">Himalayas are</span></span><span class="hero-heading-static hero-heading-suffix">calling</span></h1>
@@ -6754,8 +6754,8 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 /* Final cascade override: place after every legacy hero style so the mobile hero uses IMG_8475. */
 @media screen and (max-width:760px){
   html body #home.hero{
-    background:linear-gradient(90deg,rgba(16,36,59,.88) 0%,rgba(16,36,59,.62) 47%,rgba(16,36,59,.08) 100%),linear-gradient(0deg,rgba(16,36,59,.46),transparent 45%),url("/IMG_8475.jpeg?v=2") center 48%/cover no-repeat!important;
-    background-image:linear-gradient(90deg,rgba(16,36,59,.88) 0%,rgba(16,36,59,.62) 47%,rgba(16,36,59,.08) 100%),linear-gradient(0deg,rgba(16,36,59,.46),transparent 45%),url("/IMG_8475.jpeg?v=2")!important;
+    background:linear-gradient(90deg,rgba(16,36,59,.88) 0%,rgba(16,36,59,.62) 47%,rgba(16,36,59,.08) 100%),linear-gradient(0deg,rgba(16,36,59,.46),transparent 45%),url("/IMG_8475.jpeg?v=3") center 48%/cover no-repeat!important;
+    background-image:linear-gradient(90deg,rgba(16,36,59,.88) 0%,rgba(16,36,59,.62) 47%,rgba(16,36,59,.08) 100%),linear-gradient(0deg,rgba(16,36,59,.46),transparent 45%),url("/IMG_8475.jpeg?v=3")!important;
     background-position:center,center,center 48%!important;
     background-size:auto,auto,cover!important;
     background-repeat:no-repeat!important;
@@ -7241,6 +7241,63 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
     row-gap:3px!important;
     padding:9px 12px!important;
     line-height:1.7!important;
+  }
+}
+</style>
+
+
+<style id="mobile-hero-image-visibility-recovery-v1">
+/* Final mobile-only fallback: keep the live hero photo visible even if the
+   dedicated animated IMG layer fails to paint or is affected by old CSS. */
+@media screen and (max-width:760px){
+  html body #home.hero{
+    background-color:#071321!important;
+    background-image:
+      linear-gradient(0deg,rgba(5,16,29,.62) 0%,rgba(5,16,29,.20) 55%,rgba(5,16,29,.06) 100%),
+      linear-gradient(90deg,rgba(5,16,29,.30),rgba(5,16,29,.02)),
+      url("/IMG_8475.jpeg?v=3")!important;
+    background-position:center,center,58% 54%!important;
+    background-size:cover,cover,cover!important;
+    background-repeat:no-repeat,no-repeat,no-repeat!important;
+    background-attachment:scroll!important;
+  }
+  html body #home.hero > img.hero-ken-burns-photo{
+    display:block!important;
+    visibility:visible!important;
+    opacity:1!important;
+    position:absolute!important;
+    inset:-3%!important;
+    z-index:0!important;
+    width:106%!important;
+    max-width:none!important;
+    height:106%!important;
+    max-height:none!important;
+    margin:0!important;
+    padding:0!important;
+    border:0!important;
+    object-fit:cover!important;
+    object-position:58% 58%!important;
+    pointer-events:none!important;
+    user-select:none!important;
+  }
+  html body #home.hero::before{
+    content:""!important;
+    display:block!important;
+    position:absolute!important;
+    inset:0!important;
+    z-index:1!important;
+    pointer-events:none!important;
+    background:linear-gradient(0deg,rgba(5,16,29,.48),rgba(5,16,29,.14) 56%,rgba(5,16,29,.04))!important;
+  }
+  html body #home.hero > .hero-content{
+    position:relative!important;
+    z-index:2!important;
+  }
+}
+@media screen and (max-width:760px) and (prefers-reduced-motion:reduce){
+  html body #home.hero > img.hero-ken-burns-photo{
+    animation:none!important;
+    transform:none!important;
   }
 }
 </style>
