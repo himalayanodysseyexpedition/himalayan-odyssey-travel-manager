@@ -1,6 +1,6 @@
 # Project Memory — Himalayan Odyssey Expedition
 
-Last updated: 2026-11-14
+Last updated: 2026-11-18
 
 This file is a factual working index for AI coding agents. The repository and current implementation are the source of truth. Re-inspect code before every task; do not assume this document describes the latest code.
 
@@ -519,3 +519,11 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Preserved horizontal touch swiping, scroll snapping, carousel counter updates, keyboard handling and all desktop carousel controls/layouts.
 - Added a mobile stylesheet cache-bust in the homepage HTML so iPhone Safari fetches the updated rules.
 - Files: `windows-fluent-monochrome-mobile.css`, `index.html`, `PROJECT_MEMORY.md`. Browser/device visual verification remains pending.
+
+
+## 2026-11-18 — Keep the mobile bottom navigation permanently visible
+- The shared mobile bottom dock no longer hides when visitors scroll down or up; it stays fixed at the bottom of every page using the shared navigation script.
+- Added a mobile CSS safeguard so the dock remains visible and interactive even if a stale `is-hidden` class is present.
+- Kept the existing desktop dock scroll hide/reveal behaviour unchanged.
+- Bumped the service-worker shell cache to v18 so deployed clients refresh the shared navigation assets.
+- Files: `mobile-app-experience.js`, `himalayan-bottom-navigation.css`, `service-worker.js`, `PROJECT_MEMORY.md`.
