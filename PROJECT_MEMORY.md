@@ -527,3 +527,12 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Kept the existing desktop dock scroll hide/reveal behaviour unchanged.
 - Bumped the service-worker shell cache to v18 so deployed clients refresh the shared navigation assets.
 - Files: `mobile-app-experience.js`, `himalayan-bottom-navigation.css`, `service-worker.js`, `PROJECT_MEMORY.md`.
+
+
+## 2026-11-18 — Restyle mobile bottom navigation as blue glass
+- Restyled only the mobile bottom navigation shell as one translucent blue-tinted glass capsule with stronger blur, a restrained blue rim and subtle inner highlights.
+- Removed all individual button fills, active-state fills and button shadows; Home, Explore, WhatsApp and Menu remain transparent controls within the one shared capsule.
+- Kept all four SVG symbols and labels white, with soft depth lighting and a slow, minimal floating/glow animation. Reduced-motion preferences disable the animation.
+- Desktop navigation styling remains unchanged.
+- Updated the shared injected stylesheet URL to v6 and service-worker cache to v19.
+- Files: `himalayan-bottom-navigation.css`, `mobile-app-experience.js`, `service-worker.js`, `PROJECT_MEMORY.md`.
