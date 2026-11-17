@@ -147,3 +147,40 @@ html body{scroll-padding-bottom:112px}
   border-color:rgba(255,255,255,.38)!important;
  }
 }
+
+
+/* Desktop dock icon contrast: keep Home and Explore glyphs white in every interaction state. */
+@media(min-width:761px){
+ html body nav.desktop-app-dock>a[data-dock="home"] .dock-icon,
+ html body nav.desktop-app-dock>a[data-dock="home"]:hover .dock-icon,
+ html body nav.desktop-app-dock>a[data-dock="home"]:active .dock-icon,
+ html body nav.desktop-app-dock>a[data-dock="home"]:focus .dock-icon,
+ html body nav.desktop-app-dock>a[data-dock="home"][aria-current="page"] .dock-icon,
+ html body nav.desktop-app-dock>a[data-dock="explore"] .dock-icon,
+ html body nav.desktop-app-dock>a[data-dock="explore"]:hover .dock-icon,
+ html body nav.desktop-app-dock>a[data-dock="explore"]:active .dock-icon,
+ html body nav.desktop-app-dock>a[data-dock="explore"]:focus .dock-icon,
+ html body nav.desktop-app-dock>a[data-dock="explore"][aria-current="page"] .dock-icon{
+  color:#fff!important;
+  stroke:#fff!important;
+  fill:none!important;
+ }
+ html body nav.desktop-app-dock>a[data-dock="home"] .dock-icon path,
+ html body nav.desktop-app-dock>a[data-dock="home"] .dock-icon circle,
+ html body nav.desktop-app-dock>a[data-dock="home"] .dock-icon rect,
+ html body nav.desktop-app-dock>a[data-dock="home"] .dock-icon line,
+ html body nav.desktop-app-dock>a[data-dock="home"] .dock-icon polyline,
+ html body nav.desktop-app-dock>a[data-dock="home"] .dock-icon polygon,
+ html body nav.desktop-app-dock>a[data-dock="explore"] .dock-icon path,
+ html body nav.desktop-app-dock>a[data-dock="explore"] .dock-icon circle,
+ html body nav.desktop-app-dock>a[data-dock="explore"] .dock-icon rect,
+ html body nav.desktop-app-dock>a[data-dock="explore"] .dock-icon line,
+ html body nav.desktop-app-dock>a[data-dock="explore"] .dock-icon polyline,
+ html body nav.desktop-app-dock>a[data-dock="explore"] .dock-icon polygon{
+  stroke:#fff!important;
+ }
+ html body nav.desktop-app-dock>a[data-dock="home"] .dock-icon .icon-side,
+ html body nav.desktop-app-dock>a[data-dock="explore"] .dock-icon .icon-side{
+  fill:rgba(255,255,255,.16)!important;
+ }
+}
