@@ -37,14 +37,14 @@
   nav.setAttribute('aria-label','Bottom navigation');
   nav.innerHTML=items.map(x=>'<a href="'+x.href+'" data-dock="'+x.path+'" aria-label="'+x.label+'">'+icon(x.svg)+'<span>'+x.label+'</span></a>').join('')+
    '<button type="button" class="dock-menu-trigger" data-dock-menu aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMainNavigation">'+
-   icon('<path d="M12 4v16M4 12h16"/>')+
+   icon(mobile()?'<path d="M12 4v16M4 12h16"/>':'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect class="icon-side" x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect class="icon-side" x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/>')+
    '<span>Menu</span></button>';
   document.body.appendChild(nav);
   const menuTrigger=nav.querySelector('.dock-menu-trigger');
   {
    // Mobile and desktop share an independent body-level popup anchored above the bottom dock.
    const menuPopup=document.createElement('div');
-   menuPopup.className='dock-menu-popup';
+   menuPopup.className='dock-menu-popup '+(mobile()?'dock-fab-popup':'dock-panel-popup');
    menuPopup.setAttribute('role','menu');
    menuPopup.setAttribute('aria-label','Website menu');
    menuPopup.setAttribute('aria-hidden','true');
@@ -74,6 +74,11 @@
     Object.assign(svg.style,{width:'23px',height:'23px',flex:'0 0 23px',fill:'none',stroke:'#fff',strokeWidth:'1.7',strokeLinecap:'round',strokeLinejoin:'round'});
     const label=a.querySelector('span');
     Object.assign(label.style,{position:'absolute',right:'64px',top:'50%',transform:'translateY(-50%)',padding:'7px 11px',border:'1px solid rgba(255,255,255,.20)',borderRadius:'999px',background:'rgba(38,42,48,.94)',color:'#fff',whiteSpace:'nowrap',fontSize:'11px',fontWeight:'600',letterSpacing:'.02em',boxShadow:'0 5px 14px rgba(0,0,0,.24)',pointerEvents:'none'});
+    if(!mobile()){
+     Object.assign(a.style,{position:'static',width:'auto',height:'auto',minHeight:'46px',justifyContent:'flex-start',gap:'12px',padding:'0 14px',border:'1px solid transparent',borderRadius:'13px',background:'rgba(255,255,255,.055)',boxShadow:'none'});
+     Object.assign(svg.style,{width:'20px',height:'20px',flex:'0 0 20px',stroke:'#aeb7c2'});
+     Object.assign(label.style,{position:'static',right:'auto',top:'auto',transform:'none',padding:'0',border:'0',borderRadius:'0',background:'transparent',fontSize:'14px',boxShadow:'none'});
+    }
    });
    document.body.appendChild(menuPopup);
    const positionMenuPopup=()=>{
@@ -81,11 +86,19 @@
     const bottom=Math.max(0,Math.ceil(window.innerHeight-rect.top+10));
     menuPopup.style.setProperty('bottom',bottom+'px','important');
     const triggerRect=menuTrigger.getBoundingClientRect();
-    const right=Math.max(8,Math.ceil(window.innerWidth-(triggerRect.left+triggerRect.width/2+27)));
-    menuPopup.style.setProperty('width','54px','important');
-    menuPopup.style.setProperty('left','auto','important');
-    menuPopup.style.setProperty('right',right+'px','important');
-    menuPopup.style.setProperty('transform','none','important');
+    if(nav.classList.contains('mobile-app-dock')){
+     const right=Math.max(8,Math.ceil(window.innerWidth-(triggerRect.left+triggerRect.width/2+27)));
+     menuPopup.style.setProperty('width','54px','important');
+     menuPopup.style.setProperty('left','auto','important');
+     menuPopup.style.setProperty('right',right+'px','important');
+     menuPopup.style.setProperty('transform','none','important');
+    }else{
+     const right=Math.max(8,Math.ceil(window.innerWidth-triggerRect.right));
+     menuPopup.style.setProperty('width','min(260px, calc(100vw - 24px))','important');
+     menuPopup.style.setProperty('left','auto','important');
+     menuPopup.style.setProperty('right',right+'px','important');
+     menuPopup.style.setProperty('transform','none','important');
+    }
    };
    const closeDockPopup=()=>{
     menuPopup.style.display='none';
