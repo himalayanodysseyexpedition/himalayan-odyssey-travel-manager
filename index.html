@@ -1842,6 +1842,75 @@ body.guest-itinerary-popup-open{overflow:hidden}
 @media(max-width:760px){#guest-itinerary-popup .guest-itinerary-content{padding:14px}}
 </style>
 
+
+<style id="mobile-card-right-peek-unified-v1">
+/* Mobile-only consistent next-card peek across the homepage card rails. */
+@media screen and (max-width:760px){
+  html body #cabList,
+  html body #packageList,
+  html body #galleryList,
+  html body #groupDeparturesCarousel{
+    display:grid!important;
+    grid-auto-flow:column!important;
+    grid-template-columns:none!important;
+    grid-auto-columns:82%!important;
+    gap:14px!important;
+    width:calc(100% + 6vw)!important;
+    max-width:none!important;
+    margin-left:0!important;
+    margin-right:-6vw!important;
+    padding:5px 6vw 18px 2px!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    -webkit-overflow-scrolling:touch!important;
+    overscroll-behavior-x:contain!important;
+    scroll-snap-type:x mandatory!important;
+    scroll-padding-inline:2px!important;
+    scrollbar-width:none!important;
+    touch-action:pan-x pan-y!important;
+  }
+  html body #cabList::-webkit-scrollbar,
+  html body #packageList::-webkit-scrollbar,
+  html body #galleryList::-webkit-scrollbar,
+  html body #groupDeparturesCarousel::-webkit-scrollbar{display:none!important}
+  html body #cabList>.cab-card,
+  html body #packageList>.package-slide,
+  html body #galleryList>.hotel-card,
+  html body #groupDeparturesCarousel>.group-departure-card{
+    width:100%!important;
+    min-width:0!important;
+    max-width:none!important;
+    grid-column:auto!important;
+    scroll-snap-align:start!important;
+  }
+  /* Promotional tour card rails, when rendered by the promotional-card module. */
+  html body .promotional-tour-carousel,
+  html body .promotional-cards-carousel,
+  html body #promotionalToursCarousel,
+  html body #promoToursCarousel{
+    display:grid!important;
+    grid-auto-flow:column!important;
+    grid-template-columns:none!important;
+    grid-auto-columns:82%!important;
+    gap:14px!important;
+    width:calc(100% + 6vw)!important;
+    margin-right:-6vw!important;
+    padding:5px 6vw 18px 2px!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    -webkit-overflow-scrolling:touch!important;
+    overscroll-behavior-x:contain!important;
+    scroll-snap-type:x mandatory!important;
+    scrollbar-width:none!important;
+    touch-action:pan-x pan-y!important;
+  }
+  html body .promotional-tour-carousel>*,
+  html body .promotional-cards-carousel>*,
+  html body #promotionalToursCarousel>*,
+  html body #promoToursCarousel>*{min-width:0!important;scroll-snap-align:start!important}
+}
+</style>
+
 </head>
 
 <body>
