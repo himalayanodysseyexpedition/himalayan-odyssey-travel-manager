@@ -61,6 +61,7 @@
     boxShadow:'none',backdropFilter:'none',WebkitBackdropFilter:'none',
     zIndex:'1901'
    });
+   if(!mobile())Object.assign(menuPopup.style,{width:'min(360px, calc(100vw - 24px))',maxHeight:'min(58vh, 460px)',overflowY:'auto',flexDirection:'column',alignItems:'stretch',gap:'5px',padding:'10px',border:'1px solid rgba(255,255,255,.28)',borderRadius:'22px',background:'rgba(55,59,65,.97)',boxShadow:'0 20px 48px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.16)',backdropFilter:'blur(28px) saturate(145%)',WebkitBackdropFilter:'blur(28px) saturate(145%)'});
    menuPopup.querySelectorAll('a').forEach(a=>{
     Object.assign(a.style,{
      display:'flex',position:'relative',alignItems:'center',justifyContent:'center',
