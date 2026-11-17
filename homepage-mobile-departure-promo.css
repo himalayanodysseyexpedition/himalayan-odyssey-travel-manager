@@ -457,3 +457,27 @@ html body #home.hero .hero-promo-slide a.mobile-departure-cta:not(.mobile-depart
     box-sizing:border-box!important;
   }
 }
+
+
+/* Mobile-only complete-content repair for both hero departure cards. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-promo-carousel,html body #home.hero .hero-promo-track{height:auto!important;min-height:0!important;max-height:none!important;overflow-y:visible!important}
+  html body #home.hero .hero-promo-slide{height:auto!important;min-height:0!important;overflow:visible!important}
+  html body #home.hero .hero-promo-slide .mobile-next-departure{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-flow:row!important;grid-auto-rows:max-content!important;align-content:start!important;align-items:start!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;padding:20px 17px 18px!important;gap:0!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-topline{grid-area:top!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-kicker{grid-area:kicker!important}
+  html body #home.hero .hero-promo-slide .mobile-next-departure h2{grid-area:title!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-date{grid-area:date!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-facts{grid-area:facts!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-price{grid-area:price!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-seats{grid-area:seats!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-track{grid-area:progress!important;display:block!important;width:100%!important;min-height:7px!important;visibility:visible!important;opacity:1!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details{grid-area:itinerary!important;display:block!important;width:100%!important}
+  html body #home.hero .hero-promo-slide a.mobile-departure-itinerary{grid-area:itinerary!important}
+  html body #home.hero .hero-promo-slide a.mobile-departure-cta:not(.mobile-departure-itinerary){grid-area:explore!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-cta{width:100%!important;min-height:48px!important;height:auto!important;max-height:none!important;box-sizing:border-box!important;margin:9px 0 0!important;padding:13px 17px!important;white-space:normal!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-track span{display:block!important;height:100%!important;min-height:7px!important;visibility:visible!important;opacity:1!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-secondary .mobile-departure-track{height:7px!important;margin:12px 0 14px!important;background:rgba(255,255,255,.16)!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-secondary .mobile-departure-track span{width:100%!important;background:linear-gradient(100deg,#1b4fa3 0%,#fff 18%,#d92332 36%,#f4c542 54%,#168b58 72%,#1b4fa3 100%)!important;background-size:260% 100%!important;animation:mobileDepartureTibetanFlow 3.2s linear infinite!important}
+}
+@media(prefers-reduced-motion:reduce){html body #home.hero .mobile-departure-secondary .mobile-departure-track span{animation:none!important}}

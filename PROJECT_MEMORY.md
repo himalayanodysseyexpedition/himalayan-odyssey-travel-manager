@@ -469,3 +469,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Prevented the mobile CTA from stretching vertically by setting a consistent 48px control height and explicit box sizing. Kept the secondary departure's existing mobile layout and all desktop rules unchanged.
 - Bumped `homepage-mobile-departure-promo.css` to v15 for cache refresh.
 - Files: `homepage-mobile-departure-promo.css`, `index.html`. Live iPhone verification remains pending.
+
+## 2026-11-17 — Restore complete mobile departure card content and second-card animated bar
+- On mobile only, both carousel cards use a full-width one-column layout with explicit grid areas for date, facts, price, seat information/progress, itinerary control, and enquiry CTA. Remove vertical clipping from the carousel viewport and slides.
+- Add a Tibetan-colour animated decorative strip to the 19 December card without inventing a booking count or percentage.
+- Improve carousel height measurement: size slides to the tallest card and remeasure after web fonts and page load settle. Desktop rules remain unchanged.
+- Bump `homepage-mobile-departure-promo.css` to v16.
+- Files: `homepage-mobile-departure-promo.css`, `index.html`, `PROJECT_MEMORY.md`. Live device screenshot verification pending.
