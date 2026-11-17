@@ -305,7 +305,11 @@ html body #home.hero .hero-promo-slide .mobile-departure-price small{font-size:1
 html body #home.hero .hero-promo-slide .mobile-departure-seats{display:flex!important;flex-direction:column!important;align-items:flex-end!important;gap:3px!important;margin:12px 0 8px!important;padding:9px 0!important;border-top:1px solid rgba(255,255,255,.28)!important;color:#fff!important;text-align:right!important}
 html body #home.hero .hero-promo-slide .mobile-departure-track{height:7px!important;margin:0 0 14px!important}
 html body #home.hero .hero-promo-slide .mobile-departure-cta{display:flex!important;align-items:center!important;justify-content:space-between!important;width:100%!important;min-height:48px!important;margin:8px 0 0!important;padding:13px 17px!important;border-radius:999px!important}
-html body #home.hero .hero-promo-slide .mobile-departure-itinerary-list{display:grid!important;gap:6px!important;margin:10px 0 13px!important;padding:11px 0!important;border-top:1px solid rgba(255,255,255,.24)!important;color:#fff!important}
+html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details:not([open]) .mobile-departure-itinerary-list{display:none!important}
+html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details[open] .mobile-departure-itinerary-list{display:grid!important;gap:6px!important;margin:10px 0 13px!important;padding:11px 0!important;border-top:1px solid rgba(255,255,255,.24)!important;color:#fff!important}
+html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details{grid-area:itinerary!important;margin:10px 0 13px!important}
+html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details>summary{list-style:none!important;cursor:pointer!important}
+html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details>summary::-webkit-details-marker{display:none!important}
 html body #home.hero .hero-promo-slide .mobile-departure-itinerary-list p{margin:0!important;color:#fff!important;font:500 11px/1.45 "DM Sans",Arial,sans-serif!important}
 html body #home.hero .hero-promo-slide .mobile-departure-itinerary-list strong{display:inline-block;min-width:48px;color:#fff!important;font-size:10px!important;letter-spacing:.5px}
 html body #home.hero .hero-promo-pagination{display:flex!important;justify-content:center!important;align-items:center!important;gap:9px!important;width:100%!important;padding:12px 0 0!important}
@@ -327,3 +331,13 @@ html body #home.hero .hero-promo-slide .mobile-departure-track{grid-area:progres
 html body #home.hero .hero-promo-slide a.mobile-departure-itinerary,
 html body #home.hero .hero-promo-slide .mobile-departure-itinerary-list{grid-area:itinerary!important}
 html body #home.hero .hero-promo-slide a.mobile-departure-cta:not(.mobile-departure-itinerary){grid-area:explore!important}
+
+@media(max-width:760px){
+  html body #home.hero .hero-promo-slide .mobile-departure-secondary{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    grid-template-areas:"top top" "kicker kicker" "title title" "date date" "facts facts" "price price" "itinerary itinerary" "explore explore"!important;
+    align-items:center!important;
+    gap:0 12px!important;
+    padding:18px 17px 16px!important;
+  }
+}

@@ -1873,8 +1873,7 @@ body.guest-itinerary-popup-open{overflow:hidden}
       <div class="mobile-departure-track" role="img" aria-label="80 percent of seats booked"><span></span></div>
       <a class="mobile-departure-cta mobile-departure-itinerary" href="/itineraries/" aria-label="View the Winter Spiti itinerary">VIEW ITINERARY <span aria-hidden="true">→</span></a>
       <a class="mobile-departure-cta" href="https://wa.me/919816929669?text=Hello%20Himalayan%20Odyssey%20Expedition%2C%20I%20am%20interested%20in%20the%20Winter%20Spiti%20Expedition%20(26%20Dec%202026%20%E2%80%93%2002%20Jan%202027)%20priced%20at%20%E2%82%B917%2C000%20per%20person.%20Please%20share%20the%20full%20itinerary%20and%20booking%20details." target="_blank" rel="noopener noreferrer">EXPLORE THIS DEPARTURE <span aria-hidden="true">↗</span></a>
-      </div>
-
+    </section>
         </div>
         <div class="hero-promo-slide" role="group" aria-roledescription="slide" aria-label="2 of 2">
           <section class="mobile-next-departure mobile-departure-secondary" aria-label="19 December Kinnaur and Spiti group tour">
@@ -1884,15 +1883,18 @@ body.guest-itinerary-popup-open{overflow:hidden}
             <div class="mobile-departure-date">19 DEC 2026</div>
             <div class="mobile-departure-facts"><span>6 Nights / 7 Days</span><span>Chandigarh Pickup &amp; Drop</span></div>
             <div class="mobile-departure-price">₹14,000 <small>/ person</small></div>
-            <div class="mobile-departure-itinerary-list" aria-label="Tour itinerary">
-              <p><strong>DAY 1</strong> Chandigarh → Shimla → Narkanda · DJ party &amp; bonfire</p>
-              <p><strong>DAY 2</strong> Narkanda → Sangla → Chitkul · Lepcha La &amp; Chitkul border sightseeing</p>
-              <p><strong>DAY 3</strong> Sangla → Khab Sangam → Nako → Tabo</p>
-              <p><strong>DAY 4</strong> Tabo → Kaza</p>
-              <p><strong>DAY 5</strong> Kaza local sightseeing · Overnight in Kaza</p>
-              <p><strong>DAY 6</strong> Kaza → Kalpa</p>
-              <p><strong>DAY 7</strong> Kalpa → Chandigarh drop</p>
-            </div>
+            <details class="mobile-departure-itinerary-details">
+              <summary class="mobile-departure-cta mobile-departure-itinerary">VIEW 7-DAY ITINERARY <span aria-hidden="true">＋</span></summary>
+              <div class="mobile-departure-itinerary-list" aria-label="Tour itinerary">
+                <p><strong>DAY 1</strong> Chandigarh → Shimla → Narkanda · DJ party &amp; bonfire</p>
+                <p><strong>DAY 2</strong> Narkanda → Sangla → Chitkul · Lepcha La &amp; Chitkul border sightseeing</p>
+                <p><strong>DAY 3</strong> Sangla → Khab Sangam → Nako → Tabo</p>
+                <p><strong>DAY 4</strong> Tabo → Kaza</p>
+                <p><strong>DAY 5</strong> Kaza local sightseeing · Overnight in Kaza</p>
+                <p><strong>DAY 6</strong> Kaza → Kalpa</p>
+                <p><strong>DAY 7</strong> Kalpa → Chandigarh drop</p>
+              </div>
+            </details>
             <a class="mobile-departure-cta" href="https://wa.me/919816929669?text=Hello%20Himalayan%20Odyssey%20Expedition%2C%20I%20am%20interested%20in%20the%2019%20December%202026%20Kinnaur%20and%20Spiti%20group%20tour%20(6%20Nights%2F7%20Days)%20priced%20at%20%E2%82%B914%2C000%20per%20person%2C%20with%20Chandigarh%20pickup%20and%20drop.%20Please%20share%20the%20full%20itinerary%20and%20booking%20details." target="_blank" rel="noopener noreferrer">ENQUIRE ON WHATSAPP <span aria-hidden="true">↗</span></a>
           </section>
         </div>
@@ -6856,9 +6858,16 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   const dots = Array.from(carousel.querySelectorAll('.hero-promo-pagination button'));
   if (!slides.length || slides.length !== dots.length) return;
   let activeIndex = 0, ticking = false;
+  const getBaseHeight = () => {
+    const firstCard = slides[0]?.querySelector('.mobile-next-departure');
+    return firstCard ? Math.ceil(firstCard.getBoundingClientRect().height) : 0;
+  };
   const updateHeight = (index) => {
     const card = slides[index]?.querySelector('.mobile-next-departure');
-    if (card) track.style.height = card.offsetHeight + 'px';
+    if (!card) return;
+    const expanded = card.querySelector('.mobile-departure-itinerary-details[open]');
+    const activeHeight = Math.ceil(card.getBoundingClientRect().height);
+    track.style.height = Math.max(getBaseHeight(), expanded ? activeHeight : 0) + 'px';
   };
   const setActive = (index) => {
     activeIndex = Math.max(0, Math.min(index, slides.length - 1));
@@ -6899,6 +6908,10 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   track.addEventListener('pointerup',stopDrag);
   track.addEventListener('pointercancel',stopDrag);
   track.addEventListener('lostpointercapture',stopDrag);
+  slides.forEach(slide => {
+    const details = slide.querySelector('.mobile-departure-itinerary-details');
+    if (details) details.addEventListener('toggle', () => updateHeight(activeIndex));
+  });
   window.addEventListener('resize',()=>updateHeight(activeIndex),{passive:true});
   if('ResizeObserver'in window){
     const observer=new ResizeObserver(()=>updateHeight(activeIndex));
