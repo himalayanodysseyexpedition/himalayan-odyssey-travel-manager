@@ -123,6 +123,43 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
 <link rel="stylesheet" href="/admin-monochrome.css?v=20261112-1">
 
 <link rel="stylesheet" href="/windows-fluent-monochrome-mobile.css?v=1">
+
+<style id="cab-photo-cropper-styles">
+#cabCropDialog{
+  width:min(760px,calc(100vw - 24px));
+  max-width:760px;
+  max-height:calc(100svh - 24px);
+  padding:0;
+  overflow:auto;
+  border:1px solid #d8e3ec;
+  border-radius:18px;
+  background:#fff;
+  color:#152b40;
+  box-shadow:0 24px 80px rgba(0,0,0,.32);
+}
+#cabCropDialog::backdrop{background:rgba(4,18,30,.76);backdrop-filter:blur(5px)}
+.cab-crop-shell{padding:clamp(16px,3.5vw,28px)}
+.cab-crop-heading{margin-bottom:16px}
+.cab-crop-heading h3{margin:0 0 4px!important;font-size:29px!important}
+.cab-crop-heading p{margin:0;color:#61788d;font-size:13px;line-height:1.55}
+.cab-crop-viewport{width:100%;max-width:680px;margin:0 auto;border-radius:12px;overflow:hidden;background:#e9eef2;border:1px solid #d8e3ec}
+#cabCropCanvas{display:block;width:100%;height:auto;max-height:58svh;object-fit:contain;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}
+#cabCropCanvas:active{cursor:grabbing}
+.cab-crop-zoom-row{display:grid;grid-template-columns:auto minmax(100px,1fr) auto;align-items:center;gap:14px;margin:17px 0 20px;font-size:13px;font-weight:600}
+.cab-crop-zoom-row input{width:100%;margin:0;accent-color:#244a66}
+.cab-crop-hint{color:#61788d;font-size:11px;font-weight:400}
+.cab-crop-actions{display:flex;justify-content:flex-end;gap:10px}
+.cab-crop-actions button{min-width:125px}
+@media(max-width:520px){
+  #cabCropDialog{width:calc(100vw - 16px);max-height:calc(100svh - 16px);border-radius:15px}
+  .cab-crop-shell{padding:15px}
+  .cab-crop-heading h3{font-size:25px!important}
+  .cab-crop-zoom-row{grid-template-columns:auto 1fr;gap:8px 12px}
+  .cab-crop-hint{grid-column:1/-1}
+  .cab-crop-actions{display:grid;grid-template-columns:1fr 1fr}
+  .cab-crop-actions button{min-width:0;width:100%;margin:0}
+}
+</style>
 </head>
 
 <body>
@@ -443,6 +480,30 @@ Publish this cab on the guest website
 </form>
 </dialog>
 
+
+<!-- VEHICLE PHOTO CROP -->
+<dialog id="cabCropDialog" aria-labelledby="cabCropTitle" aria-describedby="cabCropDescription">
+  <div class="cab-crop-shell">
+    <div class="cab-crop-heading">
+      <h3 id="cabCropTitle">Crop vehicle photograph</h3>
+      <p id="cabCropDescription">The frame matches the Vehicles &amp; Cabs card image area. Drag the photo to position it, then adjust the zoom.</p>
+    </div>
+    <div class="cab-crop-viewport">
+      <canvas id="cabCropCanvas" aria-label="Vehicle photo crop preview. Drag to reposition."></canvas>
+    </div>
+    <label class="cab-crop-zoom-row" for="cabCropZoom">
+      <span>Zoom</span>
+      <input id="cabCropZoom" type="range" min="1" max="3" step="0.01" value="1">
+      <span id="cabCropZoomValue">100%</span>
+      <small class="cab-crop-hint">Drag the photo inside the frame to choose what appears on the card.</small>
+    </label>
+    <div class="cab-crop-actions">
+      <button type="button" id="cabCropCancel" class="secondary">Cancel</button>
+      <button type="button" id="cabCropApply">Use Cropped Photo</button>
+    </div>
+  </div>
+</dialog>
+
 <!-- LEAD FORM -->
 <dialog id="leadDialog">
 <form id="leadF">
@@ -603,7 +664,7 @@ Publish this cab on the guest website
 </form>
 </dialog>
 
-<script src="app.js?v=112"></script>
+<script src="app.js?v=113"></script>
 <script src="whatsapp-automation.js?v=1"></script>
 <script src="/mobile-scroll-indicators.js?v=2" defer></script>
 </body>
