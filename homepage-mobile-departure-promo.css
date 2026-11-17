@@ -508,7 +508,7 @@ html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details > sum
     display:flex!important;
     flex-flow:row nowrap!important;
     align-items:stretch!important;
-    gap:0!important;
+    gap:8px!important;
     width:100%!important;
     max-width:100%!important;
     min-width:0!important;
@@ -526,10 +526,10 @@ html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details > sum
   html body #home.hero .hero-promo-slide{
     display:block!important;
     position:relative!important;
-    flex:0 0 95%!important;
-    width:95%!important;
-    min-width:95%!important;
-    max-width:95%!important;
+    flex:0 0 calc(95% + 8px)!important;
+    width:calc(95% + 8px)!important;
+    min-width:calc(95% + 8px)!important;
+    max-width:calc(95% + 8px)!important;
     height:auto!important;
     min-height:0!important;
     overflow:visible!important;
