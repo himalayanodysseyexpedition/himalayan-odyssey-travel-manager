@@ -485,3 +485,10 @@ html body #home.hero .hero-promo-slide a.mobile-departure-cta,
 html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details > summary {
   font-weight: 800 !important;
 }
+
+/* Keep the new generated scroll indicator as the only visible mobile promo-carousel indicator. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-promo-pagination{
+    display:none!important;
+  }
+}
