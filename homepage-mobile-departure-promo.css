@@ -405,3 +405,55 @@ html body #home.hero .hero-promo-slide a.mobile-departure-cta:not(.mobile-depart
     z-index:4!important;
   }
 }
+
+/* Mobile repair: give the primary departure card an explicit one-column grid.
+   The previous carousel CSS assigned named grid areas but only declared a mobile
+   template for the secondary card, allowing the primary card content to overlap. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-promo-slide .mobile-next-departure:not(.mobile-departure-secondary){
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-areas:
+      "top"
+      "kicker"
+      "title"
+      "date"
+      "facts"
+      "price"
+      "seats"
+      "progress"
+      "itinerary"
+      "explore"!important;
+    grid-auto-rows:max-content!important;
+    align-content:start!important;
+    align-items:start!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:max-content!important;
+    max-height:none!important;
+    box-sizing:border-box!important;
+  }
+  html body #home.hero .hero-promo-slide .mobile-next-departure .mobile-departure-cta{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    justify-self:stretch!important;
+    align-self:start!important;
+    width:100%!important;
+    height:48px!important;
+    min-height:48px!important;
+    max-height:56px!important;
+    margin:8px 0 0!important;
+    padding:0 17px!important;
+    box-sizing:border-box!important;
+    line-height:1.2!important;
+    white-space:normal!important;
+  }
+  html body #home.hero .hero-promo-carousel,
+  html body #home.hero .hero-promo-track,
+  html body #home.hero .hero-promo-slide{
+    min-height:0!important;
+    max-height:none!important;
+    box-sizing:border-box!important;
+  }
+}
