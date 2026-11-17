@@ -492,3 +492,55 @@ html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details > sum
     display:none!important;
   }
 }
+
+
+/* Mobile promotional departure cards: show the next slide peeking in from the right. */
+@media screen and (max-width:760px){
+  html body #home.hero > .hero-content > .hero-promo-carousel{
+    display:block!important;
+    width:100%!important;
+    max-width:520px!important;
+    min-width:0!important;
+    overflow:visible!important;
+    box-sizing:border-box!important;
+  }
+  html body #home.hero .hero-promo-track{
+    display:flex!important;
+    flex-flow:row nowrap!important;
+    align-items:stretch!important;
+    gap:14px!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    height:auto!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    padding:0 18% 2px 0!important;
+    box-sizing:border-box!important;
+    scroll-snap-type:x mandatory!important;
+    scroll-padding-left:0!important;
+    scroll-padding-right:18%!important;
+    -webkit-overflow-scrolling:touch!important;
+    overscroll-behavior-x:contain!important;
+  }
+  html body #home.hero .hero-promo-slide{
+    display:block!important;
+    position:relative!important;
+    flex:0 0 82%!important;
+    width:82%!important;
+    min-width:82%!important;
+    max-width:82%!important;
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+    box-sizing:border-box!important;
+    scroll-snap-align:start!important;
+    scroll-snap-stop:always!important;
+  }
+  html body #home.hero .hero-promo-slide .mobile-next-departure{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    box-sizing:border-box!important;
+  }
+}
