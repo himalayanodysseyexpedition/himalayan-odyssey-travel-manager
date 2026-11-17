@@ -4290,11 +4290,17 @@ html body #home.hero .hero-content h1.hero-animated-heading > .hero-heading-suff
     position:relative!important;
     z-index:1!important;
   }
-  /* Center the existing logo independently of the right-side hamburger button. */
+  /* Keep the hamburger at the right while centering the logo against the full header width. */
+  html body > header .header-inner{
+    width:100%!important;
+    box-sizing:border-box!important;
+  }
   html body > header .header-inner > a.brand{
     position:absolute!important;
     left:50%!important;
+    right:auto!important;
     top:50%!important;
+    bottom:auto!important;
     transform:translate(-50%,-50%)!important;
     display:flex!important;
     align-items:center!important;
