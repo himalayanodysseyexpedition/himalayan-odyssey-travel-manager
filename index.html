@@ -6903,7 +6903,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
     setActive(index);
   };
 
-  // Mobile hero promotions advance automatically every 10 seconds.
+  // Mobile hero promotions advance automatically every 2 seconds.
   // Manual swipe, focus, hover, open itinerary details and hidden tabs pause the rotation.
   const autoAdvanceEnabled = window.matchMedia('(max-width: 760px)').matches &&
     !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -6920,7 +6920,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
       if (document.body.classList.contains('promo-itinerary-modal-open')) return;
       goTo((activeIndex + 1) % slides.length);
       scheduleAutoAdvance();
-    }, 10000);
+    }, 2000);
   };
   const pauseForInteraction = () => {
     interactionPaused = true;
