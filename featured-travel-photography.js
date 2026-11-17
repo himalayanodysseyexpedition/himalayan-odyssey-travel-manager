@@ -62,15 +62,15 @@ const renderPositions=()=>{
   [...dots.children].forEach((dot,i)=>dot.setAttribute("aria-current",i===active?"true":"false"));
 };
 const go=index=>{if(!photos.length)return;active=(index+photos.length)%photos.length;renderPositions();};
-dots.addEventListener("click",e=>{const button=e.target.closest("[data-index]");if(button){go(Number(button.dataset.index));play();}});
-[prev,next].forEach((button,i)=>{if(!button)return;button.addEventListener("pointerdown",e=>e.stopPropagation());button.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();go(active+(i===0?-1:1));play();});});
-track.addEventListener("click",e=>{if(swiped){swiped=false;return;}const item=e.target.closest(".featured-travel-slide");if(!item)return;const i=[...track.children].indexOf(item);if(i>=0&&i!==active){go(i);play();}});
-carousel.addEventListener("pointerdown",e=>{if(e.target.closest("button"))return;if(e.pointerType==="mouse"&&e.button!==0)return;startX=lastX=e.clientX;dragging=true;swiped=false;carousel.classList.add("is-dragging");carousel.setPointerCapture?.(e.pointerId);stop();});
+dots.addEventListener("click",e=>{const button=e.target.closest("[data-index]");if(button)go(Number(button.dataset.index));});
+[prev,next].forEach((button,i)=>{if(!button)return;button.addEventListener("pointerdown",e=>e.stopPropagation());button.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();go(active+(i===0?-1:1));});});
+track.addEventListener("click",e=>{if(swiped){swiped=false;return;}const item=e.target.closest(".featured-travel-slide");if(!item)return;const i=[...track.children].indexOf(item);if(i>=0&&i!==active)go(i);});
+carousel.addEventListener("pointerdown",e=>{if(e.target.closest("button"))return;if(e.pointerType==="mouse"&&e.button!==0)return;startX=lastX=e.clientX;dragging=true;swiped=false;carousel.classList.add("is-dragging");carousel.setPointerCapture?.(e.pointerId);});
 carousel.addEventListener("pointermove",e=>{if(dragging)lastX=e.clientX;});
-const finish=()=>{if(!dragging)return;const delta=lastX-startX;dragging=false;carousel.classList.remove("is-dragging");if(Math.abs(delta)>40){swiped=true;go(active+(delta<0?1:-1));}play();};
+const finish=()=>{if(!dragging)return;const delta=lastX-startX;dragging=false;carousel.classList.remove("is-dragging");if(Math.abs(delta)>40){swiped=true;go(active+(delta<0?1:-1));}};
 ["pointerup","pointercancel","lostpointercapture"].forEach(name=>carousel.addEventListener(name,finish));
-carousel.addEventListener("mouseenter",stop);carousel.addEventListener("mouseleave",play);
-carousel.addEventListener("focusin",stop);carousel.addEventListener("focusout",play);
+// Touch, swipe, taps and focus never pause or reset the mobile autoplay interval.
+// The slideshow continues on its original 2-second cadence while guests interact.
 document.addEventListener("visibilitychange",()=>document.hidden?stop():play());
 carousel.addEventListener("keydown",e=>{if(e.key==="ArrowRight"){e.preventDefault();go(active+1);play();}else if(e.key==="ArrowLeft"){e.preventDefault();go(active-1);play();}else if(e.key==="Home"){e.preventDefault();go(0);play();}else if(e.key==="End"){e.preventDefault();go(photos.length-1);play();}});
 (async()=>{try{const client=window.supabase.createClient("https://ynkoiuyjevclypumnyes.supabase.co","sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-");const {data,error}=await client.from("featured_travel_photos").select("title,caption,alt_text,image_url,sort_order").eq("is_active",true).order("sort_order",{ascending:true});if(error)throw error;photos=(data||[]).filter(p=>p.image_url);if(!photos.length)return;active=Math.min(3,photos.length-1);section.hidden=false;render();play();}catch(e){console.info("Featured photography is not configured yet.",e.message);}})();
