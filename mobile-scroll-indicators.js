@@ -71,10 +71,13 @@
       const max = Math.max(0, el.scrollWidth - el.clientWidth);
       const ratio = el.clientWidth / el.scrollWidth;
       const width = Math.max(18, ratio * 100);
-      const travel = Math.max(0, 100 - width);
       const progress = max ? Math.min(1, Math.max(0, el.scrollLeft / max)) : 0;
       indicator.thumb.style.width = width + "%";
-      indicator.thumb.style.transform = "translateX(" + (travel * progress) + "%)";
+      // translateX(%) is relative to the thumb's own width, not the track.
+      // Calculate the available track travel in pixels so the thumb reaches
+      // the exact end when scrollLeft reaches the carousel's maximum.
+      const travel = Math.max(0, indicator.track.clientWidth - indicator.thumb.offsetWidth);
+      indicator.thumb.style.transform = "translateX(" + (travel * progress) + "px)";
       indicator.track.hidden = max <= 8;
     };
     el.addEventListener("scroll", update, {passive:true});
