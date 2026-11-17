@@ -15,9 +15,9 @@
 <div class="full"><label>Trip facts (one per line)</label><textarea id="facts" placeholder="6 Nights / 7 Days&#10;Chandigarh Pickup & Drop"></textarea></div>
 <div><label>Price per person (₹) *</label><input id="price" type="number" min="0" step="1" required></div><div><label>People already booked</label><input id="booked" type="number" min="0" step="1" value="0"></div>
 <div><label>Total people / seats</label><input id="seats" type="number" min="0" step="1" value="0"><p class="hint">Set 0 if you do not want to show booking progress.</p></div><div><label>Display order</label><input id="sort" type="number" value="1"></div>
-<div><label>Itinerary button label</label><input id="itineraryLabel" value="VIEW ITINERARY"></div><div><label>Itinerary page URL</label><input id="itineraryUrl" value="/itineraries/"></div>
-<div class="full"><label>Itinerary details (one day per line; leave blank to use itinerary page URL)</label><textarea id="itineraryItems" placeholder="DAY 1 · Chandigarh → Narkanda&#10;DAY 2 · Narkanda → Sangla"></textarea></div>
-<div><label>Main CTA label *</label><input id="ctaLabel" required value="ENQUIRE ON WHATSAPP"></div><div><label>Main CTA URL *</label><input id="ctaUrl" type="url" required placeholder="https://wa.me/919816929669"></div>
+<div><label>Itinerary button label</label><input id="itineraryLabel" value="VIEW ITINERARY" readonly></div><div><label>Itinerary page URL</label><input id="itineraryUrl" value="/itineraries/"></div>
+<div class="full"><label>Day-wise itinerary (one day per line)</label><textarea id="itineraryItems" placeholder="DAY 1 · Chandigarh → Narkanda&#10;DAY 2 · Narkanda → Sangla&#10;DAY 3 · Sangla → Chitkul"></textarea><p class="hint">Enter one day per line and start each line with DAY 1, DAY 2, DAY 3… These entries appear in the homepage View Itinerary popup.</p></div>
+<div><label>Main CTA label</label><input id="ctaLabel" value="ENQUIRE ON WHATSAPP" readonly></div><div><label>Main CTA URL *</label><input id="ctaUrl" type="url" required placeholder="https://wa.me/919816929669"></div>
 <div class="full check"><input id="active" type="checkbox" checked><label for="active" style="margin:0">Publish this card on the homepage</label></div>
 </div><p id="status" class="status"></p><button id="saveBtn" type="submit">Save Promotional Card</button><button id="clearBtn" type="button" class="secondary">Clear Form</button></form></section></section></main>
-<script src="/admin-hero-promotions.js?v=1"></script></body></html>
+<script src="/admin-hero-promotions.js?v=2"></script></body></html>
