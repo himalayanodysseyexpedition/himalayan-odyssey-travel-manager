@@ -6855,7 +6855,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 (() => {
   const carousel = document.getElementById('heroPromoCarousel');
   const track = document.getElementById('heroPromoTrack');
-  if (!carousel || !track || !window.matchMedia('(max-width: 760px)').matches) return;
+  if (!carousel || !track) return;
 
   const slides = Array.from(track.querySelectorAll('.hero-promo-slide'));
   const dots = Array.from(carousel.querySelectorAll('.hero-promo-pagination button'));
@@ -6883,6 +6883,30 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
     });
     setTrackHeight(activeIndex);
   };
+
+  // Desktop mouse users can drag the same track; touch devices retain native swipe.
+  let dragStartX = 0;
+  let dragStartScroll = 0;
+  let dragging = false;
+  track.addEventListener('pointerdown', (event) => {
+    if (event.pointerType !== 'mouse' || event.button !== 0) return;
+    dragging = true;
+    dragStartX = event.clientX;
+    dragStartScroll = track.scrollLeft;
+    track.classList.add('is-dragging');
+    track.setPointerCapture(event.pointerId);
+  });
+  track.addEventListener('pointermove', (event) => {
+    if (!dragging) return;
+    track.scrollLeft = dragStartScroll - (event.clientX - dragStartX);
+  });
+  const stopDragging = () => {
+    dragging = false;
+    track.classList.remove('is-dragging');
+  };
+  track.addEventListener('pointerup', stopDragging);
+  track.addEventListener('pointercancel', stopDragging);
+  track.addEventListener('lostpointercapture', stopDragging);
 
   dots.forEach((dot, index) => dot.addEventListener('click', () => {
     track.scrollTo({
