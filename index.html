@@ -6909,11 +6909,11 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   track.addEventListener('lostpointercapture',stopDrag);
   slides.forEach(slide => {
     const details = slide.querySelector('.mobile-departure-itinerary-details');
-    if (details) details.addEventListener('toggle', () => updateHeight(activeIndex));
+    if (details) details.addEventListener('toggle', () => updateHeight());
   });
-  window.addEventListener('resize',()=>updateHeight(activeIndex),{passive:true});
+  window.addEventListener('resize',()=>updateHeight(),{passive:true});
   if('ResizeObserver'in window){
-    const observer=new ResizeObserver(()=>updateHeight(activeIndex));
+    const observer=new ResizeObserver(()=>updateHeight());
     slides.forEach(slide=>{const card=slide.querySelector('.mobile-next-departure');if(card)observer.observe(card);});
   }
   setActive(0);
