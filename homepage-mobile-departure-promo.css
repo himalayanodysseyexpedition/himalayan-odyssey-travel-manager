@@ -478,3 +478,10 @@ html body #home.hero .hero-promo-pagination button.is-active{width:24px!importan
 @media(prefers-reduced-motion:reduce) and (min-width:761px){
   html body #home.hero .hero-promo-slide .mobile-departure-track>span{animation:none!important;background-position:50% 0!important}
 }
+
+
+/* Make only hero promotional card button labels bold on mobile and desktop. */
+html body #home.hero .hero-promo-slide a.mobile-departure-cta,
+html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details > summary {
+  font-weight: 800 !important;
+}
