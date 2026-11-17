@@ -41,9 +41,8 @@
    '<span>Menu</span></button>';
   document.body.appendChild(nav);
   const menuTrigger=nav.querySelector('.dock-menu-trigger');
-  if(mobile()){
-   // Mobile Menu is an independent body-level popup. It never invokes or
-   // inherits positioning from the header navigation.
+  {
+   // Mobile and desktop share an independent body-level popup anchored above the bottom dock.
    const menuPopup=document.createElement('div');
    menuPopup.className='dock-menu-popup';
    menuPopup.setAttribute('role','menu');
@@ -117,15 +116,6 @@
    window.addEventListener('scroll',()=>{
     if(menuPopup.getAttribute('aria-hidden')==='false')positionMenuPopup();
    },{passive:true});
-  }else{
-   menuTrigger.addEventListener('click',event=>{
-    event.preventDefault();event.stopPropagation();
-    const headerToggle=document.querySelector('header .header-menu-toggle');
-    if(!headerToggle)return;
-    headerToggle.dataset.openedFromDock='true';
-    headerToggle.click();
-    syncMenuState(nav);
-   });
   }
   const targets=['home-promo','home','packages','upcoming-packages'].map(id=>document.getElementById(id)).filter(Boolean);
   if('IntersectionObserver'in window&&targets.length){
