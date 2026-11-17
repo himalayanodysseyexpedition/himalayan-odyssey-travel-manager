@@ -24,10 +24,14 @@
     if (Number(record.price_per_person) > 0) {
       addText("p", "Price: ₹" + Number(record.price_per_person).toLocaleString("en-IN") + " per person");
     }
-    addText("h3", "Day-wise itinerary");
+    addText("h3", "Itinerary");
     const items = Array.isArray(record.itinerary_items) ? record.itinerary_items : [];
-    if (!items.length) {
-      addText("p", "The detailed itinerary is being updated. Please contact our team for the latest day-wise plan.", "promo-itinerary-empty");
+    const itineraryText = items.map(item => String(item || "")).filter(Boolean).join("\n");
+    if (itineraryText.trim()) {
+      const itinerary = addText("p", itineraryText, "promo-itinerary-body");
+      itinerary.style.whiteSpace = "pre-line";
+    } else {
+      addText("p", "The detailed itinerary is being updated. Please contact our team for the latest plan.", "promo-itinerary-empty");
       if (record.itinerary_url) {
         const link = document.createElement("a");
         link.href = record.itinerary_url;
@@ -35,21 +39,6 @@
         link.className = "promo-itinerary-page-link";
         content.appendChild(link);
       }
-    } else {
-      const list = document.createElement("ol");
-      items.forEach((item, index) => {
-        const li = document.createElement("li");
-        const raw = String(item || "").trim();
-        const split = raw.match(/^(DAY\s*\d+\s*[·—:-]?)\s*(.*)$/i);
-        const strong = document.createElement("strong");
-        strong.textContent = split ? split[1].replace(/[·—:-]$/, "").trim() : "Day " + (index + 1);
-        li.appendChild(strong);
-        const detail = document.createElement("span");
-        detail.textContent = split ? split[2] : raw;
-        li.appendChild(detail);
-        list.appendChild(li);
-      });
-      content.appendChild(list);
     }
     addText("p", "The itinerary may be adjusted according to weather, road and safety conditions.", "promo-itinerary-note");
   };
