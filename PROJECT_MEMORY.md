@@ -544,3 +544,11 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Bumped the homepage v13 script URL to `?v=14` and the service-worker shell cache to v20 to invalidate stale assets.
 - No homepage content, navigation destinations, interactions, or desktop layout changes.
 - Files: `mobile-app-experience-v13.js`, `index.html`, `service-worker.js`, `PROJECT_MEMORY.md`.
+
+
+## 2026-11-18 — Bypass stale mobile dock asset caches
+- Added fresh, uniquely named assets for the homepage's mobile dock: `mobile-app-experience-v14.js` and `himalayan-bottom-navigation-blue-glass.css`. This bypasses old service-worker entries keyed by the former asset paths.
+- Pointed the homepage at the new script. Updated the shared mobile loaders to use the new blue-glass stylesheet path.
+- Updated the homepage script's service-worker registration URL to `?build=18` and bumped the shell cache to v21. Added both new assets to the offline shell.
+- The design remains mobile-only; desktop navigation, destinations and button behavior are unchanged.
+- Files: `index.html`, `mobile-app-experience.js`, `mobile-app-experience-v13.js`, `mobile-app-experience-v14.js` (new), `himalayan-bottom-navigation-blue-glass.css` (new), `service-worker.js`, `PROJECT_MEMORY.md`.
