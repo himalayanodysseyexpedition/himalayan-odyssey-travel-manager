@@ -120,7 +120,15 @@
       nav.style.setProperty("pointer-events", "auto", "important");
       nav.style.setProperty("position", dockMenu ? "fixed" : "absolute", "important");
       nav.style.setProperty("top", dockMenu ? "auto" : "calc(100% + 7px)", "important");
-      nav.style.setProperty("bottom", dockMenu ? (mobileMenu ? "calc(98px + env(safe-area-inset-bottom))" : "108px") : "auto", "important");
+      let dockPopupBottom = "calc(98px + env(safe-area-inset-bottom))";
+      if (dockMenu && mobileMenu) {
+        const dock = document.querySelector("nav.mobile-app-dock");
+        const dockTop = dock ? dock.getBoundingClientRect().top : NaN;
+        if (Number.isFinite(dockTop) && dockTop > 0) {
+          dockPopupBottom = Math.max(0, Math.ceil(window.innerHeight - dockTop + 10)) + "px";
+        }
+      }
+      nav.style.setProperty("bottom", dockMenu ? (mobileMenu ? dockPopupBottom : "108px") : "auto", "important");
       nav.style.setProperty("right", dockMenu ? "auto" : "10px", "important");
       nav.style.setProperty("left", dockMenu ? "50%" : "auto", "important");
       nav.style.setProperty("transform", dockMenu ? "translateX(-50%)" : "none", "important");
