@@ -482,3 +482,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Final mobile-only override switches both promo cards to normal flex-column document flow, resets all child grid-area/position/visibility/opacity overrides, and explicitly orders each content block. This avoids Safari's implicit/empty grid tracks and restores content visibility.
 - Restore the 19 December card's animated Tibetan-colour progress strip with a dedicated keyframe definition and visible full-width span.
 - Bump stylesheet cache to v17. Desktop styles remain untouched. Screenshot validation on physical iPhone still required.
+
+## 2026-11-17 — Match mobile promotional card details and layout to desktop reference
+- User supplied a desktop screenshot as the visual reference and requested the mobile promotional cards to use the same information hierarchy and layout.
+- Removed the accumulated conflicting mobile promo CSS overrides (including the flex-column fallback and older grid placements) and replaced them with one consolidated mobile-only desktop-matching card layout.
+- First card uses the desktop two-column price-left / seat-count-right row, with the booking progress bar and both full-width pill CTAs below.
+- Second card uses the same typography, borders, black gradient card, date/facts hierarchy, progress strip, and pill controls. It has no verified seat count, so its price/progress span the full row rather than inventing seat information.
+- Existing carousel height remeasurement remains in place; bump mobile promo stylesheet to v18. Desktop CSS and desktop markup remain unchanged.

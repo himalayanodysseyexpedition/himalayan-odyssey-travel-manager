@@ -319,230 +319,48 @@ html body #home.hero .hero-promo-pagination button.is-active{width:24px!importan
 @media(min-width:761px){html body #home.hero .hero-promo-carousel{max-width:560px!important;margin:18px auto 22px!important}html body #home.hero .hero-promo-slide .mobile-next-departure{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-areas:"top top" "kicker kicker" "title title" "date date" "facts facts" "price seats" "progress progress" "itinerary itinerary" "explore explore"!important;gap:0 14px!important}}
 @media(prefers-reduced-motion:reduce){html body #home.hero .hero-promo-track{scroll-behavior:auto!important}html body #home.hero .hero-promo-pagination button{transition:none!important}}
 
-/* Explicit grid placement keeps card content ordered identically at every width. */
-html body #home.hero .hero-promo-slide .mobile-departure-topline{grid-area:top!important}
-html body #home.hero .hero-promo-slide .mobile-departure-kicker{grid-area:kicker!important}
-html body #home.hero .hero-promo-slide .mobile-next-departure h2{grid-area:title!important}
-html body #home.hero .hero-promo-slide .mobile-departure-date{grid-area:date!important}
-html body #home.hero .hero-promo-slide .mobile-departure-facts{grid-area:facts!important}
-html body #home.hero .hero-promo-slide .mobile-departure-price{grid-area:price!important}
-html body #home.hero .hero-promo-slide .mobile-departure-seats{grid-area:seats!important}
-html body #home.hero .hero-promo-slide .mobile-departure-track{grid-area:progress!important}
-html body #home.hero .hero-promo-slide a.mobile-departure-itinerary,
-html body #home.hero .hero-promo-slide .mobile-departure-itinerary-list{grid-area:itinerary!important}
-html body #home.hero .hero-promo-slide a.mobile-departure-cta:not(.mobile-departure-itinerary){grid-area:explore!important}
 
-@media(max-width:760px){
-  html body #home.hero .hero-promo-slide .mobile-departure-secondary{
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
-    grid-template-areas:"top top" "kicker kicker" "title title" "date date" "facts facts" "price price" "itinerary itinerary" "explore explore"!important;
-    align-items:center!important;
-    gap:0 12px!important;
-    padding:18px 17px 16px!important;
-  }
-}
-
-
-/* Mobile-only hero carousel sizing correction.
-   Match the old single-card flex footprint and stop the carousel from shrinking vertically. */
+/* Mobile departure cards: reproduce the desktop information hierarchy and card styling. */
 @media screen and (max-width:760px){
-  html body #home.hero > .hero-content > .hero-promo-carousel{
-    display:block!important;
-    position:relative!important;
-    flex:0 0 auto!important;
-    align-self:stretch!important;
-    width:100%!important;
-    max-width:520px!important;
-    min-width:0!important;
-    margin:0 auto!important;
-    padding:0!important;
-    box-sizing:border-box!important;
-    overflow:hidden!important;
-    transform:none!important;
-  }
-  html body #home.hero .hero-promo-track{
-    display:flex!important;
-    flex:0 0 auto!important;
-    align-items:flex-start!important;
-    width:100%!important;
-    min-width:0!important;
-    max-width:100%!important;
-    box-sizing:border-box!important;
-    overflow-x:auto!important;
-    overflow-y:hidden!important;
-  }
-  html body #home.hero .hero-promo-slide{
-    display:block!important;
-    flex:0 0 100%!important;
-    width:100%!important;
-    min-width:100%!important;
-    max-width:100%!important;
-    height:auto!important;
-    box-sizing:border-box!important;
-  }
-  html body #home.hero .hero-promo-slide .mobile-next-departure{
-    display:grid!important;
-    flex:0 0 auto!important;
-    align-self:stretch!important;
-    width:100%!important;
-    min-width:0!important;
-    max-width:100%!important;
-    height:auto!important;
-    min-height:max-content!important;
-    margin:0!important;
-    box-sizing:border-box!important;
-  }
-  html body #home.hero .hero-content .hero-destination-list{
-    position:relative!important;
-    top:0!important;
-    align-self:stretch!important;
-    flex:0 0 auto!important;
-    width:100%!important;
-    max-width:100%!important;
-    margin:auto 0 0!important;
-    padding-top:14px!important;
-    transform:none!important;
-    z-index:4!important;
-  }
+  html body #home.hero > .hero-content > .hero-promo-carousel{display:block!important;position:relative!important;flex:0 0 auto!important;align-self:stretch!important;width:100%!important;max-width:520px!important;min-width:0!important;margin:0 auto 22px!important;padding:0!important;overflow:hidden!important;transform:none!important;box-sizing:border-box!important}
+  html body #home.hero .hero-promo-track{display:flex!important;flex-flow:row nowrap!important;align-items:stretch!important;gap:0!important;width:100%!important;min-width:0!important;max-width:100%!important;height:auto!important;overflow-x:auto!important;overflow-y:hidden!important;box-sizing:border-box!important}
+  html body #home.hero .hero-promo-slide{display:block!important;position:relative!important;flex:0 0 100%!important;width:100%!important;min-width:100%!important;max-width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;box-sizing:border-box!important}
+  html body #home.hero .hero-promo-slide .mobile-next-departure{display:grid!important;position:relative!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-auto-flow:row!important;grid-auto-rows:max-content!important;align-content:start!important;align-items:start!important;gap:0 12px!important;width:100%!important;max-width:none!important;height:auto!important;min-height:0!important;max-height:none!important;margin:0!important;padding:19px 17px 18px!important;overflow:hidden!important;box-sizing:border-box!important;color:#fff!important;text-align:left!important;border:1px solid rgba(255,255,255,.9)!important;border-radius:22px!important;background:linear-gradient(145deg,#080808 0%,#171717 58%,#050505 100%)!important;box-shadow:0 20px 48px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.14)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;animation:none!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-topline{grid-area:top!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:7px!important;flex-wrap:wrap!important;min-height:30px!important;padding-bottom:10px!important;border-bottom:1px solid rgba(255,255,255,.24)!important;color:#fff!important;text-shadow:none!important;font-size:9px!important;letter-spacing:1.35px!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-kicker{grid-area:kicker!important;display:block!important;margin:17px 0 6px!important;color:#fff!important;font-size:8px!important;letter-spacing:2px!important}
+  html body #home.hero .hero-promo-slide .mobile-next-departure h2{grid-area:title!important;display:block!important;margin:0 0 5px!important;color:#fff!important;font-size:clamp(38px,9.6vw,52px)!important;line-height:.9!important;letter-spacing:-.8px!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-date{grid-area:date!important;display:block!important;margin:12px 0 10px!important;padding:10px 0!important;border-top:1px solid rgba(255,255,255,.22)!important;border-bottom:1px solid rgba(255,255,255,.22)!important;color:#fff!important;font-size:clamp(11px,3.1vw,13px)!important;letter-spacing:1px!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-date span{color:#fff!important;padding:0 4px!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-facts{grid-area:facts!important;display:flex!important;flex-wrap:wrap!important;gap:6px!important;margin:8px 0!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-facts span{display:inline-flex!important;align-items:center!important;padding:6px 8px!important;border:1px solid rgba(255,255,255,.2)!important;border-radius:6px!important;background:#202020!important;color:#fff!important;font-size:9px!important;line-height:1.35!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-price{grid-area:price!important;display:block!important;align-self:stretch!important;min-width:0!important;margin:12px 0 8px!important;padding:10px 0!important;border-top:1px solid rgba(255,255,255,.28)!important;color:#fff!important;font-size:clamp(22px,6.2vw,29px)!important;line-height:1.1!important;letter-spacing:-.8px!important;white-space:nowrap!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-price small{color:#fff!important;font-size:10px!important;letter-spacing:0!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-seats{grid-area:seats!important;display:flex!important;flex-direction:column!important;align-items:flex-end!important;justify-content:center!important;gap:3px!important;min-width:0!important;margin:12px 0 8px!important;padding:10px 0!important;border-top:1px solid rgba(255,255,255,.28)!important;color:#fff!important;text-align:right!important;font-size:9px!important;line-height:1.4!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-seats strong,html body #home.hero .hero-promo-slide .mobile-departure-seats span{color:#fff!important;font-size:9px!important;font-weight:700!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-track{grid-area:progress!important;display:block!important;position:relative!important;width:100%!important;height:7px!important;min-height:7px!important;max-height:7px!important;margin:0 0 14px!important;overflow:hidden!important;border-radius:99px!important;background:#3a3a3a!important;visibility:visible!important;opacity:1!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-track>span{display:block!important;width:80%!important;height:100%!important;min-height:7px!important;border-radius:inherit!important;background:linear-gradient(100deg,#1b4fa3 0%,#fff 20%,#d92332 40%,#f4c542 60%,#168b58 80%,#1b4fa3 100%)!important;background-size:260% 100%!important;animation:mobileDepartureTibetanFlow 3.2s linear infinite!important;visibility:visible!important;opacity:1!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-cta{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;grid-area:explore!important;width:100%!important;min-width:0!important;min-height:48px!important;height:auto!important;max-height:none!important;margin:8px 0 0!important;padding:13px 16px!important;box-sizing:border-box!important;border:1px solid #fff!important;border-radius:999px!important;background:#fff!important;color:#000!important;font-size:9px!important;line-height:1.2!important;letter-spacing:1.05px!important;text-decoration:none!important;white-space:normal!important;box-shadow:0 7px 18px rgba(0,0,0,.28)!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-cta span{color:#000!important;font-size:17px!important}
+  html body #home.hero .hero-promo-slide a.mobile-departure-itinerary{grid-area:itinerary!important;margin:0 0 8px!important;background:#fff!important;color:#000!important;border:1px solid #fff!important;box-shadow:0 7px 18px rgba(0,0,0,.2)!important}
+  html body #home.hero .hero-promo-slide a.mobile-departure-itinerary span{color:#000!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details{grid-area:itinerary!important;display:block!important;width:100%!important;min-width:0!important;margin:0 0 8px!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details>summary{display:flex!important;align-items:center!important;justify-content:space-between!important;min-height:48px!important;box-sizing:border-box!important;list-style:none!important;cursor:pointer!important;background:#fff!important;color:#000!important;border:1px solid #fff!important;border-radius:999px!important;padding:13px 16px!important;font-size:9px!important;letter-spacing:1.05px!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details>summary::-webkit-details-marker{display:none!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details>summary span{color:#000!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details:not([open]) .mobile-departure-itinerary-list{display:none!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details[open] .mobile-departure-itinerary-list{display:grid!important;grid-column:1/-1!important;gap:6px!important;margin:10px 0 13px!important;padding:11px 0!important;border-top:1px solid rgba(255,255,255,.24)!important;color:#fff!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-list p{margin:0!important;color:#fff!important;font:500 11px/1.45 "DM Sans",Arial,sans-serif!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-list strong{display:inline-block!important;min-width:48px!important;color:#fff!important;font-size:10px!important;letter-spacing:.5px!important}
+  html body #home.hero .hero-promo-slide .mobile-next-departure:not(.mobile-departure-secondary){grid-template-areas:"top top" "kicker kicker" "title title" "date date" "facts facts" "price seats" "progress progress" "itinerary itinerary" "explore explore"!important;column-gap:12px!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-secondary{grid-template-areas:"top top" "kicker kicker" "title title" "date date" "facts facts" "price price" "progress progress" "itinerary itinerary" "explore explore"!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-secondary .mobile-departure-track>span{width:100%!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-secondary .mobile-departure-itinerary-details[open] .mobile-departure-itinerary-list{grid-column:1/-1!important}
+  html body #home.hero .hero-promo-pagination{display:flex!important;justify-content:center!important;align-items:center!important;gap:9px!important;width:100%!important;padding:12px 0 0!important}
+  html body #home.hero .hero-promo-pagination button{display:block!important;width:8px!important;height:8px!important;padding:0!important;border:1px solid rgba(255,255,255,.95)!important;border-radius:50%!important;background:rgba(255,255,255,.35)!important}
+  html body #home.hero .hero-promo-pagination button.is-active{width:24px!important;border-radius:99px!important;background:#fff!important}
 }
-
-/* Mobile repair: give the primary departure card an explicit one-column grid.
-   The previous carousel CSS assigned named grid areas but only declared a mobile
-   template for the secondary card, allowing the primary card content to overlap. */
-@media screen and (max-width:760px){
-  html body #home.hero .hero-promo-slide .mobile-next-departure:not(.mobile-departure-secondary){
-    display:grid!important;
-    grid-template-columns:minmax(0,1fr)!important;
-    grid-template-areas:
-      "top"
-      "kicker"
-      "title"
-      "date"
-      "facts"
-      "price"
-      "seats"
-      "progress"
-      "itinerary"
-      "explore"!important;
-    grid-auto-rows:max-content!important;
-    align-content:start!important;
-    align-items:start!important;
-    width:100%!important;
-    height:auto!important;
-    min-height:max-content!important;
-    max-height:none!important;
-    box-sizing:border-box!important;
-  }
-  html body #home.hero .hero-promo-slide .mobile-next-departure .mobile-departure-cta{
-    display:flex!important;
-    align-items:center!important;
-    justify-content:space-between!important;
-    justify-self:stretch!important;
-    align-self:start!important;
-    width:100%!important;
-    height:48px!important;
-    min-height:48px!important;
-    max-height:56px!important;
-    margin:8px 0 0!important;
-    padding:0 17px!important;
-    box-sizing:border-box!important;
-    line-height:1.2!important;
-    white-space:normal!important;
-  }
-  html body #home.hero .hero-promo-carousel,
-  html body #home.hero .hero-promo-track,
-  html body #home.hero .hero-promo-slide{
-    min-height:0!important;
-    max-height:none!important;
-    box-sizing:border-box!important;
-  }
-}
-
-
-/* Mobile-only complete-content repair for both hero departure cards. */
-@media screen and (max-width:760px){
-  html body #home.hero .hero-promo-carousel,html body #home.hero .hero-promo-track{height:auto!important;min-height:0!important;max-height:none!important;overflow-y:visible!important}
-  html body #home.hero .hero-promo-slide{height:auto!important;min-height:0!important;overflow:visible!important}
-  html body #home.hero .hero-promo-slide .mobile-next-departure{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-flow:row!important;grid-auto-rows:max-content!important;align-content:start!important;align-items:start!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;padding:20px 17px 18px!important;gap:0!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-topline{grid-area:top!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-kicker{grid-area:kicker!important}
-  html body #home.hero .hero-promo-slide .mobile-next-departure h2{grid-area:title!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-date{grid-area:date!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-facts{grid-area:facts!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-price{grid-area:price!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-seats{grid-area:seats!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-track{grid-area:progress!important;display:block!important;width:100%!important;min-height:7px!important;visibility:visible!important;opacity:1!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details{grid-area:itinerary!important;display:block!important;width:100%!important}
-  html body #home.hero .hero-promo-slide a.mobile-departure-itinerary{grid-area:itinerary!important}
-  html body #home.hero .hero-promo-slide a.mobile-departure-cta:not(.mobile-departure-itinerary){grid-area:explore!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-cta{width:100%!important;min-height:48px!important;height:auto!important;max-height:none!important;box-sizing:border-box!important;margin:9px 0 0!important;padding:13px 17px!important;white-space:normal!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-track span{display:block!important;height:100%!important;min-height:7px!important;visibility:visible!important;opacity:1!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-secondary .mobile-departure-track{height:7px!important;margin:12px 0 14px!important;background:rgba(255,255,255,.16)!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-secondary .mobile-departure-track span{width:100%!important;background:linear-gradient(100deg,#1b4fa3 0%,#fff 18%,#d92332 36%,#f4c542 54%,#168b58 72%,#1b4fa3 100%)!important;background-size:260% 100%!important;animation:mobileDepartureTibetanFlow 3.2s linear infinite!important}
-}
-@media(prefers-reduced-motion:reduce){html body #home.hero .mobile-departure-secondary .mobile-departure-track span{animation:none!important}}
-
-
-/* FINAL MOBILE FIX: use normal document flow, not named CSS grid areas.
-   The two promo cards have different markup; grid-area overrides were leaving
-   the secondary card's content in empty grid tracks on iOS Safari. */
-@media screen and (max-width:760px){
-  html body #home.hero .hero-promo-carousel{
-    display:block!important;position:relative!important;width:100%!important;
-    height:auto!important;min-height:0!important;max-height:none!important;
-    overflow:hidden!important;flex:0 0 auto!important;
-  }
-  html body #home.hero .hero-promo-track{
-    display:flex!important;flex-flow:row nowrap!important;align-items:stretch!important;
-    height:auto!important;min-height:0!important;max-height:none!important;
-    overflow-x:auto!important;overflow-y:hidden!important;
-  }
-  html body #home.hero .hero-promo-slide{
-    display:block!important;position:relative!important;flex:0 0 100%!important;
-    width:100%!important;min-width:100%!important;height:auto!important;
-    min-height:0!important;max-height:none!important;overflow:visible!important;
-  }
-  html body #home.hero .hero-promo-slide .mobile-next-departure{
-    display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;
-    align-items:stretch!important;justify-content:flex-start!important;
-    gap:0!important;grid-template:none!important;grid-template-areas:none!important;
-    grid-auto-flow:unset!important;grid-auto-rows:auto!important;
-    width:100%!important;height:auto!important;min-height:0!important;
-    max-height:none!important;overflow:visible!important;
-    padding:20px 17px 18px!important;margin:0!important;box-sizing:border-box!important;
-  }
-  html body #home.hero .hero-promo-slide .mobile-next-departure > *{
-    grid-area:auto!important;position:relative!important;inset:auto!important;
-    flex:0 0 auto!important;min-width:0!important;max-width:100%!important;
-    visibility:visible!important;opacity:1!important;transform:none!important;
-  }
-  html body #home.hero .hero-promo-slide .mobile-departure-topline{order:1!important;display:flex!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-kicker{order:2!important;display:block!important;margin:17px 0 7px!important}
-  html body #home.hero .hero-promo-slide .mobile-next-departure > h2{order:3!important;display:block!important;margin:0 0 12px!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-date{order:4!important;display:block!important;margin:8px 0 10px!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-facts{order:5!important;display:flex!important;flex-wrap:wrap!important;margin:8px 0!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-price{order:6!important;display:block!important;margin:12px 0 8px!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-seats{order:7!important;display:flex!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-track{order:8!important;display:block!important;position:relative!important;width:100%!important;height:8px!important;min-height:8px!important;max-height:8px!important;margin:10px 0 14px!important;overflow:hidden!important;visibility:visible!important;opacity:1!important;border-radius:99px!important;background:rgba(255,255,255,.18)!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-track > span{display:block!important;height:100%!important;min-height:8px!important;border-radius:99px!important;visibility:visible!important;opacity:1!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details{order:9!important;display:block!important;width:100%!important;margin:10px 0 12px!important}
-  html body #home.hero .hero-promo-slide a.mobile-departure-itinerary{order:9!important}
-  html body #home.hero .hero-promo-slide a.mobile-departure-cta:not(.mobile-departure-itinerary){order:10!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-cta{display:flex!important;align-items:center!important;justify-content:space-between!important;align-self:stretch!important;width:100%!important;height:auto!important;min-height:52px!important;max-height:none!important;margin:8px 0 0!important;padding:14px 17px!important;box-sizing:border-box!important;white-space:normal!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-secondary .mobile-departure-track{order:7!important;height:8px!important;margin:12px 0 14px!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-secondary .mobile-departure-track > span{
-    width:100%!important;
-    background:linear-gradient(100deg,#1b4fa3 0%,#fff 18%,#d92332 36%,#f4c542 54%,#168b58 72%,#1b4fa3 100%)!important;
-    background-size:260% 100%!important;
-    animation:mobileDepartureTibetanFlow 3.2s linear infinite!important;
-  }
-  html body #home.hero .hero-promo-slide .mobile-departure-secondary .mobile-departure-itinerary-details{order:8!important}
-  html body #home.hero .hero-promo-slide .mobile-departure-secondary > a.mobile-departure-cta{order:9!important}
-}
-@keyframes mobileDepartureTibetanFlow{
-  from{background-position:100% 0}
-  to{background-position:-160% 0}
-}
+@keyframes mobileDepartureTibetanFlow{from{background-position:100% 0}to{background-position:-160% 0}}
 @media(prefers-reduced-motion:reduce){
-  html body #home.hero .hero-promo-slide .mobile-departure-secondary .mobile-departure-track > span{animation:none!important;background-position:50% 0!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-track>span{animation:none!important;background-position:50% 0!important}
+  html body #home.hero .hero-promo-track{scroll-behavior:auto!important}
 }
