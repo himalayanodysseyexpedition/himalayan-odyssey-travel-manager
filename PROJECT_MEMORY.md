@@ -495,3 +495,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Show 4 of 12 people booked and 8 seats remaining.
 - Promotional card now includes an accessible 4/12 progressbar; mobile fill is one-third of the track with the existing animated multicolour gradient.
 - Price, booking count, and WhatsApp enquiry price remain consistent.
+
+## 2026-11-17 — Admin-managed homepage hero promotional cards
+- Added a separate Hero Promotional Cards entry in the admin dashboard, linking to /admin-hero-promotions.html.
+- Added independent CRUD for homepage hero promotional cards: create, edit, publish/hide, permanent delete, and sort order; fields include headings, season/date, trip facts, per-person price, booked/total people, itinerary lines/link, and CTA label/URL.
+- Added public homepage rendering from Supabase table public.site_hero_promotions, ordered by sort_order and limited to active cards. Existing two hero promotions were seeded with their current content and prices (Winter Spiti ₹17,000; Kinnaur & Spiti ₹15,000, 4/12 booked).
+- Added RLS: public can read active cards; only the existing admin auth UID can read/manage all cards and perform mutations.
+- Explicitly left the existing Tour Packages admin section and its data/functions untouched.
