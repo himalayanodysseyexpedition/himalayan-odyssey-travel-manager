@@ -1434,6 +1434,7 @@ html body #home.hero .hero-build-cta-wrap > .hero-build-cta:active{
 <link rel="stylesheet" href="/windows-fluent-monochrome-mobile.css?v=13">
   <link rel="stylesheet" href="/arctic-premium-ux.css?v=1">
   <link rel="stylesheet" href="/hero-promo-cta-override.css?v=2">
+  <link rel="stylesheet" href="/hero-promo-itinerary-popup.css?v=1">
   <link rel="stylesheet" href="/premium-design-system.css?v=1">
   <link rel="stylesheet" href="/spiti-package-mask.css?v=1">
   <script src="/spiti-package-mask.js?v=1" defer></script>
@@ -6484,34 +6485,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   </div>
  </section>
 </div>
-<script id="promo-itinerary-modal-behavior">
-(() => {
- const modal=document.getElementById("promo-itinerary-modal");
- const trigger=document.querySelector("#home .mobile-next-departure .mobile-departure-itinerary");
- if(!modal||!trigger)return;
- const closeButton=modal.querySelector(".promo-itinerary-close");
- let lastFocus=null;
- const open=()=>{
-   lastFocus=document.activeElement;
-   modal.classList.add("is-open");
-   modal.setAttribute("aria-hidden","false");
-   document.body.classList.add("promo-itinerary-modal-open");
-   closeButton.focus();
- };
- const close=()=>{
-   modal.classList.remove("is-open");
-   modal.setAttribute("aria-hidden","true");
-   document.body.classList.remove("promo-itinerary-modal-open");
-   if(lastFocus&&typeof lastFocus.focus==="function")lastFocus.focus();
- };
- trigger.addEventListener("click",event=>{event.preventDefault();open()});
- closeButton.addEventListener("click",close);
- modal.addEventListener("click",event=>{if(event.target===modal)close()});
- document.addEventListener("keydown",event=>{
-   if(modal.classList.contains("is-open")&&event.key==="Escape"){event.preventDefault();close()}
- });
-})();
-</script>
+<script src="/hero-promo-itinerary-modal.js?v=1"></script>
 
 
 <div id="guest-itinerary-popup" aria-hidden="true">
@@ -6851,7 +6825,8 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 </style>
 
 
-<script src="/hero-promotions.js?v=1"></script>
+<script src="/hero-promotions.js?v=2"></script>
+<script src="/hero-promo-itinerary-modal.js?v=1"></script>
 <script>
 (() => {
  const initCarousel = () => {
