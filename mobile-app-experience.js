@@ -79,14 +79,15 @@
     const rect=nav.getBoundingClientRect();
     const bottom=Math.max(0,Math.ceil(window.innerHeight-rect.top+10));
     menuPopup.style.setProperty('bottom',bottom+'px','important');
-    if(mobile()){
+    if(nav.classList.contains('mobile-app-dock')){
      // Keep the mobile popup centered above the dock.
      menuPopup.style.setProperty('left','50%','important');
      menuPopup.style.setProperty('right','auto','important');
      menuPopup.style.setProperty('transform','translateX(-50%)','important');
     }else{
-     // Desktop popup opens from the dock's right edge, directly above Menu.
-     const right=Math.max(12,Math.ceil(window.innerWidth-rect.right));
+     // Anchor desktop popup to the actual Menu button, not the centered dock container.
+     const triggerRect=menuTrigger.getBoundingClientRect();
+     const right=Math.max(8,Math.ceil(window.innerWidth-triggerRect.right));
      menuPopup.style.setProperty('left','auto','important');
      menuPopup.style.setProperty('right',right+'px','important');
      menuPopup.style.setProperty('transform','none','important');
