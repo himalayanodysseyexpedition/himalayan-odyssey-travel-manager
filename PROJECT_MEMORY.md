@@ -457,3 +457,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - On mobile, calculate the popup's fixed bottom offset from the live top edge of the visible bottom navigation dock, preserving a 10px gap above it; retain the safe-area fallback when the dock position is unavailable.
 - Desktop navigation layout and header-menu positioning remain unchanged.
 - Responsive real-device visual verification remains pending.
+
+## 2026-11-17 — Add a 3D card carousel to mobile Featured Travel Photography (PR #533)
+- Reworked only the mobile Featured Travel Photography presentation into a perspective-based 3D stacked-card carousel, using the existing active Supabase gallery records and their image/title/caption/alt-text fields.
+- Kept the desktop carousel implementation and all other website sections unchanged. Retained mobile swipe, previous/next arrows, pagination dots, keyboard navigation, reduced-motion handling, and the existing 2-second autoplay interval.
+- Bumped the homepage gallery CSS and JavaScript cache versions. No Supabase schema, gallery records, hosting, or deployment settings were changed.
+- Files: `featured-travel-photography.js`, `featured-travel-photography.css`, `index.html`, `PROJECT_MEMORY.md`. PR #533 opened; automated validation and deployment status pending.
