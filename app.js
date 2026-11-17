@@ -143,10 +143,13 @@ async function optimizeStorageImage(file, options = {}) {
     if (!blob) throw new Error("Could not compress this image.");
     if (blob.size >= file.size && scale === 1) return file;
 
-    const extension = blob.type === "image/webp" ? ".webp" : ".jpg";
+    const outputMimeType = blob.type || "image/webp";
+    const extension = outputMimeType === "image/webp"
+      ? ".webp"
+      : outputMimeType === "image/jpeg" ? ".jpg" : ".png";
     const baseName = String(file.name || "photo").replace(/\.[^.]+$/, "");
     return new File([blob], baseName + extension, {
-      type: blob.type || "image/webp",
+      type: outputMimeType,
       lastModified: Date.now()
     });
   } finally {
