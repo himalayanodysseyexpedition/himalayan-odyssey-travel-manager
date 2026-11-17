@@ -502,3 +502,12 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Added public homepage rendering from Supabase table public.site_hero_promotions, ordered by sort_order and limited to active cards. Existing two hero promotions were seeded with their current content and prices (Winter Spiti ₹17,000; Kinnaur & Spiti ₹15,000, 4/12 booked).
 - Added RLS: public can read active cards; only the existing admin auth UID can read/manage all cards and perform mutations.
 - Explicitly left the existing Tour Packages admin section and its data/functions untouched.
+
+
+## 2026-11-17 — Mobile hero promotional itinerary popup
+- Updated homepage hero promotion itinerary buttons on mobile (up to 760px) to open a centered, scrollable white popup inspired by the supplied Uiverse discount-card styling.
+- Popup content is populated from each active `site_hero_promotions` record, including its title, date, trip facts, price and admin-managed day-wise `itinerary_items`; empty itineraries show a clear update message and the existing itinerary-page link.
+- Added close-button, backdrop-click, Escape-key and focus-restoration behaviour. Desktop itinerary links retain their existing navigation behaviour.
+- Files: `index.html`, `hero-promotions.js`, `hero-promo-itinerary-modal.js`, `hero-promo-itinerary-popup.css`.
+- Mobile-only styling and interaction; no Supabase schema/data, admin workflow, booking flow, desktop layout, SEO metadata, hosting or deployment settings changed.
+- Implementation is on branch `feat/mobile-hero-itinerary-popup`; PR and verification pending.
