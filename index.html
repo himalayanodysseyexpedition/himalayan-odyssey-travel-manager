@@ -6651,12 +6651,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
     if(!item)throw new Error("Published itinerary not found.");
     if(!days?.length)throw new Error("No day-wise details have been added to this itinerary yet.");
     const esc=value=>String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
-    const duration=[item.duration_days?item.duration_days+" Days":"",item.duration_nights!=null?item.duration_nights+" Nights":""].filter(Boolean).join(" / ");
     scroll.innerHTML=
-     '<div class="package-itinerary-meta">'+
-      (item.destination?'<p>'+esc(item.destination)+'</p>':'')+
-      (duration?'<p>'+esc(duration)+'</p>':'')+
-     '</div>'+
      '<h3 class="package-itinerary-section-title">Day-wise itinerary</h3>'+
      '<div class="package-itinerary-days">'+days.map(day=>
       '<article class="package-itinerary-day">'+
