@@ -285,3 +285,32 @@ html body #home.hero section.mobile-next-departure > *{
     transition:none!important;
   }
 }
+
+
+/* Upcoming departures carousel: touch swipe and desktop mouse drag. */
+html body #home.hero .hero-promo-carousel{display:block!important;width:100%!important;max-width:560px!important;min-width:0!important;margin:18px auto 22px!important;overflow:hidden!important;flex:0 1 auto!important}
+html body #home.hero .hero-promo-track{display:flex!important;flex-flow:row nowrap!important;align-items:flex-start!important;gap:0!important;width:100%!important;min-width:0!important;height:auto;overflow-x:auto!important;overflow-y:hidden!important;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;cursor:grab}
+html body #home.hero .hero-promo-track::-webkit-scrollbar{display:none!important}
+html body #home.hero .hero-promo-track.is-dragging{cursor:grabbing;scroll-snap-type:none;user-select:none}
+html body #home.hero .hero-promo-slide{display:block!important;position:relative!important;flex:0 0 100%!important;width:100%!important;min-width:100%!important;max-width:100%!important;height:auto!important;scroll-snap-align:start;scroll-snap-stop:always}
+html body #home.hero .hero-promo-slide .mobile-next-departure{display:grid!important;position:relative!important;width:100%!important;max-width:none!important;margin:0!important;padding:clamp(18px,3vw,25px)!important;overflow:hidden!important;color:#fff!important;text-align:left!important;border:1px solid rgba(255,255,255,.88)!important;border-radius:22px!important;background:#050505!important;background-image:linear-gradient(145deg,#080808 0%,#171717 58%,#050505 100%)!important;box-shadow:0 20px 48px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.14)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;animation:none!important}
+html body #home.hero .hero-promo-slide .mobile-departure-topline{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:7px!important;flex-wrap:wrap!important;min-height:30px!important;padding-bottom:10px!important;border-bottom:1px solid rgba(255,255,255,.24)!important;color:#fff!important;text-shadow:none!important}
+html body #home.hero .hero-promo-slide .mobile-departure-kicker{margin:16px 0 6px!important;color:#fff!important}
+html body #home.hero .hero-promo-slide .mobile-next-departure h2{margin:0 0 4px!important;color:#fff!important;font-size:clamp(39px,7vw,58px)!important;line-height:.9!important}
+html body #home.hero .hero-promo-slide .mobile-departure-date{margin:12px 0 10px!important;padding:10px 0!important;border-top:1px solid rgba(255,255,255,.22)!important;border-bottom:1px solid rgba(255,255,255,.22)!important;color:#fff!important}
+html body #home.hero .hero-promo-slide .mobile-departure-facts{display:flex!important;flex-wrap:wrap!important;gap:8px!important;margin:8px 0!important}
+html body #home.hero .hero-promo-slide .mobile-departure-facts span{padding:6px 9px!important;color:#fff!important;background:rgba(255,255,255,.08)!important;border:1px solid rgba(255,255,255,.18)!important;border-radius:5px!important}
+html body #home.hero .hero-promo-slide .mobile-departure-price{margin:12px 0 8px!important;padding:9px 0!important;border-top:1px solid rgba(255,255,255,.28)!important;color:#fff!important;font-size:clamp(22px,4vw,29px)!important}
+html body #home.hero .hero-promo-slide .mobile-departure-price small{font-size:11px!important}
+html body #home.hero .hero-promo-slide .mobile-departure-seats{display:flex!important;flex-direction:column!important;align-items:flex-end!important;gap:3px!important;margin:12px 0 8px!important;padding:9px 0!important;border-top:1px solid rgba(255,255,255,.28)!important;color:#fff!important;text-align:right!important}
+html body #home.hero .hero-promo-slide .mobile-departure-track{height:7px!important;margin:0 0 14px!important}
+html body #home.hero .hero-promo-slide .mobile-departure-cta{display:flex!important;align-items:center!important;justify-content:space-between!important;width:100%!important;min-height:48px!important;margin:8px 0 0!important;padding:13px 17px!important;border-radius:999px!important}
+html body #home.hero .hero-promo-slide .mobile-departure-itinerary-list{display:grid!important;gap:6px!important;margin:10px 0 13px!important;padding:11px 0!important;border-top:1px solid rgba(255,255,255,.24)!important;color:#fff!important}
+html body #home.hero .hero-promo-slide .mobile-departure-itinerary-list p{margin:0!important;color:#fff!important;font:500 11px/1.45 "DM Sans",Arial,sans-serif!important}
+html body #home.hero .hero-promo-slide .mobile-departure-itinerary-list strong{display:inline-block;min-width:48px;color:#fff!important;font-size:10px!important;letter-spacing:.5px}
+html body #home.hero .hero-promo-pagination{display:flex!important;justify-content:center!important;align-items:center!important;gap:9px!important;width:100%!important;padding:12px 0 0!important}
+html body #home.hero .hero-promo-pagination button{display:block!important;width:8px!important;height:8px!important;padding:0!important;border:1px solid rgba(255,255,255,.95)!important;border-radius:50%!important;background:rgba(255,255,255,.35)!important;cursor:pointer!important;transition:width .2s ease,background .2s ease}
+html body #home.hero .hero-promo-pagination button.is-active{width:24px!important;border-radius:99px!important;background:#fff!important}
+@media(max-width:760px){html body #home.hero .hero-promo-carousel{max-width:520px!important;margin:0 auto 22px!important}html body #home.hero .hero-promo-slide .mobile-next-departure{padding:18px 17px 16px!important}html body #home.hero .hero-promo-slide .mobile-next-departure h2{font-size:clamp(39px,10vw,51px)!important}}
+@media(min-width:761px){html body #home.hero .hero-promo-carousel{max-width:560px!important;margin:18px auto 22px!important}html body #home.hero .hero-promo-slide .mobile-next-departure{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-areas:"top top" "kicker kicker" "title title" "date date" "facts facts" "price seats" "progress progress" "itinerary itinerary" "explore explore"!important;gap:0 14px!important}}
+@media(prefers-reduced-motion:reduce){html body #home.hero .hero-promo-track{scroll-behavior:auto!important}html body #home.hero .hero-promo-pagination button{transition:none!important}}
