@@ -314,3 +314,16 @@ html body #home.hero .hero-promo-pagination button.is-active{width:24px!importan
 @media(max-width:760px){html body #home.hero .hero-promo-carousel{max-width:520px!important;margin:0 auto 22px!important}html body #home.hero .hero-promo-slide .mobile-next-departure{padding:18px 17px 16px!important}html body #home.hero .hero-promo-slide .mobile-next-departure h2{font-size:clamp(39px,10vw,51px)!important}}
 @media(min-width:761px){html body #home.hero .hero-promo-carousel{max-width:560px!important;margin:18px auto 22px!important}html body #home.hero .hero-promo-slide .mobile-next-departure{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-areas:"top top" "kicker kicker" "title title" "date date" "facts facts" "price seats" "progress progress" "itinerary itinerary" "explore explore"!important;gap:0 14px!important}}
 @media(prefers-reduced-motion:reduce){html body #home.hero .hero-promo-track{scroll-behavior:auto!important}html body #home.hero .hero-promo-pagination button{transition:none!important}}
+
+/* Explicit grid placement keeps card content ordered identically at every width. */
+html body #home.hero .hero-promo-slide .mobile-departure-topline{grid-area:top!important}
+html body #home.hero .hero-promo-slide .mobile-departure-kicker{grid-area:kicker!important}
+html body #home.hero .hero-promo-slide .mobile-next-departure h2{grid-area:title!important}
+html body #home.hero .hero-promo-slide .mobile-departure-date{grid-area:date!important}
+html body #home.hero .hero-promo-slide .mobile-departure-facts{grid-area:facts!important}
+html body #home.hero .hero-promo-slide .mobile-departure-price{grid-area:price!important}
+html body #home.hero .hero-promo-slide .mobile-departure-seats{grid-area:seats!important}
+html body #home.hero .hero-promo-slide .mobile-departure-track{grid-area:progress!important}
+html body #home.hero .hero-promo-slide a.mobile-departure-itinerary,
+html body #home.hero .hero-promo-slide .mobile-departure-itinerary-list{grid-area:itinerary!important}
+html body #home.hero .hero-promo-slide a.mobile-departure-cta:not(.mobile-departure-itinerary){grid-area:explore!important}
