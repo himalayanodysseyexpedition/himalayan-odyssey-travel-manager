@@ -54,7 +54,7 @@ const go=index=>{if(!photos.length)return;active=(index+photos.length)%photos.le
 dots.addEventListener("click",e=>{const button=e.target.closest("[data-index]");if(button){go(Number(button.dataset.index));play();}});
 [prev,next].forEach((button,i)=>{if(!button)return;button.addEventListener("pointerdown",e=>e.stopPropagation());button.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();go(active+(i===0?-1:1));play();});});
 track.addEventListener("click",e=>{if(swiped){swiped=false;return;}const item=e.target.closest(".featured-travel-slide");if(!item)return;const i=[...track.children].indexOf(item);if(i>=0&&i!==active){go(i);play();}});
-carousel.addEventListener("pointerdown",e=>{if(e.target.closest("button"))return;if(e.pointerType==="mouse"&&e.button!==0)return;startX=lastX=e.clientX;dragging=true;swiped=false;carousel.classList.add("is-dragging");stop();});
+carousel.addEventListener("pointerdown",e=>{if(e.target.closest("button"))return;if(e.pointerType==="mouse"&&e.button!==0)return;startX=lastX=e.clientX;dragging=true;swiped=false;carousel.classList.add("is-dragging");carousel.setPointerCapture?.(e.pointerId);stop();});
 carousel.addEventListener("pointermove",e=>{if(dragging)lastX=e.clientX;});
 const finish=()=>{if(!dragging)return;const delta=lastX-startX;dragging=false;carousel.classList.remove("is-dragging");if(Math.abs(delta)>40){swiped=true;go(active+(delta<0?1:-1));}play();};
 ["pointerup","pointercancel","lostpointercapture"].forEach(name=>carousel.addEventListener(name,finish));
