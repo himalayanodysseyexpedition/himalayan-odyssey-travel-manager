@@ -357,6 +357,7 @@ html body #home.hero section.mobile-next-departure > *{
   html body #home.hero .hero-promo-track{display:contents}
   html body #home.hero .hero-promo-slide{display:contents}
   html body #home.hero .hero-promo-pagination{display:none}
+  html body #home.hero .mobile-departure-secondary{display:none!important}
 }
 @media(prefers-reduced-motion:reduce){
   html body #home.hero .hero-promo-track{scroll-behavior:auto}
