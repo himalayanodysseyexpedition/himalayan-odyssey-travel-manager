@@ -331,3 +331,13 @@ html body #home.hero .hero-promo-slide .mobile-departure-track{grid-area:progres
 html body #home.hero .hero-promo-slide a.mobile-departure-itinerary,
 html body #home.hero .hero-promo-slide .mobile-departure-itinerary-list{grid-area:itinerary!important}
 html body #home.hero .hero-promo-slide a.mobile-departure-cta:not(.mobile-departure-itinerary){grid-area:explore!important}
+
+@media(max-width:760px){
+  html body #home.hero .hero-promo-slide .mobile-departure-secondary{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    grid-template-areas:"top top" "kicker kicker" "title title" "date date" "facts facts" "price price" "itinerary itinerary" "explore explore"!important;
+    align-items:center!important;
+    gap:0 12px!important;
+    padding:18px 17px 16px!important;
+  }
+}
