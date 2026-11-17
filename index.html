@@ -30,6 +30,7 @@
 <link rel="preconnect" href="https://ynkoiuyjevclypumnyes.supabase.co">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap">
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..900&family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..900&family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet"></noscript>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=boska@400,500,600,700&display=swap">
@@ -7015,6 +7016,27 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 @media screen and (max-width:380px){
   #odyssey-difference-mobile .odyssey-place-grid{grid-template-columns:1fr}
   #odyssey-difference-mobile .odyssey-place-card{min-height:0}
+}
+/* Mobile-only typography hierarchy requested for the Himalayan Odyssey Difference section. */
+@media screen and (max-width:760px){
+  html body #odyssey-difference-mobile .odyssey-difference-title small{
+    font-family:"Montserrat",Arial,sans-serif!important;
+    font-weight:700!important;
+    letter-spacing:2.8px!important;
+    text-transform:uppercase!important;
+  }
+  html body #odyssey-difference-mobile .odyssey-difference-title h2{
+    font-family:"Bodoni Moda",Didot,"Times New Roman",serif!important;
+    font-weight:500!important;
+    letter-spacing:-.45px!important;
+    line-height:1.08!important;
+  }
+  html body #odyssey-difference-mobile .odyssey-difference-intro{
+    font-family:"Inter","Helvetica Neue",Arial,sans-serif!important;
+    font-weight:400!important;
+    letter-spacing:0!important;
+    line-height:1.8!important;
+  }
 }
 @media (prefers-reduced-motion:reduce){#odyssey-difference-mobile *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 </style>
