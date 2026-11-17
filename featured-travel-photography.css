@@ -234,3 +234,82 @@
 @media (prefers-reduced-motion: reduce) {
   #featured-travel-photography .featured-travel-slide { transition: none !important; }
 }
+
+
+/* Desktop 3D photography carousel: larger centered card with angled, depth-layered neighbours. */
+@media screen and (min-width: 761px) {
+ html body #featured-travel-photography .featured-travel-carousel {
+  overflow: visible !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  perspective: 1500px;
+  -webkit-perspective: 1500px;
+ }
+ html body #featured-travel-photography .featured-travel-track {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: clamp(390px, 36vw, 470px);
+  overflow: visible;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  will-change: auto;
+ }
+ html body #featured-travel-photography .featured-travel-slide {
+  --cf-slide-w: min(29vw, 350px);
+  --cf-slide-h: clamp(340px, 31vw, 420px);
+  --cf-spacing: clamp(230px, 23vw, 300px);
+  --cf-depth: 105px;
+  --cf-angle: 30deg;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--cf-slide-w);
+  height: var(--cf-slide-h);
+  margin-left: calc(var(--cf-slide-w) / -2);
+  padding: 0;
+  border-radius: 18px;
+  cursor: pointer;
+  z-index: calc(20 - var(--cf-abs, 0));
+  transform: translateX(calc(var(--cf-offset, 0) * var(--cf-spacing))) translateZ(calc(var(--cf-abs, 0) * var(--cf-depth) * -1)) rotateY(calc(var(--cf-dir, 0) * var(--cf-angle) * -1));
+  transform-style: preserve-3d;
+  filter: brightness(calc(1 - var(--cf-abs, 0) * .17));
+  opacity: 1;
+  transition: transform .75s cubic-bezier(.22,.8,.3,1), filter .75s, opacity .75s;
+  -webkit-box-reflect: below 7px linear-gradient(transparent 72%, rgba(255,255,255,.13));
+ }
+ html body #featured-travel-photography .featured-travel-slide.is-far {
+  opacity: 0;
+  pointer-events: none;
+ }
+ html body #featured-travel-photography .featured-travel-slide img,
+ html body #featured-travel-photography .featured-travel-slide.is-active img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid rgba(255,255,255,.8);
+  border-radius: 18px;
+  background: #151b22;
+  box-shadow: 0 26px 48px -18px rgba(0,0,0,.72);
+  opacity: 1;
+  transform: none;
+  transition: none;
+ }
+ html body #featured-travel-photography .featured-travel-slide.is-active img {
+  outline: 2px solid rgba(255,255,255,.9);
+  outline-offset: 4px;
+ }
+ html body #featured-travel-photography .featured-travel-caption {
+  left: 22px;
+  bottom: 25px;
+  max-width: calc(100% - 44px);
+ }
+ html body #featured-travel-photography .featured-travel-caption strong { font-size: 34px; }
+ html body #featured-travel-photography .featured-travel-caption span { font-size: 10px; }
+}
+@media screen and (min-width: 761px) and (prefers-reduced-motion: reduce) {
+ html body #featured-travel-photography .featured-travel-slide { transition: none !important; }
+}
