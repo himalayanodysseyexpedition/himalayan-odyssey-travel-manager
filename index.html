@@ -2066,14 +2066,11 @@ body.guest-itinerary-popup-open{overflow:hidden}
 <!-- MOBILE: HIMALAYAN ODYSSEY DIFFERENCE -->
 <section id="odyssey-difference-mobile" aria-labelledby="odyssey-difference-title">
   <div class="odyssey-difference-inner">
-    <div class="odyssey-difference-visual">
-      <div class="odyssey-difference-photo" role="img" aria-label="Himalayan mountain landscape"></div>
-      <div class="odyssey-difference-photo-copy">
-        <span class="odyssey-kicker">THE HIMALAYAN ODYSSEY DIFFERENCE</span>
-        <h2 id="odyssey-difference-title">Beyond the Usual.<br>Into the Real Himalayas.</h2>
-        <p>More than the familiar tourist circuit. Discover offbeat Himalayan places and shared mountain experiences, thoughtfully planned around your journey.</p>
-      </div>
+    <div class="section-title reveal odyssey-difference-title">
+      <small>THE HIMALAYAN ODYSSEY DIFFERENCE</small>
+      <h2 id="odyssey-difference-title">Beyond the Usual. Into the Real Himalayas.</h2>
     </div>
+    <p class="intro reveal odyssey-difference-intro">More than the familiar tourist circuit. Discover offbeat Himalayan places and shared mountain experiences, thoughtfully planned around your journey.</p>
 
     <div class="odyssey-difference-heading">
       <span class="odyssey-kicker">GO A LITTLE FURTHER</span>
@@ -6953,7 +6950,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 </script>
 <script src="/mobile-scroll-indicators.js?v=2" defer></script>
 
-<style id="mobile-odyssey-difference-section-v1">
+<style id="mobile-odyssey-difference-section-v2">
 /* Mobile-only replacement for the homepage Tour Itineraries section. Desktop remains unchanged. */
 #odyssey-difference-mobile{display:none}
 @media screen and (max-width:760px){
@@ -6968,20 +6965,31 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   }
   #odyssey-difference-mobile *{box-sizing:border-box}
   #odyssey-difference-mobile .odyssey-difference-inner{width:100%;max-width:560px;margin:0 auto}
-  #odyssey-difference-mobile .odyssey-difference-visual{
-    position:relative;min-height:390px;display:flex;align-items:flex-end;overflow:hidden;
-    border:1px solid rgba(220,238,250,.22);border-radius:18px;background:#172638;
-    box-shadow:0 18px 44px rgba(0,0,0,.28);isolation:isolate;
+  #odyssey-difference-mobile .odyssey-difference-title{
+    margin:0 auto 14px!important;
+    text-align:center!important;
   }
-  #odyssey-difference-mobile .odyssey-difference-photo{
-    position:absolute;inset:0;z-index:-2;
-    background-image:linear-gradient(180deg,rgba(4,10,17,.04) 0%,rgba(4,10,17,.28) 38%,rgba(4,10,17,.94) 100%),url('/spiti.jpg');
-    background-size:cover;background-position:center 54%;transform:scale(1.02);
+  #odyssey-difference-mobile .odyssey-difference-title small{
+    color:#a9d8f2!important;
+    font-family:var(--sans)!important;
+    font-size:10px!important;
+    font-weight:700!important;
+    letter-spacing:4px!important;
+    text-transform:uppercase!important;
   }
-  #odyssey-difference-mobile .odyssey-difference-photo-copy{padding:26px 21px 24px}
-  #odyssey-difference-mobile .odyssey-kicker{display:block;color:#c5dff1;font:700 9px/1.5 'DM Sans',Arial,sans-serif;letter-spacing:2px;text-transform:uppercase}
-  #odyssey-difference-mobile h2{margin:11px 0 12px;color:#fff;font:500 clamp(36px,10vw,49px)/.98 'Cormorant Garamond',Georgia,serif;letter-spacing:-.5px}
-  #odyssey-difference-mobile .odyssey-difference-photo-copy p{max-width:440px;margin:0;color:rgba(255,255,255,.86);font:400 12px/1.8 'DM Sans',Arial,sans-serif}
+  #odyssey-difference-mobile .odyssey-difference-title h2{
+    color:#f4f6f8!important;
+    font-family:var(--serif)!important;
+  }
+  #odyssey-difference-mobile .odyssey-difference-title h2:after{
+    background:#c5dff1!important;
+  }
+  #odyssey-difference-mobile .odyssey-difference-intro{
+    max-width:760px!important;
+    margin:0 auto 20px!important;
+    color:#aeb8c2!important;
+    text-align:center!important;
+  }
   #odyssey-difference-mobile .odyssey-difference-heading{padding:32px 3px 17px}
   #odyssey-difference-mobile .odyssey-difference-heading h3{margin:7px 0 5px;color:#fff;font:500 31px/1.05 'Cormorant Garamond',Georgia,serif}
   #odyssey-difference-mobile .odyssey-difference-heading p{margin:0;color:#aeb8c2;font:400 12px/1.7 'DM Sans',Arial,sans-serif}
