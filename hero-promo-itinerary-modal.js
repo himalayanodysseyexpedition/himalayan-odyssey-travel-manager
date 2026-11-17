@@ -40,7 +40,7 @@
       items.forEach((item, index) => {
         const li = document.createElement("li");
         const raw = String(item || "").trim();
-        const split = raw.match(/^(DAY\\s*\\d+\\s*[·—:-]?)\\s*(.*)$/i);
+        const split = raw.match(/^(DAY\s*\\d+\s*[·—:-]?)\s*(.*)$/i);
         const strong = document.createElement("strong");
         strong.textContent = split ? split[1].replace(/[·—:-]$/, "").trim() : "Day " + (index + 1);
         li.appendChild(strong);
@@ -57,7 +57,7 @@
   const open = record => {
     lastFocus = document.activeElement;
     if (record) {
-      title.textContent = (record.title_line1 + " " + (record.title_emphasis || "") + " " + (record.title_line2 || "")).replace(/\\s+/g, " ").trim() + " — Itinerary";
+      title.textContent = (record.title_line1 + " " + (record.title_emphasis || "") + " " + (record.title_line2 || "")).replace(/\s+/g, " ").trim() + " — Itinerary";
       eyebrow.textContent = record.kicker || "HIMALAYAN ODYSSEY EXPEDITION";
       renderRecord(record);
     }
