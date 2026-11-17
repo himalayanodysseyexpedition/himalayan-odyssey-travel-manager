@@ -38,6 +38,16 @@ let editingItineraryId = null;
 let itineraryGalleryImages = [];
 let editingHotelId = null;
 let editingCabId = null;
+let croppedCabPhoto = null;
+let cabCropImage = null;
+let cabCropObjectUrl = null;
+let cabCropPreviewUrl = null;
+let cabCropPreviousPreviewHtml = "";
+let cabCropZoom = 1;
+let cabCropPanX = 0;
+let cabCropPanY = 0;
+let cabCropAspectRatio = 1.5;
+let cabCropDrag = null;
 
 const $ = id => document.getElementById(id);
 
@@ -1595,6 +1605,284 @@ async function deleteHotel(id) {
    CAB MANAGEMENT
 ========================================= */
 
+
+function getCabCardImageAspectRatio() {
+  const viewportWidth = Math.max(320, window.innerWidth || document.documentElement.clientWidth || 390);
+  const carouselWidth = Math.min(1280, viewportWidth * (viewportWidth <= 600 ? 0.88 : 0.86));
+  let cardWidth;
+  let imageHeight;
+
+  if (viewportWidth <= 600) {
+    cardWidth = carouselWidth * 0.88;
+    imageHeight = 218;
+  } else if (viewportWidth <= 900) {
+    cardWidth = (carouselWidth - 22) / 2;
+    imageHeight = 215;
+  } else {
+    cardWidth = (carouselWidth - 44) / 3;
+    imageHeight = 215;
+  }
+
+  return Math.max(1.1, Math.min(2.1, cardWidth / imageHeight));
+}
+
+function getCabCropDisplayWidth() {
+  const canvas = $("cabCropCanvas");
+  const viewport = canvas?.parentElement;
+  return Math.max(240, Math.min(680, viewport?.clientWidth || window.innerWidth - 48));
+}
+
+function getCabCropMetrics(width, height, zoom) {
+  const scale = Math.max(width / cabCropImage.naturalWidth, height / cabCropImage.naturalHeight) * zoom;
+  const drawWidth = cabCropImage.naturalWidth * scale;
+  const drawHeight = cabCropImage.naturalHeight * scale;
+  return {
+    drawWidth,
+    drawHeight,
+    extraX: Math.max(0, (drawWidth - width) / 2),
+    extraY: Math.max(0, (drawHeight - height) / 2)
+  };
+}
+
+function paintCabCrop(context, width, height) {
+  if (!cabCropImage) return;
+
+  const metrics = getCabCropMetrics(width, height, cabCropZoom);
+  const left = (width - metrics.drawWidth) / 2 - cabCropPanX * metrics.extraX;
+  const top = (height - metrics.drawHeight) / 2 - cabCropPanY * metrics.extraY;
+
+  context.clearRect(0, 0, width, height);
+  context.fillStyle = "#e9eef2";
+  context.fillRect(0, 0, width, height);
+  context.imageSmoothingEnabled = true;
+  context.imageSmoothingQuality = "high";
+  context.drawImage(cabCropImage, left, top, metrics.drawWidth, metrics.drawHeight);
+}
+
+function drawCabCropPreview() {
+  const canvas = $("cabCropCanvas");
+  if (!canvas || !cabCropImage) return;
+
+  const displayWidth = getCabCropDisplayWidth();
+  const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+  const width = Math.round(displayWidth * pixelRatio);
+  const height = Math.max(1, Math.round(width / cabCropAspectRatio));
+
+  canvas.width = width;
+  canvas.height = height;
+  canvas.style.aspectRatio = String(cabCropAspectRatio);
+  const context = canvas.getContext("2d");
+  if (context) paintCabCrop(context, width, height);
+
+  setText("cabCropZoomValue", Math.round(cabCropZoom * 100) + "%");
+}
+
+function releaseCabCropSource() {
+  if (cabCropObjectUrl) URL.revokeObjectURL(cabCropObjectUrl);
+  cabCropObjectUrl = null;
+  cabCropImage = null;
+  cabCropDrag = null;
+}
+
+function clearCabPhotoCropState() {
+  croppedCabPhoto = null;
+  releaseCabCropSource();
+
+  if (cabCropPreviewUrl) URL.revokeObjectURL(cabCropPreviewUrl);
+  cabCropPreviewUrl = null;
+  cabCropPreviousPreviewHtml = "";
+  cabCropZoom = 1;
+  cabCropPanX = 0;
+  cabCropPanY = 0;
+
+  const cropDialog = $("cabCropDialog");
+  if (cropDialog?.open) cropDialog.close();
+}
+
+function cancelCabPhotoCrop() {
+  const cropDialog = $("cabCropDialog");
+  if (cropDialog?.open) cropDialog.close();
+
+  if ($("cabPhoto")) $("cabPhoto").value = "";
+  setHTML("cabExistingPhoto", cabCropPreviousPreviewHtml);
+  cabCropPreviousPreviewHtml = "";
+  releaseCabCropSource();
+}
+
+function handleCabPhotoSelection(event) {
+  const file = event.target.files?.[0];
+  if (!file) return;
+
+  if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+    event.target.value = "";
+    alert("Only JPG, PNG and WebP vehicle photographs are allowed.");
+    return;
+  }
+
+  if (file.size > MAX_CAB_PHOTO_SIZE) {
+    event.target.value = "";
+    alert("Vehicle photograph must be smaller than 5 MB.");
+    return;
+  }
+
+  cabCropPreviousPreviewHtml = $("cabExistingPhoto")?.innerHTML || "";
+  const sourceUrl = URL.createObjectURL(file);
+  const image = new Image();
+
+  image.onload = () => {
+    cabCropImage = image;
+    cabCropObjectUrl = sourceUrl;
+    cabCropAspectRatio = getCabCardImageAspectRatio();
+    cabCropZoom = 1;
+    cabCropPanX = 0;
+    cabCropPanY = 0;
+
+    if ($("cabCropZoom")) $("cabCropZoom").value = "1";
+    show("cabCropDialog");
+    requestAnimationFrame(drawCabCropPreview);
+  };
+
+  image.onerror = () => {
+    URL.revokeObjectURL(sourceUrl);
+    event.target.value = "";
+    alert("This photograph could not be opened. Please choose another image.");
+  };
+
+  image.src = sourceUrl;
+}
+
+function canvasToJpegBlob(canvas, quality) {
+  return new Promise((resolve, reject) => {
+    canvas.toBlob(blob => {
+      if (blob) resolve(blob);
+      else reject(new Error("The cropped photograph could not be prepared."));
+    }, "image/jpeg", quality);
+  });
+}
+
+async function createCroppedCabFile() {
+  if (!cabCropImage) throw new Error("Please select a vehicle photograph first.");
+
+  const originalName = $("cabPhoto")?.files?.[0]?.name || "cab-photo";
+  const baseName = safeFileName(originalName.replace(/\.[^.]+$/, "")) || "cab-photo";
+  const widths = [1600, 1280, 1024];
+  const qualities = [0.9, 0.84, 0.78];
+
+  for (let index = 0; index < widths.length; index += 1) {
+    const output = document.createElement("canvas");
+    output.width = widths[index];
+    output.height = Math.max(1, Math.round(widths[index] / cabCropAspectRatio));
+
+    const context = output.getContext("2d");
+    if (!context) throw new Error("Your browser could not prepare the cropped photograph.");
+
+    paintCabCrop(context, output.width, output.height);
+    const blob = await canvasToJpegBlob(output, qualities[index]);
+
+    if (blob.size <= MAX_CAB_PHOTO_SIZE) {
+      return new File([blob], baseName + "-cropped.jpg", {
+        type: "image/jpeg",
+        lastModified: Date.now()
+      });
+    }
+  }
+
+  throw new Error("The cropped photograph is still larger than 5 MB. Please use a smaller image.");
+}
+
+async function applyCabPhotoCrop() {
+  const button = $("cabCropApply");
+  if (button) button.disabled = true;
+
+  try {
+    const file = await createCroppedCabFile();
+
+    if (cabCropPreviewUrl) URL.revokeObjectURL(cabCropPreviewUrl);
+    croppedCabPhoto = file;
+    cabCropPreviewUrl = URL.createObjectURL(file);
+
+    setHTML(
+      "cabExistingPhoto",
+      "<h4>Cropped vehicle photograph preview</h4>" +
+      "<img class=\"cab-preview\" src=\"" + esc(cabCropPreviewUrl) + "\" alt=\"Cropped vehicle photograph\">" +
+      "<p><small>This crop will be uploaded when you save the cab. Choose another photo to change the crop.</small></p>"
+    );
+
+    if ($("cabPhoto")) $("cabPhoto").value = "";
+    $("cabCropDialog")?.close();
+    cabCropPreviousPreviewHtml = "";
+    releaseCabCropSource();
+
+  } catch (error) {
+    alert("Could not crop vehicle photograph: " + error.message);
+  } finally {
+    if (button) button.disabled = false;
+  }
+}
+
+function bindCabPhotoCropper() {
+  const dialog = $("cabCropDialog");
+  const canvas = $("cabCropCanvas");
+  if (!dialog || !canvas || dialog.dataset.cropBound === "true") return;
+  dialog.dataset.cropBound = "true";
+
+  $("cabCropCancel")?.addEventListener("click", cancelCabPhotoCrop);
+  $("cabCropApply")?.addEventListener("click", applyCabPhotoCrop);
+
+  $("cabCropZoom")?.addEventListener("input", event => {
+    cabCropZoom = Math.max(1, Math.min(3, Number(event.target.value) || 1));
+    drawCabCropPreview();
+  });
+
+  canvas.addEventListener("pointerdown", event => {
+    if (!cabCropImage) return;
+    event.preventDefault();
+    canvas.setPointerCapture?.(event.pointerId);
+    cabCropDrag = {
+      x: event.clientX,
+      y: event.clientY,
+      panX: cabCropPanX,
+      panY: cabCropPanY
+    };
+  });
+
+  canvas.addEventListener("pointermove", event => {
+    if (!cabCropDrag || !cabCropImage) return;
+
+    const width = getCabCropDisplayWidth();
+    const height = width / cabCropAspectRatio;
+    const metrics = getCabCropMetrics(width, height, cabCropZoom);
+    const dx = event.clientX - cabCropDrag.x;
+    const dy = event.clientY - cabCropDrag.y;
+
+    cabCropPanX = metrics.extraX > 0
+      ? Math.max(-1, Math.min(1, cabCropDrag.panX - dx / metrics.extraX))
+      : 0;
+    cabCropPanY = metrics.extraY > 0
+      ? Math.max(-1, Math.min(1, cabCropDrag.panY - dy / metrics.extraY))
+      : 0;
+
+    drawCabCropPreview();
+  });
+
+  const stopDrag = () => { cabCropDrag = null; };
+  canvas.addEventListener("pointerup", stopDrag);
+  canvas.addEventListener("pointercancel", stopDrag);
+  canvas.addEventListener("lostpointercapture", stopDrag);
+
+  dialog.addEventListener("cancel", event => {
+    event.preventDefault();
+    cancelCabPhotoCrop();
+  });
+
+  window.addEventListener("resize", () => {
+    if (!cabCropImage || !dialog.open) return;
+    cabCropAspectRatio = getCabCardImageAspectRatio();
+    drawCabCropPreview();
+  });
+}
+
+
 function renderCabs() {
   const el = $("cabList");
   if (!el) return;
@@ -1637,6 +1925,7 @@ function renderCabs() {
 
 
 function resetCabForm() {
+  clearCabPhotoCropState();
   editingCabId = null;
   $("cabF")?.reset();
   setText("cabDialogTitle", "Add Cab");
@@ -1658,6 +1947,7 @@ function openEditCab(id) {
 
   if (!cab) return;
 
+  clearCabPhotoCropState();
   editingCabId = cab.id;
 
   setText("cabDialogTitle", "Edit Cab");
@@ -1750,7 +2040,10 @@ async function saveCabForm(event) {
     const price = Number($("cabPrice").value);
     const description = $("cabDescription").value.trim();
     const published = $("cabPublished").checked;
-    const file = $("cabPhoto").files[0];
+    const file = croppedCabPhoto;
+    if ($("cabPhoto").files[0] && !file) {
+      throw new Error("Please finish cropping the selected vehicle photograph before saving.");
+    }
 
     if (!name) throw new Error("Please enter the cab type or name.");
     if (!Number.isInteger(seats) || seats < 1) {
@@ -2488,6 +2781,8 @@ function bindForms() {
 
   $("hotelF")?.addEventListener("submit", saveHotelForm);
   $("cabF")?.addEventListener("submit", saveCabForm);
+  $("cabPhoto")?.addEventListener("change", handleCabPhotoSelection);
+  bindCabPhotoCropper();
 }
 
 
