@@ -26,7 +26,7 @@ if(desktopImagesOnly){
  return;
 } 
 // Mobile-only 3D photography carousel. Desktop implementation above is unchanged.
-let photos=[],active=3,startX=null,lastX=null,dragging=false,swiped=false,timer=null;
+let active=3,swiped=false;
 const visibleRange=2;
 const stop=()=>{clearInterval(timer);timer=null;};
 const play=()=>{stop();if(photos.length>1&&!reduced&&!document.hidden)timer=setInterval(()=>{if(!dragging&&!carousel.matches(":hover"))go(active+1);},2000);};
