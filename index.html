@@ -1427,7 +1427,7 @@ html body #home.hero .hero-build-cta-wrap > .hero-build-cta:active{
 }
 </style>
   <link rel="stylesheet" href="/arctic-prestige-motion.css?v=3">
-  <link rel="stylesheet" href="/homepage-mobile-departure-promo.css?v=15">
+  <link rel="stylesheet" href="/homepage-mobile-departure-promo.css?v=11">
   <link rel="stylesheet" href="/homepage-mobile-cream-background.css?v=2">
 
 <link rel="stylesheet" href="/windows-fluent-monochrome-sitewide.css?v=2">
@@ -1859,9 +1859,6 @@ body.guest-itinerary-popup-open{overflow:hidden}
     <div class="mobile-tibetan-flag-line" aria-hidden="true"></div>
     <h1 class="hero-animated-heading"><span class="hero-heading-static hero-heading-prefix">The</span><span class="hero-word-slot"><span id="heroRotatingWord" class="hero-word-rotator word-himalayas" aria-label="Himalayas are">Himalayas are</span></span><span class="hero-heading-static hero-heading-suffix">calling</span></h1>
 
-    <div class="hero-promo-carousel" id="heroPromoCarousel" role="region" aria-roledescription="carousel" aria-label="Upcoming group departures">
-      <div class="hero-promo-track" id="heroPromoTrack">
-        <div class="hero-promo-slide" role="group" aria-roledescription="slide" aria-label="1 of 2">
     <section id="home-promo" class="mobile-next-departure" aria-label="Next group tour departure">
       <div class="mobile-departure-topline"><span class="mobile-departure-live-dot" aria-hidden="true"></span> NEXT GROUP DEPARTURE <span class="mobile-departure-season">WINTER 2026–27</span></div>
       <p class="mobile-departure-kicker">HIMALAYAN ODYSSEY PRESENTS</p>
@@ -1873,38 +1870,7 @@ body.guest-itinerary-popup-open{overflow:hidden}
       <div class="mobile-departure-track" role="img" aria-label="80 percent of seats booked"><span></span></div>
       <a class="mobile-departure-cta mobile-departure-itinerary" href="/itineraries/" aria-label="View the Winter Spiti itinerary">VIEW ITINERARY <span aria-hidden="true">→</span></a>
       <a class="mobile-departure-cta" href="https://wa.me/919816929669?text=Hello%20Himalayan%20Odyssey%20Expedition%2C%20I%20am%20interested%20in%20the%20Winter%20Spiti%20Expedition%20(26%20Dec%202026%20%E2%80%93%2002%20Jan%202027)%20priced%20at%20%E2%82%B917%2C000%20per%20person.%20Please%20share%20the%20full%20itinerary%20and%20booking%20details." target="_blank" rel="noopener noreferrer">EXPLORE THIS DEPARTURE <span aria-hidden="true">↗</span></a>
-      </div>
-
-        </div>
-        <div class="hero-promo-slide" role="group" aria-roledescription="slide" aria-label="2 of 2">
-          <section class="mobile-next-departure mobile-departure-secondary" aria-label="19 December Kinnaur and Spiti group tour">
-            <div class="mobile-departure-topline"><span class="mobile-departure-live-dot" aria-hidden="true"></span> NEXT GROUP DEPARTURE <span class="mobile-departure-season">DECEMBER 2026</span></div>
-            <p class="mobile-departure-kicker">HIMALAYAN ODYSSEY PRESENTS</p>
-            <h2>Kinnaur <em>&amp; Spiti</em><br>Group Tour</h2>
-            <div class="mobile-departure-date">19 DEC 2026</div>
-            <div class="mobile-departure-facts"><span>6 Nights / 7 Days</span><span>Chandigarh Pickup &amp; Drop</span></div>
-            <div class="mobile-departure-price">₹14,000 <small>/ person</small></div>
-            <details class="mobile-departure-itinerary-details">
-              <summary class="mobile-departure-cta mobile-departure-itinerary">VIEW 7-DAY ITINERARY <span aria-hidden="true">＋</span></summary>
-              <div class="mobile-departure-itinerary-list" aria-label="Tour itinerary">
-                <p><strong>DAY 1</strong> Chandigarh → Shimla → Narkanda · DJ party &amp; bonfire</p>
-                <p><strong>DAY 2</strong> Narkanda → Sangla → Chitkul · Lepcha La &amp; Chitkul border sightseeing</p>
-                <p><strong>DAY 3</strong> Sangla → Khab Sangam → Nako → Tabo</p>
-                <p><strong>DAY 4</strong> Tabo → Kaza</p>
-                <p><strong>DAY 5</strong> Kaza local sightseeing · Overnight in Kaza</p>
-                <p><strong>DAY 6</strong> Kaza → Kalpa</p>
-                <p><strong>DAY 7</strong> Kalpa → Chandigarh drop</p>
-              </div>
-            </details>
-            <a class="mobile-departure-cta" href="https://wa.me/919816929669?text=Hello%20Himalayan%20Odyssey%20Expedition%2C%20I%20am%20interested%20in%20the%2019%20December%202026%20Kinnaur%20and%20Spiti%20group%20tour%20(6%20Nights%2F7%20Days)%20priced%20at%20%E2%82%B914%2C000%20per%20person%2C%20with%20Chandigarh%20pickup%20and%20drop.%20Please%20share%20the%20full%20itinerary%20and%20booking%20details." target="_blank" rel="noopener noreferrer">ENQUIRE ON WHATSAPP <span aria-hidden="true">↗</span></a>
-          </section>
-        </div>
-      </div>
-      <div class="hero-promo-pagination" aria-label="Choose a group departure">
-        <button type="button" class="is-active" aria-label="Show Winter Spiti departure" aria-current="true"></button>
-        <button type="button" aria-label="Show 19 December Kinnaur and Spiti departure"></button>
-      </div>
-    </div>
+    </section>
 
     <div class="hero-destination-list" aria-label="Destinations we offer">
       <div class="hero-destination-marquee">
@@ -6849,94 +6815,6 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 }
 </style>
 
-
-
-<script>
-(() => {
-  const carousel = document.getElementById('heroPromoCarousel');
-  const track = document.getElementById('heroPromoTrack');
-  if (!carousel || !track) return;
-
-  const slides = Array.from(track.querySelectorAll('.hero-promo-slide'));
-  const dots = Array.from(carousel.querySelectorAll('.hero-promo-pagination button'));
-  if (!slides.length || slides.length !== dots.length) return;
-
-  let activeIndex = 0;
-  let ticking = false;
-
-  // Keep the carousel viewport the same height as the visible card only.
-  // A taller off-screen card must not stretch the original hero layout.
-  const setTrackHeight = (index) => {
-    const slide = slides[index];
-    if (!slide) return;
-    const card = slide.querySelector('.mobile-next-departure');
-    const height = Math.ceil((card || slide).getBoundingClientRect().height);
-    if (height > 0) track.style.height = height + 'px';
-  };
-
-  const setActive = (index) => {
-    activeIndex = Math.max(0, Math.min(slides.length - 1, index));
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('is-active', i === activeIndex);
-      if (i === activeIndex) dot.setAttribute('aria-current', 'true');
-      else dot.removeAttribute('aria-current');
-    });
-    setTrackHeight(activeIndex);
-  };
-
-  // Desktop mouse users can drag the same track; touch devices retain native swipe.
-  let dragStartX = 0;
-  let dragStartScroll = 0;
-  let dragging = false;
-  track.addEventListener('pointerdown', (event) => {
-    if (event.pointerType !== 'mouse' || event.button !== 0) return;
-    dragging = true;
-    dragStartX = event.clientX;
-    dragStartScroll = track.scrollLeft;
-    track.classList.add('is-dragging');
-    track.setPointerCapture(event.pointerId);
-  });
-  track.addEventListener('pointermove', (event) => {
-    if (!dragging) return;
-    track.scrollLeft = dragStartScroll - (event.clientX - dragStartX);
-  });
-  const stopDragging = () => {
-    dragging = false;
-    track.classList.remove('is-dragging');
-  };
-  track.addEventListener('pointerup', stopDragging);
-  track.addEventListener('pointercancel', stopDragging);
-  track.addEventListener('lostpointercapture', stopDragging);
-
-  dots.forEach((dot, index) => dot.addEventListener('click', () => {
-    track.scrollTo({
-      left: index * track.clientWidth,
-      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
-    });
-    setActive(index);
-  }));
-
-  track.addEventListener('scroll', () => {
-    if (ticking) return;
-    ticking = true;
-    window.requestAnimationFrame(() => {
-      const width = track.clientWidth || 1;
-      const active = Math.round(track.scrollLeft / width);
-      setActive(active);
-      ticking = false;
-    });
-  }, { passive: true });
-
-  window.addEventListener('resize', () => setTrackHeight(activeIndex), { passive: true });
-
-  if ('ResizeObserver' in window) {
-    const observer = new ResizeObserver(() => setTrackHeight(activeIndex));
-    slides.forEach(slide => observer.observe(slide));
-  }
-
-  setTrackHeight(0);
-})();
-</script>
 
 </body>
 
