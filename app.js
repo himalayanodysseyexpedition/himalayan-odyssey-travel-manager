@@ -96,6 +96,68 @@ function safeFileName(name) {
     .slice(-90) || "photo";
 }
 
+
+/* =========================================
+   STORAGE IMAGE OPTIMIZATION
+========================================= */
+
+async function optimizeStorageImage(file, options = {}) {
+  if (!(file instanceof Blob) || !String(file.type || "").startsWith("image/")) {
+    throw new Error("Please select a valid image file.");
+  }
+
+  const maxDimension = Number(options.maxDimension) || 1800;
+  const quality = Number(options.quality) || 0.78;
+  let bitmap;
+  let objectUrl = null;
+
+  try {
+    if (typeof createImageBitmap === "function") {
+      bitmap = await createImageBitmap(file);
+    } else {
+      objectUrl = URL.createObjectURL(file);
+      const image = new Image();
+      image.src = objectUrl;
+      await new Promise((resolve, reject) => {
+        image.onload = resolve;
+        image.onerror = () => reject(new Error("Could not read the selected image."));
+      });
+      bitmap = image;
+    }
+
+    const sourceWidth = bitmap.width;
+    const sourceHeight = bitmap.height;
+    if (!sourceWidth || !sourceHeight) throw new Error("The selected image has invalid dimensions.");
+
+    const scale = Math.min(1, maxDimension / Math.max(sourceWidth, sourceHeight));
+    const width = Math.max(1, Math.round(sourceWidth * scale));
+    const height = Math.max(1, Math.round(sourceHeight * scale));
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const context = canvas.getContext("2d", { alpha: true });
+    if (!context) throw new Error("Image optimization is not supported by this browser.");
+    context.drawImage(bitmap, 0, 0, width, height);
+
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/webp", quality));
+    if (!blob) throw new Error("Could not compress this image.");
+    if (blob.size >= file.size && scale === 1) return file;
+
+    const outputMimeType = blob.type || "image/webp";
+    const extension = outputMimeType === "image/webp"
+      ? ".webp"
+      : outputMimeType === "image/jpeg" ? ".jpg" : ".png";
+    const baseName = String(file.name || "photo").replace(/\.[^.]+$/, "");
+    return new File([blob], baseName + extension, {
+      type: outputMimeType,
+      lastModified: Date.now()
+    });
+  } finally {
+    if (bitmap && typeof bitmap.close === "function") bitmap.close();
+    if (objectUrl) URL.revokeObjectURL(objectUrl);
+  }
+}
+
 function getBooking(id) {
   return (D.bookings || []).find(
     item => String(item.id) === String(id)
@@ -448,12 +510,14 @@ async function uploadPackageImage(packageId, file) {
     Math.random().toString(36).slice(2, 9) + "-" +
     safeFileName(file.name);
 
-  message("Uploading package poster...");
+  const optimizedFile = await optimizeStorageImage(file);
+  message("Uploading optimized package poster...");
 
   const { error: uploadError } = await db.storage
     .from(PACKAGE_BUCKET)
-    .upload(path, file, {
-      contentType: file.type,
+    .upload(path, optimizedFile, {
+      contentType: optimizedFile.type,
+      cacheControl: "31536000",
       upsert: false
     });
 
@@ -1359,12 +1423,14 @@ async function uploadHotelPhotos(hotelId, files) {
         Math.random().toString(36).slice(2, 9) + "-" +
         safeFileName(file.name);
 
-      message("Uploading " + file.name + "...");
+      const optimizedFile = await optimizeStorageImage(file);
+      message("Uploading optimized " + file.name + "...");
 
       const { error: uploadError } = await db.storage
         .from(HOTEL_BUCKET)
-        .upload(path, file, {
-          contentType: file.type,
+        .upload(path, optimizedFile, {
+          contentType: optimizedFile.type,
+          cacheControl: "31536000",
           upsert: false
         });
 
@@ -1993,12 +2059,14 @@ async function uploadCabPhoto(cabId, file) {
     Math.random().toString(36).slice(2, 9) + "-" +
     safeFileName(file.name);
 
-  message("Uploading cab photograph...");
+  const optimizedFile = await optimizeStorageImage(file);
+  message("Uploading optimized cab photograph...");
 
   const { error } = await db.storage
     .from(CAB_BUCKET)
-    .upload(path, file, {
-      contentType: file.type,
+    .upload(path, optimizedFile, {
+      contentType: optimizedFile.type,
+      cacheControl: "31536000",
       upsert: false
     });
 
@@ -2402,9 +2470,10 @@ async function uploadItineraryPhoto(file, itineraryId) {
   }
   const path = itineraryId + "/" + Date.now() + "-" +
     Math.random().toString(36).slice(2, 8) + "-" + safeFileName(file.name);
-  const { error } = await db.storage.from(ITINERARY_PHOTO_BUCKET).upload(path, file, {
-    contentType: file.type,
-    cacheControl: "3600",
+  const optimizedFile = await optimizeStorageImage(file);
+  const { error } = await db.storage.from(ITINERARY_PHOTO_BUCKET).upload(path, optimizedFile, {
+    contentType: optimizedFile.type,
+    cacheControl: "31536000",
     upsert: false
   });
   if (error) throw error;
@@ -3421,7 +3490,8 @@ async function saveDestination(event){
       if(file.size>MAX_DESTINATION_PHOTO_SIZE)throw new Error("Photo must be smaller than 5 MB.");
       const id=editingDestinationId||crypto.randomUUID();
       uploadedPath=id+"/"+Date.now()+"-"+safeFileName(file.name);
-      const {error:uploadError}=await db.storage.from(DESTINATION_BUCKET).upload(uploadedPath,file,{contentType:file.type,upsert:false});
+      const optimizedFile=await optimizeStorageImage(file);
+      const {error:uploadError}=await db.storage.from(DESTINATION_BUCKET).upload(uploadedPath,optimizedFile,{contentType:optimizedFile.type,cacheControl:"31536000",upsert:false});
       if(uploadError)throw uploadError;
       const {data}=db.storage.from(DESTINATION_BUCKET).getPublicUrl(uploadedPath);
       payload.image_url=data.publicUrl;payload.storage_path=uploadedPath;
@@ -3485,7 +3555,8 @@ async function saveFeaturedPhoto(e){
         const file=files[i],id=crypto.randomUUID();
         const path=id+"/"+Date.now()+"-"+safeFileName(file.name);
         message("Uploading photo "+(i+1)+" of "+files.length+"…");
-        const up=await db.storage.from(FEATURED_PHOTO_BUCKET).upload(path,file,{contentType:file.type,upsert:false});
+        const optimizedFile=await optimizeStorageImage(file);
+        const up=await db.storage.from(FEATURED_PHOTO_BUCKET).upload(path,optimizedFile,{contentType:optimizedFile.type,cacheControl:"31536000",upsert:false});
         if(up.error)throw up.error;
         uploadedPaths.push(path);
         const imageUrl=db.storage.from(FEATURED_PHOTO_BUCKET).getPublicUrl(path).data.publicUrl;
@@ -3506,7 +3577,8 @@ async function saveFeaturedPhoto(e){
       if(!["image/jpeg","image/png","image/webp"].includes(f.type))throw Error("Only JPG, PNG and WebP images are allowed.");
       if(f.size>MAX_FEATURED_PHOTO_SIZE)throw Error("Photo must be smaller than 5 MB.");
       const path=editingFeaturedPhotoId+"/"+Date.now()+"-"+safeFileName(f.name);
-      const up=await db.storage.from(FEATURED_PHOTO_BUCKET).upload(path,f,{contentType:f.type,upsert:false});
+      const optimizedFile=await optimizeStorageImage(f);
+      const up=await db.storage.from(FEATURED_PHOTO_BUCKET).upload(path,optimizedFile,{contentType:optimizedFile.type,cacheControl:"31536000",upsert:false});
       if(up.error)throw up.error;
       uploadedPaths.push(path);p.storage_path=path;p.image_url=db.storage.from(FEATURED_PHOTO_BUCKET).getPublicUrl(path).data.publicUrl;
     }
@@ -3575,7 +3647,8 @@ async function saveGroupDeparture(event){
       if(file.size>MAX_GROUP_DEPARTURE_PHOTO_SIZE)throw new Error("Photo must be smaller than 5 MB.");
       const id=editingGroupDepartureId||crypto.randomUUID();
       uploadedPath=id+"/"+Date.now()+"-"+safeFileName(file.name);
-      const {error}=await db.storage.from(GROUP_DEPARTURE_BUCKET).upload(uploadedPath,file,{contentType:file.type,upsert:false});if(error)throw error;
+      const optimizedFile=await optimizeStorageImage(file);
+      const {error}=await db.storage.from(GROUP_DEPARTURE_BUCKET).upload(uploadedPath,optimizedFile,{contentType:optimizedFile.type,cacheControl:"31536000",upsert:false});if(error)throw error;
       payload.storage_path=uploadedPath;payload.image_url=db.storage.from(GROUP_DEPARTURE_BUCKET).getPublicUrl(uploadedPath).data.publicUrl;
     }
     if(editingGroupDepartureId){
