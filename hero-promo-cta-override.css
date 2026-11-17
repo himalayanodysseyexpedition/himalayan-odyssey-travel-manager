@@ -83,3 +83,11 @@ html body #home.hero .hero-promo-slide section.mobile-next-departure > a.mobile-
   font-weight: 800 !important;
   -webkit-text-fill-color: #000 !important;
 }
+
+
+/* Cache-busted final rule: make the View Itinerary summary label visibly bold on iOS Safari too. */
+html body #home.hero .hero-promo-slide details.mobile-departure-itinerary-details > summary.mobile-departure-cta.mobile-departure-itinerary,
+html body #home.hero .hero-promo-slide details.mobile-departure-itinerary-details > summary.mobile-departure-cta.mobile-departure-itinerary * {
+  font-weight: 900 !important;
+  -webkit-text-stroke: 0.3px currentColor !important;
+}
