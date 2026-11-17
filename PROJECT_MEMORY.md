@@ -510,4 +510,4 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Added close-button, backdrop-click, Escape-key and focus-restoration behaviour. Desktop itinerary links retain their existing navigation behaviour.
 - Files: `index.html`, `hero-promotions.js`, `hero-promo-itinerary-modal.js`, `hero-promo-itinerary-popup.css`.
 - Mobile-only styling and interaction; no Supabase schema/data, admin workflow, booking flow, desktop layout, SEO metadata, hosting or deployment settings changed.
-- Implementation is on branch `feat/mobile-hero-itinerary-popup`; PR and verification pending.
+- Merged via PR #560 as commit `ce98607f093dd189b6b664ebe3358578ab8b3159`. GitHub validation and GitGuardian checks passed. Automated browser/device verification was not run; GitHub Pages deployment/live visual behaviour was not independently verified.
