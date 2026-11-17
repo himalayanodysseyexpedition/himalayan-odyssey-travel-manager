@@ -6494,6 +6494,11 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
  #promo-itinerary-modal.is-open .promo-itinerary-dialog{animation:promoItineraryEnter .22s ease-out both}
  @keyframes promoItineraryEnter{from{opacity:0;transform:translateY(14px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
 }
+#promo-itinerary-modal .promo-day-list{display:grid;gap:14px;margin:0}
+#promo-itinerary-modal .promo-day-card{padding:16px 18px;background:#fff;border:1px solid #dbe3e9;border-radius:12px;box-shadow:0 5px 18px rgba(16,30,42,.045)}
+#promo-itinerary-modal .promo-day-card h4{margin:0 0 9px;color:#101820;font-size:16px;line-height:1.35;font-weight:800}
+#promo-itinerary-modal .promo-day-card .promo-day-stay{display:inline-block;margin:0 0 10px;padding:5px 9px;border-radius:4px;background:#edf1f4;color:#263746;font-size:10px;font-weight:800;letter-spacing:.55px}
+#promo-itinerary-modal .promo-day-card .promo-day-description{margin:0;color:#34434e;font-size:14px;line-height:1.7;white-space:pre-line}
 </style>
 <div id="promo-itinerary-modal" aria-hidden="true">
  <section class="promo-itinerary-dialog" role="dialog" aria-modal="true" aria-labelledby="promo-itinerary-title">
@@ -6863,7 +6868,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 
 
 <script src="/hero-promotions.js?v=2"></script>
-<script src="/hero-promo-itinerary-modal.js?v=3"></script>
+<script src="/hero-promo-itinerary-modal.js?v=4"></script>
 <script>
 (() => {
  const initCarousel = () => {

@@ -26,10 +26,36 @@
     }
     addText("h3", "Itinerary");
     const items = Array.isArray(record.itinerary_items) ? record.itinerary_items : [];
-    const itineraryText = items.map(item => String(item || "")).filter(Boolean).join("\n");
-    if (itineraryText.trim()) {
-      const itinerary = addText("p", itineraryText, "promo-itinerary-body");
-      itinerary.style.whiteSpace = "pre-line";
+    const days = items.map((item, index) => {
+      if (item && typeof item === "object" && !Array.isArray(item)) {
+        return {day_number: Number(item.day_number) || index + 1, heading: String(item.heading || ""), overnight_stay: String(item.overnight_stay || ""), description: String(item.description || "")};
+      }
+      return {day_number: index + 1, heading: "", overnight_stay: "", description: String(item || "")};
+    }).filter(day => day.heading || day.overnight_stay || day.description);
+    if (days.length) {
+      const dayList = document.createElement("div");
+      dayList.className = "promo-day-list";
+      days.forEach((day, index) => {
+        const card = document.createElement("section");
+        card.className = "promo-day-card";
+        const heading = document.createElement("h4");
+        heading.textContent = "DAY " + (day.day_number || index + 1) + (day.heading ? " · " + day.heading : "");
+        card.appendChild(heading);
+        if (day.overnight_stay) {
+          const stay = document.createElement("p");
+          stay.className = "promo-day-stay";
+          stay.textContent = "OVERNIGHT STAY · " + day.overnight_stay;
+          card.appendChild(stay);
+        }
+        if (day.description) {
+          const description = document.createElement("p");
+          description.className = "promo-day-description";
+          description.textContent = day.description;
+          card.appendChild(description);
+        }
+        dayList.appendChild(card);
+      });
+      content.appendChild(dayList);
     } else {
       addText("p", "The detailed itinerary is being updated. Please contact our team for the latest plan.", "promo-itinerary-empty");
       if (record.itinerary_url) {
