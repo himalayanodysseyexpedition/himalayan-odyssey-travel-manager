@@ -6851,8 +6851,10 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 </style>
 
 
+<script src="/hero-promotions.js?v=1"></script>
 <script>
 (() => {
+ const initCarousel = () => {
   const carousel = document.getElementById('heroPromoCarousel');
   const track = document.getElementById('heroPromoTrack');
   if (!carousel || !track) return;
@@ -6925,6 +6927,8 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   const refreshHeight = () => requestAnimationFrame(() => requestAnimationFrame(updateHeight));
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(refreshHeight);
   window.addEventListener('load', refreshHeight, {once:true});
+ };
+ if(window.heroPromotionsReady){window.heroPromotionsReady.then(initCarousel).catch(initCarousel);}else{initCarousel();}
 })();
 </script>
 </body>
