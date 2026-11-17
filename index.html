@@ -2567,7 +2567,7 @@ async function loadCabs() {
 
             ${model ? `<p class="cab-details">${safe(model)}</p>` : ""}
 
-            <p class="cab-details">
+            <p class="cab-details cab-capacity">
               <b>Seating Capacity:</b>
               ${safe(capacity)}${cab.seating_capacity ? " passengers" : ""}
             </p>
@@ -7175,6 +7175,25 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 @media screen and (max-width:760px){
   html body #odyssey-difference-mobile a.odyssey-difference-cta{
     font-weight:700!important;
+  }
+}
+</style>
+
+
+<style id="mobile-cab-seating-capacity-spacing-v1">
+/* Improve spacing and readability of the seating-capacity row on mobile. */
+@media screen and (max-width:760px){
+  html body #cabs #cabList .cab-card .card-body{
+    gap:12px!important;
+  }
+  html body #cabs #cabList .cab-card .card-body .cab-capacity{
+    display:inline-flex!important;
+    flex-wrap:wrap!important;
+    align-items:center!important;
+    column-gap:7px!important;
+    row-gap:3px!important;
+    padding:9px 12px!important;
+    line-height:1.7!important;
   }
 }
 </style>
