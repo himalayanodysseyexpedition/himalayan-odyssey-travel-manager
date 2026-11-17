@@ -489,3 +489,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - First card uses the desktop two-column price-left / seat-count-right row, with the booking progress bar and both full-width pill CTAs below.
 - Second card uses the same typography, borders, black gradient card, date/facts hierarchy, progress strip, and pill controls. It has no verified seat count, so its price/progress span the full row rather than inventing seat information.
 - Existing carousel height remeasurement remains in place; bump mobile promo stylesheet to v18. Desktop CSS and desktop markup remain unchanged.
+
+## 2026-11-17 — Kinnaur & Spiti group tour booking count
+- Kinnaur & Spiti Group Tour price is ₹15,000 per person.
+- Show 4 of 12 people booked and 8 seats remaining.
+- Promotional card now includes an accessible 4/12 progressbar; mobile fill is one-third of the track with the existing animated multicolour gradient.
+- Price, booking count, and WhatsApp enquiry price remain consistent.
