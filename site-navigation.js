@@ -104,16 +104,21 @@
       } else if (nav.parentNode === document.body) {
         inner.appendChild(nav);
       }
-      header.style.setProperty("background", "#000", "important");
-      header.style.setProperty("background-color", "#000", "important");
-      header.style.setProperty("background-image", "none", "important");
-      header.style.setProperty("color", "#fff", "important");
-      header.style.setProperty("border-bottom", "1px solid rgba(255,255,255,.14)", "important");
-      header.style.setProperty("position", "relative", "important");
-      header.style.setProperty("overflow", "visible", "important");
-      header.style.setProperty("z-index", dockMenu && mobileMenu ? "1000" : "1400", "important");
-      inner.style.setProperty("position", "relative", "important");
-      inner.style.setProperty("overflow", "visible", "important");
+      // Only the header-triggered dropdown may restyle the header.
+      // A dock-triggered menu is a separate fixed popup above the bottom dock;
+      // touching header styles here makes it look as though the popup opened there.
+      if (!dockMenu || !mobileMenu) {
+        header.style.setProperty("background", "#000", "important");
+        header.style.setProperty("background-color", "#000", "important");
+        header.style.setProperty("background-image", "none", "important");
+        header.style.setProperty("color", "#fff", "important");
+        header.style.setProperty("border-bottom", "1px solid rgba(255,255,255,.14)", "important");
+        header.style.setProperty("position", "relative", "important");
+        header.style.setProperty("overflow", "visible", "important");
+        header.style.setProperty("z-index", "1400", "important");
+        inner.style.setProperty("position", "relative", "important");
+        inner.style.setProperty("overflow", "visible", "important");
+      }
       nav.style.setProperty("display", "flex", "important");
       nav.style.setProperty("visibility", "visible", "important");
       nav.style.setProperty("opacity", "1", "important");
@@ -197,11 +202,12 @@
       event.stopPropagation();
       const open = button.getAttribute("aria-expanded") !== "true";
       if (open) {
-        header.classList.add("menu-open");
+        const openedFromDock = button.dataset.openedFromDock === "true";
+        if (!openedFromDock) header.classList.add("menu-open");
+        else header.classList.remove("menu-open");
         button.setAttribute("aria-expanded", "true");
         button.setAttribute("aria-label", "Close navigation menu");
         nav.setAttribute("aria-hidden", "false");
-        const openedFromDock = button.dataset.openedFromDock === "true";
         if (openedFromDock) {
           document.querySelectorAll(".dock-menu-trigger").forEach(trigger => { trigger.setAttribute("aria-expanded", "true"); trigger.setAttribute("aria-label", "Close navigation menu"); trigger.classList.add("is-open"); });
           document.querySelectorAll(".mobile-app-dock,.desktop-app-dock").forEach(dock => dock.classList.add("menu-open"));
