@@ -624,3 +624,41 @@
     stroke:#fff!important;
   }
 }
+
+
+/* MOBILE ONLY — simplify homepage carousel navigation.
+   Keep swipe/scroll behaviour and live page counters; remove decorative controls. */
+@media screen and (max-width:760px){
+  html body .guides-controls button,
+  html body .group-departures-controls button,
+  html body .destinations-controls button,
+  html body .carousel-controls button{
+    display:none!important;
+  }
+
+  html body :is(.guides-progress,.packages-progress,.destinations-progress,.guides-swipe-hint,.swipe-hint,.package-swipe-hint){
+    display:none!important;
+  }
+
+  html body :is(.guides-controls,.packages-controls,.itineraries-controls,.cabs-controls,
+    .group-departures-controls,.destinations-controls,.carousel-controls){
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:0!important;
+    width:100%!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    text-align:center!important;
+  }
+
+  html body :is(.guides-controls,.packages-controls,.itineraries-controls,.cabs-controls,
+    .destinations-controls,.carousel-controls) .guides-count,
+  html body .group-departures-controls>span,
+  html body .carousel-controls .carousel-count{
+    display:block!important;
+    min-width:0!important;
+    margin:0 auto!important;
+    text-align:center!important;
+  }
+}
