@@ -313,3 +313,11 @@
 @media screen and (min-width: 761px) and (prefers-reduced-motion: reduce) {
  html body #featured-travel-photography .featured-travel-slide { transition: none !important; }
 }
+
+
+/* Mobile-only: make the Featured Travel Photography eyebrow line black. */
+@media screen and (max-width: 760px) {
+  html body #featured-travel-photography .featured-travel-heading > small {
+    color: #000000 !important;
+  }
+}
