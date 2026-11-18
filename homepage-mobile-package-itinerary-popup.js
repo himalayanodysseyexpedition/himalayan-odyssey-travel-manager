@@ -125,7 +125,7 @@
     bodyNode.appendChild(card);
   }
 
-  function openItinerary(packageRecord, card) {
+  function openItinerary(packageRecord) {
     createDialog();
 
     var packageName = packageRecord.name || packageRecord.destination || "Travel Package";
@@ -176,6 +176,6 @@
     if (!packageRecord) return;
 
     event.preventDefault();
-    openItinerary(packageRecord, card);
+    openItinerary(packageRecord);
   });
 })();
