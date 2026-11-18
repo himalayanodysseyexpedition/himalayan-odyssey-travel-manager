@@ -100,6 +100,22 @@
       if (event.target === dialog) dialog.close();
     });
 
+    // Native dialogs restore focus to their opener when they close. On touch browsers
+    // that can leave the package-card link focused and draw a dark frame around the card.
+    dialog.addEventListener("close", function () {
+      var trigger = lastTriggerLink;
+      lastTriggerLink = null;
+      window.requestAnimationFrame(function () {
+        if (trigger && document.activeElement === trigger && typeof trigger.blur === "function") {
+          trigger.blur();
+        }
+        var packageRail = document.getElementById("packageList");
+        if (packageRail && document.activeElement === packageRail && typeof packageRail.blur === "function") {
+          packageRail.blur();
+        }
+      });
+    });
+
     document.body.appendChild(dialog);
   }
 
@@ -125,8 +141,11 @@
     bodyNode.appendChild(card);
   }
 
-  function openItinerary(packageRecord) {
+  var lastTriggerLink = null;
+
+  function openItinerary(packageRecord, triggerLink) {
     createDialog();
+    lastTriggerLink = triggerLink || document.activeElement;
 
     var packageName = packageRecord.name || packageRecord.destination || "Travel Package";
     var meta = [
@@ -178,6 +197,6 @@
     if (!packageRecord) return;
 
     event.preventDefault();
-    openItinerary(packageRecord);
+    openItinerary(packageRecord, link);
   });
 })();
