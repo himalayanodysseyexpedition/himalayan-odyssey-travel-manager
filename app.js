@@ -347,6 +347,74 @@ function del(table, id) {
    PACKAGE POSTER MANAGEMENT
 ========================================= */
 
+function addPackageDayRow(day = {}) {
+  const editor = $("packageDayEditor");
+  if (!editor) return;
+  const row = document.createElement("section");
+  row.className = "package-day-entry";
+  row.innerHTML = `
+    <div class="package-day-entry-head">
+      <strong>Itinerary Day</strong>
+      <button type="button" class="remove-package-day">Remove Day</button>
+    </div>
+    <div class="package-day-fields">
+      <div>
+        <label>Day</label>
+        <input type="text" data-package-day="day" value="${esc(day.day || "")}" placeholder="Day 1">
+      </div>
+      <div>
+        <label>Stay</label>
+        <input type="text" data-package-day="stay" value="${esc(day.stay || "")}" placeholder="Overnight stay location">
+      </div>
+      <div class="full">
+        <label>Small Day Description</label>
+        <textarea data-package-day="description" rows="3" placeholder="Brief route, sightseeing and activities for this day">${esc(day.description || "")}</textarea>
+      </div>
+    </div>`;
+  editor.appendChild(row);
+}
+
+function collectPackageDayRows() {
+  const rows = Array.from($("packageDayEditor")?.querySelectorAll(".package-day-entry") || []);
+  return rows.map((row, index) => {
+    const value = key => row.querySelector('[data-package-day="' + key + '"]')?.value.trim() || "";
+    return {
+      day: value("day") || "Day " + (index + 1),
+      stay: value("stay"),
+      description: value("description")
+    };
+  }).filter(day => day.stay || day.description || day.day)
+    .map(day => [day.day, "Stay: " + (day.stay || "Not specified"), "Description: " + (day.description || "Not specified")].join("\\n"))
+    .join("\\n\\n");
+}
+
+function renderPackageDayRows(value) {
+  const raw = String(value || "").trim();
+  if (!raw) {
+    setHTML("packageDayEditor", "");
+    addPackageDayRow({day:"Day 1",stay:"",description:""});
+    return;
+  }
+  const blocks = raw.split(/\\n\\s*\\n/).filter(Boolean);
+  const parsed = blocks.map(block => {
+    const lines = block.split("\\n");
+    const first = lines.shift() || "";
+    if (!/^Day\\s*\\d+/i.test(first.trim())) return null;
+    const stayLine = lines.find(line => /^Stay:/i.test(line));
+    const descriptionIndex = lines.findIndex(line => /^Description:/i.test(line));
+    return {
+      day: first.trim(),
+      stay: stayLine ? stayLine.replace(/^Stay:\\s*/i, "").trim() : "",
+      description: descriptionIndex >= 0
+        ? [lines[descriptionIndex].replace(/^Description:\\s*/i, ""), ...lines.slice(descriptionIndex + 1)].join("\\n").trim()
+        : lines.join("\\n").trim()
+    };
+  }).filter(Boolean);
+  if (!parsed.length) parsed.push({day:"Day 1",stay:"",description:raw});
+  setHTML("packageDayEditor", "");
+  parsed.forEach(day => addPackageDayRow(day));
+}
+
 function resetPackageForm() {
   editingPackageId = null;
 
@@ -354,6 +422,8 @@ function resetPackageForm() {
 
   setText("packageDialogTitle", "Add Travel Package");
   setText("packageSave", "Save Package");
+  setHTML("packageDayEditor", "");
+  addPackageDayRow({day:"Day 1",stay:"",description:""});
 
   setHTML(
     "packageImagePreview",
@@ -386,7 +456,7 @@ function openEditPackage(id) {
   form.elements.departure_dates.value = item.departure_dates || "";
   form.elements.price_per_person.value =
     item.price_per_person ?? "";
-  form.elements.itinerary.value = item.itinerary || "";
+  renderPackageDayRows(item.itinerary || "");
 
   $("packageImage").value = "";
 
@@ -578,8 +648,7 @@ async function savePackageForm(event) {
         form.elements.price_per_person.value.trim() === "" ? null : Number(form.elements.price_per_person.value),
       departure_dates:
         form.elements.departure_dates.value.trim() || null,
-      itinerary:
-        form.elements.itinerary.value.trim() || null
+      itinerary: collectPackageDayRows() || null
     };
 
     const file = $("packageImage")?.files?.[0];
@@ -2702,6 +2771,22 @@ function bindForms() {
     "change",
     previewPackageImage
   );
+
+  $("addPackageDay")?.addEventListener("click", () => {
+    const count = $("packageDayEditor")?.querySelectorAll(".package-day-entry").length || 0;
+    addPackageDayRow({day:"Day " + (count + 1),stay:"",description:""});
+  });
+
+  $("packageDayEditor")?.addEventListener("click", event => {
+    const remove = event.target.closest(".remove-package-day");
+    if (!remove) return;
+    const rows = $("packageDayEditor").querySelectorAll(".package-day-entry");
+    if (rows.length <= 1) {
+      alert("A package must keep at least one itinerary day entry.");
+      return;
+    }
+    remove.closest(".package-day-entry")?.remove();
+  });
 
 
   /* VENDOR FORM */
