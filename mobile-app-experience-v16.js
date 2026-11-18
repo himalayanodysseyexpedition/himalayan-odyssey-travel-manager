@@ -199,7 +199,7 @@
    window.history.replaceState(window.history.state,'',window.location.pathname+window.location.search);
   }
   window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
- });
+ },true);
  function init(){loadStyles();removeLegacy();mountDock();reveal();registerPwa()}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
  window.addEventListener('resize',()=>{
