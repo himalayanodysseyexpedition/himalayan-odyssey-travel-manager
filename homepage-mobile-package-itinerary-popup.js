@@ -160,6 +160,8 @@
     if (closeButton) closeButton.focus();
   }
 
+  window.openHoePackageItinerary = openItinerary;
+
   document.addEventListener("click", function (event) {
     var link = event.target.closest && event.target.closest("a.package-itinerary-link");
     if (!link || !isMobile()) return;
