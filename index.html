@@ -8270,3 +8270,35 @@ html body #packages #packageList .package-slide .card-body>.price{display:none!i
 }
 </style>
 
+
+
+<style id="mobile-package-card-no-edge-v3">
+/* Mobile-only: fully remove the package-card edge that can remain after closing the itinerary dialog.
+   This resets the card surface, touch/focus states and the restored View Itinerary link. */
+@media screen and (max-width:760px){
+  html body section#packages #packageList > article.package-slide,
+  html body section#packages #packageList > article.package-slide:hover,
+  html body section#packages #packageList > article.package-slide:focus,
+  html body section#packages #packageList > article.package-slide:focus-visible,
+  html body section#packages #packageList > article.package-slide:focus-within,
+  html body section#packages #packageList > article.package-slide:active{
+    border:0!important;
+    outline:0!important;
+    box-shadow:none!important;
+    filter:none!important;
+  }
+  html body section#packages #packageList > article.package-slide .package-card-actions > a.btn:focus,
+  html body section#packages #packageList > article.package-slide .package-card-actions > a.btn:focus-visible,
+  html body section#packages #packageList > article.package-slide .package-card-actions > a.btn:active{
+    outline:0!important;
+    outline-offset:0!important;
+    box-shadow:none!important;
+  }
+  html body section#packages #packageList > article.package-slide::after{
+    content:none!important;
+    border:0!important;
+    outline:0!important;
+    box-shadow:none!important;
+  }
+}
+</style>
