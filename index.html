@@ -6742,7 +6742,7 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
    }
    event.stopImmediatePropagation();
    if(record && typeof window.openHoePackageItinerary==="function"){
-    window.openHoePackageItinerary(record);
+    window.openHoePackageItinerary(record, link);
     return;
    }
    const scroll=modal.querySelector(".guest-itinerary-content");
