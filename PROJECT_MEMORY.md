@@ -559,3 +559,11 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Preserved card content, carousel swipe/snap behaviour, links, desktop presentation and existing promotion styling.
 - Respects `prefers-reduced-motion`; no JavaScript, dependencies, images or hosting changes.
 - File: `homepage-mobile-departure-promo.css`. PR and automated verification pending.
+
+
+## 2026-11-18 — Add project-local third-party agent skills
+- Added four compatible `SKILL.md` packages under `.agents/skills/`: `frontend-ui`, `web-motion`, `seo-audit` and `supabase`.
+- Included their linked Markdown references and upstream license notices, plus `.agents/skills/README.md` with source attribution and project-specific precedence rules.
+- Updated `AGENTS.md` to tell compatible coding agents where to discover the skills and to prevent generic third-party guidance from overriding this project's stack and safety constraints.
+- Only Markdown and license text files changed; no website runtime code, dependencies, database, hosting or deployment settings changed.
+- PR: #629 (https://github.com/himalayanodysseyexpedition/himalayan-odyssey-travel-manager/pull/629). Verification: diff review confirms 23 documentation-only files; no application tests or live-browser checks apply.
