@@ -6723,53 +6723,32 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   // On mobile, package cards show the admin-managed day-wise itinerary directly
   // inside the same guest popup rather than loading the separate itinerary page.
   if(cardSelector==="#packageList > article.package-slide" && window.matchMedia("(max-width:760px)").matches){
+   event.preventDefault();
    const record=(window.hoePackageRecords||[]).find(item=>String(item.id)===String(card.dataset.packageId));
    if(record && typeof window.openHoePackageItinerary==="function"){
-    event.preventDefault();
     event.stopImmediatePropagation();
     window.openHoePackageItinerary(record);
     return;
    }
-   const itineraryId=new URL(link.href,window.location.origin).searchParams.get("id");
-   if(!itineraryId){
-    alert("This package does not have a published itinerary linked yet.");
-    return;
-   }
+   // Do not fall through to the legacy published-itinerary lookup: package cards
+   // use the admin-managed packages.itinerary field, not a separately linked page.
    const scroll=modal.querySelector(".guest-itinerary-content");
    if(!scroll)return;
    frame.style.display="none";
    scroll.style.display="block";
-   scroll.innerHTML='<p class="package-itinerary-loading">Loading day-wise itinerary…</p>';
+   scroll.textContent="";
+   const message=document.createElement("p");
+   message.className="package-itinerary-loading";
+   message.textContent=record
+    ? "Opening the package itinerary… Please refresh if this message remains."
+    : "Package details are still loading. Please try again in a moment.";
+   scroll.appendChild(message);
    lastFocus=document.activeElement;
    title.textContent=popupLabel+" — Itinerary";
    modal.classList.add("is-open");
    modal.setAttribute("aria-hidden","false");
    document.body.classList.add("guest-itinerary-popup-open");
    closeButton.focus();
-   try{
-    const [{data:item,error:itemError},{data:days,error:daysError}]=await Promise.all([
-     db.from("itineraries").select("id,title,destination,duration_days,duration_nights,price,summary,published").eq("id",itineraryId).eq("published",true).maybeSingle(),
-     db.from("itinerary_days").select("day_number,title,description,overnight_location").eq("itinerary_id",itineraryId).order("day_number",{ascending:true})
-    ]);
-    if(itemError)throw itemError;
-    if(daysError)throw daysError;
-    if(!item)throw new Error("Published itinerary not found.");
-    if(!days?.length)throw new Error("No day-wise details have been added to this itinerary yet.");
-    const esc=value=>String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
-    scroll.innerHTML=
-     '<h3 class="package-itinerary-section-title">Day-wise itinerary</h3>'+
-     '<div class="package-itinerary-days">'+days.map(day=>
-      '<article class="package-itinerary-day">'+
-       '<h4>Day '+esc(day.day_number)+(day.title?' — '+esc(day.title):'')+'</h4>'+
-       (day.overnight_location?'<span class="package-itinerary-stay">OVERNIGHT STAY · '+esc(day.overnight_location)+'</span>':'')+
-       (day.description?'<p>'+esc(day.description)+'</p>':'')+
-      '</article>'
-     ).join("")+'</div>'+
-     '<p class="package-itinerary-note">The itinerary sequence and travel timings may be adjusted according to weather, road and safety conditions.</p>';
-   }catch(error){
-    console.error("Package itinerary popup error:",error);
-    scroll.innerHTML='<p class="package-itinerary-loading">'+esc(error.message||"Could not load this itinerary.")+'</p>';
-   }
    return;
   }
   open(link.href,popupLabel);
