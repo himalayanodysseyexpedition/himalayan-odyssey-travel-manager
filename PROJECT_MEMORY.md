@@ -552,3 +552,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Updated the homepage script's service-worker registration URL to `?build=18` and bumped the shell cache to v21. Added both new assets to the offline shell.
 - The design remains mobile-only; desktop navigation, destinations and button behavior are unchanged.
 - Files: `index.html`, `mobile-app-experience.js`, `mobile-app-experience-v13.js`, `mobile-app-experience-v14.js` (new), `himalayan-bottom-navigation-blue-glass.css` (new), `service-worker.js`, `PROJECT_MEMORY.md`.
+
+
+## 2026-11-18 — Mobile hero promotional card object reveal
+- Added a mobile-only object-style reveal to both homepage hero promotional departure cards (up to 760px): a top-down masked reveal with subtle 3D tilt/settle, followed by staggered content reveal.
+- Preserved card content, carousel swipe/snap behaviour, links, desktop presentation and existing promotion styling.
+- Respects `prefers-reduced-motion`; no JavaScript, dependencies, images or hosting changes.
+- File: `homepage-mobile-departure-promo.css`. PR and automated verification pending.
