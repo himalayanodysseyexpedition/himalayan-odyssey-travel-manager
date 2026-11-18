@@ -384,8 +384,8 @@ function collectPackageDayRows() {
       description: value("description")
     };
   }).filter(day => day.stay || day.description || day.day)
-    .map(day => [day.day, "Stay: " + (day.stay || "Not specified"), "Description: " + (day.description || "Not specified")].join("\\n"))
-    .join("\\n\\n");
+    .map(day => [day.day, "Stay: " + (day.stay || "Not specified"), "Description: " + (day.description || "Not specified")].join("\n"))
+    .join("\n\n");
 }
 
 function renderPackageDayRows(value) {
@@ -395,19 +395,19 @@ function renderPackageDayRows(value) {
     addPackageDayRow({day:"Day 1",stay:"",description:""});
     return;
   }
-  const blocks = raw.split(/\\n\\s*\\n/).filter(Boolean);
+  const blocks = raw.split(/\n\s*\n/).filter(Boolean);
   const parsed = blocks.map(block => {
-    const lines = block.split("\\n");
+    const lines = block.split("\n");
     const first = lines.shift() || "";
-    if (!/^Day\\s*\\d+/i.test(first.trim())) return null;
+    if (!/^Day\s*\d+/i.test(first.trim())) return null;
     const stayLine = lines.find(line => /^Stay:/i.test(line));
     const descriptionIndex = lines.findIndex(line => /^Description:/i.test(line));
     return {
       day: first.trim(),
-      stay: stayLine ? stayLine.replace(/^Stay:\\s*/i, "").trim() : "",
+      stay: stayLine ? stayLine.replace(/^Stay:\s*/i, "").trim() : "",
       description: descriptionIndex >= 0
-        ? [lines[descriptionIndex].replace(/^Description:\\s*/i, ""), ...lines.slice(descriptionIndex + 1)].join("\\n").trim()
-        : lines.join("\\n").trim()
+        ? [lines[descriptionIndex].replace(/^Description:\s*/i, ""), ...lines.slice(descriptionIndex + 1)].join("\n").trim()
+        : lines.join("\n").trim()
     };
   }).filter(Boolean);
   if (!parsed.length) parsed.push({day:"Day 1",stay:"",description:raw});
