@@ -6724,6 +6724,12 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   // inside the same guest popup rather than loading the separate itinerary page.
   if(cardSelector==="#packageList > article.package-slide" && window.matchMedia("(max-width:760px)").matches){
    const record=(window.hoePackageRecords||[]).find(item=>String(item.id)===String(card.dataset.packageId));
+   if(record && typeof window.openHoePackageItinerary==="function"){
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    window.openHoePackageItinerary(record);
+    return;
+   }
    const itineraryId=new URL(link.href,window.location.origin).searchParams.get("id");
    if(!itineraryId){
     alert("This package does not have a published itinerary linked yet.");
