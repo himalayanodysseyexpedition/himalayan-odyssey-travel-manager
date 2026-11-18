@@ -225,3 +225,14 @@ body footer :is(h2,h3,h4,strong,b,p,small),body footer a,body .site-footer :is(h
     outline:0!important;
   }
 }
+
+
+/* Mobile only: prevent a focus-restoration outline from appearing around a package card
+   after returning from its View Itinerary page. Keep keyboard focus styling on the link itself. */
+@media screen and (max-width:760px){
+  html body #packages .package-slide:focus-within{
+    border:0!important;
+    outline:0!important;
+    box-shadow:0 12px 36px rgba(8,16,24,.075)!important;
+  }
+}
