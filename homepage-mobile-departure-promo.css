@@ -611,3 +611,55 @@ html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details > sum
     font-weight:900!important;
   }
 }
+
+
+/* Mobile hero promo cards: premium object-style reveal on first appearance. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-promo-slide .mobile-next-departure{
+    transform-origin:50% 85%;
+    backface-visibility:hidden;
+    animation:mobilePromoObjectReveal 1.05s cubic-bezier(.18,.72,.22,1) both!important;
+  }
+  html body #home.hero .hero-promo-slide:nth-child(2) .mobile-next-departure{
+    animation-delay:.16s!important;
+  }
+  html body #home.hero .hero-promo-slide .mobile-departure-topline,
+  html body #home.hero .hero-promo-slide .mobile-departure-kicker,
+  html body #home.hero .hero-promo-slide .mobile-next-departure h2,
+  html body #home.hero .hero-promo-slide .mobile-departure-date,
+  html body #home.hero .hero-promo-slide .mobile-departure-facts,
+  html body #home.hero .hero-promo-slide .mobile-departure-price,
+  html body #home.hero .hero-promo-slide .mobile-departure-seats,
+  html body #home.hero .hero-promo-slide .mobile-departure-track,
+  html body #home.hero .hero-promo-slide .mobile-departure-cta,
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details{
+    animation:mobilePromoContentReveal .62s cubic-bezier(.2,.7,.25,1) both;
+  }
+  html body #home.hero .hero-promo-slide .mobile-departure-topline{animation-delay:.22s}
+  html body #home.hero .hero-promo-slide .mobile-departure-kicker{animation-delay:.28s}
+  html body #home.hero .hero-promo-slide .mobile-next-departure h2{animation-delay:.34s}
+  html body #home.hero .hero-promo-slide .mobile-departure-date{animation-delay:.42s}
+  html body #home.hero .hero-promo-slide .mobile-departure-facts{animation-delay:.48s}
+  html body #home.hero .hero-promo-slide .mobile-departure-price{animation-delay:.54s}
+  html body #home.hero .hero-promo-slide .mobile-departure-seats{animation-delay:.60s}
+  html body #home.hero .hero-promo-slide .mobile-departure-track{animation-delay:.66s}
+  html body #home.hero .hero-promo-slide .mobile-departure-cta,
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details{animation-delay:.72s}
+}
+@keyframes mobilePromoObjectReveal{
+  0%{opacity:0;clip-path:inset(0 0 100% 0 round 19px);transform:perspective(900px) rotateX(9deg) translateY(22px) scale(.965);filter:brightness(.72) blur(3px)}
+  68%{opacity:1;clip-path:inset(0 0 0 0 round 19px);transform:perspective(900px) rotateX(-1deg) translateY(-2px) scale(1.005);filter:brightness(1.04) blur(0)}
+  100%{opacity:1;clip-path:inset(0 0 0 0 round 19px);transform:perspective(900px) rotateX(0) translateY(0) scale(1);filter:brightness(1) blur(0)}
+}
+@keyframes mobilePromoContentReveal{
+  from{opacity:0;translate:0 10px}
+  to{opacity:1;translate:0 0}
+}
+@media(prefers-reduced-motion:reduce){
+  html body #home.hero .hero-promo-slide .mobile-next-departure,
+  html body #home.hero .hero-promo-slide .mobile-next-departure *{
+    animation:none!important;
+    translate:none!important;
+    clip-path:none!important;
+  }
+}
