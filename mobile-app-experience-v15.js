@@ -57,7 +57,8 @@
    menuTrigger.addEventListener('click',event=>{
     event.preventDefault();
     event.stopImmediatePropagation();
-    const onHomepage=window.location.pathname==='/'||/\\/index\\.html$/i.test(window.location.pathname);
+    const path=window.location.pathname.toLowerCase();
+    const onHomepage=path==='/'||path.endsWith('/index.html');
     if(!onHomepage){
      window.location.assign('/');
      return;
@@ -197,7 +198,7 @@
   const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('app-reveal','is-visible');io.unobserve(e.target)}}),{threshold:.08});
   candidates.forEach(el=>{if(!el.classList.contains('app-reveal')){el.classList.add('app-reveal');io.observe(el)}});
  }
- function registerPwa(){if('serviceWorker'in navigator&&location.protocol==='https:'){window.addEventListener('load',()=>navigator.serviceWorker.register('/service-worker.js?build=18',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}),{once:true})}}
+ function registerPwa(){if('serviceWorker'in navigator&&location.protocol==='https:'){window.addEventListener('load',()=>navigator.serviceWorker.register('/service-worker.js?build=19',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}),{once:true})}}
  function init(){loadStyles();removeLegacy();mountDock();reveal();registerPwa()}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
  window.addEventListener('resize',()=>{
