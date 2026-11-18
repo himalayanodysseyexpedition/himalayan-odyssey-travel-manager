@@ -112,21 +112,33 @@ async function optimizeStorageImage(file, options = {}) {
   let objectUrl = null;
 
   try {
+    // Some Safari/iOS image formats fail in createImageBitmap even when the
+    // browser's normal image decoder can display them. Fall back to Image().
     if (typeof createImageBitmap === "function") {
-      bitmap = await createImageBitmap(file);
-    } else {
+      try {
+        bitmap = await createImageBitmap(file);
+      } catch (decodeError) {
+        console.warn("createImageBitmap could not decode the upload; trying Image() fallback.", decodeError);
+      }
+    }
+
+    if (!bitmap) {
       objectUrl = URL.createObjectURL(file);
       const image = new Image();
+      image.decoding = "async";
       image.src = objectUrl;
       await new Promise((resolve, reject) => {
+        if (image.complete && image.naturalWidth > 0) return resolve();
         image.onload = resolve;
-        image.onerror = () => reject(new Error("Could not read the selected image."));
+        image.onerror = () => reject(new Error(
+          "This image format could not be decoded by the browser. Please choose a JPG, PNG or WebP image."
+        ));
       });
       bitmap = image;
     }
 
-    const sourceWidth = bitmap.width;
-    const sourceHeight = bitmap.height;
+    const sourceWidth = bitmap.width || bitmap.naturalWidth;
+    const sourceHeight = bitmap.height || bitmap.naturalHeight;
     if (!sourceWidth || !sourceHeight) throw new Error("The selected image has invalid dimensions.");
 
     const scale = Math.min(1, maxDimension / Math.max(sourceWidth, sourceHeight));
