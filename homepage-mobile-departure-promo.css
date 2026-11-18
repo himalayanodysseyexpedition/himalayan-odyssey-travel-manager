@@ -577,3 +577,37 @@ html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details > sum
     font-weight:900!important;
   }
 }
+
+
+/* Final cascade fix: visibly badge the departure date on mobile promo slides.
+   This selector outranks the earlier transparent-background reset. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-promo-slide section.mobile-next-departure .mobile-departure-date{
+    display:inline-flex!important;
+    align-items:center!important;
+    width:max-content!important;
+    max-width:100%!important;
+    min-height:40px!important;
+    box-sizing:border-box!important;
+    margin:15px 0 12px!important;
+    padding:10px 15px!important;
+    border:1px solid #fff!important;
+    border-radius:7px!important;
+    background:#fff!important;
+    background-color:#fff!important;
+    background-image:none!important;
+    color:#080808!important;
+    -webkit-text-fill-color:#080808!important;
+    text-shadow:none!important;
+    box-shadow:0 5px 16px rgba(0,0,0,.35)!important;
+    font-size:14px!important;
+    font-weight:900!important;
+    line-height:1.2!important;
+    letter-spacing:1.15px!important;
+  }
+  html body #home.hero .hero-promo-slide section.mobile-next-departure .mobile-departure-date span{
+    color:#080808!important;
+    -webkit-text-fill-color:#080808!important;
+    font-weight:900!important;
+  }
+}
