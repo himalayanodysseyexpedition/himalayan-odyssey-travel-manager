@@ -109,3 +109,12 @@ Always inspect the current implementation and database before changing any of th
 - Update `PROJECT_MEMORY.md` after significant completed work with factual scope, changed files, PR/commit and verification status. Never store secrets or customer/private data.
 - **Current design preference (updated 2026-11-14):** the user's latest direction is premium luxury Himalayan branding with mixed dark/light sections and avoidance of green, gold, bronze and copper palettes unless explicitly requested. This newer preference supersedes the older green-palette note above. Preserve the existing logo.
 - A merge is not proof of deployment. Never claim that the live site changed until the deployment is independently verified.
+
+
+## Project-local third-party agent skills
+
+- Compatible coding agents may discover project skills under `.agents/skills/*/SKILL.md`. Read and use the relevant skill for the task at hand; do not load unrelated skills unnecessarily.
+- The installed skills are documented in `.agents/skills/README.md`; upstream attribution and license notices are retained in each skill folder.
+- Project-specific instructions in this file, `.github/skills/himalayan-odyssey-web-agent/SKILL.md`, the user's latest explicit request and the current codebase override generic third-party skill guidance.
+- The skills are instruction documents only. Do not install their demo code, scripts, hooks, npm packages or framework-specific examples unless the user explicitly requests the implementation and the existing stack requires it.
+- Preserve this repository's existing HTML/CSS/JavaScript + Supabase architecture. Do not migrate to React/Next.js, add a second styling system, introduce dependencies, or change hosting/deployment/database settings based solely on a third-party skill recommendation.
