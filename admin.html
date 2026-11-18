@@ -52,7 +52,16 @@ dialog{border:1px solid var(--gold);border-radius:5px;width:min(95%,680px);max-h
 .day-entry{border:1px solid var(--line);border-radius:4px;margin:12px 0;padding:14px;background:var(--paper)}.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}#msg{color:var(--gold-light);margin-top:10px;font-size:12px;letter-spacing:.3px}
 .hotel-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin:12px 0}.hotel-photo{border:1px solid var(--line);border-radius:4px;padding:8px;min-width:0;background:var(--paper)}.hotel-photo img{width:100%;height:100px;object-fit:cover;border-radius:3px}.hotel-photo button{width:100%;margin:5px 0 0;padding:8px;font-size:10px}
 .hotel-status{font-weight:bold;color:#2c6f88}.cab-preview{width:140px;height:95px;object-fit:cover;border-radius:4px;margin-top:8px}.form-check{display:flex;align-items:center;gap:9px;margin:14px 0;padding:12px 14px;background:#f0eee5;border:1px solid var(--line);border-radius:3px}.form-check input{width:auto;margin:0;accent-color:var(--forest)}
-.package-preview{width:100%;max-height:240px;object-fit:cover;border-radius:4px;margin-top:8px}.package-card-image{width:100%;max-width:300px;height:160px;object-fit:cover;border-radius:4px;margin:8px 0}
+.package-preview{width:100%;max-height:240px;object-fit:cover;border-radius:4px;margin-top:8px}
+.package-day-editor{display:grid;gap:12px;margin:12px 0}
+.package-day-entry{padding:14px;border:1px solid var(--line);border-radius:5px;background:#fff}
+.package-day-entry-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.package-day-entry-head strong{font-size:13px;color:var(--forest)}
+.package-day-fields{display:grid;grid-template-columns:120px minmax(0,1fr);gap:0 12px}
+.package-day-fields .full{grid-column:1/-1}
+.package-day-fields textarea{min-height:88px}
+.package-day-entry .remove-package-day{background:#fff;color:#8d3934;border-color:#8d3934}
+@media(max-width:520px){.package-day-fields{grid-template-columns:1fr}.package-day-fields .full{grid-column:auto}}.package-card-image{width:100%;max-width:300px;height:160px;object-fit:cover;border-radius:4px;margin:8px 0}
 #auth{max-width:480px;margin:7vh auto 0}#auth .card{padding:32px;border-top:3px solid var(--gold);box-shadow:var(--shadow)}#auth h2{font:600 38px var(--serif);margin:0 0 20px}#login{width:100%;margin:8px 0 0}#refresh{background:transparent;color:var(--forest);border-color:var(--gold)}#refresh:hover{background:var(--gold)}
 #supplierSubmissions,#supplierProfiles,#supplierListings,#supplierEnquiries,#packageList,#itineraryList,#hotelList,#cabList,#leadList,#bookingList,#vendorList,#financeList,#recent{display:grid;gap:12px}\n.lead-status-label{display:inline-flex;align-items:center;gap:8px;margin:5px 8px 5px 0;font-size:12px;color:var(--muted)}.lead-status-label select{width:auto;min-width:140px;padding:8px;border:1px solid var(--gold);border-radius:7px;background:#ffffff;color:var(--ink)}
 #supplierSubmissions article,#supplierProfiles article,#supplierListings article,#supplierEnquiries article{border-left:3px solid var(--gold)}
@@ -406,8 +415,10 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
   <small>No poster selected</small>
 </div>
 
-<label>Package Itinerary</label>
-<textarea name="itinerary" rows="4"></textarea>
+<label>Day-wise Package Itinerary</label>
+<small>Add each travel day separately. Every entry includes the day number, overnight stay location and a short description of that day's route or activities.</small>
+<div id="packageDayEditor" class="package-day-editor"></div>
+<button type="button" id="addPackageDay" class="secondary">+ Add Day</button>
 
 <button type="submit" id="packageSave">Save Package</button>
 <button type="button" data-close class="secondary">Cancel</button>
