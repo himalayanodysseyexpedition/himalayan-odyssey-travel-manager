@@ -6724,25 +6724,65 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   // inside the same guest popup rather than loading the separate itinerary page.
   if(cardSelector==="#packageList > article.package-slide" && window.matchMedia("(max-width:760px)").matches){
    event.preventDefault();
-   const record=(window.hoePackageRecords||[]).find(item=>String(item.id)===String(card.dataset.packageId));
+   let record=(window.hoePackageRecords||[]).find(item=>String(item.id)===String(card.dataset.packageId));
+   if(!record && db){
+    try{
+     const result=await db.from("packages").select("*").eq("id",card.dataset.packageId).maybeSingle();
+     if(!result.error)record=result.data;
+    }catch(fetchError){console.error("Could not fetch package itinerary:",fetchError);}
+   }
+   event.stopImmediatePropagation();
    if(record && typeof window.openHoePackageItinerary==="function"){
-    event.stopImmediatePropagation();
     window.openHoePackageItinerary(record);
     return;
    }
-   // Do not fall through to the legacy published-itinerary lookup: package cards
-   // use the admin-managed packages.itinerary field, not a separately linked page.
    const scroll=modal.querySelector(".guest-itinerary-content");
    if(!scroll)return;
    frame.style.display="none";
    scroll.style.display="block";
-   scroll.textContent="";
-   const message=document.createElement("p");
-   message.className="package-itinerary-loading";
-   message.textContent=record
-    ? "Opening the package itinerary… Please refresh if this message remains."
-    : "Package details are still loading. Please try again in a moment.";
-   scroll.appendChild(message);
+   scroll.replaceChildren();
+   const heading=document.createElement("h3");
+   heading.className="package-itinerary-section-title";
+   heading.textContent="Day-wise itinerary";
+   scroll.appendChild(heading);
+   const raw=String(record?.itinerary||"").trim();
+   const blocks=raw?raw.split(/\n\s*\n/).filter(Boolean):[];
+   const safeText=value=>String(value||"").trim();
+   blocks.forEach((block,index)=>{
+    const lines=block.split("\n");
+    const day=(lines.shift()||("Day "+(index+1))).trim();
+    const stayLine=lines.find(line=>/^Stay:/i.test(line.trim()));
+    const descriptionIndex=lines.findIndex(line=>/^Description:/i.test(line.trim()));
+    const stay=stayLine?stayLine.replace(/^Stay:\s*/i,"").trim():"";
+    const description=descriptionIndex>=0
+     ? [lines[descriptionIndex].replace(/^Description:\s*/i,""),...lines.slice(descriptionIndex+1)].join("\n").trim()
+     : lines.filter(line=>line!==stayLine).join("\n").trim();
+    const article=document.createElement("article");
+    article.className="package-itinerary-day";
+    const dayTitle=document.createElement("h4");
+    dayTitle.textContent=day;
+    article.appendChild(dayTitle);
+    if(stay){
+     const stayNode=document.createElement("span");
+     stayNode.className="package-itinerary-stay";
+     stayNode.textContent="OVERNIGHT STAY · "+stay;
+     article.appendChild(stayNode);
+    }
+    if(description){
+     const descriptionNode=document.createElement("p");
+     descriptionNode.textContent=description;
+     article.appendChild(descriptionNode);
+    }
+    scroll.appendChild(article);
+   });
+   if(!blocks.length){
+    const empty=document.createElement("p");
+    empty.className="package-itinerary-loading";
+    empty.textContent=record
+     ? "No day-wise itinerary has been saved for this package yet."
+     : "Package details could not be loaded. Please refresh the page and try again.";
+    scroll.appendChild(empty);
+   }
    lastFocus=document.activeElement;
    title.textContent=popupLabel+" — Itinerary";
    modal.classList.add("is-open");
