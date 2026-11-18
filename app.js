@@ -592,13 +592,21 @@ async function uploadPackageImage(packageId, file) {
     Math.random().toString(36).slice(2, 9) + "-" +
     safeFileName(file.name);
 
-  const optimizedFile = await optimizeStorageImage(file);
-  message("Uploading optimized package poster...");
+  let uploadFile = file;
+  try {
+    uploadFile = await optimizeStorageImage(file);
+    message("Uploading optimized package poster...");
+  } catch (optimizationError) {
+    // The original JPG/PNG/WebP may still be uploadable even when this
+    // browser cannot decode it for canvas compression (common on iOS).
+    console.warn("Package poster optimization failed; uploading the original image.", optimizationError);
+    message("Image optimization unavailable. Uploading the original poster...");
+  }
 
   const { error: uploadError } = await db.storage
     .from(PACKAGE_BUCKET)
-    .upload(path, optimizedFile, {
-      contentType: optimizedFile.type,
+    .upload(path, uploadFile, {
+      contentType: uploadFile.type || file.type,
       cacheControl: "31536000",
       upsert: false
     });
