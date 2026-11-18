@@ -3,6 +3,7 @@
   dialog.hoe-package-itinerary-modal{
     width:min(560px,calc(100vw - 28px));
     max-width:none;
+    max-height:84vh;
     max-height:min(84dvh,780px);
     margin:auto;
     padding:0;
