@@ -211,3 +211,17 @@ body footer :is(h2,h3,h4,strong,b,p,small),body footer a,body .site-footer :is(h
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
+
+
+/* Mobile only: remove the dark outer outline from cards in Our Travel Packages. */
+@media screen and (max-width:760px){
+  html body #packages .package-slide{
+    border:0!important;
+    outline:0!important;
+  }
+  html body #packages .package-slide:before,
+  html body #packages .package-slide:after{
+    border:0!important;
+    outline:0!important;
+  }
+}
