@@ -6672,8 +6672,10 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   dragHandle.addEventListener("touchend",()=>{if(dragging&&touchCurrentY-touchStartY>85)close();dragging=false;touchStartY=0;touchCurrentY=0},{passive:true});
  }
  let lastFocus=null;
+ let restoreLastFocus=true;
  const open=(url,label)=>{
   lastFocus=document.activeElement;
+  restoreLastFocus=true;
   title.textContent=label||"Explore Full Itinerary";
   frame.src=url;
   frame.style.display="block";
@@ -6691,7 +6693,14 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   const content=modal.querySelector(".guest-itinerary-content");
   if(content){content.innerHTML='<p class="package-itinerary-loading">Select a package to view its itinerary.</p>';content.style.display="none";}
   if(frame){frame.style.display="block";frame.src="about:blank";}
-  if(lastFocus&&typeof lastFocus.focus==="function")lastFocus.focus();
+  if(restoreLastFocus&&lastFocus&&typeof lastFocus.focus==="function"){
+   lastFocus.focus({preventScroll:true});
+  }else{
+   const active=document.activeElement;
+   if(active&&modal.contains(active)&&typeof active.blur==="function")active.blur();
+  }
+  lastFocus=null;
+  restoreLastFocus=true;
  };
  const openFromCard=async (event,cardSelector)=>{
   const link=event.target.closest("a.btn");
@@ -6783,7 +6792,11 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
      : "Package details could not be loaded. Please refresh the page and try again.";
     scroll.appendChild(empty);
    }
-   lastFocus=document.activeElement;
+   // Restore focus only for keyboard activation. A touch tap may leave the carousel
+   // container as document.activeElement; refocusing it on close draws an outline around
+   // the package rail/cards on mobile.
+   restoreLastFocus=event.detail===0;
+   lastFocus=restoreLastFocus?link:null;
    title.textContent=popupLabel+" — Itinerary";
    modal.classList.add("is-open");
    modal.setAttribute("aria-hidden","false");
