@@ -8315,3 +8315,11 @@ html body #packages #packageList .package-slide .card-body>.price{display:none!i
   }
 }
 </style>
+
+
+<!-- Desktop-only: remove Tour Itineraries from the homepage. Mobile remains unchanged. -->
+<style id="desktop-homepage-hide-tour-itineraries">
+@media screen and (min-width:761px){
+  html body main #itineraries{display:none!important;}
+}
+</style>
