@@ -18,13 +18,7 @@
  function syncMenuState(nav){
   const trigger=nav&&nav.querySelector('.dock-menu-trigger');
   if(!trigger)return;
-  if(mobile()){
-   trigger.setAttribute('aria-expanded','false');
-   trigger.setAttribute('aria-label','Return to homepage top');
-   trigger.classList.remove('is-open');
-   nav.classList.remove('menu-open');
-   return;
-  }
+  if(mobile())return; // The mobile dock popup owns its own expanded state.
   const headerToggle=document.querySelector('header .header-menu-toggle');
   if(!headerToggle)return;
   const opened=headerToggle.getAttribute('aria-expanded')==='true';
@@ -44,18 +38,15 @@
   nav.className=expected;
   nav.setAttribute('aria-label','Bottom navigation');
   nav.innerHTML=items.map(x=>'<a href="'+x.href+'" data-dock="'+x.path+'" aria-label="'+x.label+'">'+icon(x.svg)+'<span>'+x.label+'</span></a>').join('')+
-   '<button type="button" class="dock-menu-trigger" data-dock-menu aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMainNavigation">'+
+   '<button type="button" class="dock-menu-trigger" data-dock-menu aria-label="Open navigation menu" aria-expanded="false" aria-controls="dockMenuPopup">'+
    icon(mobile()?'<path d="M12 4v16M4 12h16"/>':'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect class="icon-side" x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect class="icon-side" x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/>')+
    '<span>Menu</span></button>';
   document.body.appendChild(nav);
   const menuTrigger=nav.querySelector('.dock-menu-trigger');
-  if(mobile()){
-   menuTrigger.setAttribute('aria-label','Return to homepage top');
-   menuTrigger.setAttribute('title','Return to homepage top');
-  }
   {
-   // Desktop keeps its existing menu popup; the mobile Menu control returns to the homepage top.
+   // The dock popup is independent of the hidden header menu on mobile.
    const menuPopup=document.createElement('div');
+   menuPopup.id='dockMenuPopup';
    menuPopup.className='dock-menu-popup '+(mobile()?'dock-fab-popup':'dock-panel-popup');
    menuPopup.setAttribute('role','menu');
    menuPopup.setAttribute('aria-label','Website menu');
@@ -182,7 +173,7 @@
   candidates.forEach(el=>{if(!el.classList.contains('app-reveal')){el.classList.add('app-reveal');io.observe(el)}});
  }
  function registerPwa(){if('serviceWorker'in navigator&&location.protocol==='https:'){window.addEventListener('load',()=>navigator.serviceWorker.register('/service-worker.js?build=22',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}),{once:true})}}
- // Mobile Home and Menu actions: capture taps before delegated navigation or popup handlers.
+ // Keep the mobile Home shortcut independent; Menu taps reach the popup's own click handler.
  document.addEventListener('click',event=>{
   if(!mobile())return;
   const target=event.target instanceof Element?event.target.closest('.mobile-app-dock [data-dock="home"]'):null;
