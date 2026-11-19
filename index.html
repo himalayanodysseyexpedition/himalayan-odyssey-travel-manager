@@ -1927,10 +1927,8 @@ body.guest-itinerary-popup-open{overflow:hidden}
 
     <nav class="glass-nav" id="mobileMainNavigation" aria-label="Main navigation">
       <a href="#more-than-tours"><span>Destinations</span></a>
-      <a href="/travel-guides/"><span>Travel Guides</span></a>
       <a href="#cabs"><span>Vehicle and Cabs</span></a>
       <a href="#gallery"><span>Hotels and Properties</span></a>
-      <a href="/suppliers/"><span>List Your Vehicle or Property</span></a>
     </nav>
     <button class="header-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMainNavigation">
       <svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
@@ -2294,7 +2292,7 @@ body.guest-itinerary-popup-open{overflow:hidden}
   <p>Contact Himalayan Odyssey Expedition for packages, bookings and travel enquiries.</p>
 
   <a class="btn desktop-enquiry-link"
-     href="/?topic=General%20Himalayan%20trip%20planning/build-your-trip/">Start an Enquiry</a>
+     href="/?topic=General%20Himalayan%20trip%20planning">Start an Enquiry</a>
 
   <a class="btn mobile-whatsapp-enquiry"
      href="https://wa.me/919816929669?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20planning%20a%20Himalayan%20trip%20with%20Himalayan%20Odyssey%20Expedition.">Start an Enquiry</a>
@@ -2352,10 +2350,7 @@ body.guest-itinerary-popup-open{overflow:hidden}
     <a href="#packages">Upcoming Group Tours</a> ·
     <a href="#itineraries">Tour Itineraries</a> ·
     <a href="#more-than-tours">Destinations &amp; Services</a> ·
-    <a href="/manali-tours/">Manali Tours</a> ·
-    <a href="/himachal-pradesh-tours/">Himachal Pradesh Tours</a> ·
-    <a href="/privacy-policy/">Privacy Policy</a> ·
-    <a href="/about-us/">About Us</a>
+    <a href="/privacy-policy/">Privacy Policy</a>
   </nav>
 
   <a href="admin.html">Admin Login</a>
@@ -2553,7 +2548,7 @@ async function loadPackages() {
             ` : ""}
 
             <div class="package-card-actions">
-              <a class="btn package-enquire-link" href="/?package=${encodeURIComponent(p.id)}/build-your-trip/">Enquire About This Package</a>
+              <a class="btn package-enquire-link" href="/?package=${encodeURIComponent(p.id)}">Enquire About This Package</a>
               <a class="btn package-itinerary-link" aria-haspopup="dialog" href="${safe(p.linkedItineraryPage || "/itinerary.html")}">View Itinerary</a>
             </div>
 
@@ -2587,7 +2582,7 @@ async function loadItineraries() {
       const cover=item.cover_image||(gallery[0]&&gallery[0].url)||"";
       const pageUrl="/itinerary.html?id="+encodeURIComponent(item.id);
       const coverHtml=cover?'<img src="'+safe(cover)+'" alt="'+safe(item.title||"Himalayan tour")+'" loading="lazy" decoding="async">':'<div class="itinerary-cover-placeholder"><span>✧</span><b>HIMALAYAN ODYSSEY EXPEDITION</b><small>CURATED HIMALAYAN JOURNEY</small></div>';
-      return '<article class="card package-slide itinerary-slide reveal"><a class="itinerary-cover-link" href="'+safe(pageUrl)+'"><div class="itinerary-cover">'+coverHtml+'</div></a><div class="card-body"><h3>'+safe(item.title||"Himalayan Tour")+'</h3><p>'+safe(item.destination||"Himalayan Tour")+'</p>'+(duration?'<p class="itinerary-meta">'+safe(duration)+'</p>':"")+'<div class="itinerary-card-actions"><a class="btn" href="'+safe(pageUrl)+'">Explore Full Itinerary</a><a class="btn" href="/?itinerary='+encodeURIComponent(item.id)+'&topic='+encodeURIComponent("Itinerary enquiry: "+(item.title||"Himalayan tour"))+'/build-your-trip/">Enquire About This Itinerary</a></div></div></article>';
+      return '<article class="card package-slide itinerary-slide reveal"><a class="itinerary-cover-link" href="'+safe(pageUrl)+'"><div class="itinerary-cover">'+coverHtml+'</div></a><div class="card-body"><h3>'+safe(item.title||"Himalayan Tour")+'</h3><p>'+safe(item.destination||"Himalayan Tour")+'</p>'+(duration?'<p class="itinerary-meta">'+safe(duration)+'</p>':"")+'<div class="itinerary-card-actions"><a class="btn" href="'+safe(pageUrl)+'">Explore Full Itinerary</a><a class="btn" href="/?itinerary='+encodeURIComponent(item.id)+'&topic='+encodeURIComponent("Itinerary enquiry: "+(item.title||"Himalayan tour"))+'">Enquire About This Itinerary</a></div></div></article>';
     }).join("");
     observeReveals();
   }catch(error){console.error("Itinerary loading error:",error);showLoadingError(list,"Itineraries Temporarily Unavailable","Please contact us on WhatsApp for current tour details.","Please share your tour itineraries.");}
@@ -2760,7 +2755,7 @@ async function loadHotels() {
                     data-view-hotel="${safe(hotel.id)}">View Property</button>
 
             <a class="btn${String(hotel.name || "").toLowerCase().includes("survi") ? " hotel-survi-action-btn" : ""}"
-               href="/?topic=${encodeURIComponent("Property enquiry: "+(hotel.name||"Accommodation"))}/build-your-trip/">Enquire Now</a>
+               href="/?topic=${encodeURIComponent("Property enquiry: "+(hotel.name||"Accommodation"))}">Enquire Now</a>
 
           </div>
         </article>`;
@@ -2819,7 +2814,7 @@ function showHotelDetails(hotelId) {
 
     <div style="margin-top:25px">
       <a class="btn"
-         href="/?topic=${encodeURIComponent("Property enquiry: "+(hotel.name||"Accommodation"))}/build-your-trip/">Enquire About This Property</a>
+         href="/?topic=${encodeURIComponent("Property enquiry: "+(hotel.name||"Accommodation"))}">Enquire About This Property</a>
     </div>
   `;
 
