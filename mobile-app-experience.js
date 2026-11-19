@@ -17,6 +17,7 @@
  }
  function syncMenuState(nav){
   const trigger=nav&&nav.querySelector('.dock-menu-trigger');
+  if(mobile())return; // The mobile dock owns its popup state; never sync it to the hidden header menu.
   const headerToggle=document.querySelector('header .header-menu-toggle');
   if(!trigger||!headerToggle)return;
   const opened=headerToggle.getAttribute('aria-expanded')==='true';
@@ -51,7 +52,7 @@
    menuPopup.innerHTML=
     '<a role="menuitem" href="/destinations/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20 9 4l6 16 6-16M5 15h14M7 9h10"/></svg><span>Destinations</span></a>'+
     '<a role="menuitem" href="/#cabs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13l2-6h14l2 6v6h-2v-2H5v2H3zM5 13h14M7 16h.01M17 16h.01"/></svg><span>Cabs</span></a>'+
-    '<a role="menuitem" href="/#gallery"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20V8l9-5 9 5v12M7 20v-7h10v7M9 9h.01M15 9h.01"/></svg><span>Hotels &amp; Properties</span></a>';
+    '<a role="menuitem" href="/packages/#packageList"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5h16v13H4zM8 7.5V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2.5M4 12h16M9 12v2h6v-2"/></svg><span>Travel Packages</span></a>';
    Object.assign(menuPopup.style,{
     display:'none',position:'fixed',left:'50%',bottom:'calc(98px + env(safe-area-inset-bottom))',
     transform:'translateX(-50%)',width:'min(360px, calc(100vw - 24px))',
@@ -59,7 +60,7 @@
     flexDirection:'column',alignItems:'flex-end',gap:'10px',padding:'0',
     border:'0',borderRadius:'0',background:'transparent',color:'#fff',
     boxShadow:'none',backdropFilter:'none',WebkitBackdropFilter:'none',
-    zIndex:'1901'
+    zIndex:'2147483001'
    });
    if(!mobile())Object.assign(menuPopup.style,{width:'min(360px, calc(100vw - 24px))',maxHeight:'min(58vh, 460px)',overflowY:'auto',flexDirection:'column',alignItems:'stretch',gap:'5px',padding:'10px',border:'1px solid rgba(255,255,255,.28)',borderRadius:'22px',background:'rgba(55,59,65,.97)',boxShadow:'0 20px 48px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.16)',backdropFilter:'blur(28px) saturate(145%)',WebkitBackdropFilter:'blur(28px) saturate(145%)'});
    menuPopup.querySelectorAll('a').forEach(a=>{
