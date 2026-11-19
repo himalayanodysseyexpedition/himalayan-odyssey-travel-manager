@@ -574,3 +574,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Corrected homepage heading hierarchy by changing seven experience-card subheadings from H4 to H3 under their existing H2 section.
 - Refreshed sitemap lastmod values only for existing sitemap URLs changed in this pass.
 - Files: index.html, about-us/index.html, himachal-pradesh-tours/index.html, jibhi-tours/index.html, kasol-tours/index.html, manali-tours/index.html, marketplace/index.html, privacy-policy/index.html, services/index.html, shimla-tours/index.html, spiti-tour-cost/index.html, spiti-valley-travel-guide/index.html, suppliers/index.html, travel-guides/index.html, sitemap.xml, PROJECT_MEMORY.md. PR and verification pending; hosting/deployment settings unchanged.
+
+
+## 2026-11-20 — Remove 12 public pages and expose 404 responses
+- Removed the public page files for About Us, Himachal Pradesh Tours, Jibhi Tours, Kasol Tours, Manali Tours, Shimla Tours, Spiti Tour Cost, Spiti Valley Travel Guide, Travel Guides, Services, Marketplace and Suppliers. Removed page-local Marketplace/Suppliers scripts with their page directories; admin tools, Supabase data/schema and unrelated routes remain untouched.
+- Removed these 12 URLs from `sitemap.xml` and removed the Services dropdown from the two remaining static navigation templates (`itinerary.html` and `privacy-policy/index.html`) so they no longer link to deleted pages.
+- GitHub Pages should serve its standard 404 for the removed directory URLs after the change is published. No custom redirect or custom 404 page was added. Hosting configuration, DNS, deployment workflows, booking/admin flows and database records were not changed.
