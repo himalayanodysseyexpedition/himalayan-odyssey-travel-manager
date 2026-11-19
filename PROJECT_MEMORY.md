@@ -567,3 +567,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Updated `AGENTS.md` to tell compatible coding agents where to discover the skills and to prevent generic third-party guidance from overriding this project's stack and safety constraints.
 - Only Markdown and license text files changed; no website runtime code, dependencies, database, hosting or deployment settings changed.
 - PR: #629 (https://github.com/himalayanodysseyexpedition/himalayan-odyssey-travel-manager/pull/629). Verification: diff review confirms 23 documentation-only files; no application tests or live-browser checks apply.
+
+
+## SEO internal-link and heading cleanup — 2026-11-20
+- Updated internal navigation and related-content links on existing public pages to point directly to current homepage sections or relevant live destination pages instead of retired noindex redirect URLs. Retired routes and their redirect/noindex behaviour were not changed; no new pages were created.
+- Corrected homepage heading hierarchy by changing seven experience-card subheadings from H4 to H3 under their existing H2 section.
+- Refreshed sitemap lastmod values only for existing sitemap URLs changed in this pass.
+- Files: index.html, about-us/index.html, himachal-pradesh-tours/index.html, jibhi-tours/index.html, kasol-tours/index.html, manali-tours/index.html, marketplace/index.html, privacy-policy/index.html, services/index.html, shimla-tours/index.html, spiti-tour-cost/index.html, spiti-valley-travel-guide/index.html, suppliers/index.html, travel-guides/index.html, sitemap.xml, PROJECT_MEMORY.md. PR and verification pending; hosting/deployment settings unchanged.
