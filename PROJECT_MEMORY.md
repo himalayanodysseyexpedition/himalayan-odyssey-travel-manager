@@ -589,3 +589,12 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Added root `llms.txt` with verified public business identity, contact, destinations, services and travel-condition caveats.
 - Scope: `index.html`, `robots.txt`, `llms.txt`; no routes, visual styling, booking flows, Supabase, hosting, DNS or deployment settings changed.
 - Verification: JSON-LD parsed successfully; crawler directives and llms.txt facts were checked from the repository branch. No workflow run was returned for the merge commit, and live deployment / crawler access remain unverified.
+
+
+## 2026-11-20 — Publish-ready 2027 Spiti travel journal content
+- Added a new `/blog/` index and six original, standalone 2027 planning guides: Winter Spiti route planning, winter road access, Delhi-to-Spiti planning, winter-versus-summer comparison, Spiti trip-cost budgeting and an eight-day sample itinerary.
+- Added article titles, unique meta descriptions, canonical URLs, Open Graph/Twitter metadata, Article JSON-LD, related-article links, WhatsApp enquiry links and links to official Himachal Tourism / Lahaul & Spiti district route information. Content avoids fixed future prices and guarantees of road access.
+- Added three guide cards and an all-guides link to the homepage, a Travel Journal footer link, and all seven new URLs to `sitemap.xml`.
+- New public URLs use `/blog/` and do not recreate the previously removed `/spiti-tour-cost/`, `/spiti-valley-travel-guide/` or `/travel-guides/` routes.
+- Files: `blog/index.html`, six `blog/*/index.html` articles, `index.html`, `sitemap.xml`, `PROJECT_MEMORY.md`. No Supabase, booking/payment logic, hosting configuration, deployment workflow or paid services changed.
+- Verification: all seven blog pages have unique title/description/canonical metadata; all six articles contain Article JSON-LD; sitemap contains nine URLs and is well-formed XML. Browser rendering and live deployment remain unverified.
