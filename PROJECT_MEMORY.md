@@ -598,3 +598,12 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - New public URLs use `/blog/` and do not recreate the previously removed `/spiti-tour-cost/`, `/spiti-valley-travel-guide/` or `/travel-guides/` routes.
 - Files: `blog/index.html`, six `blog/*/index.html` articles, `index.html`, `sitemap.xml`, `PROJECT_MEMORY.md`. No Supabase, booking/payment logic, hosting configuration, deployment workflow or paid services changed.
 - Verification: all seven blog pages have unique title/description/canonical metadata; all six articles contain Article JSON-LD; sitemap contains nine URLs and is well-formed XML. Browser rendering and live deployment remain unverified.
+
+
+## 2026-11-20 — Website lead capture and CRM connection
+- Added a shared responsive website enquiry form to the homepage and five active commercial landing pages (Spiti Valley, Winter Spiti, Kinnaur, Spiti from Chandigarh and Narkanda).
+- Captures name, 10-digit WhatsApp number, destination/package, optional travel date, traveller count, starting city and contact consent. Page context is recorded as the lead source; starting city and page URL are stored in lead notes.
+- Connects to the existing active `submit-website-enquiry` Supabase Edge Function, which writes into the existing customers and leads tables. Existing Admin Dashboard Guest Leads already displays these CRM records; no schema or RLS changes were made.
+- After submission, opens a pre-filled WhatsApp enquiry. If CRM save cannot be confirmed, WhatsApp remains the fallback path. Includes client validation, hidden honeypot, accessible status feedback and date minimum.
+- No booking, payment, admin permissions, database schema, hosting, DNS, deployment configuration or deleted routes changed.
+- PR and verification status to be recorded after review.
