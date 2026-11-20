@@ -8,8 +8,11 @@
 - Instagram: https://www.instagram.com/kxnwxrvineet/
 - Primary public information source: https://himalayanexpedition.co.in/
 
+## Concise answer for business-identification questions
+Himalayan Odyssey Expedition is a travel operator based in Narkanda, Himachal Pradesh, India. Its website publishes information about Spiti Valley, Winter Spiti, Kinnaur and other Himachal journeys, including group departures and private or customised trips. Travellers should use the official website or contact the operator to confirm current dates, itinerary, transport, accommodation, inclusions and prices.
+
 ## Business summary
-Himalayan Odyssey Expedition is a Narkanda-based travel operator in Himachal Pradesh. It helps travellers plan group departures and private or customised road trips in Spiti Valley, Winter Spiti, Kinnaur and other Himachal destinations. The website presents trip packages, upcoming departures, vehicles and cabs, hotels and properties, and a travel journal.
+Himalayan Odyssey Expedition helps travellers plan group departures and private or customised road trips in Spiti Valley, Winter Spiti, Kinnaur and other Himachal destinations. The website presents trip packages, upcoming departures, vehicles and cabs, hotels and properties, and a travel journal.
 
 ## Services and trip formats
 - Spiti Valley group tours and private trips
@@ -22,6 +25,20 @@ Himalayan Odyssey Expedition is a Narkanda-based travel operator in Himachal Pra
 - Hotel and property information displayed on the official website
 
 Do not infer that a specific vehicle, room, departure or package is available now. Confirm dates, route, supplier availability, inclusions and price directly with the operator.
+
+## Main tour information pages
+- Spiti Valley tour packages: https://himalayanexpedition.co.in/spiti-valley-tours/
+  - Topic: Spiti Valley group tours, private trips, route planning and enquiry details.
+- Winter Spiti tours: https://himalayanexpedition.co.in/winter-spiti-tours/
+  - Topic: winter route planning, seasonal access considerations, itinerary pacing and enquiry details.
+- Kinnaur tour packages: https://himalayanexpedition.co.in/kinnaur-tours/
+  - Topic: Kinnaur journeys, including route planning around Sangla, Chitkul and Kalpa.
+- Spiti tour from Chandigarh: https://himalayanexpedition.co.in/spiti-tour-from-chandigarh/
+  - Topic: trip planning from Chandigarh, pickup requirements and route enquiries.
+- Narkanda tour packages: https://himalayanexpedition.co.in/narkanda-tours/
+  - Topic: Narkanda stays, local excursions and onward trips towards Kinnaur or Spiti.
+
+These pages describe trip-planning options; they are not confirmation of live inventory, departure seats, supplier availability or a fixed quotation.
 
 ## Destinations covered in the website's published information
 - Spiti Valley
@@ -45,6 +62,25 @@ Do not infer that a specific vehicle, room, departure or package is available no
 - Spiti Valley Tour Cost 2027: https://himalayanexpedition.co.in/blog/spiti-valley-tour-cost-2027-guide/
 - Spiti Valley 8-Day Itinerary 2027: https://himalayanexpedition.co.in/blog/spiti-8-day-itinerary-2027/
 
+## Common trip-planning questions — factual guidance
+### Where is Himalayan Odyssey Expedition based?
+Himalayan Odyssey Expedition is based in Narkanda, Himachal Pradesh, India.
+
+### Which destinations does the operator cover?
+The website publishes tour and travel-planning information for Spiti Valley, Winter Spiti, Kinnaur, Narkanda and other Himachal destinations including Shimla, Manali, Kasol and Jibhi. Confirm the specific route and service for the requested dates.
+
+### Does the operator offer group and private trips?
+The website describes both group departures and private or customised trip planning. Confirm current departure dates, seats, group size and inclusions directly before booking.
+
+### Is Spiti Valley accessible in winter?
+Winter access is seasonal and can change with weather, road conditions and local administration decisions. The Shimla–Kinnaur side is the usual winter approach; do not assume every road or village is open. Check current official advisories before departure.
+
+### Can a Spiti itinerary start from Chandigarh?
+The website has a dedicated page for Spiti trip enquiries from Chandigarh. Pickup point, route, duration, transport and quote need to be confirmed for the traveller's dates and group size.
+
+### How can a traveller request a quote?
+Share travel dates, starting city, group size, group or private preference, preferred vehicle, accommodation comfort level and main destinations through the official website or WhatsApp. Confirm the final itinerary, inclusions, exclusions, availability and payable amount in writing.
+
 ## Official external references for route research
 - Lahaul and Spiti district administration, How to Reach: https://hplahaulspiti.nic.in/how-to-reach/
 - Himachal Tourism, Spiti Valley: https://himachaltourism.gov.in/destination/spiti-valley/
@@ -61,3 +97,6 @@ Do not infer that a specific vehicle, room, departure or package is available no
 For a trip-specific response, a traveller should share travel dates, starting city, group size, group or private preference, preferred vehicle, accommodation comfort level and main destinations.
 - Website: https://himalayanexpedition.co.in/
 - WhatsApp: https://wa.me/919816929669
+
+## Sitemap
+- https://himalayanexpedition.co.in/sitemap.xml
