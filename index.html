@@ -7411,6 +7411,20 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 
 </style>
 
+<style id="mobile-odyssey-cards-glass-blur-v1">
+/* Mobile-only translucent glass treatment for destination and experience cards. */
+@media screen and (max-width:760px){
+  html body #odyssey-difference-mobile .odyssey-place-card,
+  html body #odyssey-difference-mobile .odyssey-experience-card{
+    background:rgba(255,255,255,.055)!important;
+    -webkit-backdrop-filter:blur(16px) saturate(135%)!important;
+    backdrop-filter:blur(16px) saturate(135%)!important;
+    border:1px solid rgba(255,255,255,.19)!important;
+    box-shadow:0 8px 26px rgba(0,0,0,.13)!important;
+  }
+}
+</style>
+
 <style id="mobile-odyssey-card-heading-white-v1">
 /* Ensure the five destination names and both experience names render white on mobile. */
 @media screen and (max-width:760px){
