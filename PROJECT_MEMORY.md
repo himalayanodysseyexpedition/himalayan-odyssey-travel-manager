@@ -580,3 +580,12 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Removed the public page files for About Us, Himachal Pradesh Tours, Jibhi Tours, Kasol Tours, Manali Tours, Shimla Tours, Spiti Tour Cost, Spiti Valley Travel Guide, Travel Guides, Services, Marketplace and Suppliers. Removed page-local Marketplace/Suppliers scripts with their page directories; admin tools, Supabase data/schema and unrelated routes remain untouched.
 - Removed these 12 URLs from `sitemap.xml` and removed the Services dropdown from the two remaining static navigation templates (`itinerary.html` and `privacy-policy/index.html`) so they no longer link to deleted pages.
 - GitHub Pages should serve its standard 404 for the removed directory URLs after the change is published. No custom redirect or custom 404 page was added. Hosting configuration, DNS, deployment workflows, booking/admin flows and database records were not changed.
+
+
+## 2026-11-20 — Free GEO foundations (PR #647)
+- Merged PR #647 as commit `8944aea105e9c0bec1e5718ecfc778b79bc556cc`.
+- Updated homepage meta/social descriptions to identify Himalayan Odyssey Expedition as a Narkanda-based Himachal travel operator and added `knowsAbout` topics to the existing TravelAgency JSON-LD.
+- Updated `robots.txt` with explicit allow rules for OAI-SearchBot, ChatGPT-User, GPTBot, Google-Extended, ClaudeBot and PerplexityBot; the existing site-wide allow rule remains.
+- Added root `llms.txt` with verified public business identity, contact, destinations, services and travel-condition caveats.
+- Scope: `index.html`, `robots.txt`, `llms.txt`; no routes, visual styling, booking flows, Supabase, hosting, DNS or deployment settings changed.
+- Verification: JSON-LD parsed successfully; crawler directives and llms.txt facts were checked from the repository branch. No workflow run was returned for the merge commit, and live deployment / crawler access remain unverified.
