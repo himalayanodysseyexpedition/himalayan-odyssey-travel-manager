@@ -2239,6 +2239,14 @@ body.guest-itinerary-popup-open{overflow:hidden}
       <div class="hotel-empty">Loading hotels and properties...</div>
     </div>
 
+    <div class="desktop-hotel-carousel-controls" aria-label="Hotel and properties carousel controls">
+      <span class="desktop-hotel-carousel-status">Explore more stays</span>
+      <div class="desktop-hotel-carousel-buttons">
+        <button type="button" class="desktop-hotel-carousel-prev" aria-label="Previous hotels">‹</button>
+        <button type="button" class="desktop-hotel-carousel-next" aria-label="Next hotels">›</button>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -7615,6 +7623,81 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   }
 }
 </style>
+
+
+
+<style id="desktop-hotels-properties-carousel-v1">
+/* Desktop-only horizontal hotel/property carousel. Mobile layout remains untouched. */
+@media screen and (min-width:761px){
+  html body #gallery .section-inner{overflow:hidden}
+  html body #gallery #galleryList{
+    display:grid!important;
+    grid-auto-flow:column!important;
+    grid-template-columns:none!important;
+    grid-auto-columns:minmax(280px,calc((100% - 48px)/3))!important;
+    gap:24px!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:8px 2px 22px!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    scroll-snap-type:x mandatory!important;
+    scroll-behavior:smooth!important;
+    overscroll-behavior-x:contain!important;
+    scrollbar-width:none!important;
+  }
+  html body #gallery #galleryList::-webkit-scrollbar{display:none!important}
+  html body #gallery #galleryList>.hotel-card{
+    width:auto!important;
+    min-width:0!important;
+    max-width:none!important;
+    scroll-snap-align:start!important;
+  }
+  html body #gallery .desktop-hotel-carousel-controls{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:18px;margin:12px 2px 0;padding-top:12px;
+    border-top:1px solid rgba(255,255,255,.18);
+  }
+  html body #gallery .desktop-hotel-carousel-status{
+    color:rgba(244,246,248,.68);font-size:11px;
+    letter-spacing:1.2px;text-transform:uppercase;
+  }
+  html body #gallery .desktop-hotel-carousel-buttons{display:flex;gap:9px}
+  html body #gallery .desktop-hotel-carousel-buttons button{
+    display:grid;place-items:center;width:42px;height:42px;
+    border:1px solid rgba(244,246,248,.55);border-radius:50%;
+    background:rgba(255,255,255,.08);color:#fff;
+    font:400 27px/1 Arial,sans-serif;cursor:pointer;
+    transition:background .2s ease,color .2s ease,transform .2s ease;
+  }
+  html body #gallery .desktop-hotel-carousel-buttons button:hover{
+    background:#fff;color:#10243b;transform:translateY(-2px);
+  }
+  html body #gallery .desktop-hotel-carousel-buttons button:focus-visible{
+    outline:2px solid #fff;outline-offset:3px;
+  }
+}
+@media screen and (max-width:760px){
+  html body #gallery .desktop-hotel-carousel-controls{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+  html body #gallery #galleryList{scroll-behavior:auto!important}
+}
+</style>
+<script id="desktop-hotels-properties-carousel-controls-v1">
+(function(){
+  const section=document.getElementById("gallery");
+  const rail=document.getElementById("galleryList");
+  if(!section||!rail)return;
+  const previous=section.querySelector(".desktop-hotel-carousel-prev");
+  const next=section.querySelector(".desktop-hotel-carousel-next");
+  if(!previous||!next)return;
+  const step=()=>Math.max(rail.clientWidth/3,rail.querySelector(".hotel-card")?.getBoundingClientRect().width||300)+24;
+  previous.addEventListener("click",()=>rail.scrollBy({left:-step(),behavior:"smooth"}));
+  next.addEventListener("click",()=>rail.scrollBy({left:step(),behavior:"smooth"}));
+})();
+</script>
 
 </body>
 
