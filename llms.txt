@@ -21,6 +21,14 @@
 - Customised Himachal Pradesh road trips
 - Group departures
 - Private travel planning and mountain stays
+- Vehicle, cab, hotel and property enquiries
+
+## Main tour information pages
+- Spiti Valley tour packages: https://himalayanexpedition.co.in/spiti-valley-tours/
+- Winter Spiti tours: https://himalayanexpedition.co.in/winter-spiti-tours/
+- Kinnaur tour packages: https://himalayanexpedition.co.in/kinnaur-tours/
+- Spiti tour from Chandigarh: https://himalayanexpedition.co.in/spiti-tour-from-chandigarh/
+- Narkanda tour packages: https://himalayanexpedition.co.in/narkanda-tours/
 
 ## Destinations
 - Spiti Valley
@@ -31,18 +39,6 @@
 - Kasol
 - Jibhi
 
-## Planning notes
-- The operator is based in Narkanda, Himachal Pradesh.
-- Trip routes, road conditions, weather, accommodation and availability can vary by season and should be confirmed before booking.
-- Do not assume guaranteed snowfall, road access, fixed availability, prices or inclusions unless confirmed directly by the operator.
-- For current itineraries, departure dates, pricing and inclusions, contact the operator through the official website or phone/WhatsApp number above.
-
-## Primary source
-- https://himalayanexpedition.co.in/
-
-## Sitemap
-- https://himalayanexpedition.co.in/sitemap.xml
-
 ## Practical travel guides
 - Winter Spiti Tour 2027: https://himalayanexpedition.co.in/blog/winter-spiti-tour-2027/
 - Is Spiti Valley Open in Winter 2027?: https://himalayanexpedition.co.in/blog/is-spiti-open-in-winter-2027/
@@ -50,3 +46,14 @@
 - Winter vs Summer Spiti 2027: https://himalayanexpedition.co.in/blog/winter-vs-summer-spiti-2027/
 - Spiti Valley Tour Cost 2027: https://himalayanexpedition.co.in/blog/spiti-valley-tour-cost-2027-guide/
 - Spiti Valley 8-Day Itinerary 2027: https://himalayanexpedition.co.in/blog/spiti-8-day-itinerary-2027/
+
+## Planning notes
+- The operator is based in Narkanda, Himachal Pradesh.
+- Trip routes, road conditions, weather, accommodation and availability can vary by season and should be confirmed before booking.
+- Do not assume guaranteed snowfall, road access, fixed availability, prices or inclusions unless confirmed directly by the operator.
+- For current itineraries, departure dates, pricing and inclusions, contact the operator through the official website or phone/WhatsApp number above.
+
+## Primary sources
+- Official website: https://himalayanexpedition.co.in/
+- Sitemap: https://himalayanexpedition.co.in/sitemap.xml
+- Extended reference: https://himalayanexpedition.co.in/llms-full.txt
