@@ -7701,13 +7701,20 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
 
 
 
-<style id="desktop-cab-card-price-black-v1">
-/* Desktop only: render vehicle and cab card prices in black. */
+<style id="desktop-cab-card-photo-price-badge-v2">
+/* Desktop only: match the Travel Packages photo price badge on Vehicles & Cabs cards. */
 @media screen and (min-width:761px){
-  html body #cabs #cabList .cab-card .card-body .price,
-  html body #cabs #cabList .cab-card .card-body .price *{
-    color:#000!important;
+  html body #cabs #cabList .cab-card{position:relative!important}
+  html body #cabs #cabList .cab-card:before{
+    content:attr(data-price)!important;position:absolute!important;z-index:3!important;
+    top:14px!important;right:14px!important;max-width:calc(100% - 28px)!important;
+    padding:9px 13px!important;border:1px solid rgba(255,255,255,.78)!important;
+    border-radius:999px!important;background:rgba(255,255,255,.94)!important;color:#10151b!important;
+    box-shadow:0 5px 18px rgba(0,0,0,.14)!important;
+    -webkit-backdrop-filter:blur(12px)!important;backdrop-filter:blur(12px)!important;
+    font:800 14px/1.2 Inter,"Helvetica Neue",Arial,sans-serif!important;
   }
+  html body #cabs #cabList .cab-card .card-body>.price{display:none!important}
 }
 </style>
 
