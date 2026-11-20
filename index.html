@@ -2124,29 +2124,42 @@ body.guest-itinerary-popup-open{overflow:hidden}
 </section>
 
 
-<!-- ITINERARIES -->
-<section class="content" id="itineraries">
-  <div class="section-inner">
+<!-- DESKTOP: HIMALAYAN ODYSSEY DIFFERENCE -->
+<section class="content" id="itineraries" aria-labelledby="itineraries-odyssey-title">
+  <div class="odyssey-difference-inner">
+    <div class="section-title reveal odyssey-difference-title">
+      <small>THE HIMALAYAN ODYSSEY DIFFERENCE</small>
+      <h2 id="itineraries-odyssey-title">Beyond the Usual. Into the Real Himalayas.</h2>
+    </div>
+    <p class="intro reveal odyssey-difference-intro">More than the familiar tourist circuit. Discover offbeat Himalayan places and shared mountain experiences, thoughtfully planned around your journey.</p>
 
-    <div class="section-title reveal">
-      <small>PLAN YOUR JOURNEY</small>
-      <h2>Tour Itineraries</h2>
+    <div class="odyssey-place-grid">
+      <article class="odyssey-place-card"><span>01 / KINNAUR</span><h3>Chitkul Border</h3><p>Explore the far end of the Baspa Valley, subject to current access rules.</p></article>
+      <article class="odyssey-place-card"><span>02 / KINNAUR</span><h3>Shipki La</h3><p>A remote high-altitude border region, visited only when access and permissions allow.</p></article>
+      <article class="odyssey-place-card"><span>03 / KINNAUR</span><h3>Lepcha La</h3><p>An offbeat mountain experience considered according to route feasibility.</p></article>
+      <article class="odyssey-place-card"><span>04 / SPITI</span><h3>Gue Village</h3><p>A distinctive high-altitude village with a remarkable cultural story.</p></article>
+      <article class="odyssey-place-card"><span>05 / SPITI</span><h3>Pin Valley</h3><p>Explore the dramatic landscapes and villages of this quieter Himalayan valley.</p></article>
     </div>
 
-    <p class="intro reveal">Simple day-wise routes to help you plan with confidence.</p>
-
-    <div id="itineraryList" class="packages-carousel itineraries-carousel" tabindex="0" aria-label="Tour itineraries carousel">
-      <p id="itineraryMessage">Loading available itineraries...</p>
+    <div class="odyssey-experiences">
+      <div class="odyssey-experience-card">
+        <span class="odyssey-experience-mark" aria-hidden="true">✦</span>
+        <div><span class="odyssey-kicker">TOGETHER UNDER THE STARS</span><h3>Bonfire Evenings</h3><p>Unwind, share stories and enjoy the mountain atmosphere with your travel group.</p></div>
+      </div>
+      <div class="odyssey-experience-card">
+        <span class="odyssey-experience-mark" aria-hidden="true">♫</span>
+        <div><span class="odyssey-kicker">MAKE IT A CELEBRATION</span><h3>DJ &amp; Group Parties</h3><p>Add music and group celebrations to selected departures where arrangements permit.</p></div>
+      </div>
     </div>
-    <div class="guides-controls itineraries-controls" aria-label="Tour itinerary carousel controls">
-      <span class="guides-count" id="itinerariesCount" aria-live="polite">01 <i>/</i> 01</span>
-      <button type="button" class="guide-arrow" id="itinerariesPrev" aria-label="Previous itineraries">←</button>
-      <button type="button" class="guide-arrow" id="itinerariesNext" aria-label="Next itineraries">→</button>
-    </div>
-    <div class="guides-progress packages-progress" aria-hidden="true"><span id="itinerariesProgress"></span></div>
-    <p class="guides-swipe-hint">SWIPE TO EXPLORE <span>·</span> OR USE THE ARROWS</p>
-    
 
+    <div class="odyssey-flex-note">
+      <strong>No one-size-fits-all route.</strong>
+      <p>Stops and experiences are planned around travel dates, weather, road conditions, official permissions and traveller preferences. Remote and border-area access is never guaranteed.</p>
+    </div>
+    <a class="odyssey-difference-cta" href="https://wa.me/919816929669?text=Hi%2C%20I%20want%20to%20plan%20a%20Himalayan%20trip%20with%20offbeat%20places%20and%20experiences.">Plan Your Himalayan Experience <span aria-hidden="true">↗</span></a>
+
+    <!-- Retain the itinerary data mount point for the existing Supabase renderer. -->
+    <div id="itineraryList" hidden aria-hidden="true"></div>
   </div>
 </section>
 
@@ -7280,6 +7293,83 @@ body.promo-itinerary-modal-open{overflow:hidden!important}
   }
 }
 @media (prefers-reduced-motion:reduce){#odyssey-difference-mobile *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* Desktop counterpart of the mobile “Beyond the Usual” section. */
+@media screen and (min-width:761px){
+  html body #itineraries{
+    display:block!important;
+    padding:92px 7% 96px!important;
+    margin:0!important;
+    color:#f4f6f8!important;
+    background:#080d14!important;
+    overflow:hidden!important;
+  }
+  html body #itineraries .odyssey-difference-inner{width:100%;max-width:1180px;margin:0 auto}
+  html body #itineraries .odyssey-difference-title{margin:0 auto 18px!important;text-align:center!important}
+  html body #itineraries .odyssey-difference-title small{
+    color:#a9d8f2!important;font-family:"Montserrat",Arial,sans-serif!important;
+    font-size:10px!important;font-weight:700!important;letter-spacing:2.8px!important;text-transform:uppercase!important
+  }
+  html body #itineraries .odyssey-difference-title h2{
+    color:#f4f6f8!important;font-family:"Bodoni Moda",Didot,"Times New Roman",serif!important;
+    font-size:clamp(42px,4.2vw,58px)!important;font-weight:500!important;letter-spacing:-.55px!important;line-height:1.08!important
+  }
+  html body #itineraries .odyssey-difference-title h2:after{background:#c5dff1!important}
+  html body #itineraries .odyssey-difference-intro{
+    max-width:760px!important;margin:0 auto 34px!important;color:#aeb8c2!important;
+    text-align:center!important;font-family:"Inter","Helvetica Neue",Arial,sans-serif!important;
+    font-size:14px!important;line-height:1.8!important
+  }
+  html body #itineraries .odyssey-place-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+  html body #itineraries .odyssey-place-card{
+    min-height:190px;padding:23px 22px;border:1px solid rgba(210,226,239,.15);border-radius:14px;
+    background:linear-gradient(145deg,#172330,#101820);box-shadow:0 8px 24px rgba(0,0,0,.18)
+  }
+  html body #itineraries .odyssey-place-card > span{
+    display:block;color:#fff;font-family:"Montserrat",Arial,sans-serif;font-size:9px;font-weight:600;letter-spacing:1.5px
+  }
+  html body #itineraries .odyssey-place-card h3{
+    margin:14px 0 8px;color:#fff;font-family:"Bodoni Moda",Georgia,serif;font-size:29px;font-weight:500;line-height:1.1
+  }
+  html body #itineraries .odyssey-place-card p{
+    margin:0;color:#c2cbd3;font-family:"Inter","Helvetica Neue",Arial,sans-serif;font-size:12px;line-height:1.75
+  }
+  html body #itineraries .odyssey-experiences{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px}
+  html body #itineraries .odyssey-experience-card{
+    display:flex;gap:18px;align-items:flex-start;min-height:142px;padding:24px;
+    border:1px solid rgba(210,226,239,.18);border-radius:14px;background:#111b25
+  }
+  html body #itineraries .odyssey-experience-mark{
+    display:grid;place-items:center;flex:0 0 46px;width:46px;height:46px;
+    border:1px solid rgba(197,223,241,.4);border-radius:50%;color:#d6eafa;font-size:21px
+  }
+  html body #itineraries .odyssey-kicker{
+    color:#fff;font-family:"Montserrat",Arial,sans-serif;font-size:9px;font-weight:600;letter-spacing:1px
+  }
+  html body #itineraries .odyssey-experience-card h3{
+    margin:8px 0 6px;color:#fff;font-family:"Bodoni Moda",Georgia,serif;font-size:28px;font-weight:500;line-height:1.1
+  }
+  html body #itineraries .odyssey-experience-card p{
+    margin:0;color:#c2cbd3;font-family:"Inter","Helvetica Neue",Arial,sans-serif;font-size:12px;line-height:1.75
+  }
+  html body #itineraries .odyssey-flex-note{
+    max-width:900px;margin:22px auto 0;padding:20px 23px;border-left:2px solid #c5dff1;background:rgba(255,255,255,.055)
+  }
+  html body #itineraries .odyssey-flex-note strong{color:#fff;font-family:"Inter",Arial,sans-serif;font-size:15px;font-weight:600}
+  html body #itineraries .odyssey-flex-note p{
+    margin:7px 0 0;color:#b5c0ca;font-family:"Inter","Helvetica Neue",Arial,sans-serif;font-size:11px;line-height:1.75
+  }
+  html body #itineraries .odyssey-difference-cta{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    width:min(440px,100%);margin:22px auto 0;padding:17px 20px;
+    border:1px solid #fff;border-radius:10px;background:#fff;color:#000;
+    font-family:"Inter",Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase
+  }
+  html body #itineraries .odyssey-difference-cta span{font-size:18px}
+}
+@media screen and (min-width:761px) and (max-width:1050px){
+  html body #itineraries .odyssey-place-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
 </style>
 
 
