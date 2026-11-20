@@ -606,4 +606,5 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Connects to the existing active `submit-website-enquiry` Supabase Edge Function, which writes into the existing customers and leads tables. Existing Admin Dashboard Guest Leads already displays these CRM records; no schema or RLS changes were made.
 - After submission, opens a pre-filled WhatsApp enquiry. If CRM save cannot be confirmed, WhatsApp remains the fallback path. Includes client validation, hidden honeypot, accessible status feedback and date minimum.
 - No booking, payment, admin permissions, database schema, hosting, DNS, deployment configuration or deleted routes changed.
-- PR and verification status to be recorded after review.
+- PR #655: https://github.com/himalayanodysseyexpedition/himalayan-odyssey-travel-manager/pull/655; merged 2026-11-20 as commit `157899ed71df09edf2019abf6e83c934f1696c23`.
+- Verification: JavaScript syntax parsing passed; GitHub Actions `Static site quality checks` run #1579 passed (run ID `44769162351`). GitHub Pages deployment run `44769236182` was still in progress at the time of this note; live form rendering and an end-to-end test submission were not performed to avoid creating test customer/lead records.
