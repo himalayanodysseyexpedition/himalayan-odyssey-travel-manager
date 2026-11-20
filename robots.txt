@@ -1,4 +1,26 @@
 User-agent: *
 Allow: /
 
+# Explicit access for AI search and assistant crawlers
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# AI-readable business summary
+# https://himalayanexpedition.co.in/llms.txt
+
 Sitemap: https://himalayanexpedition.co.in/sitemap.xml
