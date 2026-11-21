@@ -249,7 +249,7 @@
   if (window.matchMedia && !window.matchMedia("(max-width: 760px)").matches) return;
   if (document.querySelector('script[data-hoe-voice-assistant]')) return;
   const script = document.createElement("script");
-  script.src = "/voice-travel-assistant.js?v=1";
+  script.src = "/voice-travel-assistant.js?v=2";
   script.defer = true;
   script.dataset.hoeVoiceAssistant = "true";
   document.head.appendChild(script);
