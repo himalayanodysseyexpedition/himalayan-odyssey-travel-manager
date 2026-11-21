@@ -608,3 +608,10 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - No booking, payment, admin permissions, database schema, hosting, DNS, deployment configuration or deleted routes changed.
 - PR #655: https://github.com/himalayanodysseyexpedition/himalayan-odyssey-travel-manager/pull/655; merged 2026-11-20 as commit `157899ed71df09edf2019abf6e83c934f1696c23`.
 - Verification: JavaScript syntax parsing passed; GitHub Actions `Static site quality checks` run #1579 passed (run ID `44769162351`). GitHub Pages deployment run `44769236182` was still in progress at the time of this note; live form rendering and an end-to-end test submission were not performed to avoid creating test customer/lead records.
+
+
+## 2026-11-21 — Mobile voice-only travel assistant (PR pending)
+- Added a mobile-only floating microphone assistant for public pages using the shared navigation script. It supports Hindi and English voice input, sends recognized speech to the existing Gemini-backed Supabase AI Travel Assistant, and reads replies aloud using browser speech synthesis. No text-chat transcript or text input is shown.
+- Added `voice-travel-assistant.js` and a small loader in `site-navigation.js`. Added `[functions.ai-travel-assistant] verify_jwt = false` to Supabase config to match the existing setup guide's public-function deployment requirement; no function deployment or secret changes were performed.
+- Free browser speech APIs are used; browser/device support and microphone permission vary. The existing Gemini API still requires the already-documented `GEMINI_API_KEY` Supabase secret and a deployed Edge Function. Live voice and iPhone Safari compatibility remain unverified.
+- Desktop UI, hosting, DNS, database schema/data, existing chat/lead logic and WhatsApp enquiry flows are unchanged. PR pending; no production deployment performed.
