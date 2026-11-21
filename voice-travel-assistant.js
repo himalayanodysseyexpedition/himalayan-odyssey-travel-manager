@@ -87,19 +87,29 @@
   function stopSpeech() {
     if ("speechSynthesis" in window) window.speechSynthesis.cancel();
   }
-  function speak(message) {
-    if (!("speechSynthesis" in window)) {
-      setStatus(message + " (Voice playback is not supported in this browser.)");
+  function speak(message, replaceCurrent = true) {
+    if (!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
+      setStatus("Voice playback is not supported in this browser. You can still use the microphone or WhatsApp.");
       return;
     }
-    stopSpeech();
+    // Avoid cancel() on an idle queue for the welcome tap: iOS Safari can
+    // suppress the immediately following utterance after that cancellation.
+    if (replaceCurrent && (window.speechSynthesis.speaking || window.speechSynthesis.pending)) {
+      window.speechSynthesis.cancel();
+    }
     const utterance = new SpeechSynthesisUtterance(message);
     utterance.lang = state.language;
     utterance.rate = 0.96;
     utterance.pitch = 1;
+    utterance.volume = 1;
     utterance.onstart = () => setStatus("Himalayan Odyssey is speaking…");
     utterance.onend = () => setStatus("Tap the microphone to ask another question.");
-    utterance.onerror = () => setStatus("Reply received. Tap the microphone to continue.");
+    utterance.onerror = (event) => {
+      setStatus(event && event.error === "not-allowed"
+        ? "Please tap the voice assistant again to allow spoken welcome."
+        : "Voice playback could not start. Check your iPhone audio and browser settings.");
+    };
+    window.speechSynthesis.resume();
     window.speechSynthesis.speak(utterance);
   }
   function setBusy(busy) {
@@ -177,9 +187,9 @@
     setOpen(opening);
     if (opening) {
       const welcome = state.language === "hi-IN"
-        ? "नमस्ते! Himalayan Odyssey में आपका स्वागत है। आप हिमाचल, स्पीति या अपनी अगली यात्रा के बारे में क्या जानना चाहेंगे?"
+        ? "नमस्कार, बताइए आज कौन-सी ट्रिप पर चलें?"
         : "Hello! Welcome to Himalayan Odyssey. What would you like to know about Himachal, Spiti, or planning your next trip?";
-      speak(welcome);
+      speak(welcome, false);
     } else {
       stopSpeech();
     }
