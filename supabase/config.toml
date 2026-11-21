@@ -2,3 +2,6 @@ project_id = "ynkoiuyjevclypumnyes"
 
 [functions.submit-website-enquiry]
 verify_jwt = false
+
+[functions.ai-travel-assistant]
+verify_jwt = false
