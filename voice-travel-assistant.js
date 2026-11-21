@@ -144,6 +144,7 @@
   function createRecognition() {
     if (!Recognition) return null;
     const recognition = new Recognition();
+    let receivedResult = false;
     recognition.lang = state.language;
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
@@ -155,6 +156,7 @@
       setStatus(state.language === "hi-IN" ? "सुन रहा हूँ… अब बोलिए।" : "Listening… speak now.");
     };
     recognition.onresult = event => {
+      receivedResult = true;
       const transcript = event.results && event.results[0] && event.results[0][0]
         ? String(event.results[0][0].transcript || "").trim() : "";
       state.listening = false;
@@ -168,16 +170,26 @@
       root.classList.remove("is-listening");
       mic.setAttribute("aria-label", "Start speaking");
       const errors = {
+        "no-speech": "I didn't catch that. Please speak soon after tapping the microphone and try again.",
         "not-allowed": "Microphone permission is blocked. Allow microphone access in your browser settings.",
         "service-not-allowed": "Speech recognition is unavailable in this browser. Use WhatsApp to contact our team.",
         "network": "Speech recognition needs an internet connection. Please try again."
       };
       setStatus(errors[event.error] || "I couldn't hear that. Please tap the microphone and try again.");
     };
+    recognition.onnomatch = () => {
+      setStatus("I couldn't understand that. Please try speaking clearly once more.");
+    };
     recognition.onend = () => {
+      const wasListening = state.listening;
       state.listening = false;
       root.classList.remove("is-listening");
       mic.setAttribute("aria-label", "Start speaking");
+      // Some mobile browsers end recognition without firing onresult or onerror.
+      // Never leave the user stuck on the "Listening…" status in that case.
+      if (wasListening && !receivedResult && !state.busy) {
+        setStatus("I couldn't hear your question. Check your connection, then tap the microphone and try again.");
+      }
     };
     return recognition;
   }
