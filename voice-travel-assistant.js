@@ -27,7 +27,7 @@
     #hoe-voice-assistant .hoe-voice-panel{display:none;width:min( min( calc(100vw - 32px), 350px), 350px);margin-bottom:12px;padding:19px;border:1px solid rgba(255,255,255,.17);border-radius:22px;background:rgba(13,20,29,.96);box-shadow:0 20px 55px rgba(0,0,0,.38);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
     #hoe-voice-assistant.is-open .hoe-voice-panel{display:block}
     #hoe-voice-assistant .hoe-voice-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-    #hoe-voice-assistant .hoe-voice-title{font:600 17px/1.25 Georgia,serif;margin:0;color:#fff!important}
+    #hoe-voice-assistant .hoe-voice-title{font:600 17px/1.25 Georgia,serif;margin:0;color:#fff!important;-webkit-text-fill-color:#fff!important;opacity:1!important}
     #hoe-voice-assistant .hoe-voice-subtitle{margin:6px 0 0;color:#b9c3ce;font-size:11px;line-height:1.5}
     #hoe-voice-assistant .hoe-voice-close{width:30px;height:30px;flex:0 0 30px;border:1px solid rgba(255,255,255,.2);border-radius:50%;background:transparent;color:#fff;font-size:19px;line-height:1;cursor:pointer}
     #hoe-voice-assistant .hoe-voice-status{min-height:42px;margin:17px 0 12px;padding:11px 12px;border-radius:12px;background:rgba(255,255,255,.08);color:#e4eaf0;font-size:12px;line-height:1.5}
@@ -51,7 +51,7 @@
   root.innerHTML = `
     <section class="hoe-voice-panel" aria-label="Voice travel assistant">
       <div class="hoe-voice-top">
-        <div><h2 class="hoe-voice-title">Talk to Himalayan Odyssey</h2><p class="hoe-voice-subtitle">Ask about Spiti, Kinnaur, itineraries and trip planning.</p></div>
+        <div><h2 class="hoe-voice-title" style="color:#fff!important;-webkit-text-fill-color:#fff!important;opacity:1!important">Talk to Himalayan Odyssey</h2><p class="hoe-voice-subtitle">Ask about Spiti, Kinnaur, itineraries and trip planning.</p></div>
         <button class="hoe-voice-close" type="button" aria-label="Close voice assistant">×</button>
       </div>
       <p class="hoe-voice-status" id="hoeVoiceStatus" role="status" aria-live="polite">Tap the microphone and ask your travel question.</p>
