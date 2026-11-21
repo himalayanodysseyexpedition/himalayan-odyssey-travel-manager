@@ -172,7 +172,18 @@
     return recognition;
   }
 
-  launcher.addEventListener("click", () => setOpen(!state.open));
+  launcher.addEventListener("click", () => {
+    const opening = !state.open;
+    setOpen(opening);
+    if (opening) {
+      const welcome = state.language === "hi-IN"
+        ? "नमस्ते! Himalayan Odyssey में आपका स्वागत है। आप हिमाचल, स्पीति या अपनी अगली यात्रा के बारे में क्या जानना चाहेंगे?"
+        : "Hello! Welcome to Himalayan Odyssey. What would you like to know about Himachal, Spiti, or planning your next trip?";
+      speak(welcome);
+    } else {
+      stopSpeech();
+    }
+  });
   panelClose.addEventListener("click", () => {
     if (state.recognition && state.listening) state.recognition.stop();
     stopSpeech();
