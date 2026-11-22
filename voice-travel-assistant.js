@@ -366,7 +366,8 @@
   }
   function extractPackageRoute(item) {
     const stays = Array.from(String(item?.itinerary || "").matchAll(/Stay:\s*([^\r\n]+)/gi))
-      .map(match => match[1].trim()).filter(Boolean);
+      .map(match => match[1].trim())
+      .filter(value => value && !/^not specified$/i.test(value));
     return [...new Set(stays)].join(" → ");
   }
   function renderPackageOptions(items) {
@@ -527,20 +528,27 @@
   function findDepartureFromText(text) {
     const input = normaliseSearch(text);
     const departures = state.bootstrap?.group_departures || [];
-    const dateMatches = departures.filter(item => {
-      const start = String(item.start_date || "");
-      const end = String(item.end_date || "");
-      const startDay = start.slice(8,10);
-      const endDay = end.slice(8,10);
-      const startMonth = start.slice(5,7);
-      const endMonth = end.slice(5,7);
-      return (start && input.includes(start)) || (end && input.includes(end)) ||
-        (startDay && input.includes(startDay) && input.includes("dec")) ||
-        (endDay && input.includes(endDay) && (input.includes("jan") || endMonth === "01"));
-    });
+    const monthNames = {
+      "01":["jan","january"],"02":["feb","february"],"03":["mar","march"],
+      "04":["apr","april"],"05":["may"],"06":["jun","june"],"07":["jul","july"],
+      "08":["aug","august"],"09":["sep","sept","september"],"10":["oct","october"],
+      "11":["nov","november"],"12":["dec","december"]
+    };
+    const matchesDate = isoDate => {
+      if (!isoDate) return false;
+      const [year,month,day] = isoDate.split("-");
+      const dayNumber = String(Number(day));
+      const dayPattern = new RegExp("\\b" + dayNumber + "(?:st|nd|rd|th)?\\b");
+      const monthMatch = (monthNames[month] || []).some(name => input.includes(name));
+      const isoMatch = new RegExp("\\b" + year + "\\s+" + month + "\\s+" + dayNumber + "\\b").test(input);
+      return isoMatch || (dayPattern.test(input) && monthMatch);
+    };
+    const dateMatches = departures.filter(item =>
+      matchesDate(String(item.start_date || "")) || matchesDate(String(item.end_date || ""))
+    );
     if (dateMatches.length === 1) return dateMatches[0];
-    if (/\b(first|1st|one|pehla)\b/.test(input) || text.includes("पहला")) return departures[0] || null;
-    if (/\b(second|2nd|two|doosra)\b/.test(input) || text.includes("दूसरा")) return departures[1] || null;
+    if (/\\b(first|1st|one|pehla)\\b/.test(input) || text.includes("पहला")) return departures[0] || null;
+    if (/\\b(second|2nd|two|doosra)\\b/.test(input) || text.includes("दूसरा")) return departures[1] || null;
     if (departures.length === 1 && /(group|departure|haan|yes|interested|ग्रुप|हाँ|हां)/.test(input)) return departures[0];
     return null;
   }
