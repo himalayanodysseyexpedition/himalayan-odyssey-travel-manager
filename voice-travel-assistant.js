@@ -1,3 +1,4 @@
+/* Guided trip discovery, package selection and WhatsApp enquiry workflow. */
 (() => {
   "use strict";
 
