@@ -30,6 +30,20 @@
     #hoe-voice-assistant .hoe-voice-title{font:600 17px/1.25 Georgia,serif;margin:0;color:#fff!important;-webkit-text-fill-color:#fff!important;opacity:1!important}
     #hoe-voice-assistant .hoe-voice-subtitle{margin:6px 0 0;color:#b9c3ce;font-size:11px;line-height:1.5}
     #hoe-voice-assistant .hoe-voice-close{width:30px;height:30px;flex:0 0 30px;border:1px solid rgba(255,255,255,.2);border-radius:50%;background:transparent;color:#fff;font-size:19px;line-height:1;cursor:pointer}
+    #hoe-voice-assistant .hoe-voice-chat{display:flex;flex-direction:column;gap:9px;max-height:34vh;overflow:auto;margin:13px 0 8px;padding:2px 3px 7px;overscroll-behavior:contain;scrollbar-width:thin}
+    #hoe-voice-assistant .hoe-voice-message{max-width:92%;padding:10px 12px;border:1px solid rgba(255,255,255,.1);border-radius:15px;font-size:12px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
+    #hoe-voice-assistant .hoe-voice-message.is-user{align-self:flex-end;background:rgba(218,232,242,.16);border-bottom-right-radius:5px;color:#fff}
+    #hoe-voice-assistant .hoe-voice-message.is-assistant{align-self:flex-start;background:rgba(255,255,255,.075);border-bottom-left-radius:5px;color:#f4f6f8}
+    #hoe-voice-assistant .hoe-voice-results{display:grid;gap:8px;margin-top:10px}
+    #hoe-voice-assistant .hoe-voice-results-label{margin:5px 0 0;color:#d4b779;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+    #hoe-voice-assistant .hoe-voice-result-card{display:flex;gap:9px;align-items:stretch;padding:8px;border:1px solid rgba(255,255,255,.13);border-radius:13px;background:rgba(7,14,22,.55);min-width:0}
+    #hoe-voice-assistant .hoe-voice-result-card img{width:72px;height:76px;flex:0 0 72px;object-fit:cover;border-radius:9px;background:rgba(255,255,255,.08)}
+    #hoe-voice-assistant .hoe-voice-result-copy{min-width:0;display:flex;flex:1;flex-direction:column;align-items:flex-start}
+    #hoe-voice-assistant .hoe-voice-result-title{margin:0 0 4px;color:#fff;font-size:11px;font-weight:700;line-height:1.35}
+    #hoe-voice-assistant .hoe-voice-result-meta{margin:0 0 5px;color:#e2c98e;font-size:10px;line-height:1.35}
+    #hoe-voice-assistant .hoe-voice-result-summary{margin:0 0 7px;color:#c0cbd6;font-size:10px;line-height:1.4}
+    #hoe-voice-assistant .hoe-voice-result-link{margin-top:auto;color:#fff;font-size:10px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+    #hoe-voice-assistant .hoe-voice-panel{width:min(calc(100vw - 32px),390px);max-height:78vh;overflow:hidden}
     #hoe-voice-assistant .hoe-voice-status{min-height:42px;margin:17px 0 12px;padding:11px 12px;border-radius:12px;background:rgba(255,255,255,.08);color:#e4eaf0;font-size:12px;line-height:1.5}
     #hoe-voice-assistant .hoe-voice-controls{display:flex;align-items:center;justify-content:space-between;gap:12px}
     #hoe-voice-assistant .hoe-voice-languages{display:flex;gap:5px}
@@ -54,7 +68,7 @@
         <div><h2 class="hoe-voice-title" style="color:#fff!important;-webkit-text-fill-color:#fff!important;opacity:1!important">Talk to Himalayan Odyssey</h2><p class="hoe-voice-subtitle">Ask about Spiti, Kinnaur, itineraries and trip planning.</p></div>
         <button class="hoe-voice-close" type="button" aria-label="Close voice assistant">×</button>
       </div>
-      <p class="hoe-voice-status" id="hoeVoiceStatus" role="status" aria-live="polite">Tap the microphone and ask your travel question.</p>
+      <div class="hoe-voice-chat" id="hoeVoiceChat" role="log" aria-live="polite"><div class="hoe-voice-message is-assistant">नमस्कार! स्पीति, किन्नौर या हिमाचल के किसी भी टूर के बारे में पूछिए।</div></div><p class="hoe-voice-status" id="hoeVoiceStatus" role="status" aria-live="polite">माइक्रोफ़ोन दबाकर अपना सवाल पूछें।</p>
       <div class="hoe-voice-controls">
         <div class="hoe-voice-languages" aria-label="Choose conversation language">
           <button class="hoe-voice-language" type="button" data-lang="hi-IN" aria-pressed="true">हिन्दी</button>
@@ -64,7 +78,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="13" rx="3"></rect><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3m-4 0h8"></path></svg>
         </button>
       </div>
-      <span class="hoe-voice-help">Your microphone is used only after you tap it. No chat transcript is displayed.</span>
+      <span class="hoe-voice-help">आपकी बातचीत यहीं दिखाई देगी। माइक्रोफ़ोन केवल दबाने पर सक्रिय होगा।</span>
       <a class="hoe-voice-whatsapp" href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">Talk to our team on WhatsApp</a>
     </section>
     <button class="hoe-voice-launch" type="button" aria-label="Open voice travel assistant" aria-expanded="false">
@@ -73,6 +87,7 @@
   document.body.appendChild(root);
 
   const status = root.querySelector("#hoeVoiceStatus");
+  const chatFeed = root.querySelector("#hoeVoiceChat");
   const mic = root.querySelector("#hoeVoiceMic");
   const launcher = root.querySelector(".hoe-voice-launch");
   const panelClose = root.querySelector(".hoe-voice-close");
@@ -87,28 +102,47 @@
   function stopSpeech() {
     if ("speechSynthesis" in window) window.speechSynthesis.cancel();
   }
+  function prepareSpeechText(message) {
+    if (state.language !== "hi-IN") return String(message || "");
+    const pronunciations = [
+      ["Himalayan Odyssey Expedition","हिमालयन ओडिसी एक्सपेडिशन"],
+      ["Himalayan Odyssey","हिमालयन ओडिसी"],
+      ["Winter Spiti Valley","विंटर स्पीति वैली"],
+      ["Spiti Valley","स्पीति वैली"],["Winter Spiti","विंटर स्पीति"],
+      ["Key Monastery","की मोनेस्ट्री"],["Chicham Bridge","चिचम ब्रिज"],["Hatu Peak","हाटू पीक"],
+      ["Kinnaur","किन्नौर"],["Narkanda","नारकंडा"],["Chitkul","छितकुल"],["Sangla","सांगला"],
+      ["Kalpa","कल्पा"],["Tabo","ताबो"],["Kaza","काज़ा"],["Kibber","किब्बर"],
+      ["Shimla","शिमला"],["Manali","मनाली"],["Kasol","कसोल"],["Jibhi","जिभी"],["Spiti","स्पीति"]
+    ];
+    let spoken = String(message || "");
+    pronunciations.forEach(([from,to]) => { spoken = spoken.replace(new RegExp(from,"gi"),to); });
+    return spoken.replace(/₹\s*/g," रुपये ").replace(/\s{2,}/g," ").trim();
+  }
+  function selectSpeechVoice() {
+    if (!("speechSynthesis" in window)) return null;
+    const voices = window.speechSynthesis.getVoices() || [];
+    const wanted = state.language.toLowerCase();
+    return voices.find(item => String(item.lang || "").toLowerCase() === wanted) ||
+      voices.find(item => String(item.lang || "").toLowerCase().startsWith(wanted.slice(0,2))) || null;
+  }
   function speak(message, replaceCurrent = true) {
     if (!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
-      setStatus("Voice playback is not supported in this browser. You can still use the microphone or WhatsApp.");
+      setStatus("Voice playback is not supported in this browser. You can still use the chat or WhatsApp.");
       return;
     }
-    // Avoid cancel() on an idle queue for the welcome tap: iOS Safari can
-    // suppress the immediately following utterance after that cancellation.
-    if (replaceCurrent && (window.speechSynthesis.speaking || window.speechSynthesis.pending)) {
-      window.speechSynthesis.cancel();
-    }
-    const utterance = new SpeechSynthesisUtterance(message);
+    if (replaceCurrent && (window.speechSynthesis.speaking || window.speechSynthesis.pending)) window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(prepareSpeechText(message));
     utterance.lang = state.language;
-    utterance.rate = 1.08;
-    utterance.pitch = 1;
+    const voiceChoice = selectSpeechVoice();
+    if (voiceChoice) utterance.voice = voiceChoice;
+    utterance.rate = state.language === "hi-IN" ? 0.92 : 1.0;
+    utterance.pitch = 1.02;
     utterance.volume = 1;
-    utterance.onstart = () => setStatus("Himalayan Odyssey is speaking…");
-    utterance.onend = () => setStatus("Tap the microphone to ask another question.");
-    utterance.onerror = (event) => {
-      setStatus(event && event.error === "not-allowed"
-        ? "Please tap the voice assistant again to allow spoken welcome."
-        : "Voice playback could not start. Check your iPhone audio and browser settings.");
-    };
+    utterance.onstart = () => setStatus(state.language === "hi-IN" ? "जवाब सुनिए…" : "Himalayan Odyssey is speaking…");
+    utterance.onend = () => setStatus(state.language === "hi-IN" ? "अगला सवाल पूछने के लिए माइक्रोफ़ोन दबाएँ।" : "Tap the microphone to ask another question.");
+    utterance.onerror = event => setStatus(event && event.error === "not-allowed"
+      ? "Please tap the voice assistant again to allow spoken audio."
+      : "Voice playback could not start. Check your device's Hindi/English speech voice settings.");
     window.speechSynthesis.resume();
     window.speechSynthesis.speak(utterance);
   }
@@ -117,37 +151,110 @@
     mic.disabled = busy;
     root.classList.toggle("is-listening", state.listening);
   }
+  function appendChatMessage(role, text) {
+    const bubble = document.createElement("div");
+    bubble.className = "hoe-voice-message " + (role === "user" ? "is-user" : "is-assistant");
+    bubble.textContent = text || "";
+    chatFeed.appendChild(bubble);
+    chatFeed.scrollTop = chatFeed.scrollHeight;
+    return bubble;
+  }
+  function addResultCard(container,title,meta,summary,imageUrl,href,actionLabel) {
+    const card = document.createElement("article");
+    card.className = "hoe-voice-result-card";
+    if (imageUrl) {
+      const image = document.createElement("img");
+      image.src = imageUrl; image.alt = title; image.loading = "lazy"; image.referrerPolicy = "no-referrer";
+      image.onerror = () => image.remove();
+      card.appendChild(image);
+    }
+    const copy = document.createElement("div"); copy.className = "hoe-voice-result-copy";
+    const heading = document.createElement("h3"); heading.className = "hoe-voice-result-title";
+    heading.textContent = title || "Himalayan Odyssey"; copy.appendChild(heading);
+    if (meta) { const line = document.createElement("p"); line.className = "hoe-voice-result-meta"; line.textContent = meta; copy.appendChild(line); }
+    if (summary) { const desc = document.createElement("p"); desc.className = "hoe-voice-result-summary"; desc.textContent = summary; copy.appendChild(desc); }
+    const link = document.createElement("a"); link.className = "hoe-voice-result-link";
+    link.href = href; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = actionLabel || "View details";
+    copy.appendChild(link); card.appendChild(copy); container.appendChild(card);
+  }
+  function renderRecommendations(parent,recommendations) {
+    if (!recommendations) return;
+    const results = document.createElement("div"); results.className = "hoe-voice-results";
+    const safeInternalUrl = value => {
+      const url = String(value || "");
+      return url.startsWith("/") && !url.startsWith("//") ? url : "";
+    };
+    const whatsapp = text => "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(text);
+    const destinations = Array.isArray(recommendations.destinations) ? recommendations.destinations : [];
+    const packages = Array.isArray(recommendations.packages) ? recommendations.packages : [];
+    const departures = Array.isArray(recommendations.group_departures) ? recommendations.group_departures : [];
+    if (destinations.length) {
+      const label = document.createElement("p"); label.className = "hoe-voice-results-label";
+      label.textContent = state.language === "hi-IN" ? "संबंधित जगहें" : "Related destinations"; results.appendChild(label);
+      destinations.forEach(item => addResultCard(
+        results,item.title,item.tagline || "",
+        state.language === "hi-IN" ? "इस जगह के टूर और यात्रा की जानकारी देखें।" : "Explore tours and travel details for this destination.",
+        item.image_url,safeInternalUrl(item.link_url) || whatsapp("Namaste, please share tour details for " + item.title + "."),
+        state.language === "hi-IN" ? "डेस्टिनेशन देखें" : "Explore destination"
+      ));
+    }
+    if (packages.length) {
+      const label = document.createElement("p"); label.className = "hoe-voice-results-label";
+      label.textContent = state.language === "hi-IN" ? "आपके लिए टूर पैकेज" : "Matching tour packages"; results.appendChild(label);
+      packages.forEach(item => {
+        const price = item.price_per_person === null || item.price_per_person === undefined ? "" :
+          (state.language === "hi-IN" ? "₹" : "₹") + Number(item.price_per_person).toLocaleString("en-IN") + (state.language === "hi-IN" ? " प्रति व्यक्ति" : " per person");
+        const meta = [item.duration,price].filter(Boolean).join(" · ");
+        addResultCard(results,item.name,meta,item.summary || (state.language === "hi-IN" ? "इस पैकेज की पूरी जानकारी के लिए पूछें।" : "Ask us for the full package itinerary."),
+          item.image_url,whatsapp("Namaste, I want details for the " + item.name + " tour package."),
+          state.language === "hi-IN" ? "पैकेज की जानकारी लें" : "Ask about this package");
+      });
+    }
+    if (departures.length) {
+      const label = document.createElement("p"); label.className = "hoe-voice-results-label";
+      label.textContent = state.language === "hi-IN" ? "आगामी ग्रुप टूर" : "Upcoming group tours"; results.appendChild(label);
+      departures.forEach(item => {
+        const seats = item.max_travellers === null || item.max_travellers === undefined ? "" :
+          Math.max(0,Number(item.max_travellers)-Number(item.joined_count||0));
+        const dates = [item.start_date,item.end_date].filter(Boolean).join(" – ");
+        const price = item.price_per_person === null || item.price_per_person === undefined ? "" : "₹" + Number(item.price_per_person).toLocaleString("en-IN") + " pp";
+        const meta = [dates,item.duration,price,seats === "" ? "" : (state.language === "hi-IN" ? seats + " सीट बाकी" : seats + " seats left")].filter(Boolean).join(" · ");
+        addResultCard(results,item.title + (item.destination ? " · " + item.destination : ""),meta,item.highlights || "",
+          "",whatsapp("Namaste, please share availability and details for " + item.title + " starting " + item.start_date + "."),
+          state.language === "hi-IN" ? "ग्रुप टूर पूछें" : "Enquire about group tour");
+      });
+    }
+    if (results.childElementCount) { parent.appendChild(results); chatFeed.scrollTop = chatFeed.scrollHeight; }
+  }
   async function askAssistant(transcript) {
-    state.messages.push({ role: "user", content: transcript });
+    appendChatMessage("user",transcript);
+    state.messages.push({role:"user",content:transcript});
     state.messages = state.messages.slice(-12);
     setBusy(true);
-    const heardLabel = state.language === "hi-IN" ? "आपने कहा: " : "I heard: ";
-    const preparingLabel = state.language === "hi-IN" ? " — जवाब तैयार कर रहा हूँ…" : " — preparing your reply…";
-    setStatus(heardLabel + transcript.slice(0, 90) + (transcript.length > 90 ? "…" : "") + preparingLabel);
+    setStatus(state.language === "hi-IN" ? "आपका सवाल समझ रहा हूँ…" : "Preparing your answer…");
     const controller = new AbortController();
-    const requestTimeout = window.setTimeout(() => controller.abort(), 15000);
+    const requestTimeout = window.setTimeout(() => controller.abort(),18000);
     try {
-      const response = await fetch(SUPABASE_URL + "/functions/v1/ai-travel-assistant", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "apikey": SUPABASE_KEY },
-        body: JSON.stringify({ action: "chat", messages: state.messages }),
-        signal: controller.signal
+      const response = await fetch(SUPABASE_URL + "/functions/v1/ai-travel-assistant",{
+        method:"POST",
+        headers:{"Content-Type":"application/json","apikey":SUPABASE_KEY},
+        body:JSON.stringify({action:"chat",messages:state.messages,language:state.language}),
+        signal:controller.signal
       });
       const result = await response.json().catch(() => ({}));
       if (!response.ok || !result.reply) throw new Error(result.message || "The assistant is unavailable right now.");
-      state.messages.push({ role: "assistant", content: result.reply });
+      state.messages.push({role:"assistant",content:result.reply});
       state.messages = state.messages.slice(-12);
+      const responseBubble = appendChatMessage("assistant",result.reply);
+      renderRecommendations(responseBubble,result.recommendations);
       speak(result.reply);
     } catch (error) {
       const message = error && error.name === "AbortError"
         ? (state.language === "hi-IN" ? "जवाब आने में ज़्यादा समय लगा। कृपया फिर से पूछें।" : "The reply took too long. Please try again.")
         : (error && error.message ? error.message : "I couldn't connect. Please try again.");
-      setStatus(message);
+      appendChatMessage("assistant",message); setStatus(message);
       if ("speechSynthesis" in window) speak(message);
-    } finally {
-      window.clearTimeout(requestTimeout);
-      setBusy(false);
-    }
+    } finally { window.clearTimeout(requestTimeout); setBusy(false); }
   }
   function createRecognition() {
     if (!Recognition) return null;
