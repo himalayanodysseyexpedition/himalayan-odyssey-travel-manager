@@ -144,6 +144,13 @@
       window.speechSynthesis.cancel();
     }
     const utterance = new SpeechSynthesisUtterance(prepareSpeechText(message));
+    state.speaking = true;
+    if (state.recognition && (state.listening || state.starting)) {
+      try { state.recognition.stop(); } catch (_) {}
+      state.listening = false;
+      state.starting = false;
+      root.classList.remove("is-listening");
+    }
     utterance.lang = state.language;
     const voiceChoice = selectSpeechVoice();
     if (voiceChoice) utterance.voice = voiceChoice;
@@ -169,8 +176,12 @@
         : "Voice playback could not start. I will keep the conversation open.");
       finishSpeech();
     };
-    window.speechSynthesis.resume();
-    window.speechSynthesis.speak(utterance);
+    try {
+      window.speechSynthesis.resume();
+      window.speechSynthesis.speak(utterance);
+    } catch (_) {
+      finishSpeech();
+    }
   }
   function setBusy(busy) {
     state.busy = busy;
@@ -855,7 +866,7 @@
 
       // The greeting is spoken directly from the launch tap. If recognition
       // starts while it is playing, stop capture so the assistant does not hear itself.
-      if (state.isGreeting) {
+      if (state.isGreeting || state.speaking) {
         resetListeningUI();
         try { recognition.stop(); } catch (_) {}
         return;
