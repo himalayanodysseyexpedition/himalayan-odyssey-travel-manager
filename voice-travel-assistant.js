@@ -19,7 +19,6 @@
     starting: false,
     speaking: false,
     isGreeting: false,
-    welcomePending: false,
     restartTimer: null
   };
 
@@ -337,20 +336,11 @@
       state.listening = true;
       root.classList.add("is-listening");
 
-      // Trigger the microphone permission from the launch gesture, then speak
-      // the welcome line without leaving the recognizer listening to its own voice.
-      if (state.welcomePending) {
-        state.welcomePending = false;
-        state.isGreeting = true;
+      // The greeting is spoken directly from the launch tap. If recognition
+      // starts while it is playing, stop capture so the assistant does not hear itself.
+      if (state.isGreeting) {
         resetListeningUI();
         try { recognition.stop(); } catch (_) {}
-        const welcome = state.language === "hi-IN"
-          ? "नमस्कार, बताइए आज कौन-सी ट्रिप पर चलें?"
-          : "Hello! Welcome to Himalayan Odyssey. What would you like to know about Himachal, Spiti, or planning your next trip?";
-        speak(welcome, false, () => {
-          state.isGreeting = false;
-          scheduleListening(250);
-        });
         return;
       }
 
@@ -415,7 +405,6 @@
 
   function stopVoiceSession() {
     state.sessionActive = false;
-    state.welcomePending = false;
     state.starting = false;
     state.listening = false;
     state.isGreeting = false;
@@ -432,14 +421,39 @@
     const opening = !state.open;
     setOpen(opening);
     if (opening) {
-      if (!Recognition) {
-        setStatus("This browser does not support automatic voice recognition. Please use Chrome or contact us on WhatsApp.");
-        return;
-      }
-      state.sessionActive = true;
-      state.welcomePending = true;
+      state.sessionActive = Boolean(Recognition);
+      state.isGreeting = false;
       setStatus(state.language === "hi-IN" ? "वॉइस असिस्टेंट शुरू हो रहा है…" : "Starting voice assistant…");
-      startListening();
+
+      // Invoke recognition and speech synthesis during the same user tap.
+      // This preserves mobile browser user activation for BOTH microphone
+      // permission and the welcome audio.
+      if (Recognition) startListening();
+      state.isGreeting = true;
+      const welcome = state.language === "hi-IN"
+        ? "नमस्कार, बताइए आज कौन-सी ट्रिप पर चलें?"
+        : "Hello! Welcome to Himalayan Odyssey. What would you like to know about Himachal, Spiti, or planning your next trip?";
+      try {
+        speak(welcome, false, () => {
+          state.isGreeting = false;
+          if (!Recognition) {
+            setStatus(state.language === "hi-IN"
+              ? "इस ब्राउज़र में ऑटोमैटिक वॉइस सुनना उपलब्ध नहीं है। Chrome में खोलें या WhatsApp पर संपर्क करें।"
+              : "Automatic voice recognition is not supported in this browser. Open this page in Chrome or contact us on WhatsApp.");
+            return;
+          }
+          if (state.sessionActive) {
+            setStatus(state.language === "hi-IN" ? "अब बोलिए, मैं सुन रहा हूँ…" : "Go ahead, I am listening…");
+            scheduleListening(350);
+          }
+        });
+      } catch (_) {
+        state.isGreeting = false;
+        setStatus(state.language === "hi-IN"
+          ? "वॉइस ग्रीटिंग शुरू नहीं हुई। अब बोलिए…"
+          : "The voice greeting could not start. You can speak now.");
+        if (state.sessionActive) scheduleListening(350);
+      }
     } else {
       stopVoiceSession();
     }
@@ -465,7 +479,6 @@
         state.listening = false;
         state.speaking = false;
         state.isGreeting = false;
-        state.welcomePending = false;
         setStatus(state.language === "hi-IN" ? "भाषा बदल गई है। अब बोलिए।" : "Language changed. Please speak.");
         scheduleListening(350);
       } else {

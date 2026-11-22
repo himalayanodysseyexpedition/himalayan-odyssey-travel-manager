@@ -79,7 +79,7 @@ async function publicContext() {
 
   publicContextPending = (async () => {
     const results = await Promise.all([
-      rest("destinations?select=title,tagline,slug,link_url,sort_order&is_active=eq.true&order=sort_order.asc"),
+      rest("destinations?select=title,tagline,slug,image_url,link_url,sort_order&is_active=eq.true&order=sort_order.asc"),
       rest("packages?select=name,destination,duration,price_per_person,description,itinerary,inclusions,exclusions,departure_dates,image_url&order=created_at.desc&limit=20"),
       rest("itineraries?select=id,title,destination,duration_days,duration_nights,summary,price,package_id&published=eq.true&order=created_at.desc&limit=30"),
       rest("itinerary_days?select=itinerary_id,day_number,title,description,overnight_location&order=day_number.asc&limit=80"),
@@ -123,10 +123,20 @@ function buildRecommendations(query: string, context: any) {
   const matchedPlaces = Object.entries(PLACE_ALIASES)
     .filter(([, aliases]) => aliases.some(alias => normalizedQuery.includes(normalizeSearchText(alias))))
     .map(([name]) => name);
+
+  const hasPackageIntent = /\b(package|packages|tour|tours|itinerary|itineraries)\b/.test(normalizedQuery) ||
+    /(पैकेज|टूर|यात्रा|इटिनरेरी)/.test(normalizedQuery);
+  const hasDestinationIntent = /\b(destination|destinations|place|places|location|locations)\b/.test(normalizedQuery) ||
+    /(जगह|स्थान|डेस्टिनेशन|घूमने की जगह)/.test(normalizedQuery);
+  const hasGroupIntent = /\b(group|departure|departures)\b/.test(normalizedQuery) ||
+    /(ग्रुप|समूह|डिपार्चर)/.test(normalizedQuery);
+
   const stopWords = new Set([
     "the","and","for","with","tour","tours","trip","trips","package","packages","show","tell",
-    "about","want","need","please","details","information","me","ka","ki","ke","mein","aur",
-    "का","की","के","में","और","बताओ","बताइए","दिखाओ","चाहिए","टूर","पैकेज","जाना","कौन","कैसा","है","हैं"
+    "about","want","need","please","details","information","me","all","list","find","search",
+    "ka","ki","ke","mein","aur","batao","btao","dikhao","dikhaiye","dikhaye","chahiye",
+    "का","की","के","में","और","बताओ","बताइए","दिखाओ","दिखाइए","चाहिए","टूर","पैकेज",
+    "जाना","कौन","कैसा","है","हैं","सभी","सब","दिखाएं","सूची"
   ]);
   const terms = normalizedQuery.split(" ").filter(term => term.length >= 3 && !stopWords.has(term));
   const searchTerms = matchedPlaces.length
@@ -136,28 +146,44 @@ function buildRecommendations(query: string, context: any) {
     const haystack = normalizeSearchText(value);
     return searchTerms.some(term => haystack.includes(term));
   };
+
+  const showAllDestinations = !matchedPlaces.length && hasDestinationIntent;
+  const showAllPackages = !matchedPlaces.length && hasPackageIntent && !hasGroupIntent;
+  const showAllDepartures = !matchedPlaces.length && hasGroupIntent;
   const destinations = (Array.isArray(context?.destinations) ? context.destinations : [])
-    .filter((item: any) => matchedPlaces.some(place =>
-      [item.title, item.slug].some(name => {
-        const value = normalizeSearchText(name);
-        return value.includes(normalizeSearchText(place)) ||
-          PLACE_ALIASES[place].some(alias => value.includes(normalizeSearchText(alias)));
-      })
-    ) || (!matchedPlaces.length && [item.title,item.slug,item.tagline].some(matches)))
-    .slice(0,3)
-    .map((item: any) => ({title:item.title,tagline:item.tagline||"",image_url:item.image_url||"",link_url:item.link_url||""}));
+    .filter((item: any) => {
+      if (showAllDestinations) return true;
+      if (matchedPlaces.length) return matchedPlaces.some(place =>
+        [item.title, item.slug].some(name => {
+          const value = normalizeSearchText(name);
+          return value.includes(normalizeSearchText(place)) ||
+            PLACE_ALIASES[place].some(alias => value.includes(normalizeSearchText(alias)));
+        })
+      );
+      return searchTerms.length > 0 && [item.title,item.slug,item.tagline].some(matches);
+    })
+    .slice(0, showAllDestinations ? 8 : 3)
+    .map((item: any) => ({
+      title:item.title,tagline:item.tagline||"",image_url:item.image_url||"",link_url:item.link_url||""
+    }));
+
   const packages = (Array.isArray(context?.packages) ? context.packages : [])
-    .filter((item: any) => searchTerms.length > 0 && matches([
-      item.name,item.destination,item.description,item.Description,item.itinerary,item.inclusions,item.departure_dates
-    ].join(" ")))
+    .filter((item: any) => showAllPackages || (
+      !hasGroupIntent && searchTerms.length > 0 && matches([
+        item.name,item.destination,item.description,item.Description,item.itinerary,item.inclusions,item.departure_dates
+      ].join(" "))
+    ))
     .slice(0,4)
     .map((item: any) => ({
       id:item.id,name:item.name,destination:item.destination||"",duration:item.duration||"",
       price_per_person:item.price_per_person??null,image_url:item.image_url||"",
       summary:String(item.description||item.Description||item.itinerary||"").replace(/\s+/g," ").trim().slice(0,300)
     }));
+
   const group_departures = (Array.isArray(context?.group_departures) ? context.group_departures : [])
-    .filter((item: any) => searchTerms.length > 0 && matches([item.title,item.destination,item.highlights,item.duration].join(" ")))
+    .filter((item: any) => showAllDepartures || (
+      searchTerms.length > 0 && matches([item.title,item.destination,item.highlights,item.duration].join(" "))
+    ))
     .slice(0,3)
     .map((item: any) => ({
       title:item.title,destination:item.destination,start_date:item.start_date,end_date:item.end_date||"",
@@ -167,6 +193,49 @@ function buildRecommendations(query: string, context: any) {
   return {destinations,packages,group_departures,matched_places:matchedPlaces};
 }
 
+function localFallbackReply(query: string, recommendations: any, language: string) {
+  const hindi = language !== "en-IN";
+  const money = (value: unknown) => value === null || value === undefined || value === ""
+    ? "" : "₹" + Number(value).toLocaleString("en-IN");
+  const packages = Array.isArray(recommendations?.packages) ? recommendations.packages : [];
+  const departures = Array.isArray(recommendations?.group_departures) ? recommendations.group_departures : [];
+  const destinations = Array.isArray(recommendations?.destinations) ? recommendations.destinations : [];
+  const normalized = normalizeSearchText(query);
+  const asksGroup = /\b(group|departure|departures)\b/.test(normalized) || /(ग्रुप|समूह|डिपार्चर)/.test(normalized);
+
+  if (asksGroup && departures.length) {
+    const details = departures.map((item: any) =>
+      [item.title, item.start_date && item.end_date ? item.start_date + " से " + item.end_date : item.start_date,
+       item.duration, money(item.price_per_person) ? money(item.price_per_person) + " प्रति व्यक्ति" : ""].filter(Boolean).join(", ")
+    ).join("; ");
+    return hindi
+      ? "ये आगामी ग्रुप टूर उपलब्ध हैं: " + details + "। नीचे दिए कार्ड में पूरी जानकारी देखें। किस departure में रुचि है?"
+      : "These upcoming group tours match your search: " + details + ". Open the cards below for details. Which departure interests you?";
+  }
+
+  if (packages.length) {
+    const details = packages.slice(0,3).map((item: any) =>
+      [item.name,item.duration,money(item.price_per_person) ? money(item.price_per_person) + " प्रति व्यक्ति" : ""].filter(Boolean).join(", ")
+    ).join("; ");
+    return hindi
+      ? "आपके सवाल से ये टूर पैकेज मैच हुए हैं: " + details + "। नीचे दिए कार्ड में पैकेज खोलें। कितने यात्रियों के लिए जानकारी चाहिए?"
+      : "These tour packages match your search: " + details + ". Open the cards below for details. How many travellers are you planning for?";
+  }
+
+  if (departures.length) {
+    return hindi
+      ? "आपके लिए आगामी ग्रुप टूर के कार्ड नीचे दिए हैं। तारीख और सीटों की जानकारी देखकर enquiry भेजें।"
+      : "I found upcoming group tours for you. Their date, price and seat details are shown in the cards below.";
+  }
+  if (destinations.length) {
+    return hindi
+      ? "ये जगहें आपके सवाल से मैच करती हैं: " + destinations.map((item: any) => item.title).join(", ") + "। किस जगह के tour details चाहिए?"
+      : "These destinations match your search: " + destinations.map((item: any) => item.title).join(", ") + ". Which one would you like to explore?";
+  }
+  return hindi
+    ? "जी, मैं स्पीति, किन्नौर, नारकंडा, शिमला, मनाली, कसोल और जिभी की यात्रा में मदद कर सकता हूँ। किसी जगह या tour package का नाम बताइए।"
+    : "I can help plan trips to Spiti, Kinnaur, Narkanda, Shimla, Manali, Kasol and Jibhi. Tell me a destination or ask to see our tour packages.";
+}
 function systemPrompt(context: unknown, replyLanguage: string) {
   return "You are the official AI Travel Assistant for Himalayan Odyssey Expedition, a Himalayan travel company based in Narkanda, Himachal Pradesh, India.\n\n" +
     "Help guests plan Spiti Valley, Kinnaur, Narkanda, Shimla, Kufri, Manali, Jibhi, Kasol and destinations present in the supplied business data. Understand dates, duration, pickup point, group size, budget, comfort level and interests. Ask one useful question at a time.\n" +
@@ -180,8 +249,6 @@ function systemPrompt(context: unknown, replyLanguage: string) {
 }
 
 async function answerChat(payload: Record<string, unknown>) {
-  const apiKey = Deno.env.get("GEMINI_API_KEY");
-  if (!apiKey) throw new Error("AI assistant setup is incomplete. Please contact our team on WhatsApp.");
   const messages = Array.isArray(payload.messages) ? payload.messages.slice(-12) : [];
   if (!messages.length) throw new Error("Please enter a question.");
   const contents = messages.map((item: any) => ({
@@ -190,17 +257,32 @@ async function answerChat(payload: Record<string, unknown>) {
   })).filter((item: any) => item.parts[0].text);
   if (!contents.length || contents[contents.length - 1].role !== "user") throw new Error("Please send a new message.");
 
+  const language = safeText(payload.language, 10) === "en-IN" ? "en-IN" : "hi-IN";
+  const latestQuestion = safeText(contents[contents.length - 1]?.parts?.[0]?.text, 1200);
   const contextStartedAt = performance.now();
-  const context = await publicContext();
+  let context: any = {
+    destinations: [], packages: [], itineraries: [], itinerary_days: [],
+    hotels: [], cabs: [], group_departures: [],
+  };
+  try {
+    context = await publicContext();
+  } catch (error) {
+    console.error("AI assistant context unavailable", error instanceof Error ? error.message : "database error");
+  }
   const contextMs = Math.round(performance.now() - contextStartedAt);
+  const recommendations = buildRecommendations(latestQuestion, context);
+  const fallbackReply = localFallbackReply(latestQuestion, recommendations, language);
+  const apiKey = Deno.env.get("GEMINI_API_KEY");
+  if (!apiKey) return { reply: fallbackReply, recommendations, fallback: true };
+
   const requestBody = JSON.stringify({
-    systemInstruction: { parts: [{ text: systemPrompt(context, safeText(payload.language, 10) === "en-IN" ? "English" : "Hindi in Devanagari script") }] },
+    systemInstruction: { parts: [{ text: systemPrompt(context, language === "en-IN" ? "English" : "Hindi in Devanagari script") }] },
     contents,
     generationConfig: { maxOutputTokens: 220, temperature: 0.3 },
   });
 
-  // Prefer Flash-Lite for low-latency voice replies; use the configured Flash
-  // model as a fallback. Avoid repeating slow retries on the same model.
+  // Keep voice replies bounded. If Gemini is unavailable, return the local
+  // data-backed answer and cards rather than leaving the visitor without a reply.
   const models = [...new Set(["gemini-3.5-flash-lite", MODEL])];
   let response: Response | null = null;
   let lastStatus = 0;
@@ -209,7 +291,7 @@ async function answerChat(payload: Record<string, unknown>) {
 
   for (const model of models) {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 8500);
+    const timeout = setTimeout(() => controller.abort(), 5500);
     try {
       response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + encodeURIComponent(model) + ":generateContent", {
         method: "POST",
@@ -238,20 +320,24 @@ async function answerChat(payload: Record<string, unknown>) {
   }
 
   if (!response?.ok) {
-    throw new Error(lastStatus === 429
-      ? "The assistant is temporarily busy. Please try again or contact us on WhatsApp."
-      : "The AI assistant is temporarily unavailable. Please try again or contact us on WhatsApp.");
+    console.warn("Using local voice-assistant fallback", { contextMs, lastStatus });
+    return { reply: fallbackReply, recommendations, fallback: true };
   }
 
-  const result = await response.json();
-  const reply = (result?.candidates?.[0]?.content?.parts || []).map((part: any) => part.text || "").join("").trim();
-  if (!reply) throw new Error("I couldn't prepare an answer. Please try again or contact our team.");
-  console.info("AI travel assistant timing", {
-    contextMs,
-    generationMs: Math.round(performance.now() - generationStartedAt),
-    model: usedModel,
-  });
-  return { reply: reply.slice(0, 1800), recommendations: buildRecommendations(safeText(contents[contents.length - 1]?.parts?.[0]?.text, 1200), context) };
+  try {
+    const result = await response.json();
+    const reply = (result?.candidates?.[0]?.content?.parts || []).map((part: any) => part.text || "").join("").trim();
+    if (!reply) return { reply: fallbackReply, recommendations, fallback: true };
+    console.info("AI travel assistant timing", {
+      contextMs,
+      generationMs: Math.round(performance.now() - generationStartedAt),
+      model: usedModel,
+    });
+    return { reply: reply.slice(0, 1800), recommendations };
+  } catch (error) {
+    console.error("Gemini response parsing failed", error instanceof Error ? error.message : "invalid JSON");
+    return { reply: fallbackReply, recommendations, fallback: true };
+  }
 }
 function calculateEstimate(payload: Record<string, unknown>, cabs: any[]) {
   const days = Number(payload.days);
