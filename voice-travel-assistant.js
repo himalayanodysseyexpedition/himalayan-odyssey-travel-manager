@@ -251,9 +251,8 @@
         const price = item.price_per_person === null || item.price_per_person === undefined ? "" :
           (state.language === "hi-IN" ? "₹" : "₹") + Number(item.price_per_person).toLocaleString("en-IN") + (state.language === "hi-IN" ? " प्रति व्यक्ति" : " per person");
         const meta = [item.duration,price].filter(Boolean).join(" · ");
-        addResultCard(results,item.name,meta,item.summary || (state.language === "hi-IN" ? "इस पैकेज की पूरी जानकारी के लिए पूछें।" : "Ask us for the full package itinerary."),
-          item.image_url,whatsapp("Namaste, I want details for the " + item.name + " tour package."),
-          state.language === "hi-IN" ? "पैकेज की जानकारी लें" : "Ask about this package");
+        addResultCard(results,item.name,meta,item.summary || (state.language === "hi-IN" ? "इस पैकेज को चुनकर enquiry आगे बढ़ाएँ।" : "Select this package to continue the enquiry."),
+          item.image_url,"",state.language === "hi-IN" ? "यह package चुनें" : "Select package",() => choosePackage(item));
       });
     }
     if (departures.length) {
@@ -266,14 +265,14 @@
         const price = item.price_per_person === null || item.price_per_person === undefined ? "" : "₹" + Number(item.price_per_person).toLocaleString("en-IN") + " pp";
         const meta = [dates,item.duration,price,seats === "" ? "" : (state.language === "hi-IN" ? seats + " सीट बाकी" : seats + " seats left")].filter(Boolean).join(" · ");
         addResultCard(results,item.title + (item.destination ? " · " + item.destination : ""),meta,item.highlights || "",
-          "",whatsapp("Namaste, please share availability and details for " + item.title + " starting " + item.start_date + "."),
-          state.language === "hi-IN" ? "ग्रुप टूर पूछें" : "Enquire about group tour");
+          "", "", state.language === "hi-IN" ? "यह departure चुनें" : "Select departure",
+          () => chooseDeparture(item));
       });
     }
     if (results.childElementCount) { parent.appendChild(results); chatFeed.scrollTop = chatFeed.scrollHeight; }
   }
-  async function askAssistant(transcript) {
-    appendChatMessage("user",transcript);
+  async function askAssistant(transcript, alreadyDisplayed = false) {
+    if (!alreadyDisplayed) appendChatMessage("user",transcript);
     state.messages.push({role:"user",content:transcript});
     state.messages = state.messages.slice(-12);
     setBusy(true);
@@ -300,7 +299,13 @@
         : (error && error.message ? error.message : "I couldn't connect. Please try again.");
       appendChatMessage("assistant",message); setStatus(message);
       if ("speechSynthesis" in window) speak(message);
-    } finally { window.clearTimeout(requestTimeout); setBusy(false); }
+    } finally {
+      window.clearTimeout(requestTimeout);
+      setBusy(false);
+      // If speech playback was unavailable or completed before the request
+      // finished, resume listening after clearing the busy state.
+      if (state.sessionActive && !state.speaking) scheduleListening(350);
+    }
   }
   function enquiryText(hindi, english) {
     return state.language === "hi-IN" ? hindi : english;
@@ -640,6 +645,11 @@
   function askForName() {
     askForField("name", enquiryText("Enquiry में आपका नाम क्या लिखूँ?", "What name should I put on the enquiry?"));
   }
+  function isInformationalQuestion(text) {
+    const value = normaliseSearch(text);
+    return /\b(what|when|where|why|how|which|can|could|is|are|does|do|tell me|explain)\b/.test(value) ||
+      /(क्या|कब|कहाँ|कहा|क्यों|कैसे|कितना|कितनी|कितने|मौसम|रास्ता|सड़क|रोड)/.test(String(text || ""));
+  }
   function confirmEnquiry() {
     const summary = buildEnquirySummary();
     state.awaitingField = "confirmation";
@@ -655,6 +665,12 @@
     const field = state.awaitingField;
 
     if (field === "groupOrCustom" || field === "tripChoice") {
+      // Answer travel-planning questions with the connected AI service, while
+      // keeping the guided group/package selection state ready for the next turn.
+      if (isInformationalQuestion(input)) {
+        askAssistant(input, true);
+        return;
+      }
       const selectedDeparture = findDepartureFromText(input);
       if (selectedDeparture) { chooseDeparture(selectedDeparture); return; }
       const normalized = normaliseSearch(input);
