@@ -86,7 +86,7 @@ async function publicContext() {
       rest("itinerary_days?select=itinerary_id,day_number,title,description,overnight_location&order=day_number.asc&limit=80"),
       rest("hotels?select=name,location,description,facilities&published=eq.true&limit=30"),
       rest("cabs?select=name,model,seating_capacity,daily_price,description&published=eq.true&limit=20"),
-      rest("group_departures?select=id,title,destination,start_date,end_date,duration,price_per_person,joined_count,max_travellers,image_url,highlights,booking_note,status&status=in.(published,full)&start_date=gte.${indiaDate}&order=start_date.asc&limit=10"),
+      rest("group_departures?select=id,title,destination,start_date,end_date,duration,price_per_person,joined_count,max_travellers,image_url,highlights,booking_note,status&status=in.(published,full)&start_date=gte." + indiaDate + "&order=start_date.asc&limit=10"),
     ]);
     const value = {
       destinations: results[0], packages: results[1], itineraries: results[2],
