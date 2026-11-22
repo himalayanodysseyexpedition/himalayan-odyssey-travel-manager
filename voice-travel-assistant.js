@@ -422,7 +422,6 @@
     setOpen(opening);
     if (opening) {
       state.sessionActive = Boolean(Recognition);
-      state.welcomePending = false;
       state.isGreeting = false;
       setStatus(state.language === "hi-IN" ? "वॉइस असिस्टेंट शुरू हो रहा है…" : "Starting voice assistant…");
 
