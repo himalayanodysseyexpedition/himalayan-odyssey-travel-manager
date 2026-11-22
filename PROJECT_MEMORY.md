@@ -622,10 +622,17 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - AI recommendation cards for packages and group departures now select the item and continue the guided enquiry rather than bypassing guest/date/pickup collection with a direct WhatsApp link.
 - Fixed the AI response lifecycle so microphone listening resumes after the request finishes, including when speech playback is unavailable or ends before the request cleanup.
 - Bumped the shared voice assistant script cache URL from v8 to v9. No Supabase schema/data, credentials, deployment settings, or booking records changed.
-- PR #677 merged to main on 2026-11-22 as commit `f6fd231025040d1bb1ed79e8cd55cc6e5392e5e0`; GitHub Actions Static site quality checks run #1626 passed. Live browser/device verification and GitHub Pages deployment completion remain unverified.
+- PR #677 merged to main on 2026-11-22 as commit `f6fd231025040d1bb1ed79e8cd55cc6e5392e5e0`; GitHub Actions Static site quality checks run #1626 passed. GitHub Pages deployment run #1296 and Pages build #1653 completed successfully. Live browser/device verification remains unverified.
 
 
 ## 2026-11-22 — Source-level SEO sitemap validation
 - Checked all 18 URLs in `sitemap.xml` against the repository: every corresponding page file exists.
 - All 18 sitemap pages have a non-empty title, meta description and canonical URL; no duplicate titles or canonical URLs were found, and none of the sitemap pages is marked noindex.
 - This validates repository source only; it does not establish that GitHub Pages has deployed the latest files, that Google has crawled them, or that the URLs are indexed.
+
+
+## 2026-11-22 — Optimize large homepage and destination images (PR pending)
+- Used a temporary branch-scoped GitHub Actions workflow with Sharp to generate the optimized assets; removed the workflow after the successful run. No paid service or production runtime dependency was added.
+- Converted the 4.46 MB mobile hero JPEG into a 302 KB WebP at quality 82 and updated the homepage preload, hero image element, inline mobile backgrounds and hero stylesheet to use the WebP asset. Bumped the hero stylesheet cache URL.
+- Compressed destination JPGs: Kinnaur 591 KB to 283 KB, Spiti 268 KB to 224 KB, Narkanda 211 KB to 179 KB, and Manali 539 KB to 331 KB. Kinnaur and Manali remain above the first-pass target; further compression may trade away visible quality.
+- Optimization workflow run #1 succeeded. The optimized assets and WebP reference changes are on branch `performance/optimize-images-20261122`; PR, static checks, and GitHub Pages deployment verification pending.
