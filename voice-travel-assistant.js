@@ -14,7 +14,13 @@
     recognition: null,
     listening: false,
     busy: false,
-    open: false
+    open: false,
+    sessionActive: false,
+    starting: false,
+    speaking: false,
+    isGreeting: false,
+    welcomePending: false,
+    restartTimer: null
   };
 
   const style = document.createElement("style");
@@ -45,18 +51,14 @@
     #hoe-voice-assistant .hoe-voice-result-link{margin-top:auto;color:#fff;font-size:10px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
     #hoe-voice-assistant .hoe-voice-panel{width:min(calc(100vw - 32px),390px);max-height:78vh;overflow:hidden}
     #hoe-voice-assistant .hoe-voice-status{min-height:42px;margin:17px 0 12px;padding:11px 12px;border-radius:12px;background:rgba(255,255,255,.08);color:#e4eaf0;font-size:12px;line-height:1.5}
-    #hoe-voice-assistant .hoe-voice-controls{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    #hoe-voice-assistant .hoe-voice-controls{display:flex;align-items:center;justify-content:flex-start;gap:12px}
     #hoe-voice-assistant .hoe-voice-languages{display:flex;gap:5px}
     #hoe-voice-assistant .hoe-voice-language{min-height:34px;padding:0 11px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:transparent;color:#dce4ed;font-size:11px;cursor:pointer}
     #hoe-voice-assistant .hoe-voice-language[aria-pressed="true"]{background:#f2f5f8;color:#101820;border-color:#f2f5f8;font-weight:700}
-    #hoe-voice-assistant .hoe-voice-mic{width:62px;height:62px;flex:0 0 62px;border:0;border-radius:50%;background:#f2f5f8;color:#101820;display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.24)}
-    #hoe-voice-assistant .hoe-voice-mic svg{width:25px;height:25px}
-    #hoe-voice-assistant .hoe-voice-mic[disabled]{opacity:.48;cursor:wait}
-    #hoe-voice-assistant.is-listening .hoe-voice-mic{background:#e7b9b9;color:#391313;animation:hoe-voice-pulse 1.35s ease-in-out infinite}
+    #hoe-voice-assistant.is-listening .hoe-voice-status{border:1px solid rgba(231,185,185,.5);box-shadow:0 0 0 4px rgba(231,185,185,.07)}
     #hoe-voice-assistant .hoe-voice-help{display:block;margin-top:12px;color:#aebbc8;font-size:10px;line-height:1.5;text-align:center}
     #hoe-voice-assistant .hoe-voice-whatsapp{display:block;margin-top:11px;color:#fff;text-align:center;font-size:11px;text-decoration:underline;text-underline-offset:3px}
-    @keyframes hoe-voice-pulse{50%{box-shadow:0 0 0 9px rgba(231,185,185,.13)}}
-    @media(prefers-reduced-motion:reduce){#hoe-voice-assistant .hoe-voice-mic{animation:none!important}}
+    @media(prefers-reduced-motion:reduce){#hoe-voice-assistant .hoe-voice-status{box-shadow:none!important}}
   `;
   document.head.appendChild(style);
 
@@ -68,17 +70,15 @@
         <div><h2 class="hoe-voice-title" style="color:#fff!important;-webkit-text-fill-color:#fff!important;opacity:1!important">Talk to Himalayan Odyssey</h2><p class="hoe-voice-subtitle">Ask about Spiti, Kinnaur, itineraries and trip planning.</p></div>
         <button class="hoe-voice-close" type="button" aria-label="Close voice assistant">×</button>
       </div>
-      <div class="hoe-voice-chat" id="hoeVoiceChat" role="log" aria-live="polite"><div class="hoe-voice-message is-assistant">नमस्कार! स्पीति, किन्नौर या हिमाचल के किसी भी टूर के बारे में पूछिए।</div></div><p class="hoe-voice-status" id="hoeVoiceStatus" role="status" aria-live="polite">माइक्रोफ़ोन दबाकर अपना सवाल पूछें।</p>
+      <div class="hoe-voice-chat" id="hoeVoiceChat" role="log" aria-live="polite"><div class="hoe-voice-message is-assistant">नमस्कार! मैं आपकी यात्रा में मदद के लिए तैयार हूँ।</div></div><p class="hoe-voice-status" id="hoeVoiceStatus" role="status" aria-live="polite">वॉइस असिस्टेंट खुलते ही बातचीत शुरू हो जाएगी।</p>
       <div class="hoe-voice-controls">
         <div class="hoe-voice-languages" aria-label="Choose conversation language">
           <button class="hoe-voice-language" type="button" data-lang="hi-IN" aria-pressed="true">हिन्दी</button>
           <button class="hoe-voice-language" type="button" data-lang="en-IN" aria-pressed="false">English</button>
         </div>
-        <button class="hoe-voice-mic" type="button" id="hoeVoiceMic" aria-label="Start speaking">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="13" rx="3"></rect><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3m-4 0h8"></path></svg>
-        </button>
+
       </div>
-      <span class="hoe-voice-help">आपकी बातचीत यहीं दिखाई देगी। माइक्रोफ़ोन केवल दबाने पर सक्रिय होगा।</span>
+      <span class="hoe-voice-help">वॉइस असिस्टेंट खुलने पर सुनना शुरू करता है। बातचीत समाप्त करने के लिए इसे बंद करें।</span>
       <a class="hoe-voice-whatsapp" href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">Talk to our team on WhatsApp</a>
     </section>
     <button class="hoe-voice-launch" type="button" aria-label="Open voice travel assistant" aria-expanded="false">
@@ -88,7 +88,6 @@
 
   const status = root.querySelector("#hoeVoiceStatus");
   const chatFeed = root.querySelector("#hoeVoiceChat");
-  const mic = root.querySelector("#hoeVoiceMic");
   const launcher = root.querySelector(".hoe-voice-launch");
   const panelClose = root.querySelector(".hoe-voice-close");
 
@@ -125,12 +124,19 @@
     return voices.find(item => String(item.lang || "").toLowerCase() === wanted) ||
       voices.find(item => String(item.lang || "").toLowerCase().startsWith(wanted.slice(0,2))) || null;
   }
-  function speak(message, replaceCurrent = true) {
+  function speak(message, replaceCurrent = true, afterSpeech = null) {
+    const resumeConversation = () => {
+      if (typeof afterSpeech === "function") afterSpeech();
+      else if (state.sessionActive) scheduleListening(350);
+    };
     if (!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
       setStatus("Voice playback is not supported in this browser. You can still use the chat or WhatsApp.");
+      resumeConversation();
       return;
     }
-    if (replaceCurrent && (window.speechSynthesis.speaking || window.speechSynthesis.pending)) window.speechSynthesis.cancel();
+    if (replaceCurrent && (window.speechSynthesis.speaking || window.speechSynthesis.pending)) {
+      window.speechSynthesis.cancel();
+    }
     const utterance = new SpeechSynthesisUtterance(prepareSpeechText(message));
     utterance.lang = state.language;
     const voiceChoice = selectSpeechVoice();
@@ -138,17 +144,30 @@
     utterance.rate = state.language === "hi-IN" ? 0.92 : 1.0;
     utterance.pitch = 1.02;
     utterance.volume = 1;
-    utterance.onstart = () => setStatus(state.language === "hi-IN" ? "जवाब सुनिए…" : "Himalayan Odyssey is speaking…");
-    utterance.onend = () => setStatus(state.language === "hi-IN" ? "अगला सवाल पूछने के लिए माइक्रोफ़ोन दबाएँ।" : "Tap the microphone to ask another question.");
-    utterance.onerror = event => setStatus(event && event.error === "not-allowed"
-      ? "Please tap the voice assistant again to allow spoken audio."
-      : "Voice playback could not start. Check your device's Hindi/English speech voice settings.");
+    let completed = false;
+    const finishSpeech = () => {
+      if (completed) return;
+      completed = true;
+      state.speaking = false;
+      setStatus(state.language === "hi-IN" ? "अगला सवाल सुनने के लिए तैयार हूँ…" : "Ready for your next question…");
+      resumeConversation();
+    };
+    utterance.onstart = () => {
+      state.speaking = true;
+      setStatus(state.language === "hi-IN" ? "जवाब सुनिए…" : "Himalayan Odyssey is speaking…");
+    };
+    utterance.onend = finishSpeech;
+    utterance.onerror = event => {
+      setStatus(event && event.error === "not-allowed"
+        ? "Please allow spoken audio in your browser settings."
+        : "Voice playback could not start. I will keep the conversation open.");
+      finishSpeech();
+    };
     window.speechSynthesis.resume();
     window.speechSynthesis.speak(utterance);
   }
   function setBusy(busy) {
     state.busy = busy;
-    mic.disabled = busy;
     root.classList.toggle("is-listening", state.listening);
   }
   function appendChatMessage(role, text) {
@@ -256,6 +275,44 @@
       if ("speechSynthesis" in window) speak(message);
     } finally { window.clearTimeout(requestTimeout); setBusy(false); }
   }
+  function clearRestartTimer() {
+    if (state.restartTimer) window.clearTimeout(state.restartTimer);
+    state.restartTimer = null;
+  }
+
+  function scheduleListening(delay = 350) {
+    if (!state.sessionActive || state.busy || state.speaking || state.isGreeting || state.starting || state.listening) return;
+    clearRestartTimer();
+    state.restartTimer = window.setTimeout(() => {
+      state.restartTimer = null;
+      startListening();
+    }, delay);
+  }
+
+  function startListening() {
+    if (!state.sessionActive || state.busy || state.speaking || state.isGreeting || state.starting || state.listening) return;
+    if (!Recognition) {
+      state.sessionActive = false;
+      setStatus("This browser does not support automatic voice recognition. Please use Chrome or contact us on WhatsApp.");
+      return;
+    }
+    clearRestartTimer();
+    const recognition = createRecognition();
+    state.recognition = recognition;
+    state.starting = true;
+    try {
+      // Called directly from the launcher click on first use so the browser can
+      // request microphone permission within the user's activation.
+      recognition.start();
+    } catch (error) {
+      state.starting = false;
+      setStatus(state.language === "hi-IN"
+        ? "माइक्रोफ़ोन शुरू नहीं हो पाया। अनुमति जाँचकर दोबारा वॉइस असिस्टेंट खोलें।"
+        : "The microphone could not start. Check permission and reopen the voice assistant.");
+      scheduleListening(900);
+    }
+  }
+
   function createRecognition() {
     if (!Recognition) return null;
     const recognition = new Recognition();
@@ -267,29 +324,46 @@
     };
     const resetListeningUI = () => {
       clearListenWatchdog();
+      state.starting = false;
       state.listening = false;
       root.classList.remove("is-listening");
-      mic.setAttribute("aria-label", "Start speaking");
     };
     recognition.lang = state.language;
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
     recognition.continuous = false;
     recognition.onstart = () => {
+      state.starting = false;
       state.listening = true;
       root.classList.add("is-listening");
-      mic.setAttribute("aria-label", "Listening");
-      setStatus(state.language === "hi-IN" ? "सुन रहा हूँ… अब बोलिए।" : "Listening… speak now.");
-      // Some Android speech services fail to emit onresult/onend. Recover instead
-      // of leaving the microphone permanently stuck in the listening state.
+
+      // Trigger the microphone permission from the launch gesture, then speak
+      // the welcome line without leaving the recognizer listening to its own voice.
+      if (state.welcomePending) {
+        state.welcomePending = false;
+        state.isGreeting = true;
+        resetListeningUI();
+        try { recognition.stop(); } catch (_) {}
+        const welcome = state.language === "hi-IN"
+          ? "नमस्कार, बताइए आज कौन-सी ट्रिप पर चलें?"
+          : "Hello! Welcome to Himalayan Odyssey. What would you like to know about Himachal, Spiti, or planning your next trip?";
+        speak(welcome, false, () => {
+          state.isGreeting = false;
+          scheduleListening(250);
+        });
+        return;
+      }
+
+      setStatus(state.language === "hi-IN" ? "सुन रहा हूँ… बोलिए।" : "Listening… speak now.");
       clearListenWatchdog();
       listenWatchdog = window.setTimeout(() => {
-        if (!state.listening || receivedResult) return;
+        if (!state.sessionActive || receivedResult || !state.listening) return;
+        setStatus(state.language === "hi-IN"
+          ? "मैं फिर से सुन रहा हूँ… बोलिए।"
+          : "I am still here. Please speak when ready.");
         try { recognition.stop(); } catch (_) {}
         resetListeningUI();
-        setStatus(state.language === "hi-IN"
-          ? "आवाज़ सुनाई नहीं दी। कृपया दोबारा माइक्रोफ़ोन दबाकर बोलें।"
-          : "I couldn't hear a response. Tap the microphone and try again.");
+        scheduleListening(300);
       }, 12000);
     };
     recognition.onresult = event => {
@@ -301,72 +375,103 @@
         .join(" ").trim();
       resetListeningUI();
       if (transcript) askAssistant(transcript);
-      else setStatus("I couldn't hear that clearly. Tap the microphone and try again.");
+      else {
+        setStatus(state.language === "hi-IN" ? "आवाज़ साफ़ नहीं आई। फिर से बोलिए।" : "I couldn't hear that clearly. Please try again.");
+        scheduleListening(300);
+      }
     };
     recognition.onerror = event => {
       resetListeningUI();
-      const errors = {
-        "no-speech": "I didn't catch that. Please speak soon after tapping the microphone and try again.",
-        "not-allowed": "Microphone permission is blocked. Allow microphone access in your browser settings.",
-        "service-not-allowed": "Speech recognition is unavailable in this browser. Use WhatsApp to contact our team.",
-        "network": "Speech recognition needs an internet connection. Please try again."
-      };
-      setStatus(errors[event.error] || "I couldn't hear that. Please tap the microphone and try again.");
+      if (event.error === "not-allowed" || event.error === "service-not-allowed") {
+        state.sessionActive = false;
+        setStatus(state.language === "hi-IN"
+          ? "माइक्रोफ़ोन की अनुमति नहीं मिली। ब्राउज़र सेटिंग्स में माइक्रोफ़ोन की अनुमति दें।"
+          : "Microphone access is blocked. Allow microphone access in your browser settings.");
+        return;
+      }
+      if (!state.sessionActive || event.error === "aborted") return;
+      if (event.error === "network") {
+        setStatus(state.language === "hi-IN" ? "कनेक्शन जाँच रहा हूँ… फिर से सुनूँगा।" : "Checking the connection. I will listen again.");
+        scheduleListening(1400);
+        return;
+      }
+      setStatus(state.language === "hi-IN" ? "जी, फिर से सुन रहा हूँ। बोलिए।" : "Ready to listen again. Please speak.");
+      scheduleListening(350);
     };
     recognition.onnomatch = () => {
-      setStatus("I couldn't understand that. Please try speaking clearly once more.");
+      setStatus(state.language === "hi-IN" ? "मैं समझ नहीं पाया। कृपया दोबारा बोलें।" : "I couldn't understand that. Please say it again.");
     };
     recognition.onend = () => {
-      const wasListening = state.listening;
+      const hadResult = receivedResult;
       resetListeningUI();
-      // Some mobile browsers end recognition without firing onresult or onerror.
-      // Never leave the user stuck on the "Listening…" status in that case.
-      if (wasListening && !receivedResult && !state.busy) {
-        setStatus("I couldn't hear your question. Check your connection, then tap the microphone and try again.");
+      if (!state.sessionActive || state.busy || state.speaking || state.isGreeting) return;
+      if (!hadResult) {
+        setStatus(state.language === "hi-IN" ? "मैं सुनने के लिए तैयार हूँ…" : "Ready to listen…");
       }
+      scheduleListening(350);
     };
     return recognition;
   }
 
+  function stopVoiceSession() {
+    state.sessionActive = false;
+    state.welcomePending = false;
+    state.starting = false;
+    state.listening = false;
+    state.isGreeting = false;
+    clearRestartTimer();
+    root.classList.remove("is-listening");
+    if (state.recognition) {
+      try { state.recognition.stop(); } catch (_) {}
+      state.recognition = null;
+    }
+    stopSpeech();
+  }
+ 
   launcher.addEventListener("click", () => {
     const opening = !state.open;
     setOpen(opening);
     if (opening) {
-      const welcome = state.language === "hi-IN"
-        ? "नमस्कार, बताइए आज कौन-सी ट्रिप पर चलें?"
-        : "Hello! Welcome to Himalayan Odyssey. What would you like to know about Himachal, Spiti, or planning your next trip?";
-      speak(welcome, false);
+      if (!Recognition) {
+        setStatus("This browser does not support automatic voice recognition. Please use Chrome or contact us on WhatsApp.");
+        return;
+      }
+      state.sessionActive = true;
+      state.welcomePending = true;
+      setStatus(state.language === "hi-IN" ? "वॉइस असिस्टेंट शुरू हो रहा है…" : "Starting voice assistant…");
+      startListening();
     } else {
-      stopSpeech();
+      stopVoiceSession();
     }
   });
+
   panelClose.addEventListener("click", () => {
-    if (state.recognition && state.listening) state.recognition.stop();
-    stopSpeech();
+    stopVoiceSession();
     setOpen(false);
   });
+
   root.querySelectorAll("[data-lang]").forEach(button => {
     button.addEventListener("click", () => {
       state.language = button.dataset.lang;
-      root.querySelectorAll("[data-lang]").forEach(item => item.setAttribute("aria-pressed", String(item === button)));
-      if (state.recognition && state.listening) state.recognition.stop();
-      setStatus(state.language === "hi-IN" ? "माइक्रोफ़ोन दबाएँ और अपना सवाल पूछें।" : "Tap the microphone and ask your question.");
+      root.querySelectorAll("[data-lang]").forEach(item =>
+        item.setAttribute("aria-pressed", String(item === button))
+      );
+      if ("speechSynthesis" in window) stopSpeech();
+      if (state.sessionActive) {
+        if (state.recognition) {
+          try { state.recognition.stop(); } catch (_) {}
+        }
+        state.starting = false;
+        state.listening = false;
+        state.speaking = false;
+        state.isGreeting = false;
+        state.welcomePending = false;
+        setStatus(state.language === "hi-IN" ? "भाषा बदल गई है। अब बोलिए।" : "Language changed. Please speak.");
+        scheduleListening(350);
+      } else {
+        setStatus(state.language === "hi-IN" ? "वॉइस असिस्टेंट खुलते ही सुनना शुरू करेगा।" : "Open the voice assistant to start listening.");
+      }
     });
   });
-  mic.addEventListener("click", () => {
-    if (state.busy) return;
-    stopSpeech();
-    if (!Recognition) {
-      const message = "Voice recognition is not supported by this browser. Please open this website in Safari or Chrome, or contact our team on WhatsApp.";
-      setStatus(message);
-      return;
-    }
-    if (state.listening && state.recognition) {
-      state.recognition.stop();
-      return;
-    }
-    state.recognition = createRecognition();
-    try { state.recognition.start(); }
-    catch (_) { setStatus("Microphone is starting. Please tap again in a moment."); }
-  });
+
 })();
