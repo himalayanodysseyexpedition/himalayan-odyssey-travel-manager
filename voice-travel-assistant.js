@@ -710,6 +710,9 @@
 
     if (field === "datesConfirmation") {
       if (isYes(input)) { askForPickup(); return; }
+      state.enquiry.kind = "custom";
+      state.enquiry.departure = null;
+      state.enquiry.package = null;
       if (isNo(input)) {
         askForField("dates", enquiryText("अपनी preferred travel dates बताइए।", "Tell me your preferred travel dates."));
         return;
@@ -796,7 +799,7 @@
     beginPackageSearch(input);
   }
   function prepareAndStartGuidedEnquiry() {
-    const ready = state.bootstrap ? Promise.resolve(state.bootstrap) : loadAssistantData();
+    const ready = state.bootstrap ? Promise.resolve(state.bootstrap) : assistantDataPromise;
     ready.then(() => {
       if (state.open && state.sessionActive) beginGuidedEnquiry();
     });
