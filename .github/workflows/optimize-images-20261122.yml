@@ -32,16 +32,16 @@ jobs:
           import fs from 'node:fs/promises';
 
           const destinations = [
-            { file: 'kinnaur.jpg', width: 1600, target: 170 * 1024 },
-            { file: 'spiti.jpg', width: 1800, target: 230 * 1024 },
-            { file: 'narkanda.jpg', width: 1800, target: 230 * 1024 },
-            { file: 'manali.jpg', width: 1800, target: 230 * 1024 }
+            { file: 'kinnaur.jpg', width: 1200, target: 160 * 1024 },
+            { file: 'spiti.jpg', width: 1500, target: 180 * 1024 },
+            { file: 'narkanda.jpg', width: 1500, target: 160 * 1024 },
+            { file: 'manali.jpg', width: 1400, target: 220 * 1024 }
           ];
 
           for (const item of destinations) {
             const before = await fs.stat(item.file);
             let best = null;
-            for (const quality of [82, 78, 74, 70]) {
+            for (const quality of [82, 78, 74, 70, 66]) {
               const output = await sharp(item.file)
                 .rotate()
                 .resize({ width: item.width, height: item.width, fit: 'inside', withoutEnlargement: true })
