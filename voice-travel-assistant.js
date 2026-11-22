@@ -145,7 +145,7 @@
     }
     const utterance = new SpeechSynthesisUtterance(prepareSpeechText(message));
     state.speaking = true;
-    if (state.recognition && (state.listening || state.starting)) {
+    if (state.recognition && state.listening) {
       try { state.recognition.stop(); } catch (_) {}
       state.listening = false;
       state.starting = false;
