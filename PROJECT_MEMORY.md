@@ -615,3 +615,11 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Added `voice-travel-assistant.js` and a small loader in `site-navigation.js`. Added `[functions.ai-travel-assistant] verify_jwt = false` to Supabase config to match the existing setup guide's public-function deployment requirement; no function deployment or secret changes were performed.
 - Free browser speech APIs are used; browser/device support and microphone permission vary. The existing Gemini API still requires the already-documented `GEMINI_API_KEY` Supabase secret and a deployed Edge Function. Live voice and iPhone Safari compatibility remain unverified.
 - Desktop UI, hosting, DNS, database schema/data, existing chat/lead logic and WhatsApp enquiry flows are unchanged. PR pending; no production deployment performed.
+
+
+## 2026-11-22 — Voice assistant AI question routing and conversation recovery
+- Connected general travel-planning questions in the initial guided assistant state to the existing AI Travel Assistant endpoint; package and group-departure selection remains deterministic and data-backed.
+- AI recommendation cards for packages and group departures now select the item and continue the guided enquiry rather than bypassing guest/date/pickup collection with a direct WhatsApp link.
+- Fixed the AI response lifecycle so microphone listening resumes after the request finishes, including when speech playback is unavailable or ends before the request cleanup.
+- Bumped the shared voice assistant script cache URL from v8 to v9. No Supabase schema/data, credentials, deployment settings, or booking records changed.
+- Branch: `fix/voice-assistant-ai-question-routing`. Automated checks and live browser/device verification pending; not merged or deployed.
