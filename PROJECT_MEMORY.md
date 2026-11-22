@@ -632,7 +632,7 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 
 
 ## 2026-11-22 — Optimize large homepage and destination images (PR pending)
-- Added a branch-scoped GitHub Actions image workflow using Sharp, with no paid service or new production runtime dependency.
+- Used a temporary branch-scoped GitHub Actions workflow with Sharp to generate the optimized assets; removed the workflow after the successful run. No paid service or production runtime dependency was added.
 - Converted the 4.46 MB mobile hero JPEG into a 302 KB WebP at quality 82 and updated the homepage preload, hero image element, inline mobile backgrounds and hero stylesheet to use the WebP asset. Bumped the hero stylesheet cache URL.
 - Compressed destination JPGs: Kinnaur 591 KB to 283 KB, Spiti 268 KB to 224 KB, Narkanda 211 KB to 179 KB, and Manali 539 KB to 331 KB. Kinnaur and Manali remain above the first-pass target; further compression may trade away visible quality.
 - Optimization workflow run #1 succeeded. The optimized assets and WebP reference changes are on branch `performance/optimize-images-20261122`; PR, static checks, and GitHub Pages deployment verification pending.
