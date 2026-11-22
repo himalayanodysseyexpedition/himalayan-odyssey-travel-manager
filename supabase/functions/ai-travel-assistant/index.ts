@@ -107,21 +107,37 @@ async function answerChat(payload: Record<string, unknown>) {
   })).filter((item: any) => item.parts[0].text);
   if (!contents.length || contents[contents.length - 1].role !== "user") throw new Error("Please send a new message.");
   const context = await publicContext();
-  const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + encodeURIComponent(MODEL) + ":generateContent", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
-    body: JSON.stringify({
-      systemInstruction: { parts: [{ text: systemPrompt(context) }] },
-      contents,
-      generationConfig: { maxOutputTokens: 750 },
-    }),
+  const requestBody = JSON.stringify({
+    systemInstruction: { parts: [{ text: systemPrompt(context) }] },
+    contents,
+    generationConfig: { maxOutputTokens: 750 },
   });
-  if (!response.ok) {
-    const details = await response.text();
-    console.error("Gemini API error", response.status, details.slice(0, 500));
-    throw new Error(response.status === 429
-      ? "The assistant has reached its current usage limit. Please try again later or contact us on WhatsApp."
-      : "The AI assistant could not respond right now. Please try again or contact us on WhatsApp.");
+  // Retry transient capacity/rate-limit errors, then fall back to the lighter
+  // stable Flash model so temporary load on the primary model does not silence voice chat.
+  const models = [...new Set([MODEL, "gemini-3.5-flash-lite"])];
+  let response: Response | null = null;
+  let lastStatus = 0;
+  for (const model of models) {
+    for (let attempt = 0; attempt < 2; attempt++) {
+      response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + encodeURIComponent(model) + ":generateContent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
+        body: requestBody,
+      });
+      if (response.ok) break;
+      lastStatus = response.status;
+      const details = await response.text();
+      console.error("Gemini API error", model, response.status, details.slice(0, 500));
+      if (![429, 500, 502, 503, 504].includes(response.status)) break;
+      if (attempt === 0) await new Promise(resolve => setTimeout(resolve, 650));
+    }
+    if (response?.ok) break;
+    if (![429, 500, 502, 503, 504].includes(lastStatus)) break;
+  }
+  if (!response?.ok) {
+    throw new Error(lastStatus === 429
+      ? "The assistant is temporarily busy. Please try again shortly or contact us on WhatsApp."
+      : "The AI assistant is temporarily unavailable. Please try again or contact us on WhatsApp.");
   }
   const result = await response.json();
   const reply = (result?.candidates?.[0]?.content?.parts || []).map((part: any) => part.text || "").join("").trim();
