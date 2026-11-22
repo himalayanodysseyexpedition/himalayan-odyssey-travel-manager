@@ -99,7 +99,7 @@
     }
     const utterance = new SpeechSynthesisUtterance(message);
     utterance.lang = state.language;
-    utterance.rate = 0.96;
+    utterance.rate = 1.08;
     utterance.pitch = 1;
     utterance.volume = 1;
     utterance.onstart = () => setStatus("Himalayan Odyssey is speaking…");
@@ -121,12 +121,17 @@
     state.messages.push({ role: "user", content: transcript });
     state.messages = state.messages.slice(-12);
     setBusy(true);
-    setStatus("Thinking about your trip…");
+    const heardLabel = state.language === "hi-IN" ? "आपने कहा: " : "I heard: ";
+    const preparingLabel = state.language === "hi-IN" ? " — जवाब तैयार कर रहा हूँ…" : " — preparing your reply…";
+    setStatus(heardLabel + transcript.slice(0, 90) + (transcript.length > 90 ? "…" : "") + preparingLabel);
+    const controller = new AbortController();
+    const requestTimeout = window.setTimeout(() => controller.abort(), 15000);
     try {
       const response = await fetch(SUPABASE_URL + "/functions/v1/ai-travel-assistant", {
         method: "POST",
         headers: { "Content-Type": "application/json", "apikey": SUPABASE_KEY },
-        body: JSON.stringify({ action: "chat", messages: state.messages })
+        body: JSON.stringify({ action: "chat", messages: state.messages }),
+        signal: controller.signal
       });
       const result = await response.json().catch(() => ({}));
       if (!response.ok || !result.reply) throw new Error(result.message || "The assistant is unavailable right now.");
@@ -134,10 +139,13 @@
       state.messages = state.messages.slice(-12);
       speak(result.reply);
     } catch (error) {
-      const message = error && error.message ? error.message : "I couldn't connect. Please try again.";
+      const message = error && error.name === "AbortError"
+        ? (state.language === "hi-IN" ? "जवाब आने में ज़्यादा समय लगा। कृपया फिर से पूछें।" : "The reply took too long. Please try again.")
+        : (error && error.message ? error.message : "I couldn't connect. Please try again.");
       setStatus(message);
       if ("speechSynthesis" in window) speak(message);
     } finally {
+      window.clearTimeout(requestTimeout);
       setBusy(false);
     }
   }
