@@ -622,4 +622,4 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - AI recommendation cards for packages and group departures now select the item and continue the guided enquiry rather than bypassing guest/date/pickup collection with a direct WhatsApp link.
 - Fixed the AI response lifecycle so microphone listening resumes after the request finishes, including when speech playback is unavailable or ends before the request cleanup.
 - Bumped the shared voice assistant script cache URL from v8 to v9. No Supabase schema/data, credentials, deployment settings, or booking records changed.
-- Branch: `fix/voice-assistant-ai-question-routing`. Automated checks and live browser/device verification pending; not merged or deployed.
+- PR #677 merged to main on 2026-11-22 as commit `f6fd231025040d1bb1ed79e8cd55cc6e5392e5e0`; GitHub Actions Static site quality checks run #1626 passed. Live browser/device verification and GitHub Pages deployment completion remain unverified.
