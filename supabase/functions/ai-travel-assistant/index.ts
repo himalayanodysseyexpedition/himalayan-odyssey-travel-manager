@@ -78,14 +78,15 @@ async function publicContext() {
   if (publicContextPending) return publicContextPending;
 
   publicContextPending = (async () => {
+    const indiaDate = new Date(Date.now() + 330 * 60 * 1000).toISOString().slice(0, 10);
     const results = await Promise.all([
       rest("destinations?select=title,tagline,slug,image_url,link_url,sort_order&is_active=eq.true&order=sort_order.asc"),
-      rest("packages?select=name,destination,duration,price_per_person,description,itinerary,inclusions,exclusions,departure_dates,image_url&order=created_at.desc&limit=20"),
+      rest("packages?select=id,name,destination,duration,price_per_person,description,itinerary,inclusions,exclusions,departure_dates,image_url&order=created_at.desc&limit=20"),
       rest("itineraries?select=id,title,destination,duration_days,duration_nights,summary,price,package_id&published=eq.true&order=created_at.desc&limit=30"),
       rest("itinerary_days?select=itinerary_id,day_number,title,description,overnight_location&order=day_number.asc&limit=80"),
       rest("hotels?select=name,location,description,facilities&published=eq.true&limit=30"),
       rest("cabs?select=name,model,seating_capacity,daily_price,description&published=eq.true&limit=20"),
-      rest("group_departures?select=title,destination,start_date,end_date,duration,price_per_person,joined_count,max_travellers,highlights,booking_note&status=in.(published,full)&order=start_date.asc&limit=20"),
+      rest("group_departures?select=id,title,destination,start_date,end_date,duration,price_per_person,joined_count,max_travellers,image_url,highlights,booking_note,status&status=in.(published,full)&start_date=gte." + indiaDate + "&order=start_date.asc&limit=10"),
     ]);
     const value = {
       destinations: results[0], packages: results[1], itineraries: results[2],
@@ -437,7 +438,12 @@ Deno.serve(async (request: Request) => {
   try {
     if (action === "bootstrap") {
       const context = await publicContext();
-      return json({ cabs: context.cabs });
+      return json({
+        packages: context.packages,
+        destinations: context.destinations,
+        group_departures: context.group_departures,
+        cabs: context.cabs
+      });
     }
     if (action === "chat") return json(await answerChat(payload));
     if (action === "estimate") {
