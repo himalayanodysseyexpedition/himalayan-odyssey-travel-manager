@@ -244,12 +244,11 @@
 })();
 
 
-// Load the optional mobile voice assistant on public pages that use shared navigation.
+// Load the optional voice assistant on public pages that use shared navigation.
 (() => {
-  if (window.matchMedia && !window.matchMedia("(max-width: 760px)").matches) return;
   if (document.querySelector('script[data-hoe-voice-assistant]')) return;
   const script = document.createElement("script");
-  script.src = "/voice-travel-assistant.js?v=7";
+  script.src = "/voice-travel-assistant.js?v=8";
   script.defer = true;
   script.dataset.hoeVoiceAssistant = "true";
   document.head.appendChild(script);

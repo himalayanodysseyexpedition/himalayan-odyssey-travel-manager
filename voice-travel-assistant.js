@@ -6,8 +6,7 @@
   const SUPABASE_KEY = "sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-";
   const WHATSAPP = "919816929669";
   const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  const isMobile = window.matchMedia("(max-width: 760px)").matches;
-  if (!isMobile || document.getElementById("hoe-voice-assistant")) return;
+  if (document.getElementById("hoe-voice-assistant")) return;
 
   const state = {
     language: "hi-IN",
@@ -64,6 +63,7 @@
     #hoe-voice-assistant.is-listening .hoe-voice-status{border:1px solid rgba(231,185,185,.5);box-shadow:0 0 0 4px rgba(231,185,185,.07)}
     #hoe-voice-assistant .hoe-voice-help{display:block;margin-top:12px;color:#aebbc8;font-size:10px;line-height:1.5;text-align:center}
     #hoe-voice-assistant .hoe-voice-whatsapp{display:block;margin-top:11px;color:#fff;text-align:center;font-size:11px;text-decoration:underline;text-underline-offset:3px}
+    @media(min-width:761px){#hoe-voice-assistant{right:24px;bottom:104px}#hoe-voice-assistant .hoe-voice-panel{width:min(420px,calc(100vw - 48px));max-height:min(76vh,760px);overflow-y:auto}#hoe-voice-assistant .hoe-voice-chat{max-height:42vh}}
     @media(prefers-reduced-motion:reduce){#hoe-voice-assistant .hoe-voice-status{box-shadow:none!important}}
   `;
   document.head.appendChild(style);
