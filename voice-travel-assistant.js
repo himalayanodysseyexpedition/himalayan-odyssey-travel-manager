@@ -145,6 +145,17 @@
     if (!Recognition) return null;
     const recognition = new Recognition();
     let receivedResult = false;
+    let listenWatchdog = null;
+    const clearListenWatchdog = () => {
+      if (listenWatchdog) window.clearTimeout(listenWatchdog);
+      listenWatchdog = null;
+    };
+    const resetListeningUI = () => {
+      clearListenWatchdog();
+      state.listening = false;
+      root.classList.remove("is-listening");
+      mic.setAttribute("aria-label", "Start speaking");
+    };
     recognition.lang = state.language;
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
@@ -154,21 +165,31 @@
       root.classList.add("is-listening");
       mic.setAttribute("aria-label", "Listening");
       setStatus(state.language === "hi-IN" ? "सुन रहा हूँ… अब बोलिए।" : "Listening… speak now.");
+      // Some Android speech services fail to emit onresult/onend. Recover instead
+      // of leaving the microphone permanently stuck in the listening state.
+      clearListenWatchdog();
+      listenWatchdog = window.setTimeout(() => {
+        if (!state.listening || receivedResult) return;
+        try { recognition.stop(); } catch (_) {}
+        resetListeningUI();
+        setStatus(state.language === "hi-IN"
+          ? "आवाज़ सुनाई नहीं दी। कृपया दोबारा माइक्रोफ़ोन दबाकर बोलें।"
+          : "I couldn't hear a response. Tap the microphone and try again.");
+      }, 12000);
     };
     recognition.onresult = event => {
       receivedResult = true;
-      const transcript = event.results && event.results[0] && event.results[0][0]
-        ? String(event.results[0][0].transcript || "").trim() : "";
-      state.listening = false;
-      root.classList.remove("is-listening");
-      mic.setAttribute("aria-label", "Start speaking");
+      clearListenWatchdog();
+      const transcript = Array.from(event.results || [])
+        .slice(event.resultIndex || 0)
+        .map(result => result && result[0] ? String(result[0].transcript || "") : "")
+        .join(" ").trim();
+      resetListeningUI();
       if (transcript) askAssistant(transcript);
       else setStatus("I couldn't hear that clearly. Tap the microphone and try again.");
     };
     recognition.onerror = event => {
-      state.listening = false;
-      root.classList.remove("is-listening");
-      mic.setAttribute("aria-label", "Start speaking");
+      resetListeningUI();
       const errors = {
         "no-speech": "I didn't catch that. Please speak soon after tapping the microphone and try again.",
         "not-allowed": "Microphone permission is blocked. Allow microphone access in your browser settings.",
@@ -182,9 +203,7 @@
     };
     recognition.onend = () => {
       const wasListening = state.listening;
-      state.listening = false;
-      root.classList.remove("is-listening");
-      mic.setAttribute("aria-label", "Start speaking");
+      resetListeningUI();
       // Some mobile browsers end recognition without firing onresult or onerror.
       // Never leave the user stuck on the "Listening…" status in that case.
       if (wasListening && !receivedResult && !state.busy) {
