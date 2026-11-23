@@ -82,6 +82,7 @@
    $("htpStatus").textContent="Enter your name and a valid 10-digit Indian WhatsApp number.";
    $("htpGuestName").focus();return;
   }
+  lines.splice(1,0,"Name: "+guestName,"WhatsApp: +91 "+guestPhone);
   const selections=places.map(name=>({type:"stay",destination:name,nights:nights[name],rate_per_person_per_night:rates[name]}));
   if(v&&vehicleDays>0)selections.push({type:"vehicle",title:v.title,daily_rate:Number(v.price),days:vehicleDays,vehicle_count:Math.ceil(people/Math.max(1,Number(v.capacity)||1))});
   const url="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(lines.join("\n"));
