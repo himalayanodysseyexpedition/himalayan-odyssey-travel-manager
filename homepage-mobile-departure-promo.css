@@ -664,16 +664,12 @@ html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details > sum
   }
 }
 
-/* Mobile-only purple ambient light for the homepage promotional departure cards. */
+/* Mobile-only purple glow outside the border of homepage promotional departure cards. */
 @media screen and (max-width:760px){
   html body #home.hero .hero-promo-slide .mobile-next-departure{
-    background-image:
-      radial-gradient(ellipse at 86% 8%,rgba(168,85,247,.24),transparent 48%),
-      radial-gradient(ellipse at 8% 94%,rgba(124,58,237,.17),transparent 52%),
-      linear-gradient(145deg,#080808 0%,#171717 58%,#050505 100%)!important;
+    background-image:linear-gradient(145deg,#080808 0%,#171717 58%,#050505 100%)!important;
     box-shadow:
-      0 0 18px rgba(168,85,247,.24),
-      0 0 42px rgba(139,92,246,.18),
+      0 0 24px 3px rgba(168,85,247,.48),
       0 20px 48px rgba(0,0,0,.38),
       inset 0 1px 0 rgba(255,255,255,.14)!important;
   }
