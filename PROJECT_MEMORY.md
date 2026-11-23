@@ -636,3 +636,8 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Converted the 4.46 MB mobile hero JPEG into a 302 KB WebP at quality 82 and updated the homepage preload, hero image element, inline mobile backgrounds and hero stylesheet to use the WebP asset. Bumped the hero stylesheet cache URL.
 - Compressed destination JPGs: Kinnaur 591 KB to 283 KB, Spiti 268 KB to 224 KB, Narkanda 211 KB to 179 KB, and Manali 539 KB to 331 KB. Kinnaur and Manali remain above the first-pass target; further compression may trade away visible quality.
 - PR #678 merged to main on 2026-11-22 as commit `6271380cc3c4f70ee9fedd3cf824d7848d5a8765`. Temporary image optimization workflow run #1 succeeded; static-site quality checks run #1630 passed; GitHub Pages deployment run #1297 and Pages build #1654 completed successfully. Live mobile visual comparison remains unverified.
+
+## 2026-11-23 — Add a subtle purple glow to mobile homepage promotional cards
+- Added a restrained purple ambient highlight inside the backgrounds and a soft violet halo around both homepage hero group-departure promotional cards.
+- Scoped the effect to the mobile breakpoint (760px and below). Desktop styling, card content, carousel behaviour, buttons, and booking/enquiry functionality remain unchanged.
+- File: `homepage-mobile-departure-promo.css`. PR and automated verification pending; no production deployment performed.
