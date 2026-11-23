@@ -637,8 +637,8 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Compressed destination JPGs: Kinnaur 591 KB to 283 KB, Spiti 268 KB to 224 KB, Narkanda 211 KB to 179 KB, and Manali 539 KB to 331 KB. Kinnaur and Manali remain above the first-pass target; further compression may trade away visible quality.
 - PR #678 merged to main on 2026-11-22 as commit `6271380cc3c4f70ee9fedd3cf824d7848d5a8765`. Temporary image optimization workflow run #1 succeeded; static-site quality checks run #1630 passed; GitHub Pages deployment run #1297 and Pages build #1654 completed successfully. Live mobile visual comparison remains unverified.
 
-## 2026-11-23 — Add a subtle purple glow to mobile homepage promotional cards
-- Added a restrained purple ambient highlight inside the backgrounds and a soft violet halo around both homepage hero group-departure promotional cards.
-- Scoped the effect to the mobile breakpoint (760px and below). Desktop styling, card content, carousel behaviour, buttons, and booking/enquiry functionality remain unchanged.
-- Updated the homepage stylesheet cache version to v27 so browsers request the revised mobile promo styles.
-- Files: `homepage-mobile-departure-promo.css`, `index.html`. PR #679 merged as commit `5fe2239da80fedc2831314d5746adcc831046216`; static-site quality checks passed and GitHub Pages deployment completed successfully (run #1656). Live visual inspection through the public site was not available.
+## 2026-11-23 — Add a purple exterior glow to mobile homepage promotional cards
+- Applied one soft purple halo outside the border of both homepage hero group-departure promotional cards. Removed all purple tint from the card fill; the original dark gradient background, white border, text, and other card content remain unchanged.
+- Scoped the effect to the mobile breakpoint (760px and below); desktop styling, card layout, carousel behaviour, buttons, and booking/enquiry functionality remain unchanged.
+- Bumped the homepage stylesheet cache version to v28 so mobile browsers fetch the corrected style.
+- Files: `homepage-mobile-departure-promo.css`, `index.html`. Correction PR and deployment verification pending.
