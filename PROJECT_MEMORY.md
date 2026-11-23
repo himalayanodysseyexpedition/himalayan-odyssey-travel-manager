@@ -640,4 +640,5 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 ## 2026-11-23 — Add a subtle purple glow to mobile homepage promotional cards
 - Added a restrained purple ambient highlight inside the backgrounds and a soft violet halo around both homepage hero group-departure promotional cards.
 - Scoped the effect to the mobile breakpoint (760px and below). Desktop styling, card content, carousel behaviour, buttons, and booking/enquiry functionality remain unchanged.
-- File: `homepage-mobile-departure-promo.css`. PR and automated verification pending; no production deployment performed.
+- Updated the homepage stylesheet cache version to v27 so browsers request the revised mobile promo styles.
+- Files: `homepage-mobile-departure-promo.css`, `index.html`. PR #679 merged as commit `5fe2239da80fedc2831314d5746adcc831046216`; static-site quality checks passed and GitHub Pages deployment completed successfully (run #1656). Live visual inspection through the public site was not available.
