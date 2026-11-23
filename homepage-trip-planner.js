@@ -71,14 +71,35 @@
  $("htpVehicle").addEventListener("change",()=>{vehicleDays=0;renderVehicleSelection();calculate()});
  $("htpVehicleDays").addEventListener("input",e=>{vehicleDays=Math.min(30,Math.max(0,Number(e.target.value)||0));renderVehicleSelection();calculate()});
  root.addEventListener("click",e=>{const b=e.target.closest("[data-vehicle-days]");if(!b)return;vehicleDays=Math.min(30,Math.max(0,vehicleDays+Number(b.dataset.vehicleDays)));renderVehicleSelection();calculate()});
- $("htpCalculate").addEventListener("click",()=>{
+ $("htpCalculate").addEventListener("click",async()=>{
   const places=names.filter(n=>nights[n]>0),people=Number($("htpTravellers").value)||1,v=selectedVehicle(),days=tripDays();
   const stay=Number($("htpCalculate").dataset.stay),cab=Number($("htpCalculate").dataset.cab);
   if(!places.length||!days||(v&&vehicleDays>0&&!cab)){$("htpStatus").textContent="Select a destination and valid travel dates to prepare your trip estimate.";return}
   const lines=["Hello Himalayan Odyssey Expedition! Please prepare my trip quotation.","Destinations: "+places.map(n=>n+" ("+nights[n]+" nights)").join(", "),"Dates: "+$("htpStart").value+" to "+$("htpEnd").value,"Duration: "+days+" days; selected stay: "+totalNights()+" nights","Travellers: "+people,"Stay estimate: "+money(stay),"Vehicle: "+(v&&vehicleDays>0?v.title+" × "+Math.ceil(people/Math.max(1,Number(v.capacity)||1)):"Not included (0 days)"),"Vehicle rental days: "+(v?vehicleDays:0),"Daily vehicle rate: "+(v&&vehicleDays>0?money(v.price):"Not applicable"),"Cab estimate: "+money(cab),"Estimated total: "+money(stay+cab),"Estimated per person: "+money((stay+cab)/people),"Please confirm availability, route feasibility and final inclusions."];
+  const guestName=$("htpGuestName").value.trim();
+  const guestPhone=$("htpGuestPhone").value.replace(/\D/g,"");
+  if(guestName.length<2||!/^[6-9]\d{9}$/.test(guestPhone)){
+   $("htpStatus").textContent="Enter your name and a valid 10-digit Indian WhatsApp number.";
+   $("htpGuestName").focus();return;
+  }
+  lines.splice(1,0,"Name: "+guestName,"WhatsApp: +91 "+guestPhone);
+  const selections=places.map(name=>({type:"stay",destination:name,nights:nights[name],rate_per_person_per_night:rates[name]}));
+  if(v&&vehicleDays>0)selections.push({type:"vehicle",title:v.title,daily_rate:Number(v.price),days:vehicleDays,vehicle_count:Math.ceil(people/Math.max(1,Number(v.capacity)||1))});
   const url="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(lines.join("\n"));
-  const w=window.open(url,"_blank");if(!w)window.location.href=url;
-  $("htpStatus").textContent="Trip estimate prepared. Confirm final cab and stay rates with our team.";
+  const w=window.open("about:blank","_blank");
+  const submit=$("htpCalculate");submit.disabled=true;submit.textContent="SAVING YOUR ENQUIRY…";
+  $("htpStatus").textContent="Saving your enquiry to our team dashboard…";
+  let saved=false;
+  try{
+   const response=await fetch("https://ynkoiuyjevclypumnyes.supabase.co/rest/v1/marketplace_enquiries",{
+    method:"POST",headers:{apikey:KEY,Authorization:"Bearer "+KEY,"Content-Type":"application/json",Prefer:"return=minimal"},
+    body:JSON.stringify({guest_name:guestName,guest_phone:"+91"+guestPhone,travel_date:$("htpStart").value,guest_count:people,selections,estimated_total:Number(submit.dataset.total)||0,status:"new",source:"build-your-trip"})
+   });
+   saved=response.ok;if(!response.ok)console.warn("Trip enquiry save failed:",response.status,await response.text());
+  }catch(error){console.warn("Trip enquiry save error:",error)}
+  $("htpStatus").textContent=saved?"Enquiry saved to our dashboard. Opening WhatsApp…":"Could not confirm dashboard save. Opening WhatsApp so your enquiry still reaches us.";
+  submit.textContent=saved?"ENQUIRY SAVED":"CONTINUE ON WHATSAPP";
+  if(w&&!w.closed)w.location.href=url;else window.location.href=url;
  });
  function renderVehicleSelection(){
   const card=$("htpVehicleSelection"),v=selectedVehicle();
