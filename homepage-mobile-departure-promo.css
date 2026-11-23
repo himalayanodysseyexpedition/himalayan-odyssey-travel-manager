@@ -690,3 +690,29 @@ html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details > sum
       inset 0 1px 0 rgba(255,255,255,.14)!important;
   }
 }
+
+
+/* Render the purple halo on the carousel slide itself, outside the card.
+   The track is a horizontal scroll container, so its vertical overflow clips shadows.
+   This slide-level glow uses the reserved track padding and leaves the card face untouched. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-promo-slide{
+    isolation:isolate!important;
+  }
+  html body #home.hero .hero-promo-slide::before{
+    content:""!important;
+    position:absolute!important;
+    z-index:0!important;
+    inset:-14px!important;
+    border-radius:32px!important;
+    background:radial-gradient(ellipse at 50% 48%,rgba(168,85,247,.78) 0%,rgba(147,51,234,.52) 34%,rgba(126,34,206,.24) 58%,rgba(126,34,206,0) 78%)!important;
+    filter:blur(15px)!important;
+    opacity:1!important;
+    pointer-events:none!important;
+  }
+  html body #home.hero .hero-promo-slide .mobile-next-departure{
+    position:relative!important;
+    z-index:1!important;
+    box-shadow:0 0 30px 5px rgba(168,85,247,.32),0 20px 48px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.14)!important;
+  }
+}
