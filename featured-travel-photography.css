@@ -321,3 +321,13 @@
     color: #000000 !important;
   }
 }
+
+/* Reserve the existing mobile gallery geometry while its data is fetched.
+   Hidden controls remain non-interactive until the gallery is ready. */
+@media screen and (max-width: 760px) {
+  html.hoe-gallery-pending body #featured-travel-photography[hidden] {
+    display: block !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
