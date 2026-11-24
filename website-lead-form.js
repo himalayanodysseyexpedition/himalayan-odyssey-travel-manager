@@ -147,6 +147,8 @@
       } catch (_) {
         saved = false;
       }
+      if (saved) window.HOEAnalytics?.track("generate_lead", { form_name: "website_enquiry", page_path: location.pathname });
+      else window.HOEAnalytics?.track("enquiry_whatsapp_fallback", { page_path: location.pathname });
       status.dataset.state = saved ? "success" : "error";
       status.textContent = saved
         ? "Enquiry saved. Opening WhatsApp to continue…"

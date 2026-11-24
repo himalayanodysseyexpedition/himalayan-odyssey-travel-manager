@@ -13,8 +13,7 @@
     const link = event.target.closest('a[href*="wa.me"]');
     if (!link) return;
     track("whatsapp_click", {
-      link_url: link.href,
-      link_text: (link.innerText || "WhatsApp").trim().slice(0, 100),
+      link_url: "https://wa.me/",
       page_path: window.location.pathname
     });
   });
@@ -55,7 +54,7 @@
       window.dataLayer = window.dataLayer || [];
       window.gtag = function(){ window.dataLayer.push(arguments); };
       window.gtag("js", new Date());
-      window.gtag("config", measurementId, { send_page_view: true });
+      window.gtag("config", measurementId, { send_page_view: true, page_location: window.location.origin + window.location.pathname });
 
       const script = document.createElement("script");
       script.async = true;
