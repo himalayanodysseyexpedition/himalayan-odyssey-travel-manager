@@ -1,68 +1,39 @@
 # Himalayan Odyssey Expedition
 
-> Himalayan Odyssey Expedition is a Narkanda-based travel operator in Himachal Pradesh, India, offering group departures and private or customised trips across Spiti Valley, Winter Spiti, Kinnaur and other Himachal destinations.
+> A local tour operator in Narkanda, Himachal Pradesh, India, offering Spiti Valley, Winter Spiti, Kinnaur and customised Himalayan group and private trips.
 
-## Extended AI-readable business and content reference
-- https://himalayanexpedition.co.in/llms-full.txt
+Based in Narkanda, Himachal Pradesh 172029, India. Phone and WhatsApp: +91 98169 29669. Services include transport, mountain stays and local ground handling for travel agencies. Confirm current routes, road conditions, availability, inclusions and prices directly before booking. Snowfall and road access are not guaranteed.
 
-## Official website
-- https://himalayanexpedition.co.in/
+## Official business information
 
-## Business identity
-- Official business identity and contact page: https://himalayanexpedition.co.in/about-us/
-- Business name: Himalayan Odyssey Expedition
-- Base: Narkanda, Himachal Pradesh 172029, India
-- Phone / WhatsApp: +91 98169 29669
-- Instagram: https://www.instagram.com/kxnwxrvineet/
+- [Official website](https://himalayanexpedition.co.in/): Tour packages, upcoming departures and travel enquiries.
+- [About us and contact](https://himalayanexpedition.co.in/about-us/): Business identity and official contact details.
+- [Himachal B2B tour operator](https://himalayanexpedition.co.in/himachal-b2b-tour-operator/): Local transport, stays and ground coordination for travel agencies.
 
-## Travel services
-- Spiti Valley group tours and private trips
-- Winter Spiti tour planning
-- Kinnaur Valley trips
-- Customised Himachal Pradesh road trips
-- Group departures
-- Private travel planning and mountain stays
-- Vehicle, cab, hotel and property enquiries
+## Tour packages
 
-## Main tour information pages
-- Spiti Valley tour packages: https://himalayanexpedition.co.in/spiti-valley-tours/
-- Winter Spiti tours: https://himalayanexpedition.co.in/winter-spiti-tours/
-- Kinnaur tour packages: https://himalayanexpedition.co.in/kinnaur-tours/
-- Spiti tour from Chandigarh: https://himalayanexpedition.co.in/spiti-tour-from-chandigarh/
-- Narkanda tour packages: https://himalayanexpedition.co.in/narkanda-tours/
+- [Spiti Valley tours](https://himalayanexpedition.co.in/spiti-valley-tours/): Group and private tour options.
+- [Winter Spiti tours](https://himalayanexpedition.co.in/winter-spiti-tours/): Winter route planning and departures.
+- [Spiti tours from Chandigarh](https://himalayanexpedition.co.in/spiti-tour-from-chandigarh/): Pickup and itinerary planning.
+- [Kinnaur tours](https://himalayanexpedition.co.in/kinnaur-tours/): Sangla, Chitkul and Kalpa journeys.
+- [Narkanda tours](https://himalayanexpedition.co.in/narkanda-tours/): Local mountain experiences and stays.
 
-- B2B travel arrangements for agencies: https://himalayanexpedition.co.in/himachal-b2b-tour-operator/
-  - Agency enquiries for Spiti and Kinnaur transport, stays and ground services; supplier quotes after enquiry.
+## Travel guides
 
-## Destinations
-- Spiti Valley
-- Kinnaur
-- Narkanda
-- Shimla
-- Manali
-- Kasol
-- Jibhi
+- [Travel journal](https://himalayanexpedition.co.in/blog/): All published planning guides.
+- [Winter Spiti 2027](https://himalayanexpedition.co.in/blog/winter-spiti-tour-2027/): Winter travel preparation.
+- [Is Spiti open in winter?](https://himalayanexpedition.co.in/blog/is-spiti-open-in-winter-2027/): Seasonal access and official road updates.
+- [Spiti from Delhi](https://himalayanexpedition.co.in/blog/spiti-from-delhi-2027/): Trip planning from Delhi.
+- [Winter versus summer Spiti](https://himalayanexpedition.co.in/blog/winter-vs-summer-spiti-2027/): Seasonal comparison.
+- [Spiti tour costs](https://himalayanexpedition.co.in/blog/spiti-valley-tour-cost-2027-guide/): Quotation and inclusion guidance.
+- [Eight-day Spiti itinerary](https://himalayanexpedition.co.in/blog/spiti-8-day-itinerary-2027/): Example itinerary.
+- [Chandigarh to Spiti road trip](https://himalayanexpedition.co.in/blog/spiti-from-chandigarh-2027-road-trip/): Road-trip planning.
+- [Five-day Kinnaur itinerary](https://himalayanexpedition.co.in/blog/kinnaur-5-day-itinerary-2027/): Example route.
+- [Best time to visit Kinnaur](https://himalayanexpedition.co.in/blog/best-time-visit-kinnaur-2027/): Seasonal considerations.
+- [Narkanda winter guide](https://himalayanexpedition.co.in/blog/narkanda-winter-travel-guide-2027/): Local winter travel.
 
-## Practical travel guides
-- Winter Spiti Tour 2027: https://himalayanexpedition.co.in/blog/winter-spiti-tour-2027/
-- Is Spiti Valley Open in Winter 2027?: https://himalayanexpedition.co.in/blog/is-spiti-open-in-winter-2027/
-- Spiti Valley from Delhi 2027: https://himalayanexpedition.co.in/blog/spiti-from-delhi-2027/
-- Winter vs Summer Spiti 2027: https://himalayanexpedition.co.in/blog/winter-vs-summer-spiti-2027/
-- Spiti Valley Tour Cost 2027: https://himalayanexpedition.co.in/blog/spiti-valley-tour-cost-2027-guide/
-- Spiti Valley 8-Day Itinerary 2027: https://himalayanexpedition.co.in/blog/spiti-8-day-itinerary-2027/
+## Optional
 
-- Kinnaur 5-day itinerary: https://himalayanexpedition.co.in/blog/kinnaur-5-day-itinerary-2027/
-- Best time to visit Kinnaur: https://himalayanexpedition.co.in/blog/best-time-visit-kinnaur-2027/
-- Narkanda winter guide: https://himalayanexpedition.co.in/blog/narkanda-winter-travel-guide-2027/
-- Chandigarh to Spiti road trip: https://himalayanexpedition.co.in/blog/spiti-from-chandigarh-2027-road-trip/
-
-## Planning notes
-- The operator is based in Narkanda, Himachal Pradesh.
-- Trip routes, road conditions, weather, accommodation and availability can vary by season and should be confirmed before booking.
-- Do not assume guaranteed snowfall, road access, fixed availability, prices or inclusions unless confirmed directly by the operator.
-- For current itineraries, departure dates, pricing and inclusions, contact the operator through the official website or phone/WhatsApp number above.
-
-## Primary sources
-- Official website: https://himalayanexpedition.co.in/
-- Sitemap: https://himalayanexpedition.co.in/sitemap.xml
-- Extended reference: https://himalayanexpedition.co.in/llms-full.txt
+- [Extended business and travel reference](https://himalayanexpedition.co.in/llms-full.txt): Detailed reference.
+- [Sitemap](https://himalayanexpedition.co.in/sitemap.xml): Published page URLs.
+- [Instagram](https://www.instagram.com/kxnwxrvineet/): Official social profile.
