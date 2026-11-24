@@ -2432,11 +2432,15 @@ const db = window.supabase
 let publishedItinerariesRequest;
 function getPublishedItineraries() {
   if (!publishedItinerariesRequest) {
-    publishedItinerariesRequest = db
+    const query = db
       .from("itineraries")
       .select("id,package_id,title,destination,duration_days,duration_nights,price,summary,published,created_at,gallery_images,cover_image")
       .eq("published", true)
       .order("created_at", { ascending: false });
+    // On mobile, resolve the Supabase thenable once so both sections share a real promise.
+    publishedItinerariesRequest = window.matchMedia("(max-width: 760px)").matches
+      ? Promise.resolve(query)
+      : query;
   }
   return publishedItinerariesRequest;
 }
@@ -2724,6 +2728,12 @@ async function loadCabs() {
 /* HOTEL AND PROPERTY GALLERY */
 let publicHotels = [];
 let publicHotelPhotos = [];
+let mobileHotelPhotosById = null;
+
+function photosForHotel(hotelId) {
+  if (mobileHotelPhotosById) return mobileHotelPhotosById.get(String(hotelId)) || [];
+  return publicHotelPhotos.filter(photo => String(photo.hotel_id) === String(hotelId));
+}
 
 function hotelFacilities(value) {
   if (Array.isArray(value)) return value.filter(Boolean).join(" • ");
@@ -2758,18 +2768,25 @@ async function loadHotels() {
 
     const {data:photos,error:photoError} = await db
       .from("hotel_photos")
-      .select("*")
+      .select(window.matchMedia("(max-width: 760px)").matches ? "hotel_id,photo_url,caption" : "*")
       .in("hotel_id",hotelIds);
 
     if (photoError) throw photoError;
 
     publicHotelPhotos = photos || [];
+    mobileHotelPhotosById = null;
+    if (window.matchMedia("(max-width: 760px)").matches) {
+      mobileHotelPhotosById = new Map();
+      for (const photo of publicHotelPhotos) {
+        const id = String(photo.hotel_id);
+        if (!mobileHotelPhotosById.has(id)) mobileHotelPhotosById.set(id, []);
+        mobileHotelPhotosById.get(id).push(photo);
+      }
+    }
 
     list.innerHTML = publicHotels.map(hotel => {
 
-      const hotelPhotos = publicHotelPhotos.filter(
-        photo => String(photo.hotel_id) === String(hotel.id)
-      );
+      const hotelPhotos = photosForHotel(hotel.id);
 
       const firstPhoto = hotelPhotos.find(photo => photo.photo_url);
 
@@ -2825,9 +2842,7 @@ function showHotelDetails(hotelId) {
 
   if (!hotel) return;
 
-  const photos = publicHotelPhotos.filter(
-    photo => String(photo.hotel_id) === String(hotel.id)
-  );
+  const photos = photosForHotel(hotel.id);
 
   const facilities = hotelFacilities(hotel.facilities);
 
