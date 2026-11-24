@@ -77,7 +77,13 @@
         frame = 0;
         return;
       }
-      const delta = Math.min(0.04, Math.max(0, (time - lastTime) / 1000));
+      // Snow motion is decorative: cap canvas redraws near 30 fps on mobile.
+      // Keep movement time-based, so the visible falling speed stays the same.
+      if (time - lastTime < 1000 / 30 - 1) {
+        frame = requestAnimationFrame(animate);
+        return;
+      }
+      const delta = Math.min(0.05, Math.max(0, (time - lastTime) / 1000));
       lastTime = time;
 
       for (const flake of flakes) {
