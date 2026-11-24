@@ -716,3 +716,45 @@ html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details > sum
     box-shadow:0 0 30px 5px rgba(168,85,247,.32),0 20px 48px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.14)!important;
   }
 }
+
+
+/* Slightly compact the mobile homepage departure cards without changing their visual theme. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-promo-slide{
+    flex:0 0 94%!important;
+    width:94%!important;
+    min-width:94%!important;
+    max-width:94%!important;
+    margin-inline:3%!important;
+    box-sizing:border-box!important;
+  }
+  html body #home.hero .hero-promo-slide .mobile-next-departure{
+    padding:16px 15px 14px!important;
+    border-radius:20px!important;
+  }
+  html body #home.hero .hero-promo-slide .mobile-next-departure h2{
+    font-size:clamp(36px,9.2vw,48px)!important;
+  }
+  html body #home.hero .hero-promo-slide .mobile-departure-topline{
+    min-height:27px!important;
+    padding-bottom:8px!important;
+  }
+  html body #home.hero .hero-promo-slide .mobile-departure-kicker{
+    margin:13px 0 5px!important;
+  }
+  html body #home.hero .hero-promo-slide .mobile-departure-date{
+    margin:10px 0 8px!important;
+    padding:8px 0!important;
+  }
+  html body #home.hero .hero-promo-slide .mobile-departure-facts{
+    gap:6px!important;
+    margin:6px 0!important;
+  }
+  html body #home.hero .hero-promo-slide .mobile-departure-price{
+    margin:11px 0 8px!important;
+  }
+  html body #home.hero .hero-promo-slide .mobile-departure-cta{
+    min-height:40px!important;
+    padding-inline:12px!important;
+  }
+}
