@@ -43,9 +43,6 @@ Do not infer that a specific vehicle, room, departure or package is available no
 
 These pages describe trip-planning options; they are not confirmation of live inventory, departure seats, supplier availability or a fixed quotation.
 
-- B2B travel arrangements for agencies: https://himalayanexpedition.co.in/himachal-b2b-tour-operator/
-  - Agency enquiries for Spiti and Kinnaur transport, stays and ground services; supplier quotes after enquiry.
-
 ## Destinations covered in the website's published information
 - Spiti Valley
 - Kinnaur
