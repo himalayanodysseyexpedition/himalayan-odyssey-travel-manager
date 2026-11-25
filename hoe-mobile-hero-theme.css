@@ -224,3 +224,11 @@ html[data-hoe-theme]{scroll-padding-top:76px!important}
   position:relative!important;z-index:1!important;
  }
 }
+
+/* Public secondary mobile headers: identical homepage artwork and relief finish. */
+@media(max-width:760px){
+html[data-hoe-theme="page"] body > .hoe-shared-mobile-header::after{background-image:url("/tibetan-header-flags-wind.svg?v=1")!important;background-size:50% 56px!important;background-repeat:repeat-x!important;background-position:var(--hoe-header-flag-scroll-x,0px) 0!important;opacity:.7!important;animation:none!important;filter:none!important}
+html[data-hoe-theme="page"] body > .hoe-shared-mobile-header .hoe-shared-brand > img{display:block!important;width:100%!important;max-width:100%!important;height:auto!important;max-height:45px!important;object-fit:contain!important;object-position:center!important;margin:0!important;padding:0!important;position:relative!important;z-index:1!important;opacity:.92!important;filter:drop-shadow(0 -0.35px 0 rgba(255,255,255,.35)) drop-shadow(0 1px .7px rgba(0,0,0,.70))!important}
+html[data-hoe-theme="page"] body > .hoe-shared-mobile-header .hoe-shared-brand::before{background:rgba(16,16,16,.18)!important;-webkit-backdrop-filter:blur(1.5px)!important;backdrop-filter:blur(1.5px)!important;border-color:rgba(255,255,255,.20)!important;border-top-color:rgba(255,255,255,.48)!important;border-left-color:rgba(255,255,255,.34)!important;border-right-color:rgba(255,255,255,.16)!important;border-bottom-color:rgba(255,255,255,.16)!important;box-shadow:0 1px 0 rgba(255,255,255,.10),1px 2px 3px rgba(0,0,0,.66),inset 0 1px 1px rgba(0,0,0,.50),inset 0 -1px 0 rgba(255,255,255,.18)!important}
+}
+@media(max-width:760px) and (prefers-reduced-motion:reduce){html[data-hoe-theme="page"] body > .hoe-shared-mobile-header::after{background-image:url("/tibetan-header-flags-static.svg?v=1")!important;background-position:0 0!important;animation:none!important}}
