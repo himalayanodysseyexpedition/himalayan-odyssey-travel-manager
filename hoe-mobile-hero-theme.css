@@ -49,7 +49,8 @@ html[data-hoe-theme="page"] body .hoe-floating-whatsapp{font-family:var(--hoe-sa
 @media screen and (max-width:760px){
 html[data-hoe-theme="home"] body > header,
 html[data-hoe-theme="page"] body > .hoe-shared-mobile-header{
- display:block!important;position:sticky!important;top:0!important;z-index:1500!important;
+ display:block!important;position:fixed!important;top:0!important;left:0!important;right:0!important;bottom:auto!important;z-index:1500!important;
+ transform:none!important;translate:none!important;opacity:1!important;visibility:visible!important;
  width:100%!important;max-width:none!important;min-height:64px!important;height:64px!important;
  padding:0!important;margin:0!important;box-sizing:border-box!important;
  background:#0b0b0b!important;background-image:none!important;border:0!important;
@@ -74,14 +75,14 @@ html[data-hoe-theme="home"] body > header > .header-inner > a.brand,
 html[data-hoe-theme="page"] body > .hoe-shared-mobile-header .hoe-shared-brand{
  position:absolute!important;left:50%!important;right:auto!important;top:50%!important;bottom:auto!important;transform:translate(-50%,-50%)!important;
  display:flex!important;align-items:center!important;justify-content:center!important;flex:0 0 auto!important;
- width:clamp(140px,38vw,170px)!important;min-width:0!important;max-width:calc(100vw - 80px)!important;
+ width:clamp(150px,41vw,185px)!important;min-width:0!important;max-width:calc(100vw - 80px)!important;
  margin:0!important;padding:0!important;z-index:2!important;background:none!important;
  border:0!important;border-radius:0!important;box-shadow:none!important;text-decoration:none!important;
 }
 html[data-hoe-theme="home"] body > header > .header-inner > a.brand > img,
 html[data-hoe-theme="page"] body > .hoe-shared-mobile-header .hoe-shared-brand > img{
  display:block!important;width:100%!important;max-width:100%!important;
- height:auto!important;max-height:41px!important;object-fit:contain!important;object-position:center!important;
+ height:auto!important;max-height:45px!important;object-fit:contain!important;object-position:center!important;
  margin:0!important;padding:0!important;
 }
 html[data-hoe-theme="page"] body > header[data-hoe-legacy-header]{display:none!important}
@@ -187,4 +188,11 @@ html[data-hoe-theme="page"] body #itineraryContent .price strong{
 html[data-hoe-theme="page"] body #itineraryContent .destination-mark{
  color:var(--hoe-label)!important;-webkit-text-fill-color:var(--hoe-label)!important;
 }
+}
+
+/* Reserve the fixed header's original flow space on mobile, including the 404 page. */
+@media screen and (max-width:760px){
+html[data-hoe-theme="home"] body:has(>header),
+html[data-hoe-theme="page"] body:has(>.hoe-shared-mobile-header){padding-top:64px!important}
+html[data-hoe-theme]{scroll-padding-top:76px!important}
 }
