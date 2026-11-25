@@ -652,3 +652,8 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Scoped presentation-only update in `admin.html`: matte-black page canvas, Bodoni Moda headings, Inter UI typography, light translucent cards, royal-purple tab navigation, subtle prayer-flag header and beveled controls matching the approved mobile public website direction.
 - Retained the original admin logo, all tabs, links, form fields, visibility states, application scripts and authentication/data behavior. Desktop and separate admin routes unchanged; destructive controls retain red styling.
 - Source markup outside the new font link and CSS is unchanged. Live authenticated browser/device verification not performed. Implementation commit `630be8fb43c8cae72353566e2734cef2032328cb`; PR and checks pending at entry time.
+
+
+## 2026-11-26 — Public mobile header parity
+- Match 22 secondary public HTML pages to homepage header: same transparent 3D logo, 92% opacity, engraved frame and scroll-linked flags with independent wind flutter.
+- Shared CSS and deferred script. Desktop, admin, homepage, redirect routes and navigation unchanged. JavaScript syntax checked; device rendering and deployment not verified at implementation time.
