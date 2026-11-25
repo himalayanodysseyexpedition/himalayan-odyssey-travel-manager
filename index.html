@@ -23,7 +23,7 @@
 <meta name="twitter:title" content="Himalayan Odyssey Expedition | Spiti & Himachal Tours">
 <meta name="twitter:description" content="Himalayan Odyssey Expedition is a Narkanda-based Himachal travel operator offering Spiti Valley, Winter Spiti, Kinnaur and customised Himachal group and private tours.">
 <link rel="preload" as="image" href="/spiti.jpg" fetchpriority="high" media="(min-width: 761px)">
-<link rel="preload" as="image" href="/IMG_8475.webp?v=1" fetchpriority="high" media="(max-width: 760px)">
+<link rel="preload" as="image" href="/kinnaur.jpg" fetchpriority="high" media="(max-width: 760px)">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -257,7 +257,7 @@
 </header>
 <!-- HERO -->
 <div class="hero" id="home">
-  <img class="hero-ken-burns-photo" src="/IMG_8475.webp?v=1" alt="" aria-hidden="true" decoding="async" fetchpriority="high">
+  <img class="hero-ken-burns-photo" src="/kinnaur.jpg" alt="" aria-hidden="true" decoding="async" fetchpriority="high">
   <div class="hero-content">
     <div class="mobile-tibetan-flag-line" aria-hidden="true"></div>
     <h1 class="hero-animated-heading"><span class="hero-heading-static hero-heading-prefix">The</span><span class="hero-word-slot"><span id="heroRotatingWord" class="hero-word-rotator word-himalayas" aria-label="Himalayas are">Himalayas are</span></span><span class="hero-heading-static hero-heading-suffix">calling</span></h1>
@@ -277,6 +277,7 @@
       <div class="hero-promo-track" id="heroPromoTrack">
         <div class="hero-promo-slide" role="group" aria-roledescription="slide" aria-label="1 of 2">
     <section id="home-promo" class="mobile-next-departure" aria-label="Next group tour departure">
+      <img class="hoe-promo-thumb" src="/spiti.jpg" alt="Snow-covered Key Monastery in Spiti Valley" width="1350" height="1800" loading="lazy" decoding="async">
       <div class="mobile-departure-topline"><span class="mobile-departure-live-dot" aria-hidden="true"></span> NEXT GROUP DEPARTURE <span class="mobile-departure-season">WINTER 2026–27</span></div>
       <p class="mobile-departure-kicker">HIMALAYAN ODYSSEY PRESENTS</p>
       <h2>Winter <em>Spiti</em><br>Expedition</h2>
@@ -291,6 +292,7 @@
         </div>
         <div class="hero-promo-slide" role="group" aria-roledescription="slide" aria-label="2 of 2">
           <section class="mobile-next-departure mobile-departure-secondary" aria-label="19 December Kinnaur and Spiti group tour">
+            <img class="hoe-promo-thumb" src="/kinnaur.jpg" alt="Kinnaur village and Himalayan mountains" width="1200" height="1600" loading="lazy" decoding="async">
             <div class="mobile-departure-topline"><span class="mobile-departure-live-dot" aria-hidden="true"></span> NEXT GROUP DEPARTURE <span class="mobile-departure-season">DECEMBER 2026</span></div>
             <p class="mobile-departure-kicker">HIMALAYAN ODYSSEY PRESENTS</p>
             <h2>Kinnaur <em>&amp; Spiti</em><br>Group Tour</h2>
@@ -2739,3 +2741,35 @@ html body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobil
 @keyframes hoeReferenceMountainDrift{from{transform:scale(1.02) translate3d(0,0,0)}to{transform:scale(1.09) translate3d(0,-1%,0)}}
 @media screen and (max-width:760px) and (prefers-reduced-motion:reduce){html body #home.hero#home > img.hero-ken-burns-photo{animation:none!important;transform:none!important}}
 </style>
+
+<style id="mobile-hero-parallax-photos-v2">
+
+/* Repair mobile image layers without changing desktop styling or promotion records. */
+html body #home.hero #heroPromoTrack section.mobile-next-departure > img.hoe-promo-thumb{display:none!important}
+@media screen and (max-width:760px){
+  html body #home.hero#home > img.hero-ken-burns-photo{
+    display:block!important;visibility:visible!important;opacity:1!important;position:absolute!important;
+    inset:-22px 0 auto!important;width:100%!important;height:calc(66% + 44px)!important;
+    max-width:none!important;max-height:none!important;object-fit:cover!important;object-position:center 8%!important;
+    z-index:0!important;filter:none!important;animation:none!important;
+    transform:translate3d(0,var(--hoe-hero-offset,0px),0) scale(1.12)!important;transform-origin:center top!important;
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 72%,transparent 100%)!important;
+    mask-image:linear-gradient(to bottom,#000 0%,#000 72%,transparent 100%)!important;pointer-events:none!important;
+  }
+  html body #home.hero#home{background:#07121f!important;background-image:none!important}
+  html body #home.hero#home::before{background:linear-gradient(180deg,rgba(5,17,36,.82) 0%,rgba(7,22,44,.45) 20%,rgba(7,18,35,.06) 42%,rgba(5,13,24,.16) 55%,#07121f 82%,#07121f 100%)!important}
+  html body #home.hero#home #heroPromoTrack .hero-promo-slide > section.mobile-next-departure::before,
+  html body #home.hero#home #heroPromoTrack .hero-promo-slide > section.mobile-next-departure::after{content:none!important;display:none!important;background:none!important;border:0!important}
+  html body #home.hero#home #heroPromoTrack .hero-promo-slide > section.mobile-next-departure > img.hoe-promo-thumb{
+    display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;
+    inset:auto!important;grid-column:1!important;grid-row:1/7!important;align-self:stretch!important;justify-self:stretch!important;
+    width:100%!important;min-width:0!important;max-width:100%!important;height:100%!important;min-height:124px!important;max-height:none!important;
+    object-fit:cover!important;object-position:center 55%!important;border-radius:10px!important;
+    margin:0!important;padding:0!important;border:0!important;box-shadow:none!important;filter:none!important;animation:none!important;transform:none!important;z-index:1!important;pointer-events:none!important;
+  }
+}
+@media screen and (max-width:760px) and (prefers-reduced-motion:reduce){
+  html body #home.hero#home > img.hero-ken-burns-photo{transform:none!important}
+}
+</style>
+<script src="/mobile-hero-parallax-photos.js?v=1" defer></script>
