@@ -91,8 +91,9 @@
     if (!booking || /cancel|no.show|refund/i.test(String(booking.status || ""))) return false;
     const today = new Intl.DateTimeFormat("en-CA", {timeZone:"Asia/Kolkata",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());
     const date = ["year","month","day"].map(key => today.find(part => part.type === key).value).join("-");
-    return /^\d{4}-\d{2}-\d{2}$/.test(String(booking.start_date || "")) &&
-      booking.start_date <= date && (!booking.end_date || booking.end_date <= date);
+    const start = String(booking.start_date || "").slice(0, 10);
+    const end = String(booking.end_date || "").slice(0, 10);
+    return (!start || start <= date) && (!end || end <= date);
   }
 
   function addCardActions() {
@@ -110,8 +111,7 @@
       addAction(actions, "advance", id, "Advance request");
       addAction(actions, "trip", id, "Trip reminder");
       addAction(actions, "feedback", id, "Feedback request");
-      const booking = (D.bookings || []).find(item => String(item.id) === String(id));
-      if (reviewEligible(booking)) addAction(actions, "review", id, "Request Google Review");
+
     });
   }
 
@@ -185,7 +185,10 @@
     } else {
       const booking = (D?.bookings || []).find(item => String(item.id) === String(id));
       if (!booking) { alert("Booking not found. Refresh the dashboard and try again."); return; }
-      if (key === "review" && (!reviewEligible(booking) || !confirm("Confirm this customer actually completed their trip and has not already received a review request. Continue to WhatsApp?"))) return;
+      if (key === "review") {
+        if (!reviewEligible(booking)) { alert("Review requests are only for completed trips, not future or cancelled bookings."); return; }
+        if (!confirm("Confirm this customer actually completed their trip and has not already received a review request. Continue to WhatsApp?")) return;
+      }
       customer = (D?.customers || []).find(item => String(item.id) === String(booking.customer_id)) || {};
       const total = Number(booking.total_amount || 0);
       const paid = Number(booking.amount_paid || 0);
