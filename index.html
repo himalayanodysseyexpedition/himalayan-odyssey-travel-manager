@@ -1695,7 +1695,7 @@ loadHotels();
 
 
 <link rel="manifest" href="/manifest.webmanifest">
-<script src="/mobile-app-experience-v18.js?v=2" defer></script>
+<script src="/mobile-app-experience-v18.js?v=3" defer></script>
 <script src="/site-navigation.js?v=28" defer></script>
 
 <!-- Final cascade guard: load approved Arctic layers after legacy page-level styles. -->
@@ -3170,3 +3170,71 @@ html[data-hoe-theme="home"] body nav.mobile-app-dock .dock-icon{color:#fff!impor
  html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-services > a:active{transform:none!important}
 }
 </style>
+
+<style id="hoe-mobile-dock-engraved">
+@media(max-width:760px){
+ html[data-hoe-theme="home"] body nav.mobile-app-dock{
+  border:1px solid rgba(224,204,255,.55)!important;
+  border-top-color:rgba(255,255,255,.76)!important;
+  border-bottom-color:rgba(49,20,81,.85)!important;
+  box-shadow:0 7px 13px #170b2c88,0 2px 3px #140a25aa,inset 0 2px 2px #ffffff55,inset 0 -3px 4px #28104377!important;
+ }
+ html[data-hoe-theme="home"] body nav.mobile-app-dock::before{
+  box-shadow:inset 0 1px 1px #ffffff40,inset 0 -1px 2px #1d0a3a66!important;
+ }
+ html[data-hoe-theme="home"] body nav.mobile-app-dock > :is(a[data-dock],button.dock-menu-trigger){
+  background:transparent!important;background-image:none!important;border-color:transparent!important;
+  box-shadow:none!important;transform:none!important;
+  color:#fff!important;-webkit-text-fill-color:#fff!important;
+  transition:box-shadow .15s ease,background .15s ease!important;
+  -webkit-tap-highlight-color:transparent;
+ }
+ html[data-hoe-theme="home"] body nav.mobile-app-dock > :is(a[data-dock],button.dock-menu-trigger) .dock-icon{
+  color:#fff!important;stroke:#fff!important;fill:none!important;stroke-width:1.9!important;
+  filter:drop-shadow(0 -.65px 0 #ffffffb0) drop-shadow(0 1px 0 #391c60) drop-shadow(0 2px 1px #180a2d99)!important;
+  animation:none!important;transform:translateY(0) scale(1)!important;
+  transition:transform .15s cubic-bezier(.2,.8,.2,1),filter .15s ease!important;
+ }
+ html[data-hoe-theme="home"] body nav.mobile-app-dock .dock-icon .icon-side{fill:rgba(255,255,255,.20)!important;stroke:#fff!important}
+ html[data-hoe-theme="home"] body nav.mobile-app-dock > button.dock-menu-trigger .dock-icon rect{fill:rgba(255,255,255,.80)!important;stroke:#fff!important;stroke-width:1.25!important}
+ html[data-hoe-theme="home"] body nav.mobile-app-dock > button.dock-menu-trigger.is-open .dock-icon{transform:rotate(45deg)!important}
+ html[data-hoe-theme="home"] body nav.mobile-app-dock > :is(a[data-dock],button.dock-menu-trigger) > span{
+  color:#fff!important;-webkit-text-fill-color:#fff!important;
+  text-shadow:0 -.5px 0 #ffffff50,0 1px 1px #291044cc!important;
+ }
+ html[data-hoe-theme="home"] body nav.mobile-app-dock > :is(a[data-dock],button.dock-menu-trigger):is(:active,.hoe-dock-pressed){
+  background:rgba(27,10,51,.15)!important;
+  border-color:rgba(255,255,255,.12)!important;
+  box-shadow:inset 0 3px 5px #1a082f80,inset 0 -1px 1px #ffffff45!important;
+  transform:none!important;
+ }
+ html[data-hoe-theme="home"] body nav.mobile-app-dock > :is(a[data-dock],button.dock-menu-trigger):is(:active,.hoe-dock-pressed) .dock-icon{
+  transform:translateY(2px) scale(.88)!important;
+  filter:drop-shadow(0 -.5px 0 #170b2caa) drop-shadow(0 1px 0 #ffffff88)!important;
+ }
+ html[data-hoe-theme="home"] body nav.mobile-app-dock > button.dock-menu-trigger.is-open:is(:active,.hoe-dock-pressed) .dock-icon{transform:translateY(2px) rotate(45deg) scale(.88)!important}
+}
+@media(max-width:760px) and (prefers-reduced-motion:reduce){
+ html[data-hoe-theme="home"] body nav.mobile-app-dock > :is(a[data-dock],button.dock-menu-trigger),
+ html[data-hoe-theme="home"] body nav.mobile-app-dock .dock-icon{transition:none!important}
+ html[data-hoe-theme="home"] body nav.mobile-app-dock > :is(a[data-dock],button.dock-menu-trigger):is(:active,.hoe-dock-pressed) .dock-icon{transform:none!important}
+ html[data-hoe-theme="home"] body nav.mobile-app-dock > button.dock-menu-trigger.is-open .dock-icon{transform:rotate(45deg)!important}
+}
+</style>
+<script id="hoe-mobile-dock-press-feedback">
+(()=>{
+ const mobile=matchMedia('(max-width:760px)');
+ const selector='nav.mobile-app-dock > a[data-dock],nav.mobile-app-dock > button.dock-menu-trigger';
+ let pressed=null,timer=0;
+ function clear(){clearTimeout(timer);if(pressed)pressed.classList.remove('hoe-dock-pressed');pressed=null;}
+ function target(e){return e.target instanceof Element?e.target.closest(selector):null}
+ function press(el){clear();pressed=el;el.classList.add('hoe-dock-pressed');}
+ function release(){if(pressed){clearTimeout(timer);timer=setTimeout(clear,130);}}
+ document.addEventListener('pointerdown',e=>{const el=target(e);if(mobile.matches&&e.button===0&&e.isPrimary&&el)press(el);},{passive:true});
+ document.addEventListener('pointerup',release,{passive:true});
+ document.addEventListener('pointercancel',clear,{passive:true});
+ document.addEventListener('click',e=>{const el=target(e);if(mobile.matches&&el&&e.detail===0){press(el);release();}},{passive:true});
+ window.addEventListener('blur',clear);
+ mobile.addEventListener('change',clear);
+})();
+</script>
