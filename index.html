@@ -175,7 +175,7 @@
 <style> @media (max-width: 767px) { #packageList .package-title-desktop { display: none !important; } #packageList .package-title-mobile { display: block !important; } } @media (min-width: 768px) { #packageList .package-title-mobile { display: none !important; } } </style>
   <link rel="stylesheet" href="/arctic-prestige-motion.css?v=3">
   <link rel="stylesheet" href="/homepage-mobile-departure-promo.css?v=30">
-  <link rel="stylesheet" href="/homepage-mobile-cream-background.css?v=2" media="(max-width: 760px)">
+  
 
 <link rel="stylesheet" href="/windows-fluent-monochrome-sitewide.css?v=2">
 <link rel="stylesheet" href="/windows-fluent-monochrome-mobile.css?v=17">
@@ -2096,7 +2096,7 @@ loadHotels();
 
 
 <!-- Final mobile homepage cream canvas override: intentionally last in the document cascade. -->
-<style id="mobile-homepage-cream-final-override"> @media (max-width:760px){ html,html body,html body main,html body .content, html body section#upcoming-packages, html body section#plan-your-trip, html body section#more-than-tours{ background:#f8f6ef!important; background-color:#f8f6ef!important; background-image:none!important; } html body section#upcoming-packages::before, html body section#upcoming-packages::after, html body section#plan-your-trip::before, html body section#plan-your-trip::after, html body section#journey-story::before, html body section#journey-story::after, html body section#more-than-tours::before, html body section#more-than-tours::after{ background:none!important; background-image:none!important; opacity:0!important; box-shadow:none!important; content:none!important; } html body section#upcoming-packages>.section-inner, html body section#more-than-tours>.section-inner, html body section#plan-your-trip>.htp-inner{ background:#f8f6ef!important; background-color:#f8f6ef!important; background-image:none!important; } } </style>
+
 
 
 <style id="floating-bar-fixed-position-scroll-state"> html body #footerContactBar.footer-contact-bar{ position:fixed!important; left:50%!important; right:auto!important; bottom:max(12px,env(safe-area-inset-bottom))!important; margin:0!important; translate:none!important; transform:translate3d(-50%,22px,0)!important; transform-origin:center bottom!important; z-index:1200!important; will-change:transform,opacity; } html body #footerContactBar.footer-contact-bar.visible{ opacity:1!important; transform:translate3d(-50%,0,0)!important; pointer-events:auto!important; } html body #footerContactBar.footer-contact-bar.scroll-hidden{ opacity:0!important; transform:translate3d(-50%,calc(100% + 36px),0)!important; pointer-events:none!important; } @media(max-width:760px){ html body #footerContactBar.footer-contact-bar{ width:calc(100vw - 20px)!important; max-width:calc(100vw - 20px)!important; box-sizing:border-box!important; bottom:max(12px,env(safe-area-inset-bottom))!important; } } @media(prefers-reduced-motion:reduce){ html body #footerContactBar.footer-contact-bar{ transition:none!important; } } </style>
@@ -2922,3 +2922,41 @@ html[data-hoe-theme="home"] body #travel-journal .section-inner > p:last-child{m
  window.addEventListener("hashchange",()=>{if(mq.matches&&location.hash==="#more-than-tours")document.getElementById("odyssey-difference-mobile")?.scrollIntoView()});
 })();
 </script>
+
+<style id="hoe-mobile-matte-section-canvases-final">
+@media screen and (max-width:760px){
+/* Only the page canvas and section wrappers. Do not recolor any card, image, form field or button. */
+html[data-hoe-theme="home"],
+html[data-hoe-theme="home"] body,
+html[data-hoe-theme="home"] body > main,
+html[data-hoe-theme="home"] body > header,
+html[data-hoe-theme="home"] body > .journey-strip,
+html[data-hoe-theme="home"] body > :is(section#featured-travel-photography,section#upcoming-packages,section#journey-story,section#packages,section#itineraries,section#odyssey-difference-mobile,section#cabs,section#gallery,section#more-than-tours,section#instagram,section#travel-journal,section#plan-your-trip,section#reviews,section.content,div#contact.cta){
+ background:#0b0b0b!important;background-color:#0b0b0b!important;background-image:none!important;color:#f5f5f5!important;
+}
+html[data-hoe-theme="home"] body > :is(section#featured-travel-photography,section#upcoming-packages,section#journey-story,section#packages,section#itineraries,section#odyssey-difference-mobile,section#cabs,section#gallery,section#more-than-tours,section#instagram,section#travel-journal,section#plan-your-trip,section#reviews,section.content) > :is(.section-inner,.featured-travel-inner,.odyssey-difference-inner,.htp-inner),
+html[data-hoe-theme="home"] body > section#upcoming-packages > .section-inner > :is(.group-departures-head,.group-departures-rail),
+html[data-hoe-theme="home"] body > section#featured-travel-photography > .featured-travel-inner > .featured-travel-heading,
+html[data-hoe-theme="home"] body > :is(section#packages,section#cabs,section#gallery,section#travel-journal) > .section-inner > :is(.cards,.packages-carousel,.cabs-carousel),
+html[data-hoe-theme="home"] body > section#odyssey-difference-mobile > .odyssey-difference-inner > :is(.odyssey-place-grid,.odyssey-experiences),
+html[data-hoe-theme="home"] body > :is(section#upcoming-packages,section#journey-story,section#packages,section#itineraries,section#odyssey-difference-mobile,section#cabs,section#gallery,section#instagram,section#travel-journal) :is(.section-title,.odyssey-difference-title){
+ background:transparent!important;background-color:transparent!important;background-image:none!important;color:#f5f5f5!important;box-shadow:none!important;
+}
+html[data-hoe-theme="home"] body > :is(section#featured-travel-photography,section#upcoming-packages,section#journey-story,section#packages,section#itineraries,section#odyssey-difference-mobile,section#cabs,section#gallery,section#instagram,section#travel-journal,section#plan-your-trip,section#reviews)::before,
+html[data-hoe-theme="home"] body > :is(section#featured-travel-photography,section#upcoming-packages,section#journey-story,section#packages,section#itineraries,section#odyssey-difference-mobile,section#cabs,section#gallery,section#instagram,section#travel-journal,section#plan-your-trip,section#reviews)::after{
+ background:none!important;background-image:none!important;box-shadow:none!important;
+}
+html[data-hoe-theme="home"] body > :is(section#upcoming-packages,section#journey-story,section#packages,section#itineraries,section#odyssey-difference-mobile,section#cabs,section#gallery,section#instagram,section#travel-journal,section#featured-travel-photography) :is(.section-title h2,.odyssey-difference-title h2,.featured-travel-heading h2){
+ color:#f5f5f5!important;-webkit-text-fill-color:#f5f5f5!important;
+}
+html[data-hoe-theme="home"] body > :is(section#upcoming-packages,section#journey-story,section#packages,section#itineraries,section#odyssey-difference-mobile,section#cabs,section#gallery,section#instagram,section#travel-journal,section#featured-travel-photography) :is(.section-title small,.featured-travel-heading small){
+ color:#d9baff!important;-webkit-text-fill-color:#d9baff!important;
+}
+html[data-hoe-theme="home"] body > :is(section#upcoming-packages,section#journey-story,section#packages,section#itineraries,section#odyssey-difference-mobile,section#cabs,section#gallery,section#instagram,section#travel-journal,section#featured-travel-photography) :is(p.intro,.featured-travel-heading p,.guides-swipe-hint,.featured-travel-hint,.guides-count,#groupDeparturesCount,#packageMessage,.group-departures-empty,.cab-empty,.hotel-empty){
+ color:#c7c7c7!important;-webkit-text-fill-color:#c7c7c7!important;
+}
+html[data-hoe-theme="home"] body > #home.hero#home{background:#0b0b0b!important;background-color:#0b0b0b!important;background-image:none!important}
+html[data-hoe-theme="home"] body > #home.hero#home::before{background:linear-gradient(180deg,rgba(8,8,8,.82) 0%,rgba(12,12,12,.45) 20%,rgba(12,12,12,.06) 42%,rgba(8,8,8,.16) 55%,#0b0b0b 82%,#0b0b0b 100%)!important}
+html[data-hoe-theme="home"] body > .journey-strip{border-color:transparent!important;box-shadow:none!important}
+}
+</style>
