@@ -1,16 +1,19 @@
 /* Optional GA4 integration.
    Leave analytics-config.json measurementId empty until the GA4 property is ready. */
 (() => {
+  const pendingEvents = [];
   const track = (eventName, parameters = {}) => {
     if (typeof window.gtag === "function") {
       window.gtag("event", eventName, parameters);
+    } else if (pendingEvents.length < 50) {
+      pendingEvents.push([eventName, parameters]);
     }
   };
 
   window.HOEAnalytics = { track };
 
   document.addEventListener("click", (event) => {
-    const link = event.target.closest('a[href*="wa.me"]');
+    const link = event.target instanceof Element ? event.target.closest('a[href*="wa.me"]') : null;
     if (!link) return;
     track("whatsapp_click", {
       link_url: "https://wa.me/",
@@ -55,6 +58,8 @@
       window.gtag = function(){ window.dataLayer.push(arguments); };
       window.gtag("js", new Date());
       window.gtag("config", measurementId, { send_page_view: true, page_location: window.location.origin + window.location.pathname });
+
+      for (const [name, parameters] of pendingEvents.splice(0)) window.gtag("event", name, parameters);
 
       const script = document.createElement("script");
       script.async = true;
