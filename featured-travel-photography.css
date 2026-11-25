@@ -202,7 +202,8 @@
     border: 1px solid rgba(255,255,255,.76);
     border-radius: 15px;
     background: #151b22;
-    box-shadow: 0 22px 38px -16px rgba(0,0,0,.72);
+    box-shadow: 0 22px 38px -16px rgba(0,0,0,.72),
+                0 -22px 38px -16px rgba(0,0,0,.72);
     opacity: 1;
     transform: none;
     transition: none;
