@@ -248,7 +248,7 @@
 (() => {
   if (document.querySelector('script[data-hoe-voice-assistant]')) return;
   const script = document.createElement("script");
-  script.src = "/voice-travel-assistant.js?v=9";
+  script.src = "/voice-travel-assistant.js?v=10";
   script.defer = true;
   script.dataset.hoeVoiceAssistant = "true";
   document.head.appendChild(script);

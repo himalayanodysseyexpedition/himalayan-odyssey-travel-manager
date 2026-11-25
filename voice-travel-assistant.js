@@ -862,12 +862,17 @@
   }
   function prepareAndStartGuidedEnquiry() {
     const generation = state.generation;
-    const ready = state.bootstrap ? Promise.resolve(state.bootstrap) : assistantDataPromise;
+    const ready = ensureAssistantData();
     ready.then(() => {
       if (state.open && generation === state.generation && !state.awaitingField) beginGuidedEnquiry();
     });
   }
-  const assistantDataPromise = loadAssistantData();
+  let assistantDataPromise = null;
+  function ensureAssistantData() {
+    if (state.bootstrap) return Promise.resolve(state.bootstrap);
+    if (!assistantDataPromise) assistantDataPromise = loadAssistantData();
+    return assistantDataPromise;
+  }
   function clearRestartTimer() {
     if (state.restartTimer) window.clearTimeout(state.restartTimer);
     state.restartTimer = null;
@@ -1047,6 +1052,7 @@
     const opening = !state.open;
     setOpen(opening);
     if (opening) {
+      ensureAssistantData();
       state.sessionActive = Boolean(Recognition);
       state.generation++;
       state.failures = 0;
