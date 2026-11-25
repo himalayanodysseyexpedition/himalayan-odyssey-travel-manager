@@ -32,6 +32,13 @@ Based in Narkanda, Himachal Pradesh 172029, India. Phone and WhatsApp: +91 98169
 - [Best time to visit Kinnaur](https://himalayanexpedition.co.in/blog/best-time-visit-kinnaur-2027/): Seasonal considerations.
 - [Narkanda winter guide](https://himalayanexpedition.co.in/blog/narkanda-winter-travel-guide-2027/): Local winter travel.
 
+## Independent official travel references
+
+- [Lahaul and Spiti district route information](https://hplahaulspiti.nic.in/how-to-reach/): General route guidance.
+- [Lahaul and Spiti district road status](https://hplahaulspiti.nic.in/road-status/): Check current advisories before travel.
+- [Kinnaur district tourist places](https://hpkinnaur.nic.in/tourist-places/): Destination information.
+- [Shimla district Narkanda guide](https://hpshimla.nic.in/tourist-place/narkanda/): Local destination information.
+
 ## Optional
 
 - [Extended business and travel reference](https://himalayanexpedition.co.in/llms-full.txt): Detailed reference.
