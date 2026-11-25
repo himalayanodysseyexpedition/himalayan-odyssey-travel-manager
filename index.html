@@ -2969,3 +2969,106 @@ html[data-hoe-theme="home"] body > #home.hero#home::before{background:linear-gra
 html[data-hoe-theme="home"] body > .journey-strip{border-color:transparent!important;box-shadow:none!important}
 }
 </style>
+
+<style id="hoe-mobile-hotel-reference-cards-v1">
+@media screen and (max-width:760px){
+html[data-hoe-theme="home"]{
+ --hoe-home-card:rgba(255,255,255,.87);
+ --hoe-home-ink:#171717;--hoe-home-copy:#444;--hoe-home-label:#444;
+ --hoe-card-button:#171717;--hoe-card-radius:18px;
+}
+/* The existing Hotels & Properties panel is the reference. Restrict to content cards. */
+html[data-hoe-theme="home"] body :is(#packages,#cabs,#gallery,#itineraries,#upcoming-packages,#travel-journal,#odyssey-difference-mobile,#instagram,.journey-strip) :is(.package-slide,.cab-card,.hotel-card,.itinerary-slide,.group-departure-card,.card,.odyssey-place-card,.odyssey-experience-card,.instagram-content,.journey-item),
+html[data-hoe-theme="home"] body section#packages #packageList > article.package-slide,
+html[data-hoe-theme="home"] body section#upcoming-packages #groupDeparturesCarousel > article.group-departure-card,
+html[data-hoe-theme="home"] body #cabs #cabList .cab-card,
+html[data-hoe-theme="home"] body #gallery #galleryList > .hotel-card{
+ background:var(--hoe-home-card)!important;background-image:none!important;
+ color:var(--hoe-home-ink)!important;-webkit-text-fill-color:var(--hoe-home-ink)!important;
+ border:1px solid #ffffff70!important;border-radius:var(--hoe-card-radius)!important;
+ box-shadow:0 6px 20px #0003!important;
+}
+html[data-hoe-theme="home"] body :is(#packages,#cabs,#gallery,#itineraries,#upcoming-packages) :is(.package-slide,.cab-card,.hotel-card,.itinerary-slide,.group-departure-card){
+ overflow:hidden!important;
+}
+html[data-hoe-theme="home"] body :is(#packageList,#cabList,#galleryList,#itineraryList) :is(.package-slide,.cab-card,.hotel-card,.itinerary-slide) > img,
+html[data-hoe-theme="home"] body #upcoming-packages #groupDeparturesCarousel .group-departure-photo{
+ display:block!important;width:100%!important;height:auto!important;aspect-ratio:1.45!important;max-height:none!important;object-fit:cover!important;
+ border-radius:0!important;margin:0!important;
+}
+html[data-hoe-theme="home"] body #upcoming-packages #groupDeparturesCarousel .group-departure-photo > img{
+ width:100%!important;height:100%!important;object-fit:cover!important;border-radius:0!important;
+}
+html[data-hoe-theme="home"] body :is(#packageList,#cabList,#galleryList,#itineraryList) :is(.package-slide,.cab-card,.hotel-card,.itinerary-slide) > .card-body,
+html[data-hoe-theme="home"] body #upcoming-packages #groupDeparturesCarousel .group-departure-card > .group-departure-body{
+ padding:16px!important;background:transparent!important;background-image:none!important;color:var(--hoe-home-ink)!important;text-align:left!important;
+}
+html[data-hoe-theme="home"] body :is(#packageList,#cabList,#galleryList,#itineraryList,#groupDeparturesCarousel) :is(.package-slide,.cab-card,.hotel-card,.itinerary-slide,.group-departure-card) :is(.card-body,.group-departure-body) h3{
+ color:var(--hoe-home-ink)!important;-webkit-text-fill-color:var(--hoe-home-ink)!important;
+ font:700 clamp(19px,5.5vw,23px)/1.22 Inter,Arial,sans-serif!important;letter-spacing:-.035em!important;text-shadow:none!important;margin:0 0 10px!important;
+}
+html[data-hoe-theme="home"] body :is(#packageList,#cabList,#galleryList,#itineraryList,#groupDeparturesCarousel) :is(.package-slide,.cab-card,.hotel-card,.itinerary-slide,.group-departure-card) :is(.card-body,.group-departure-body) :is(p,.hotel-location,.hotel-facilities,.cab-details,.group-departure-date,.group-departure-highlights){
+ font:400 13px/1.65 Inter,Arial,sans-serif!important;color:var(--hoe-home-copy)!important;-webkit-text-fill-color:var(--hoe-home-copy)!important;text-shadow:none!important;
+}
+html[data-hoe-theme="home"] body :is(#packages,#cabs,#gallery,#itineraries,#upcoming-packages,#travel-journal,#odyssey-difference-mobile,#instagram) :is(.card-body,.group-departure-body,.odyssey-place-card,.odyssey-experience-card,.instagram-content) :is(strong,b,h3,h4,.price){
+ color:var(--hoe-home-ink)!important;-webkit-text-fill-color:var(--hoe-home-ink)!important;text-shadow:none!important;
+}
+html[data-hoe-theme="home"] body #upcoming-packages #groupDeparturesCarousel .group-departure-card .group-departure-body :is(small,.group-departure-meta span,.group-occupancy-label span){
+ color:var(--hoe-home-copy)!important;-webkit-text-fill-color:var(--hoe-home-copy)!important;
+}
+html[data-hoe-theme="home"] body #odyssey-difference-mobile :is(.odyssey-place-card,.odyssey-experience-card) :is(h3,p),
+html[data-hoe-theme="home"] body #instagram .instagram-content :is(h3,p),
+html[data-hoe-theme="home"] body #travel-journal .card .card-body :is(h3,p){
+ font-family:Inter,Arial,sans-serif!important;text-shadow:none!important;
+}
+html[data-hoe-theme="home"] body #odyssey-difference-mobile :is(.odyssey-place-card,.odyssey-experience-card) :is(.odyssey-kicker,.odyssey-experience-mark),
+html[data-hoe-theme="home"] body #odyssey-difference-mobile .odyssey-place-card > span,
+html[data-hoe-theme="home"] body #travel-journal .card .card-body .itinerary-meta{
+ color:var(--hoe-home-copy)!important;-webkit-text-fill-color:var(--hoe-home-copy)!important;
+}
+/* Match the hotel CTA, including uppercase letter spacing and white text. */
+html[data-hoe-theme="home"] body :is(#packages,#cabs,#gallery,#itineraries,#upcoming-packages,#travel-journal,#odyssey-difference-mobile,#instagram) :is(.card-body,.group-departure-body,.odyssey-place-card,.odyssey-experience-card,.instagram-content) :is(a.btn,button.btn,.group-departure-cta,.instagram-btn),
+html[data-hoe-theme="home"] body #packages #packageList .package-slide .package-card-actions > a.btn,
+html[data-hoe-theme="home"] body #cabs #cabList .cab-card .card-body > a.btn,
+html[data-hoe-theme="home"] body #gallery #galleryList .hotel-card .card-body :is(a.btn,button.btn),
+html[data-hoe-theme="home"] body #travel-journal .card .card-body a.btn{
+ background:var(--hoe-card-button)!important;background-image:none!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+ border:1px solid var(--hoe-card-button)!important;border-radius:9px!important;box-shadow:none!important;text-shadow:none!important;
+ font:700 12px/1.3 Inter,Arial,sans-serif!important;letter-spacing:.08em!important;text-transform:uppercase!important;min-height:44px!important;
+ text-decoration:none!important;padding:11px 14px!important;box-sizing:border-box!important;white-space:normal!important;text-align:center!important;
+}
+html[data-hoe-theme="home"] body #packages #packageList .package-slide .package-card-actions{
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:4px!important;
+}
+html[data-hoe-theme="home"] body #packages #packageList .package-slide .package-card-actions > a.btn,
+html[data-hoe-theme="home"] body #gallery #galleryList .hotel-card .card-body :is(a.btn,button.btn),
+html[data-hoe-theme="home"] body #cabs #cabList .cab-card .card-body > a.btn{
+ width:fit-content!important;max-width:100%!important;
+}
+html[data-hoe-theme="home"] body #gallery #galleryList .hotel-card .card-body :is(a.btn,button.btn){
+ display:flex!important;align-items:center!important;justify-content:center!important;margin:2px 0 0!important;
+}
+/* Compact promotion cards keep their existing image grid, seat bar and purple outer accent. */
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack .hero-promo-slide > section.mobile-next-departure{
+ background:var(--hoe-home-card)!important;background-image:none!important;border-radius:var(--hoe-card-radius)!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > h2,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > h2 em{
+ font:700 clamp(18px,5vw,23px)/1.22 Inter,Arial,sans-serif!important;color:#171717!important;-webkit-text-fill-color:#171717!important;text-shadow:none!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure :is(.mobile-departure-topline,.mobile-departure-kicker,.mobile-departure-season){
+ color:#444!important;-webkit-text-fill-color:#444!important;text-shadow:none!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > a.mobile-departure-cta,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > details.mobile-departure-itinerary-details > summary.mobile-departure-cta{
+ background:#171717!important;background-image:none!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+ border:1px solid #171717!important;border-radius:9px!important;box-shadow:none!important;font:700 12px/1.3 Inter,Arial,sans-serif!important;letter-spacing:.06em!important;text-transform:uppercase!important;text-shadow:none!important;
+}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-card{
+ border-radius:var(--hoe-card-radius)!important;
+}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-card button[type="submit"]{
+ background:#171717!important;background-image:none!important;color:#fff!important;-webkit-text-fill-color:#fff!important;border-color:#171717!important;border-radius:9px!important;font:700 12px/1.3 Inter,Arial,sans-serif!important;letter-spacing:.08em!important;text-transform:uppercase!important;
+}
+}
+</style>
