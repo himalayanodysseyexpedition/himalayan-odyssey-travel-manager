@@ -164,9 +164,18 @@
     -webkit-transform-style: preserve-3d;
     will-change: auto;
   }
+  /* Align the dark edge overlays with the photos, not the taller reflection area. */
+  html body #featured-travel-photography #featuredTravelCarousel {
+    --gallery-photo-height: 250px;
+  }
+  html body #featured-travel-photography #featuredTravelCarousel .featured-travel-edge {
+    top: 0;
+    bottom: auto;
+    height: var(--gallery-photo-height);
+  }
   html body #featured-travel-photography .featured-travel-slide {
     --cf-slide-w: min(58vw, 210px);
-    --cf-slide-h: 250px;
+    --cf-slide-h: var(--gallery-photo-height);
     --cf-spacing: clamp(88px, 25vw, 112px);
     --cf-depth: 66px;
     --cf-angle: 34deg;
