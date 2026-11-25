@@ -113,29 +113,55 @@
   function stopSpeech() {
     if ("speechSynthesis" in window) window.speechSynthesis.cancel();
   }
+  // Prefer enhanced voices in the requested language; never select a
+  // different-language voice simply because it has a premium label.
   function prepareSpeechText(message) {
-    if (state.language !== "hi-IN") return String(message || "");
-    const pronunciations = [
-      ["Himalayan Odyssey Expedition","हिमालयन ओडिसी एक्सपेडिशन"],
-      ["Himalayan Odyssey","हिमालयन ओडिसी"],
-      ["Winter Spiti Valley","विंटर स्पीति वैली"],
-      ["Spiti Valley","स्पीति वैली"],["Winter Spiti","विंटर स्पीति"],
-      ["Key Monastery","की मोनेस्ट्री"],["Chicham Bridge","चिचम ब्रिज"],["Hatu Peak","हाटू पीक"],
-      ["Kinnaur","किन्नौर"],["Narkanda","नारकंडा"],["Chitkul","छितकुल"],["Sangla","सांगला"],
-      ["Kalpa","कल्पा"],["Tabo","ताबो"],["Kaza","काज़ा"],["Kibber","किब्बर"],
-      ["Shimla","शिमला"],["Manali","मनाली"],["Kasol","कसोल"],["Jibhi","जिभी"],["Spiti","स्पीति"]
-    ];
-    let spoken = String(message || "");
-    pronunciations.forEach(([from,to]) => { spoken = spoken.replace(new RegExp(from,"gi"),to); });
-    return spoken.replace(/₹\s*/g," रुपये ").replace(/\s{2,}/g," ").trim();
+    let spoken = String(message || "")
+      .replace(/https?:\/\/\S+/gi, "")
+      .replace(/[*#_`]+/g, "")
+      .replace(/\r?\n+/g, ". ")
+      .replace(/\s*[→·•]\s*/g, ", ")
+      .replace(/\s+[–—]\s+/g, state.language === "hi-IN" ? " से " : " to ")
+      .replace(/₹\s*([\d,]+(?:\.\d+)?)/g, (_, amount) => amount.replace(/,/g, "") + (state.language === "hi-IN" ? " रुपये" : " rupees"))
+      .replace(/(\d+)\s*[Nn]\s*\/\s*(\d+)\s*[Dd]\b/g, (_, n, d) => state.language === "hi-IN" ? n + " रातें और " + d + " दिन" : n + " nights and " + d + " days");
+    if (state.language === "hi-IN") {
+      const words = [
+        ["Himalayan Odyssey Expedition","हिमालयन ओडिसी एक्सपेडिशन"],["Himalayan Odyssey","हिमालयन ओडिसी"],
+        ["Winter Spiti Valley","विंटर स्पीति वैली"],["Spiti Valley","स्पीति वैली"],["Winter Spiti","विंटर स्पीति"],
+        ["Key Monastery","की मोनेस्ट्री"],["Chicham Bridge","चिचम ब्रिज"],["Hatu Peak","हाटू पीक"],
+        ["Kinnaur","किन्नौर"],["Narkanda","नारकंडा"],["Chitkul","छितकुल"],["Sangla","सांगला"],
+        ["Kalpa","कल्पा"],["Tabo","ताबो"],["Kaza","काज़ा"],["Kibber","किब्बर"],["Shimla","शिमला"],
+        ["Manali","मनाली"],["Kasol","कसोल"],["Jibhi","जिभी"],["Spiti","स्पीति"],["Chandigarh","चंडीगढ़"],
+        ["Ambala","अंबाला"],["Delhi","दिल्ली"],["Nako","नाको"],["Hikkim","हिक्किम"],["Langza","लांगज़ा"],
+        ["Komic","कोमिक"],["WhatsApp","व्हाट्सऐप"],["upcoming group departures","आने वाले ग्रुप टूर"],
+        ["customised","कस्टमाइज़्ड"],["customized","कस्टमाइज़्ड"],["private","प्राइवेट"],["group","ग्रुप"],
+        ["departure","डिपार्चर"],["package","पैकेज"],["guests","यात्री"],["pickup","पिकअप"],
+        ["enquiry","पूछताछ"],["itinerary","यात्रा कार्यक्रम"],["dates","तारीखें"],["details","जानकारी"],
+        ["select","चुनें"],["tour","टूर"],["trip","ट्रिप"],["card","कार्ड"],["December","दिसंबर"],
+        ["January","जनवरी"],["rupees per person","रुपये प्रति व्यक्ति"]
+      ];
+      words.forEach(([from,to]) => { spoken = spoken.replace(new RegExp("\\b" + from + "\\b","gi"),to); });
+    }
+    return spoken.replace(/\s{2,}/g," ").trim();
   }
   function selectSpeechVoice() {
     if (!("speechSynthesis" in window)) return null;
-    const voices = window.speechSynthesis.getVoices() || [];
     const wanted = state.language.toLowerCase();
-    return voices.find(item => String(item.lang || "").toLowerCase() === wanted) ||
-      voices.find(item => String(item.lang || "").toLowerCase().startsWith(wanted.slice(0,2))) || null;
+    const base = wanted.split("-")[0];
+    const voices = (window.speechSynthesis.getVoices() || []).filter(v =>
+      String(v.lang || "").toLowerCase().split(/[-_]/)[0] === base);
+    const score = v => {
+      const name = String(v.name || "");
+      const locale = String(v.lang || "").toLowerCase().replace(/_/g,"-");
+      return (locale === wanted ? 100 : 0) +
+        (/neural|natural|enhanced|premium|studio/i.test(name) ? 45 : 0) +
+        (/google|siri|microsoft/i.test(name) ? 12 : 0) +
+        (v.default ? 3 : 0) - (/compact|espeak|robot/i.test(name) ? 25 : 0);
+    };
+    return voices.sort((x,y) => score(y)-score(x))[0] || null;
   }
+  // Prime the browser voice inventory without playing audio.
+  if ("speechSynthesis" in window) window.speechSynthesis.getVoices();
   function speak(message, replaceCurrent = true, afterSpeech = null) {
     const token = ++state.speechToken;
     const resumeConversation = () => {
@@ -156,9 +182,9 @@
     detachRecognition();
     utterance.lang = state.language;
     const voiceChoice = selectSpeechVoice();
-    if (voiceChoice) utterance.voice = voiceChoice;
-    utterance.rate = state.language === "hi-IN" ? 0.92 : 1.0;
-    utterance.pitch = 1.02;
+    if (voiceChoice) { utterance.voice = voiceChoice; utterance.lang = voiceChoice.lang; }
+    utterance.rate = state.language === "hi-IN" ? 0.96 : 0.97;
+    utterance.pitch = 1.0;
     utterance.volume = 1;
     let completed = false;
     let speechTimer;
