@@ -169,6 +169,67 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
   .cab-crop-actions button{min-width:0;width:100%;margin:0}
 }
 </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Inter:wght@400;500;600;700;800&display=swap" media="(max-width:760px)">
+<style id="hoe-admin-mobile-theme">
+/* Admin-only responsive visual layer. Do not change access, hidden state, form layout or data. */
+@media screen and (max-width:760px){
+ html:root{--admin-bg:#0b0b0b;--admin-surface:#f5f5f5;--admin-ink:#171717;--admin-muted:#4b4b4b;--admin-line:#d6d0df;--admin-soft:#eae7ee;--admin-dark:#171717;--admin-radius:19px;--admin-shadow:0 5px 16px #0005;--forest:#171717;--forest2:#543486;--gold:#bd83ff;--gold-light:#d9baff;--cream:#0b0b0b;--paper:#f5f5f5;--ink:#171717;--muted:#4b4b4b;--line:#d6d0df;--serif:"Bodoni Moda",Georgia,serif;--sans:Inter,Arial,sans-serif;--shadow:0 5px 18px #0005;background:#0b0b0b!important;scroll-padding-top:110px}
+ html body{background:#0b0b0b!important;background-image:none!important;color:#f5f5f5!important;font:400 14px/1.55 var(--sans)!important;animation:none!important}
+ html body>header{background:#0b0b0b!important;background-image:none!important;color:#fff!important;border:0!important;border-bottom:1px solid #bd83ff66!important;box-shadow:0 4px 16px #0008!important;padding:10px 14px!important;top:0!important}
+ html body>header:after{display:block!important;content:"";position:absolute;inset:0!important;width:100%!important;height:100%!important;border:0!important;border-radius:0!important;background:url("/tibetan-header-flags-wind.svg?v=1") repeat-x 0 0 / 50% 54px!important;opacity:.17!important;box-shadow:none!important;pointer-events:none;z-index:-1!important}
+ html body>header .topline{display:flex!important;align-items:center!important;gap:8px!important;flex-wrap:wrap!important}
+ html body>header .admin-brand{background:#10101060!important;border:1px solid #ffffff55!important;border-radius:11px!important;padding:5px 8px!important;box-shadow:inset 0 1px 0 #ffffff66,inset 0 -2px 2px #0008,0 2px 3px #0008!important}
+ html body>header .admin-brand img{width:115px!important;max-height:39px!important;animation:none!important;filter:none!important}
+ html body>header .admin-header-copy{flex:1 1 130px!important;padding-left:0!important}
+ html body>header .admin-header-copy h2{font:650 12px/1.25 var(--sans)!important;letter-spacing:.015em!important;color:#fff!important;-webkit-text-fill-color:#fff!important;margin:0!important}
+ html body>header .admin-header-copy p{font:500 9px/1.4 var(--sans)!important;color:#d9baff!important;-webkit-text-fill-color:#d9baff!important;letter-spacing:.025em!important;margin:3px 0 0!important}
+ html body>header #msg{color:#f5f5f5!important;-webkit-text-fill-color:#f5f5f5!important;overflow-wrap:anywhere}
+ html body>main{background:transparent!important;color:#f5f5f5!important;padding:16px 14px 40px!important}
+ html body #app>nav{position:relative!important;top:auto!important;display:flex;gap:6px!important;background:linear-gradient(110deg,#2c1150,#592b97,#8052b6,#2c1150)!important;border:1px solid #d9baff80!important;border-radius:17px!important;padding:7px!important;margin-bottom:18px!important;box-shadow:0 4px 12px #0008,inset 0 1px 1px #ffffff55,inset 0 -2px 3px #28104377!important;scrollbar-color:#c9a9f5 transparent!important}
+ html body #app>nav :is(button[data-tab],a){flex:0 0 auto!important;min-height:44px!important;background:transparent!important;border:1px solid transparent!important;border-radius:10px!important;box-shadow:none!important;color:#fff!important;-webkit-text-fill-color:#fff!important;font:650 11px/1.2 var(--sans)!important;letter-spacing:0!important;text-transform:none!important;padding:9px 11px!important;transform:none!important}
+ html body #app>nav button[data-tab]:is(.active,:hover,:focus-visible),html body #app>nav a:hover{background:#ffffffeb!important;border-color:#fff!important;color:#171717!important;-webkit-text-fill-color:#171717!important;box-shadow:0 2px 4px #0003,inset 0 1px 1px #fff!important}
+ html body #app>nav :is(button,a):active{box-shadow:inset 0 2px 4px #0005!important;transform:translateY(1px)!important}
+ html body #app>.panel{background:transparent!important;background-image:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;color:#f5f5f5!important;animation:none!important;padding:0!important}
+ html body #app>.panel :is(h1,h2,h3,h4,h5,h6){color:#f5f5f5!important;-webkit-text-fill-color:#f5f5f5!important;font-family:var(--serif)!important;font-weight:500!important;letter-spacing:-.025em!important}
+ html body #app>.panel h2{font-size:clamp(25px,6.5vw,33px)!important;line-height:1.15!important;margin:7px 0 12px!important}
+ html body #app>.panel h3{font-size:23px!important;line-height:1.2!important}
+ html body #app>.panel :is(p,small,.muted,.status,.finance-intro){color:#c7c7c7!important;-webkit-text-fill-color:#c7c7c7!important}
+ html body #app>.panel a:not(.btn):not(.button){color:#d9baff!important}
+ html body :is(#app,#auth) :is(.stat,.card,article,.finance-entry,.provider-payment-group,.item,.enquiry,.source-card),html body>dialog{
+  background:rgba(248,248,248,.97)!important;background-image:none!important;color:#171717!important;
+  border:1px solid #bd83ff88!important;border-radius:17px!important;
+  box-shadow:0 4px 10px #0005,0 0 9px #9855ed25,inset 0 1px 1px #fff!important;
+ }
+ html body #app :is(.stat,.card,article,.finance-entry,.provider-payment-group,.item,.enquiry,.source-card):hover{transform:none!important;border-color:#bd83ff!important}
+ html body :is(#app,#auth) :is(.stat,.card,article,.finance-entry,.provider-payment-group,.item,.enquiry,.source-card) :is(h1,h2,h3,h4,h5,h6,strong,b),html body>dialog :is(h1,h2,h3,h4,h5,h6,strong,b){color:#171717!important;-webkit-text-fill-color:#171717!important;font-family:var(--sans)!important;letter-spacing:-.015em!important}
+ html body :is(#app,#auth) :is(.stat,.card,article,.finance-entry,.provider-payment-group,.item,.enquiry,.source-card) :is(p,small,.muted,.status,label),html body>dialog :is(p,small,.muted,.status,label){color:#444!important;-webkit-text-fill-color:#444!important}
+ html body #app :is(.stat,.card,article,.finance-entry,.provider-payment-group,.item,.enquiry,.source-card) a:not(.btn):not(.button){color:#543486!important}
+ html body #app .stats{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;margin:14px 0 21px!important}
+ html body #app .stat{padding:13px!important;margin:0!important;font:700 10px/1.4 var(--sans)!important;letter-spacing:.04em!important}
+ html body #app .stat strong{font:750 clamp(19px,5.5vw,27px)/1.2 var(--sans)!important;overflow-wrap:anywhere}
+ html body #app .stat:after{border-color:#bd83ff35!important}
+ html body #auth{margin:5vh auto 0!important}
+ html body #auth .card{padding:23px!important;border-top:2px solid #bd83ff!important}
+ html body #auth .card h2{font:500 32px/1.15 var(--serif)!important;margin:0 0 18px!important}
+ html body :is(#app,#auth,dialog) :is(input:not([type=checkbox]):not([type=radio]),select,textarea){background:#fff!important;color:#171717!important;-webkit-text-fill-color:#171717!important;border:1px solid #d3ceda!important;border-radius:10px!important;font:400 16px/1.4 var(--sans)!important;box-shadow:none!important;min-height:44px}
+ html body :is(#app,#auth,dialog) :is(input,select,textarea):focus{border-color:#8150bb!important;box-shadow:0 0 0 3px #bd83ff33!important}
+ html body :is(#app,#auth,dialog) :is(input[type=checkbox],input[type=radio]){accent-color:#7040bb!important}
+ html body :is(#app,#auth,dialog,header) button:not(.danger):not([data-tab]){background:#171717!important;background-image:none!important;color:#fff!important;-webkit-text-fill-color:#fff!important;border:1px solid #171717!important;border-radius:9px!important;box-shadow:inset 0 1px 0 #ffffff25,0 2px 3px #0003!important;font:750 11px/1.3 var(--sans)!important;letter-spacing:.02em!important;min-height:44px!important;padding:9px 12px!important;transform:none!important}
+ html body #app>.panel>.topline>button:not(.danger),html body #app>.panel>#refresh,html body>header #logout{background:#fff!important;color:#171717!important;-webkit-text-fill-color:#171717!important;border-color:#fff!important}
+ html body :is(#app,#auth,dialog,header) button.danger{background:#982f36!important;color:#fff!important;-webkit-text-fill-color:#fff!important;border:1px solid #982f36!important;border-radius:9px!important;min-height:44px!important}
+ html body :is(#app,#auth,dialog,header) button:not(:disabled):active{transform:translateY(1px)!important;box-shadow:inset 0 2px 4px #0006!important}
+ html body :is(#app,#auth,dialog) :is(.finance-quantity,.finance-breakdown>div,.finance-profit-line,.provider-payment-totals>div,.form-check,.day-entry,.package-day-entry,.hotel-photo){background:#ece9f0!important;color:#171717!important;border:1px solid #d6d0df!important;border-radius:10px!important}
+ html body #app :is(.finance-profit-line,.provider-payment-totals,.finance-breakdown) strong{color:#171717!important;-webkit-text-fill-color:#171717!important;font-family:var(--sans)!important}
+ html body>dialog{padding:19px!important;max-width:calc(100vw - 24px)!important;max-height:90dvh!important;color-scheme:light}
+ html body>dialog::backdrop{background:#000b!important;backdrop-filter:blur(5px)}
+ html body :is(button,a,input,textarea,select):focus-visible{outline:2px solid #bd83ff!important;outline-offset:3px!important}
+ html body :is([hidden],.hidden){display:none!important}
+}
+@media screen and (max-width:760px) and (prefers-reduced-motion:reduce){
+ html body>header:after{background-image:url("/tibetan-header-flags-static.svg?v=1")!important}
+ html body *,html body *::before,html body *::after{animation:none!important;transition:none!important}
+}
+</style>
 </head>
 
 <body>
