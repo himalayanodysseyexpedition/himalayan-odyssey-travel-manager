@@ -124,7 +124,8 @@
 
   const renderRecord = record => {
     content.replaceChildren();
-    addText("p", [record.date_label, ...(record.facts || [])].filter(Boolean).join(" · "), "promo-itinerary-intro");
+    const intro = [record.date_label, ...(record.facts || [])].filter(Boolean).join(" · ");
+    if (intro) addText("p", intro, "promo-itinerary-intro");
     if (Number(record.price_per_person) > 0) {
       addText("p", "Price: ₹" + Number(record.price_per_person).toLocaleString("en-IN") + " per person");
     }
@@ -190,8 +191,8 @@
     addText("p", "The itinerary may be adjusted according to weather, road and safety conditions.", "promo-itinerary-note");
   };
 
-  const open = record => {
-    lastFocus = document.activeElement;
+  const open = (record, trigger) => {
+    lastFocus = trigger || document.activeElement;
     if (record) {
       title.textContent = (record.title_line1 + " " + (record.title_emphasis || "") + " " + (record.title_line2 || "")).replace(/\s+/g, " ").trim() + " — Itinerary";
       eyebrow.textContent = record.kicker || "HIMALAYAN ODYSSEY EXPEDITION";
@@ -201,8 +202,12 @@
       eyebrow.textContent = fallbackEyebrow;
       content.innerHTML = fallback;
     }
-    const cover = photoFor(record ? [record.title_line1, record.title_line2, record.title_emphasis].join(" ") : "spiti") || "/spiti.jpg";
-    head.style.setProperty("--journey-cover", 'url("' + cover + '")');
+    let cover = photoFor(record ? [record.title_line1, record.title_line2, record.title_emphasis].join(" ") : "spiti") || "/spiti.jpg";
+    if (record?.cover_image) {
+      try { const url = new URL(record.cover_image,location.href); if (url.protocol==="https:" || url.origin===location.origin) cover=url.href; } catch (_) {}
+    }
+    head.style.setProperty("--journey-cover", "url("+JSON.stringify(cover)+")");
+    rail.hidden = !content.querySelector(".promo-day-card, ol > li");
     footer.replaceChildren(); footer.hidden = true;
     if (record && record.cta_url) {
       try {
@@ -224,12 +229,90 @@
   };
 
   const close = () => {
+    requestVersion++;
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
     document.body.classList.remove("promo-itinerary-modal-open");
     if (frame) { cancelAnimationFrame(frame); frame = 0; }
-    if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+    if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus({preventScroll:true});
   };
+
+
+  // Reuse one mobile itinerary renderer for all existing itinerary card actions.
+  const parsePackageDays = value => {
+    const raw = String(value || "").replace(/\r\n?/g,"\n").trim();
+    if (!raw) return [];
+    const blocks = /^Day\s*\d+/im.test(raw) ? raw.split(/\n(?=\s*Day\s*\d+\b)/i) : raw.split(/\n\s*\n/);
+    return blocks.map((block,index) => {
+      const lines = block.trim().split("\n");
+      const first = (lines.shift() || "").trim();
+      const match = first.match(/^Day\s*(\d+)\s*[-–—·:.)]?\s*(.*)$/i);
+      const stayIndex = lines.findIndex(line => /^Stay:/i.test(line.trim()));
+      const descriptionIndex = lines.findIndex(line => /^Description:/i.test(line.trim()));
+      const stay = stayIndex < 0 ? "" : lines[stayIndex].trim().replace(/^Stay:\s*/i,"");
+      const description = (descriptionIndex >= 0
+        ? [lines[descriptionIndex].trim().replace(/^Description:\s*/i,""),...lines.slice(descriptionIndex+1).filter((_,i)=>i+descriptionIndex+1!==stayIndex)]
+        : [...(match ? [] : [first]),...lines.filter((_,i)=>i!==stayIndex)]).join("\n").trim();
+      return {day_number:match ? Number(match[1]) : index+1, heading:match ? match[2] : "", overnight_stay:stay, description};
+    }).filter(day=>day.heading || day.overnight_stay || day.description);
+  };
+  const enquiry = name => "https://wa.me/919816929669?text="+encodeURIComponent("Hello Himalayan Odyssey Expedition, I am interested in "+name+". Please share dates, availability and booking details.");
+  const packageToPromo = (record, label) => ({
+    title_line1:record?.name || record?.destination || label, kicker:"HIMALAYAN ODYSSEY EXPEDITION",
+    facts:[], itinerary_items:parsePackageDays(record?.itinerary),
+    cover_image:record?.image_url || record?.cover_image || "", cta_url:enquiry(record?.name || label)
+  });
+  const itineraryToPromo = (record, days, label) => ({
+    title_line1:record?.title || label, kicker:"HIMALAYAN ODYSSEY EXPEDITION", facts:[],
+    cover_image:record?.cover_image || "",
+    itinerary_items:(days || []).map(day=>({day_number:day.day_number,heading:day.title,overnight_stay:day.overnight_location,description:day.description})),
+    cta_url:enquiry(record?.title || label)
+  });
+  const loadPublishedDays = async id => {
+    if (!id || typeof db === "undefined" || !db) return null;
+    const result = await db.from("itineraries").select("id,title,cover_image").eq("id",id).eq("published",true).maybeSingle();
+    if (result.error || !result.data) return null;
+    const days = await db.from("itinerary_days").select("day_number,title,description,overnight_location").eq("itinerary_id",id).order("day_number",{ascending:true});
+    if (days.error) return null;
+    return {record:result.data, days:days.data || []};
+  };
+  let requestVersion = 0;
+  document.addEventListener("click", async event => {
+    if (!window.matchMedia("(max-width:760px)").matches || event.defaultPrevented || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    const link = event.target.closest("a.package-itinerary-link, #itineraryList .itinerary-card-actions a.btn");
+    if (!link) return;
+    const card = link.closest("#packageList .package-slide[data-package-id], #itineraryList .itinerary-slide");
+    if (!card || !/^(view itinerary|explore full itinerary)\b/i.test(link.textContent.trim())) return;
+    event.preventDefault(); event.stopImmediatePropagation();
+    const version = ++requestVersion;
+    const label = card.querySelector("h3")?.textContent.trim() || "Travel Itinerary";
+    const packageId = card.dataset.packageId;
+    let record = packageId ? (window.hoePackageRecords || []).find(row=>String(row.id)===String(packageId)) : null;
+    let adapted = packageId ? packageToPromo(record,label) : itineraryToPromo(null,[],label);
+    open(adapted,link);
+    if (adapted.itinerary_items.length) return;
+    const empty = content.querySelector(".promo-itinerary-empty");
+    if (empty) empty.textContent = "Loading itinerary…";
+    try {
+      if (packageId && !record && typeof db !== "undefined" && db) {
+        const fetched = await db.from("packages").select("*").eq("id",packageId).maybeSingle();
+        if (!fetched.error && fetched.data) {
+          record=fetched.data; adapted=packageToPromo(record,label);
+        }
+      }
+      if (!adapted.itinerary_items.length) {
+        const url = new URL(link.href,location.href);
+        if (url.origin===location.origin && url.pathname==="/itinerary.html") {
+          const published = await loadPublishedDays(url.searchParams.get("id"));
+          if (published) {
+            const linked = itineraryToPromo(published.record,published.days,label);
+            adapted = packageId ? {...adapted,itinerary_items:linked.itinerary_items,cover_image:adapted.cover_image||linked.cover_image} : linked;
+          }
+        }
+      }
+    } catch (error) { console.warn("Itinerary could not be loaded",error); }
+    if (version===requestVersion && modal.classList.contains("is-open")) open(adapted,link);
+  },true);
 
   track.addEventListener("click", event => {
     const trigger = event.target.closest(".mobile-departure-itinerary");
@@ -239,7 +322,8 @@
     const id = card && card.dataset.promoId;
     const records = Array.isArray(window.heroPromoRecords) ? window.heroPromoRecords : [];
     const record = records.find(item => String(item.id) === String(id || trigger.dataset.itineraryPromo));
-    open(record || null);
+    requestVersion++;
+    open(record || null, trigger);
   });
 
   closeButton.addEventListener("click", close);
