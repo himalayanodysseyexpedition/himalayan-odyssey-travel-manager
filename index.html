@@ -191,7 +191,7 @@
 <style> @media (max-width: 767px) { #packageList .package-title-desktop { display: none !important; } #packageList .package-title-mobile { display: block !important; } } @media (min-width: 768px) { #packageList .package-title-mobile { display: none !important; } } </style>
   <link rel="stylesheet" href="/arctic-prestige-motion.css?v=3">
   <link rel="stylesheet" href="/homepage-mobile-departure-promo.css?v=30">
-  <link rel="stylesheet" href="/homepage-mobile-cream-background.css?v=2">
+  <link rel="stylesheet" href="/homepage-mobile-cream-background.css?v=2" media="(max-width: 760px)">
 
 <link rel="stylesheet" href="/windows-fluent-monochrome-sitewide.css?v=2">
 <link rel="stylesheet" href="/windows-fluent-monochrome-mobile.css?v=17">
@@ -1011,7 +1011,7 @@ async function loadCabs() {
         "\n\nPlease share availability and booking details.";
 
       const photo = image
-        ? `<img src="${safe(image)}" alt="${safe(name)}" loading="lazy" onerror="this.outerHTML=window.imageFallback('Vehicle photograph unavailable',220)">`
+        ? `<img src="${safe(image)}" alt="${safe(name)}" loading="lazy" decoding="async" fetchpriority="low" onerror="this.outerHTML=window.imageFallback('Vehicle photograph unavailable',220)">`
         : imageFallback("Vehicle photograph unavailable",220);
 
       const price = cab.daily_price != null && cab.daily_price !== ""
@@ -1121,7 +1121,7 @@ async function loadHotels() {
       const firstPhoto = hotelPhotos.find(photo => photo.photo_url);
 
       const imageHTML = firstPhoto
-        ? `<img src="${safe(firstPhoto.photo_url)}" alt="${safe(hotel.name)}" loading="lazy" onerror="this.outerHTML=window.imageFallback('Property photograph unavailable',220)">`
+        ? `<img src="${safe(firstPhoto.photo_url)}" alt="${safe(hotel.name)}" loading="lazy" decoding="async" fetchpriority="low" onerror="this.outerHTML=window.imageFallback('Property photograph unavailable',220)">`
         : imageFallback("Property photograph unavailable",220);
 
       const facilities = hotelFacilities(hotel.facilities);
@@ -1181,7 +1181,7 @@ function showHotelDetails(hotelId) {
     .map(photo => `
       <img src="${safe(photo.photo_url)}"
         alt="${safe(photo.caption || hotel.name || "Property photograph")}"
-        loading="lazy"
+        loading="lazy" decoding="async" fetchpriority="low"
         onerror="this.style.display='none'">
     `).join("");
 
