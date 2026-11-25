@@ -44,29 +44,10 @@ const visibleRange=2;
 const stop=()=>{clearInterval(timer);timer=null;};
 const play=()=>{stop();if(galleryVisible&&photos.length>1&&!reduced&&!document.hidden)timer=setInterval(()=>{if(!dragging&&!carousel.matches(":hover"))go(active+1);},2000);};
 const render=()=>{
-  track.innerHTML=photos.map((p,i)=>'<article class="featured-travel-slide" role="group" aria-roledescription="slide" aria-label="'+(i+1)+' of '+photos.length+'" data-title="'+safe(p.title||"")+'"><img data-src="'+safe(p.image_url)+'" alt="'+safe(p.alt_text||p.title||"Himalayan travel photograph")+'" loading="lazy" decoding="async" fetchpriority="low"><div class="featured-travel-caption"><strong>'+safe(p.title||"")+'</strong>'+(p.caption?'<span>'+safe(p.caption)+'</span>':'')+'</div></article>').join("");
+  track.innerHTML=photos.map((p,i)=>'<article class="featured-travel-slide" role="group" aria-roledescription="slide" aria-label="'+(i+1)+' of '+photos.length+'" data-title="'+safe(p.title||"")+'"><img src="'+safe(p.image_url)+'" alt="'+safe(p.alt_text||p.title||"Himalayan travel photograph")+'" loading="lazy" decoding="async" fetchpriority="low"><div class="featured-travel-caption"><strong>'+safe(p.title||"")+'</strong>'+(p.caption?'<span>'+safe(p.caption)+'</span>':'')+'</div></article>').join("");
   dots.innerHTML=photos.map((p,i)=>'<button class="featured-travel-dot" type="button" data-index="'+i+'" aria-label="Show photo '+(i+1)+' of '+photos.length+'" aria-current="'+(i===active?'true':'false')+'"></button>').join("");
   renderPositions();
 };
-// Do not assign network image sources to every absolutely-positioned slide at once.
-let nearGallery=typeof IntersectionObserver==="undefined";
-const loadNearbyPhotos=()=>{
-  if(!nearGallery||!photos.length)return;
-  [...track.children].forEach((item,i)=>{
-    const distance=Math.min(Math.abs(i-active),photos.length-Math.abs(i-active));
-    if(distance>visibleRange)return;
-    const img=item.querySelector("img[data-src]");
-    if(img){img.src=img.dataset.src;img.removeAttribute("data-src");}
-  });
-};
-if(typeof IntersectionObserver!=="undefined"){
-  const imageObserver=new IntersectionObserver(entries=>{
-    if(entries.some(entry=>entry.isIntersecting)){
-      nearGallery=true;loadNearbyPhotos();imageObserver.disconnect();
-    }
-  },{rootMargin:"240px 0px"});
-  imageObserver.observe(carousel);
-}
 const renderPositions=()=>{
   [...track.children].forEach((item,i)=>{
     let offset=i-active;
@@ -81,7 +62,6 @@ const renderPositions=()=>{
     if(offset===0)item.removeAttribute("aria-hidden");else item.setAttribute("aria-hidden","true");
   });
   [...dots.children].forEach((dot,i)=>dot.setAttribute("aria-current",i===active?"true":"false"));
-  loadNearbyPhotos();
 };
 const go=index=>{if(!photos.length)return;active=(index+photos.length)%photos.length;renderPositions();};
 dots.addEventListener("click",e=>{const button=e.target.closest("[data-index]");if(button)go(Number(button.dataset.index));});
