@@ -232,8 +232,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Inter:wght@400;500;600;700;800&display=swap" media="(max-width: 760px)">
 <link rel="stylesheet" href="/hoe-mobile-hero-theme.css?v=10" media="(max-width: 760px)">
 <style id="hoe-home-3d-logo-layout">
-@media(max-width:760px){html[data-hoe-theme="home"] body > header > .header-inner > a.brand > picture{display:contents!important}html[data-hoe-theme="home"] body > header > .header-inner > a.brand > picture > img{display:block!important;width:100%!important;max-width:100%!important;height:auto!important;max-height:45px!important;object-fit:contain!important;object-position:center!important;margin:0!important;padding:0!important;position:relative!important;z-index:1!important}}
-@media(min-width:761px){html[data-hoe-theme="home"] body > header > .header-inner > a.brand > picture{display:contents}}
+@media(max-width:760px){
+html[data-hoe-theme="home"] body > header > .header-inner > a.brand > img:not(.hoe-mobile-3d-logo){display:none!important}
+html[data-hoe-theme="home"] body > header > .header-inner > a.brand > img.hoe-mobile-3d-logo{display:block!important;width:100%!important;max-width:100%!important;height:auto!important;max-height:45px!important;object-fit:contain!important;object-position:center!important;margin:0!important;padding:0!important;position:relative!important;z-index:1!important}
+}
+@media(min-width:761px){html[data-hoe-theme="home"] body > header > .header-inner > a.brand > img.hoe-mobile-3d-logo{display:none!important}}
 </style>
 </head>
 
@@ -244,7 +247,8 @@
 <header>
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Himalayan Odyssey Expedition — Home">
-      <picture><source media="(max-width: 760px)" srcset="/hoe-home-header-3d.webp"><img src="logo.webp" alt="Himalayan Odyssey Expedition"></picture>
+      <img src="logo.webp" alt="Himalayan Odyssey Expedition">
+      <img class="hoe-mobile-3d-logo" src="/hoe-home-header-3d.webp" alt="Himalayan Odyssey Expedition" width="280" height="103">
     </a>
 
     <nav class="glass-nav" id="mobileMainNavigation" aria-label="Main navigation">
