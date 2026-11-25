@@ -13,7 +13,8 @@
     advance: "Hello {name}, thank you for choosing Himalayan Odyssey Expedition for your {destination} trip. To secure your booking, please complete the advance payment as discussed with our team. Once paid, kindly share the transaction screenshot here so we can update your booking record and confirm the arrangements.",
     payment: "Hello {name}, this is a friendly payment reminder from Himalayan Odyssey Expedition for your {destination} booking. Total amount: {total}. Amount received: {paid}. Pending balance: {balance}. Please let us know when we can expect the remaining payment. Thank you!",
     trip: "Hello {name}, your Himalayan Odyssey Expedition {destination} trip is approaching! Your travel starts on {start_date} and ends on {end_date}. Please keep your ID proof and essential travel items ready. Kindly confirm your pickup coordination with our team before departure. We look forward to seeing you!",
-    feedback: "Hello {name}, thank you for travelling with Himalayan Odyssey Expedition to {destination}! We hope you had a wonderful Himalayan experience. We would really appreciate your feedback about the trip, stays, transport and overall arrangements. Your suggestions help us improve. Thank you for travelling with us!"
+    feedback: "Hello {name}, thank you for travelling with Himalayan Odyssey Expedition to {destination}! We hope you had a wonderful Himalayan experience. We would really appreciate your feedback about the trip, stays, transport and overall arrangements. Your suggestions help us improve. Thank you for travelling with us!",
+    review: "Hello {name}, thank you for travelling with Himalayan Odyssey Expedition! If you have a moment, please share your honest feedback about your trip on Google: {review_url}. Your feedback helps us improve and helps other travellers plan their journeys. Thank you!"
   };
 
   const labels = {
@@ -22,7 +23,8 @@
     advance: "Advance payment request",
     payment: "Payment reminder",
     trip: "Trip reminder",
-    feedback: "Post-trip feedback"
+    feedback: "Post-trip feedback",
+    review: "Google review request"
   };
 
   const $ = id => document.getElementById(id);
@@ -61,7 +63,7 @@
     });
 
     $("resetWhatsAppTemplates")?.addEventListener("click", () => {
-      if (!confirm("Restore all six WhatsApp message templates to their original wording?")) return;
+      if (!confirm("Restore all seven WhatsApp message templates to their original wording?")) return;
       templates = { ...defaults };
       Object.keys(defaults).forEach(key => {
         const field = $("wa-template-" + key);
@@ -84,6 +86,15 @@
     container.appendChild(button);
   }
 
+  const REVIEW_URL = "https://search.google.com/local/writereview?placeid=ChIJjUoK-laRBTkRxgO7IVHlOTY";
+  function reviewEligible(booking) {
+    if (!booking || /cancel|no.show|refund/i.test(String(booking.status || ""))) return false;
+    const today = new Intl.DateTimeFormat("en-CA", {timeZone:"Asia/Kolkata",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());
+    const date = ["year","month","day"].map(key => today.find(part => part.type === key).value).join("-");
+    return /^\d{4}-\d{2}-\d{2}$/.test(String(booking.start_date || "")) &&
+      booking.start_date <= date && (!booking.end_date || booking.end_date <= date);
+  }
+
   function addCardActions() {
     document.querySelectorAll("#leadList article").forEach(article => {
       const record = article.querySelector("[data-confirm]");
@@ -99,6 +110,8 @@
       addAction(actions, "advance", id, "Advance request");
       addAction(actions, "trip", id, "Trip reminder");
       addAction(actions, "feedback", id, "Feedback request");
+      const booking = (D.bookings || []).find(item => String(item.id) === String(id));
+      if (reviewEligible(booking)) addAction(actions, "review", id, "Request Google Review");
     });
   }
 
@@ -172,6 +185,7 @@
     } else {
       const booking = (D?.bookings || []).find(item => String(item.id) === String(id));
       if (!booking) { alert("Booking not found. Refresh the dashboard and try again."); return; }
+      if (key === "review" && (!reviewEligible(booking) || !confirm("Confirm this customer actually completed their trip and has not already received a review request. Continue to WhatsApp?"))) return;
       customer = (D?.customers || []).find(item => String(item.id) === String(booking.customer_id)) || {};
       const total = Number(booking.total_amount || 0);
       const paid = Number(booking.amount_paid || 0);
@@ -187,7 +201,10 @@
       };
     }
 
-    openWhatsApp(customer.phone, fill(templates[key] || defaults[key], data));
+    if (key === "review") data.review_url = REVIEW_URL;
+    let message = fill(templates[key] || defaults[key], data);
+    if (key === "review" && !message.includes(REVIEW_URL)) message += "\n\n" + REVIEW_URL;
+    openWhatsApp(customer.phone, message);
   }, true);
 
   setupEditor();
