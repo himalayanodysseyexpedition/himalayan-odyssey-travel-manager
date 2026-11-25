@@ -239,6 +239,15 @@ html[data-hoe-theme="home"] body > header > .header-inner > a.brand::before{back
 }
 @media(min-width:761px){html[data-hoe-theme="home"] body > header > .header-inner > a.brand > img.hoe-mobile-3d-logo{display:none!important}}
 </style>
+<style id="mobile-itinerary-close-contrast-v1">
+@media(max-width:760px){
+html body #promo-itinerary-modal .promo-itinerary-close,
+html body #guest-itinerary-popup .guest-itinerary-close,
+html body .hoe-package-itinerary-modal .hoe-package-itinerary-close{
+background:#fff!important;background-image:none!important;color:#000!important;-webkit-text-fill-color:#000!important;
+}
+}
+</style>
 </head>
 
 <body>
@@ -2501,7 +2510,7 @@ loadHotels();
 
 
 <script src="/hero-promotions.js?v=2" defer></script>
-<script src="/hero-promo-itinerary-modal.js?v=6" defer></script>
+<script src="/hero-promo-itinerary-modal.js?v=7" defer></script>
 <script src="/homepage-promotion-carousel.js?v=1" defer></script>
 <script src="/mobile-scroll-indicators.js?v=2" defer></script>
 
