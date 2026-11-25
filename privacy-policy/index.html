@@ -57,10 +57,12 @@
   <link rel="stylesheet" href="/premium-design-system.css?v=1">
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Inter:wght@400;500;600;700;800&display=swap" media="(max-width: 760px)">
-<link rel="stylesheet" href="/hoe-mobile-hero-theme.css?v=1" media="(max-width: 760px)">
+<link rel="stylesheet" href="/hoe-mobile-hero-theme.css?v=2" media="(max-width: 760px)">
 </head>
 <body>
-<header class="sitewide-header">
+<div class="hoe-shared-mobile-header" role="banner" hidden><div class="hoe-shared-header-inner"><a class="hoe-shared-brand" href="/" aria-label="Himalayan Odyssey Expedition — Home"><img src="/logo.webp" alt="Himalayan Odyssey Expedition"></a></div></div>
+
+<header data-hoe-legacy-header class="sitewide-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Himalayan Odyssey Expedition — Home"><img src="/logo.webp" alt="Himalayan Odyssey Expedition"></a>
     <nav class="glass-nav" aria-label="Main navigation">
@@ -104,4 +106,10 @@
 <script src="/mobile-app-experience.js?v=5" defer></script>
 
  <script src="/arctic-prestige-motion.js?v=2" defer></script>
+<nav class="hoe-mobile-utility-nav" aria-label="Quick links" hidden>
+      <a href="/#more-than-tours"><span>Destinations</span></a>
+      <a href="/#packages"><span>Upcoming Tours</span></a>
+      <a href="/#itineraries"><span>Itinerary</span></a>
+      
+    </nav>
 </body></html>
