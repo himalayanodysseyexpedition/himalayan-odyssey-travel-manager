@@ -3097,14 +3097,40 @@ html[data-hoe-theme="home"] body section#upcoming-packages #groupDeparturesCarou
 
 <style id="hoe-mobile-seamless-flags-purple-dock">
 @media(max-width:760px){
-html[data-hoe-theme="home"] body > header::after{background-image:url("/tibetan-header-flags-wind.svg?v=1")!important;background-size:50% 56px!important;background-repeat:repeat-x!important;background-position:0 0!important;opacity:.7!important;animation:none!important;filter:none!important}
+html[data-hoe-theme="home"] body > header::after{background-image:url("/tibetan-header-flags-wind.svg?v=1")!important;background-size:50% 56px!important;background-repeat:repeat-x!important;background-position:var(--hoe-header-flag-scroll-x,0px) 0!important;opacity:.7!important;animation:none!important;filter:none!important}
 html[data-hoe-theme="home"] body nav.mobile-app-dock{background:linear-gradient(110deg,rgba(44,17,80,.96),rgba(89,43,151,.93),rgba(144,87,209,.88),rgba(177,126,233,.84),rgba(111,57,176,.92),rgba(44,17,80,.96))!important;background-size:260% 100%!important;background-position:var(--hoe-dock-flow,0%) 50%!important;border-color:#d9baff80!important;box-shadow:0 12px 30px #170b2c66,0 0 20px #a66af044,inset 0 1px 0 #ffffff55!important;-webkit-backdrop-filter:blur(30px) saturate(150%)!important;backdrop-filter:blur(30px) saturate(150%)!important}
 html[data-hoe-theme="home"] body nav.mobile-app-dock::before{background:linear-gradient(110deg,#ffffff24,transparent 65%,#d9baff15)!important}
 html[data-hoe-theme="home"] body nav.mobile-app-dock span{color:#fff!important;-webkit-text-fill-color:#fff!important;text-shadow:0 1px 3px #24103f!important}
 html[data-hoe-theme="home"] body nav.mobile-app-dock .dock-icon{color:#fff!important;stroke:#fff!important;animation:none!important;filter:drop-shadow(0 2px 3px #24103f88)!important}
 }
-@media(max-width:760px) and (prefers-reduced-motion:reduce){html[data-hoe-theme="home"] body > header::after{background-image:url("/tibetan-header-flags-static.svg?v=1")!important;animation:none!important}html[data-hoe-theme="home"] body nav.mobile-app-dock{background-position:50% 50%!important}}
+@media(max-width:760px) and (prefers-reduced-motion:reduce){html[data-hoe-theme="home"] body > header::after{background-image:url("/tibetan-header-flags-static.svg?v=1")!important;background-position:0 0!important;animation:none!important}html[data-hoe-theme="home"] body nav.mobile-app-dock{background-position:50% 50%!important}}
 </style>
 <script id="hoe-mobile-dock-scroll-flow">
 (()=>{const mobile=matchMedia('(max-width:760px)'),reduce=matchMedia('(prefers-reduced-motion:reduce)');let frame=0,last=0,dock=null,scrollPhase=0;function tick(now){frame=0;if(!mobile.matches||reduce.matches||document.hidden)return;if(now-last>=32){last=now;if(!dock||!dock.isConnected)dock=document.querySelector('nav.mobile-app-dock');const target=Math.max(0,window.scrollY)/280;scrollPhase+=(target-scrollPhase)*.12;const phase=50-50*Math.cos(now/1700+scrollPhase);if(dock)dock.style.setProperty('--hoe-dock-flow',phase.toFixed(2)+'%')}frame=requestAnimationFrame(tick)}function sync(){if(frame){cancelAnimationFrame(frame);frame=0}if(mobile.matches&&!reduce.matches&&!document.hidden)frame=requestAnimationFrame(tick);else if(dock)dock.style.removeProperty('--hoe-dock-flow')}mobile.addEventListener('change',sync);reduce.addEventListener('change',sync);document.addEventListener('visibilitychange',sync);sync()})();
+</script>
+
+<script id="hoe-mobile-header-scroll-direction-flags">
+// Only page displacement moves the flag strip; the SVG's cloth flutter runs independently.
+(()=>{
+ const mobile=matchMedia('(max-width:760px)'),reduce=matchMedia('(prefers-reduced-motion:reduce)');
+ const header=document.querySelector('body > header');
+ if(!header)return;
+ let frame=0;
+ function update(){
+  frame=0;
+  if(!mobile.matches||reduce.matches){header.style.removeProperty('--hoe-header-flag-scroll-x');return;}
+  const root=document.scrollingElement||document.documentElement;
+  const y=Math.max(0,Math.min(window.scrollY,Math.max(0,root.scrollHeight-root.clientHeight)));
+  const period=header.clientWidth/2;
+  const x=period>0?-((y*.55)%period):0;
+  header.style.setProperty('--hoe-header-flag-scroll-x',x.toFixed(2)+'px');
+ }
+ function queue(){if(!frame)frame=requestAnimationFrame(update);}
+ window.addEventListener('scroll',queue,{passive:true});
+ window.addEventListener('resize',queue,{passive:true});
+ window.addEventListener('pageshow',queue);
+ mobile.addEventListener('change',queue);
+ reduce.addEventListener('change',queue);
+ queue();
+})();
 </script>
