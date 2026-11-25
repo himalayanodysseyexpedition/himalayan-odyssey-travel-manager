@@ -77,6 +77,7 @@
   if(!places.length||!days||(v&&vehicleDays>0&&!cab)){$("htpStatus").textContent="Select a destination and valid travel dates to prepare your trip estimate.";return}
   const lines=["Hello Himalayan Odyssey Expedition! Please prepare my trip quotation.","Destinations: "+places.map(n=>n+" ("+nights[n]+" nights)").join(", "),"Dates: "+$("htpStart").value+" to "+$("htpEnd").value,"Duration: "+days+" days; selected stay: "+totalNights()+" nights","Travellers: "+people,"Stay estimate: "+money(stay),"Vehicle: "+(v&&vehicleDays>0?v.title+" × "+Math.ceil(people/Math.max(1,Number(v.capacity)||1)):"Not included (0 days)"),"Vehicle rental days: "+(v?vehicleDays:0),"Daily vehicle rate: "+(v&&vehicleDays>0?money(v.price):"Not applicable"),"Cab estimate: "+money(cab),"Estimated total: "+money(stay+cab),"Estimated per person: "+money((stay+cab)/people),"Please confirm availability, route feasibility and final inclusions."];
   const url="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(lines.join("\n"));
+  window.HOEAnalytics?.track("whatsapp_click",{form_name:"trip_calculator",page_path:location.pathname});
   const w=window.open(url,"_blank");if(!w)window.location.href=url;
   $("htpStatus").textContent="Trip estimate prepared. Confirm final cab and stay rates with our team.";
  });
