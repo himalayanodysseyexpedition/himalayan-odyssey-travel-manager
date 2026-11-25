@@ -39,7 +39,7 @@
   nav.setAttribute('aria-label','Bottom navigation');
   nav.innerHTML=items.map(x=>'<a href="'+x.href+'"'+(x.target?' target="'+x.target+'" rel="noopener noreferrer"':'')+' data-dock="'+x.path+'" aria-label="'+x.label+'">'+icon(x.svg)+'<span>'+x.label+'</span></a>').join('')+
    '<button type="button" class="dock-menu-trigger" data-dock-menu aria-label="Open navigation menu" aria-expanded="false" aria-controls="dockMenuPopup">'+
-   icon(mobile()?'<path d="M12 4v16M4 12h16"/>':'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect class="icon-side" x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect class="icon-side" x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/>')+
+   icon(mobile()&&document.documentElement.dataset.hoeTheme!=='home'?'<path d="M12 4v16M4 12h16"/>':'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect class="icon-side" x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect class="icon-side" x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/>')+
    '<span>Menu</span></button>';
   document.body.appendChild(nav);
   const menuTrigger=nav.querySelector('.dock-menu-trigger');
