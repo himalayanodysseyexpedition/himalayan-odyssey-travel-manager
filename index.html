@@ -902,7 +902,7 @@ async function loadPackages() {
 
       const relatedPhoto = packageImageFor(p);
       const image = p.image_url || p.cover_image || relatedPhoto.src;
-      const photo = `<img class="package-photo" src="${safe(image)}" data-fallback-src="${safe(relatedPhoto.src)}" alt="${safe(p.name || relatedPhoto.alt)}" loading="lazy" decoding="async" onerror="if(this.dataset.fallbackSrc && this.src!==this.dataset.fallbackSrc){this.src=this.dataset.fallbackSrc;this.dataset.fallbackSrc='';}else{this.outerHTML=window.imageFallback('Himalayan landscape',220)}">`;
+      const photo = `<img class="package-photo" src="${safe(image)}" data-fallback-src="${safe(relatedPhoto.src)}" alt="${safe(p.name || relatedPhoto.alt)}" loading="lazy" decoding="async" fetchpriority="low" onerror="if(this.dataset.fallbackSrc && this.src!==this.dataset.fallbackSrc){this.src=this.dataset.fallbackSrc;this.dataset.fallbackSrc='';}else{this.outerHTML=window.imageFallback('Himalayan landscape',220)}">`;
 
       const message = "Hello, I am interested in " +
         (p.name || "your travel package") +
@@ -963,7 +963,7 @@ async function loadItineraries() {
       const gallery=Array.isArray(item.gallery_images)?item.gallery_images:[];
       const cover=item.cover_image||(gallery[0]&&gallery[0].url)||"";
       const pageUrl="/itinerary.html?id="+encodeURIComponent(item.id);
-      const coverHtml=cover?'<img src="'+safe(cover)+'" alt="'+safe(item.title||"Himalayan tour")+'" loading="lazy" decoding="async">':'<div class="itinerary-cover-placeholder"><span>✧</span><b>HIMALAYAN ODYSSEY EXPEDITION</b><small>CURATED HIMALAYAN JOURNEY</small></div>';
+      const coverHtml=cover?'<img src="'+safe(cover)+'" alt="'+safe(item.title||"Himalayan tour")+'" loading="lazy" decoding="async" fetchpriority="low">':'<div class="itinerary-cover-placeholder"><span>✧</span><b>HIMALAYAN ODYSSEY EXPEDITION</b><small>CURATED HIMALAYAN JOURNEY</small></div>';
       return '<article class="card package-slide itinerary-slide reveal"><a class="itinerary-cover-link" href="'+safe(pageUrl)+'"><div class="itinerary-cover">'+coverHtml+'</div></a><div class="card-body"><h3>'+safe(item.title||"Himalayan Tour")+'</h3><p>'+safe(item.destination||"Himalayan Tour")+'</p>'+(duration?'<p class="itinerary-meta">'+safe(duration)+'</p>':"")+'<div class="itinerary-card-actions"><a class="btn" href="'+safe(pageUrl)+'">Explore Full Itinerary</a><a class="btn" href="/?itinerary='+encodeURIComponent(item.id)+'&topic='+encodeURIComponent("Itinerary enquiry: "+(item.title||"Himalayan tour"))+'">Enquire About This Itinerary</a></div></div></article>';
     }).join("");
     observeReveals();
