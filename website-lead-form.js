@@ -105,7 +105,7 @@
       event.preventDefault();
       const status = formElement.querySelector(".hoe-lead-status");
       const button = formElement.querySelector(".hoe-lead-submit");
-      if (!formElement.reportValidity()) return;
+      if (button.disabled || !formElement.reportValidity()) return;
       const values = new FormData(formElement);
       const name = String(values.get("name") || "").trim();
       const phone = String(values.get("phone") || "").replace(/\D/g,"");
@@ -113,7 +113,7 @@
       const persons = Number(values.get("persons"));
       const travelDate = String(values.get("travelDate") || "");
       const startCity = String(values.get("startCity") || "").trim();
-      const notes = "Starting city: " + startCity + "\nEnquiry page: " + location.href.slice(0,500);
+      const notes = "Starting city: " + startCity + "\nEnquiry page: " + location.pathname.slice(0,500);
       const message = [
         "Hello Himalayan Odyssey Expedition,",
         "I have submitted a trip enquiry through your website.",
@@ -132,9 +132,12 @@
       status.dataset.state = "";
       status.textContent = "Saving your enquiry securely…";
       let saved = false;
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 10000);
       try {
         const response = await fetch(SUPABASE_URL + "/functions/v1/submit-website-enquiry", {
           method: "POST",
+          signal: controller.signal,
           headers: { "Content-Type": "application/json", "apikey": SUPABASE_PUBLISHABLE_KEY },
           body: JSON.stringify({
             name, phone, destination, persons, travelDate,
@@ -146,6 +149,8 @@
         saved = response.ok && result.saved === true;
       } catch (_) {
         saved = false;
+      } finally {
+        window.clearTimeout(timeout);
       }
       if (saved) window.HOEAnalytics?.track("generate_lead", { form_name: "website_enquiry", page_path: location.pathname });
       else window.HOEAnalytics?.track("enquiry_whatsapp_fallback", { page_path: location.pathname });
@@ -154,6 +159,7 @@
         ? "Enquiry saved. Opening WhatsApp to continue…"
         : "The CRM could not confirm the save. Opening WhatsApp so your enquiry can still reach our team.";
       button.textContent = saved ? "Enquiry submitted" : "Continue on WhatsApp";
+      window.HOEAnalytics?.track("whatsapp_click", { form_name: "website_enquiry", page_path: location.pathname });
       window.setTimeout(() => {
         if (whatsappWindow && !whatsappWindow.closed) whatsappWindow.location.href = whatsappUrl;
         else window.location.href = whatsappUrl;
