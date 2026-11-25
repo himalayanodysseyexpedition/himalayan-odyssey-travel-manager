@@ -152,3 +152,39 @@ html[data-hoe-theme="page"] body main :is(.kicker,.eyebrow,.section-kicker,.code
 html[data-hoe-theme="page"] body main :is(.price,.day-number,.overnight){color:var(--hoe-strong)!important;-webkit-text-fill-color:var(--hoe-strong)!important;font-size:14px!important}
 html[data-hoe-theme="page"] body main .article table{font-size:13px!important}
 }
+
+@media screen and (max-width:760px){
+/* Landing-page enquiry forms retain their light cards inside the dark theme. */
+html[data-hoe-theme="page"] body main .hoe-lead-card .hoe-lead-copy h2{
+ color:#171717!important;-webkit-text-fill-color:#171717!important;
+}
+html[data-hoe-theme="page"] body main .hoe-lead-card :is(.hoe-lead-copy p,.hoe-lead-optional,.hoe-lead-status){
+ color:#444!important;-webkit-text-fill-color:#444!important;
+}
+html[data-hoe-theme="page"] body main .hoe-lead-card .hoe-lead-status[data-state="error"]{
+ color:#8b2424!important;-webkit-text-fill-color:#8b2424!important;
+}
+html[data-hoe-theme="page"] body main .hoe-lead-card .hoe-lead-status[data-state="success"]{
+ color:#235b35!important;-webkit-text-fill-color:#235b35!important;
+}
+
+/* The itinerary summary, duration chips and day numbers have light fills. */
+html[data-hoe-theme="page"] body #itineraryContent :is(.intro h2,.meta span,.day-number){
+ color:#171717!important;-webkit-text-fill-color:#171717!important;
+}
+html[data-hoe-theme="page"] body #itineraryContent .intro p{
+ color:#444!important;-webkit-text-fill-color:#444!important;
+}
+html[data-hoe-theme="page"] body #itineraryContent .intro .section-kicker{
+ color:#543486!important;-webkit-text-fill-color:#543486!important;
+}
+html[data-hoe-theme="page"] body #itineraryContent :is(.hero-destination,.price small,.price span){
+ color:var(--hoe-muted)!important;-webkit-text-fill-color:var(--hoe-muted)!important;
+}
+html[data-hoe-theme="page"] body #itineraryContent .price strong{
+ color:var(--hoe-strong)!important;-webkit-text-fill-color:var(--hoe-strong)!important;
+}
+html[data-hoe-theme="page"] body #itineraryContent .destination-mark{
+ color:var(--hoe-label)!important;-webkit-text-fill-color:var(--hoe-label)!important;
+}
+}
