@@ -162,6 +162,23 @@
   }
   // Prime the browser voice inventory without playing audio.
   if ("speechSynthesis" in window) window.speechSynthesis.getVoices();
+  function conciseVoiceReply(message) {
+    const text = String(message || "").trim();
+    const words = text.split(/\s+/);
+    if (words.length <= 36 && text.length <= 260) return text;
+    const sentences = text.match(/[^।!?]+?[।!?]+|[^।!?]+$/g) || [text];
+    // Keep complete sentences, not a truncated price, date or itinerary.
+    const chosen = [];
+    for (const sentence of sentences) {
+      const clean = sentence.trim();
+      const candidate = [...chosen, clean].join(" ");
+      if (candidate.length > 210 || candidate.split(/\s+/).length > 30) break;
+      chosen.push(clean);
+      if (chosen.length === 2) break;
+    }
+    const note = state.language === "hi-IN" ? "पूरी जानकारी चैट में है।" : "Full details are in the chat.";
+    return [...chosen, note].join(" ");
+  }
   function speak(message, replaceCurrent = true, afterSpeech = null) {
     const token = ++state.speechToken;
     const resumeConversation = () => {
@@ -177,7 +194,7 @@
     if (replaceCurrent && (window.speechSynthesis.speaking || window.speechSynthesis.pending)) {
       window.speechSynthesis.cancel();
     }
-    const utterance = new SpeechSynthesisUtterance(prepareSpeechText(message));
+    const utterance = new SpeechSynthesisUtterance(prepareSpeechText(conciseVoiceReply(message)));
     state.speaking = true;
     detachRecognition();
     utterance.lang = state.language;
@@ -469,9 +486,9 @@
     }).filter(entry => entry.score > 0)
       .sort((a,b) => b.score - a.score).slice(0,4).map(entry => entry.item);
   }
-  function renderAssistantMessage(message, shouldSpeak = true) {
+  function renderAssistantMessage(message, shouldSpeak = true, voiceMessage = null) {
     appendChatMessage("assistant", message);
-    if (shouldSpeak) speak(message);
+    if (shouldSpeak) speak(voiceMessage || message);
   }
   function askForField(field, message) {
     state.awaitingField = field;
@@ -560,7 +577,7 @@
         "। क्या आप इनमें से किसी group tour में जाना चाहते हैं, या अपना private / customised tour बनवाना चाहते हैं? आप नीचे किसी departure को select भी कर सकते हैं।",
         "I can help plan your trip. First, our upcoming group departures are: " + spoken +
         ". Would you like to join one of these group tours, or plan a private or customised trip? You can also select a departure card below."
-      ));
+      ), true, enquiryText("हमारे ग्रुप टूर नीचे हैं। आप ग्रुप में जाना चाहेंगे या प्राइवेट टूर पर?", "Our upcoming group tours are below. Would you prefer a group or private trip?"));
     } else {
       askForField("tripChoice", enquiryText(
         "अभी कोई upcoming group departure listed नहीं है। क्या आप published tour package देखना चाहेंगे या customised trip बनवाना चाहते हैं?",
@@ -645,7 +662,7 @@
     renderAssistantMessage(enquiryText(
       "आपकी search से ये published packages मिले: " + names + "। सही package को नीचे select करें या उसका नाम बोलें।",
       "I found these published packages: " + names + ". Select the correct package below or say its name."
-    ));
+    ), true, enquiryText("आपके लिए टूर मिल गए हैं। नीचे से चुनिए।", "I found matching tours. Please choose one below."));
   }
   function askForNextAfterGuests() {
     if (state.enquiry.kind === "group") {
@@ -662,8 +679,8 @@
   }
   function askForPickup() {
     askForField("pickup", enquiryText(
-      "आप कहाँ से pickup चाहते हैं? City या pickup point बताइए, जैसे Delhi, Chandigarh या Ambala.",
-      "Where should the pickup be? Tell me your city or pickup point, for example Delhi, Chandigarh or Ambala."
+      "आप कहाँ से पिकअप चाहते हैं?",
+      "Where would you like to be picked up?"
     ));
   }
   function askForLocationsOrName() {
@@ -693,7 +710,7 @@
     renderAssistantMessage(enquiryText(
       "कृपया details check करें:\n" + summary + "\nक्या सब सही है? हाँ कहें या बताएं क्या बदलना है।",
       "Please check the enquiry details:\n" + summary + "\nIs everything correct? Say yes, or tell me what needs to change."
-    ));
+    ), true, enquiryText("आपकी यात्रा की जानकारी चैट में है। क्या सब सही है?", "Your trip details are in the chat. Is everything correct?"));
   }
   function processEnquiryTurn(transcript) {
     const input = String(transcript || "").trim();
@@ -1058,7 +1075,7 @@
       state.isGreeting = true;
       const welcome = state.language === "hi-IN"
         ? "नमस्कार, बताइए आज कौन-सी ट्रिप पर चलें?"
-        : "Hello! Welcome to Himalayan Odyssey. What would you like to know about Himachal, Spiti, or planning your next trip?";
+        : "Hello! Welcome to Himalayan Odyssey. Where would you like to travel?";
       try {
         speak(welcome, false, () => {
           state.isGreeting = false;
