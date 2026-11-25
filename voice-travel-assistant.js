@@ -20,6 +20,10 @@
     speaking: false,
     isGreeting: false,
     restartTimer: null,
+    speechToken: 0,
+    startTimer: null,
+    failures: 0,
+    generation: 0,
     bootstrap: null,
     enquiry: { kind:"", package:null, departure:null, guests:"", travelDates:"", pickup:"", locations:"", name:"" },
     awaitingField: "",
@@ -84,6 +88,7 @@
         </div>
 
       </div>
+      <form id="hoeVoiceTextForm" style="display:flex;gap:6px;margin-top:10px"><input id="hoeVoiceText" aria-label="Type your question" placeholder="Type your question" autocomplete="off" style="min-width:0;flex:1;padding:9px;border-radius:8px;border:1px solid #888;background:#fff;color:#111"><button type="submit" class="hoe-voice-language">Send</button></form>
       <span class="hoe-voice-help">वॉइस असिस्टेंट खुलने पर सुनना शुरू करता है। बातचीत समाप्त करने के लिए इसे बंद करें।</span>
       <a class="hoe-voice-whatsapp is-disabled" id="hoeVoiceWhatsapp" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">Complete trip details to prepare WhatsApp enquiry</a>
     </section>
@@ -132,7 +137,9 @@
       voices.find(item => String(item.lang || "").toLowerCase().startsWith(wanted.slice(0,2))) || null;
   }
   function speak(message, replaceCurrent = true, afterSpeech = null) {
+    const token = ++state.speechToken;
     const resumeConversation = () => {
+      if (token !== state.speechToken || !state.open) return;
       if (typeof afterSpeech === "function") afterSpeech();
       else if (state.sessionActive) scheduleListening(350);
     };
@@ -146,12 +153,7 @@
     }
     const utterance = new SpeechSynthesisUtterance(prepareSpeechText(message));
     state.speaking = true;
-    if (state.recognition && state.listening) {
-      try { state.recognition.stop(); } catch (_) {}
-      state.listening = false;
-      state.starting = false;
-      root.classList.remove("is-listening");
-    }
+    detachRecognition();
     utterance.lang = state.language;
     const voiceChoice = selectSpeechVoice();
     if (voiceChoice) utterance.voice = voiceChoice;
@@ -159,14 +161,20 @@
     utterance.pitch = 1.02;
     utterance.volume = 1;
     let completed = false;
+    let speechTimer;
     const finishSpeech = () => {
       if (completed) return;
       completed = true;
+      window.clearTimeout(speechTimer);
+      if (token !== state.speechToken || !state.open) return;
       state.speaking = false;
       setStatus(state.language === "hi-IN" ? "अगला सवाल सुनने के लिए तैयार हूँ…" : "Ready for your next question…");
       resumeConversation();
     };
     utterance.onstart = () => {
+      if (token !== state.speechToken) return;
+      window.clearTimeout(speechTimer);
+      speechTimer = window.setTimeout(() => { finishSpeech(); if (token === state.speechToken) stopSpeech(); }, Math.max(8000, Math.min(60000, String(message).length * 125 + 4000)));
       state.speaking = true;
       setStatus(state.language === "hi-IN" ? "जवाब सुनिए…" : "Himalayan Odyssey is speaking…");
     };
@@ -178,6 +186,7 @@
       finishSpeech();
     };
     try {
+      speechTimer = window.setTimeout(() => { finishSpeech(); if (token === state.speechToken) stopSpeech(); }, 4000);
       window.speechSynthesis.resume();
       window.speechSynthesis.speak(utterance);
     } catch (_) {
@@ -312,7 +321,7 @@
   }
   function normaliseSearch(value) {
     return String(value || "").normalize("NFKC").toLocaleLowerCase("en-IN")
-      .replace(/[‐-–—]/g, " ").replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+      .replace(/[‐-–—]/g, " ").replace(/[^\p{L}\p{M}\p{N}]+/gu, " ").trim();
   }
   function formatTripDate(value) {
     const match = String(value || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
@@ -327,11 +336,13 @@
     return start && end ? start + " to " + end : start || end;
   }
   async function loadAssistantData() {
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 7000);
     try {
       const response = await fetch(SUPABASE_URL + "/functions/v1/ai-travel-assistant", {
         method:"POST",
         headers:{ "Content-Type":"application/json", "apikey":SUPABASE_KEY },
-        body:JSON.stringify({ action:"bootstrap" })
+        body:JSON.stringify({ action:"bootstrap" }), signal:controller.signal
       });
       const data = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(data.message || "Could not load trip options.");
@@ -344,7 +355,7 @@
     } catch (_) {
       state.bootstrap = state.bootstrap || { packages:[], destinations:[], group_departures:[] };
       return state.bootstrap;
-    }
+    } finally { window.clearTimeout(timeout); }
   }
   function renderDepartureOptions(departures) {
     if (!departures || !departures.length) return;
@@ -824,9 +835,10 @@
     beginPackageSearch(input);
   }
   function prepareAndStartGuidedEnquiry() {
+    const generation = state.generation;
     const ready = state.bootstrap ? Promise.resolve(state.bootstrap) : assistantDataPromise;
     ready.then(() => {
-      if (state.open && state.sessionActive) beginGuidedEnquiry();
+      if (state.open && generation === state.generation && !state.awaitingField) beginGuidedEnquiry();
     });
   }
   const assistantDataPromise = loadAssistantData();
@@ -844,6 +856,24 @@
     }, delay);
   }
 
+  function detachRecognition() {
+    window.clearTimeout(state.startTimer);
+    state.startTimer = null;
+    const old = state.recognition;
+    state.recognition = null;
+    state.starting = false;
+    state.listening = false;
+    root.classList.remove("is-listening");
+    if (old) { try { old.abort(); } catch (_) {} }
+  }
+  function retryListening(delay = 500) {
+    if (++state.failures >= 3) {
+      state.sessionActive = false;
+      setStatus("Voice unavailable. Type your question or reopen the assistant to retry.");
+      return;
+    }
+    scheduleListening(delay);
+  }
   function startListening() {
     if (!state.sessionActive || state.busy || state.speaking || state.isGreeting || state.starting || state.listening) return;
     if (!Recognition) {
@@ -858,13 +888,17 @@
     try {
       // Called directly from the launcher click on first use so the browser can
       // request microphone permission within the user's activation.
+      state.startTimer = window.setTimeout(() => {
+        if (state.recognition !== recognition || !state.starting) return;
+        detachRecognition(); retryListening(800);
+      }, 6000);
       recognition.start();
     } catch (error) {
       state.starting = false;
       setStatus(state.language === "hi-IN"
         ? "माइक्रोफ़ोन शुरू नहीं हो पाया। अनुमति जाँचकर दोबारा वॉइस असिस्टेंट खोलें।"
         : "The microphone could not start. Check permission and reopen the voice assistant.");
-      scheduleListening(900);
+      detachRecognition(); retryListening(900);
     }
   }
 
@@ -888,6 +922,8 @@
     recognition.maxAlternatives = 1;
     recognition.continuous = false;
     recognition.onstart = () => {
+      if (state.recognition !== recognition) return;
+      window.clearTimeout(state.startTimer);
       state.starting = false;
       state.listening = true;
       root.classList.add("is-listening");
@@ -903,31 +939,36 @@
       setStatus(state.language === "hi-IN" ? "सुन रहा हूँ… बोलिए।" : "Listening… speak now.");
       clearListenWatchdog();
       listenWatchdog = window.setTimeout(() => {
-        if (!state.sessionActive || receivedResult || !state.listening) return;
+        if (state.recognition !== recognition || !state.sessionActive || receivedResult || !state.listening) return;
         setStatus(state.language === "hi-IN"
           ? "मैं फिर से सुन रहा हूँ… बोलिए।"
           : "I am still here. Please speak when ready.");
-        try { recognition.stop(); } catch (_) {}
         resetListeningUI();
-        scheduleListening(300);
+        detachRecognition();
+        retryListening(300);
       }, 12000);
     };
     recognition.onresult = event => {
+      if (state.recognition !== recognition || receivedResult || !state.open) return;
       receivedResult = true;
+      state.failures = 0;
       clearListenWatchdog();
       const transcript = Array.from(event.results || [])
         .slice(event.resultIndex || 0)
         .map(result => result && result[0] ? String(result[0].transcript || "") : "")
         .join(" ").trim();
       resetListeningUI();
-      if (transcript) processEnquiryTurn(transcript);
+      detachRecognition();
+      if (transcript) { try { processEnquiryTurn(transcript); } catch (_) { setStatus("Could not process that question. Please try typing it."); scheduleListening(500); } }
       else {
         setStatus(state.language === "hi-IN" ? "आवाज़ साफ़ नहीं आई। फिर से बोलिए।" : "I couldn't hear that clearly. Please try again.");
         scheduleListening(300);
       }
     };
     recognition.onerror = event => {
+      if (state.recognition !== recognition) return;
       resetListeningUI();
+      detachRecognition();
       if (event.error === "not-allowed" || event.error === "service-not-allowed") {
         state.sessionActive = false;
         setStatus(state.language === "hi-IN"
@@ -938,23 +979,26 @@
       if (!state.sessionActive || event.error === "aborted") return;
       if (event.error === "network") {
         setStatus(state.language === "hi-IN" ? "कनेक्शन जाँच रहा हूँ… फिर से सुनूँगा।" : "Checking the connection. I will listen again.");
-        scheduleListening(1400);
+        retryListening(1400);
         return;
       }
       setStatus(state.language === "hi-IN" ? "जी, फिर से सुन रहा हूँ। बोलिए।" : "Ready to listen again. Please speak.");
-      scheduleListening(350);
+      retryListening(350);
     };
     recognition.onnomatch = () => {
+      if (state.recognition !== recognition) return;
       setStatus(state.language === "hi-IN" ? "मैं समझ नहीं पाया। कृपया दोबारा बोलें।" : "I couldn't understand that. Please say it again.");
     };
     recognition.onend = () => {
+      if (state.recognition !== recognition) return;
       const hadResult = receivedResult;
       resetListeningUI();
+      detachRecognition();
       if (!state.sessionActive || state.busy || state.speaking || state.isGreeting) return;
       if (!hadResult) {
         setStatus(state.language === "hi-IN" ? "मैं सुनने के लिए तैयार हूँ…" : "Ready to listen…");
       }
-      scheduleListening(350);
+      if (hadResult) scheduleListening(350); else retryListening(500);
     };
     return recognition;
   }
@@ -966,10 +1010,10 @@
     state.isGreeting = false;
     clearRestartTimer();
     root.classList.remove("is-listening");
-    if (state.recognition) {
-      try { state.recognition.stop(); } catch (_) {}
-      state.recognition = null;
-    }
+    state.generation++;
+    state.speechToken++;
+    state.speaking = false;
+    detachRecognition();
     stopSpeech();
   }
  
@@ -978,13 +1022,13 @@
     setOpen(opening);
     if (opening) {
       state.sessionActive = Boolean(Recognition);
+      state.generation++;
+      state.failures = 0;
+      state.awaitingField = "";
       state.isGreeting = false;
       setStatus(state.language === "hi-IN" ? "वॉइस असिस्टेंट शुरू हो रहा है…" : "Starting voice assistant…");
 
-      // Invoke recognition and speech synthesis during the same user tap.
-      // This preserves mobile browser user activation for BOTH microphone
-      // permission and the welcome audio.
-      if (Recognition) startListening();
+      // Speak first, then start recognition to avoid capturing the greeting.
       state.isGreeting = true;
       const welcome = state.language === "hi-IN"
         ? "नमस्कार, बताइए आज कौन-सी ट्रिप पर चलें?"
@@ -996,9 +1040,9 @@
             setStatus(state.language === "hi-IN"
               ? "इस ब्राउज़र में ऑटोमैटिक वॉइस सुनना उपलब्ध नहीं है। Chrome में खोलें या WhatsApp पर संपर्क करें।"
               : "Automatic voice recognition is not supported in this browser. Open this page in Chrome or contact us on WhatsApp.");
-            return;
           }
-          if (state.sessionActive) prepareAndStartGuidedEnquiry();
+          prepareAndStartGuidedEnquiry();
+          if (state.sessionActive) scheduleListening(350);
         });
       } catch (_) {
         state.isGreeting = false;
@@ -1012,6 +1056,19 @@
     }
   });
 
+  root.querySelector("#hoeVoiceTextForm").addEventListener("submit", event => {
+    event.preventDefault();
+    const input = root.querySelector("#hoeVoiceText");
+    const value = input.value.trim();
+    if (!value || state.busy) return;
+    state.speechToken++;
+    state.isGreeting = false;
+    state.speaking = false;
+    clearRestartTimer(); detachRecognition(); stopSpeech();
+    if (!state.awaitingField) state.awaitingField = "tripChoice";
+    input.value = "";
+    processEnquiryTurn(value);
+  });
   panelClose.addEventListener("click", () => {
     stopVoiceSession();
     setOpen(false);
@@ -1023,11 +1080,10 @@
       root.querySelectorAll("[data-lang]").forEach(item =>
         item.setAttribute("aria-pressed", String(item === button))
       );
+      state.speechToken++;
       if ("speechSynthesis" in window) stopSpeech();
       if (state.sessionActive) {
-        if (state.recognition) {
-          try { state.recognition.stop(); } catch (_) {}
-        }
+        detachRecognition();
         state.starting = false;
         state.listening = false;
         state.speaking = false;
