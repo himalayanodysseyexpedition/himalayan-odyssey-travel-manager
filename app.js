@@ -1144,6 +1144,7 @@ function render() {
                 <button data-remind="${esc(item.id)}">
                   Payment reminder
                 </button>
+                <button type="button" class="secondary" data-wa-automation="review" data-record-id="${esc(item.id)}">Request Google Review</button>
               `
               : ""
           }
