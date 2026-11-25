@@ -1,0 +1,9 @@
+/* Shared, mobile-only direct WhatsApp enquiry. No JavaScript required. */
+.hoe-floating-whatsapp{display:none}
+@media(max-width:760px){
+  .hoe-floating-whatsapp{box-sizing:border-box;position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:1100;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;max-width:calc(100vw - 28px);padding:12px 17px;border:1px solid rgba(255,255,255,.75);border-radius:999px;background:#111;color:#fff!important;font:700 13px/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-decoration:none!important;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.25);-webkit-tap-highlight-color:transparent}
+  .hoe-floating-whatsapp svg{width:23px;height:23px;flex:0 0 23px;display:block;fill:currentColor}
+  .hoe-floating-whatsapp:focus-visible{outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 6px #111}
+  body:has(> .hoe-floating-whatsapp){padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+}
+@media print{.hoe-floating-whatsapp{display:none!important}}
