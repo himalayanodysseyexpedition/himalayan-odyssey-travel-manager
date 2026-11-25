@@ -41,9 +41,6 @@
 
     track("generate_lead", {
       form_name: "travel_enquiry",
-      destination,
-      travel_month: month,
-      travellers: persons,
       page_path: window.location.pathname
     });
   });
@@ -57,7 +54,7 @@
       window.dataLayer = window.dataLayer || [];
       window.gtag = function(){ window.dataLayer.push(arguments); };
       window.gtag("js", new Date());
-      window.gtag("config", measurementId, { send_page_view: true, page_location: window.location.origin + window.location.pathname });
+      window.gtag("config", measurementId, { send_page_view: true, allow_google_signals: false, allow_ad_personalization_signals: false, page_location: window.location.origin + window.location.pathname });
 
       for (const [name, parameters] of pendingEvents.splice(0)) window.gtag("event", name, parameters);
 
