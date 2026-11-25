@@ -646,3 +646,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 ## 2026-11-26 — Mobile text contrast on the matte-black theme
 - Set dark text on light departure status panels, enquiry forms and itinerary summary, facts and day-number surfaces. Set light text for itinerary destination and pricing details on dark surfaces.
 - Updated the shared mobile stylesheet URL on all linked public pages. Chromium checks at 320px and 390px covered the homepage, destination enquiry and a fixture-backed itinerary. Local static site checks passed.
+
+
+## 2026-11-26 — Mobile admin dashboard theme
+- Scoped presentation-only update in `admin.html`: matte-black page canvas, Bodoni Moda headings, Inter UI typography, light translucent cards, royal-purple tab navigation, subtle prayer-flag header and beveled controls matching the approved mobile public website direction.
+- Retained the original admin logo, all tabs, links, form fields, visibility states, application scripts and authentication/data behavior. Desktop and separate admin routes unchanged; destructive controls retain red styling.
+- Source markup outside the new font link and CSS is unchanged. Live authenticated browser/device verification not performed. Implementation commit `630be8fb43c8cae72353566e2734cef2032328cb`; PR and checks pending at entry time.
