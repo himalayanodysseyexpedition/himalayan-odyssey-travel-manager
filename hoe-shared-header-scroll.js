@@ -1,3 +1,12 @@
+// Load the common desktop-only visual layer on all existing public secondary pages.
+(()=>{
+ if(document.documentElement.dataset.hoeTheme!=='page')return;
+ if(document.querySelector('link[data-hoe-desktop-theme]'))return;
+ const link=document.createElement('link');
+ link.rel='stylesheet';link.href='/hoe-desktop-theme.css?v=1';
+ link.media='(min-width: 761px)';link.dataset.hoeDesktopTheme='true';
+ document.head.appendChild(link);
+})();
 
 // Only page displacement moves the flag strip; the SVG's cloth flutter runs independently.
 (()=>{
@@ -7,7 +16,7 @@
  let frame=0;
  function update(){
   frame=0;
-  if(!mobile.matches||reduce.matches){header.style.removeProperty('--hoe-header-flag-scroll-x');return;}
+  if(reduce.matches){header.style.removeProperty('--hoe-header-flag-scroll-x');return;}
   const root=document.scrollingElement||document.documentElement;
   const y=Math.max(0,Math.min(window.scrollY,Math.max(0,root.scrollHeight-root.clientHeight)));
   const period=header.clientWidth/2;
