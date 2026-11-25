@@ -2793,7 +2793,7 @@ html body #home.hero #heroPromoTrack section.mobile-next-departure > img.hoe-pro
   html body #home.hero#home > img.hero-ken-burns-photo{transform:none!important}
 }
 </style>
-<script src="/mobile-hero-parallax-photos.js?v=2" defer></script>
+<script src="/mobile-hero-parallax-photos.js?v=3" defer></script>
 
 <style id="hoe-mobile-white-glass-home-v1">
 @media screen and (max-width:760px){
@@ -3115,7 +3115,7 @@ html[data-hoe-theme="home"] body nav.mobile-app-dock .dock-icon{color:#fff!impor
 @media(max-width:760px) and (prefers-reduced-motion:reduce){html[data-hoe-theme="home"] body > header::after{background-image:url("/tibetan-header-flags-static.svg?v=1")!important;background-position:0 0!important;animation:none!important}html[data-hoe-theme="home"] body nav.mobile-app-dock{background-position:50% 50%!important}}
 </style>
 <script id="hoe-mobile-dock-scroll-flow">
-(()=>{const mobile=matchMedia('(max-width:760px)'),reduce=matchMedia('(prefers-reduced-motion:reduce)');let frame=0,last=0,dock=null,scrollPhase=0;function tick(now){frame=0;if(!mobile.matches||reduce.matches||document.hidden)return;if(now-last>=32){last=now;if(!dock||!dock.isConnected)dock=document.querySelector('nav.mobile-app-dock');const target=Math.max(0,window.scrollY)/280;scrollPhase+=(target-scrollPhase)*.12;const phase=50-50*Math.cos(now/1700+scrollPhase);if(dock)dock.style.setProperty('--hoe-dock-flow',phase.toFixed(2)+'%')}frame=requestAnimationFrame(tick)}function sync(){if(frame){cancelAnimationFrame(frame);frame=0}if(mobile.matches&&!reduce.matches&&!document.hidden)frame=requestAnimationFrame(tick);else if(dock)dock.style.removeProperty('--hoe-dock-flow')}mobile.addEventListener('change',sync);reduce.addEventListener('change',sync);document.addEventListener('visibilitychange',sync);sync()})();
+(()=>{const mobile=matchMedia('(max-width:760px)'),reduce=matchMedia('(prefers-reduced-motion:reduce)');let frame=0,last=0,dock=null,scrollPhase=0;function tick(now){frame=0;if(reduce.matches||document.hidden)return;if(now-last>=32){last=now;if(!dock||!dock.isConnected)dock=document.querySelector('nav.mobile-app-dock,nav.desktop-app-dock');const target=Math.max(0,window.scrollY)/280;scrollPhase+=(target-scrollPhase)*.12;const phase=50-50*Math.cos(now/1700+scrollPhase);if(dock)dock.style.setProperty('--hoe-dock-flow',phase.toFixed(2)+'%')}frame=requestAnimationFrame(tick)}function sync(){if(frame){cancelAnimationFrame(frame);frame=0}if(!reduce.matches&&!document.hidden)frame=requestAnimationFrame(tick);else if(dock)dock.style.removeProperty('--hoe-dock-flow')}mobile.addEventListener('change',sync);reduce.addEventListener('change',sync);document.addEventListener('visibilitychange',sync);sync()})();
 </script>
 
 <script id="hoe-mobile-header-scroll-direction-flags">
@@ -3127,7 +3127,7 @@ html[data-hoe-theme="home"] body nav.mobile-app-dock .dock-icon{color:#fff!impor
  let frame=0;
  function update(){
   frame=0;
-  if(!mobile.matches||reduce.matches){header.style.removeProperty('--hoe-header-flag-scroll-x');return;}
+  if(reduce.matches){header.style.removeProperty('--hoe-header-flag-scroll-x');return;}
   const root=document.scrollingElement||document.documentElement;
   const y=Math.max(0,Math.min(window.scrollY,Math.max(0,root.scrollHeight-root.clientHeight)));
   const period=header.clientWidth/2;
@@ -3329,7 +3329,6 @@ html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cin
     return [];
   };
   function refresh(){
-    if(!mobile.matches)return;
     const records=Array.isArray(window.heroPromoRecords)?window.heroPromoRecords:[];
     for(const card of track.querySelectorAll(".mobile-next-departure")){
       card.classList.add("hoe-cinematic-ticket");
@@ -3348,3 +3347,627 @@ html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cin
   if(mobile.addEventListener)mobile.addEventListener("change",refresh);
 })();
 </script>
+
+<link rel="stylesheet" href="/hoe-desktop-theme.css?v=1" media="(min-width: 761px)">
+<style id="hoe-desktop-home-theme-parity">
+@media screen and (min-width:761px){
+html body #home.hero#home{
+  display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;
+  position:relative!important;isolation:isolate!important;min-height:0!important;height:auto!important;max-height:none!important;margin:0!important;
+  padding:25px 16px 25px!important;overflow:hidden!important;background:#07121f!important;
+  background-image:none!important;box-sizing:border-box!important;transform:none!important;
+}
+html body #home.hero#home > img.hero-ken-burns-photo{
+  position:absolute!important;inset:0!important;display:block!important;visibility:visible!important;opacity:1!important;
+  width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;
+  object-fit:cover!important;object-position:50% 45%!important;z-index:0!important;
+  transform-origin:center center!important;animation:hoeReferenceMountainDrift 25s ease-in-out infinite alternate!important;pointer-events:none!important;
+}
+html body #home.hero#home::before{content:""!important;display:block!important;position:absolute!important;inset:0!important;z-index:1!important;opacity:1!important;background:linear-gradient(180deg,rgba(4,19,44,.75) 0%,rgba(8,30,59,.23) 31%,rgba(6,17,31,.08) 48%,rgba(4,12,23,.79) 75%,#050b13 100%)!important;pointer-events:none!important;transform:none!important}
+html body #home.hero#home::after{display:none!important}
+html body #home.hero#home > .hero-content{
+  display:flex!important;flex-direction:column!important;justify-content:flex-start!important;align-items:stretch!important;
+  position:relative!important;z-index:3!important;top:0!important;left:auto!important;right:auto!important;bottom:auto!important;
+  width:100%!important;max-width:520px!important;min-height:0!important;height:auto!important;max-height:none!important;flex-shrink:0!important;gap:0!important;
+  margin:0 auto!important;padding:0!important;transform:none!important;animation:none!important;opacity:1!important;visibility:visible!important;text-align:center!important;overflow:visible!important;
+}
+html body #home.hero#home .hero-content > h1.hero-animated-heading,
+html body #home.hero#home .hero-content > .mobile-tibetan-flag-line,
+html body #home.hero#home > .hero-bottom-motion{display:none!important}
+html body #home.hero#home > .hero-weather-motion{z-index:2!important;opacity:.36!important;pointer-events:none!important}
+html body #home.hero#home .hero-content > .hoe-reference-intro{display:block!important;order:0!important;margin:0!important;padding:0!important;color:#fff!important}
+html body #home.hero#home .hoe-reference-eyebrow{font:700 clamp(9px,2.5vw,11px)/1.4 Inter,Arial,sans-serif!important;letter-spacing:.18em!important;margin:0 0 12px!important;color:#f4f1fa!important;text-align:center!important}
+html body #home.hero#home .hoe-reference-title{font:500 clamp(40px,11.5vw,68px)/.99 "Bodoni Moda",Georgia,serif!important;letter-spacing:-.038em!important;color:#fff!important;text-shadow:0 2px 18px #06142780!important;margin:0!important;padding:0!important;text-align:center!important}
+html body #home.hero#home .hoe-reference-destinations{font:500 clamp(11px,3.1vw,15px)/1.45 Inter,Arial,sans-serif!important;color:#fff!important;margin:16px 0 0!important;text-align:center!important}
+html body #home.hero#home .hoe-reference-destinations span{opacity:.65;margin:0 4px}
+html body #home.hero#home .hero-content > .hoe-reference-services{
+  display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:9px!important;order:1!important;
+  margin:clamp(78px,25vw,132px) 0 15px!important;padding:0!important;width:100%!important;
+}
+html body #home.hero#home .hoe-reference-services a{
+  min-width:0!important;min-height:88px!important;display:flex!important;align-items:center!important;justify-content:center!important;flex-direction:column!important;gap:7px!important;
+  padding:10px 4px!important;border:1px solid #ffffff30!important;border-radius:15px!important;
+  background:linear-gradient(145deg,rgba(42,59,80,.63),rgba(7,17,31,.85))!important;
+  box-shadow:inset 0 1px 0 #ffffff1e,0 5px 16px #0004!important;
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:white!important;text-decoration:none!important;
+  font:650 clamp(11px,3.1vw,15px)/1.23 Inter,Arial,sans-serif!important;text-align:center!important;
+}
+html body #home.hero#home .hoe-reference-services svg{display:block!important;width:26px!important;height:26px!important;color:#fff!important;flex:none!important}
+html body #home.hero#home .hero-content > #heroPromoCarousel.hero-promo-carousel{order:2!important;display:block!important;position:relative!important;top:auto!important;transform:none!important;width:100%!important;max-width:none!important;min-width:0!important;margin:0!important;padding:0!important;overflow:visible!important;height:auto!important;max-height:none!important;flex-shrink:0!important}
+html body #home.hero#home #heroPromoTrack.hero-promo-track{display:flex!important;flex-flow:row nowrap!important;align-items:stretch!important;gap:10px!important;width:100%!important;min-width:0!important;max-width:none!important;height:auto!important;margin:0!important;padding:12px 5px 14px!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x mandatory!important;scroll-padding-inline:5px!important;scrollbar-width:none!important;touch-action:pan-x pan-y!important;box-sizing:border-box!important;position:relative!important}
+html body #home.hero#home #heroPromoTrack::-webkit-scrollbar{display:none!important}
+html body #home.hero#home #heroPromoTrack > .hero-promo-slide{display:block!important;position:relative!important;flex:0 0 100%!important;width:100%!important;min-width:100%!important;max-width:100%!important;height:auto!important;min-height:0!important;scroll-snap-align:start!important;margin:0!important;padding:0!important;overflow:visible!important}
+html body #home.hero#home #heroPromoTrack > .hero-promo-slide::before{display:none!important;content:none!important}
+html body #home.hero#home #heroPromoTrack .hero-promo-slide > section.mobile-next-departure{
+  display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-template-rows:auto auto auto auto auto auto auto!important;align-items:center!important;align-content:start!important;gap:6px 9px!important;position:relative!important;isolation:isolate!important;
+  top:0!important;width:100%!important;max-width:none!important;min-width:0!important;height:auto!important;min-height:0!important;margin:0!important;padding:12px!important;box-sizing:border-box!important;
+  background:linear-gradient(135deg,#23324be8,#07101def 75%)!important;border:1px solid #bd83ff!important;border-radius:19px!important;
+  box-shadow:0 0 14px 2px #9855ed80,inset 0 0 8px #b983ff35!important;color:#fff!important;text-align:left!important;animation:none!important;transform:none!important;overflow:hidden!important;
+}
+html body #home.hero#home #heroPromoTrack .hero-promo-slide > section.mobile-next-departure::before{
+  content:""!important;display:block!important;position:relative!important;inset:auto!important;grid-column:1!important;grid-row:1/7!important;align-self:stretch!important;width:100%!important;height:auto!important;min-height:124px!important;max-height:none!important;
+  border-radius:10px!important;background:url("/spiti.jpg") center/cover no-repeat!important;opacity:1!important;filter:none!important;transform:none!important;z-index:0!important;pointer-events:none!important;
+}
+html body #home.hero#home #heroPromoTrack .hero-promo-slide > section.mobile-next-departure.mobile-departure-secondary::before{background-image:url("/kinnaur.jpg")!important}
+html body #home.hero#home #heroPromoTrack .hero-promo-slide > section.mobile-next-departure::after{display:none!important;content:none!important}
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-topline,
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-kicker{display:none!important}
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > h2{
+  grid-column:2/5!important;grid-row:1!important;display:block!important;width:100%!important;max-width:none!important;
+  font:750 clamp(17px,4.8vw,25px)/1.12 Inter,Arial,sans-serif!important;letter-spacing:-.025em!important;color:#fff!important;-webkit-text-fill-color:#fff!important;text-align:left!important;
+  margin:0!important;padding:0!important;background:none!important;text-shadow:none!important;animation:none!important;transform:none!important;opacity:1!important;
+}
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > h2 em{font:inherit!important;color:inherit!important;-webkit-text-fill-color:#fff!important;font-style:normal!important}
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > h2 br{display:initial!important}
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-date{
+  grid-column:2/5!important;grid-row:2!important;display:block!important;width:auto!important;max-width:100%!important;min-height:0!important;margin:3px 0 0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;
+  font:650 clamp(10px,2.85vw,13px)/1.35 Inter,Arial,sans-serif!important;letter-spacing:0!important;color:#fff!important;-webkit-text-fill-color:#fff!important;text-shadow:none!important;text-align:left!important;white-space:normal!important;
+}
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-date span{padding:0!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-seats{grid-column:2/5!important;grid-row:3!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:2px!important;margin:0!important;padding:0!important;width:100%!important;text-align:left!important}
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-seats strong,
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-seats span{color:#fff!important;-webkit-text-fill-color:#fff!important;font:650 11px/1.25 Inter,Arial,sans-serif!important;margin:0!important;padding:0!important;background:none!important}
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-track{grid-column:2/5!important;grid-row:4!important;display:block!important;position:relative!important;height:7px!important;min-height:7px!important;width:100%!important;margin:0!important;padding:0!important;border-radius:99px!important;background:#ffffff30!important;border:0!important;overflow:hidden!important}
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-track > span{display:block!important;height:100%!important;border-radius:99px!important;background:#a879f5!important;animation:none!important;box-shadow:none!important}
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-facts{grid-column:2/5!important;grid-row:5!important;display:flex!important;flex-wrap:wrap!important;gap:3px 7px!important;margin:0!important;padding:0!important;width:100%!important;text-align:left!important}
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-facts span{font:500 10px/1.2 Inter,Arial,sans-serif!important;color:#e8e8f0!important;-webkit-text-fill-color:#e8e8f0!important;padding:0!important;margin:0!important;background:none!important;border:0!important;box-shadow:none!important}
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-price{grid-column:2/5!important;grid-row:6!important;color:#fff!important;-webkit-text-fill-color:#fff!important;font:750 14px/1.2 Inter,Arial,sans-serif!important;margin:0!important;padding:0!important;background:none!important;text-align:left!important}
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-price small{font:500 10px/1.2 Inter,Arial,sans-serif!important;color:#ddd!important;-webkit-text-fill-color:#ddd!important}
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > a.mobile-departure-cta,
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > details.mobile-departure-itinerary-details > summary.mobile-departure-cta{
+  display:flex!important;align-items:center!important;justify-content:center!important;gap:4px!important;min-height:36px!important;width:100%!important;max-width:100%!important;
+  margin:0!important;padding:7px 4px!important;border:1px solid #fff!important;border-radius:8px!important;background:#fff!important;color:#0a0a0a!important;-webkit-text-fill-color:#0a0a0a!important;
+  font:800 clamp(9px,2.6vw,12px)/1.2 Inter,Arial,sans-serif!important;letter-spacing:0!important;text-align:center!important;white-space:normal!important;box-shadow:none!important;transform:none!important;box-sizing:border-box!important;text-decoration:none!important
+}
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > a.mobile-departure-cta{grid-row:7!important;grid-column:3/5!important}
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > a.mobile-departure-itinerary,
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > details.mobile-departure-itinerary-details{grid-row:7!important;grid-column:1/3!important;margin:0!important;width:100%!important;min-width:0!important;padding:0!important}
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > details.mobile-departure-itinerary-details[open]{grid-row:8!important;grid-column:1/5!important}
+html body #home.hero#home #heroPromoCarousel .hero-promo-pagination{display:flex!important;justify-content:center!important;align-items:center!important;gap:6px!important;margin:0!important;padding:0!important;width:100%!important}
+html body #home.hero#home #heroPromoCarousel .hero-promo-pagination button{display:grid!important;place-items:center!important;position:relative!important;width:26px!important;height:26px!important;min-width:26px!important;min-height:26px!important;margin:0!important;padding:0!important;border:0!important;border-radius:50%!important;background:transparent!important;box-shadow:none!important}
+html body #home.hero#home #heroPromoCarousel .hero-promo-pagination button::after{content:""!important;display:block!important;width:8px!important;height:8px!important;box-sizing:border-box!important;border:1px solid #fff!important;border-radius:50%!important;background:transparent!important}
+html body #home.hero#home #heroPromoCarousel .hero-promo-pagination button.is-active::after{background:#fff!important}
+html body #home.hero#home .hero-content > .hero-destination-list{order:3!important;position:relative!important;top:0!important;left:0!important;align-self:stretch!important;flex:none!important;width:100%!important;max-width:none!important;margin:4px 0 0!important;padding:5px 0!important;background:transparent!important;transform:none!important;box-shadow:none!important;border:0!important}
+html body #home.hero#home .hero-content .hero-destination-track span,
+html body #home.hero#home .hero-content .hero-destination-track i{font-size:11px!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
+}
+
+@media screen and (min-width:761px){
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-date::before,
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-seats strong::before{
+  content:"";display:inline-block;width:13px;height:13px;margin-right:5px;vertical-align:-2px;background-repeat:no-repeat;background-position:center;background-size:contain;
+}
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-date::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round'%3E%3Crect x='3' y='5' width='18' height='16' rx='2'/%3E%3Cpath d='M7 3v4m10-4v4M3 10h18'/%3E%3C/svg%3E")}
+html body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-seats strong::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='9' cy='8' r='3'/%3E%3Cpath d='M3 20v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 3a5 5 0 0 1 3 5'/%3E%3C/svg%3E")}
+}
+@keyframes hoeReferenceMountainDrift{from{transform:scale(1.02) translate3d(0,0,0)}to{transform:scale(1.09) translate3d(0,-1%,0)}}
+@media screen and (min-width:761px) and (prefers-reduced-motion:reduce){html body #home.hero#home > img.hero-ken-burns-photo{animation:none!important;transform:none!important}}
+
+
+
+/* Repair mobile image layers without changing desktop styling or promotion records. */
+html body #home.hero #heroPromoTrack section.mobile-next-departure > img.hoe-promo-thumb{display:none!important}
+@media screen and (min-width:761px){
+  html body #home.hero#home > img.hero-ken-burns-photo{
+    display:block!important;visibility:visible!important;opacity:1!important;position:absolute!important;
+    inset:-22px 0 auto!important;width:100%!important;height:calc(66% + 44px)!important;
+    max-width:none!important;max-height:none!important;object-fit:cover!important;object-position:center 8%!important;
+    z-index:0!important;filter:none!important;animation:none!important;
+    transform:translate3d(0,var(--hoe-hero-offset,0px),0) scale(1.12)!important;transform-origin:center top!important;
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 72%,transparent 100%)!important;
+    mask-image:linear-gradient(to bottom,#000 0%,#000 72%,transparent 100%)!important;pointer-events:none!important;
+  }
+  html body #home.hero#home{background:#07121f!important;background-image:none!important}
+  html body #home.hero#home::before{background:linear-gradient(180deg,rgba(5,17,36,.82) 0%,rgba(7,22,44,.45) 20%,rgba(7,18,35,.06) 42%,rgba(5,13,24,.16) 55%,#07121f 82%,#07121f 100%)!important}
+  html body #home.hero#home #heroPromoTrack .hero-promo-slide > section.mobile-next-departure::before,
+  html body #home.hero#home #heroPromoTrack .hero-promo-slide > section.mobile-next-departure::after{content:none!important;display:none!important;background:none!important;border:0!important}
+  html body #home.hero#home #heroPromoTrack .hero-promo-slide > section.mobile-next-departure > img.hoe-promo-thumb{
+    display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;
+    inset:auto!important;grid-column:1!important;grid-row:1/7!important;align-self:stretch!important;justify-self:stretch!important;
+    width:100%!important;min-width:0!important;max-width:100%!important;height:100%!important;min-height:124px!important;max-height:none!important;
+    object-fit:cover!important;object-position:center 55%!important;border-radius:10px!important;
+    margin:0!important;padding:0!important;border:0!important;box-shadow:none!important;filter:none!important;animation:none!important;transform:none!important;z-index:1!important;pointer-events:none!important;
+  }
+}
+@media screen and (min-width:761px) and (prefers-reduced-motion:reduce){
+  html body #home.hero#home > img.hero-ken-burns-photo{transform:none!important}
+}
+
+
+@media screen and (min-width:761px){
+html[data-hoe-theme="home"]{
+ --hoe-home-card:rgba(255,255,255,.87);--hoe-home-ink:#171717;--hoe-home-copy:#444;--hoe-home-label:#543486;
+}
+
+html[data-hoe-theme="home"] body :is(#packages,#cabs,#gallery,#itineraries,#upcoming-packages,#travel-journal,#odyssey-difference-mobile,#instagram,.journey-strip) :is(.package-slide,.cab-card,.hotel-card,.itinerary-slide,.group-departure-card,.card,.odyssey-place-card,.odyssey-experience-card,.instagram-content,.journey-item),
+html[data-hoe-theme="home"] body section#packages #packageList > article.package-slide:is(:hover,:focus-within,:active),
+html[data-hoe-theme="home"] body section#upcoming-packages #groupDeparturesCarousel > article.group-departure-card,
+html[data-hoe-theme="home"] body #cabs #cabList .cab-card{
+ background:var(--hoe-home-card)!important;background-image:none!important;color:var(--hoe-home-ink)!important;
+ border:1px solid #ffffff70!important;border-radius:18px!important;box-shadow:0 6px 20px #0003!important;
+}
+html[data-hoe-theme="home"] body :is(#packages,#cabs,#gallery,#itineraries,#upcoming-packages,#travel-journal) :is(.package-slide,.cab-card,.hotel-card,.itinerary-slide,.card) .card-body,
+html[data-hoe-theme="home"] body #cabs #cabList .cab-card .card-body,
+html[data-hoe-theme="home"] body #upcoming-packages .group-departure-card .group-departure-body{
+ background:transparent!important;background-image:none!important;color:var(--hoe-home-ink)!important;
+}
+html[data-hoe-theme="home"] body :is(#packages,#cabs,#gallery,#itineraries,#upcoming-packages,#travel-journal,#odyssey-difference-mobile,#instagram,.journey-strip) :is(.card-body,.group-departure-body,.odyssey-place-card,.odyssey-experience-card,.instagram-content,.journey-item) :is(h3,h4,strong,b,.price,.instagram-logo){
+ color:var(--hoe-home-ink)!important;-webkit-text-fill-color:var(--hoe-home-ink)!important;
+}
+html[data-hoe-theme="home"] body :is(#packages,#cabs,#itineraries) :is(#packageList,#cabList,#itineraryList) :is(.package-slide,.cab-card,.itinerary-slide) .card-body :is(h3,.price,p strong,p b),
+html[data-hoe-theme="home"] body #upcoming-packages .group-departure-card .group-departure-body :is(h3,.group-departure-meta strong,.group-occupancy-label strong),
+html[data-hoe-theme="home"] body #instagram .instagram-content .instagram-logo{
+ color:var(--hoe-home-ink)!important;-webkit-text-fill-color:var(--hoe-home-ink)!important;
+}
+html[data-hoe-theme="home"] body :is(#packages,#cabs,#gallery,#itineraries,#upcoming-packages,#travel-journal,#odyssey-difference-mobile,#instagram,.journey-strip) :is(.card-body,.group-departure-body,.odyssey-place-card,.odyssey-experience-card,.instagram-content,.journey-item) :is(p,li,small,.itinerary-meta,.cab-details,.hotel-location,.hotel-facilities,.group-departure-date,.group-departure-meta span,.group-occupancy-label span,.group-departure-highlights),
+html[data-hoe-theme="home"] body :is(#packages,#cabs,#itineraries) :is(#packageList,#cabList,#itineraryList) :is(.package-slide,.cab-card,.itinerary-slide) .card-body :is(p,.cab-details,.itinerary-meta),
+html[data-hoe-theme="home"] body .journey-strip .journey-item span{
+ color:var(--hoe-home-copy)!important;-webkit-text-fill-color:var(--hoe-home-copy)!important;
+}
+html[data-hoe-theme="home"] body #cabs #cabList .cab-card .card-body .cab-details{background:#ffffff70!important;border-color:#0002!important}
+html[data-hoe-theme="home"] body #upcoming-packages .group-departure-card .group-departure-body small,
+html[data-hoe-theme="home"] body #odyssey-difference-mobile .odyssey-place-card > span,
+html[data-hoe-theme="home"] body #odyssey-difference-mobile .odyssey-experience-card .odyssey-kicker,
+html[data-hoe-theme="home"] body #travel-journal .card .card-body .itinerary-meta{
+ color:var(--hoe-home-label)!important;-webkit-text-fill-color:var(--hoe-home-label)!important;
+}
+html[data-hoe-theme="home"] body :is(#packages,#cabs,#gallery,#itineraries,#upcoming-packages,#travel-journal,#odyssey-difference-mobile,#instagram) :is(.card-body,.group-departure-body,.odyssey-place-card,.odyssey-experience-card,.instagram-content) :is(.btn,.group-departure-cta,.instagram-btn),
+html[data-hoe-theme="home"] body #gallery #galleryList .hotel-card .card-body :is(a.btn,button.btn),
+html[data-hoe-theme="home"] body #packages #packageList .package-slide .package-card-actions > a.btn,
+html[data-hoe-theme="home"] body #cabs #cabList .cab-card .card-body > a.btn{
+ background:#171717!important;background-image:none!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+ border:1px solid #171717!important;border-radius:9px!important;box-shadow:none!important;
+}
+html[data-hoe-theme="home"] body #upcoming-packages .group-departure-card .group-occupancy-track{background:#0002!important}
+html[data-hoe-theme="home"] body #upcoming-packages .group-departure-card .group-occupancy-track > span{background:#7040bb!important}
+html[data-hoe-theme="home"] body #odyssey-difference-mobile .odyssey-experience-card .odyssey-experience-mark{color:#543486!important;-webkit-text-fill-color:#543486!important}
+/* Hero cards: light translucent panels, preserving photos, carousel and purple border. */
+html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-services a{
+ background:rgba(255,255,255,.82)!important;background-image:none!important;color:#171717!important;-webkit-text-fill-color:#171717!important;border-color:#ffffff80!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-services a :is(span,svg){color:#171717!important;-webkit-text-fill-color:#171717!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack .hero-promo-slide > section.mobile-next-departure{
+ background:var(--hoe-home-card)!important;background-image:none!important;color:#171717!important;
+ border:1px solid #bd83ff!important;box-shadow:0 0 12px #9855ed66!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > h2,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > h2 em,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-price,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-seats strong{
+ color:#171717!important;-webkit-text-fill-color:#171717!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-date,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-date span,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-seats span,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-price small,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-facts span{
+ color:#444!important;-webkit-text-fill-color:#444!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-track{background:#0002!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-track > span{background:#7040bb!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > a.mobile-departure-cta,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > details.mobile-departure-itinerary-details > summary.mobile-departure-cta{
+ background:#171717!important;color:#fff!important;-webkit-text-fill-color:#fff!important;border-color:#171717!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure .mobile-departure-cta span{color:inherit!important;-webkit-text-fill-color:inherit!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure .mobile-departure-itinerary-list{background:#ffffff70!important;color:#171717!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure .mobile-departure-itinerary-list :is(p,strong){color:#171717!important;-webkit-text-fill-color:#171717!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-date::before,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > .mobile-departure-seats strong::before{filter:invert(1)}
+/* Compact existing lead form: all six fields, consent and submission behavior remain. */
+html[data-hoe-theme="home"] body #contact.cta{padding:26px 16px!important}
+html[data-hoe-theme="home"] body #contact.cta > h2{margin:8px 0!important}
+html[data-hoe-theme="home"] body #contact.cta > p{margin:6px 0 14px!important}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-section{margin:12px auto 16px!important;width:100%!important;max-width:480px!important}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-card{
+ display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:10px!important;padding:14px!important;
+ background:var(--hoe-home-card)!important;color:#171717!important;border:1px solid #ffffff70!important;border-radius:16px!important;box-shadow:none!important;text-align:left!important;
+}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-copy{margin:0!important;padding:0!important}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-copy .hoe-lead-eyebrow{color:#543486!important;-webkit-text-fill-color:#543486!important;font:700 9px/1.3 Inter,Arial,sans-serif!important;letter-spacing:.08em!important}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-copy h2{color:#171717!important;-webkit-text-fill-color:#171717!important;font:700 17px/1.25 Inter,Arial,sans-serif!important;margin:5px 0!important}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-copy p{color:#444!important;-webkit-text-fill-color:#444!important;font:400 12px/1.45 Inter,Arial,sans-serif!important;margin:0!important}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-form label{margin:0!important;min-width:0!important;color:#222!important;font:650 11px/1.35 Inter,Arial,sans-serif!important}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-form :is(input:not([type=checkbox]),select){
+ box-sizing:border-box!important;width:100%!important;min-width:0!important;min-height:44px!important;height:44px!important;margin:4px 0 0!important;padding:7px 8px!important;
+ background:#fff!important;color:#171717!important;border:1px solid #0003!important;border-radius:8px!important;font:400 16px/1.2 Inter,Arial,sans-serif!important;color-scheme:light;
+}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-form input::placeholder{color:#666!important;opacity:1}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-optional{color:#555!important;font-size:10px!important}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-form .hoe-lead-consent{margin:10px 0!important;align-items:flex-start!important;gap:7px!important;font-weight:400!important}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-submit{min-height:44px!important;padding:8px!important;background:#171717!important;color:#fff!important;border-radius:8px!important;font:700 12px/1.3 Inter,Arial,sans-serif!important}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-status{color:#444!important;-webkit-text-fill-color:#444!important;font:400 11px/1.4 Inter,Arial,sans-serif!important;margin:6px 0 0!important}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-status[data-state="error"]{color:#8b2424!important;-webkit-text-fill-color:#8b2424!important}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-status[data-state="success"]{color:#235b35!important;-webkit-text-fill-color:#235b35!important}
+html[data-hoe-theme="home"] body #contact.cta > a.btn{margin:4px!important;padding:9px 12px!important;min-height:44px!important}
+@media(max-width:340px){html[data-hoe-theme="home"] body #contact.cta .hoe-lead-grid{grid-template-columns:1fr!important}}
+/* Journal: tighter vertical rhythm, no removed guide text or links. */
+html[data-hoe-theme="home"] body section#travel-journal{padding:26px 16px!important}
+html[data-hoe-theme="home"] body #travel-journal .section-title{margin-bottom:10px!important}
+html[data-hoe-theme="home"] body #travel-journal .intro{margin:0 0 14px!important}
+html[data-hoe-theme="home"] body #travel-journal .cards{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:8px!important}
+html[data-hoe-theme="home"] body #travel-journal .cards > .card{width:100%!important;min-height:0!important;height:auto!important;margin:0!important;padding:0!important;border-radius:12px!important;overflow:hidden!important}
+html[data-hoe-theme="home"] body #travel-journal .card .card-body{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;gap:4px 8px!important;padding:12px!important;min-height:0!important}
+html[data-hoe-theme="home"] body #travel-journal .card .card-body .itinerary-meta{grid-column:1/-1!important;font:700 9px/1.3 Inter,Arial,sans-serif!important;margin:0!important;letter-spacing:.07em!important}
+html[data-hoe-theme="home"] body #travel-journal .card .card-body h3{grid-column:1/-1!important;font:700 15px/1.3 Inter,Arial,sans-serif!important;margin:0!important}
+html[data-hoe-theme="home"] body #travel-journal .card .card-body p:not(.itinerary-meta){grid-column:1!important;font:400 12px/1.45 Inter,Arial,sans-serif!important;margin:0!important}
+html[data-hoe-theme="home"] body #travel-journal .card .card-body a.btn{grid-column:2!important;align-self:center!important;min-height:44px!important;width:auto!important;white-space:nowrap!important;margin:0!important;padding:8px 10px!important;font:700 11px/1.2 Inter,Arial,sans-serif!important}
+html[data-hoe-theme="home"] body #travel-journal .section-inner > p:last-child{margin:14px 0 0!important}
+}
+
+
+@media screen and (min-width:761px){
+/* Hide the photography slideshow hint on mobile without affecting its controls. */
+html[data-hoe-theme="home"] body #featured-travel-photography .featured-travel-hint{display:none!important}
+/* Only the page canvas and section wrappers. Do not recolor any card, image, form field or button. */
+html[data-hoe-theme="home"],
+html[data-hoe-theme="home"] body,
+html[data-hoe-theme="home"] body > main,
+html[data-hoe-theme="home"] body > header,
+html[data-hoe-theme="home"] body > .journey-strip,
+html[data-hoe-theme="home"] body > :is(section#featured-travel-photography,section#upcoming-packages,section#journey-story,section#packages,section#itineraries,section#odyssey-difference-mobile,section#cabs,section#gallery,section#more-than-tours,section#instagram,section#travel-journal,section#plan-your-trip,section#reviews,section.content,div#contact.cta){
+ background:#0b0b0b!important;background-color:#0b0b0b!important;background-image:none!important;color:#f5f5f5!important;
+}
+html[data-hoe-theme="home"] body > :is(section#featured-travel-photography,section#upcoming-packages,section#journey-story,section#packages,section#itineraries,section#odyssey-difference-mobile,section#cabs,section#gallery,section#more-than-tours,section#instagram,section#travel-journal,section#plan-your-trip,section#reviews,section.content) > :is(.section-inner,.featured-travel-inner,.odyssey-difference-inner,.htp-inner),
+html[data-hoe-theme="home"] body > section#upcoming-packages > .section-inner > :is(.group-departures-head,.group-departures-rail),
+html[data-hoe-theme="home"] body > section#featured-travel-photography > .featured-travel-inner > .featured-travel-heading,
+html[data-hoe-theme="home"] body > :is(section#packages,section#cabs,section#gallery,section#travel-journal) > .section-inner > :is(.cards,.packages-carousel,.cabs-carousel),
+html[data-hoe-theme="home"] body > section#odyssey-difference-mobile > .odyssey-difference-inner > :is(.odyssey-place-grid,.odyssey-experiences),
+html[data-hoe-theme="home"] body > :is(section#upcoming-packages,section#journey-story,section#packages,section#itineraries,section#odyssey-difference-mobile,section#cabs,section#gallery,section#instagram,section#travel-journal) :is(.section-title,.odyssey-difference-title){
+ background:transparent!important;background-color:transparent!important;background-image:none!important;color:#f5f5f5!important;box-shadow:none!important;
+}
+html[data-hoe-theme="home"] body > :is(section#featured-travel-photography,section#upcoming-packages,section#journey-story,section#packages,section#itineraries,section#odyssey-difference-mobile,section#cabs,section#gallery,section#instagram,section#travel-journal,section#plan-your-trip,section#reviews)::before,
+html[data-hoe-theme="home"] body > :is(section#featured-travel-photography,section#upcoming-packages,section#journey-story,section#packages,section#itineraries,section#odyssey-difference-mobile,section#cabs,section#gallery,section#instagram,section#travel-journal,section#plan-your-trip,section#reviews)::after{
+ background:none!important;background-image:none!important;box-shadow:none!important;
+}
+html[data-hoe-theme="home"] body > :is(section#upcoming-packages,section#journey-story,section#packages,section#itineraries,section#odyssey-difference-mobile,section#cabs,section#gallery,section#instagram,section#travel-journal,section#featured-travel-photography) :is(.section-title h2,.odyssey-difference-title h2,.featured-travel-heading h2){
+ color:#f5f5f5!important;-webkit-text-fill-color:#f5f5f5!important;
+}
+html[data-hoe-theme="home"] body > :is(section#upcoming-packages,section#journey-story,section#packages,section#itineraries,section#odyssey-difference-mobile,section#cabs,section#gallery,section#instagram,section#travel-journal,section#featured-travel-photography) :is(.section-title small,.featured-travel-heading small){
+ color:#d9baff!important;-webkit-text-fill-color:#d9baff!important;
+}
+html[data-hoe-theme="home"] body > :is(section#upcoming-packages,section#journey-story,section#packages,section#itineraries,section#odyssey-difference-mobile,section#cabs,section#gallery,section#instagram,section#travel-journal,section#featured-travel-photography) :is(p.intro,.featured-travel-heading p,.guides-swipe-hint,.featured-travel-hint,.guides-count,#groupDeparturesCount,#packageMessage){
+ color:#c7c7c7!important;-webkit-text-fill-color:#c7c7c7!important;
+}
+/* Loading and unavailable messages use light panels over the matte canvas. */
+html[data-hoe-theme="home"] body #upcoming-packages #groupDeparturesCarousel .group-departures-empty,
+html[data-hoe-theme="home"] body :is(#packages,#itineraries,#cabs,#gallery) :is(.cab-empty,.hotel-empty),
+html[data-hoe-theme="home"] body :is(#packages,#itineraries,#cabs,#gallery) :is(.cab-empty,.hotel-empty) h3{
+ color:var(--hoe-home-ink)!important;-webkit-text-fill-color:var(--hoe-home-ink)!important;
+}
+html[data-hoe-theme="home"] body :is(#packages,#itineraries,#cabs,#gallery) :is(.cab-empty,.hotel-empty) p{
+ color:var(--hoe-home-copy)!important;-webkit-text-fill-color:var(--hoe-home-copy)!important;
+}
+html[data-hoe-theme="home"] body > #home.hero#home{background:#0b0b0b!important;background-color:#0b0b0b!important;background-image:none!important}
+html[data-hoe-theme="home"] body > #home.hero#home::before{background:linear-gradient(180deg,rgba(8,8,8,.82) 0%,rgba(12,12,12,.45) 20%,rgba(12,12,12,.06) 42%,rgba(8,8,8,.16) 55%,#0b0b0b 82%,#0b0b0b 100%)!important}
+html[data-hoe-theme="home"] body > .journey-strip{border-color:transparent!important;box-shadow:none!important}
+}
+
+
+@media screen and (min-width:761px){
+html[data-hoe-theme="home"]{
+ --hoe-home-card:rgba(255,255,255,.87);
+ --hoe-home-ink:#171717;--hoe-home-copy:#444;--hoe-home-label:#444;
+ --hoe-card-button:#171717;--hoe-card-radius:18px;
+}
+/* The existing Hotels & Properties panel is the reference. Restrict to content cards. */
+html[data-hoe-theme="home"] body :is(#packages,#cabs,#gallery,#itineraries,#upcoming-packages,#travel-journal,#odyssey-difference-mobile,#instagram,.journey-strip) :is(.package-slide,.cab-card,.hotel-card,.itinerary-slide,.group-departure-card,.card,.odyssey-place-card,.odyssey-experience-card,.instagram-content,.journey-item),
+html[data-hoe-theme="home"] body section#packages #packageList > article.package-slide,
+html[data-hoe-theme="home"] body section#upcoming-packages #groupDeparturesCarousel > article.group-departure-card,
+html[data-hoe-theme="home"] body #cabs #cabList .cab-card,
+html[data-hoe-theme="home"] body #gallery #galleryList > .hotel-card{
+ background:var(--hoe-home-card)!important;background-image:none!important;
+ color:var(--hoe-home-ink)!important;-webkit-text-fill-color:var(--hoe-home-ink)!important;
+ border:1px solid #ffffff70!important;border-radius:var(--hoe-card-radius)!important;
+ box-shadow:0 6px 20px #0003!important;
+}
+html[data-hoe-theme="home"] body :is(#packages,#cabs,#gallery,#itineraries,#upcoming-packages) :is(.package-slide,.cab-card,.hotel-card,.itinerary-slide,.group-departure-card){
+ overflow:hidden!important;
+}
+html[data-hoe-theme="home"] body :is(#packageList,#cabList,#galleryList,#itineraryList) :is(.package-slide,.cab-card,.hotel-card,.itinerary-slide) > img,
+html[data-hoe-theme="home"] body #upcoming-packages #groupDeparturesCarousel .group-departure-photo{
+ display:block!important;width:100%!important;height:auto!important;aspect-ratio:1.45!important;max-height:none!important;object-fit:cover!important;
+ border-radius:0!important;margin:0!important;
+}
+html[data-hoe-theme="home"] body #upcoming-packages #groupDeparturesCarousel .group-departure-photo > img{
+ width:100%!important;height:100%!important;object-fit:cover!important;border-radius:0!important;
+}
+html[data-hoe-theme="home"] body :is(#packageList,#cabList,#galleryList,#itineraryList) :is(.package-slide,.cab-card,.hotel-card,.itinerary-slide) > .card-body,
+html[data-hoe-theme="home"] body #upcoming-packages #groupDeparturesCarousel .group-departure-card > .group-departure-body{
+ padding:16px!important;background:transparent!important;background-image:none!important;color:var(--hoe-home-ink)!important;text-align:left!important;
+}
+html[data-hoe-theme="home"] body :is(#packageList,#cabList,#galleryList,#itineraryList,#groupDeparturesCarousel) :is(.package-slide,.cab-card,.hotel-card,.itinerary-slide,.group-departure-card) :is(.card-body,.group-departure-body) h3{
+ color:var(--hoe-home-ink)!important;-webkit-text-fill-color:var(--hoe-home-ink)!important;
+ font:700 clamp(19px,5.5vw,23px)/1.22 Inter,Arial,sans-serif!important;letter-spacing:-.035em!important;text-shadow:none!important;margin:0 0 10px!important;
+}
+html[data-hoe-theme="home"] body :is(#packageList,#cabList,#galleryList,#itineraryList,#groupDeparturesCarousel) :is(.package-slide,.cab-card,.hotel-card,.itinerary-slide,.group-departure-card) :is(.card-body,.group-departure-body) :is(p,.hotel-location,.hotel-facilities,.cab-details,.group-departure-date,.group-departure-highlights){
+ font:400 13px/1.65 Inter,Arial,sans-serif!important;color:var(--hoe-home-copy)!important;-webkit-text-fill-color:var(--hoe-home-copy)!important;text-shadow:none!important;
+}
+html[data-hoe-theme="home"] body :is(#packages,#cabs,#gallery,#itineraries,#upcoming-packages,#travel-journal,#odyssey-difference-mobile,#instagram) :is(.card-body,.group-departure-body,.odyssey-place-card,.odyssey-experience-card,.instagram-content) :is(strong,b,h3,h4,.price){
+ color:var(--hoe-home-ink)!important;-webkit-text-fill-color:var(--hoe-home-ink)!important;text-shadow:none!important;
+}
+html[data-hoe-theme="home"] body #upcoming-packages #groupDeparturesCarousel .group-departure-card .group-departure-body :is(small,.group-departure-meta span,.group-occupancy-label span){
+ color:var(--hoe-home-copy)!important;-webkit-text-fill-color:var(--hoe-home-copy)!important;
+}
+html[data-hoe-theme="home"] body #odyssey-difference-mobile :is(.odyssey-place-card,.odyssey-experience-card) :is(h3,p),
+html[data-hoe-theme="home"] body #instagram .instagram-content :is(h3,p),
+html[data-hoe-theme="home"] body #travel-journal .card .card-body :is(h3,p){
+ font-family:Inter,Arial,sans-serif!important;text-shadow:none!important;
+}
+html[data-hoe-theme="home"] body #odyssey-difference-mobile :is(.odyssey-place-card,.odyssey-experience-card) :is(.odyssey-kicker,.odyssey-experience-mark),
+html[data-hoe-theme="home"] body #odyssey-difference-mobile .odyssey-place-card > span,
+html[data-hoe-theme="home"] body #travel-journal .card .card-body .itinerary-meta{
+ color:var(--hoe-home-copy)!important;-webkit-text-fill-color:var(--hoe-home-copy)!important;
+}
+/* Match the hotel CTA, including uppercase letter spacing and white text. */
+html[data-hoe-theme="home"] body :is(#packages,#cabs,#gallery,#itineraries,#upcoming-packages,#travel-journal,#odyssey-difference-mobile,#instagram) :is(.card-body,.group-departure-body,.odyssey-place-card,.odyssey-experience-card,.instagram-content) :is(a.btn,button.btn,.group-departure-cta,.instagram-btn),
+html[data-hoe-theme="home"] body #packages #packageList .package-slide .package-card-actions > a.btn,
+html[data-hoe-theme="home"] body #cabs #cabList .cab-card .card-body > a.btn,
+html[data-hoe-theme="home"] body #gallery #galleryList .hotel-card .card-body :is(a.btn,button.btn),
+html[data-hoe-theme="home"] body #travel-journal .card .card-body a.btn{
+ background:var(--hoe-card-button)!important;background-image:none!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+ border:1px solid var(--hoe-card-button)!important;border-radius:9px!important;box-shadow:none!important;text-shadow:none!important;
+ font:700 12px/1.3 Inter,Arial,sans-serif!important;letter-spacing:.08em!important;text-transform:uppercase!important;min-height:44px!important;
+ text-decoration:none!important;padding:11px 14px!important;box-sizing:border-box!important;white-space:normal!important;text-align:center!important;
+}
+html[data-hoe-theme="home"] body #packages #packageList .package-slide .package-card-actions{
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:4px!important;
+}
+html[data-hoe-theme="home"] body #packages #packageList .package-slide .package-card-actions > a.btn,
+html[data-hoe-theme="home"] body #gallery #galleryList .hotel-card .card-body :is(a.btn,button.btn),
+html[data-hoe-theme="home"] body #cabs #cabList .cab-card .card-body > a.btn{
+ width:fit-content!important;max-width:100%!important;
+}
+html[data-hoe-theme="home"] body #gallery #galleryList .hotel-card .card-body :is(a.btn,button.btn){
+ display:flex!important;align-items:center!important;justify-content:center!important;margin:2px 0 0!important;
+}
+/* Compact promotion cards keep their existing image grid, seat bar and purple outer accent. */
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack .hero-promo-slide > section.mobile-next-departure{
+ background:var(--hoe-home-card)!important;background-image:none!important;border-radius:var(--hoe-card-radius)!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > h2,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > h2 em{
+ font:700 clamp(18px,5vw,23px)/1.22 Inter,Arial,sans-serif!important;color:#171717!important;-webkit-text-fill-color:#171717!important;text-shadow:none!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure :is(.mobile-departure-topline,.mobile-departure-kicker,.mobile-departure-season){
+ color:#444!important;-webkit-text-fill-color:#444!important;text-shadow:none!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > a.mobile-departure-cta,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.mobile-next-departure > details.mobile-departure-itinerary-details > summary.mobile-departure-cta{
+ background:#171717!important;background-image:none!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+ border:1px solid #171717!important;border-radius:9px!important;box-shadow:none!important;font:700 12px/1.3 Inter,Arial,sans-serif!important;letter-spacing:.06em!important;text-transform:uppercase!important;text-shadow:none!important;
+}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-card{
+ border-radius:var(--hoe-card-radius)!important;
+}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-card button[type="submit"]{
+ background:#171717!important;background-image:none!important;color:#fff!important;-webkit-text-fill-color:#fff!important;border-color:#171717!important;border-radius:9px!important;font:700 12px/1.3 Inter,Arial,sans-serif!important;letter-spacing:.08em!important;text-transform:uppercase!important;
+}
+}
+
+
+@media screen and (min-width:761px){
+html[data-hoe-theme="home"] body section#upcoming-packages #groupDeparturesCarousel article.group-departure-card .group-departure-body :is(.group-departure-date,.group-departure-highlights){color:#444!important;-webkit-text-fill-color:#444!important;opacity:1!important;text-shadow:none!important}
+html[data-hoe-theme="home"] body section#upcoming-packages #groupDeparturesCarousel article.group-departure-card .group-departure-body a.group-departure-cta,
+html[data-hoe-theme="home"] body section#upcoming-packages #groupDeparturesCarousel article.group-departure-card .group-departure-body a.group-departure-cta:is(:link,:visited,:hover,:focus,:active),
+html[data-hoe-theme="home"] body section#upcoming-packages #groupDeparturesCarousel article.group-departure-card .group-departure-body a.group-departure-cta *{color:#fff!important;-webkit-text-fill-color:#fff!important;opacity:1!important;text-shadow:none!important}
+html[data-hoe-theme="home"] body section#upcoming-packages #groupDeparturesCarousel article.group-departure-card .group-departure-body a.group-departure-cta{background:#171717!important;background-image:none!important;border-color:#171717!important}
+html[data-hoe-theme="home"] body section#upcoming-packages #groupDeparturesCarousel article.group-departure-card .group-departure-body :is(.group-departure-meta,.group-occupancy){border-color:#17171726!important}
+}
+
+
+@media(min-width:761px){
+html[data-hoe-theme="home"] body > header::after{background-image:url("/tibetan-header-flags-wind.svg?v=1")!important;background-size:50% 56px!important;background-repeat:repeat-x!important;background-position:var(--hoe-header-flag-scroll-x,0px) 0!important;opacity:.7!important;animation:none!important;filter:none!important}
+html[data-hoe-theme="home"] body nav.desktop-app-dock{background:linear-gradient(110deg,rgba(44,17,80,.96),rgba(89,43,151,.93),rgba(144,87,209,.88),rgba(177,126,233,.84),rgba(111,57,176,.92),rgba(44,17,80,.96))!important;background-size:260% 100%!important;background-position:var(--hoe-dock-flow,0%) 50%!important;border-color:#d9baff80!important;box-shadow:0 12px 30px #170b2c66,0 0 20px #a66af044,inset 0 1px 0 #ffffff55!important;-webkit-backdrop-filter:blur(30px) saturate(150%)!important;backdrop-filter:blur(30px) saturate(150%)!important}
+html[data-hoe-theme="home"] body nav.desktop-app-dock::before{background:linear-gradient(110deg,#ffffff24,transparent 65%,#d9baff15)!important}
+html[data-hoe-theme="home"] body nav.desktop-app-dock span{color:#fff!important;-webkit-text-fill-color:#fff!important;text-shadow:0 1px 3px #24103f!important}
+html[data-hoe-theme="home"] body nav.desktop-app-dock .dock-icon{color:#fff!important;stroke:#fff!important;animation:none!important;filter:drop-shadow(0 2px 3px #24103f88)!important}
+}
+@media(min-width:761px) and (prefers-reduced-motion:reduce){html[data-hoe-theme="home"] body > header::after{background-image:url("/tibetan-header-flags-static.svg?v=1")!important;background-position:0 0!important;animation:none!important}html[data-hoe-theme="home"] body nav.desktop-app-dock{background-position:50% 50%!important}}
+
+
+@media screen and (min-width:761px){
+ html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-services > a{
+  position:relative!important;isolation:isolate!important;box-sizing:border-box!important;
+  border:1px solid rgba(255,255,255,.72)!important;
+  border-top-color:rgba(255,255,255,.98)!important;
+  border-left-color:rgba(255,255,255,.90)!important;
+  border-right-color:rgba(120,120,120,.30)!important;
+  border-bottom-color:rgba(90,90,90,.40)!important;
+  background:rgba(255,255,255,.82)!important;background-image:none!important;
+  box-shadow:0 4px 7px rgba(0,0,0,.32),0 1px 2px rgba(0,0,0,.20),inset 0 2px 2px rgba(255,255,255,.88),inset 1px 0 1px rgba(255,255,255,.72),inset 0 -3px 4px rgba(35,35,35,.23)!important;
+  transition:box-shadow .18s ease,transform .18s ease!important;
+ }
+ html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-services > a::after{
+  content:""!important;position:absolute!important;inset:3px!important;
+  border-radius:11px!important;border:1px solid rgba(255,255,255,.40)!important;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.13),0 1px 0 rgba(255,255,255,.42)!important;
+  background:transparent!important;pointer-events:none!important;
+ }
+ html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-services > a > span{
+  text-shadow:0 1px 0 rgba(255,255,255,.82),0 -.5px 0 rgba(0,0,0,.18)!important;
+ }
+ html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-services > a > svg{
+  filter:drop-shadow(0 1px 0 rgba(255,255,255,.9)) drop-shadow(0 -.5px 0 rgba(0,0,0,.18))!important;
+ }
+ html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-services > a:active{
+  transform:translateY(1px)!important;
+  box-shadow:0 1px 2px rgba(0,0,0,.20),inset 0 3px 5px rgba(0,0,0,.22),inset 0 -1px 1px rgba(255,255,255,.75)!important;
+ }
+}
+@media screen and (min-width:761px) and (prefers-reduced-motion:reduce){
+ html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-services > a{transition:none!important}
+ html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-services > a:active{transform:none!important}
+}
+
+
+@media(min-width:761px){
+ html[data-hoe-theme="home"] body nav.desktop-app-dock{
+  border:1px solid rgba(224,204,255,.55)!important;
+  border-top-color:rgba(255,255,255,.76)!important;
+  border-bottom-color:rgba(49,20,81,.85)!important;
+  box-shadow:0 7px 13px #170b2c88,0 2px 3px #140a25aa,inset 0 2px 2px #ffffff55,inset 0 -3px 4px #28104377!important;
+ }
+ html[data-hoe-theme="home"] body nav.desktop-app-dock::before{
+  box-shadow:inset 0 1px 1px #ffffff40,inset 0 -1px 2px #1d0a3a66!important;
+ }
+ html[data-hoe-theme="home"] body nav.desktop-app-dock > :is(a[data-dock],button.dock-menu-trigger){
+  background:transparent!important;background-image:none!important;border-color:transparent!important;
+  box-shadow:none!important;transform:none!important;
+  color:#fff!important;-webkit-text-fill-color:#fff!important;
+  transition:box-shadow .15s ease,background .15s ease!important;
+  -webkit-tap-highlight-color:transparent;
+ }
+ html[data-hoe-theme="home"] body nav.desktop-app-dock > :is(a[data-dock],button.dock-menu-trigger) .dock-icon{
+  color:#fff!important;stroke:#fff!important;fill:none!important;stroke-width:1.9!important;
+  filter:drop-shadow(0 -.65px 0 #ffffffb0) drop-shadow(0 1px 0 #391c60) drop-shadow(0 2px 1px #180a2d99)!important;
+  animation:none!important;transform:translateY(0) scale(1)!important;
+  transition:transform .15s cubic-bezier(.2,.8,.2,1),filter .15s ease!important;
+ }
+ html[data-hoe-theme="home"] body nav.desktop-app-dock .dock-icon .icon-side{fill:rgba(255,255,255,.20)!important;stroke:#fff!important}
+ html[data-hoe-theme="home"] body nav.desktop-app-dock > button.dock-menu-trigger .dock-icon rect{fill:rgba(255,255,255,.80)!important;stroke:#fff!important;stroke-width:1.25!important}
+ html[data-hoe-theme="home"] body nav.desktop-app-dock > button.dock-menu-trigger.is-open .dock-icon{transform:rotate(45deg)!important}
+ html[data-hoe-theme="home"] body nav.desktop-app-dock > :is(a[data-dock],button.dock-menu-trigger) > span{
+  color:#fff!important;-webkit-text-fill-color:#fff!important;
+  text-shadow:0 -.5px 0 #ffffff50,0 1px 1px #291044cc!important;
+ }
+ html[data-hoe-theme="home"] body nav.desktop-app-dock > :is(a[data-dock],button.dock-menu-trigger):is(:active,.hoe-dock-pressed){
+  background:rgba(27,10,51,.15)!important;
+  border-color:rgba(255,255,255,.12)!important;
+  box-shadow:inset 0 3px 5px #1a082f80,inset 0 -1px 1px #ffffff45!important;
+  transform:none!important;
+ }
+ html[data-hoe-theme="home"] body nav.desktop-app-dock > :is(a[data-dock],button.dock-menu-trigger):is(:active,.hoe-dock-pressed) .dock-icon{
+  transform:translateY(2px) scale(.88)!important;
+  filter:drop-shadow(0 -.5px 0 #170b2caa) drop-shadow(0 1px 0 #ffffff88)!important;
+ }
+ html[data-hoe-theme="home"] body nav.desktop-app-dock > button.dock-menu-trigger.is-open:is(:active,.hoe-dock-pressed) .dock-icon{transform:translateY(2px) rotate(45deg) scale(.88)!important}
+}
+@media(min-width:761px) and (prefers-reduced-motion:reduce){
+ html[data-hoe-theme="home"] body nav.desktop-app-dock > :is(a[data-dock],button.dock-menu-trigger),
+ html[data-hoe-theme="home"] body nav.desktop-app-dock .dock-icon{transition:none!important}
+ html[data-hoe-theme="home"] body nav.desktop-app-dock > :is(a[data-dock],button.dock-menu-trigger):is(:active,.hoe-dock-pressed) .dock-icon{transform:none!important}
+ html[data-hoe-theme="home"] body nav.desktop-app-dock > button.dock-menu-trigger.is-open .dock-icon{transform:rotate(45deg)!important}
+}
+
+
+@media(min-width:761px){
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack .hero-promo-slide > section.mobile-next-departure.hoe-cinematic-ticket{
+display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-template-rows:auto auto auto auto auto auto auto auto auto!important;align-items:center!important;align-content:start!important;gap:8px!important;padding:14px 12px 13px!important;
+background:radial-gradient(ellipse at 100% 80%,#392449 0%,#17131f 42%,#0b0b10 76%)!important;color:#fff!important;border:1.5px solid #c78bff!important;border-radius:22px!important;box-shadow:0 0 12px #a55befa0,inset 0 0 9px #d29cff55!important;overflow:hidden!important;isolation:isolate!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack .hero-promo-slide > section.hoe-cinematic-ticket > img.hoe-promo-thumb{
+position:absolute!important;grid-area:1 / 1 / 4 / -1!important;inset:-14px -12px 0!important;width:calc(100% + 24px)!important;max-width:none!important;height:calc(100% + 14px)!important;min-height:0!important;max-height:none!important;border-radius:0!important;object-position:center 42%!important;z-index:-2!important;opacity:.92!important;pointer-events:none!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack .hero-promo-slide > section.hoe-cinematic-ticket::before{
+content:""!important;display:block!important;position:absolute!important;grid-area:1 / 1 / 4 / -1!important;inset:-14px -12px 0!important;width:auto!important;height:auto!important;min-height:0!important;border-radius:0!important;z-index:-1!important;opacity:1!important;background:linear-gradient(90deg,#08080dd9 0%,#0b0b105e 57%,#0b0b100d 100%),linear-gradient(0deg,#0b0b10 0%,#0b0b1000 64%)!important;pointer-events:none!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-topline{display:none!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-kicker{
+display:block!important;grid-column:1/-1!important;grid-row:1!important;margin:1px 0 0!important;padding:0!important;font:700 9px/1.4 Inter,Arial,sans-serif!important;letter-spacing:.14em!important;color:#eee5fa!important;-webkit-text-fill-color:#eee5fa!important;text-align:left!important;text-shadow:0 1px 5px #000!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > h2{
+grid-column:1/-1!important;grid-row:2!important;display:block!important;min-height:77px!important;max-width:100%!important;font:700 clamp(24px,6.5vw,34px)/1.06 "Bodoni Moda",Georgia,serif!important;letter-spacing:-.025em!important;color:#fff!important;-webkit-text-fill-color:#fff!important;text-shadow:0 2px 8px #000b!important;margin:3px 0 6px!important;align-self:end!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > h2 em{font:inherit!important;font-style:italic!important;color:#d5a1ff!important;-webkit-text-fill-color:#d5a1ff!important;text-shadow:0 1px 6px #000!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-date{
+grid-column:1/-1!important;grid-row:3!important;display:flex!important;align-items:center!important;gap:5px!important;padding:9px 10px!important;margin:0!important;position:relative!important;top:-6px!important;border:1px solid #bb84e65c!important;border-radius:10px!important;background:linear-gradient(135deg,#3c2d50df,#191821eb)!important;color:#fff!important;-webkit-text-fill-color:#fff!important;font:700 clamp(10px,3vw,13px)/1.3 Inter,Arial,sans-serif!important;box-shadow:inset 0 1px 4px #ffffff20!important;white-space:normal!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-date span{color:#fff!important;-webkit-text-fill-color:#fff!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-facts{
+grid-column:1/-1!important;grid-row:4!important;display:flex!important;justify-content:space-between!important;gap:4px 6px!important;flex-wrap:wrap!important;padding:5px 2px 0!important;margin:0!important;box-sizing:border-box!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-facts span{font:600 10px/1.4 Inter,Arial,sans-serif!important;color:#e9e0f2!important;-webkit-text-fill-color:#e9e0f2!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-seats{
+grid-column:1/-1!important;grid-row:5!important;display:flex!important;flex-direction:row!important;justify-content:space-between!important;align-items:center!important;gap:5px!important;flex-wrap:wrap!important;margin:0!important;padding:0 2px!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-seats strong,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-seats span{font:650 10px/1.4 Inter,Arial,sans-serif!important;color:#e6d1ff!important;-webkit-text-fill-color:#e6d1ff!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-track{grid-column:1/-1!important;grid-row:6!important;height:5px!important;min-height:5px!important;background:#ffffff25!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-track > span{background:linear-gradient(90deg,#743dc2,#dda9ff)!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-date::before,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-seats strong::before{filter:none!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .hoe-ticket-route{grid-column:1/-1!important;grid-row:7!important;display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:6px 9px!important;padding:6px 0 2px!important;margin:0!important;list-style:none!important;min-width:0!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .hoe-ticket-route[hidden]{display:none!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .hoe-ticket-route li{position:relative!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:4px!important;font:700 9px/1.2 Inter,Arial,sans-serif!important;letter-spacing:.025em!important;color:#fff!important;-webkit-text-fill-color:#fff!important;text-transform:uppercase!important;text-align:center!important;min-width:0!important;list-style:none!important;margin:0!important;padding:0!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .hoe-ticket-route li::before{content:""!important;display:block!important;width:8px!important;height:8px!important;border-radius:50% 50% 50% 0!important;transform:rotate(-45deg)!important;background:#d8a2ff!important;box-shadow:0 0 5px #b272e8!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .hoe-ticket-route li:not(:last-child)::after{content:""!important;position:absolute!important;top:4px!important;left:calc(50% + 8px)!important;width:calc(50% + 1px)!important;border-top:1px dashed #d5b5ef!important;opacity:.8!important;pointer-events:none!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-price::before{content:"PRICE"!important;display:block!important;font:700 9px/1.3 Inter,Arial,sans-serif!important;letter-spacing:.18em!important;color:#e1c6fb!important;-webkit-text-fill-color:#e1c6fb!important;margin-bottom:2px!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-price{
+grid-column:1/-1!important;grid-row:8!important;display:block!important;margin:1px 0 2px!important;padding:2px 0 2px 10px!important;border-left:3px solid #c085f7!important;color:#fff!important;-webkit-text-fill-color:#fff!important;font:700 clamp(25px,7vw,36px)/1.1 "Bodoni Moda",Georgia,serif!important;text-align:left!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-price small{font:500 11px/1.3 Inter,Arial,sans-serif!important;color:#e4d8ec!important;-webkit-text-fill-color:#e4d8ec!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > a.mobile-departure-cta,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > details.mobile-departure-itinerary-details > summary.mobile-departure-cta{
+grid-row:9!important;min-height:43px!important;padding:8px 7px!important;border:1px solid #d5a1ff!important;border-radius:25px!important;background:#141119!important;color:#fff!important;-webkit-text-fill-color:#fff!important;font:750 clamp(10px,2.8vw,12px)/1.2 Inter,Arial,sans-serif!important;letter-spacing:.015em!important;box-shadow:inset 0 1px 4px #ffffff15!important;text-shadow:none!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > a.mobile-departure-itinerary,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > details.mobile-departure-itinerary-details > summary.mobile-departure-cta{
+background:linear-gradient(180deg,#f4d7ff,#d2a1f4 65%,#b77be7)!important;color:#17101e!important;-webkit-text-fill-color:#17101e!important;border-color:#f0d9ff!important;box-shadow:0 0 9px #b879ee70,inset 0 1px 3px #fff!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > details.mobile-departure-itinerary-details{grid-row:9!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > details.mobile-departure-itinerary-details[open]{grid-row:10!important;grid-column:1/-1!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > a.mobile-departure-cta:active{filter:brightness(.9)!important}
+}
+
+
+@media(min-width:761px){
+html[data-hoe-theme="home"] body #home.hero#home{min-height:0!important;padding:clamp(34px,4vw,64px) clamp(24px,5vw,84px)!important}
+html[data-hoe-theme="home"] body #home.hero#home > .hero-content{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(340px,500px)!important;grid-template-rows:1fr auto auto!important;gap:18px 44px!important;align-items:center!important;max-width:1180px!important}
+html[data-hoe-theme="home"] body #home.hero#home .hero-content > .hoe-reference-intro{grid-column:1!important;grid-row:1!important;align-self:end!important;display:block!important;text-align:center!important}
+html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-title{font:500 clamp(50px,6vw,88px)/1.04 "Bodoni Moda",Georgia,serif!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
+html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-destinations{font:500 15px/1.5 Inter,Arial,sans-serif!important;color:#fff!important;margin:18px 0 0!important}
+html[data-hoe-theme="home"] body #home.hero#home .hero-content > .hoe-reference-services{grid-column:1!important;grid-row:2!important;align-self:start!important;margin:24px 0 0!important;gap:14px!important}
+html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-services a{min-height:100px!important;font:700 15px/1.25 Inter,Arial,sans-serif!important;color:#171717!important;-webkit-text-fill-color:#171717!important}
+html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-services svg{width:30px!important;height:30px!important;color:#171717!important}
+html[data-hoe-theme="home"] body #home.hero#home .hero-content > #heroPromoCarousel.hero-promo-carousel{grid-column:2!important;grid-row:1/3!important;align-self:center!important;margin:0!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack .hero-promo-slide > section.mobile-next-departure.hoe-cinematic-ticket{padding:16px 16px 18px!important;grid-template-rows:auto auto auto auto auto auto auto auto auto!important;gap:10px!important;max-height:none!important;min-height:0!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack .hero-promo-slide > section.hoe-cinematic-ticket > img.hoe-promo-thumb{display:block!important;inset:-16px -16px 0!important;width:calc(100% + 32px)!important;height:calc(100% + 16px)!important;object-fit:cover!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack .hero-promo-slide > section.hoe-cinematic-ticket::before{inset:-16px -16px 0!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > h2{font:700 clamp(30px,3vw,44px)/1.06 "Bodoni Moda",Georgia,serif!important;min-height:115px!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > h2 em{font:inherit!important;font-style:italic!important;color:#d5a1ff!important;-webkit-text-fill-color:#d5a1ff!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-kicker{font-size:11px!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-date{font-size:14px!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-facts span,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-seats :is(strong,span){font-size:12px!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .hoe-ticket-route li{font-size:10px!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-price{font-size:36px!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > a.mobile-departure-cta,html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > details.mobile-departure-itinerary-details > summary.mobile-departure-cta{font-size:12px!important}
+html[data-hoe-theme="home"] body #home.hero#home .hero-content > .hero-destination-list{grid-column:1/-1!important;grid-row:3!important;margin:0!important}
+html[data-hoe-theme="home"] body #home.hero#home > img.hero-ken-burns-photo{height:100%!important;object-position:center 42%!important;mask-image:linear-gradient(#000 0%,#000 65%,transparent 100%)!important;-webkit-mask-image:linear-gradient(#000 0%,#000 65%,transparent 100%)!important}
+html[data-hoe-theme="home"] body > header > .header-inner{justify-content:flex-end!important;min-height:74px!important;height:74px!important}
+html[data-hoe-theme="home"] body > header > .header-inner > a.brand > img.hoe-mobile-3d-logo{display:block!important}
+html[data-hoe-theme="home"] body > header > .header-inner > a.brand > img:not(.hoe-mobile-3d-logo){display:none!important}
+html[data-hoe-theme="home"] body > header > .header-inner > nav.glass-nav{display:none!important}
+html[data-hoe-theme="home"] body nav.desktop-app-dock{width:min(500px,calc(100vw - 32px))!important;opacity:1!important;transform:translateX(-50%)!important;pointer-events:auto!important}
+html[data-hoe-theme="home"] body nav.desktop-app-dock :is(a,button){color:#fff!important;-webkit-text-fill-color:#fff!important;background:transparent!important;border-color:transparent!important}
+html[data-hoe-theme="home"] body nav.desktop-app-dock button.dock-menu-trigger{background:#0b0b0b!important}
+html[data-hoe-theme="home"] body nav.desktop-app-dock .dock-icon{color:#fff!important;stroke:#fff!important}
+html[data-hoe-theme="home"] body #dockMenuPopup.dock-panel-popup{background:rgba(17,12,25,.94)!important;border-color:#d9baff65!important}
+html[data-hoe-theme="home"] body #contact.cta .hoe-lead-card{max-width:780px!important;width:100%!important}
+html[data-hoe-theme="home"] body #packages #packageList .package-slide .package-card-actions{flex-direction:row!important;flex-wrap:wrap!important;gap:8px!important}
+}
+@media(min-width:761px) and (max-width:950px){html[data-hoe-theme="home"] body #home.hero#home > .hero-content{gap:14px 22px!important;grid-template-columns:minmax(0,1fr) minmax(320px,400px)!important}html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-title{font-size:46px!important}html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-services a{font-size:12px!important;min-height:78px!important}}
+
+</style>
