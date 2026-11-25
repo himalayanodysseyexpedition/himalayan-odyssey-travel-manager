@@ -642,3 +642,7 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Strengthened the soft purple outer halo; kept the card fill black, white border, content, and carousel interaction unchanged.
 - Scoped the effect to mobile (760px and below); desktop remains unchanged. Bumped the stylesheet cache version to v29.
 - Files: `homepage-mobile-departure-promo.css`, `index.html`.
+
+## 2026-11-26 — Mobile text contrast on the matte-black theme
+- Set dark text on light departure status panels, enquiry forms and itinerary summary, facts and day-number surfaces. Set light text for itinerary destination and pricing details on dark surfaces.
+- Updated the shared mobile stylesheet URL on all linked public pages. Chromium checks at 320px and 390px covered the homepage, destination enquiry and a fixture-backed itinerary. Local static site checks passed.

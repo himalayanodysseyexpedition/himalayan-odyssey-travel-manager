@@ -230,7 +230,7 @@
 
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Inter:wght@400;500;600;700;800&display=swap" media="(max-width: 760px)">
-<link rel="stylesheet" href="/hoe-mobile-hero-theme.css?v=3" media="(max-width: 760px)">
+<link rel="stylesheet" href="/hoe-mobile-hero-theme.css?v=4" media="(max-width: 760px)">
 </head>
 
 <body>
@@ -2952,8 +2952,17 @@ html[data-hoe-theme="home"] body > :is(section#upcoming-packages,section#journey
 html[data-hoe-theme="home"] body > :is(section#upcoming-packages,section#journey-story,section#packages,section#itineraries,section#odyssey-difference-mobile,section#cabs,section#gallery,section#instagram,section#travel-journal,section#featured-travel-photography) :is(.section-title small,.featured-travel-heading small){
  color:#d9baff!important;-webkit-text-fill-color:#d9baff!important;
 }
-html[data-hoe-theme="home"] body > :is(section#upcoming-packages,section#journey-story,section#packages,section#itineraries,section#odyssey-difference-mobile,section#cabs,section#gallery,section#instagram,section#travel-journal,section#featured-travel-photography) :is(p.intro,.featured-travel-heading p,.guides-swipe-hint,.featured-travel-hint,.guides-count,#groupDeparturesCount,#packageMessage,.group-departures-empty,.cab-empty,.hotel-empty){
+html[data-hoe-theme="home"] body > :is(section#upcoming-packages,section#journey-story,section#packages,section#itineraries,section#odyssey-difference-mobile,section#cabs,section#gallery,section#instagram,section#travel-journal,section#featured-travel-photography) :is(p.intro,.featured-travel-heading p,.guides-swipe-hint,.featured-travel-hint,.guides-count,#groupDeparturesCount,#packageMessage){
  color:#c7c7c7!important;-webkit-text-fill-color:#c7c7c7!important;
+}
+/* Loading and unavailable messages use light panels over the matte canvas. */
+html[data-hoe-theme="home"] body #upcoming-packages #groupDeparturesCarousel .group-departures-empty,
+html[data-hoe-theme="home"] body :is(#packages,#itineraries,#cabs,#gallery) :is(.cab-empty,.hotel-empty),
+html[data-hoe-theme="home"] body :is(#packages,#itineraries,#cabs,#gallery) :is(.cab-empty,.hotel-empty) h3{
+ color:var(--hoe-home-ink)!important;-webkit-text-fill-color:var(--hoe-home-ink)!important;
+}
+html[data-hoe-theme="home"] body :is(#packages,#itineraries,#cabs,#gallery) :is(.cab-empty,.hotel-empty) p{
+ color:var(--hoe-home-copy)!important;-webkit-text-fill-color:var(--hoe-home-copy)!important;
 }
 html[data-hoe-theme="home"] body > #home.hero#home{background:#0b0b0b!important;background-color:#0b0b0b!important;background-image:none!important}
 html[data-hoe-theme="home"] body > #home.hero#home::before{background:linear-gradient(180deg,rgba(8,8,8,.82) 0%,rgba(12,12,12,.45) 20%,rgba(12,12,12,.06) 42%,rgba(8,8,8,.16) 55%,#0b0b0b 82%,#0b0b0b 100%)!important}
