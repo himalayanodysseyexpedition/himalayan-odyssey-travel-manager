@@ -14,7 +14,7 @@
     payment: "Hello {name}, this is a friendly payment reminder from Himalayan Odyssey Expedition for your {destination} booking. Total amount: {total}. Amount received: {paid}. Pending balance: {balance}. Please let us know when we can expect the remaining payment. Thank you!",
     trip: "Hello {name}, your Himalayan Odyssey Expedition {destination} trip is approaching! Your travel starts on {start_date} and ends on {end_date}. Please keep your ID proof and essential travel items ready. Kindly confirm your pickup coordination with our team before departure. We look forward to seeing you!",
     feedback: "Hello {name}, thank you for travelling with Himalayan Odyssey Expedition to {destination}! We hope you had a wonderful Himalayan experience. We would really appreciate your feedback about the trip, stays, transport and overall arrangements. Your suggestions help us improve. Thank you for travelling with us!",
-    review: "Hello {name}, thank you for travelling with Himalayan Odyssey Expedition! If you have a moment, please share your honest feedback about your trip on Google: {review_url}. Your feedback helps us improve and helps other travellers plan their journeys. Thank you!"
+    review: "Hello {name}, thank you for travelling with Himalayan Odyssey Expedition! If you have a moment, please share your honest feedback about your trip on Google. Your feedback helps us improve and helps other travellers plan their journeys. Thank you!"
   };
 
   const labels = {
@@ -110,7 +110,7 @@
       const id = record.dataset.confirmWa;
       addAction(actions, "advance", id, "Advance request");
       addAction(actions, "trip", id, "Trip reminder");
-      addAction(actions, "feedback", id, "Feedback request");
+      
 
     });
   }
@@ -166,7 +166,9 @@
     const button = event.target.closest("[data-wa-automation]");
     if (!button) return;
 
-    const key = button.dataset.waAutomation;
+    const key = button.dataset.waAutomation === "feedback" ? "review" : button.dataset.waAutomation;
+    event.preventDefault();
+    event.stopImmediatePropagation();
     const id = button.dataset.recordId;
     let customer = {};
     let data = {};
@@ -204,9 +206,12 @@
       };
     }
 
-    if (key === "review") data.review_url = REVIEW_URL;
+    if (key === "review") data.review_url = "";
     let message = fill(templates[key] || defaults[key], data);
-    if (key === "review" && !message.includes(REVIEW_URL)) message += "\n\n" + REVIEW_URL;
+    if (key === "review") {
+      message = message.split(REVIEW_URL).join("").trim();
+      message += "\n\nLeave your Google review here:\n" + REVIEW_URL;
+    }
     openWhatsApp(customer.phone, message);
   }, true);
 
