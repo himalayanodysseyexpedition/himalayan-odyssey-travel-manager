@@ -18,7 +18,6 @@
     return ["/kinnaur.jpg","Himalayan mountains in Kinnaur",1200,1600];
   };
   function refreshCards() {
-    if (!mobile.matches) return;
     for (const card of track.querySelectorAll("section.mobile-next-departure")) {
       const title = card.querySelector("h2")?.textContent || card.getAttribute("aria-label") || "";
       const [src,alt,width,height] = pick(title);
@@ -50,7 +49,7 @@
   function update() {
     pending = false;
     if (!photo) return;
-    if (!mobile.matches || reduced.matches) {
+    if (reduced.matches) {
       photo.style.removeProperty("--hoe-hero-offset");
       return;
     }

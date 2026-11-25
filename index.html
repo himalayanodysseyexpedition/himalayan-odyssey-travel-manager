@@ -2793,7 +2793,7 @@ html body #home.hero #heroPromoTrack section.mobile-next-departure > img.hoe-pro
   html body #home.hero#home > img.hero-ken-burns-photo{transform:none!important}
 }
 </style>
-<script src="/mobile-hero-parallax-photos.js?v=2" defer></script>
+<script src="/mobile-hero-parallax-photos.js?v=3" defer></script>
 
 <style id="hoe-mobile-white-glass-home-v1">
 @media screen and (max-width:760px){
@@ -3115,7 +3115,7 @@ html[data-hoe-theme="home"] body nav.mobile-app-dock .dock-icon{color:#fff!impor
 @media(max-width:760px) and (prefers-reduced-motion:reduce){html[data-hoe-theme="home"] body > header::after{background-image:url("/tibetan-header-flags-static.svg?v=1")!important;background-position:0 0!important;animation:none!important}html[data-hoe-theme="home"] body nav.mobile-app-dock{background-position:50% 50%!important}}
 </style>
 <script id="hoe-mobile-dock-scroll-flow">
-(()=>{const mobile=matchMedia('(max-width:760px)'),reduce=matchMedia('(prefers-reduced-motion:reduce)');let frame=0,last=0,dock=null,scrollPhase=0;function tick(now){frame=0;if(!mobile.matches||reduce.matches||document.hidden)return;if(now-last>=32){last=now;if(!dock||!dock.isConnected)dock=document.querySelector('nav.mobile-app-dock');const target=Math.max(0,window.scrollY)/280;scrollPhase+=(target-scrollPhase)*.12;const phase=50-50*Math.cos(now/1700+scrollPhase);if(dock)dock.style.setProperty('--hoe-dock-flow',phase.toFixed(2)+'%')}frame=requestAnimationFrame(tick)}function sync(){if(frame){cancelAnimationFrame(frame);frame=0}if(mobile.matches&&!reduce.matches&&!document.hidden)frame=requestAnimationFrame(tick);else if(dock)dock.style.removeProperty('--hoe-dock-flow')}mobile.addEventListener('change',sync);reduce.addEventListener('change',sync);document.addEventListener('visibilitychange',sync);sync()})();
+(()=>{const mobile=matchMedia('(max-width:760px)'),reduce=matchMedia('(prefers-reduced-motion:reduce)');let frame=0,last=0,dock=null,scrollPhase=0;function tick(now){frame=0;if(reduce.matches||document.hidden)return;if(now-last>=32){last=now;if(!dock||!dock.isConnected)dock=document.querySelector('nav.mobile-app-dock,nav.desktop-app-dock');const target=Math.max(0,window.scrollY)/280;scrollPhase+=(target-scrollPhase)*.12;const phase=50-50*Math.cos(now/1700+scrollPhase);if(dock)dock.style.setProperty('--hoe-dock-flow',phase.toFixed(2)+'%')}frame=requestAnimationFrame(tick)}function sync(){if(frame){cancelAnimationFrame(frame);frame=0}if(!reduce.matches&&!document.hidden)frame=requestAnimationFrame(tick);else if(dock)dock.style.removeProperty('--hoe-dock-flow')}mobile.addEventListener('change',sync);reduce.addEventListener('change',sync);document.addEventListener('visibilitychange',sync);sync()})();
 </script>
 
 <script id="hoe-mobile-header-scroll-direction-flags">
@@ -3127,7 +3127,7 @@ html[data-hoe-theme="home"] body nav.mobile-app-dock .dock-icon{color:#fff!impor
  let frame=0;
  function update(){
   frame=0;
-  if(!mobile.matches||reduce.matches){header.style.removeProperty('--hoe-header-flag-scroll-x');return;}
+  if(reduce.matches){header.style.removeProperty('--hoe-header-flag-scroll-x');return;}
   const root=document.scrollingElement||document.documentElement;
   const y=Math.max(0,Math.min(window.scrollY,Math.max(0,root.scrollHeight-root.clientHeight)));
   const period=header.clientWidth/2;
@@ -3329,7 +3329,6 @@ html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cin
     return [];
   };
   function refresh(){
-    if(!mobile.matches)return;
     const records=Array.isArray(window.heroPromoRecords)?window.heroPromoRecords:[];
     for(const card of track.querySelectorAll(".mobile-next-departure")){
       card.classList.add("hoe-cinematic-ticket");
@@ -3348,3 +3347,7 @@ html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cin
   if(mobile.addEventListener)mobile.addEventListener("change",refresh);
 })();
 </script>
+
+<link rel="stylesheet" href="/hoe-desktop-theme.css?v=1" media="(min-width: 761px)">
+<link rel="stylesheet" href="/hoe-desktop-home-theme.css?v=1" media="(min-width: 761px)">
+
