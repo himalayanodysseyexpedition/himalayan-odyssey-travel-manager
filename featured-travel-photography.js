@@ -54,7 +54,7 @@ const loadNearbyPhotos=()=>{
   if(!nearGallery||!photos.length)return;
   [...track.children].forEach((item,i)=>{
     const distance=Math.min(Math.abs(i-active),photos.length-Math.abs(i-active));
-    if(distance>visibleRange+1)return;
+    if(distance>visibleRange)return;
     const img=item.querySelector("img[data-src]");
     if(img){img.src=img.dataset.src;img.removeAttribute("data-src");}
   });
@@ -64,7 +64,7 @@ if(typeof IntersectionObserver!=="undefined"){
     if(entries.some(entry=>entry.isIntersecting)){
       nearGallery=true;loadNearbyPhotos();imageObserver.disconnect();
     }
-  },{rootMargin:"600px 0px"});
+  },{rootMargin:"240px 0px"});
   imageObserver.observe(carousel);
 }
 const renderPositions=()=>{
