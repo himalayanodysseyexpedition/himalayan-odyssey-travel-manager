@@ -9,6 +9,8 @@
   const photo = hero.querySelector("img.hero-ken-burns-photo");
   const pick = title => {
     const name = title.toLowerCase();
+    // Real Sangla snowfall photograph by UnpetitproleX, CC0 1.0 (Wikimedia Commons).
+    if (name.includes("kinnaur") && name.includes("spiti")) return ["https://upload.wikimedia.org/wikipedia/commons/0/02/Apple_and_walnut_orchards_after_a_night_of_snowfall_in_Sangla_in_the_Kinnaur_district_of_the_northern_Indian_state_of_Himachal_Pradesh.webp","Snow-covered orchards and Himalayan mountains in Sangla, Kinnaur",960,640];
     if (name.includes("kinnaur") || name.includes("kalpa") || name.includes("sangla")) return ["/kinnaur.jpg","Kinnaur village and Himalayan mountains",1200,1600];
     if (name.includes("spiti") || name.includes("kaza")) return ["/spiti.jpg","Snow-covered Key Monastery in Spiti Valley",1350,1800];
     if (name.includes("narkanda")) return ["/narkanda.jpg","Snow-covered forest in Narkanda",1013,1800];
@@ -28,10 +30,20 @@
         img.loading = "eager";
         card.prepend(img);
       }
-      if (img.getAttribute("src") !== src) img.src = src;
-      img.alt = alt;
-      img.width = width;
-      img.height = height;
+      if (img.dataset.hoePhotoSource !== src) {
+        img.dataset.hoePhotoSource = src;
+        img.onerror = src.startsWith("https://upload.wikimedia.org/") ? () => {
+          img.onerror = null;
+          img.src = "/kinnaur.jpg";
+          img.alt = "Kinnaur village and Himalayan mountains";
+          img.width = 1200;
+          img.height = 1600;
+        } : null;
+        img.alt = alt;
+        img.width = width;
+        img.height = height;
+        if (img.getAttribute("src") !== src) img.src = src;
+      }
     }
   }
   let pending = false;
