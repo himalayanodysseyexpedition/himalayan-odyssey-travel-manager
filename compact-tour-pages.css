@@ -1,0 +1,25 @@
+/* Page-local opt-in for compact public tour landing pages. */
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-quick{margin:12px 0 18px;padding:14px 16px;background:#171717;border:1px solid #bd83ff65;border-radius:13px;color:#fff}
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-quick p{margin:0 0 8px;color:#dedede!important;-webkit-text-fill-color:#dedede!important}
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-quick a{color:#d9baff!important;-webkit-text-fill-color:#d9baff!important}
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-quick .hoe-trip-enquire{display:inline-flex;min-height:44px;align-items:center;justify-content:center;padding:9px 15px;background:#fff!important;border:1px solid #fff;border-radius:9px;color:#0b0b0b!important;-webkit-text-fill-color:#0b0b0b!important;text-decoration:none;font-weight:750;font-size:14px}
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-details{margin:10px 0;border:1px solid #bd83ff65;border-radius:12px;background:#171717;color:#f5f5f5;overflow:hidden}
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-details>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;list-style:none;min-height:48px;padding:11px 14px;font:650 15px/1.4 Inter,Arial,sans-serif;color:#f5f5f5}
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-details>summary::-webkit-details-marker{display:none}
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-details>summary::after{content:"+";font-size:22px;color:#d9baff;flex:none}
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-details[open]>summary::after{content:"−"}
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-details>summary:focus-visible{outline:2px solid #d9baff;outline-offset:-4px}
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-details>div{padding:0 14px 14px;color:#dedede}
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-details>div :is(h2,h3,h4,strong){color:#f5f5f5!important;-webkit-text-fill-color:#f5f5f5!important}
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-details>div :is(p,li,td,th){color:#dedede!important;-webkit-text-fill-color:#dedede!important}
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-details>div a{color:#d9baff!important;-webkit-text-fill-color:#d9baff!important}
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-details>div h2{font-size:22px;margin:18px 0 8px}
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-details>div section:first-child h2{margin-top:10px}
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-details>div .faq{border:0;padding:0;margin:0}
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-details>div table{display:block;max-width:100%;overflow-x:auto}
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-details>div th{background:#242424!important}
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-details>div :is(.spiti-destination-gallery,.spiti-monastery) img{max-width:100%}
+html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-quick h2{font:700 16px/1.4 Inter,Arial,sans-serif!important;margin:0 0 8px!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
+@media(max-width:800px){html[data-hoe-theme="page"] body main.hoe-compact-booking .grid>.side{order:1!important}}
+@media(max-width:760px){html[data-hoe-theme="page"] body main.hoe-compact-booking .hero img{max-height:200px;object-fit:cover}html[data-hoe-theme="page"] body main.hoe-compact-booking .spiti-book-card{display:grid;grid-template-columns:88px minmax(0,1fr);gap:6px 11px;align-items:start;padding:10px}html[data-hoe-theme="page"] body main.hoe-compact-booking .spiti-book-card img{grid-row:1/4;height:100%;min-height:92px;max-height:128px;width:88px;object-fit:cover;margin:0}html[data-hoe-theme="page"] body main.hoe-compact-booking .spiti-book-card h3{margin:0;font-size:15px!important;grid-column:2}html[data-hoe-theme="page"] body main.hoe-compact-booking .spiti-book-card p{margin:0;grid-column:2;font-size:12px!important;line-height:1.45!important}html[data-hoe-theme="page"] body main.hoe-compact-booking .spiti-book-card .spiti-book-link{grid-column:1/-1}html[data-hoe-theme="page"] body main.hoe-compact-booking .spiti-book-price strong{font-size:17px}html[data-hoe-theme="page"] body main.hoe-compact-booking .hoe-trip-details>div h2{font-size:20px!important}}
+@media print{.hoe-trip-details>div{display:block!important}.hoe-trip-quick .hoe-trip-enquire{display:none!important}}
