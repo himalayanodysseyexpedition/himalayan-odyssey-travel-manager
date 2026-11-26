@@ -1,0 +1,17 @@
+/* Compact, page-local catalogue cards; no homepage styling. */
+.hoe-inventory{margin:16px 0 20px;padding:14px;border:1px solid #aa76df70;border-radius:12px;background:#171717;color:#f5f5f5}
+html[data-hoe-theme="page"] body main.wrap .hoe-inventory :is(h2,h3,strong){color:#fff!important;-webkit-text-fill-color:#fff!important}
+html[data-hoe-theme="page"] body main.wrap .hoe-inventory :is(p,small,li,td,th){color:#dedede!important;-webkit-text-fill-color:#dedede!important}
+html[data-hoe-theme="page"] body main.wrap .hoe-inventory a{color:#d9baff!important;-webkit-text-fill-color:#d9baff!important}
+.hoe-inventory h2{margin:0 0 8px!important;font-size:20px!important;line-height:1.35}
+.hoe-inventory p{margin:6px 0!important;font-size:13px!important;line-height:1.55!important}
+.hoe-inventory .hoe-inventory-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid #ffffff25}
+.hoe-inventory .hoe-inventory-row>div{min-width:0;flex:1}
+.hoe-inventory .hoe-inventory-row img{width:92px;height:76px;object-fit:cover;border-radius:8px;flex:0 0 92px}
+.hoe-inventory .hoe-inventory-row h3{font-size:15px!important;margin:0 0 4px!important;line-height:1.35}
+.hoe-inventory .hoe-inventory-price{font-weight:700}
+.hoe-inventory .hoe-inventory-link{display:inline-flex;min-height:44px;align-items:center;font-size:13px;font-weight:700;text-decoration:underline}
+.hoe-inventory .hoe-inventory-table{width:100%;border-collapse:collapse;font-size:13px;table-layout:auto}
+.hoe-inventory .hoe-inventory-table th,.hoe-inventory .hoe-inventory-table td{padding:8px 5px;border-bottom:1px solid #ffffff20;text-align:left;background:transparent!important}
+.hoe-inventory .hoe-inventory-table td:last-child,.hoe-inventory .hoe-inventory-table th:last-child{text-align:right;white-space:nowrap}
+@media(max-width:360px){.hoe-inventory{padding:10px}.hoe-inventory .hoe-inventory-table{font-size:12px}.hoe-inventory .hoe-inventory-row img{width:72px;flex-basis:72px;height:72px}}
