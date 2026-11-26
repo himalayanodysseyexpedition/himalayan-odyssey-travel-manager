@@ -4,7 +4,7 @@
   html body #home.hero#home .hero-content > #hoeExpeditionJourney{
     display:block!important;order:4!important;flex:0 0 auto!important;position:relative!important;
     align-self:stretch!important;width:100%!important;max-width:100%!important;min-width:0!important;
-    margin:8px 0 0!important;padding:0!important;box-sizing:border-box!important;overflow:hidden!important;
+    margin:24px 0 0!important;padding:0!important;box-sizing:border-box!important;overflow:hidden!important;
     border:1px solid #a779e96b!important;border-radius:15px!important;isolation:isolate;
     background:#101014!important;box-shadow:0 5px 18px #0005!important;pointer-events:none;
     color:#fff!important;text-align:left!important;--journey-accent:#bf98ff;--journey-depth:0px;
