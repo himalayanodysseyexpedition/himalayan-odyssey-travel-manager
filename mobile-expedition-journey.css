@@ -39,6 +39,8 @@
   #hoeExpeditionJourney .journey-stamp text{fill:#f0ddff;font:700 7.5px Inter,Arial,sans-serif;text-anchor:middle;letter-spacing:.06em}
   #hoeExpeditionJourney .journey-stamp rect{fill:#211631;stroke:#b78bff;stroke-width:.8;stroke-dasharray:2 1}
   #hoeExpeditionJourney:not([data-running="true"]) *{animation-play-state:paused!important}
+  #hoeExpeditionJourney .journey-flame{animation:hoeJourneyFlame 2s ease-in-out infinite alternate}
+  @keyframes hoeJourneyFlame{from{opacity:.65}to{opacity:1}}
   @keyframes hoeJourneyRoute{to{stroke-dashoffset:-14}}
   @keyframes hoeJourneyCloud{from{transform:translateX(-8px)}to{transform:translateX(18px)}}
   @keyframes hoeJourneyFlake{0%{transform:translate(0,-10px);opacity:0}20%,75%{opacity:.65}100%{transform:translate(-9px,62px);opacity:0}}
