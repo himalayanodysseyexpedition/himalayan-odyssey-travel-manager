@@ -345,6 +345,13 @@ background:#fff!important;background-image:none!important;color:#000!important;-
       </div>
     </div>
 
+    <div id="hoeDesktopDestinationsTicker" style="display:none" aria-label="Destinations we offer">
+      <div class="hoe-desktop-ticker-track">
+        <div class="hoe-desktop-ticker-group"><span>Spiti Valley</span><i aria-hidden="true">·</i><span>Kinnaur</span><i aria-hidden="true">·</i><span>Narkanda</span><i aria-hidden="true">·</i><span>Shimla</span><i aria-hidden="true">·</i><span>Manali</span><i aria-hidden="true">·</i><span>Kasol</span><i aria-hidden="true">·</i><span>Jibhi</span><i aria-hidden="true">·</i></div>
+        <div class="hoe-desktop-ticker-group" aria-hidden="true"><span>Spiti Valley</span><i aria-hidden="true">·</i><span>Kinnaur</span><i aria-hidden="true">·</i><span>Narkanda</span><i aria-hidden="true">·</i><span>Shimla</span><i aria-hidden="true">·</i><span>Manali</span><i aria-hidden="true">·</i><span>Kasol</span><i aria-hidden="true">·</i><span>Jibhi</span><i aria-hidden="true">·</i></div>
+      </div>
+    </div>
+
     <div class="hero-destination-list" aria-label="Destinations we offer">
       <div class="hero-destination-marquee">
         <div class="hero-destination-track">
@@ -3351,3 +3358,49 @@ html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cin
 <link rel="stylesheet" href="/hoe-desktop-theme.css?v=1" media="(min-width: 761px)">
 <link rel="stylesheet" href="/hoe-desktop-home-theme.css?v=5" media="(min-width: 761px)">
 
+
+<style id="hoe-desktop-destinations-ticker-v2">
+#hoeDesktopDestinationsTicker{display:none!important}
+@media screen and (min-width:761px){
+  html body #home.hero#home > .hero-content > .hero-destination-list{display:none!important}
+  html body #home.hero#home > .hero-content > #hoeDesktopDestinationsTicker{
+    display:block!important;position:relative!important;inset:auto!important;
+    order:3!important;grid-column:1/-1!important;align-self:center!important;
+    flex:0 0 auto!important;box-sizing:border-box!important;
+    width:100%!important;max-width:900px!important;min-width:0!important;
+    height:auto!important;min-height:44px!important;max-height:none!important;
+    margin:12px auto 0!important;padding:10px 0!important;overflow:hidden!important;
+    opacity:1!important;visibility:visible!important;transform:none!important;
+    mask-image:none!important;-webkit-mask-image:none!important;
+    background:transparent!important;color:#fff!important;z-index:5!important;
+  }
+  #hoeDesktopDestinationsTicker > .hoe-desktop-ticker-track{
+    display:flex!important;align-items:center!important;flex-wrap:nowrap!important;
+    width:max-content!important;min-width:200%!important;max-width:none!important;
+    margin:0!important;padding:0!important;gap:0!important;
+    animation:hoeDesktopTickerScrollV2 24s linear infinite!important;
+    animation-play-state:running!important;will-change:transform;
+    opacity:1!important;visibility:visible!important;
+  }
+  #hoeDesktopDestinationsTicker .hoe-desktop-ticker-group{
+    display:flex!important;flex:1 0 auto!important;align-items:center!important;
+    justify-content:space-around!important;gap:14px!important;padding:0 7px!important;
+    white-space:nowrap!important;
+  }
+  #hoeDesktopDestinationsTicker .hoe-desktop-ticker-group > :is(span,i){
+    display:inline-block!important;flex:none!important;
+    font:500 13px/24px Inter,Arial,sans-serif!important;letter-spacing:.08em!important;
+    color:#fff!important;-webkit-text-fill-color:#fff!important;
+    background:none!important;opacity:1!important;visibility:visible!important;
+    white-space:nowrap!important;font-style:normal!important;
+  }
+  @keyframes hoeDesktopTickerScrollV2{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+}
+@media screen and (min-width:761px) and (prefers-reduced-motion:reduce){
+  #hoeDesktopDestinationsTicker > .hoe-desktop-ticker-track{
+    animation:none!important;transform:none!important;min-width:0!important;width:100%!important;
+  }
+  #hoeDesktopDestinationsTicker .hoe-desktop-ticker-group{flex-wrap:wrap!important;flex:1 1 100%!important}
+  #hoeDesktopDestinationsTicker .hoe-desktop-ticker-group[aria-hidden="true"]{display:none!important}
+}
+</style>
