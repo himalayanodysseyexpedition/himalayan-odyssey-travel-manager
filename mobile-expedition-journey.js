@@ -5,7 +5,7 @@
   const mobile=matchMedia("(max-width:760px)"),reduced=matchMedia("(prefers-reduced-motion: reduce)");
   const road=panel.querySelector(".journey-route"),vehicle=panel.querySelector(".journey-vehicle");
   const markers=Array.from(panel.querySelectorAll(".journey-marker"));
-  const stamp=panel.querySelector(".journey-stamp"),stampText=stamp.querySelector("text"),themeText=panel.querySelector(".hoe-journey-theme");
+  const stamp=panel.querySelector(".journey-stamp"),stampText=stamp.querySelector("text");
   if(!road||!vehicle||!markers.length)return;
   // Schematic destination highlights, not a navigation map or a promise of included stops.
   const circuit=["Chandigarh","Shimla","Narkanda","Kalpa","Tabo","Kaza"];
@@ -38,15 +38,23 @@
     scrollPending=false;if(!mobile.matches)return;
     const next=classify(activeCard()?.textContent);
     if(next===activeTheme)return;
-    activeTheme=next;panel.dataset.theme=next;themeText.textContent=themes[next].label;
+    activeTheme=next;panel.dataset.theme=next;
     markers.forEach((m,i)=>{m.querySelector("text").textContent=themes[next].stops[i];m.style.display=themes[next].stops[i]?"":"none";});
     current=-1;draw(elapsed);
   }
   function scheduleSync(){if(!scrollPending&&mobile.matches){scrollPending=true;requestAnimationFrame(sync);}}
+  // Illustrative weather follows vehicle position in both directions, not a forecast.
+  function weatherAt(x,theme){
+    if(theme==="narkanda"||theme==="generic")return x<=62?"sunny":"clear";
+    if(x>152.05)return "snow";
+    return x<=62?"sunny":"clear";
+  }
   function draw(time){
     const t=(time%14000)/14000;
     const progress=t<.5?t*2:(1-t)*2;
     const p=road.getPointAtLength(progress*total);
+    const weather=weatherAt(p.x,activeTheme);
+    if(panel.dataset.weather!==weather)panel.dataset.weather=weather;
     vehicle.setAttribute("transform","translate("+p.x.toFixed(2)+" "+p.y.toFixed(2)+") scale("+(t<.5?1:-1)+" 1)");
     let nearest=-1,best=Infinity;
     markers.forEach((m,i)=>{if(m.style.display==="none")return;const c=m.querySelector("circle"),dx=p.x-Number(c.getAttribute("cx")),dy=p.y-Number(c.getAttribute("cy")),d=dx*dx+dy*dy;if(d<best){nearest=i;best=d;}});
