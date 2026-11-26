@@ -242,14 +242,3 @@
     init();
   }
 })();
-
-
-// Load the optional voice assistant on public pages that use shared navigation.
-(() => {
-  if (document.querySelector('script[data-hoe-voice-assistant]')) return;
-  const script = document.createElement("script");
-  script.src = "/voice-travel-assistant.js?v=10";
-  script.defer = true;
-  script.dataset.hoeVoiceAssistant = "true";
-  document.head.appendChild(script);
-})();
