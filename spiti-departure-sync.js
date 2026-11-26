@@ -75,7 +75,7 @@
           heading.textContent="Spiti Valley group tour packages: upcoming departures";
           notice.textContent=items.length?"Current advertised departures from our booking team. Confirm final prices, seats, pickup, itinerary and inclusions before booking.":"No dated upcoming group departures are currently listed. Enquire about a future group or private tour.";
           grid.replaceChildren(...items.map(card));
-          const end=main.querySelector("[data-spiti-departure-note]");if(end)end.textContent="For other dates, request a fresh group or private tour quotation.";
+          const end=main.querySelector("[data-spiti-departure-note]");if(end){const link=el("a","","private Spiti tour quotation");link.href="/spiti-valley-private-tour/";end.replaceChildren(document.createTextNode("For other dates, request a fresh group or "),link,document.createTextNode("."));}
           syncSchema(items);
         }
       }
@@ -86,7 +86,7 @@
           heading.textContent="Upcoming Winter Spiti group departure prices and dates";
           notice.textContent=matches.length?"Current advertised winter group rates. Confirm availability, pickup, return, inclusions and final quotation.":"No dated upcoming winter group departures are currently listed. Ask for a fresh quotation.";
           list.replaceChildren(...matches.map(item=>{const li=el("li");li.append(el("strong","",item.name+" — "+item.dates+": "),document.createTextNode(priceLabel(item.price)+" per person. "+item.facts.join("; ")));return li;}));
-          const note=winter.querySelector("[data-spiti-winter-note]");if(note)note.textContent="For other dates, request a fresh quotation. Road and weather conditions may change the itinerary.";
+          const note=winter.querySelector("[data-spiti-winter-note]");if(note){const link=el("a","","request a fresh quotation");link.href="#booking-quote";note.replaceChildren(document.createTextNode("For other dates, "),link,document.createTextNode(". Road and weather conditions may change the itinerary."));}
         }
       }
     } catch (_) { /* The server-rendered, explicitly dated snapshot remains readable. */ }
