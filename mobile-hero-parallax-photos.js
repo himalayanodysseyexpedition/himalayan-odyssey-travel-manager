@@ -9,6 +9,8 @@
   const photo = hero.querySelector("img.hero-ken-burns-photo");
   const pick = title => {
     const name = title.toLowerCase();
+    // Kaza winter photograph by Sayan Nath, CC0 1.0 (Wikimedia Commons).
+    if (name.includes("new year") && name.includes("spiti")) return ["https://upload.wikimedia.org/wikipedia/commons/6/6d/Buddha_In_Mountains_%28Unsplash%29.jpg","Buddha statue and snow-covered Himalayan mountains in Spiti Valley, Kaza",5472,3648];
     // Real Sangla snowfall photograph by UnpetitproleX, CC0 1.0 (Wikimedia Commons).
     if (name.includes("kinnaur") && name.includes("spiti")) return ["https://upload.wikimedia.org/wikipedia/commons/0/02/Apple_and_walnut_orchards_after_a_night_of_snowfall_in_Sangla_in_the_Kinnaur_district_of_the_northern_Indian_state_of_Himachal_Pradesh.webp","Snow-covered orchards and Himalayan mountains in Sangla, Kinnaur",960,640];
     if (name.includes("kinnaur") || name.includes("kalpa") || name.includes("sangla")) return ["/kinnaur.jpg","Kinnaur village and Himalayan mountains",1200,1600];
@@ -33,10 +35,11 @@
         img.dataset.hoePhotoSource = src;
         img.onerror = src.startsWith("https://upload.wikimedia.org/") ? () => {
           img.onerror = null;
-          img.src = "/kinnaur.jpg";
-          img.alt = "Kinnaur village and Himalayan mountains";
-          img.width = 1200;
-          img.height = 1600;
+          const isNewYearSpiti = title.toLowerCase().includes("new year") && title.toLowerCase().includes("spiti");
+          img.src = isNewYearSpiti ? "/spiti.jpg" : "/kinnaur.jpg";
+          img.alt = isNewYearSpiti ? "Snow-covered Key Monastery in Spiti Valley" : "Kinnaur village and Himalayan mountains";
+          img.width = isNewYearSpiti ? 1350 : 1200;
+          img.height = isNewYearSpiti ? 1800 : 1600;
         } : null;
         img.alt = alt;
         img.width = width;
