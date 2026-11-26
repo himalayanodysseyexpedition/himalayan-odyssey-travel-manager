@@ -631,3 +631,39 @@ html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack .hero-promo-sli
 html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack .hero-promo-slide > section.hoe-cinematic-ticket > img.hoe-promo-thumb{transform:none!important}
 }
 @media(min-width:761px) and (max-width:1000px){html[data-hoe-theme="home"] body #travel-journal .cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+
+
+/* Desktop-only centered homepage stack and persistent header. */
+@media screen and (min-width:761px){
+html[data-hoe-theme="home"]{scroll-padding-top:88px!important}
+html[data-hoe-theme="home"] body{padding-top:74px!important}
+html[data-hoe-theme="home"] body > header{
+ position:fixed!important;inset:0 0 auto!important;width:100%!important;height:74px!important;min-height:74px!important;
+ margin:0!important;transform:none!important;opacity:1!important;visibility:visible!important;z-index:1500!important;
+ background:rgba(11,11,11,.9)!important;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+}
+html[data-hoe-theme="home"] body > #home.hero#home{padding:26px clamp(20px,4vw,64px) 30px!important;background:#0b0b0b!important}
+html[data-hoe-theme="home"] body #home.hero#home > .hero-content{
+ display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;
+ gap:0!important;width:100%!important;max-width:900px!important;margin:0 auto!important;text-align:center!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home .hero-content > .hoe-reference-intro{
+ order:0!important;align-self:center!important;width:100%!important;margin:0!important;padding:0!important;text-align:center!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-eyebrow{color:#f4f1fa!important;-webkit-text-fill-color:#f4f1fa!important;margin:0 0 8px!important}
+html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-title{font:500 clamp(46px,5vw,70px)/1.03 "Bodoni Moda",Georgia,serif!important;color:#fff!important;-webkit-text-fill-color:#fff!important;text-align:center!important}
+html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-destinations{color:#f5f5f5!important;-webkit-text-fill-color:#f5f5f5!important;margin:12px 0 0!important}
+html[data-hoe-theme="home"] body #home.hero#home .hero-content > .hoe-reference-services{
+ order:1!important;align-self:center!important;width:min(100%,560px)!important;max-width:560px!important;
+ margin:20px auto 12px!important;gap:12px!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-services > a{min-height:80px!important}
+html[data-hoe-theme="home"] body #home.hero#home .hero-content > #heroPromoCarousel.hero-promo-carousel{
+ order:2!important;align-self:center!important;width:min(100%,560px)!important;max-width:560px!important;margin:0 auto!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home .hero-content > .hero-destination-list{
+ order:3!important;align-self:center!important;width:100%!important;max-width:900px!important;margin:4px auto 0!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket :is(.mobile-departure-kicker,.mobile-departure-facts span,.mobile-departure-date,.mobile-departure-date span,.mobile-departure-price,.mobile-departure-price small){color:#f5f5f5!important;-webkit-text-fill-color:#f5f5f5!important}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket .mobile-departure-seats :is(strong,span){color:#e6d1ff!important;-webkit-text-fill-color:#e6d1ff!important}
+}
