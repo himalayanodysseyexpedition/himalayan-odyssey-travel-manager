@@ -699,3 +699,19 @@ html[data-hoe-theme="home"] body > #home.hero#home > .hero-content > .hoe-refere
 html[data-hoe-theme="home"] body > #home.hero#home > .hero-content > .hoe-reference-intro > .hoe-reference-eyebrow{margin-bottom:8px!important;color:#f4f1fa!important;-webkit-text-fill-color:#f4f1fa!important}
 html[data-hoe-theme="home"] body > #home.hero#home > .hero-content > .hoe-reference-intro > .hoe-reference-destinations{margin-top:12px!important;color:#f5f5f5!important;-webkit-text-fill-color:#f5f5f5!important}
 }
+
+
+/* Desktop homepage enquiry heading: center all three copy lines, leave the form untouched. */
+@media screen and (min-width:761px){
+html[data-hoe-theme="home"] body > #contact.cta > :is(small,h2,p){
+ display:block!important;position:relative!important;inset:auto!important;float:none!important;
+ width:100%!important;max-width:none!important;box-sizing:border-box!important;
+ margin-inline:auto!important;padding-inline:0!important;text-align:center!important;text-indent:0!important;transform:none!important;
+}
+html[data-hoe-theme="home"] body > #contact.cta > small{
+ color:#b58aff!important;-webkit-text-fill-color:#b58aff!important;
+}
+html[data-hoe-theme="home"] body > #contact.cta > :is(h2,p){
+ color:#fff!important;-webkit-text-fill-color:#fff!important;
+}
+}
