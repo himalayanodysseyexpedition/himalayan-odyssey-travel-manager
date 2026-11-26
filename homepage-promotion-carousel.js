@@ -36,6 +36,21 @@
     setActive(index);
   };
 
+  if (slides.length > 1) {
+    for (const [direction, step] of [['previous', -1], ['next', 1]]) {
+      const arrow = document.createElement('button');
+      arrow.type = 'button';
+      arrow.className = 'hero-promo-arrow hero-promo-arrow-' + direction;
+      arrow.setAttribute('aria-label', direction === 'next' ? 'Next departure' : 'Previous departure');
+      arrow.setAttribute('aria-controls', track.id);
+      arrow.addEventListener('click', () => {
+        pauseForInteraction();
+        goTo((activeIndex + step + slides.length) % slides.length);
+      });
+      carousel.appendChild(arrow);
+    }
+  }
+
   // Mobile hero promotions advance automatically every 3 seconds.
   // Manual swipe, focus, hover, open itinerary details and hidden tabs pause the rotation.
   const autoAdvanceEnabled = window.matchMedia('(max-width: 760px)').matches &&
