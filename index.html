@@ -2350,6 +2350,7 @@ loadHotels();
    const record=(window.hoePackageRecords||[]).find(item=>String(item.id)===String(card.dataset.packageId));
    const packageName=record?.name||record?.destination||"Himalayan tour package";
    const message="Hello Himalayan Odyssey Expedition, I am interested in the "+packageName+" package. Please share the full itinerary, dates, inclusions, availability and booking details.";
+   window.HOEAnalytics?.track("whatsapp_click", { enquiry_service: "tour_package", page_path: location.pathname });
    window.location.href="https://wa.me/919816929669?text="+encodeURIComponent(message);
    return;
   }
@@ -2358,6 +2359,7 @@ loadHotels();
    const heading=card.querySelector(".card-body h3");
    const itineraryName=heading?heading.textContent.trim():"Himalayan tour itinerary";
    const message="Hello Himalayan Odyssey Expedition, I am interested in the "+itineraryName+" itinerary. Please share the full details, dates, inclusions, availability and booking information.";
+   window.HOEAnalytics?.track("whatsapp_click", { enquiry_service: "itinerary", page_path: location.pathname });
    window.location.href="https://wa.me/919816929669?text="+encodeURIComponent(message);
    return;
   }
@@ -2482,6 +2484,7 @@ loadHotels();
     const location = card.querySelector(".hotel-location")?.textContent.replace(/^📍\s*/, "").trim() || "Himachal Pradesh";
     const message = "Hello Himalayan Odyssey Expedition, I am interested in enquiring about " +
       name + " in " + location + ". Please share room options, rates, availability and booking details.";
+    window.HOEAnalytics?.track("whatsapp_click", { enquiry_service: "accommodation", page_path: location.pathname });
     window.location.href = "https://wa.me/919816929669?text=" + encodeURIComponent(message);
   });
 })();
