@@ -60,6 +60,110 @@ main{background:transparent;padding-top:24px}
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Inter:wght@400;500;600;700;800&display=swap" media="(max-width: 760px)">
 <link rel="stylesheet" href="/hoe-mobile-hero-theme.css?v=11" media="(max-width: 760px)">
 <script src="/hoe-shared-header-scroll.js?v=1" defer></script>
+<style id="hoe-itinerary-mobile-refinement">
+/* Page-local mobile styling; shared header, dock and desktop remain untouched. */
+@media (max-width:760px){
+  html[data-hoe-theme="page"] body main:has(#itineraryContent){
+    background:#0b0b0b!important;
+    width:100%;max-width:100%;padding:22px clamp(14px,4.5vw,30px) 96px!important;box-sizing:border-box;
+  }
+  html[data-hoe-theme="page"] body main:has(#itineraryContent) .back{
+    color:#e7d9fa!important;-webkit-text-fill-color:#e7d9fa!important;
+    display:inline-flex!important;align-items:center;min-height:44px;margin:0 0 12px!important;
+    font:700 11px/1.4 Inter,Arial,sans-serif!important;letter-spacing:.07em!important;
+  }
+  html[data-hoe-theme="page"] body main #itineraryContent{
+    --it-purple:#7841c6;--it-label:#d3afff;--it-border:#7841c699;
+    color:#fff!important;min-width:0;width:100%;
+  }
+  html[data-hoe-theme="page"] body main #itineraryContent .journey-heading{
+    display:block;padding:24px 18px!important;margin:0 0 16px!important;
+    text-align:center;background:linear-gradient(150deg,#19131f,#101010 70%)!important;
+    border:1px solid var(--it-border)!important;border-radius:18px!important;
+    box-shadow:0 5px 20px #7841c61c!important;
+  }
+  html[data-hoe-theme="page"] body main #itineraryContent :is(.eyebrow,.section-kicker){
+    color:var(--it-label)!important;-webkit-text-fill-color:var(--it-label)!important;
+    font:700 10px/1.5 Inter,Arial,sans-serif!important;letter-spacing:.12em!important;
+    text-transform:uppercase;overflow-wrap:anywhere;
+  }
+  html[data-hoe-theme="page"] body main #itineraryContent .journey-heading h1{
+    font:500 clamp(28px,8vw,42px)/1.16 "Bodoni Moda",Georgia,serif!important;
+    color:#fff!important;-webkit-text-fill-color:#fff!important;
+    margin:12px 0!important;max-width:none!important;text-wrap:balance;overflow-wrap:anywhere;
+  }
+  html[data-hoe-theme="page"] body main #itineraryContent :is(p,.hero-destination,.price small,.price span){
+    color:#e2e2e2!important;-webkit-text-fill-color:#e2e2e2!important;
+    font:400 13px/1.65 Inter,Arial,sans-serif!important;overflow-wrap:anywhere;
+  }
+  html[data-hoe-theme="page"] body main #itineraryContent #itineraryNotice{margin:0!important;text-align:center;}
+  html[data-hoe-theme="page"] body main #itineraryContent .days{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important;}
+  html[data-hoe-theme="page"] body main #itineraryContent .day{
+    display:grid!important;grid-template-columns:48px minmax(0,1fr)!important;
+    align-items:stretch!important;gap:0!important;padding:0!important;margin:0!important;
+    min-width:0;overflow:hidden;background:#151515!important;
+    border:1px solid var(--it-border)!important;border-radius:15px!important;box-shadow:0 3px 12px #7841c616!important;
+  }
+  html[data-hoe-theme="page"] body main #itineraryContent .day-number{
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    padding:12px 4px!important;margin:0!important;text-align:center;
+    background:#2a173f!important;border-right:1px solid #7841c66b;
+    color:var(--it-label)!important;-webkit-text-fill-color:var(--it-label)!important;
+    font:750 13px/1.4 Inter,Arial,sans-serif!important;overflow-wrap:anywhere;
+  }
+  html[data-hoe-theme="page"] body main #itineraryContent .day-content{
+    min-width:0;display:flex!important;flex-direction:column;align-items:stretch;
+    gap:8px;padding:16px 14px!important;text-align:left!important;
+  }
+  html[data-hoe-theme="page"] body main #itineraryContent :is(.day-content h3,.intro h2,.cta h2){
+    color:#fff!important;-webkit-text-fill-color:#fff!important;
+    font:600 17px/1.35 Inter,Arial,sans-serif!important;
+    margin:0!important;overflow-wrap:anywhere;
+  }
+  html[data-hoe-theme="page"] body main #itineraryContent .day-content p{margin:0!important;}
+  html[data-hoe-theme="page"] body main #itineraryContent :is(.intro,.status){
+    background:#151515!important;border:1px solid var(--it-border)!important;
+    color:#fff!important;border-radius:15px!important;padding:18px!important;
+  }
+  html[data-hoe-theme="page"] body main #itineraryContent .intro p{margin:8px 0 0!important;}
+  html[data-hoe-theme="page"] body main #itineraryContent :is(.overnight,.destination-mark){
+    color:var(--it-label)!important;-webkit-text-fill-color:var(--it-label)!important;
+  }
+  html[data-hoe-theme="page"] body main #itineraryContent .journey-facts{align-items:center!important;justify-content:center!important;}
+  html[data-hoe-theme="page"] body main #itineraryContent :is(.meta,.hero-destination){justify-content:center!important;}
+  html[data-hoe-theme="page"] body main #itineraryContent .meta span{
+    background:#21172e!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+    border:1px solid var(--it-border)!important;white-space:normal!important;
+  }
+  html[data-hoe-theme="page"] body main #itineraryContent .cta{
+    display:flex!important;flex-direction:column;align-items:stretch!important;gap:14px!important;
+    text-align:center!important;margin:20px 0 0!important;padding:22px 18px!important;
+    border:1px solid var(--it-border)!important;border-radius:18px!important;background:#17121e!important;
+  }
+  html[data-hoe-theme="page"] body main #itineraryContent .cta p{margin:8px 0 0!important;}
+  html[data-hoe-theme="page"] body main #itineraryContent a.btn{
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    width:100%!important;max-width:100%!important;min-height:46px!important;height:auto!important;
+    box-sizing:border-box;padding:12px 10px!important;margin:5px 0 0!important;
+    border:1px solid #fff!important;border-radius:10px!important;
+    background:#fff!important;background-image:none!important;color:#0b0b0b!important;-webkit-text-fill-color:#0b0b0b!important;
+    font:750 12px/1.35 Inter,Arial,sans-serif!important;letter-spacing:.035em!important;
+    text-transform:uppercase;text-align:center!important;white-space:normal!important;overflow-wrap:anywhere;
+    box-shadow:none!important;text-decoration:none!important;transform:none!important;
+  }
+  html[data-hoe-theme="page"] body main #itineraryContent .cta a.btn{
+    background:var(--it-purple)!important;border-color:var(--it-purple)!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+  }
+  html[data-hoe-theme="page"] body main #itineraryContent a.btn:is(:hover,:active){
+    background:#55299b!important;border-color:#55299b!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+  }
+  html[data-hoe-theme="page"] body main #itineraryContent a.btn:focus-visible{outline:2px solid #d3afff;outline-offset:3px;}
+  @media(max-width:360px){
+    html[data-hoe-theme="page"] body main #itineraryContent .day{grid-template-columns:40px minmax(0,1fr)!important;}
+    html[data-hoe-theme="page"] body main #itineraryContent .day-content{padding:13px 11px!important;}
+  }
+}
+</style>
 </head><body>
 <div class="hoe-shared-mobile-header" role="banner" hidden><div class="hoe-shared-header-inner"><a class="hoe-shared-brand" href="/" aria-label="Himalayan Odyssey Expedition — Home"><img src="/hoe-home-header-3d.webp" width="280" height="103" alt="Himalayan Odyssey Expedition"></a></div></div>
 
