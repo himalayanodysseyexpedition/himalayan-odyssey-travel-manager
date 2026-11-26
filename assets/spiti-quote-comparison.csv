@@ -1,0 +1,12 @@
+Budget item,Quote A (INR),Quote B (INR),What to confirm
+Number of travellers,,,Use same group size for both quotes
+Package total,,,Compare group totals not mixed per-person prices
+Excluded connecting transport,,,Home city to joining point and return
+Excluded accommodation,,,Extra nights or room supplement
+Excluded meals,,,Count meals not included in package
+Excluded sightseeing and transfers,,,Entry fees and local vehicle if not included
+Excluded taxes and charges,,,Confirm final payable amount
+Contingency reserve,,,Weather delay and route change reserve
+Personal expenses,,,Insurance and personal purchases
+Estimated total,,,Add package total and excluded costs only; avoid double counting
+Estimated per person,,,Divide estimated total by number of travellers
