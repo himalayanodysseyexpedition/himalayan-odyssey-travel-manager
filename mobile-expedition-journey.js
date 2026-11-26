@@ -8,13 +8,13 @@
   const stamp=panel.querySelector(".journey-stamp"),stampText=stamp.querySelector("text"),themeText=panel.querySelector(".hoe-journey-theme");
   if(!road||!vehicle||!markers.length)return;
   // Schematic destination highlights, not a navigation map or a promise of included stops.
-  const circuit=["Narkanda","Sangla","Tabo","Kaza","Kalpa"];
+  const circuit=["Chandigarh","Shimla","Narkanda","Kalpa","Tabo","Kaza"];
   const themes={
     winter:{label:"WINTER SPITI",stops:circuit},
     kinnaur:{label:"KINNAUR & SPITI",stops:circuit},
     newyear:{label:"NEW YEAR SPITI",stops:circuit},
-    narkanda:{label:"NARKANDA",stops:["","", "Narkanda","",""]},
-    generic:{label:"HIMALAYAN JOURNEY",stops:["","","","",""]}
+    narkanda:{label:"NARKANDA",stops:["","","Narkanda","","",""]},
+    generic:{label:"HIMALAYAN JOURNEY",stops:["","","","","",""]}
   };
   function classify(title){
     const n=String(title||"").toLowerCase();
