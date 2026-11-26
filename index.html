@@ -3362,7 +3362,8 @@ html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cin
 <style id="hoe-desktop-destinations-ticker-v2">
 #hoeDesktopDestinationsTicker{display:none!important}
 @media screen and (min-width:761px){
-  html body #home.hero#home > .hero-content > .hero-destination-list{display:none!important}
+  html body #home.hero#home > .hero-content > .hero-destination-list,
+  html[data-hoe-theme="home"] body > #home.hero#home > .hero-content > .hero-destination-list{display:none!important}
   html body #home.hero#home > .hero-content > #hoeDesktopDestinationsTicker{
     display:block!important;position:relative!important;inset:auto!important;
     order:3!important;grid-column:1/-1!important;align-self:center!important;
