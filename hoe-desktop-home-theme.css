@@ -667,3 +667,35 @@ html[data-hoe-theme="home"] body #home.hero#home .hero-content > .hero-destinati
 html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket :is(.mobile-departure-kicker,.mobile-departure-facts span,.mobile-departure-date,.mobile-departure-date span,.mobile-departure-price,.mobile-departure-price small){color:#f5f5f5!important;-webkit-text-fill-color:#f5f5f5!important}
 html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket .mobile-departure-seats :is(strong,span){color:#e6d1ff!important;-webkit-text-fill-color:#e6d1ff!important}
 }
+
+
+/* Desktop homepage: center the complete intro on the page axis, with an engraved single-line title. */
+@media screen and (min-width:761px){
+html[data-hoe-theme="home"] body > #home.hero#home > .hero-content{
+  box-sizing:border-box!important;position:relative!important;inset:auto!important;
+  width:100%!important;max-width:900px!important;margin-inline:auto!important;
+  padding-inline:0!important;transform:none!important;align-items:center!important;
+}
+html[data-hoe-theme="home"] body > #home.hero#home > .hero-content > .hoe-reference-intro{
+  display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+  position:relative!important;inset:auto!important;box-sizing:border-box!important;
+  width:100%!important;min-width:0!important;max-width:100%!important;
+  margin:0 auto!important;padding:0!important;transform:none!important;text-align:center!important;
+}
+html[data-hoe-theme="home"] body > #home.hero#home > .hero-content > .hoe-reference-intro > :is(.hoe-reference-eyebrow,.hoe-reference-title,.hoe-reference-destinations){
+  display:block!important;position:static!important;inset:auto!important;float:none!important;
+  width:100%!important;min-width:0!important;max-width:none!important;box-sizing:border-box!important;
+  margin-inline:0!important;padding-inline:0!important;text-align:center!important;text-indent:0!important;transform:none!important;
+}
+html[data-hoe-theme="home"] body > #home.hero#home > .hero-content > .hoe-reference-intro > .hoe-reference-title{
+  font:700 clamp(34px,5.1vw,70px)/1.15 "Bodoni Moda",Georgia,serif!important;
+  white-space:nowrap!important;letter-spacing:-.035em!important;
+  color:#dedde0!important;-webkit-text-fill-color:#dedde0!important;
+  background:none!important;opacity:1!important;
+  text-shadow:0 -1px 0 #181818,1px -1px 0 #262329,0 1px 0 #ffffffb0,1px 2px 0 #8f8a94,2px 3px 0 #37333b,0 4px 9px #000c!important;
+  -webkit-text-stroke:.25px #a6a1aa!important;
+}
+html[data-hoe-theme="home"] body > #home.hero#home > .hero-content > .hoe-reference-intro > .hoe-reference-title > br{display:none!important}
+html[data-hoe-theme="home"] body > #home.hero#home > .hero-content > .hoe-reference-intro > .hoe-reference-eyebrow{margin-bottom:8px!important;color:#f4f1fa!important;-webkit-text-fill-color:#f4f1fa!important}
+html[data-hoe-theme="home"] body > #home.hero#home > .hero-content > .hoe-reference-intro > .hoe-reference-destinations{margin-top:12px!important;color:#f5f5f5!important;-webkit-text-fill-color:#f5f5f5!important}
+}
