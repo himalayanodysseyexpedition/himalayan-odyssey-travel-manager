@@ -6,6 +6,10 @@
   const slides = Array.from(track.querySelectorAll('.hero-promo-slide'));
   const dots = Array.from(carousel.querySelectorAll('.hero-promo-pagination button'));
   if (!slides.length || slides.length !== dots.length) return;
+  const desktop = window.matchMedia('(min-width: 761px)');
+  const lastIndex = () => Math.max(0, slides.length - (desktop.matches ? 3 : 1));
+  const canNavigate = () => lastIndex() > 0;
+  carousel.classList.toggle('has-fourth-promotion', slides.length > 3);
   let activeIndex = 0, ticking = false;
   // Keep the viewport tall enough for whichever departure has the tallest content.
   // This prevents the longer card from being clipped when it is swiped into view.
@@ -21,7 +25,7 @@
     }
   };
   const setActive = (index) => {
-    activeIndex = Math.max(0, Math.min(index, slides.length - 1));
+    activeIndex = Math.max(0, Math.min(index, lastIndex()));
     dots.forEach((dot, i) => {
       dot.classList.toggle('is-active', i === activeIndex);
       if (i === activeIndex) dot.setAttribute('aria-current', 'true');
@@ -30,9 +34,11 @@
     updateHeight();
   };
   const goTo = (index) => {
+    index = Math.max(0, Math.min(index, lastIndex()));
     const slide = slides[index];
     if (!slide) return;
-    track.scrollTo({left:slide.offsetLeft,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    const left = desktop.matches ? slide.offsetLeft - slides[0].offsetLeft : slide.offsetLeft;
+    track.scrollTo({left,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
     setActive(index);
   };
 
@@ -45,7 +51,9 @@
       arrow.setAttribute('aria-controls', track.id);
       arrow.addEventListener('click', () => {
         pauseForInteraction();
-        goTo((activeIndex + step + slides.length) % slides.length);
+        if (!canNavigate()) return;
+        const count = lastIndex() + 1;
+        goTo((activeIndex + step + count) % count);
       });
       carousel.appendChild(arrow);
     }
@@ -53,14 +61,14 @@
 
   // Mobile hero promotions advance automatically every 3 seconds.
   // Manual swipe, focus, hover, open itinerary details and hidden tabs pause the rotation.
-  const autoAdvanceEnabled = window.matchMedia('(max-width: 760px)').matches &&
+  const autoAdvanceEnabled = () => !desktop.matches &&
     !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let autoAdvanceTimer = null;
   let interactionPaused = false;
   let hoverPaused = false;
   const scheduleAutoAdvance = () => {
     window.clearTimeout(autoAdvanceTimer);
-    if (!autoAdvanceEnabled || slides.length < 2 || interactionPaused || hoverPaused ||
+    if (!autoAdvanceEnabled() || slides.length < 2 || interactionPaused || hoverPaused ||
         document.hidden || (window.matchMedia('(hover: hover) and (pointer: fine)').matches && carousel.matches(':hover')) ||
         carousel.contains(document.activeElement) ||
         carousel.querySelector('.mobile-departure-itinerary-details[open]') ||
@@ -97,7 +105,8 @@
       const center=track.scrollLeft+track.clientWidth/2;
       let nearest=0,distance=Infinity;
       slides.forEach((slide,index)=>{
-        const d=Math.abs(center-(slide.offsetLeft+slide.offsetWidth/2));
+        if (index > lastIndex()) return;
+        const d=desktop.matches ? Math.abs(track.scrollLeft-(slide.offsetLeft-slides[0].offsetLeft)) : Math.abs(center-(slide.offsetLeft+slide.offsetWidth/2));
         if(d<distance){distance=d;nearest=index;}
       });
       setActive(nearest);ticking=false;
@@ -107,6 +116,7 @@
   let startX=0,startScroll=0,dragging=false;
   track.addEventListener('pointerdown',(e)=>{
     if(e.pointerType!=='mouse'||e.button!==0)return;
+    if(desktop.matches && (!canNavigate() || e.target.closest('a,button,summary,input,select,textarea'))) return;
     dragging=true;startX=e.clientX;startScroll=track.scrollLeft;
     track.classList.add('is-dragging');track.setPointerCapture(e.pointerId);
   });
@@ -119,7 +129,13 @@
     const details = slide.querySelector('.mobile-departure-itinerary-details');
     if (details) details.addEventListener('toggle', () => updateHeight());
   });
-  window.addEventListener('resize',()=>updateHeight(),{passive:true});
+  window.addEventListener('resize',()=>{setActive(activeIndex);},{passive:true});
+  desktop.addEventListener('change',()=>{
+    stopDrag();
+    track.scrollTo({left:0,behavior:'instant'});
+    setActive(0);
+    scheduleAutoAdvance();
+  });
   if('ResizeObserver'in window){
     const observer=new ResizeObserver(()=>updateHeight());
     slides.forEach(slide=>{const card=slide.querySelector('.mobile-next-departure');if(card)observer.observe(card);});

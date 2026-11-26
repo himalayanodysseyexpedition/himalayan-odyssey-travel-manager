@@ -751,3 +751,61 @@ html[data-hoe-theme="home"] body > #home.hero#home > .hero-content > .hero-desti
 }
 html[data-hoe-theme="home"] body > #home.hero#home > .hero-content > .hero-destination-list .hero-destination-track > :nth-child(n+14){display:none!important}
 }
+
+/* Desktop hero: show three promotions together; only overflow after card three. */
+@media screen and (min-width:761px){
+html[data-hoe-theme="home"] body > #home.hero#home > .hero-content{
+  max-width:1180px!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home .hero-content > #heroPromoCarousel.hero-promo-carousel{
+  width:100%!important;max-width:1140px!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack.hero-promo-track{
+  gap:12px!important;padding:12px 10px 14px!important;
+  scroll-padding-inline:10px!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack > .hero-promo-slide{
+  flex:0 0 calc((100% - 24px)/3)!important;
+  width:calc((100% - 24px)/3)!important;
+  min-width:0!important;max-width:calc((100% - 24px)/3)!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoCarousel:not(.has-fourth-promotion) #heroPromoTrack{
+  justify-content:center!important;overflow-x:hidden!important;scroll-snap-type:none!important;
+  touch-action:pan-y!important;cursor:default!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoCarousel:not(.has-fourth-promotion) > .hero-promo-arrow,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoCarousel:not(.has-fourth-promotion) .hero-promo-pagination,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoCarousel.has-fourth-promotion .hero-promo-pagination button:nth-last-child(-n+2){
+  display:none!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack .hero-promo-slide > section.mobile-next-departure.hoe-cinematic-ticket{
+  box-sizing:border-box!important;width:100%!important;min-width:0!important;
+  padding:11px 10px 12px!important;gap:6px!important;border-radius:18px!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack .hero-promo-slide > section.hoe-cinematic-ticket > img.hoe-promo-thumb{
+  inset:-11px -10px 0!important;width:calc(100% + 20px)!important;height:calc(100% + 11px)!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack .hero-promo-slide > section.hoe-cinematic-ticket::before{
+  inset:-11px -10px 0!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > h2{
+  font-size:clamp(20px,2.35vw,32px)!important;min-height:clamp(67px,7vw,90px)!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-date{
+  font-size:clamp(10px,1.05vw,12px)!important;padding:7px 6px!important;top:0!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-facts span,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-seats :is(strong,span){
+  font-size:clamp(10px,1vw,11px)!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .hoe-ticket-route li{
+  font-size:9px!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > .mobile-departure-price{
+  font-size:clamp(23px,2.35vw,30px)!important;
+}
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > a.mobile-departure-cta,
+html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cinematic-ticket > details.mobile-departure-itinerary-details > summary.mobile-departure-cta{
+  font-size:clamp(10px,1vw,11px)!important;min-height:40px!important;white-space:normal!important;
+}
+}
