@@ -72,19 +72,20 @@ main{background:transparent;padding-top:24px}
 </nav>
 
 </div></header>
-<main><a class="back" href="/#itineraries">← Back to all itineraries</a><div id="itineraryContent"><div class="status">Loading your Himalayan journey…</div></div></main>
+<main><a class="back" href="/itinerary.html">← Back to all itineraries</a><div id="itineraryContent"><section class="journey-heading"><div class="eyebrow">HIMALAYAN ODYSSEY EXPEDITION / TOUR PLANNING</div><h1>Himalayan Tour Itineraries</h1><p id="itineraryNotice">Explore our current tour options and detailed route guides. Confirm dates, road conditions and availability before booking.</p></section><section class="days" aria-label="Available tour routes and planning guides"><article class="day"><div class="day-number">01</div><div class="day-content"><h3>Spiti Valley — 8-day route</h3><p>Explore the day-wise route and current group and private tour options.</p><a class="btn" href="/spiti-valley-tours/#eight-day-itinerary">View itinerary</a></div></article><article class="day"><div class="day-number">02</div><div class="day-content"><h3>Winter Spiti Expedition</h3><p>Review winter route planning and current departure options.</p><a class="btn" href="/winter-spiti-tours/#winter-sample-itinerary">View itinerary</a></div></article><article class="day"><div class="day-number">03</div><div class="day-content"><h3>Kinnaur — 5-day planning guide</h3><p>Explore Kalpa, Sangla and Chitkul with a flexible day-wise plan.</p><a class="btn" href="/blog/kinnaur-5-day-itinerary-2027/">View itinerary</a></div></article><article class="day"><div class="day-number">04</div><div class="day-content"><h3>Narkanda tours</h3><p>Explore local trips, stays and tour planning options.</p><a class="btn" href="/narkanda-tours/">Explore tours</a></div></article></section><section class="cta"><div><h2>Plan your Himalayan trip</h2><p>Ask our team for a personalised itinerary and current availability.</p></div><a class="btn" href="https://wa.me/919816929669" target="_blank" rel="noopener">Enquire on WhatsApp</a></section></div></main>
 <footer>HIMALAYAN ODYSSEY EXPEDITION · NARKANDA, HIMACHAL PRADESH · +91 98169 29669</footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
 (function(){
- const db=window.supabase.createClient("https://ynkoiuyjevclypumnyes.supabase.co","sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-");
  const root=document.getElementById("itineraryContent"),id=new URLSearchParams(location.search).get("id");
  const safe=v=>String(v==null?"":v).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]});
  const money=v=>{const n=Number(v);return Number.isFinite(n)?"₹"+n.toLocaleString("en-IN"):safe(v)};
  const wa=t=>"https://wa.me/919816929669?text="+encodeURIComponent("Hello Himalayan Odyssey Expedition, I am interested in "+t+". Please share availability and booking details.");
- function fail(){const robots=document.querySelector('meta[name="robots"]');if(robots)robots.content="noindex,follow";root.innerHTML='<div class="status"><h2>Itinerary not available</h2><p>This itinerary may have been unpublished or the link is incorrect. Please contact our team for the latest tour details.</p><a class="btn" href="'+wa("your Himalayan tours")+'" target="_blank" rel="noopener">Ask on WhatsApp</a></div>'}
- if(!id){fail();return}
+ function fail(){const notice=document.getElementById("itineraryNotice");if(notice)notice.textContent="This older itinerary link is no longer available. Explore the current tour routes below, or contact our team for the latest itinerary.";}
+ if(!id)return;
  (async function(){
   try{
+   if(!window.supabase || !/^\d+$/.test(id)){fail();return;}
+   const db=window.supabase.createClient("https://ynkoiuyjevclypumnyes.supabase.co","sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-");
    const r=await db.from("itineraries").select("id,title,destination,duration_days,duration_nights,price,summary,cover_image,gallery_images,published").eq("id",id).eq("published",true).maybeSingle();
    if(r.error)throw r.error;if(!r.data){fail();return}const item=r.data;
    const d=await db.from("itinerary_days").select("day_number,title,description,overnight_location").eq("itinerary_id",id).order("day_number",{ascending:true});if(d.error)throw d.error;
