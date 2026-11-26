@@ -16,7 +16,7 @@
   const fallback = content.innerHTML, fallbackTitle = title.textContent, fallbackEyebrow = eyebrow.textContent;
   const style = document.createElement("style");
   style.textContent = `
-@media(max-width:760px){
+@media(max-width:760px), (min-width:761px){
 #promo-itinerary-modal{padding:12px!important;align-items:center!important;background:rgba(6,4,10,.79)!important}
 #promo-itinerary-modal .promo-itinerary-dialog{width:100%!important;max-height:91vh!important;max-height:91dvh!important;min-height:0!important;background:#101014!important;color:#fff!important;border:1px solid #b681ef!important;border-radius:23px!important;box-shadow:0 0 22px #8b38cc55,inset 0 0 16px #a257db22,0 24px 70px #000a!important}
 #promo-itinerary-modal .promo-itinerary-head{min-height:108px;padding:20px 15px!important;gap:10px!important;background:linear-gradient(90deg,#0b0b12f5,#11101bd0 58%,#0d0d1555),var(--journey-cover,url('/spiti.jpg')) center 44%/cover!important;border-bottom:1px solid #b681ef44!important;align-items:flex-start!important}
@@ -60,7 +60,22 @@
 #promo-itinerary-modal .journey-footer[hidden]{display:none!important}
 @media(prefers-reduced-motion:reduce){#promo-itinerary-modal .journey-rail{display:none}#promo-itinerary-modal .promo-itinerary-scroll{padding-right:12px!important;scrollbar-width:thin!important}#promo-itinerary-modal .promo-itinerary-scroll::-webkit-scrollbar{display:block;width:4px}}
 }
-@media(min-width:761px){#promo-itinerary-modal .journey-rail,#promo-itinerary-modal .journey-footer,#promo-itinerary-modal .journey-thumb{display:none!important}#promo-itinerary-modal .journey-scroll-wrap{display:contents}}
+@media(min-width:761px){
+#promo-itinerary-modal .promo-itinerary-dialog{width:min(720px,100%)!important;max-height:min(88dvh,850px)!important}
+#promo-itinerary-modal .promo-itinerary-head{padding:24px 24px!important;min-height:118px}
+#promo-itinerary-modal .promo-itinerary-head h2{font-size:32px!important}
+#promo-itinerary-modal .promo-itinerary-scroll{padding:18px 56px 24px 24px!important}
+#promo-itinerary-modal .promo-day-card{grid-template-columns:82px minmax(0,1fr);padding:16px!important;gap:8px 14px}
+#promo-itinerary-modal .promo-day-card .journey-thumb{width:82px;height:78px}
+#promo-itinerary-modal .promo-day-card h4{font-size:21px!important}
+#promo-itinerary-modal .promo-day-card .promo-day-description{font-size:14px!important}
+#promo-itinerary-modal .journey-rail{right:12px}
+#promo-itinerary-modal .journey-footer{padding:14px 24px}
+#promo-itinerary-modal .journey-footer a{font-size:13px!important}
+#promo-itinerary-modal .promo-itinerary-text ol li strong,#promo-itinerary-modal .promo-itinerary-text ol li span{color:#e9e4ee!important;-webkit-text-fill-color:#e9e4ee!important}
+#promo-itinerary-modal .journey-rail[hidden]{display:none!important}
+@media(prefers-reduced-motion:reduce){#promo-itinerary-modal .promo-itinerary-scroll{padding-right:24px!important}}
+}
 `;
   document.head.appendChild(style);
   const wrap = document.createElement("div");
@@ -83,7 +98,7 @@
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
   const updateJourney = () => {
     frame = 0;
-    if (!modal.classList.contains("is-open") || !window.matchMedia("(max-width:760px)").matches || reduced.matches) return;
+    if (!modal.classList.contains("is-open") || reduced.matches) return;
     const max = Math.max(0, scroll.scrollHeight - scroll.clientHeight);
     const top = Math.max(0, scroll.scrollTop);
     const progress = max ? Math.min(1, top / max) : 0;
@@ -145,7 +160,7 @@
         card.className = "promo-day-card";
         const heading = document.createElement("h4");
         heading.textContent = "DAY " + (day.day_number || index + 1) + (day.heading ? " · " + day.heading : "");
-        if (window.matchMedia("(max-width:760px)").matches) {
+        {
           const route = day.heading.split(/→| to |—/i).pop() || day.heading;
           const src = photoFor(day.overnight_stay || route);
           if (src) {
@@ -316,14 +331,35 @@
 
   track.addEventListener("click", event => {
     const trigger = event.target.closest(".mobile-departure-itinerary");
-    if (!trigger || !window.matchMedia("(max-width: 760px)").matches) return;
+    if (!trigger) return;
     event.preventDefault();
     const card = trigger.closest(".mobile-next-departure");
     const id = card && card.dataset.promoId;
     const records = Array.isArray(window.heroPromoRecords) ? window.heroPromoRecords : [];
     const record = records.find(item => String(item.id) === String(id || trigger.dataset.itineraryPromo));
     requestVersion++;
-    open(record || null, trigger);
+    // The database-backed record is preferred. On desktop, preserve the
+    // second card's own static itinerary if promotions have not loaded yet.
+    let selected = record || null;
+    if (!selected && window.matchMedia("(min-width:761px)").matches && card) {
+      const rows = Array.from(card.querySelectorAll(".mobile-departure-itinerary-list > p"));
+      if (rows.length) {
+        const items = rows.map((row,index) => {
+          const day = row.querySelector("strong");
+          const description = row.textContent.slice(day ? day.textContent.length : 0).trim();
+          return {day_number:index+1,heading:description,description:""};
+        });
+        selected = {
+          title_line1:card.querySelector("h2")?.innerText.replace(/\s+/g," ").trim() || "Group Tour",
+          date_label:card.querySelector(".mobile-departure-date")?.textContent.trim(),
+          facts:Array.from(card.querySelectorAll(".mobile-departure-facts span"),item=>item.textContent.trim()),
+          itinerary_items:items,
+          cover_image:card.querySelector("img.hoe-promo-thumb")?.getAttribute("src"),
+          cta_url:card.querySelector('a[href*="wa.me/"]')?.href
+        };
+      }
+    }
+    open(selected, trigger);
   });
 
   closeButton.addEventListener("click", close);
