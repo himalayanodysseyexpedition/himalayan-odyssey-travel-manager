@@ -2,11 +2,23 @@
    Leave analytics-config.json measurementId empty until the GA4 property is ready. */
 (() => {
   const pendingEvents = [];
+  // Use page intent as a fallback for public landing-page enquiries.
+  const pageService = (path) => {
+    const slug = String(path || "").replace(/^\/+|\/+$/g, "");
+    if (/^blog(?:\/|$)/.test(slug)) return "travel_guide";
+    if (/(?:taxi|cab)/.test(slug)) return "cab";
+    if (/(?:hotels|homestays)/.test(slug)) return "accommodation";
+    if (slug === "himachal-b2b-tour-operator") return "b2b";
+    if (/(?:places-to-visit|best-time-to-visit)/.test(slug)) return "destination";
+    if (/(?:tour|trip|expedition)/.test(slug)) return "tour_package";
+    return "general";
+  };
+
   const track = (eventName, parameters = {}) => {
     if (eventName === "whatsapp_click") {
       const service = parameters.enquiry_service ||
         (parameters.form_name === "website_enquiry" ? "website_form" :
-         parameters.form_name === "trip_calculator" ? "trip_calculator" : "general");
+         parameters.form_name === "trip_calculator" ? "trip_calculator" : pageService(window.location.pathname));
       parameters = { ...parameters, enquiry_service: service, link_url: "https://wa.me/" };
     }
     if (typeof window.gtag === "function") {
@@ -25,14 +37,15 @@
     try { url = new URL(link.href, window.location.href); } catch (_) { return; }
     if (url.protocol !== "https:" || !["wa.me", "api.whatsapp.com", "web.whatsapp.com"].includes(url.hostname)) return;
     const service =
-      link.closest("#heroPromoCarousel, .mobile-next-departure, .group-departure-card") ? "group_tour" :
-      link.closest("#packageList, .package-slide:not(.itinerary-slide)") ? "tour_package" :
+      link.closest("#heroPromoCarousel, .mobile-next-departure, .group-departure-card, #fixed-departures") ? "group_tour" :
+      link.closest("#packageList, .package-slide:not(.itinerary-slide), #published-tour-options") ? "tour_package" :
       link.closest("#itineraryList, .itinerary-slide") ? "itinerary" :
-      link.closest("#cabList, .cab-card") ? "cab" :
-      link.closest("#galleryList, .hotel-card") ? "accommodation" :
-      link.closest(".destination-card") ? "destination" : "general";
+      link.closest("#cabList, .cab-card, #published-cab-options") ? "cab" :
+      link.closest("#galleryList, .hotel-card, #published-stay-options") ? "accommodation" :
+      link.closest(".destination-card") ? "destination" : pageService(window.location.pathname);
     track("whatsapp_click", {
       enquiry_service: service,
+      enquiry_placement: link.closest(".hoe-floating-whatsapp") ? "floating" : link.closest(".hoe-inventory") ? "catalogue" : link.closest("#fixed-departures") ? "fixed_departure" : "page_link",
       page_path: window.location.pathname
     });
   });
