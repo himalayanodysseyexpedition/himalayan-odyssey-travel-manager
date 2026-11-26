@@ -715,3 +715,39 @@ html[data-hoe-theme="home"] body > #contact.cta > :is(h2,p){
  color:#fff!important;-webkit-text-fill-color:#fff!important;
 }
 }
+
+
+/* Desktop destination marquee: reserve its full line box below the promotion carousel. */
+@media screen and (min-width:761px){
+html[data-hoe-theme="home"] body > #home.hero#home > .hero-content > .hero-destination-list{
+  display:block!important;position:relative!important;inset:auto!important;order:3!important;
+  align-self:center!important;flex:0 0 auto!important;box-sizing:border-box!important;
+  width:100%!important;max-width:900px!important;min-width:0!important;
+  height:auto!important;min-height:42px!important;max-height:none!important;
+  margin:12px auto 0!important;padding:10px 0!important;
+  transform:none!important;overflow:hidden!important;opacity:1!important;visibility:visible!important;
+  mask-image:none!important;-webkit-mask-image:none!important;z-index:4!important;
+}
+html[data-hoe-theme="home"] body > #home.hero#home > .hero-content > .hero-destination-list > .hero-destination-marquee{
+  display:flex!important;align-items:center!important;box-sizing:border-box!important;
+  width:100%!important;min-width:0!important;height:auto!important;min-height:22px!important;
+  max-height:none!important;overflow:hidden!important;white-space:nowrap!important;
+}
+html[data-hoe-theme="home"] body > #home.hero#home > .hero-content > .hero-destination-list .hero-destination-track{
+  display:flex!important;align-items:center!important;justify-content:space-around!important;
+  flex:0 0 auto!important;width:max-content!important;min-width:200%!important;max-width:none!important;
+  height:auto!important;min-height:22px!important;max-height:none!important;
+  gap:0!important;line-height:1.6!important;white-space:nowrap!important;
+  animation:hoe-desktop-basalt-destination-drift 24s linear infinite!important;
+}
+html[data-hoe-theme="home"] body > #home.hero#home > .hero-content > .hero-destination-list .hero-destination-track :is(span,i){
+  display:inline-block!important;flex:none!important;padding:0 8px!important;
+  line-height:1.6!important;white-space:nowrap!important;opacity:1!important;visibility:visible!important;
+}
+}
+@media screen and (min-width:761px) and (prefers-reduced-motion:reduce){
+html[data-hoe-theme="home"] body > #home.hero#home > .hero-content > .hero-destination-list .hero-destination-track{
+  animation:none!important;transform:none!important;min-width:0!important;width:100%!important;flex-wrap:wrap!important;justify-content:center!important;
+}
+html[data-hoe-theme="home"] body > #home.hero#home > .hero-content > .hero-destination-list .hero-destination-track > :nth-child(n+14){display:none!important}
+}
