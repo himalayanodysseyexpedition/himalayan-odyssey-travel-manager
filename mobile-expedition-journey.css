@@ -1,0 +1,48 @@
+/* Mobile-only decorative expedition panorama. No shared styles or card changes. */
+#hoeExpeditionJourney{display:none!important}
+@media (max-width:760px){
+  html body #home.hero#home .hero-content > #hoeExpeditionJourney{
+    display:block!important;order:4!important;flex:0 0 auto!important;position:relative!important;
+    align-self:stretch!important;width:100%!important;max-width:100%!important;min-width:0!important;
+    margin:8px 0 0!important;padding:0!important;box-sizing:border-box!important;overflow:hidden!important;
+    border:1px solid #a779e96b!important;border-radius:15px!important;isolation:isolate;
+    background:#101014!important;box-shadow:0 5px 18px #0005!important;pointer-events:none;
+    color:#fff!important;text-align:left!important;--journey-accent:#bf98ff;--journey-depth:0px;
+  }
+  #hoeExpeditionJourney svg{display:block;width:100%;height:auto;aspect-ratio:360/144;overflow:hidden}
+  #hoeExpeditionJourney .hoe-journey-heading{position:absolute;z-index:2;top:8px;left:12px;right:12px;display:flex;justify-content:space-between;align-items:center;gap:8px;font:700 9px/1.2 Inter,Arial,sans-serif;letter-spacing:.09em;color:#e9d8ff;white-space:nowrap}
+  #hoeExpeditionJourney .hoe-journey-theme{font-size:8px;color:#fff;letter-spacing:.06em}
+  #hoeExpeditionJourney .journey-sky{fill:#12121a;transition:fill .5s}
+  #hoeExpeditionJourney .journey-ridge-back{fill:#362943;transform:translateY(calc(var(--journey-depth)*.45));transition:fill .5s}
+  #hoeExpeditionJourney .journey-ridge-front{fill:#1d1928;transform:translateY(var(--journey-depth));transition:fill .5s}
+  #hoeExpeditionJourney .journey-contours{stroke:#a579da;opacity:.30;fill:none;stroke-width:.65;stroke-linecap:round}
+  #hoeExpeditionJourney .journey-route-glow{stroke:#8253c9;stroke-width:7;opacity:.25;fill:none;stroke-linecap:round}
+  #hoeExpeditionJourney .journey-route{stroke:#cba8ff;stroke-width:2;fill:none;stroke-linecap:round;stroke-dasharray:4 3;animation:hoeJourneyRoute 2.8s linear infinite}
+  #hoeExpeditionJourney .journey-marker circle{fill:#17121f;stroke:#d1adff;stroke-width:1.3}
+  #hoeExpeditionJourney .journey-marker text{fill:#fff;font:600 8px Inter,Arial,sans-serif;text-anchor:middle;paint-order:stroke;stroke:#151019;stroke-width:2px;stroke-linejoin:round}
+  #hoeExpeditionJourney .journey-marker.is-current circle{fill:#e5caff;stroke:#fff;stroke-width:1.6}
+  #hoeExpeditionJourney .journey-marker.is-current text{fill:#f2dfff}
+  #hoeExpeditionJourney .journey-cloud{fill:#f4ecff;opacity:.18;animation:hoeJourneyCloud 14s ease-in-out infinite alternate}
+  #hoeExpeditionJourney .journey-cloud.second{animation-delay:-7s}
+  #hoeExpeditionJourney .journey-flake{stroke:#fff;stroke-width:1;opacity:0;animation:hoeJourneyFlake 6s linear infinite}
+  #hoeExpeditionJourney .journey-flake:nth-child(2){animation-delay:-2s}
+  #hoeExpeditionJourney .journey-flake:nth-child(3){animation-delay:-4s}
+  #hoeExpeditionJourney .journey-snow,#hoeExpeditionJourney .journey-orchard,#hoeExpeditionJourney .journey-pines,#hoeExpeditionJourney .journey-celebration{display:none}
+  #hoeExpeditionJourney[data-theme="winter"] .journey-snow,#hoeExpeditionJourney[data-theme="newyear"] .journey-snow{display:inline}
+  #hoeExpeditionJourney[data-theme="kinnaur"] .journey-orchard,#hoeExpeditionJourney[data-theme="narkanda"] .journey-pines,#hoeExpeditionJourney[data-theme="newyear"] .journey-celebration{display:inline}
+  #hoeExpeditionJourney[data-theme="kinnaur"] .journey-sky{fill:#221a2a}
+  #hoeExpeditionJourney[data-theme="kinnaur"] .journey-ridge-back{fill:#51405e}
+  #hoeExpeditionJourney[data-theme="narkanda"] .journey-ridge-front{fill:#2a2432}
+  #hoeExpeditionJourney[data-theme="newyear"] .journey-sky{fill:#100b23}
+  #hoeExpeditionJourney .journey-stamp{transform-box:fill-box;transform-origin:center;transition:transform .2s;opacity:.65}
+  #hoeExpeditionJourney .journey-stamp.is-stamped{opacity:1;transform:rotate(-7deg) scale(1.06)}
+  #hoeExpeditionJourney .journey-stamp text{fill:#f0ddff;font:700 7.5px Inter,Arial,sans-serif;text-anchor:middle;letter-spacing:.06em}
+  #hoeExpeditionJourney .journey-stamp rect{fill:#211631;stroke:#b78bff;stroke-width:.8;stroke-dasharray:2 1}
+  #hoeExpeditionJourney:not([data-running="true"]) *{animation-play-state:paused!important}
+  @keyframes hoeJourneyRoute{to{stroke-dashoffset:-14}}
+  @keyframes hoeJourneyCloud{from{transform:translateX(-8px)}to{transform:translateX(18px)}}
+  @keyframes hoeJourneyFlake{0%{transform:translate(0,-10px);opacity:0}20%,75%{opacity:.65}100%{transform:translate(-9px,62px);opacity:0}}
+  @media(prefers-reduced-motion:reduce){
+    #hoeExpeditionJourney *{animation:none!important;transition:none!important}
+  }
+}
