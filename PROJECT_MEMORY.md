@@ -671,3 +671,8 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 - Added project-local `.agents/skills/himalayan-growth-agent/SKILL.md` and registered it in the skills index. Defines evidence-led daily intelligence, weekly safe optimization and conversion reporting; documentation only, not an autonomous runtime.
 - Existing GA4 measurement configuration and event instrumentation were inspected; actual event delivery is unverified. Free OpenSEO Search Console query read succeeded; GSC Wizard refused access because its trial/subscription is inactive. No private metrics or credentials committed.
 - No site runtime, homepage design, business data, hosting or deployment settings changed. PR verification pending at this entry.
+
+
+## 2026-11-27 — Lead and booking marketing attribution
+- Classify coarse source and landing page in existing browser analytics and preserve it in website enquiry source_details; no raw referrer, UTM text or click ID stored for CRM attribution. Preserve source in existing booking notes on lead conversion without schema changes or modifying historical records. Privacy notice updated; aggregate reporting documented in MARKETING_ATTRIBUTION.md.
+- 14 synthetic classification/path/booking assertions passed for the implementation functions. Production enquiry and booking conversion not tested; no fake records created. PR verification pending.
