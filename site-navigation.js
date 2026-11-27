@@ -13,10 +13,10 @@
     if (type !== "reload") return;
     try { history.scrollRestoration = "manual"; } catch (_) {}
     const reset = () => {
-      window.scrollTo(0, 0);
-      requestAnimationFrame(() => window.scrollTo(0, 0));
+      (document.documentElement.classList.contains('hoe-ios26-scroll-shell')?document.body:window).scrollTo(0, 0);
+      requestAnimationFrame(() => (document.documentElement.classList.contains('hoe-ios26-scroll-shell')?document.body:window).scrollTo(0, 0));
       setTimeout(() => {
-        window.scrollTo(0, 0);
+        (document.documentElement.classList.contains('hoe-ios26-scroll-shell')?document.body:window).scrollTo(0, 0);
         try { history.scrollRestoration = "auto"; } catch (_) {}
       }, 200);
     };
