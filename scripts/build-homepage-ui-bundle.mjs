@@ -14,7 +14,7 @@ const paths = [
 ];
 const css = paths.map(path => {
   const source = readFileSync(resolve(root,path),'utf8');
-  if (/@(import|charset|namespace)\\b/i.test(source)) throw new Error('Unsupported CSS prelude in '+path);
-  return '/* Source: '+path+' */\\n'+source.trimEnd()+'\\n';
-}).join('\\n');
+  if (/@(import|charset|namespace)\b/i.test(source)) throw new Error('Unsupported CSS prelude in '+path);
+  return '/* Source: '+path+' */\n'+source.trimEnd()+'\n';
+}).join('\n');
 writeFileSync(resolve(root,'homepage-ui-bundle.css'),css);
