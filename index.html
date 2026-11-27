@@ -640,22 +640,20 @@ html body :is(#itineraries#itineraries,#odyssey-difference-mobile#odyssey-differ
 <style id="hoe-mobile-flat-dock-final">
 /* Flat mobile glyphs over a translucent royal-purple frosted lens; page motion supplies the moving backdrop. */
 @media (max-width:760px){
- /* Keep the dock at the bottom without scroll-dependent transforms. */
- html:root[data-hoe-theme="home"] body > nav.mobile-app-dock.mobile-app-dock,
- html:root[data-hoe-theme="home"] body > nav.mobile-app-dock.mobile-app-dock.is-hidden{
-  position:fixed!important;
-  top:auto!important;
-  bottom:calc(10px + env(safe-area-inset-bottom, 0px))!important;
-  left:0!important;right:0!important;
-  margin-left:auto!important;margin-right:auto!important;
-  transform:none!important;translate:none!important;
-  transition:none!important;animation:none!important;
-  opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+ /* Native fixed host, independent of dock effects and scroll handlers. */
+ html:root[data-hoe-theme="home"] body > #hoe-mobile-dock-host{
+  position:fixed!important;inset:auto 0 calc(10px + env(safe-area-inset-bottom, 0px)) 0!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  width:100%!important;height:auto!important;margin:0!important;padding:0!important;
+  transform:none!important;translate:none!important;transition:none!important;animation:none!important;
+  z-index:1800!important;pointer-events:none!important;overflow:visible!important;
  }
- /* Use measured visual viewport coordinates once available; keep the CSS bottom fallback before initialization. */
- html:root[data-hoe-theme="home"] body > nav.mobile-app-dock.mobile-app-dock[style*="--hoe-dock-viewport-bottom"]{
-  top:calc(var(--hoe-dock-viewport-bottom) - var(--hoe-dock-measured-height) - 10px - env(safe-area-inset-bottom, 0px))!important;
-  bottom:auto!important;
+ html:root[data-hoe-theme="home"] body > #hoe-mobile-dock-host > nav.mobile-app-dock.mobile-app-dock,
+ html:root[data-hoe-theme="home"] body > #hoe-mobile-dock-host > nav.mobile-app-dock.mobile-app-dock.is-hidden{
+  position:relative!important;inset:auto!important;margin:0!important;
+  flex:0 0 auto!important;transform:none!important;translate:none!important;
+  transition:none!important;animation:none!important;opacity:1!important;
+  visibility:visible!important;pointer-events:auto!important;
  }
  html:root[data-hoe-theme="home"] body nav.mobile-app-dock.mobile-app-dock{
   background:rgba(56,21,109,.48)!important;
@@ -2362,7 +2360,7 @@ if (matchMedia("(min-width:761px)").matches && "IntersectionObserver" in window)
 
 
 <link rel="manifest" href="/manifest.webmanifest">
-<script src="/mobile-app-experience-v18.js?v=10" defer></script>
+<script src="/mobile-app-experience-v18.js?v=11" defer></script>
 <script src="/site-navigation.js?v=28" defer></script>
 
 <!-- Final cascade guard: load approved Arctic layers after legacy page-level styles. -->
