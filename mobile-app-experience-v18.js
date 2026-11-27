@@ -49,47 +49,6 @@
    host.id='hoe-mobile-dock-host';
    host.appendChild(nav);
    document.body.appendChild(host);
-   // iOS 26 WebKit has a fixed-layer rendering regression during momentum scroll.
-   // Use document coordinates only on affected iPhone/iPad browsers.
-   const ua=navigator.userAgent;
-   const ios26=/\b(?:iPhone|iPad|iPod)\b/.test(ua)&&(/\bVersion\/26(?:\.|\b)/.test(ua)||/\b(?:CPU (?:iPhone )?OS|iPhone OS) 26[_\.]/.test(ua));
-   if(ios26){
-    const vv=window.visualViewport;
-    const controller=new AbortController();
-    let frame=0,lastTop=NaN,trackingUntil=0;
-    const sync=()=>{
-     frame=0;
-     if(!host.isConnected){controller.abort();return}
-     const root=document.scrollingElement||document.documentElement;
-     const scroll=window.scrollY;
-     const viewportHeight=vv&&vv.height>0?vv.height:window.innerHeight;
-     const pageTop=vv&&Number.isFinite(vv.pageTop)?vv.pageTop:scroll;
-     const origin=host.offsetParent;
-     const originTop=origin?origin.getBoundingClientRect().top+scroll+origin.clientTop:0;
-     // Clamp rubber-band overscroll and avoid extending the document.
-     const visibleBottom=Math.min(root.scrollHeight,Math.max(0,pageTop)+viewportHeight);
-     const top=Math.max(0,visibleBottom-originTop-host.offsetHeight-10);
-     if(Number.isFinite(top)&&Math.abs(top-(Number.isFinite(lastTop)?lastTop:-1000))>=.5){
-      host.style.setProperty('--hoe-dock-doc-top',top.toFixed(2)+'px');
-      lastTop=top;
-     }
-     if(performance.now()<trackingUntil)frame=requestAnimationFrame(sync);
-    };
-    const queue=()=>{
-     trackingUntil=performance.now()+180;
-     if(!frame)frame=requestAnimationFrame(sync);
-    };
-    host.classList.add('hoe-ios26-document-dock');
-    const opts={passive:true,signal:controller.signal};
-    window.addEventListener('scroll',queue,opts);
-    window.addEventListener('resize',queue,opts);
-    window.addEventListener('pageshow',queue,opts);
-    window.addEventListener('touchmove',queue,opts);
-    window.addEventListener('touchend',queue,opts);
-    vv?.addEventListener('resize',queue,opts);
-    vv?.addEventListener('scroll',queue,opts);
-    sync();queue();
-   }
   }else{
    document.body.appendChild(nav);
   }
@@ -135,15 +94,15 @@
      Object.assign(label.style,{position:'static',right:'auto',top:'auto',transform:'none',padding:'0',border:'0',borderRadius:'0',background:'transparent',fontSize:'14px',boxShadow:'none'});
     }
    });
-   const documentDock=nav.closest('.hoe-ios26-document-dock');
-   if(documentDock){
-    documentDock.appendChild(menuPopup);
+   const stableHost=document.documentElement.classList.contains('hoe-ios26-scroll-shell')?nav.closest('#hoe-mobile-dock-host'):null;
+   if(stableHost){
+    stableHost.appendChild(menuPopup);
     menuPopup.style.setProperty('position','absolute','important');
     menuPopup.style.setProperty('pointer-events','auto','important');
    }else document.body.appendChild(menuPopup);
    const positionMenuPopup=()=>{
     const rect=nav.getBoundingClientRect();
-    const bottom=documentDock?documentDock.offsetHeight+10:Math.max(0,Math.ceil(window.innerHeight-rect.top+10));
+    const bottom=stableHost?stableHost.offsetHeight+10:Math.max(0,Math.ceil(window.innerHeight-rect.top+10));
     menuPopup.style.setProperty('bottom',bottom+'px','important');
     const triggerRect=menuTrigger.getBoundingClientRect();
     if(nav.classList.contains('mobile-app-dock')){
@@ -249,7 +208,9 @@
   if(window.location.hash){
    window.history.replaceState(window.history.state,'',window.location.pathname+window.location.search);
   }
-  window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+  const options={top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'};
+  if(document.documentElement.classList.contains('hoe-ios26-scroll-shell'))document.body.scrollTo(options);
+  else window.scrollTo(options);
  },true);
  function init(){loadStyles();removeLegacy();mountDock();reveal();registerPwa()}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
