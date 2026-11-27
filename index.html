@@ -3185,7 +3185,7 @@ html[data-hoe-theme="home"] body nav.mobile-app-dock .dock-icon{color:#fff!impor
   const reduced = matchMedia("(prefers-reduced-motion:reduce)");
   let frame = 0, dock;
   function paint(phase) {
-    if (!dock?.isConnected) dock = document.querySelector("nav.mobile-app-dock,nav.desktop-app-dock");
+    if (!dock?.isConnected) dock = document.querySelector(mobile.matches ? "nav.mobile-app-dock" : "nav.desktop-app-dock");
     dock?.style.setProperty("--hoe-dock-flow", (50 - 50 * Math.cos(phase)).toFixed(2) + "%");
   }
   function mobileUpdate() {
