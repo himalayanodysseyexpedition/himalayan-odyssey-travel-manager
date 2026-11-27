@@ -35,6 +35,22 @@
     if (!link || event.defaultPrevented) return;
     let url;
     try { url = new URL(link.href, window.location.href); } catch (_) { return; }
+    // Measure guide-to-booking navigation separately from actual WhatsApp enquiries.
+    if (url.origin === window.location.origin && /^\/blog\//.test(window.location.pathname)) {
+      const commercialPaths = new Set([
+        "/spiti-valley-tours/", "/winter-spiti-tours/", "/spiti-tour-from-chandigarh/",
+        "/kinnaur-tours/", "/narkanda-tours/", "/summer-spiti-tour/",
+        "/chandigarh-to-spiti-valley-taxi/", "/delhi-to-spiti-valley-taxi/",
+        "/spiti-valley-hotels-homestays/", "/spiti-valley-taxi-service/"
+      ]);
+      if (commercialPaths.has(url.pathname)) {
+        track("guide_to_booking_click", {
+          page_path: window.location.pathname,
+          destination_path: url.pathname,
+          enquiry_service: pageService(url.pathname)
+        });
+      }
+    }
     if (url.protocol !== "https:" || !["wa.me", "api.whatsapp.com", "web.whatsapp.com"].includes(url.hostname)) return;
     const service =
       link.closest("#heroPromoCarousel, .mobile-next-departure, .group-departure-card, #fixed-departures") ? "group_tour" :
