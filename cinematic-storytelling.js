@@ -55,7 +55,7 @@
         if (!entry.isIntersecting) return;
         const index = scenes.indexOf(entry.target);
         marker.querySelectorAll("span").forEach((dot, i) => dot.classList.toggle("active", i === index));
-        marker.classList.toggle("active", window.scrollY > window.innerHeight * 0.65);
+        marker.classList.toggle("active", (document.documentElement.classList.contains('hoe-ios26-scroll-shell')?document.body.scrollTop:window.scrollY) > window.innerHeight * 0.65);
       });
     }, { threshold: 0.28 });
     scenes.forEach(scene => chapterObserver.observe(scene));
@@ -65,7 +65,7 @@
 
   let ticking = false;
   const update = () => {
-    const y = window.scrollY || 0;
+    const y = (document.documentElement.classList.contains('hoe-ios26-scroll-shell')?document.body.scrollTop:window.scrollY) || 0;
     if (!desktop.matches && !reduceMotion && hero && y < window.innerHeight * 1.2) {
       hero.style.setProperty("--story-hero-shift", (y * 0.16).toFixed(1) + "px");
     }
