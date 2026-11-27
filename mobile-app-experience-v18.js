@@ -49,6 +49,46 @@
    host.id='hoe-mobile-dock-host';
    host.appendChild(nav);
    document.body.appendChild(host);
+   // iOS 26 WebKit has a fixed-layer rendering regression during momentum scroll.
+   // Use document coordinates only on affected iPhone/iPad browsers.
+   const ios26=/\b(?:iPhone|iPad|iPod)\b/.test(navigator.userAgent)&&/\b(?:CPU (?:iPhone )?OS|iPhone OS) 26[_\.]/.test(navigator.userAgent);
+   if(ios26){
+    const vv=window.visualViewport;
+    const controller=new AbortController();
+    let frame=0,lastTop=NaN,trackingUntil=0;
+    const sync=()=>{
+     frame=0;
+     if(!host.isConnected){controller.abort();return}
+     const root=document.scrollingElement||document.documentElement;
+     const scroll=window.scrollY;
+     const viewportHeight=vv&&vv.height>0?vv.height:window.innerHeight;
+     const pageTop=vv&&Number.isFinite(vv.pageTop)?vv.pageTop:scroll;
+     const origin=host.offsetParent;
+     const originTop=origin?origin.getBoundingClientRect().top+scroll+origin.clientTop:0;
+     // Clamp rubber-band overscroll and avoid extending the document.
+     const visibleBottom=Math.min(root.scrollHeight,Math.max(0,pageTop)+viewportHeight);
+     const top=Math.max(0,visibleBottom-originTop-host.offsetHeight-10);
+     if(Number.isFinite(top)&&Math.abs(top-(Number.isFinite(lastTop)?lastTop:-1000))>=.5){
+      host.style.setProperty('--hoe-dock-doc-top',top.toFixed(2)+'px');
+      lastTop=top;
+     }
+     if(performance.now()<trackingUntil)frame=requestAnimationFrame(sync);
+    };
+    const queue=()=>{
+     trackingUntil=performance.now()+180;
+     if(!frame)frame=requestAnimationFrame(sync);
+    };
+    host.classList.add('hoe-ios26-document-dock');
+    const opts={passive:true,signal:controller.signal};
+    window.addEventListener('scroll',queue,opts);
+    window.addEventListener('resize',queue,opts);
+    window.addEventListener('pageshow',queue,opts);
+    window.addEventListener('touchmove',queue,opts);
+    window.addEventListener('touchend',queue,opts);
+    vv?.addEventListener('resize',queue,opts);
+    vv?.addEventListener('scroll',queue,opts);
+    sync();queue();
+   }
   }else{
    document.body.appendChild(nav);
   }
@@ -94,10 +134,15 @@
      Object.assign(label.style,{position:'static',right:'auto',top:'auto',transform:'none',padding:'0',border:'0',borderRadius:'0',background:'transparent',fontSize:'14px',boxShadow:'none'});
     }
    });
-   document.body.appendChild(menuPopup);
+   const documentDock=nav.closest('.hoe-ios26-document-dock');
+   if(documentDock){
+    documentDock.appendChild(menuPopup);
+    menuPopup.style.setProperty('position','absolute','important');
+    menuPopup.style.setProperty('pointer-events','auto','important');
+   }else document.body.appendChild(menuPopup);
    const positionMenuPopup=()=>{
     const rect=nav.getBoundingClientRect();
-    const bottom=Math.max(0,Math.ceil(window.innerHeight-rect.top+10));
+    const bottom=documentDock?documentDock.offsetHeight+10:Math.max(0,Math.ceil(window.innerHeight-rect.top+10));
     menuPopup.style.setProperty('bottom',bottom+'px','important');
     const triggerRect=menuTrigger.getBoundingClientRect();
     if(nav.classList.contains('mobile-app-dock')){
