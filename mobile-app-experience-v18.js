@@ -157,8 +157,12 @@
    if(raf)return;raf=true;
    requestAnimationFrame(()=>{
     const y=window.scrollY;
-    nav.classList.toggle('is-hidden',y>last+8&&y>220);
-    if(y<100||y<last-10)nav.classList.remove('is-hidden');
+    if(nav.classList.contains('mobile-app-dock')){
+     nav.classList.remove('is-hidden');
+    }else{
+     nav.classList.toggle('is-hidden',y>last+8&&y>220);
+     if(y<100||y<last-10)nav.classList.remove('is-hidden');
+    }
     last=y;raf=false;
    });
   },{passive:true});
