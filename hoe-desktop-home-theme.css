@@ -838,19 +838,74 @@ html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cin
   html[data-hoe-theme="home"] body :is(.motion-reveal,.hoe-motion-reveal,.arctic-reveal){
     will-change:auto!important;
   }
-  /* Decorative effects yield to scroll and stop when the hero leaves the viewport.
-     No content is hidden and carousel/booking interactions remain enabled. */
-  html[data-hoe-theme="home"] body #home.hero#home.hoe-desktop-motion-paused > img.hero-ken-burns-photo,
-  html[data-hoe-theme="home"] body #home.hero#home.hoe-desktop-motion-paused > .hero-weather-motion,
-  html[data-hoe-theme="home"] body #home.hero#home.hoe-desktop-motion-paused > .hero-weather-motion::before,
-  html[data-hoe-theme="home"] body #home.hero#home.hoe-desktop-motion-paused > .hero-weather-motion::after,
-  html[data-hoe-theme="home"] body #home.hero#home.hoe-desktop-motion-paused .hero-weather-motion *,
-  html[data-hoe-theme="home"] body #home.hero#home.hoe-desktop-motion-paused #hoeDesktopDestinationsTicker > .hoe-desktop-ticker-track {
-    animation-play-state:paused!important;
-    will-change:auto!important;
-  }
   html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-services a{
     -webkit-backdrop-filter:none!important;
     backdrop-filter:none!important;
+  }
+}
+
+
+/* Desktop static rendering path. Only decorative motion is removed; interactive
+   carousel scrolling, links, booking forms and modal transitions are retained. */
+@media screen and (min-width:761px){
+  html[data-hoe-theme="home"]{
+    scroll-behavior:auto!important;
+  }
+  html[data-hoe-theme="home"] body{
+    animation:none!important;
+  }
+  html[data-hoe-theme="home"] body #home.hero#home,
+  html[data-hoe-theme="home"] body #home.hero#home::before,
+  html[data-hoe-theme="home"] body #home.hero#home > img.hero-ken-burns-photo,
+  html[data-hoe-theme="home"] body #home.hero#home > .hero-content,
+  html[data-hoe-theme="home"] body > header .brand img,
+  html[data-hoe-theme="home"] body > header .brand-mark {
+    animation:none!important;
+    will-change:auto!important;
+  }
+  html[data-hoe-theme="home"] body #home.hero#home > img.hero-ken-burns-photo{
+    transform:none!important;
+  }
+  /* A full-screen animated snow/cloud layer is expensive even when using transforms. */
+  html[data-hoe-theme="home"] body #home.hero#home > .hero-weather-motion,
+  html[data-hoe-theme="home"] body #home.hero#home > .hero-bottom-motion{
+    display:none!important;
+    animation:none!important;
+  }
+  html[data-hoe-theme="home"] body #home.hero#home > .hero-content > #hoeDesktopDestinationsTicker > .hoe-desktop-ticker-track{
+    animation:none!important;
+    transform:none!important;
+    will-change:auto!important;
+    width:100%!important;
+    min-width:0!important;
+  }
+  html[data-hoe-theme="home"] body #home.hero#home #hoeDesktopDestinationsTicker .hoe-desktop-ticker-group{
+    flex:1 1 100%!important;
+    flex-wrap:wrap!important;
+  }
+  html[data-hoe-theme="home"] body #home.hero#home #hoeDesktopDestinationsTicker .hoe-desktop-ticker-group[aria-hidden="true"]{
+    display:none!important;
+  }
+  /* All content is visible immediately without four competing reveal systems. */
+  html[data-hoe-theme="home"] body :is(.reveal,.motion-reveal,.arctic-reveal,.hoe-motion-reveal),
+  html[data-hoe-theme="home"] body .story-scene .section-inner{
+    opacity:1!important;
+    visibility:visible!important;
+    transform:none!important;
+    transition:none!important;
+    animation:none!important;
+    will-change:auto!important;
+  }
+  html[data-hoe-theme="home"] body .story-progress-label{display:none!important}
+  html[data-hoe-theme="home"] body :is(button,.btn){
+    will-change:auto!important;
+  }
+  /* Let the engine skip painting distant static sections while keeping their
+     DOM, searchability and accessibility intact. Remember actual rendered size. */
+  @supports (content-visibility:auto) {
+    html[data-hoe-theme="home"] body :is(#journey-story,#more-than-tours,#travel-journal,#instagram){
+      content-visibility:auto;
+      contain-intrinsic-block-size:auto 360px;
+    }
   }
 }

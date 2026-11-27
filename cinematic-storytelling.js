@@ -4,6 +4,8 @@
   "use strict";
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const desktop = window.matchMedia("(min-width:761px)");
+  // Desktop homepage uses an immediately visible, static rendering path.
+  if (desktop.matches) return;
   const hero = document.querySelector(".hero");
   const progress = document.getElementById("scrollProgress");
   const scenes = [...document.querySelectorAll(
