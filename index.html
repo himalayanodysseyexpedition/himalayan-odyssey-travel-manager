@@ -235,7 +235,7 @@
 <style id="mobile-card-right-peek-unified-v1"> /* Mobile-only consistent next-card peek across the homepage card rails. */ @media screen and (max-width:760px){ html body #cabList, html body #packageList, html body #galleryList, html body #groupDeparturesCarousel{ display:grid!important; grid-auto-flow:column!important; grid-template-columns:none!important; grid-auto-columns:82%!important; gap:14px!important; width:calc(100% + 6vw)!important; max-width:none!important; margin-left:0!important; margin-right:-6vw!important; padding:5px 6vw 18px 2px!important; overflow-x:auto!important; overflow-y:hidden!important; -webkit-overflow-scrolling:touch!important; overscroll-behavior-x:contain!important; scroll-snap-type:x mandatory!important; scroll-padding-inline:2px!important; scrollbar-width:none!important; touch-action:pan-x pan-y!important; } html body #cabList::-webkit-scrollbar, html body #packageList::-webkit-scrollbar, html body #galleryList::-webkit-scrollbar, html body #groupDeparturesCarousel::-webkit-scrollbar{display:none!important} html body #cabList>.cab-card, html body #packageList>.package-slide, html body #galleryList>.hotel-card, html body #groupDeparturesCarousel>.group-departure-card{ width:100%!important; min-width:0!important; max-width:none!important; grid-column:auto!important; scroll-snap-align:start!important; } /* Promotional tour card rails, when rendered by the promotional-card module. */ html body .promotional-tour-carousel, html body .promotional-cards-carousel, html body #promotionalToursCarousel, html body #promoToursCarousel{ display:grid!important; grid-auto-flow:column!important; grid-template-columns:none!important; grid-auto-columns:82%!important; gap:14px!important; width:calc(100% + 6vw)!important; margin-right:-6vw!important; padding:5px 6vw 18px 2px!important; overflow-x:auto!important; overflow-y:hidden!important; -webkit-overflow-scrolling:touch!important; overscroll-behavior-x:contain!important; scroll-snap-type:x mandatory!important; scrollbar-width:none!important; touch-action:pan-x pan-y!important; } html body .promotional-tour-carousel>*, html body .promotional-cards-carousel>*, html body #promotionalToursCarousel>*, html body #promoToursCarousel>*{min-width:0!important;scroll-snap-align:start!important} } </style>
 
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Inter:wght@400;500;600;700;800&display=swap" media="(max-width: 760px)">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@700&display=swap" media="(max-width: 760px)">
 <link rel="stylesheet" href="/hoe-mobile-hero-theme.css?v=10" media="(max-width: 760px)">
 <style id="hoe-home-3d-logo-layout">
 @media(max-width:760px){
@@ -580,6 +580,32 @@ html body :is(#itineraries#itineraries,#odyssey-difference-mobile#odyssey-differ
  }
 }
 </style>
+<style id="hoe-mobile-promo-heading-reveal">
+@media screen and (max-width:760px){
+ html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack#heroPromoTrack .hero-promo-slide:first-child > section.mobile-next-departure > h2{
+  font-family:"Space Grotesk",Manrope,Arial,sans-serif!important;
+  font-weight:700!important;letter-spacing:-.035em!important;line-height:1.04!important;
+  color:#fff!important;-webkit-text-fill-color:#fff!important;
+  text-shadow:0 2px 5px #000,0 3px 12px #0008!important;
+ }
+ html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack#heroPromoTrack .hero-promo-slide:first-child > section.mobile-next-departure > h2 em{
+  font-family:inherit!important;font-weight:inherit!important;font-style:normal!important;
+  color:#d8b4fe!important;-webkit-text-fill-color:#d8b4fe!important;
+ }
+}
+@keyframes hoePromoHeadingFadeUp{
+ from{opacity:0;transform:translateY(8px)}
+ to{opacity:1;transform:translateY(0)}
+}
+@media screen and (max-width:760px) and (prefers-reduced-motion:no-preference){
+ #heroPromoTrack h2.hoe-promo-heading-reveal > .hoe-promo-heading-word,
+ #heroPromoTrack h2.hoe-promo-heading-reveal > em{
+  display:inline-block;animation:hoePromoHeadingFadeUp 350ms cubic-bezier(.2,.7,.2,1) both;
+ }
+ #heroPromoTrack h2.hoe-promo-heading-reveal > em{animation-duration:400ms;animation-delay:120ms}
+ #heroPromoTrack h2.hoe-promo-heading-reveal > .hoe-promo-heading-word:last-child{animation-duration:500ms;animation-delay:240ms}
+}
+</style>
 </head>
 
 <body>
@@ -703,6 +729,26 @@ html body :is(#itineraries#itineraries,#odyssey-difference-mobile#odyssey-differ
         <button type="button" aria-label="Show New Year Winter Spiti departure"></button>
       </div>
     </div>
+
+    <script id="hoe-mobile-promo-heading-reveal-init">
+    (()=>{
+      const track=document.getElementById("heroPromoTrack");
+      if(!track||!matchMedia("(max-width:760px) and (prefers-reduced-motion:no-preference)").matches)return;
+      const heading=track.querySelector(".hero-promo-slide:first-child > .mobile-next-departure > h2");
+      if(!heading)return;
+      // Animate the initial heading only. A later data-driven carousel refresh remains readable without replay.
+      for(const node of Array.from(heading.childNodes)){
+        if(node.nodeType!==Node.TEXT_NODE||!node.textContent.trim())continue;
+        const parts=node.textContent.match(/^(\s*)(.*?)(\s*)$/s);
+        if(!parts)continue;
+        const word=document.createElement("span");
+        word.className="hoe-promo-heading-word";
+        word.textContent=parts[2];
+        node.replaceWith(document.createTextNode(parts[1]),word,document.createTextNode(parts[3]));
+      }
+      heading.classList.add("hoe-promo-heading-reveal");
+    })();
+    </script>
 
     <div id="hoeDesktopDestinationsTicker" style="display:none" aria-label="Destinations we offer">
       <div class="hoe-desktop-ticker-track">
