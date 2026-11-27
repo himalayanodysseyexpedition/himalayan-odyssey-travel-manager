@@ -1334,6 +1334,7 @@ if (footerContactBar) {
   let lastBarScrollY = window.scrollY;
   footerContactBar.classList.add("visible");
   window.addEventListener("scroll", () => {
+    if (window.matchMedia("(min-width:761px)").matches) return;
     const currentY = window.scrollY;
     if (currentY < 40 || currentY < lastBarScrollY - 4) {
       footerContactBar.classList.remove("scroll-hidden");
@@ -1501,14 +1502,33 @@ if (quickMenuToggle && quickNavMenu) {
 /* SCROLL PROGRESS */
 const progressBar = document.getElementById("scrollProgress");
 if (progressBar) {
+  const desktopProgress = matchMedia("(min-width:761px)");
+  let scrollable = 0, progressFrame = 0;
   const updateScrollProgress = () => {
-    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
-    progressBar.style.width = Math.min(100, Math.max(0, progress)) + "%";
+    progressFrame = 0;
+    const max = desktopProgress.matches ? scrollable : document.documentElement.scrollHeight - window.innerHeight;
+    const fraction = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    if (desktopProgress.matches) {
+      progressBar.style.width = "100%";
+      progressBar.style.transform = "scaleX(" + fraction + ")";
+    } else {
+      progressBar.style.removeProperty("transform");
+      progressBar.style.width = (fraction * 100) + "%";
+    }
   };
-  window.addEventListener("scroll", updateScrollProgress, { passive: true });
-  window.addEventListener("resize", updateScrollProgress);
-  updateScrollProgress();
+  const scheduleProgress = () => {
+    if (!progressFrame) progressFrame = requestAnimationFrame(updateScrollProgress);
+  };
+  const measureProgress = () => {
+    scrollable = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    scheduleProgress();
+  };
+  window.addEventListener("scroll", scheduleProgress, { passive: true });
+  window.addEventListener("resize", measureProgress, { passive: true });
+  desktopProgress.addEventListener("change", measureProgress);
+  if ("ResizeObserver" in window) new ResizeObserver(measureProgress).observe(document.body);
+  window.addEventListener("load", measureProgress, {once:true});
+  measureProgress();
 }
 
 /* LOAD WEBSITE SECTIONS */
@@ -1591,7 +1611,7 @@ loadHotels();
 </script>
 
   <script src="/site-motion.js?v=1" defer></script>
-<script src="/cinematic-storytelling.js?v=3" defer></script>
+<script src="/cinematic-storytelling.js?v=4" defer></script>
 
 
 
@@ -2858,7 +2878,7 @@ html body #home.hero #heroPromoTrack section.mobile-next-departure > img.hoe-pro
   html body #home.hero#home > img.hero-ken-burns-photo{transform:none!important}
 }
 </style>
-<script src="/mobile-hero-parallax-photos.js?v=4" defer></script>
+<script src="/mobile-hero-parallax-photos.js?v=5" defer></script>
 
 <style id="hoe-mobile-white-glass-home-v1">
 @media screen and (max-width:760px){
@@ -3193,7 +3213,7 @@ html[data-hoe-theme="home"] body nav.mobile-app-dock .dock-icon{color:#fff!impor
     paint(Math.max(0, scrollY) / 280);
   }
   function onScroll() {
-    if (!reduced.matches && !document.hidden && !frame) {
+    if (mobile.matches && !reduced.matches && !document.hidden && !frame) {
       frame = requestAnimationFrame(mobileUpdate);
     }
   }
@@ -3202,7 +3222,7 @@ html[data-hoe-theme="home"] body nav.mobile-app-dock .dock-icon{color:#fff!impor
     frame = 0;
     if (reduced.matches) dock?.style.removeProperty("--hoe-dock-flow");
     dock = null;
-    if (reduced.matches || document.hidden) return;
+    if (!mobile.matches || reduced.matches || document.hidden) return;
     frame = requestAnimationFrame(mobileUpdate);
   }
   window.addEventListener("scroll", onScroll, {passive:true});
@@ -3232,8 +3252,8 @@ html[data-hoe-theme="home"] body nav.mobile-app-dock .dock-icon{color:#fff!impor
   const x=period>0?-((y*.55)%period):0;
   header.style.setProperty('--hoe-header-flag-scroll-x',x.toFixed(2)+'px');
  }
- function queue(){if(!frame)frame=requestAnimationFrame(update);}
- window.addEventListener('scroll',queue,{passive:true});
+ function queue(){if(!mobile.matches){header.style.removeProperty('--hoe-header-flag-scroll-x');return;}if(!frame)frame=requestAnimationFrame(update);}
+ window.addEventListener('scroll',()=>{if(mobile.matches)queue();},{passive:true});
  window.addEventListener('resize',queue,{passive:true});
  window.addEventListener('pageshow',queue);
  mobile.addEventListener('change',queue);
@@ -3447,7 +3467,7 @@ html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cin
 </script>
 
 <link rel="stylesheet" href="/hoe-desktop-theme.css?v=1" media="(min-width: 761px)">
-<link rel="stylesheet" href="/hoe-desktop-home-theme.css?v=7" media="(min-width: 761px)">
+<link rel="stylesheet" href="/hoe-desktop-home-theme.css?v=8" media="(min-width: 761px)">
 
 
 <style id="hoe-desktop-destinations-ticker-v2">
@@ -3510,3 +3530,27 @@ html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cin
   }
 }
 </style>
+
+<script id="hoe-desktop-hero-motion-budget">
+(() => {
+  const desktop = matchMedia("(min-width:761px)");
+  const hero = document.getElementById("home");
+  if (!hero) return;
+  let visible = true, scrolling = false, timer = 0;
+  const sync = () => hero.classList.toggle("hoe-desktop-motion-paused",
+    desktop.matches && (!visible || scrolling || document.hidden));
+  const stop = () => {
+    if (!desktop.matches || !visible) return;
+    if (!scrolling) { scrolling = true; sync(); }
+    clearTimeout(timer);
+    timer = setTimeout(() => { scrolling = false; sync(); }, 180);
+  };
+  if ("IntersectionObserver" in window) new IntersectionObserver(entries => {
+    visible = entries[0].isIntersecting; sync();
+  }).observe(hero);
+  window.addEventListener("scroll", stop, {passive:true});
+  document.addEventListener("visibilitychange", sync);
+  desktop.addEventListener("change", sync);
+  sync();
+})();
+</script>
