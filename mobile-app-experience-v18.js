@@ -90,7 +90,12 @@
     const bottom=Math.max(0,Math.ceil(window.innerHeight-rect.top+10));
     menuPopup.style.setProperty('bottom',bottom+'px','important');
     const triggerRect=menuTrigger.getBoundingClientRect();
-    if(nav.classList.contains('mobile-app-dock')){
+    if(nav.classList.contains('mobile-app-dock')&&document.documentElement.dataset.hoeTheme==='home'){
+     menuPopup.style.setProperty('width',rect.width+'px','important');
+     menuPopup.style.setProperty('left',rect.left+'px','important');
+     menuPopup.style.setProperty('right','auto','important');
+     menuPopup.style.setProperty('transform','none','important');
+    }else if(nav.classList.contains('mobile-app-dock')){
      const right=Math.max(8,Math.ceil(window.innerWidth-(triggerRect.left+triggerRect.width/2+27)));
      menuPopup.style.setProperty('width','54px','important');
      menuPopup.style.setProperty('left','auto','important');
