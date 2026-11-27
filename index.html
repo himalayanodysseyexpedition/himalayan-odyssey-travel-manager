@@ -726,56 +726,6 @@ html body :is(#itineraries#itineraries,#odyssey-difference-mobile#odyssey-differ
   html:root[data-hoe-theme="home"] body nav.mobile-app-dock.mobile-app-dock::before{content:none!important}
  }
 }
-
-/* Mobile Menu: concentric inner corners and matching black glass secondary dock. */
-@media (max-width:760px){
- html:root[data-hoe-theme="home"] body nav.mobile-app-dock.mobile-app-dock > button.dock-menu-trigger,
- html:root[data-hoe-theme="home"] body nav.mobile-app-dock.mobile-app-dock > button.dock-menu-trigger:is(:active,.hoe-dock-pressed,[aria-expanded="true"]){
-  border-radius:17px!important;
-  background:#26282d!important;
-  background-image:none!important;
-  box-shadow:none!important;
- }
- html:root[data-hoe-theme="home"] body #dockMenuPopup.dock-fab-popup{
-  box-sizing:border-box!important;
-  display:none!important;
-  grid-template-columns:repeat(3,minmax(0,1fr))!important;
-  align-items:stretch!important;
-  gap:4px!important;
-  padding:7px!important;
-  min-height:74px!important;
-  border:1px solid rgba(255,255,255,.24)!important;
-  border-radius:25px!important;
-  background:rgba(38,40,45,.90)!important;
-  background-image:none!important;
-  box-shadow:none!important;
-  -webkit-backdrop-filter:blur(16px) saturate(145%)!important;
-  backdrop-filter:blur(16px) saturate(145%)!important;
-  overflow:hidden!important;
- }
- html:root[data-hoe-theme="home"] body #dockMenuPopup.dock-fab-popup[aria-hidden="false"]{display:grid!important}
- html:root[data-hoe-theme="home"] body #dockMenuPopup.dock-fab-popup>a[role="menuitem"]{
-  display:flex!important; flex-direction:column!important; align-items:center!important; justify-content:center!important;
-  width:100%!important;height:auto!important;min-height:57px!important;min-width:0!important;gap:4px!important;
-  padding:4px 1px!important;border:1px solid transparent!important;border-radius:17px!important;
-  background:transparent!important;box-shadow:none!important;color:#fff!important;text-decoration:none!important;
-  transform:none!important;animation:none!important;filter:none!important;
- }
- html:root[data-hoe-theme="home"] body #dockMenuPopup.dock-fab-popup>a[role="menuitem"]:is(:hover,:active,:focus-visible){
-  background:rgba(255,255,255,.10)!important;transform:none!important;box-shadow:none!important;
- }
- html:root[data-hoe-theme="home"] body #dockMenuPopup.dock-fab-popup>a[role="menuitem"] svg{
-  width:23px!important;height:23px!important;flex:0 0 23px!important;stroke:#fff!important;fill:none!important;stroke-width:1.8!important;filter:none!important;
- }
- html:root[data-hoe-theme="home"] body #dockMenuPopup.dock-fab-popup>a[role="menuitem"] span{
-  position:static!important;transform:none!important;padding:0!important;border:0!important;border-radius:0!important;
-  background:none!important;box-shadow:none!important;text-shadow:none!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
-  font:700 10px/1.1 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;letter-spacing:.025em!important;white-space:normal!important;text-align:center!important;
- }
- @media(prefers-reduced-transparency:reduce){
-  html:root[data-hoe-theme="home"] body #dockMenuPopup.dock-fab-popup{background:#26282d!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
- }
-}
 </style>
 </head>
 
@@ -2395,7 +2345,7 @@ if (matchMedia("(min-width:761px)").matches && "IntersectionObserver" in window)
 
 
 <link rel="manifest" href="/manifest.webmanifest">
-<script src="/mobile-app-experience-v18.js?v=7" defer></script>
+<script src="/mobile-app-experience-v18.js?v=8" defer></script>
 <script src="/site-navigation.js?v=28" defer></script>
 
 <!-- Final cascade guard: load approved Arctic layers after legacy page-level styles. -->
