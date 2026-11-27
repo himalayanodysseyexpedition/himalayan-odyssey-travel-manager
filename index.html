@@ -652,6 +652,11 @@ html body :is(#itineraries#itineraries,#odyssey-difference-mobile#odyssey-differ
   transition:none!important;animation:none!important;
   opacity:1!important;visibility:visible!important;pointer-events:auto!important;
  }
+ /* Use measured visual viewport coordinates once available; keep the CSS bottom fallback before initialization. */
+ html:root[data-hoe-theme="home"] body > nav.mobile-app-dock.mobile-app-dock[style*="--hoe-dock-viewport-bottom"]{
+  top:calc(var(--hoe-dock-viewport-bottom) - var(--hoe-dock-measured-height) - 10px - env(safe-area-inset-bottom, 0px))!important;
+  bottom:auto!important;
+ }
  html:root[data-hoe-theme="home"] body nav.mobile-app-dock.mobile-app-dock{
   background:rgba(56,21,109,.48)!important;
   border:1px solid rgba(214,188,255,.36)!important;
@@ -2357,7 +2362,7 @@ if (matchMedia("(min-width:761px)").matches && "IntersectionObserver" in window)
 
 
 <link rel="manifest" href="/manifest.webmanifest">
-<script src="/mobile-app-experience-v18.js?v=9" defer></script>
+<script src="/mobile-app-experience-v18.js?v=10" defer></script>
 <script src="/site-navigation.js?v=28" defer></script>
 
 <!-- Final cascade guard: load approved Arctic layers after legacy page-level styles. -->
