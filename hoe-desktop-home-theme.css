@@ -809,3 +809,48 @@ html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cin
   font-size:clamp(10px,1vw,11px)!important;min-height:40px!important;white-space:normal!important;
 }
 }
+
+
+/* Desktop rendering budget: retain layout, artwork, controls and colours.
+   Fixed surfaces should not continuously repaint the scrolling page behind them. */
+@media screen and (min-width:761px){
+  html[data-hoe-theme="home"] body > header,
+  html[data-hoe-theme="home"] body > header > .header-inner > a.brand::before,
+  html[data-hoe-theme="home"] body nav.desktop-app-dock,
+  html[data-hoe-theme="home"] body nav.desktop-app-dock::before {
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+  }
+  html[data-hoe-theme="home"] body > header::after{
+    background-image:url("/tibetan-header-flags-static.svg?v=1")!important;
+    background-position:0 0!important;
+    animation:none!important;
+  }
+  html[data-hoe-theme="home"] body nav.desktop-app-dock{
+    background-position:50% 50%!important;
+    animation:none!important;
+  }
+  html[data-hoe-theme="home"] body #scrollProgress{
+    transform-origin:left center;
+    transition:none!important;
+  }
+  /* Avoid persistent GPU layers on every revealed card. */
+  html[data-hoe-theme="home"] body :is(.motion-reveal,.hoe-motion-reveal,.arctic-reveal){
+    will-change:auto!important;
+  }
+  /* Decorative effects yield to scroll and stop when the hero leaves the viewport.
+     No content is hidden and carousel/booking interactions remain enabled. */
+  html[data-hoe-theme="home"] body #home.hero#home.hoe-desktop-motion-paused > img.hero-ken-burns-photo,
+  html[data-hoe-theme="home"] body #home.hero#home.hoe-desktop-motion-paused > .hero-weather-motion,
+  html[data-hoe-theme="home"] body #home.hero#home.hoe-desktop-motion-paused > .hero-weather-motion::before,
+  html[data-hoe-theme="home"] body #home.hero#home.hoe-desktop-motion-paused > .hero-weather-motion::after,
+  html[data-hoe-theme="home"] body #home.hero#home.hoe-desktop-motion-paused .hero-weather-motion *,
+  html[data-hoe-theme="home"] body #home.hero#home.hoe-desktop-motion-paused #hoeDesktopDestinationsTicker > .hoe-desktop-ticker-track {
+    animation-play-state:paused!important;
+    will-change:auto!important;
+  }
+  html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-services a{
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+  }
+}
