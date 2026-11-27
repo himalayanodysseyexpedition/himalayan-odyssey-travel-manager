@@ -942,3 +942,63 @@ html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cin
     display:none!important;
   }
 }
+
+
+/* Desktop homepage: consistent section rhythm, lightweight prayer flags and journey cards. */
+@keyframes hoeDesktopFlagDrift { from { transform:translateX(0); } to { transform:translateX(-400px); } }
+@media screen and (min-width:761px){
+  html[data-hoe-theme="home"] body > header::after{display:none!important;animation:none!important}
+  html[data-hoe-theme="home"] body > header > .hoe-desktop-flag-window{
+    display:block!important;position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;opacity:.7;contain:paint;
+  }
+  html[data-hoe-theme="home"] body > header > .hoe-desktop-flag-window::before{
+    content:"";position:absolute;top:0;bottom:0;left:0;width:calc(100% + 400px);
+    background:url("/tibetan-header-flags-static.svg?v=1") repeat-x 0 0/400px 56px;
+    animation:hoeDesktopFlagDrift 28s linear infinite;will-change:transform;
+  }
+  html[data-hoe-theme="home"] body > header .header-inner{position:relative!important;z-index:1!important}
+  html[data-hoe-theme="home"] body > :is(section#featured-travel-photography,section#upcoming-packages,section#journey-story,section#packages,section#itineraries,section#cabs,section#gallery,section#more-than-tours,section#instagram,section#travel-journal,section#plan-your-trip,section#reviews,div#contact.cta){
+    margin-block:0!important;padding-block:36px!important;
+  }
+  html[data-hoe-theme="home"] body > section#upcoming-packages{padding-top:72px!important}
+  html[data-hoe-theme="home"] body #packages .packages-progress{display:none!important}
+  html[data-hoe-theme="home"] body #odyssey-difference-mobile{display:none!important}
+  html[data-hoe-theme="home"] body section#itineraries :is(.odyssey-place-card,.odyssey-experience-card){
+    background:#111014!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+    border:1px solid #7245db!important;border-radius:16px!important;box-shadow:none!important;
+    display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:0!important;
+    padding:14px!important;overflow:hidden!important;
+  }
+  html[data-hoe-theme="home"] body section#itineraries :is(.odyssey-place-card,.odyssey-experience-card) :is(h3,p){
+    color:#fff!important;-webkit-text-fill-color:#fff!important;text-shadow:none!important;
+  }
+  html[data-hoe-theme="home"] body section#itineraries :is(.odyssey-place-card > span,.odyssey-kicker){
+    color:#c5a7ff!important;-webkit-text-fill-color:#c5a7ff!important;
+  }
+  html[data-hoe-theme="home"] body section#itineraries .odyssey-experience-mark{display:none!important}
+  html[data-hoe-theme="home"] body section#itineraries .odyssey-card-photo{margin:0 0 14px!important;min-width:0}
+  html[data-hoe-theme="home"] body section#itineraries .odyssey-card-photo img{
+    display:block;width:100%;height:clamp(140px,14vw,205px);object-fit:cover;border-radius:10px;
+    box-shadow:none!important;filter:none!important;transform:none!important;animation:none!important;
+  }
+  html[data-hoe-theme="home"] body section#itineraries .odyssey-card-photo figcaption{
+    font:400 10px/1.4 Inter,Arial,sans-serif;color:#d5c7ec!important;-webkit-text-fill-color:#d5c7ec!important;margin-top:5px;
+  }
+  html[data-hoe-theme="home"] body section#itineraries .odyssey-card-photo figcaption a{
+    color:inherit!important;-webkit-text-fill-color:inherit!important;text-decoration:underline;
+  }
+  html[data-hoe-theme="home"] body section#itineraries .odyssey-flex-note{
+    background:#15101e!important;border:1px solid #7845e7!important;border-left:4px solid #7845e7!important;border-radius:12px!important;
+    color:#fff!important;-webkit-text-fill-color:#fff!important;
+  }
+  html[data-hoe-theme="home"] body section#itineraries .odyssey-flex-note :is(strong,p){
+    color:#fff!important;-webkit-text-fill-color:#fff!important;
+  }
+  /* Avoid unnecessary paint work outside the viewport, while preserving ordinary controls. */
+  html[data-hoe-theme="home"] body :is(#packages,#cabs,#gallery) :is(.package-slide,.cab-card,.hotel-card){
+    backdrop-filter:none!important;-webkit-backdrop-filter:none!important;will-change:auto!important;
+  }
+}
+@media screen and (min-width:761px) and (prefers-reduced-motion:reduce){
+  html[data-hoe-theme="home"] body > header > .hoe-desktop-flag-window::before{animation:none!important;will-change:auto!important}
+}
