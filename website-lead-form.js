@@ -113,6 +113,9 @@
       const persons = Number(values.get("persons"));
       const travelDate = String(values.get("travelDate") || "");
       const startCity = String(values.get("startCity") || "").trim();
+      const acquisition = window.HOEAnalytics?.getAcquisition?.() || { channel: "unknown", landing: "/" };
+      const enquiryPath = /^\/[a-z0-9/_.-]{0,99}$/i.test(location.pathname) && !/\d{7,}/.test(location.pathname) ? location.pathname : "/";
+      const sourceDetails = "Website lead form · Channel: " + acquisition.channel + " · Landing: " + acquisition.landing + " · Enquiry: " + enquiryPath;
       const notes = "Starting city: " + startCity + "\nEnquiry page: " + location.pathname.slice(0,500);
       const message = [
         "Hello Himalayan Odyssey Expedition,",
@@ -141,7 +144,7 @@
           headers: { "Content-Type": "application/json", "apikey": SUPABASE_PUBLISHABLE_KEY },
           body: JSON.stringify({
             name, phone, destination, persons, travelDate,
-            budget: 0, sourceDetails: "Website lead form · " + location.pathname,
+            budget: 0, sourceDetails,
             notes, website: String(values.get("website") || "")
           })
         });
@@ -152,7 +155,7 @@
       } finally {
         window.clearTimeout(timeout);
       }
-      if (saved) window.HOEAnalytics?.track("generate_lead", { form_name: "website_enquiry", page_path: location.pathname });
+      if (saved && !String(values.get("website") || "").trim()) window.HOEAnalytics?.track("generate_lead", { form_name: "website_enquiry", page_path: enquiryPath, acquisition_channel: acquisition.channel });
       else window.HOEAnalytics?.track("enquiry_whatsapp_fallback", { page_path: location.pathname });
       status.dataset.state = saved ? "success" : "error";
       status.textContent = saved
