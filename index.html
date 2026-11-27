@@ -1003,6 +1003,8 @@ async function loadPackages() {
 /* LOAD PUBLISHED ITINERARY WEBPAGES */
 async function loadItineraries() {
   const list=document.getElementById("itineraryList");
+  // The desktop Difference section has no visible itinerary carousel.
+  if (!list || (list.hidden && matchMedia("(min-width:761px)").matches)) return;
   if(!db){showLoadingError(list,"Itineraries Temporarily Unavailable","The website connection could not be started.","Please share your tour itineraries.");return;}
   try{
     const {data,error}=await getPublishedItineraries();
@@ -1370,7 +1372,7 @@ if (footerContactBar) {
 /* TOUR ITINERARY CAROUSEL CONTROLS */
 (() => {
   const rail=document.getElementById("itineraryList");
-  if(!rail)return;
+  if(!rail||(rail.hidden&&matchMedia("(min-width:761px)").matches))return;
   const count=document.getElementById("itinerariesCount");
   const progress=document.getElementById("itinerariesProgress");
   const prev=document.getElementById("itinerariesPrev");
@@ -3465,7 +3467,7 @@ html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cin
 </script>
 
 <link rel="stylesheet" href="/hoe-desktop-theme.css?v=1" media="(min-width: 761px)">
-<link rel="stylesheet" href="/hoe-desktop-home-theme.css?v=9" media="(min-width: 761px)">
+<link rel="stylesheet" href="/hoe-desktop-home-theme.css?v=10" media="(min-width: 761px)">
 
 
 <style id="hoe-desktop-destinations-ticker-v2">
