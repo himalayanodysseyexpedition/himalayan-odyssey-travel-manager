@@ -1,0 +1,2545 @@
+/* Source: arctic-prestige-motion.css */
+/* Arctic Prestige — site-wide visual system for Himalayan Odyssey Expedition.
+   Visual-only layer: preserves existing page structure, data bindings and interactions. */
+:root{
+  --arctic-ink:#101c2b;
+  --arctic-navy:#14283d;
+  --arctic-deep:#091522;
+  --arctic-blue:#6fa9ce;
+  --arctic-ice:#dceefa;
+  --arctic-frost:#eef5f9;
+  --arctic-paper:#f8fafb;
+  --arctic-line:rgba(31,67,94,.14);
+  --arctic-muted:#63778a;
+  --arctic-shadow:0 22px 60px rgba(12,31,49,.12);
+  --arctic-ease:cubic-bezier(.22,.68,0,1);
+}
+html{scroll-behavior:smooth;scroll-padding-top:112px}
+body{background:var(--arctic-paper)!important;color:var(--arctic-ink)!important;font-family:"General Sans","DM Sans",system-ui,sans-serif!important;-webkit-font-smoothing:antialiased}
+::selection{background:var(--arctic-ice);color:var(--arctic-deep)}
+/* Keep the established header, logo, flags and navigation geometry intact. */
+#home.hero{
+  background-color:var(--arctic-deep)!important;
+  background-image:
+    linear-gradient(90deg,rgba(7,19,32,.86) 0%,rgba(10,27,44,.62) 46%,rgba(10,27,44,.16) 100%),
+    linear-gradient(0deg,rgba(7,19,32,.48),transparent 55%),
+    url("/spiti.jpg")!important;
+  background-size:cover!important;background-position:center 48%!important;
+  isolation:isolate;overflow:hidden;
+}
+#home.hero:before{
+  background:
+    radial-gradient(ellipse at 72% 24%,rgba(157,207,237,.16),transparent 34%),
+    linear-gradient(135deg,rgba(255,255,255,.035),transparent 45%)!important;
+  pointer-events:none;
+}
+#home.hero:after{pointer-events:none}
+#home.hero .hero-content{max-width:900px!important}
+#home.hero .eyebrow,#home.hero .hero-note{color:rgba(238,247,252,.88)!important}
+#home.hero .hero-rule{background:linear-gradient(90deg,var(--arctic-ice),var(--arctic-blue),transparent)!important}
+#home.hero h1,#home.hero .hero-animated-heading{color:#f8fbfd!important;text-shadow:0 8px 38px rgba(0,0,0,.34)!important}
+#home.hero .hero-word-rotator,#home.hero .hero-word-rotator.word-himalayas,#home.hero .hero-word-rotator.word-spiti,#home.hero .hero-word-rotator.word-himachal,#home.hero .hero-word-rotator.word-adventure{color:#c9e7f8!important;-webkit-text-fill-color:#c9e7f8!important;background:none!important}
+#home.hero p{color:rgba(246,250,253,.86)!important}
+#home.hero .hero-note span:before{background:var(--arctic-blue)!important;box-shadow:0 0 10px rgba(111,169,206,.45)!important}
+#home.hero .hero-service-icon{
+  border:1px solid rgba(210,234,248,.38)!important;
+  background:linear-gradient(145deg,rgba(246,251,255,.16),rgba(194,222,241,.055))!important;
+  color:#f5faff!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.17),0 12px 28px rgba(0,0,0,.16)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(140%)!important;backdrop-filter:blur(18px) saturate(140%)!important;
+}
+#home.hero .hero-service-icon svg{stroke:var(--arctic-ice)!important}
+#home.hero .hero-service-icon:focus-visible{outline-color:var(--arctic-ice)!important}
+html body #home.hero .hero-build-cta-wrap>.hero-build-cta{
+  background:rgba(8,18,29,.88)!important;border-color:rgba(220,238,250,.7)!important;color:#f4f9fc!important;
+  box-shadow:0 12px 30px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.15)!important;
+}
+html body #home.hero .hero-build-cta-wrap>.hero-build-cta:hover{background:#e5f2f9!important;color:#10263b!important;border-color:#e5f2f9!important}
+/* Frosted journey panel */
+.journey-strip{
+  border:1px solid rgba(160,197,221,.38)!important;border-radius:20px!important;
+  background:linear-gradient(135deg,rgba(15,36,56,.96),rgba(29,59,82,.92))!important;
+  box-shadow:0 24px 58px rgba(8,25,41,.20),inset 0 1px 0 rgba(255,255,255,.12)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(135%)!important;backdrop-filter:blur(22px) saturate(135%)!important;
+}
+.journey-item{background:transparent!important;border-color:rgba(220,238,250,.16)!important;box-shadow:none!important}
+.journey-item strong{color:#d9effb!important;font-family:"Boska","Cormorant Garamond",Georgia,serif!important}
+.journey-item span{color:rgba(233,244,250,.72)!important}
+.journey-item+.journey-item{border-left:1px solid rgba(220,238,250,.18)!important}
+.journey-strip:before{background:linear-gradient(90deg,transparent,rgba(164,207,232,.8),transparent)!important}
+/* Section rhythm and editorial typography */
+section.content{background:var(--arctic-paper)!important;color:var(--arctic-ink)!important}
+section.content.info,.faq-section{background:#edf3f7!important}
+.section-title small,.section-kicker,.group-departure-body>small,.page-heading small{color:#547f9e!important}
+.section-title h2,.content h2,.section-inner h2,.page-heading h1{color:var(--arctic-navy)!important;font-family:"Boska","Cormorant Garamond",Georgia,serif!important;font-weight:500!important;letter-spacing:-.025em}
+.section-title h2:after{background:linear-gradient(90deg,transparent,var(--arctic-blue),transparent)!important}
+.intro,.content .intro,.page-heading p{color:var(--arctic-muted)!important}
+.local-intro-copy h2,.info-box h3,.faq-list summary{color:var(--arctic-navy)!important}
+.local-intro-panel,.review-panel{
+  background:radial-gradient(ellipse at 85% 12%,rgba(111,169,206,.22),transparent 40%),linear-gradient(135deg,#10243a,#244b68)!important;
+  border:1px solid rgba(189,220,239,.48)!important;box-shadow:var(--arctic-shadow)!important;
+}
+.local-intro-panel small,.review-kicker{color:#c9e7f8!important}
+.local-intro-panel p,.review-panel p{color:rgba(239,247,252,.78)!important}
+/* Destinations: photographic editorial panels */
+.destination-gallery{
+  background:radial-gradient(ellipse at 50% 0%,rgba(111,169,206,.14),transparent 45%),linear-gradient(180deg,#10243a,#0b1b2b)!important;
+}
+.destination-gallery .section-title h2{color:#f5f9fc!important}
+.destination-gallery .section-title small,.destination-info small{color:#c9e7f8!important}
+.destination-gallery .intro{color:rgba(231,241,248,.72)!important}
+.destination-card{border:1px solid rgba(198,225,241,.24)!important;border-radius:15px!important;box-shadow:0 18px 48px rgba(0,0,0,.22)!important}
+.destination-card:after{background:linear-gradient(180deg,rgba(8,20,33,.02) 18%,rgba(8,20,33,.28) 52%,rgba(8,20,33,.94) 100%)!important}
+.destination-card:before{border-color:rgba(220,238,250,0)!important}
+.destination-info h3{color:#f8fbfd!important;font-family:"Boska","Cormorant Garamond",Georgia,serif!important}
+.destination-info span{color:#e4f1f8!important}
+.destination-info small:before,.destination-info span:after{background:var(--arctic-blue)!important}
+/* Package, departure, itinerary, cab and hotel cards */
+.group-departures-section{background:linear-gradient(180deg,#f5f9fc,#e9f1f6)!important}
+.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.card{
+  background:#fbfdfe!important;border:1px solid var(--arctic-line)!important;border-radius:16px!important;
+  box-shadow:0 12px 34px rgba(18,43,64,.075)!important;overflow:hidden!important;
+}
+.group-departure-photo{background:#dce9f1!important}
+.group-departure-status{background:rgba(239,247,251,.94)!important;color:#254a66!important;border:1px solid rgba(111,169,206,.28)!important;border-radius:999px!important}
+.group-departure-body h3,.package-slide h3,.itinerary-slide h3,.cab-card h3,.hotel-card h3,.guide-card h3,.card h3{
+  color:var(--arctic-navy)!important;font-family:"General Sans","DM Sans",sans-serif!important;font-weight:650!important;
+}
+.group-departure-date,.group-departure-highlights,.card p,.hotel-facilities,.cab-details{color:var(--arctic-muted)!important}
+.group-departure-meta,.itinerary-meta,.hotel-location{color:#4c7897!important}
+.group-departure-meta{border-color:var(--arctic-line)!important}
+.group-occupancy-track{background:#e4edf3!important}
+.group-occupancy-track span{background:linear-gradient(90deg,#a9d2e9,#4f83a5)!important}
+.group-departure-cta,.group-departure-cta:hover{background:#17344e!important;color:#f5faff!important;border-radius:999px!important}
+.card>img,.package-slide>img,.hotel-card>img,.itinerary-slide img{background:#e4edf3!important}
+.card-body{background:#fbfdfe!important}
+.price{color:#477d9f!important}
+.card-body .btn,.hotel-detail-content .btn,.group-departure-cta{
+  background:#17344e!important;border:1px solid #17344e!important;color:#f5faff!important;border-radius:999px!important;
+}
+.card-body .btn:hover,.hotel-detail-content .btn:hover{background:#e3f0f7!important;border-color:#9fc5dd!important;color:#17344e!important}
+.packages-carousel,.group-departures-rail,.itineraries-carousel,.cabs-carousel,.destinations-carousel{scrollbar-color:#9bbbd0 transparent}
+/* Trip planner — premium light/dark balance without changing calculator logic */
+.home-trip-planner{background:linear-gradient(180deg,#edf4f8,#f9fbfc)!important;color:var(--arctic-ink)!important}
+.home-trip-planner h2,.home-trip-planner h3,.home-trip-planner label{color:var(--arctic-navy)!important}
+.home-trip-planner .htp-panel,.home-trip-planner .htp-card,.home-trip-planner .htp-summary,.home-trip-planner .planner-card{
+  background:#fbfdfe!important;border-color:var(--arctic-line)!important;box-shadow:0 14px 36px rgba(18,43,64,.07)!important;border-radius:17px!important
+}
+.home-trip-planner input,.home-trip-planner select{background:#fff!important;border-color:#cfdae3!important;color:var(--arctic-ink)!important}
+.home-trip-planner input:focus,.home-trip-planner select:focus{border-color:#6fa9ce!important;box-shadow:0 0 0 3px rgba(111,169,206,.15)!important}
+.home-trip-planner button,.home-trip-planner .btn{border-radius:999px!important}
+.home-trip-planner .htp-total,.home-trip-planner .htp-price{color:#315f7e!important}
+/* Forms, FAQ, reviews, Instagram and footer */
+.enquiry-section{background:radial-gradient(ellipse at 85% 5%,rgba(111,169,206,.17),transparent 38%),linear-gradient(135deg,#10243a,#091522)!important}
+.enquiry-box{background:#fafdff!important;border-color:rgba(155,196,222,.6)!important;border-top-color:#6fa9ce!important;border-radius:17px!important}
+.enquiry-box label{color:var(--arctic-navy)!important}
+.enquiry-box input,.enquiry-box select,.enquiry-box textarea{background:#fff!important;border-color:#d2dfe8!important;color:var(--arctic-ink)!important;border-radius:10px!important}
+.enquiry-box input:focus,.enquiry-box select:focus,.enquiry-box textarea:focus{border-color:#6fa9ce!important;box-shadow:0 0 0 3px rgba(111,169,206,.14)!important}
+.faq-list details{background:#fbfdfe!important;border:1px solid var(--arctic-line)!important;border-radius:13px!important}
+.faq-list details[open]{border-color:rgba(111,169,206,.62)!important}
+.faq-list summary:after{color:#5b91b4!important}
+.faq-list details p{color:var(--arctic-muted)!important}
+#reviews .review-panel{border-radius:20px!important}
+#reviews .review-panel h2{color:#f6fbfe!important}
+#reviews .review-kicker{color:#c9e7f8!important}
+#reviews .review-point{background:rgba(255,255,255,.07)!important;border-color:rgba(220,238,250,.2)!important;border-radius:13px!important}
+#reviews .review-point strong{color:#d9effb!important}
+#reviews .review-point span{color:rgba(239,247,252,.76)!important}
+.instagram-section{background:#eaf2f7!important;color:var(--arctic-navy)!important}
+.instagram-section .section-title h2{color:var(--arctic-navy)!important}
+.instagram-content{background:linear-gradient(145deg,#142d45,#294f6b)!important;border:1px solid rgba(111,169,206,.4)!important;border-radius:18px!important}
+footer#siteFooter,footer,.site-footer{background:linear-gradient(145deg,#0a1725,#142d45)!important;color:rgba(239,247,252,.82)!important;border-top:1px solid rgba(169,207,230,.22)!important}
+footer b,footer strong,footer h2,footer h3,footer h4{color:#e2f1fa!important}
+footer a{color:#c6e3f4!important}
+.footer-contact-bar{background:rgba(13,31,48,.9)!important;border-color:rgba(183,218,239,.32)!important}
+a:focus-visible,button:focus-visible{outline:2px solid #78afd1!important;outline-offset:3px!important}
+/* Motion language: slow reveals, no perpetual movement or hover dependency. */
+@media(prefers-reduced-motion:no-preference){
+  .arctic-reveal{opacity:0;transform:translate3d(0,22px,0);transition:opacity .72s var(--arctic-ease),transform .72s var(--arctic-ease);transition-delay:var(--arctic-delay,0ms)}
+  .arctic-reveal.arctic-in{opacity:1;transform:translate3d(0,0,0)}
+  #home.hero .hero-content{animation:arcticHeroIn .95s var(--arctic-ease) both!important}
+  #home.hero:before{animation:arcticAtmosphere 18s ease-in-out infinite alternate}
+  @keyframes arcticHeroIn{from{opacity:0;transform:translate3d(0,20px,0);filter:blur(4px)}to{opacity:1;transform:translate3d(0,0,0);filter:blur(0)}}
+  @keyframes arcticAtmosphere{from{opacity:.58}to{opacity:1}}
+  @media(hover:hover) and (pointer:fine){
+    .destination-card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card{transition:transform .48s var(--arctic-ease),box-shadow .48s ease,border-color .3s ease!important}
+    .destination-card:hover,.group-departure-card:hover,.package-slide:hover,.itinerary-slide:hover,.cab-card:hover,.hotel-card:hover,.card:hover{transform:translateY(-5px)!important;box-shadow:0 22px 48px rgba(13,35,54,.15)!important;border-color:rgba(111,169,206,.5)!important}
+    .destination-card img,.group-departure-photo img,.package-slide img,.card>img{transition:transform .85s var(--arctic-ease),filter .6s ease}
+    .destination-card:hover img,.group-departure-card:hover img,.package-slide:hover img,.card:hover>img{transform:scale(1.045);filter:saturate(1.07)}
+    #home.hero .hero-service-icon{transition:transform .3s var(--arctic-ease),background .3s ease,border-color .3s ease!important}
+    #home.hero .hero-service-icon:hover{transform:translateY(-3px)!important;border-color:rgba(220,238,250,.75)!important}
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+  .arctic-reveal,.arctic-reveal.arctic-in{opacity:1!important;transform:none!important;transition:none!important}
+  #home.hero .hero-content,#home.hero:before{animation:none!important}
+  .destination-card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card,#home.hero .hero-service-icon{transition:none!important}
+}
+@media(max-width:760px){
+  html{scroll-padding-top:120px}
+  #home.hero{background-position:center,center,58% center!important}
+  section.content{padding-left:17px!important;padding-right:17px!important}
+  .destination-gallery{padding-left:16px!important;padding-right:16px!important}
+  .destination-card{border-radius:13px!important}
+  .group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.card{border-radius:14px!important}
+  .journey-strip{border-radius:15px!important}
+  .home-trip-planner{padding-left:16px!important;padding-right:16px!important}
+}
+@media(max-width:380px){
+  #home.hero .hero-service-icon span{font-size:8px!important;letter-spacing:.3px!important}
+}
+
+
+/* MOBILE SITEWIDE HEADER — match the light glass homepage header.
+   Keep the desktop header untouched; prayer flags remain layered over the header. */
+@media screen and (max-width:760px){
+  html body>header.sitewide-header,
+  html body>header.sitewide-header.is-scrolled,
+  html body>header.sitewide-header.is-hidden,
+  html body>header.sitewide-header.menu-open{
+    position:sticky!important;top:0!important;z-index:1000!important;
+    min-height:58px!important;height:auto!important;
+    background:rgba(255,255,255,.96)!important;
+    background-color:rgba(255,255,255,.96)!important;
+    background-image:none!important;color:#171717!important;
+    border:0!important;border-bottom:1px solid rgba(20,40,58,.12)!important;
+    box-shadow:0 3px 16px rgba(16,36,59,.07)!important;
+    -webkit-backdrop-filter:blur(20px) saturate(150%)!important;
+    backdrop-filter:blur(20px) saturate(150%)!important;
+    isolation:isolate!important;overflow:visible!important;
+  }
+  html body>header.sitewide-header .header-inner{
+    position:relative!important;z-index:1!important;
+    display:flex!important;align-items:center!important;justify-content:space-between!important;
+    min-height:58px!important;padding:5px 10px 5px 7px!important;gap:10px!important;
+  }
+  html body>header.sitewide-header .header-inner>a.brand{
+    display:flex!important;align-items:center!important;justify-content:flex-start!important;
+    flex:0 1 auto!important;width:auto!important;max-width:72vw!important;
+    margin:0 auto 0 0!important;padding:0!important;transform:translateX(-2px)!important;
+    background:transparent!important;border:0!important;box-shadow:none!important;
+  }
+  html body>header.sitewide-header .header-inner>a.brand img{
+    display:block!important;width:clamp(150px,43vw,190px)!important;max-width:100%!important;
+    height:auto!important;max-height:44px!important;object-fit:contain!important;
+  }
+  html body>header.sitewide-header .header-cta{display:none!important}
+  html body>header.sitewide-header .header-menu-toggle{
+    display:inline-flex!important;align-items:center!important;justify-content:center!important;
+    flex:0 0 42px!important;width:42px!important;height:42px!important;
+    padding:0!important;margin:0!important;border:1px solid #e5e5e3!important;
+    border-radius:12px!important;background:#fff!important;background-image:none!important;
+    color:#171717!important;-webkit-text-fill-color:#171717!important;
+    box-shadow:none!important;
+  }
+  html body>header.sitewide-header .header-menu-toggle svg,
+  html body>header.sitewide-header .header-menu-toggle svg path{stroke:#171717!important}
+  html body>header.sitewide-header .header-inner>nav.glass-nav{
+    z-index:1300!important;
+  }
+  html body>header.sitewide-header::after{
+    content:""!important;display:block!important;position:absolute!important;
+    inset:0!important;z-index:0!important;pointer-events:none!important;
+    opacity:.52!important;background-repeat:repeat-x!important;
+    background-size:360px 60px!important;background-position:0 0!important;
+    animation:mobile-header-prayer-flags-overlay-flow 18s linear infinite!important;
+    animation-play-state:running!important;
+  }
+  html body>header.sitewide-header .header-inner>a.brand,
+  html body>header.sitewide-header .header-inner>.header-menu-toggle{position:relative!important;z-index:2!important}
+}
+
+
+/* MOBILE ONLY: remove the Plan Your Trip CTA from every page header.
+   Keep in-page Plan Your Trip actions and all desktop headers unchanged. */
+@media screen and (max-width:760px){
+  html body > header :is(.header-cta,a[aria-label="Plan your trip"],a[aria-label="Plan Your Trip"]){
+    display:none!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+  }
+}
+
+
+/* FINAL MOBILE OVERRIDE: Build Your Trip category tabs must render black.
+   Kept at the end of the last-loaded shared stylesheet to beat earlier theme rules. */
+@media screen and (max-width:760px){
+  html body main.wrap .toolbar #tabs.tabs > button,
+  html body main.wrap .toolbar #tabs.tabs > button.active,
+  html body main.wrap .toolbar #tabs.tabs > button:active,
+  html body main.wrap .toolbar #tabs.tabs > button:hover,
+  html body main.wrap .toolbar #tabs.tabs > button:focus,
+  html body main.wrap .toolbar #tabs.tabs > button:focus-visible{
+    background:#000!important;
+    background-color:#000!important;
+    background-image:none!important;
+    color:#fff!important;
+    -webkit-text-fill-color:#fff!important;
+    border:1px solid #000!important;
+    box-shadow:none!important;
+    opacity:1!important;
+  }
+}
+
+
+
+/* MOBILE FOOTER FIX: remove the white footer panel and restore Arctic dark styling. */
+@media screen and (max-width:760px){
+  html body > footer#siteFooter,
+  html body > footer.site-footer,
+  html body > footer,
+  html body footer#siteFooter,
+  html body footer.site-footer{
+    background:#0a1725!important;
+    background-image:linear-gradient(145deg,#091522 0%,#10243a 52%,#173b59 100%)!important;
+    color:rgba(239,247,252,.88)!important;
+    border:0!important;
+    border-top:1px solid rgba(185,220,242,.24)!important;
+    border-radius:0!important;
+    box-shadow:none!important;
+  }
+  html body > footer :is(b,strong,h2,h3,h4),
+  html body footer#siteFooter :is(b,strong,h2,h3,h4){
+    color:#e2f1fa!important;
+  }
+  html body > footer a,
+  html body footer#siteFooter a{
+    color:#c6e3f4!important;
+  }
+  html body > footer p,
+  html body footer#siteFooter p,
+  html body > footer small{
+    color:rgba(220,234,244,.72)!important;
+  }
+}
+
+
+/* Replace the removed Plan Your Trip header action with the live Packages link. */
+@media screen and (max-width:760px){
+  html body>header.sitewide-header .header-cta,
+  html body>header .header-cta,
+  html body>header a[aria-label="Browse tour packages"]{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
+    flex:0 0 auto!important;
+    min-height:38px!important;
+    padding:8px 12px!important;
+    margin:0!important;
+    white-space:nowrap!important;
+    font-size:9px!important;
+    letter-spacing:.07em!important;
+    border-radius:999px!important;
+  }
+  html body>header.sitewide-header .header-inner{
+    gap:7px!important;
+  }
+}
+
+/* Source: homepage-mobile-departure-promo.css */
+/* Mobile homepage: replace the generic hero slogan with the next group departure. */
+.mobile-next-departure{display:none}
+@media(max-width:760px){
+  #home.hero{min-height:0!important;padding:24px 17px 66px!important;align-items:stretch!important;background-position:center,center,58% 38%!important}
+  #home.hero>.hero-content{width:100%!important;max-width:560px!important;margin:0 auto!important}
+  #home.hero .hero-animated-heading{display:none!important}
+  #home.hero .mobile-next-departure{position:relative;isolation:isolate;display:block;width:100%;max-width:520px;margin:0 auto 22px;padding:19px 18px 17px;overflow:hidden;border:1px solid rgba(255,255,255,.92);border-radius:19px;color:#fff;text-align:left;background:linear-gradient(145deg,rgba(245,250,253,.96),rgba(224,239,248,.94));box-shadow:0 18px 44px rgba(15,35,52,.16),inset 0 1px 0 rgba(255,255,255,.95);-webkit-backdrop-filter:blur(18px) saturate(135%);backdrop-filter:blur(18px) saturate(135%);animation:mobileDepartureReveal .8s cubic-bezier(.2,.75,.25,1) both}
+  #home.hero .mobile-next-departure:before{content:"";position:absolute;z-index:-1;inset:-1px;padding:1px;border-radius:inherit;background:linear-gradient(115deg,rgba(255,255,255,.05),rgba(169,216,242,.9),rgba(255,255,255,.08),rgba(169,216,242,.42));background-size:240% 100%;animation:mobileDepartureBorder 6s linear infinite;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  #home.hero .mobile-departure-topline{display:flex;align-items:center;gap:7px;flex-wrap:wrap;color:#fff;text-shadow:0 1px 5px rgba(9,29,47,.85);font:700 9px/1.4 "DM Sans",Arial,sans-serif;letter-spacing:1.45px}
+  #home.hero .mobile-departure-live-dot{width:7px;height:7px;flex:none;border-radius:50%;background:#a9d8f2;box-shadow:0 0 0 4px rgba(169,216,242,.13);animation:mobileDeparturePulse 1.8s ease-in-out infinite}
+  #home.hero .mobile-departure-season{margin-left:auto;color:#fff;text-shadow:0 1px 5px rgba(9,29,47,.9);font-size:8px;letter-spacing:1px}
+  #home.hero .mobile-departure-kicker{margin:17px 0 5px;color:#fff;text-shadow:0 1px 5px rgba(9,29,47,.9);font:700 8px/1.4 "DM Sans",Arial,sans-serif;letter-spacing:2.2px}
+  #home.hero .mobile-next-departure h2{margin:0;color:#fff;text-shadow:0 2px 9px rgba(9,29,47,.95);font:500 clamp(38px,10vw,52px)/.88 "Cormorant Garamond",Georgia,serif;letter-spacing:-.7px}
+  #home.hero .mobile-next-departure h2 em{color:#fff;text-shadow:0 2px 8px rgba(9,29,47,.95);font-style:normal}
+  #home.hero .mobile-departure-date{margin:13px 0 9px;color:#fff;text-shadow:0 1px 6px rgba(9,29,47,.95);font:700 12px/1.4 "DM Sans",Arial,sans-serif;letter-spacing:1.15px}
+  #home.hero .mobile-departure-date span{padding:0 4px;color:#a9d8f2}
+  #home.hero .mobile-departure-facts{display:flex;flex-wrap:wrap;gap:6px}
+  #home.hero .mobile-departure-facts span{padding:6px 8px;border:1px solid rgba(220,238,250,.2);border-radius:6px;background:rgba(16,39,59,.82);color:#fff;font:500 9px/1.35 "DM Sans",Arial,sans-serif}
+  #home.hero .mobile-departure-price{margin:13px 0 9px;color:#fff;text-shadow:0 1px 7px rgba(9,29,47,.95);font:700 25px/1 "DM Sans",Arial,sans-serif;letter-spacing:-.8px}
+  #home.hero .mobile-departure-price small{color:#fff;text-shadow:0 1px 5px rgba(9,29,47,.95);font:500 10px/1 "DM Sans",Arial,sans-serif;letter-spacing:0}
+  #home.hero .mobile-departure-seats{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:13px 0 7px;color:#fff;text-shadow:0 1px 5px rgba(9,29,47,.95);font:600 9px/1.4 "DM Sans",Arial,sans-serif}
+  #home.hero .mobile-departure-seats span{color:#fff;font-weight:700}
+  #home.hero .mobile-departure-track{height:6px;overflow:hidden;border-radius:99px;background:rgba(255,255,255,.24)}
+  #home.hero .mobile-departure-track span{display:block;width:80%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#e9f7ff,#a9d8f2,#f7fcff);background-size:200% 100%;animation:mobileDepartureFill 1.4s ease-out both,mobileDepartureShimmer 3.2s linear infinite}
+  #home.hero .mobile-departure-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:43px;margin-top:15px;padding:0 14px;border:1px solid rgba(255,255,255,.85);border-radius:8px;background:linear-gradient(105deg,#f5fbff,#a9d8f2);color:#10243b;font:800 9px/1 "DM Sans",Arial,sans-serif;letter-spacing:1.15px;text-decoration:none;box-shadow:0 7px 18px rgba(0,0,0,.18);transition:transform .25s,box-shadow .25s}
+  #home.hero .mobile-departure-cta span{font-size:17px;transition:transform .25s}
+  #home.hero .mobile-departure-cta:active{transform:scale(.98);box-shadow:0 3px 10px rgba(0,0,0,.2)}
+  #home.hero .mobile-departure-itinerary{margin-top:9px!important;background:transparent!important;color:#fff!important;border:1px solid rgba(255,255,255,.78)!important;box-shadow:none!important}
+  #home.hero .mobile-departure-itinerary span{color:#fff!important}
+  #home.hero .hero-service-icons{margin:20px 0 18px!important}
+  #home.hero .hero-destination-list{margin-top:8px!important}
+  #home.hero .hero-build-cta-wrap{margin-top:15px!important}
+}
+@keyframes mobileDepartureReveal{from{opacity:0;transform:translateY(18px) scale(.985);filter:blur(5px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+@keyframes mobileDeparturePulse{0%,100%{box-shadow:0 0 0 4px rgba(169,216,242,.13)}50%{box-shadow:0 0 0 7px rgba(169,216,242,.03)}}
+@keyframes mobileDepartureBorder{to{background-position:240% 0}}
+@keyframes mobileDepartureFill{from{width:0}to{width:80%}}
+@keyframes mobileDepartureShimmer{to{background-position:200% 0}}
+@media(prefers-reduced-motion:reduce){#home.hero .mobile-next-departure,#home.hero .mobile-next-departure:before,#home.hero .mobile-departure-live-dot,#home.hero .mobile-departure-track span{animation:none!important}#home.hero .mobile-departure-track span{width:80%}}
+
+/* Final monochrome palette for the mobile homepage departure promotion. */
+@media(max-width:760px){
+  html body #home.hero .mobile-next-departure{
+    background:#050505!important;
+    background-image:linear-gradient(145deg,#050505 0%,#171717 100%)!important;
+    color:#fff!important;
+    border:1px solid rgba(255,255,255,.82)!important;
+    box-shadow:0 18px 44px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.12)!important;
+  }
+  html body #home.hero .mobile-next-departure:before{
+    background:linear-gradient(115deg,rgba(255,255,255,.05),#fff,rgba(255,255,255,.08),#777)!important;
+  }
+  html body #home.hero .mobile-next-departure :is(h2,h2 em,p,small,span,strong,.mobile-departure-topline,.mobile-departure-season,.mobile-departure-kicker,.mobile-departure-date,.mobile-departure-price,.mobile-departure-seats){
+    color:#fff!important;
+    text-shadow:none!important;
+  }
+  html body #home.hero .mobile-next-departure .mobile-departure-live-dot{
+    background:#fff!important;box-shadow:0 0 0 4px rgba(255,255,255,.15)!important;
+  }
+  html body #home.hero .mobile-next-departure .mobile-departure-date span{color:#fff!important}
+  html body #home.hero .mobile-next-departure .mobile-departure-facts span{
+    color:#fff!important;background:#202020!important;border:1px solid #777!important;
+  }
+  html body #home.hero .mobile-next-departure .mobile-departure-track{
+    background:#3a3a3a!important;
+  }
+  html body #home.hero .mobile-next-departure .mobile-departure-track span{
+    background:linear-gradient(100deg,#1b4fa3 0%,#fff 20%,#d92332 40%,#f4c542 60%,#168b58 80%,#1b4fa3 100%)!important;
+    background-size:260% 100%!important;
+    animation:mobileDepartureTibetanFlow 3.2s linear infinite!important;
+    box-shadow:0 0 10px rgba(255,255,255,.2);
+  }
+  @keyframes mobileDepartureTibetanFlow{
+    from{background-position:100% 0}
+    to{background-position:-160% 0}
+  }
+  html body #home.hero .mobile-next-departure .mobile-departure-cta{
+    color:#000!important;background:#fff!important;border:1px solid #fff!important;
+    text-shadow:none!important;box-shadow:0 7px 18px rgba(0,0,0,.28)!important;
+  }
+  html body #home.hero .mobile-next-departure .mobile-departure-cta span{color:#000!important}
+}
+@media(prefers-reduced-motion:reduce){html body #home.hero .mobile-next-departure .mobile-departure-track span{animation:none!important;background-position:50% 0!important}}
+
+
+/* Keep the hero promotion's Explore CTA label black on every mobile state. */
+@media(max-width:760px){
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta,
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta:visited,
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta span{
+    color:#000!important;
+    -webkit-text-fill-color:#000!important;
+  }
+}
+
+
+/* Equal vertical spacing between the seat progress bar and both promotion CTAs. */
+@media(max-width:760px){
+  html body #home.hero .mobile-next-departure .mobile-departure-track{
+    margin-bottom:12px!important;
+  }
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta{
+    margin-top:0!important;
+  }
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta + a.mobile-departure-cta{
+    margin-top:12px!important;
+  }
+}
+
+
+/* Match the Spiti word exactly to the Winter and Expedition heading typography. */
+@media(max-width:760px){
+  html body #home.hero .mobile-next-departure h2 em{
+    font-family:inherit!important;
+    font-size:inherit!important;
+    font-weight:inherit!important;
+    font-style:normal!important;
+    line-height:inherit!important;
+    letter-spacing:inherit!important;
+  }
+}
+
+
+/* Desktop homepage: use the same Winter Spiti departure card in place of the hero slogan. */
+@media(min-width:761px){
+  html body #home.hero{min-height:clamp(650px,82vh,900px)!important;padding:88px 24px 78px!important;align-items:center!important}
+  html body #home.hero>.hero-content{width:min(760px,100%)!important;max-width:760px!important;margin:0 auto!important}
+  html body #home.hero .hero-animated-heading{display:none!important}
+  html body #home.hero .mobile-next-departure{
+    position:relative;isolation:isolate;display:block;width:min(560px,100%);margin:0 auto 26px;padding:28px 30px 25px;
+    overflow:hidden;border:1px solid rgba(255,255,255,.82);border-radius:24px;color:#fff;text-align:left;
+    background:linear-gradient(145deg,#050505 0%,#171717 100%);
+    box-shadow:0 24px 64px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.12);
+    -webkit-backdrop-filter:blur(24px) saturate(120%);backdrop-filter:blur(24px) saturate(120%);
+    animation:mobileDepartureReveal .8s cubic-bezier(.2,.75,.25,1) both;
+  }
+  html body #home.hero .mobile-next-departure:before{
+    content:"";position:absolute;z-index:-1;inset:-1px;padding:1px;border-radius:inherit;
+    background:linear-gradient(115deg,rgba(255,255,255,.05),#fff,rgba(255,255,255,.08),#777);
+    background-size:240% 100%;animation:mobileDepartureBorder 6s linear infinite;
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;
+  }
+  html body #home.hero .mobile-departure-topline{display:flex;align-items:center;gap:9px;flex-wrap:wrap;color:#fff;font:700 10px/1.4 "DM Sans",Arial,sans-serif;letter-spacing:1.6px}
+  html body #home.hero .mobile-departure-live-dot{width:8px;height:8px;flex:none;border-radius:50%;background:#fff;box-shadow:0 0 0 5px rgba(255,255,255,.14);animation:mobileDeparturePulse 1.8s ease-in-out infinite}
+  html body #home.hero .mobile-departure-season{margin-left:auto;color:#fff;font-size:9px;letter-spacing:1.1px}
+  html body #home.hero .mobile-departure-kicker{margin:22px 0 7px;color:#fff;font:700 9px/1.4 "DM Sans",Arial,sans-serif;letter-spacing:2.5px}
+  html body #home.hero .mobile-next-departure h2{margin:0;color:#fff;font:500 clamp(48px,5.2vw,66px)/.9 "Cormorant Garamond",Georgia,serif;letter-spacing:-1px}
+  html body #home.hero .mobile-next-departure h2 em{color:#fff;font-style:normal}
+  html body #home.hero .mobile-departure-date{margin:17px 0 12px;color:#fff;font:700 13px/1.4 "DM Sans",Arial,sans-serif;letter-spacing:1.3px}
+  html body #home.hero .mobile-departure-date span{padding:0 5px;color:#fff}
+  html body #home.hero .mobile-departure-facts{display:flex;flex-wrap:wrap;gap:8px}
+  html body #home.hero .mobile-departure-facts span{padding:7px 10px;border:1px solid #666;border-radius:7px;background:#202020;color:#fff;font:500 10px/1.35 "DM Sans",Arial,sans-serif}
+  html body #home.hero .mobile-departure-price{margin:17px 0 11px;color:#fff;font:700 30px/1 "DM Sans",Arial,sans-serif;letter-spacing:-.8px}
+  html body #home.hero .mobile-departure-price small{color:#fff;font:500 11px/1 "DM Sans",Arial,sans-serif;letter-spacing:0}
+  html body #home.hero .mobile-departure-seats{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:15px 0 8px;color:#fff;font:600 10px/1.4 "DM Sans",Arial,sans-serif}
+  html body #home.hero .mobile-departure-seats span{color:#fff;font-weight:700}
+  html body #home.hero .mobile-departure-track{height:7px;margin-bottom:15px;overflow:hidden;border-radius:99px;background:#3a3a3a}
+  html body #home.hero .mobile-departure-track span{display:block;width:80%;height:100%;border-radius:inherit;background:linear-gradient(100deg,#1b4fa3 0%,#fff 20%,#d92332 40%,#f4c542 60%,#168b58 80%,#1b4fa3 100%);background-size:260% 100%;animation:mobileDepartureTibetanFlow 3.2s linear infinite;box-shadow:0 0 10px rgba(255,255,255,.2)}
+  html body #home.hero .mobile-departure-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;margin-top:0;padding:0 17px;border:1px solid #fff;border-radius:999px;background:#fff;color:#000;font:800 10px/1 "DM Sans",Arial,sans-serif;letter-spacing:1.25px;text-decoration:none;box-shadow:0 7px 18px rgba(0,0,0,.28);transition:transform .25s,box-shadow .25s}
+  html body #home.hero .mobile-departure-cta span{color:#000;font-size:18px;transition:transform .25s}
+  html body #home.hero .mobile-departure-cta:hover{transform:translateY(-2px);box-shadow:0 11px 24px rgba(0,0,0,.3)}
+  html body #home.hero .mobile-departure-itinerary{margin-top:0!important;margin-bottom:10px!important;background:transparent!important;color:#fff!important;border:1px solid rgba(255,255,255,.78)!important;box-shadow:none!important}
+  html body #home.hero .mobile-departure-itinerary span{color:#fff!important}
+  html body #home.hero .hero-destination-list{margin-top:12px!important}
+}
+@keyframes mobileDepartureTibetanFlow{from{background-position:100% 0}to{background-position:-160% 0}}
+@media(prefers-reduced-motion:reduce){html body #home.hero .mobile-next-departure,html body #home.hero .mobile-next-departure:before,html body #home.hero .mobile-departure-live-dot,html body #home.hero .mobile-departure-track span{animation:none!important}}
+
+
+/* Desktop hero promotion: both departure buttons use white backgrounds with black text. */
+@media(min-width:761px){
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta,
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta:visited,
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta:hover,
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta:focus,
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta:active{
+    background:#fff!important;
+    background-image:none!important;
+    color:#000!important;
+    -webkit-text-fill-color:#000!important;
+    border:1px solid #fff!important;
+    text-shadow:none!important;
+  }
+  html body #home.hero .mobile-next-departure a.mobile-departure-cta span{
+    color:#000!important;
+    -webkit-text-fill-color:#000!important;
+  }
+}
+
+
+/* Remove the pale-blue outline treatment behind the promotion date and duration on both layouts. */
+html body #home.hero .mobile-next-departure .mobile-departure-date,
+html body #home.hero .mobile-next-departure .mobile-departure-facts span:first-child{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  background-image:none!important;
+}
+
+
+/* Hard reset: date and duration labels must not render inside pale-blue outlined chips. */
+html body #home.hero section.mobile-next-departure .mobile-departure-date,
+html body #home.hero section.mobile-next-departure .mobile-departure-facts,
+html body #home.hero section.mobile-next-departure .mobile-departure-facts span,
+html body #home.hero section.mobile-next-departure .mobile-departure-date *,
+html body #home.hero section.mobile-next-departure .mobile-departure-facts *{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+}
+html body #home.hero section.mobile-next-departure .mobile-departure-date::before,
+html body #home.hero section.mobile-next-departure .mobile-departure-date::after,
+html body #home.hero section.mobile-next-departure .mobile-departure-facts::before,
+html body #home.hero section.mobile-next-departure .mobile-departure-facts::after,
+html body #home.hero section.mobile-next-departure .mobile-departure-facts span::before,
+html body #home.hero section.mobile-next-departure .mobile-departure-facts span::after{
+  content:none!important;
+  display:none!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:none!important;
+}
+
+
+/* Refined light treatment for the homepage group-departure promotion card. */
+html body #home.hero section.mobile-next-departure{
+  transition:transform .35s ease,box-shadow .35s ease;
+}
+html body #home.hero section.mobile-next-departure::after{
+  content:"";
+  position:absolute;
+  z-index:0;
+  inset:0;
+  overflow:hidden;
+  border-radius:inherit;
+  pointer-events:none;
+  opacity:.42;
+  mix-blend-mode:screen;
+  background-image:
+    radial-gradient(ellipse at 0% 0%,rgba(255,255,255,.34),transparent 34%),
+    radial-gradient(ellipse at 100% 100%,rgba(210,225,240,.25),transparent 32%),
+    linear-gradient(108deg,transparent 35%,rgba(255,255,255,0) 43%,rgba(255,255,255,.2) 50%,rgba(255,255,255,.04) 56%,transparent 65%);
+  background-size:100% 100%,100% 100%,240% 100%;
+  background-position:0 0,0 0,-140% 0;
+  animation:promoCardLightSweep 8s ease-in-out infinite,promoCardCornerGlow 5.2s ease-in-out infinite;
+}
+html body #home.hero section.mobile-next-departure > *{
+  position:relative;
+  z-index:1;
+}
+@keyframes promoCardLightSweep{
+  0%,12%{background-position:0 0,0 0,-140% 0}
+  72%,100%{background-position:0 0,0 0,140% 0}
+}
+@keyframes promoCardCornerGlow{
+  0%,100%{opacity:.3}
+  50%{opacity:.58}
+}
+@media(hover:hover) and (pointer:fine) and (min-width:761px){
+  html body #home.hero section.mobile-next-departure:hover{
+    transform:translateY(-4px);
+    box-shadow:0 30px 72px rgba(0,0,0,.46),inset 0 1px 0 rgba(255,255,255,.16);
+  }
+  html body #home.hero section.mobile-next-departure:hover::after{
+    opacity:.72;
+  }
+}
+@media(max-width:760px){
+  html body #home.hero section.mobile-next-departure::after{
+    animation:promoCardLightSweep 8s ease-in-out infinite,promoCardCornerGlow 4.8s ease-in-out infinite;
+  }
+  html body #home.hero section.mobile-next-departure:active{
+    box-shadow:0 20px 48px rgba(0,0,0,.4),0 0 22px rgba(255,255,255,.12),inset 0 1px 0 rgba(255,255,255,.16)!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  html body #home.hero section.mobile-next-departure,
+  html body #home.hero section.mobile-next-departure::after{
+    animation:none!important;
+    transition:none!important;
+  }
+}
+
+
+/* Upcoming departures carousel: touch swipe and desktop mouse drag. */
+html body #home.hero .hero-promo-carousel{display:block!important;width:100%!important;max-width:560px!important;min-width:0!important;margin:18px auto 22px!important;overflow:hidden!important;flex:0 1 auto!important}
+html body #home.hero .hero-promo-track{display:flex!important;flex-flow:row nowrap!important;align-items:flex-start!important;gap:0!important;width:100%!important;min-width:0!important;height:auto;overflow-x:auto!important;overflow-y:hidden!important;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;cursor:grab}
+html body #home.hero .hero-promo-track::-webkit-scrollbar{display:none!important}
+html body #home.hero .hero-promo-track.is-dragging{cursor:grabbing;scroll-snap-type:none;user-select:none}
+html body #home.hero .hero-promo-slide{display:block!important;position:relative!important;flex:0 0 100%!important;width:100%!important;min-width:100%!important;max-width:100%!important;height:auto!important;scroll-snap-align:start;scroll-snap-stop:always}
+html body #home.hero .hero-promo-slide .mobile-next-departure{display:grid!important;position:relative!important;width:100%!important;max-width:none!important;margin:0!important;padding:clamp(18px,3vw,25px)!important;overflow:hidden!important;color:#fff!important;text-align:left!important;border:1px solid rgba(255,255,255,.88)!important;border-radius:22px!important;background:#050505!important;background-image:linear-gradient(145deg,#080808 0%,#171717 58%,#050505 100%)!important;box-shadow:0 20px 48px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.14)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;animation:none!important}
+html body #home.hero .hero-promo-slide .mobile-departure-topline{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:7px!important;flex-wrap:wrap!important;min-height:30px!important;padding-bottom:10px!important;border-bottom:1px solid rgba(255,255,255,.24)!important;color:#fff!important;text-shadow:none!important}
+html body #home.hero .hero-promo-slide .mobile-departure-kicker{margin:16px 0 6px!important;color:#fff!important}
+html body #home.hero .hero-promo-slide .mobile-next-departure h2{margin:0 0 4px!important;color:#fff!important;font-size:clamp(39px,7vw,58px)!important;line-height:.9!important}
+html body #home.hero .hero-promo-slide .mobile-departure-date{margin:12px 0 10px!important;padding:10px 0!important;border-top:1px solid rgba(255,255,255,.22)!important;border-bottom:1px solid rgba(255,255,255,.22)!important;color:#fff!important}
+html body #home.hero .hero-promo-slide .mobile-departure-facts{display:flex!important;flex-wrap:wrap!important;gap:8px!important;margin:8px 0!important}
+html body #home.hero .hero-promo-slide .mobile-departure-facts span{padding:6px 9px!important;color:#fff!important;background:rgba(255,255,255,.08)!important;border:1px solid rgba(255,255,255,.18)!important;border-radius:5px!important}
+html body #home.hero .hero-promo-slide .mobile-departure-price{margin:12px 0 8px!important;padding:9px 0!important;border-top:1px solid rgba(255,255,255,.28)!important;color:#fff!important;font-size:clamp(22px,4vw,29px)!important}
+html body #home.hero .hero-promo-slide .mobile-departure-price small{font-size:11px!important}
+html body #home.hero .hero-promo-slide .mobile-departure-seats{display:flex!important;flex-direction:column!important;align-items:flex-end!important;gap:3px!important;margin:12px 0 8px!important;padding:9px 0!important;border-top:1px solid rgba(255,255,255,.28)!important;color:#fff!important;text-align:right!important}
+html body #home.hero .hero-promo-slide .mobile-departure-track{height:7px!important;margin:0 0 14px!important}
+html body #home.hero .hero-promo-slide .mobile-departure-cta{display:flex!important;align-items:center!important;justify-content:space-between!important;width:100%!important;min-height:48px!important;margin:8px 0 0!important;padding:13px 17px!important;border-radius:999px!important}
+html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details:not([open]) .mobile-departure-itinerary-list{display:none!important}
+html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details[open] .mobile-departure-itinerary-list{display:grid!important;gap:6px!important;margin:10px 0 13px!important;padding:11px 0!important;border-top:1px solid rgba(255,255,255,.24)!important;color:#fff!important}
+html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details{grid-area:itinerary!important;margin:10px 0 13px!important}
+html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details>summary{list-style:none!important;cursor:pointer!important}
+html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details>summary::-webkit-details-marker{display:none!important}
+html body #home.hero .hero-promo-slide .mobile-departure-itinerary-list p{margin:0!important;color:#fff!important;font:500 11px/1.45 "DM Sans",Arial,sans-serif!important}
+html body #home.hero .hero-promo-slide .mobile-departure-itinerary-list strong{display:inline-block;min-width:48px;color:#fff!important;font-size:10px!important;letter-spacing:.5px}
+html body #home.hero .hero-promo-pagination{display:flex!important;justify-content:center!important;align-items:center!important;gap:9px!important;width:100%!important;padding:12px 0 0!important}
+html body #home.hero .hero-promo-pagination button{display:block!important;width:8px!important;height:8px!important;padding:0!important;border:1px solid rgba(255,255,255,.95)!important;border-radius:50%!important;background:rgba(255,255,255,.35)!important;cursor:pointer!important;transition:width .2s ease,background .2s ease}
+html body #home.hero .hero-promo-pagination button.is-active{width:24px!important;border-radius:99px!important;background:#fff!important}
+@media(max-width:760px){html body #home.hero .hero-promo-carousel{max-width:520px!important;margin:0 auto 22px!important}html body #home.hero .hero-promo-slide .mobile-next-departure{padding:18px 17px 16px!important}html body #home.hero .hero-promo-slide .mobile-next-departure h2{font-size:clamp(39px,10vw,51px)!important}}
+@media(min-width:761px){html body #home.hero .hero-promo-carousel{max-width:560px!important;margin:18px auto 22px!important}html body #home.hero .hero-promo-slide .mobile-next-departure{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-areas:"top top" "kicker kicker" "title title" "date date" "facts facts" "price seats" "progress progress" "itinerary itinerary" "explore explore"!important;gap:0 14px!important}}
+@media(prefers-reduced-motion:reduce){html body #home.hero .hero-promo-track{scroll-behavior:auto!important}html body #home.hero .hero-promo-pagination button{transition:none!important}}
+
+
+/* Mobile departure cards: reproduce the desktop information hierarchy and card styling. */
+@media screen and (max-width:760px){
+  html body #home.hero > .hero-content > .hero-promo-carousel{display:block!important;position:relative!important;flex:0 0 auto!important;align-self:stretch!important;width:100%!important;max-width:520px!important;min-width:0!important;margin:0 auto 22px!important;padding:0!important;overflow:hidden!important;transform:none!important;box-sizing:border-box!important}
+  html body #home.hero .hero-promo-track{display:flex!important;flex-flow:row nowrap!important;align-items:stretch!important;gap:0!important;width:100%!important;min-width:0!important;max-width:100%!important;height:auto!important;overflow-x:auto!important;overflow-y:hidden!important;box-sizing:border-box!important}
+  html body #home.hero .hero-promo-slide{display:block!important;position:relative!important;flex:0 0 100%!important;width:100%!important;min-width:100%!important;max-width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;box-sizing:border-box!important}
+  html body #home.hero .hero-promo-slide .mobile-next-departure{display:grid!important;position:relative!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-auto-flow:row!important;grid-auto-rows:max-content!important;align-content:start!important;align-items:start!important;gap:0 12px!important;width:100%!important;max-width:none!important;height:auto!important;min-height:0!important;max-height:none!important;margin:0!important;padding:19px 17px 18px!important;overflow:hidden!important;box-sizing:border-box!important;color:#fff!important;text-align:left!important;border:1px solid rgba(255,255,255,.9)!important;border-radius:22px!important;background:linear-gradient(145deg,#080808 0%,#171717 58%,#050505 100%)!important;box-shadow:0 20px 48px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.14)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;animation:none!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-topline{grid-area:top!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:7px!important;flex-wrap:wrap!important;min-height:30px!important;padding-bottom:10px!important;border-bottom:1px solid rgba(255,255,255,.24)!important;color:#fff!important;text-shadow:none!important;font-size:9px!important;letter-spacing:1.35px!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-kicker{grid-area:kicker!important;display:block!important;margin:17px 0 6px!important;color:#fff!important;font-size:8px!important;letter-spacing:2px!important}
+  html body #home.hero .hero-promo-slide .mobile-next-departure h2{grid-area:title!important;display:block!important;margin:0 0 5px!important;color:#fff!important;font-size:clamp(38px,9.6vw,52px)!important;line-height:.9!important;letter-spacing:-.8px!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-date{grid-area:date!important;display:block!important;margin:12px 0 10px!important;padding:10px 0!important;border-top:1px solid rgba(255,255,255,.22)!important;border-bottom:1px solid rgba(255,255,255,.22)!important;color:#fff!important;font-size:clamp(11px,3.1vw,13px)!important;letter-spacing:1px!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-date span{color:#fff!important;padding:0 4px!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-facts{grid-area:facts!important;display:flex!important;flex-wrap:wrap!important;gap:6px!important;margin:8px 0!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-facts span{display:inline-flex!important;align-items:center!important;padding:6px 8px!important;border:1px solid rgba(255,255,255,.2)!important;border-radius:6px!important;background:#202020!important;color:#fff!important;font-size:9px!important;line-height:1.35!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-price{grid-area:price!important;display:block!important;align-self:stretch!important;min-width:0!important;margin:12px 0 8px!important;padding:10px 0!important;border-top:1px solid rgba(255,255,255,.28)!important;color:#fff!important;font-size:clamp(22px,6.2vw,29px)!important;line-height:1.1!important;letter-spacing:-.8px!important;white-space:nowrap!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-price small{color:#fff!important;font-size:10px!important;letter-spacing:0!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-seats{grid-area:seats!important;display:flex!important;flex-direction:column!important;align-items:flex-end!important;justify-content:center!important;gap:3px!important;min-width:0!important;margin:12px 0 8px!important;padding:10px 0!important;border-top:1px solid rgba(255,255,255,.28)!important;color:#fff!important;text-align:right!important;font-size:9px!important;line-height:1.4!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-seats strong,html body #home.hero .hero-promo-slide .mobile-departure-seats span{color:#fff!important;font-size:9px!important;font-weight:700!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-track{grid-area:progress!important;display:block!important;position:relative!important;width:100%!important;height:7px!important;min-height:7px!important;max-height:7px!important;margin:0 0 14px!important;overflow:hidden!important;border-radius:99px!important;background:#3a3a3a!important;visibility:visible!important;opacity:1!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-track>span{display:block!important;width:80%!important;height:100%!important;min-height:7px!important;border-radius:inherit!important;background:linear-gradient(100deg,#1b4fa3 0%,#fff 20%,#d92332 40%,#f4c542 60%,#168b58 80%,#1b4fa3 100%)!important;background-size:260% 100%!important;animation:mobileDepartureTibetanFlow 3.2s linear infinite!important;visibility:visible!important;opacity:1!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-cta{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;grid-area:explore!important;width:100%!important;min-width:0!important;min-height:48px!important;height:auto!important;max-height:none!important;margin:8px 0 0!important;padding:13px 16px!important;box-sizing:border-box!important;border:1px solid #fff!important;border-radius:999px!important;background:#fff!important;color:#000!important;font-size:9px!important;line-height:1.2!important;letter-spacing:1.05px!important;text-decoration:none!important;white-space:normal!important;box-shadow:0 7px 18px rgba(0,0,0,.28)!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-cta span{color:#000!important;font-size:17px!important}
+  html body #home.hero .hero-promo-slide a.mobile-departure-itinerary{grid-area:itinerary!important;margin:0 0 8px!important;background:#fff!important;color:#000!important;border:1px solid #fff!important;box-shadow:0 7px 18px rgba(0,0,0,.2)!important}
+  html body #home.hero .hero-promo-slide a.mobile-departure-itinerary span{color:#000!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details{grid-area:itinerary!important;display:block!important;width:100%!important;min-width:0!important;margin:0 0 8px!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details>summary{display:flex!important;align-items:center!important;justify-content:space-between!important;min-height:48px!important;box-sizing:border-box!important;list-style:none!important;cursor:pointer!important;background:#fff!important;color:#000!important;border:1px solid #fff!important;border-radius:999px!important;padding:13px 16px!important;font-size:9px!important;letter-spacing:1.05px!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details>summary::-webkit-details-marker{display:none!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details>summary span{color:#000!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details:not([open]) .mobile-departure-itinerary-list{display:none!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details[open] .mobile-departure-itinerary-list{display:grid!important;grid-column:1/-1!important;gap:6px!important;margin:10px 0 13px!important;padding:11px 0!important;border-top:1px solid rgba(255,255,255,.24)!important;color:#fff!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-list p{margin:0!important;color:#fff!important;font:500 11px/1.45 "DM Sans",Arial,sans-serif!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-list strong{display:inline-block!important;min-width:48px!important;color:#fff!important;font-size:10px!important;letter-spacing:.5px!important}
+  html body #home.hero .hero-promo-slide .mobile-next-departure:not(.mobile-departure-secondary){grid-template-areas:"top top" "kicker kicker" "title title" "date date" "facts facts" "price seats" "progress progress" "itinerary itinerary" "explore explore"!important;column-gap:12px!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-secondary{grid-template-areas:"top top" "kicker kicker" "title title" "date date" "facts facts" "price seats" "progress progress" "itinerary itinerary" "explore explore"!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-secondary .mobile-departure-track>span{width:33.333%!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-secondary .mobile-departure-itinerary-details[open] .mobile-departure-itinerary-list{grid-column:1/-1!important}
+  html body #home.hero .hero-promo-pagination{display:flex!important;justify-content:center!important;align-items:center!important;gap:9px!important;width:100%!important;padding:12px 0 0!important}
+  html body #home.hero .hero-promo-pagination button{display:block!important;width:8px!important;height:8px!important;padding:0!important;border:1px solid rgba(255,255,255,.95)!important;border-radius:50%!important;background:rgba(255,255,255,.35)!important}
+  html body #home.hero .hero-promo-pagination button.is-active{width:24px!important;border-radius:99px!important;background:#fff!important}
+}
+@keyframes mobileDepartureTibetanFlow{from{background-position:100% 0}to{background-position:-160% 0}}
+@media(prefers-reduced-motion:reduce){
+  html body #home.hero .hero-promo-slide .mobile-departure-track>span{animation:none!important;background-position:50% 0!important}
+  html body #home.hero .hero-promo-track{scroll-behavior:auto!important}
+}
+
+
+/* Desktop-only correction: use the same complete card hierarchy and grid placement as mobile. */
+@media screen and (min-width:761px){
+  html body #home.hero > .hero-content > .hero-promo-carousel{
+    display:block!important;
+    position:relative!important;
+    flex:0 0 auto!important;
+    align-self:stretch!important;
+    width:100%!important;
+    max-width:820px!important;
+    min-width:0!important;
+    margin:0 auto 26px!important;
+    padding:0!important;
+    overflow:hidden!important;
+    transform:none!important;
+    box-sizing:border-box!important;
+  }
+  html body #home.hero .hero-promo-track{
+    display:flex!important;
+    flex-flow:row nowrap!important;
+    align-items:stretch!important;
+    gap:0!important;
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+    height:auto!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    box-sizing:border-box!important;
+  }
+  html body #home.hero .hero-promo-slide{
+    display:block!important;
+    position:relative!important;
+    flex:0 0 100%!important;
+    width:100%!important;
+    min-width:100%!important;
+    max-width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+    box-sizing:border-box!important;
+  }
+  html body #home.hero .hero-promo-slide .mobile-next-departure{
+    display:grid!important;
+    position:relative!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    grid-template-areas:
+      "top top"
+      "kicker kicker"
+      "title title"
+      "date date"
+      "facts facts"
+      "price seats"
+      "progress progress"
+      "itinerary itinerary"
+      "explore explore"!important;
+    grid-auto-flow:row!important;
+    grid-auto-rows:max-content!important;
+    align-content:start!important;
+    align-items:start!important;
+    gap:0 16px!important;
+    width:100%!important;
+    max-width:none!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    margin:0!important;
+    padding:28px 30px 26px!important;
+    overflow:hidden!important;
+    box-sizing:border-box!important;
+    color:#fff!important;
+    text-align:left!important;
+    border:1px solid rgba(255,255,255,.9)!important;
+    border-radius:24px!important;
+    background:linear-gradient(145deg,#080808 0%,#171717 58%,#050505 100%)!important;
+    box-shadow:0 20px 48px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.14)!important;
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+    animation:none!important;
+  }
+  html body #home.hero .hero-promo-slide .mobile-departure-topline{grid-area:top!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:9px!important;flex-wrap:wrap!important;min-height:34px!important;padding-bottom:12px!important;border-bottom:1px solid rgba(255,255,255,.24)!important;color:#fff!important;text-shadow:none!important;font-size:10px!important;letter-spacing:1.5px!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-kicker{grid-area:kicker!important;display:block!important;margin:20px 0 7px!important;color:#fff!important;font-size:10px!important;letter-spacing:2.3px!important}
+  html body #home.hero .hero-promo-slide .mobile-next-departure h2{grid-area:title!important;display:block!important;margin:0 0 5px!important;color:#fff!important;font-size:clamp(48px,5.2vw,66px)!important;line-height:.9!important;letter-spacing:-1px!important}
+  html body #home.hero .hero-promo-slide .mobile-next-departure h2 em{color:#fff!important;font-style:normal!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-date{grid-area:date!important;display:block!important;margin:15px 0 12px!important;padding:12px 0!important;border-top:1px solid rgba(255,255,255,.22)!important;border-bottom:1px solid rgba(255,255,255,.22)!important;color:#fff!important;font-size:13px!important;letter-spacing:1.2px!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-facts{grid-area:facts!important;display:flex!important;flex-wrap:wrap!important;gap:8px!important;margin:8px 0!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-facts span{display:inline-flex!important;align-items:center!important;padding:7px 10px!important;border:1px solid rgba(255,255,255,.2)!important;border-radius:6px!important;background:#202020!important;color:#fff!important;font-size:10px!important;line-height:1.4!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-price{grid-area:price!important;display:block!important;align-self:stretch!important;min-width:0!important;margin:14px 0 10px!important;padding:12px 0!important;border-top:1px solid rgba(255,255,255,.28)!important;color:#fff!important;font-size:clamp(27px,3vw,34px)!important;line-height:1.1!important;letter-spacing:-.8px!important;white-space:nowrap!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-price small{color:#fff!important;font-size:12px!important;letter-spacing:0!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-seats{grid-area:seats!important;display:flex!important;flex-direction:column!important;align-items:flex-end!important;justify-content:center!important;gap:4px!important;min-width:0!important;margin:14px 0 10px!important;padding:12px 0!important;border-top:1px solid rgba(255,255,255,.28)!important;color:#fff!important;text-align:right!important;font-size:11px!important;line-height:1.4!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-seats strong,
+  html body #home.hero .hero-promo-slide .mobile-departure-seats span{color:#fff!important;font-size:11px!important;font-weight:700!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-track{grid-area:progress!important;display:block!important;position:relative!important;width:100%!important;height:8px!important;min-height:8px!important;max-height:8px!important;margin:0 0 16px!important;overflow:hidden!important;border-radius:99px!important;background:#3a3a3a!important;visibility:visible!important;opacity:1!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-track>span{display:block!important;height:100%!important;min-height:8px!important;border-radius:inherit!important;background:linear-gradient(100deg,#1b4fa3 0%,#fff 20%,#d92332 40%,#f4c542 60%,#168b58 80%,#1b4fa3 100%)!important;background-size:260% 100%!important;animation:mobileDepartureTibetanFlow 3.2s linear infinite!important;visibility:visible!important;opacity:1!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-cta{grid-area:explore!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;width:100%!important;min-width:0!important;min-height:52px!important;height:auto!important;margin:9px 0 0!important;padding:15px 20px!important;box-sizing:border-box!important;border:1px solid #fff!important;border-radius:999px!important;background:#fff!important;color:#000!important;font-size:11px!important;line-height:1.2!important;letter-spacing:1.2px!important;text-decoration:none!important;white-space:normal!important;box-shadow:0 7px 18px rgba(0,0,0,.28)!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-cta span{color:#000!important;font-size:19px!important}
+  html body #home.hero .hero-promo-slide a.mobile-departure-itinerary{grid-area:itinerary!important;margin:0 0 9px!important;background:#fff!important;color:#000!important;border:1px solid #fff!important;box-shadow:0 7px 18px rgba(0,0,0,.2)!important}
+  html body #home.hero .hero-promo-slide a.mobile-departure-itinerary span{color:#000!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details{grid-area:itinerary!important;display:block!important;width:100%!important;min-width:0!important;margin:0 0 9px!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details>summary{display:flex!important;align-items:center!important;justify-content:space-between!important;min-height:52px!important;box-sizing:border-box!important;list-style:none!important;cursor:pointer!important;background:#fff!important;color:#000!important;border:1px solid #fff!important;border-radius:999px!important;padding:15px 20px!important;font-size:11px!important;letter-spacing:1.2px!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details>summary::-webkit-details-marker{display:none!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details>summary span{color:#000!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details:not([open]) .mobile-departure-itinerary-list{display:none!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details[open] .mobile-departure-itinerary-list{display:grid!important;grid-column:1/-1!important;gap:7px!important;margin:12px 0 14px!important;padding:13px 0!important;border-top:1px solid rgba(255,255,255,.24)!important;color:#fff!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-list p{margin:0!important;color:#fff!important;font:500 12px/1.5 "DM Sans",Arial,sans-serif!important}
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-list strong{display:inline-block!important;min-width:52px!important;color:#fff!important;font-size:11px!important;letter-spacing:.5px!important}
+  html body #home.hero .hero-promo-pagination{display:flex!important;justify-content:center!important;align-items:center!important;gap:10px!important;width:100%!important;padding:14px 0 0!important}
+  html body #home.hero .hero-promo-pagination button{display:block!important;width:9px!important;height:9px!important;padding:0!important;border:1px solid rgba(255,255,255,.95)!important;border-radius:50%!important;background:rgba(255,255,255,.35)!important;cursor:pointer!important}
+  html body #home.hero .hero-promo-pagination button.is-active{width:26px!important;border-radius:99px!important;background:#fff!important}
+}
+@media(prefers-reduced-motion:reduce) and (min-width:761px){
+  html body #home.hero .hero-promo-slide .mobile-departure-track>span{animation:none!important;background-position:50% 0!important}
+}
+
+
+/* Make only hero promotional card button labels bold on mobile and desktop. */
+html body #home.hero .hero-promo-slide a.mobile-departure-cta,
+html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details > summary {
+  font-weight: 800 !important;
+}
+
+/* Keep the new generated scroll indicator as the only visible mobile promo-carousel indicator. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-promo-pagination{
+    display:none!important;
+  }
+}
+
+
+/* Mobile promotional departure cards: show the next slide peeking in from the right. */
+@media screen and (max-width:760px){
+  html body #home.hero > .hero-content > .hero-promo-carousel{
+    display:block!important;
+    width:100%!important;
+    max-width:520px!important;
+    min-width:0!important;
+    overflow:visible!important;
+    box-sizing:border-box!important;
+  }
+  html body #home.hero .hero-promo-track{
+    display:flex!important;
+    flex-flow:row nowrap!important;
+    align-items:stretch!important;
+    gap:8px!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    height:auto!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    padding:0 5% 2px 0!important;
+    box-sizing:border-box!important;
+    scroll-snap-type:x mandatory!important;
+    scroll-padding-left:0!important;
+    scroll-padding-right:5%!important;
+    -webkit-overflow-scrolling:touch!important;
+    overscroll-behavior-x:contain!important;
+  }
+  html body #home.hero .hero-promo-slide{
+    display:block!important;
+    position:relative!important;
+    flex:0 0 calc(95% + 8px)!important;
+    width:calc(95% + 8px)!important;
+    min-width:calc(95% + 8px)!important;
+    max-width:calc(95% + 8px)!important;
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+    box-sizing:border-box!important;
+    scroll-snap-align:start!important;
+    scroll-snap-stop:always!important;
+  }
+  html body #home.hero .hero-promo-slide .mobile-next-departure{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    box-sizing:border-box!important;
+  }
+}
+
+
+/* Mobile hero promotions: make departure dates the primary scan point. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-promo-slide .mobile-departure-date{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    width:fit-content!important;
+    max-width:100%!important;
+    min-height:42px!important;
+    margin:15px 0 12px!important;
+    padding:10px 14px!important;
+    border:1px solid rgba(255,255,255,.95)!important;
+    border-radius:7px!important;
+    background:#fff!important;
+    color:#080808!important;
+    -webkit-text-fill-color:#080808!important;
+    text-shadow:none!important;
+    box-shadow:0 5px 16px rgba(0,0,0,.28)!important;
+    font-size:14px!important;
+    font-weight:900!important;
+    line-height:1.2!important;
+    letter-spacing:1.15px!important;
+    white-space:normal!important;
+  }
+  html body #home.hero .hero-promo-slide .mobile-departure-date span{
+    padding:0 7px!important;
+    color:#080808!important;
+    -webkit-text-fill-color:#080808!important;
+    font-weight:900!important;
+  }
+}
+
+
+/* Final cascade fix: visibly badge the departure date on mobile promo slides.
+   This selector outranks the earlier transparent-background reset. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-promo-slide section.mobile-next-departure .mobile-departure-date{
+    display:inline-flex!important;
+    align-items:center!important;
+    width:max-content!important;
+    max-width:100%!important;
+    min-height:40px!important;
+    box-sizing:border-box!important;
+    margin:15px 0 12px!important;
+    padding:10px 15px!important;
+    border:1px solid #fff!important;
+    border-radius:7px!important;
+    background:#fff!important;
+    background-color:#fff!important;
+    background-image:none!important;
+    color:#080808!important;
+    -webkit-text-fill-color:#080808!important;
+    text-shadow:none!important;
+    box-shadow:0 5px 16px rgba(0,0,0,.35)!important;
+    font-size:14px!important;
+    font-weight:900!important;
+    line-height:1.2!important;
+    letter-spacing:1.15px!important;
+  }
+  html body #home.hero .hero-promo-slide section.mobile-next-departure .mobile-departure-date span{
+    color:#080808!important;
+    -webkit-text-fill-color:#080808!important;
+    font-weight:900!important;
+  }
+}
+
+
+/* Mobile hero promo cards: premium object-style reveal on first appearance. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-promo-slide .mobile-next-departure{
+    transform-origin:50% 85%;
+    backface-visibility:hidden;
+    animation:mobilePromoObjectReveal 1.05s cubic-bezier(.18,.72,.22,1) both!important;
+  }
+  html body #home.hero .hero-promo-slide:nth-child(2) .mobile-next-departure{
+    animation-delay:.16s!important;
+  }
+  html body #home.hero .hero-promo-slide .mobile-departure-topline,
+  html body #home.hero .hero-promo-slide .mobile-departure-kicker,
+  html body #home.hero .hero-promo-slide .mobile-next-departure h2,
+  html body #home.hero .hero-promo-slide .mobile-departure-date,
+  html body #home.hero .hero-promo-slide .mobile-departure-facts,
+  html body #home.hero .hero-promo-slide .mobile-departure-price,
+  html body #home.hero .hero-promo-slide .mobile-departure-seats,
+  html body #home.hero .hero-promo-slide .mobile-departure-track,
+  html body #home.hero .hero-promo-slide .mobile-departure-cta,
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details{
+    animation:mobilePromoContentReveal .62s cubic-bezier(.2,.7,.25,1) both;
+  }
+  html body #home.hero .hero-promo-slide .mobile-departure-topline{animation-delay:.22s}
+  html body #home.hero .hero-promo-slide .mobile-departure-kicker{animation-delay:.28s}
+  html body #home.hero .hero-promo-slide .mobile-next-departure h2{animation-delay:.34s}
+  html body #home.hero .hero-promo-slide .mobile-departure-date{animation-delay:.42s}
+  html body #home.hero .hero-promo-slide .mobile-departure-facts{animation-delay:.48s}
+  html body #home.hero .hero-promo-slide .mobile-departure-price{animation-delay:.54s}
+  html body #home.hero .hero-promo-slide .mobile-departure-seats{animation-delay:.60s}
+  html body #home.hero .hero-promo-slide .mobile-departure-track{animation-delay:.66s}
+  html body #home.hero .hero-promo-slide .mobile-departure-cta,
+  html body #home.hero .hero-promo-slide .mobile-departure-itinerary-details{animation-delay:.72s}
+}
+@keyframes mobilePromoObjectReveal{
+  0%{opacity:0;clip-path:inset(0 0 100% 0 round 19px);transform:perspective(900px) rotateX(9deg) translateY(22px) scale(.965);filter:brightness(.72) blur(3px)}
+  68%{opacity:1;clip-path:inset(0 0 0 0 round 19px);transform:perspective(900px) rotateX(-1deg) translateY(-2px) scale(1.005);filter:brightness(1.04) blur(0)}
+  100%{opacity:1;clip-path:inset(0 0 0 0 round 19px);transform:perspective(900px) rotateX(0) translateY(0) scale(1);filter:brightness(1) blur(0)}
+}
+@keyframes mobilePromoContentReveal{
+  from{opacity:0;translate:0 10px}
+  to{opacity:1;translate:0 0}
+}
+@media(prefers-reduced-motion:reduce){
+  html body #home.hero .hero-promo-slide .mobile-next-departure,
+  html body #home.hero .hero-promo-slide .mobile-next-departure *{
+    animation:none!important;
+    translate:none!important;
+    clip-path:none!important;
+  }
+}
+
+/* Mobile-only purple glow outside the border of homepage promotional departure cards. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-promo-slide .mobile-next-departure{
+    background-image:linear-gradient(145deg,#080808 0%,#171717 58%,#050505 100%)!important;
+    box-shadow:
+      0 0 24px 3px rgba(168,85,247,.48),
+      0 20px 48px rgba(0,0,0,.38),
+      inset 0 1px 0 rgba(255,255,255,.14)!important;
+  }
+}
+
+/* Keep vertical breathing room inside the horizontal scroller so the outer halo is not clipped. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-promo-track{
+    padding-top:22px!important;
+    padding-bottom:26px!important;
+    margin-top:-22px!important;
+    margin-bottom:-26px!important;
+  }
+  html body #home.hero .hero-promo-slide .mobile-next-departure{
+    box-shadow:
+      0 0 26px 4px rgba(168,85,247,.62),
+      0 20px 48px rgba(0,0,0,.38),
+      inset 0 1px 0 rgba(255,255,255,.14)!important;
+  }
+}
+
+
+/* Render the purple halo on the carousel slide itself, outside the card.
+   The track is a horizontal scroll container, so its vertical overflow clips shadows.
+   This slide-level glow uses the reserved track padding and leaves the card face untouched. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-promo-slide{
+    isolation:isolate!important;
+  }
+  html body #home.hero .hero-promo-slide::before{
+    content:""!important;
+    position:absolute!important;
+    z-index:0!important;
+    inset:-14px!important;
+    border-radius:32px!important;
+    background:radial-gradient(ellipse at 50% 48%,rgba(168,85,247,.78) 0%,rgba(147,51,234,.52) 34%,rgba(126,34,206,.24) 58%,rgba(126,34,206,0) 78%)!important;
+    filter:blur(15px)!important;
+    opacity:1!important;
+    pointer-events:none!important;
+  }
+  html body #home.hero .hero-promo-slide .mobile-next-departure{
+    position:relative!important;
+    z-index:1!important;
+    box-shadow:0 0 30px 5px rgba(168,85,247,.32),0 20px 48px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.14)!important;
+  }
+}
+
+/* Source: windows-fluent-monochrome-sitewide.css */
+/* Windows Fluent + Arctic Prestige — sitewide design layer
+   Visual-only overrides. Preserves page structure, routes, forms, data and integrations. */
+:root{
+  --fluent-ink:#111;
+  --fluent-muted:#686868;
+  --fluent-white:#fff;
+  --fluent-black:#050505;
+  --fluent-line:rgba(0,0,0,.12);
+  --fluent-glass:rgba(255,255,255,.78);
+  --fluent-radius:22px;
+  --fluent-shadow:0 18px 48px rgba(0,0,0,.10);
+}
+html{scroll-behavior:smooth}
+body{
+  color:var(--fluent-ink);
+  background:#fff;
+  font-family:"Segoe UI",Inter,-apple-system,BlinkMacSystemFont,"DM Sans",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:#111;color:#fff}
+:focus-visible{outline:2px solid #111;outline-offset:4px}
+
+/* Acrylic / Mica navigation */
+body>header,.site-header,.main-header{
+  background:rgba(255,255,255,.82)!important;
+  border-bottom:1px solid rgba(0,0,0,.10)!important;
+  box-shadow:0 6px 26px rgba(0,0,0,.06)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(165%);
+  backdrop-filter:blur(28px) saturate(165%);
+}
+body>header nav a,.site-header nav a,.main-header nav a{transition:background .2s ease,color .2s ease}
+body>header nav a:hover,.site-header nav a:hover,.main-header nav a:hover{
+  background:rgba(0,0,0,.055);border-radius:999px;
+}
+
+/* Cinematic monochrome hero; keep the existing mountain image and content */
+#home.hero{
+  background-color:#050505;
+  color:#fff;
+}
+#home.hero:before{pointer-events:none}
+#home.hero .eyebrow{color:rgba(255,255,255,.78)}
+#home.hero .hero-rule{background:#fff}
+#home.hero .hero-content{isolation:isolate}
+#home.hero .hero-service-icon{
+  border:1px solid rgba(255,255,255,.30);
+  border-radius:18px;
+  background:rgba(255,255,255,.12);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.20),0 12px 30px rgba(0,0,0,.18);
+  -webkit-backdrop-filter:blur(22px) saturate(150%);
+  backdrop-filter:blur(22px) saturate(150%);
+}
+#home.hero .hero-service-icon :is(span,svg){color:#fff;stroke:#fff}
+#home.hero .btn:not(.outline),#home.hero .hero-build-cta{
+  color:#000;background:#fff;border-color:#fff;border-radius:999px;
+}
+
+/* Alternating solid monochrome surfaces */
+#upcoming-packages,#journey-story,#itineraries,#gallery,#reviews,#contact{
+  background:#fff!important;color:#111;
+}
+#plan-your-trip,#packages,#cabs,#more-than-tours,#instagram,#siteFooter,#contact.cta{
+  background:#050505!important;color:#fff;
+}
+:is(#upcoming-packages,#journey-story,#itineraries,#gallery,#reviews,#contact) :is(h1,h2,h3,h4,.section-title h2){color:#111}
+:is(#plan-your-trip,#packages,#cabs,#more-than-tours,#instagram,#siteFooter,#contact.cta) :is(h1,h2,h3,h4,.section-title h2){color:#fff}
+:is(#upcoming-packages,#journey-story,#itineraries,#gallery,#reviews) .section-title small{color:#666}
+:is(#plan-your-trip,#packages,#cabs,#more-than-tours,#instagram) .section-title small{color:#c9c9c9}
+:is(#upcoming-packages,#journey-story,#itineraries,#gallery,#reviews) .intro{color:#666}
+:is(#plan-your-trip,#packages,#cabs,#more-than-tours,#instagram) .intro{color:#c7c7c7}
+:is(#upcoming-packages,#journey-story,#itineraries,#gallery,#reviews) .section-title h2:after{background:#111}
+:is(#plan-your-trip,#packages,#cabs,#more-than-tours,#instagram) .section-title h2:after{background:#fff}
+
+/* Fluent cards: crisp borders, restrained depth, soft elevation */
+:is(.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.card,.info-box,.review-point,.service-card,.property-card,.vehicle-card){
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:22px;
+  box-shadow:0 12px 34px rgba(0,0,0,.08);
+  overflow:hidden;
+  transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease;
+}
+@media(hover:hover){
+  :is(.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.card,.info-box,.review-point,.service-card,.property-card,.vehicle-card):hover{
+    transform:translateY(-5px);
+    box-shadow:0 22px 48px rgba(0,0,0,.14);
+    border-color:rgba(0,0,0,.25);
+  }
+}
+:is(.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.card,.info-box,.review-point,.service-card,.property-card,.vehicle-card) :is(h1,h2,h3,h4,strong,b){color:#111}
+:is(.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.card,.info-box,.review-point,.service-card,.property-card,.vehicle-card) p{color:#666}
+
+/* Native-feeling pill actions and accessible form controls */
+body :is(button,.btn,.button,.submit-btn,.group-departure-cta,a[role=button],a[class*=btn],a[class*=button],a[class*=cta]):not(header *){
+  border-radius:999px;
+  transition:transform .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease;
+}
+body :is(button,.btn,.button,.submit-btn):not(header *):active{transform:scale(.985)}
+body :is(input,select,textarea){border-radius:13px}
+body footer,body .site-footer{background:#050505;color:#fff}
+body footer :is(h2,h3,h4,strong,b,p,small),body footer a,body .site-footer :is(h2,h3,h4,p,small,a){color:#fff}
+
+/* Keep motion subtle and honor the device accessibility setting */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  body *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
+
+/* Remove decorative short underlines beneath all heading levels sitewide. */
+body :is(h1,h2,h3,h4,h5,h6)::after{
+  content:none!important;
+  display:none!important;
+}
+
+
+/* UX refinement: clearer hierarchy, predictable spacing and stronger interaction states. */
+:root{
+  --ux-content-width:1280px;
+  --ux-text:#171717;
+  --ux-muted:#626262;
+  --ux-border:rgba(0,0,0,.13);
+}
+html{scroll-padding-top:100px}
+body{overflow-x:hidden;line-height:1.65}
+main{min-width:0}
+section.content{padding-block:clamp(56px,7vw,92px)}
+.section-inner,.section-inner>*,.htp-inner{min-width:0}
+.section-inner{width:min(100% - 48px,var(--ux-content-width))}
+.section-title{max-width:820px;margin-inline:auto;margin-bottom:clamp(24px,4vw,42px)}
+.section-title h2{letter-spacing:-.025em;text-wrap:balance}
+.section-title small,.eyebrow{letter-spacing:.16em}
+.intro{max-width:720px;text-wrap:pretty;color:var(--ux-muted)}
+p{overflow-wrap:anywhere}
+img{height:auto}
+button,a,input,select,textarea{touch-action:manipulation}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:3px solid #555;outline-offset:3px
+}
+body :is(button,.btn,.button,.submit-btn,.group-departure-cta,a[role=button]){
+  min-height:44px;line-height:1.25
+}
+body :is(input,select,textarea){min-height:48px;padding:11px 14px}
+body :is(input,select,textarea)::placeholder{color:#777;opacity:1}
+body :is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.service-card,.info-box,.review-point){
+  min-width:0;overflow:hidden
+}
+body :is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.service-card,.info-box,.review-point) :is(h2,h3,h4){
+  line-height:1.2;text-wrap:balance
+}
+body :is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.service-card,.info-box,.review-point) p{
+  line-height:1.65
+}
+body :is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.service-card,.info-box,.review-point) img{
+  display:block;max-width:100%
+}
+body>header .header-inner{
+  width:min(100% - 40px,1400px);min-height:76px;margin-inline:auto;
+  display:flex;align-items:center;gap:clamp(12px,2vw,28px)
+}
+body>header .brand{flex:0 0 auto;display:flex;align-items:center}
+body>header .brand img{max-height:54px;width:auto}
+body>header nav.glass-nav{display:flex;align-items:center;justify-content:center;gap:clamp(4px,1vw,12px);min-width:0}
+body>header nav.glass-nav>a,body>header nav.glass-nav .nav-dropdown-toggle{
+  min-height:42px;padding:10px 14px;display:inline-flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:650;white-space:nowrap;border-radius:999px
+}
+body>header nav.glass-nav .nav-dropdown{position:relative;display:flex;align-items:center}
+body>header nav.glass-nav .nav-dropdown-menu{z-index:1600}
+body>header .header-menu-toggle{min-width:44px;min-height:44px;align-items:center;justify-content:center}
+body footer a,body>header a{ text-underline-offset:3px }
+@media(hover:hover){
+  body :is(a,button):not(:disabled){transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .2s ease}
+}
+@media(max-width:900px){
+  body>header .header-inner{width:calc(100% - 28px)}
+  body>header nav.glass-nav>a,body>header nav.glass-nav .nav-dropdown-toggle{padding-inline:10px;font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
+
+/* Desktop: remove the short decorative accent line below homepage section headings. */
+@media (min-width:761px){
+  html body :is(
+    #upcoming-packages,
+    #journey-story,
+    #packages,
+    #itineraries,
+    #cabs,
+    #gallery,
+    #more-than-tours,
+    #instagram
+  ) .section-title h2::after,
+  html body :is(
+    #upcoming-packages,
+    #journey-story,
+    #packages,
+    #itineraries,
+    #cabs,
+    #gallery,
+    #more-than-tours,
+    #instagram
+  ) .section-title h2::before{
+    content:none!important;
+    display:none!important;
+    width:0!important;
+    height:0!important;
+    background:none!important;
+    border:0!important;
+    box-shadow:none!important;
+    animation:none!important;
+  }
+}
+
+
+/* Desktop only: monochrome kicker for the Upcoming Packages heading. */
+@media (min-width: 761px){
+  html body #upcoming-packages .group-departures-head .section-title small{
+    color:#111!important;
+  }
+}
+
+/* Source: windows-fluent-monochrome-mobile.css */
+/* Windows Fluent Design + Luxury Monochrome
+   Mobile-only visual layer for Himalayan Odyssey Expedition.
+   Keeps existing page structure, data, routes, Supabase and interactions intact. */
+
+@media screen and (max-width:760px){
+  :root{
+    color-scheme:light;
+    --fluent-black:#000;
+    --fluent-white:#fff;
+    --fluent-ink:#111;
+    --fluent-muted:#707070;
+    --fluent-line:rgba(0,0,0,.12);
+    --fluent-glass:rgba(255,255,255,.76);
+    --fluent-dark-glass:rgba(0,0,0,.76);
+    --fluent-radius:20px;
+    --fluent-shadow:0 14px 38px rgba(0,0,0,.12);
+  }
+
+  html,body{
+    background:#fff!important;
+    background-color:#fff!important;
+    color:#111!important;
+    font-family:"Segoe UI",Inter,-apple-system,BlinkMacSystemFont,Arial,sans-serif!important;
+    -webkit-font-smoothing:antialiased;
+  }
+  body{line-height:1.65!important}
+  ::selection{background:#111!important;color:#fff!important}
+  :focus-visible{outline:2px solid #111!important;outline-offset:3px!important}
+
+  /* Windows 11 Acrylic navigation: preserve the existing logo and menu behavior. */
+  body>header,body>.top,body> .site-header,body>.main-header,.top{
+    position:sticky!important;
+    top:0!important;
+    z-index:1500!important;
+    color:#111!important;
+    background:rgba(255,255,255,.78)!important;
+    background-image:linear-gradient(135deg,rgba(255,255,255,.88),rgba(245,245,245,.64))!important;
+    border:0!important;
+    border-bottom:1px solid rgba(0,0,0,.10)!important;
+    box-shadow:0 5px 22px rgba(0,0,0,.07)!important;
+    -webkit-backdrop-filter:blur(28px) saturate(160%)!important;
+    backdrop-filter:blur(28px) saturate(160%)!important;
+  }
+  body>header .header-inner,body>.top .header-inner{
+    background:transparent!important;
+  }
+  body>header .brand img{object-fit:contain!important}
+  body>header .header-menu-toggle{
+    color:#111!important;
+    background:rgba(255,255,255,.72)!important;
+    border:1px solid rgba(0,0,0,.14)!important;
+    border-radius:14px!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 4px 12px rgba(0,0,0,.07)!important;
+    -webkit-backdrop-filter:blur(18px)!important;
+    backdrop-filter:blur(18px)!important;
+  }
+  body>header nav#mobileMainNavigation,
+  body>header .nav-dropdown-menu,
+  body>.top .nav-menu,.mobile-menu,.mobile-nav-panel{
+    color:#111!important;
+    background:rgba(250,250,250,.88)!important;
+    border:1px solid rgba(0,0,0,.13)!important;
+    border-radius:20px!important;
+    box-shadow:0 20px 54px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.95)!important;
+    -webkit-backdrop-filter:blur(30px) saturate(165%)!important;
+    backdrop-filter:blur(30px) saturate(165%)!important;
+  }
+  body>header nav#mobileMainNavigation a,
+  body>header nav#mobileMainNavigation button,
+  body>header .nav-dropdown-menu a,
+  body>.top nav a{
+    color:#111!important;
+    border-color:rgba(0,0,0,.08)!important;
+  }
+  body>header nav#mobileMainNavigation a:active,
+  body>header nav#mobileMainNavigation button:active{background:rgba(0,0,0,.07)!important}
+
+  /* Monochrome cinematic hero; retain the existing Spiti photo, mountain artwork and snowfall. */
+  html body #home.hero{
+    color:#fff!important;
+    background-color:#000!important;
+    background-image:
+      linear-gradient(180deg,rgba(0,0,0,.34) 0%,rgba(0,0,0,.10) 34%,rgba(0,0,0,.88) 100%),
+      linear-gradient(90deg,rgba(0,0,0,.58),rgba(0,0,0,.12)),
+      url("/spiti.jpg")!important;
+    background-size:cover!important;
+    background-position:center 43%!important;
+    border-radius:0 0 24px 24px!important;
+    overflow:hidden!important;
+  }
+  html body #home.hero:before{
+    content:""!important;
+    display:block!important;
+    background:linear-gradient(180deg,rgba(0,0,0,.12),transparent 42%,rgba(0,0,0,.48))!important;
+    opacity:1!important;
+  }
+  html body #home.hero:after{
+    content:""!important;
+    display:block!important;
+    background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.32) 100%)!important;
+    opacity:1!important;
+  }
+  #home.hero .hero-content{position:relative!important;z-index:3!important}
+  #home.hero .mobile-next-departure{
+    background:linear-gradient(145deg,rgba(0,0,0,.94),rgba(20,20,20,.88))!important;
+    border:1px solid rgba(255,255,255,.68)!important;
+    border-radius:22px!important;
+    box-shadow:0 18px 48px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.16)!important;
+    -webkit-backdrop-filter:blur(24px) saturate(120%)!important;
+    backdrop-filter:blur(24px) saturate(120%)!important;
+  }
+  #home.hero .mobile-next-departure :is(h2,h2 em,p,small,span,strong,.mobile-departure-topline,.mobile-departure-season,.mobile-departure-kicker,.mobile-departure-date,.mobile-departure-price,.mobile-departure-seats){color:#fff!important}
+  #home.hero .mobile-departure-facts span{background:rgba(255,255,255,.10)!important;border:1px solid rgba(255,255,255,.24)!important;color:#fff!important}
+  #home.hero .mobile-departure-cta{background:#fff!important;color:#000!important;border:1px solid #fff!important;border-radius:999px!important}
+  #home.hero .mobile-departure-cta span{color:#000!important}
+  #home.hero .hero-service-icon{
+    background:rgba(255,255,255,.12)!important;
+    border:1px solid rgba(255,255,255,.30)!important;
+    border-radius:17px!important;
+    color:#fff!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 10px 26px rgba(0,0,0,.16)!important;
+    -webkit-backdrop-filter:blur(22px) saturate(150%)!important;
+    backdrop-filter:blur(22px) saturate(150%)!important;
+  }
+  #home.hero .hero-service-icon :is(span,svg){color:#fff!important;stroke:#fff!important}
+  #home.hero .hero-destination-list{color:#fff!important}
+  #home.hero .hero-destination-track{color:#fff!important}
+  #home.hero .hero-build-cta-wrap>.hero-build-cta{
+    background:#fff!important;color:#000!important;-webkit-text-fill-color:#000!important;
+    border:1px solid #fff!important;border-radius:999px!important;
+    box-shadow:0 9px 28px rgba(0,0,0,.26)!important;
+  }
+
+  /* Alternating full-bleed black / white homepage sections. */
+  html body #upcoming-packages,
+  html body #journey-story,
+  html body #itineraries,
+  html body #gallery,
+  html body #reviews,
+  html body #contact{
+    background:#fff!important;background-color:#fff!important;background-image:none!important;color:#111!important;
+  }
+  html body #plan-your-trip,
+  html body #packages,
+  html body #cabs,
+  html body #more-than-tours,
+  html body #instagram,
+  html body #siteFooter,
+  html body #contact.cta{
+    background:#000!important;background-color:#000!important;background-image:none!important;color:#fff!important;
+  }
+  html body #upcoming-packages>.section-inner,
+  html body #journey-story>.section-inner,
+  html body #itineraries>.section-inner,
+  html body #gallery>.section-inner,
+  html body #reviews>.section-inner{
+    background:transparent!important;
+  }
+  html body #plan-your-trip>.htp-inner,
+  html body #packages>.section-inner,
+  html body #cabs>.section-inner,
+  html body #more-than-tours>.section-inner,
+  html body #instagram>.section-inner{
+    background:transparent!important;
+  }
+
+  /* Section typography follows the surface, not the old blue/cream palette. */
+  html body #upcoming-packages :is(h1,h2,h3,h4,.section-title h2),
+  html body #journey-story :is(h1,h2,h3,h4,.section-title h2),
+  html body #itineraries :is(h1,h2,h3,h4,.section-title h2),
+  html body #gallery :is(h1,h2,h3,h4,.section-title h2),
+  html body #reviews :is(h1,h2,h3,h4,.section-title h2),
+  html body #contact :is(h1,h2,h3,h4){
+    color:#111!important;
+  }
+  html body #plan-your-trip :is(h1,h2,h3,h4,.section-title h2),
+  html body #packages :is(h1,h2,h3,h4,.section-title h2),
+  html body #cabs :is(h1,h2,h3,h4,.section-title h2),
+  html body #more-than-tours :is(h1,h2,h3,h4,.section-title h2),
+  html body #instagram :is(h1,h2,h3,h4,.section-title h2),
+  html body #siteFooter :is(h1,h2,h3,h4){
+    color:#fff!important;
+  }
+  html body #upcoming-packages .section-title small,
+  html body #journey-story .section-title small,
+  html body #itineraries .section-title small,
+  html body #gallery .section-title small,
+  html body #reviews .review-kicker{color:#555!important}
+  html body #plan-your-trip .section-title small,
+  html body #packages .section-title small,
+  html body #cabs .section-title small,
+  html body #more-than-tours .section-title small,
+  html body #instagram .section-title small{color:#c8c8c8!important}
+  html body #upcoming-packages .intro,
+  html body #journey-story .intro,
+  html body #itineraries .intro,
+  html body #gallery .intro,
+  html body #reviews p,
+  html body #contact p{color:#666!important}
+  html body #plan-your-trip .intro,
+  html body #packages .intro,
+  html body #cabs .intro,
+  html body #more-than-tours .intro,
+  html body #instagram p{color:#c7c7c7!important}
+  html body #upcoming-packages .section-title h2:after,
+  html body #journey-story .section-title h2:after,
+  html body #itineraries .section-title h2:after,
+  html body #gallery .section-title h2:after,
+  html body #reviews .section-title h2:after{background:#111!important}
+  html body #plan-your-trip .section-title h2:after,
+  html body #packages .section-title h2:after,
+  html body #cabs .section-title h2:after,
+  html body #more-than-tours .section-title h2:after,
+  html body #instagram .section-title h2:after{background:#fff!important}
+
+  /* The trust strip becomes a restrained Mica panel between hero and departures. */
+  html body .journey-strip{
+    background:rgba(0,0,0,.92)!important;
+    background-image:linear-gradient(135deg,rgba(255,255,255,.09),transparent 58%)!important;
+    border:1px solid rgba(255,255,255,.20)!important;
+    border-radius:22px!important;
+    box-shadow:0 18px 42px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.12)!important;
+    -webkit-backdrop-filter:blur(24px) saturate(135%)!important;
+    backdrop-filter:blur(24px) saturate(135%)!important;
+  }
+  html body .journey-strip :is(strong,span){color:#fff!important}
+  html body .journey-strip .journey-item{border-color:rgba(255,255,255,.18)!important}
+
+  /* Fluent trip planner surfaces: dark Mica workspace with bright native controls. */
+  html body #plan-your-trip .htp-shell{
+    background:rgba(255,255,255,.07)!important;
+    border:1px solid rgba(255,255,255,.20)!important;
+    border-radius:24px!important;
+    box-shadow:0 20px 48px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.12)!important;
+    -webkit-backdrop-filter:blur(22px) saturate(125%)!important;
+    backdrop-filter:blur(22px) saturate(125%)!important;
+  }
+  html body #plan-your-trip :is(.htp-step,.htp-summary,.htp-panel,.htp-card,.planner-card){
+    background:#111!important;color:#fff!important;
+    border:1px solid rgba(255,255,255,.20)!important;border-radius:18px!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.07)!important;
+  }
+  html body #plan-your-trip :is(h3,label,strong,.htp-help,.htp-summary-row,.htp-fine,.htp-per-person,.htp-step-number){color:#fff!important}
+  html body #plan-your-trip :is(input,select,textarea){
+    background:#fff!important;color:#111!important;border:1px solid #d7d7d7!important;border-radius:12px!important;
+  }
+  html body #plan-your-trip :is(button,.htp-cta,.btn){
+    background:#fff!important;color:#000!important;border:1px solid #fff!important;border-radius:999px!important;
+  }
+
+  /* Cards stay bright and legible on either section colour. */
+  html body :is(.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.card,.info-box,.review-point,.instagram-content,.seo-copy,.panel,.form-card,.booking-card,.enquiry-card,.contact-card,.service-card,.property-card,.vehicle-card){
+    background:#fff!important;color:#111!important;
+    border:1px solid rgba(0,0,0,.12)!important;border-radius:20px!important;
+    box-shadow:0 12px 32px rgba(0,0,0,.10)!important;
+  }
+  html body :is(.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.card,.info-box,.review-point,.instagram-content,.seo-copy,.panel,.form-card,.booking-card,.enquiry-card,.contact-card,.service-card,.property-card,.vehicle-card) :is(h1,h2,h3,h4,strong,b){color:#111!important}
+  html body :is(.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.card,.info-box,.review-point,.instagram-content,.seo-copy,.panel,.form-card,.booking-card,.enquiry-card,.contact-card,.service-card,.property-card,.vehicle-card) p{color:#666!important}
+  html body :is(.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.card) img{object-fit:cover}
+  html body .group-departure-cta,html body .card .btn,html body .info-box .btn{
+    background:#000!important;color:#fff!important;border:1px solid #000!important;
+  }
+
+  /* Other public pages use the same monochrome section language. */
+  html body :is(.page-hero,.destination-hero,.enquiry-section,.destination-gallery,.local-intro-panel,.review-panel){
+    background-color:#000!important;color:#fff!important;
+  }
+  html body :is(.page-hero,.destination-hero) :is(h1,h2,p,small,.eyebrow){color:#fff!important}
+  html body :is(.page-hero,.destination-hero) .btn{background:#fff!important;color:#000!important;border-color:#fff!important}
+  html body section.content.info,
+  html body section.info,
+  html body .faq-section,
+  html body .instagram-section{
+    background:#000!important;color:#fff!important;
+  }
+  html body section.content:not(.info),
+  html body .page-content,
+  html body main{
+    color:#111;
+  }
+  html body section.content.info :is(h1,h2,h3,h4,.section-title h2),
+  html body section.info :is(h1,h2,h3,h4),
+  html body .faq-section :is(h1,h2,h3,h4),
+  html body .instagram-section :is(h1,h2,h3,h4){color:#fff!important}
+  html body section.content.info :is(p,.intro,small),
+  html body section.info :is(p,.intro),
+  html body .faq-section p{color:#c7c7c7!important}
+  html body .faq-section details{
+    background:#111!important;color:#fff!important;border:1px solid #444!important;border-radius:17px!important;
+  }
+  html body .faq-section details :is(summary,p){color:#fff!important}
+  html body .destination-gallery .section-title h2,
+  html body .destination-gallery .section-title small,
+  html body .destination-gallery .intro{color:#fff!important}
+  html body .destination-card{border:1px solid rgba(255,255,255,.22)!important;border-radius:20px!important}
+
+  /* Buttons and form controls use the neutral Fluent palette. */
+  html body :is(button,input[type=button],input[type=submit],input[type=reset],.btn,.button,.submit-btn,.group-departure-cta,[role=button],a[role=button],a[class*=btn],a[class*=button],a[class*=cta]):not(header *){
+    border-radius:999px!important;
+    background:#000!important;background-image:none!important;
+    color:#fff!important;-webkit-text-fill-color:#fff!important;
+    border:1px solid #000!important;
+    box-shadow:none!important;font-weight:700!important;
+  }
+  html body :is(button,.btn,.button,.submit-btn,a[role=button],a[class*=btn],a[class*=button],a[class*=cta]):not(header *):active{transform:scale(.985)!important}
+  html body :is(.outline,.btn.outline,.button.outline){
+    background:transparent!important;color:inherit!important;-webkit-text-fill-color:currentColor!important;
+    border:1px solid currentColor!important;box-shadow:none!important;
+  }
+  html body :is(input,select,textarea){
+    min-height:46px!important;background:#fff!important;color:#111!important;
+    border:1px solid #d7d7d7!important;border-radius:13px!important;box-shadow:none!important;
+  }
+  html body :is(input,select,textarea):focus{border-color:#111!important;box-shadow:0 0 0 3px rgba(0,0,0,.08)!important}
+  html body label{color:#222!important}
+  html body :is(.enquiry-section,.destination-gallery,.page-hero,.destination-hero,.info,.faq-section,#plan-your-trip,#packages,#cabs,#more-than-tours,#instagram,#siteFooter) :is(button,.btn,.button,.submit-btn,.group-departure-cta){
+    background:#fff!important;color:#000!important;-webkit-text-fill-color:#000!important;border-color:#fff!important;
+  }
+
+  /* Footer and floating navigation: white Acrylic capsule with black controls. */
+  html body>footer,html body footer,html body .site-footer{
+    background:#000!important;background-image:none!important;color:#fff!important;
+    border-top:1px solid rgba(255,255,255,.20)!important;border-radius:0!important;
+  }
+  html body footer :is(h2,h3,h4,strong,b,p,small),html body footer a,html body .site-footer :is(h2,h3,h4,p,small,a){color:#fff!important}
+  html body .footer-contact-bar,html body #footerContactBar{
+    background:rgba(255,255,255,.78)!important;color:#111!important;
+    border:1px solid rgba(0,0,0,.14)!important;border-radius:28px!important;
+    box-shadow:0 14px 38px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.95)!important;
+    -webkit-backdrop-filter:blur(28px) saturate(165%)!important;
+    backdrop-filter:blur(28px) saturate(165%)!important;
+  }
+  html body .footer-contact-bar .quick-nav-item,html body #footerContactBar .quick-nav-item{color:#111!important;text-shadow:none!important}
+  html body .footer-contact-bar .quick-nav-item svg,html body #footerContactBar .quick-nav-item svg{color:#111!important;stroke:#111!important}
+  html body .footer-contact-bar .quick-nav-whatsapp,html body #footerContactBar .quick-nav-whatsapp{
+    background:#000!important;color:#fff!important;border:1px solid #000!important;
+  }
+  html body .footer-contact-bar .quick-nav-whatsapp svg,html body #footerContactBar .quick-nav-whatsapp svg{stroke:#fff!important;color:#fff!important}
+  html body .quick-nav-menu{
+    background:rgba(255,255,255,.88)!important;color:#111!important;border:1px solid rgba(0,0,0,.13)!important;
+    border-radius:20px!important;box-shadow:0 18px 48px rgba(0,0,0,.18)!important;
+    -webkit-backdrop-filter:blur(28px)!important;backdrop-filter:blur(28px)!important;
+  }
+  html body .quick-nav-menu a{background:rgba(0,0,0,.04)!important;color:#111!important;border-color:rgba(0,0,0,.08)!important}
+
+  html body .scroll-progress{background:#111!important}
+  html body .scroll-progress:after{background:#fff!important}
+  html body .arctic-reveal{transition:opacity .55s ease,transform .55s ease!important}
+}
+
+/* Reduced motion remains respected on mobile. */
+@media screen and (max-width:760px) and (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+  html body *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  html body .arctic-reveal{opacity:1!important;transform:none!important}
+}
+
+@media screen and (max-width:760px){
+  html body #contact.cta :is(h1,h2,h3,h4,small,p){color:#fff!important}
+  html body #contact.cta :is(.btn,.button,.submit-btn){background:#fff!important;color:#000!important;-webkit-text-fill-color:#000!important;border-color:#fff!important}
+}
+
+
+/* Mobile UX pass: thumb-friendly controls, legible type and clean card rhythm. */
+@media screen and (max-width:760px){
+  html{scroll-padding-top:76px}
+  body{font-size:15px;line-height:1.65;overflow-x:hidden}
+  section.content{padding:54px 18px!important}
+  .section-inner{width:100%!important;max-width:100%!important}
+  .section-title{margin-bottom:24px!important;padding-inline:2px}
+  .section-title h2{font-size:clamp(30px,8vw,40px)!important;line-height:1.08!important;letter-spacing:-.025em!important}
+  .section-title small,.eyebrow{font-size:10px!important;letter-spacing:2px!important}
+  .intro{font-size:14px!important;line-height:1.75!important;margin-bottom:26px!important}
+  body>header .header-inner{min-height:64px!important;width:calc(100% - 24px)!important;gap:10px!important;position:relative!important}
+  body>header .brand{position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;width:max-content!important;max-width:calc(100% - 112px)!important;margin:0!important;z-index:2!important}
+  body>header .brand img{display:block!important;max-height:36px!important;max-width:min(44vw,150px)!important;width:auto!important;height:auto!important;object-fit:contain!important}
+  body>header .header-menu-toggle{position:relative!important;z-index:3!important}
+  body>header .header-menu-toggle{width:44px!important;height:44px!important;min-width:44px!important;display:flex!important}
+  body>header nav#mobileMainNavigation{max-height:calc(100dvh - 82px);overflow-y:auto;overscroll-behavior:contain}
+  body>header nav#mobileMainNavigation a,body>header nav#mobileMainNavigation button{
+    min-height:48px!important;display:flex!important;align-items:center!important;padding:12px 16px!important;
+    font-size:14px!important;line-height:1.35!important
+  }
+  body :is(.btn,.button,.submit-btn,.group-departure-cta,a[role=button]){
+    min-height:48px!important;padding:12px 18px!important;font-size:12px!important;letter-spacing:.04em!important
+  }
+  body :is(input,select,textarea){min-height:50px!important;font-size:16px!important}
+  body :is(.cards,.destination-grid){grid-template-columns:minmax(0,1fr)!important;gap:16px!important}
+  body :is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.service-card,.info-box,.review-point){
+    border-radius:18px!important
+  }
+  body :is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.service-card,.info-box,.review-point) :is(h2,h3,h4){
+    font-size:clamp(21px,6vw,27px)!important;line-height:1.18!important
+  }
+  body :is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.service-card,.info-box,.review-point) p{
+    font-size:14px!important;line-height:1.65!important
+  }
+  body :is(.card-body,.package-slide-content,.itinerary-slide-content){padding:18px!important}
+  body :is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.service-card,.info-box,.review-point) img{
+    max-width:100%;object-fit:cover
+  }
+  .date-fields{grid-template-columns:minmax(0,1fr)!important;gap:8px!important}
+  .enquiry-box{padding:22px 18px!important;border-radius:20px!important}
+  .hotel-detail-content{padding:22px 16px!important;margin:12px auto!important;border-radius:18px!important}
+  body :is(.destination-card){height:clamp(280px,88vw,390px)!important;border-radius:18px!important}
+  body :is(.destination-info){left:20px!important;right:16px!important;bottom:20px!important}
+  body :is(.destination-info h3){font-size:34px!important}
+  body :is(.footer-contact-bar,#footerContactBar){max-width:calc(100vw - 24px)!important}
+}
+@media(max-width:380px){
+  body>header .brand img{max-width:155px!important}
+  #home.hero .hero-service-icon span{font-size:8px!important;letter-spacing:.25px!important}
+  section.content{padding-inline:15px!important}
+}
+
+
+/* MOBILE ONLY — keep the Instagram handle legible on the dark Instagram panel. */
+@media(max-width:760px){
+  html body #instagram .instagram-content h3{
+    display:block!important;
+    visibility:visible!important;
+    opacity:1!important;
+    color:#fff!important;
+    -webkit-text-fill-color:#fff!important;
+  }
+}
+
+
+/* MOBILE ONLY — end the footer shortly after the copyright line. */
+@media(max-width:760px){
+  html body #siteFooter{
+    display:block!important;
+    box-sizing:border-box!important;
+    height:auto!important;
+    min-height:0!important;
+    margin-bottom:0!important;
+    padding:18px 16px 12px!important;
+    background:#000!important;
+    background-color:#000!important;
+    background-image:none!important;
+    color:#fff!important;
+    overflow:visible!important;
+  }
+  html body #siteFooter > p:last-child{
+    display:block!important;
+    margin:12px 0 0!important;
+    padding:0 0 2px!important;
+    line-height:1.5!important;
+  }
+  html body #siteFooter::before,
+  html body #siteFooter::after{
+    content:none!important;
+    display:none!important;
+  }
+}
+
+/* MOBILE ONLY — show the Instagram handle in black on its white profile card. */
+@media(max-width:760px){
+  html body section#instagram .instagram-content h3{
+    color:#111!important;
+    -webkit-text-fill-color:#111!important;
+    visibility:visible!important;
+    opacity:1!important;
+  }
+}
+
+/* MOBILE ONLY — centered Instagram logo above the centered handle. */
+@media(max-width:760px){
+  html body section#instagram .instagram-content{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    align-items:center!important;
+    column-gap:0!important;
+    row-gap:10px!important;
+    width:min(100%,310px)!important;
+    max-width:310px!important;
+    margin-inline:auto!important;
+    padding:12px 14px!important;
+  }
+  html body section#instagram .instagram-content .instagram-logo{
+    grid-column:1!important;
+    grid-row:1!important;
+    justify-self:center!important;
+    width:30px!important;
+    height:30px!important;
+    margin:0!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    font-size:22px!important;
+  }
+  html body section#instagram .instagram-content h3{
+    grid-column:1!important;
+    grid-row:2!important;
+    margin:0!important;
+    text-align:center!important;
+    justify-self:center!important;
+    font-size:18px!important;
+  }
+  html body section#instagram .instagram-content p{
+    grid-column:1 / -1!important;
+    margin:0!important;
+    text-align:center!important;
+    font-size:12px!important;
+  }
+  html body section#instagram .instagram-content .instagram-btn{
+    grid-column:1 / -1!important;
+    justify-self:center!important;
+    margin:0 auto!important;
+    padding:9px 14px!important;
+    min-height:40px!important;
+    font-size:11px!important;
+  }
+}
+
+
+/* MOBILE ONLY — route the main contact CTA directly to WhatsApp. */
+@media(max-width:760px){
+  html body #contact.cta .desktop-enquiry-link{display:none!important}
+  html body #contact.cta .mobile-whatsapp-enquiry{display:inline-flex!important}
+}
+@media(min-width:761px){
+  html body #contact.cta .mobile-whatsapp-enquiry{display:none!important}
+}
+
+
+/* MOBILE ONLY — dark blue pricing on Travel Packages and Vehicles & Cabs cards. */
+@media screen and (max-width:760px){
+  html body #packages .package-slide .card-body .price,
+  html body #packages .package-slide .card-body .price small,
+  html body #cabs .cab-card .card-body .price,
+  html body #cabs .cab-card .card-body .price small{
+    color:#12345a!important;
+    -webkit-text-fill-color:#12345a!important;
+  }
+}
+
+
+/* MOBILE ONLY — add a Packages shortcut to the floating navigation. */
+@media screen and (max-width:760px){
+  html body #footerContactBar.footer-contact-bar{
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  }
+  html body #footerContactBar .quick-nav-packages{
+    display:flex!important;
+  }
+}
+@media screen and (min-width:761px){
+  html body #footerContactBar .quick-nav-packages{
+    display:none!important;
+  }
+}
+
+
+/* MOBILE FLOATING NAV — keep the existing pill design; show Home, Explore, Packages and WhatsApp only. */
+@media screen and (max-width:760px){
+  html body #footerContactBar.footer-contact-bar{
+    display:flex!important;
+    justify-content:space-between!important;
+    gap:clamp(2px,.8vw,9px)!important;
+  }
+  html body #footerContactBar .quick-nav-home{
+    display:flex!important;
+  }
+  html body #footerContactBar .quick-nav-item:not(.quick-nav-home):not(.quick-nav-packages):not(.quick-nav-whatsapp):not([aria-label="Explore destinations"]){
+    display:none!important;
+  }
+  html body #footerContactBar .quick-nav-item{
+    flex:1 1 0!important;
+  }
+}
+@media screen and (min-width:761px){
+  html body #footerContactBar .quick-nav-home{
+    display:none!important;
+  }
+}
+
+
+/* MOBILE ONLY — high-contrast black-on-white floating navigation, based on the supplied iPhone screenshot. */
+@media screen and (max-width:760px){
+  html body #footerContactBar.footer-contact-bar{
+    background:#fff!important;
+    background-color:#fff!important;
+    background-image:none!important;
+    color:#000!important;
+    border:1px solid rgba(0,0,0,.18)!important;
+    border-radius:28px!important;
+    box-shadow:0 12px 34px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,1)!important;
+    -webkit-backdrop-filter:blur(22px) saturate(100%)!important;
+    backdrop-filter:blur(22px) saturate(100%)!important;
+  }
+  html body #footerContactBar .quick-nav-item{
+    color:#000!important;
+    -webkit-text-fill-color:#000!important;
+    opacity:1!important;
+    text-shadow:none!important;
+    font-weight:650!important;
+  }
+  html body #footerContactBar .quick-nav-item span{
+    color:#000!important;
+    -webkit-text-fill-color:#000!important;
+    font-weight:650!important;
+  }
+  html body #footerContactBar .quick-nav-item svg{
+    color:#000!important;
+    stroke:#000!important;
+    fill:none!important;
+    opacity:1!important;
+  }
+  html body #footerContactBar .quick-nav-whatsapp{
+    background:#000!important;
+    background-image:none!important;
+    color:#fff!important;
+    -webkit-text-fill-color:#fff!important;
+    border:1px solid #000!important;
+    border-radius:18px!important;
+  }
+  html body #footerContactBar .quick-nav-whatsapp span{
+    color:#fff!important;
+    -webkit-text-fill-color:#fff!important;
+  }
+  html body #footerContactBar .quick-nav-whatsapp svg{
+    color:#fff!important;
+    stroke:#fff!important;
+  }
+}
+
+
+/* MOBILE ONLY — simplify homepage carousel navigation.
+   Keep swipe/scroll behaviour and live page counters; remove decorative controls. */
+@media screen and (max-width:760px){
+  html body .guides-controls button,
+  html body .group-departures-controls button,
+  html body .destinations-controls button,
+  html body .carousel-controls button{
+    display:none!important;
+  }
+
+  html body :is(.guides-progress,.packages-progress,.destinations-progress,.guides-swipe-hint,.swipe-hint,.package-swipe-hint){
+    display:none!important;
+  }
+
+  html body :is(.guides-controls,.packages-controls,.itineraries-controls,.cabs-controls,
+    .group-departures-controls,.destinations-controls,.carousel-controls){
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:0!important;
+    width:100%!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    text-align:center!important;
+  }
+
+  html body :is(.guides-controls,.packages-controls,.itineraries-controls,.cabs-controls,
+    .destinations-controls,.carousel-controls) .guides-count,
+  html body .group-departures-controls>span,
+  html body .carousel-controls .carousel-count{
+    display:block!important;
+    min-width:0!important;
+    margin:0 auto!important;
+    text-align:center!important;
+  }
+}
+
+/* Source: arctic-premium-ux.css */
+/* Arctic Prestige — premium UX/UI system
+   Editorial monochrome, glacier-blue details, refined surfaces.
+   Visual-only: preserves existing content, routes, forms and integrations. */
+:root{
+  --arctic-ink:#10151b;
+  --arctic-charcoal:#080b0f;
+  --arctic-snow:#f4f6f8;
+  --arctic-white:#fff;
+  --arctic-muted:#697581;
+  --arctic-line:rgba(16,21,27,.12);
+  --arctic-blue:#a9cde4;
+  --arctic-blue-deep:#6f9fbd;
+  --arctic-radius:24px;
+  --arctic-shadow:0 20px 55px rgba(8,16,24,.10);
+}
+html{scroll-behavior:smooth;scroll-padding-top:104px}
+body{
+  color:var(--arctic-ink);
+  background:var(--arctic-snow);
+  font-family:"Manrope","DM Sans",Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+::selection{background:var(--arctic-ink);color:#fff}
+:focus-visible{outline:2px solid var(--arctic-blue-deep)!important;outline-offset:4px!important}
+img{max-width:100%}
+p{ text-wrap:pretty }
+h1,h2,h3,h4{ text-wrap:balance;letter-spacing:-.025em }
+section.content{padding-block:clamp(64px,8vw,112px)}
+.section-inner{width:min(100% - 56px,1320px);margin-inline:auto}
+.section-title{max-width:850px;margin:0 auto clamp(28px,4vw,48px)}
+.section-title h2,.page-hero h1,.destination-hero h1,.hero h1{
+  letter-spacing:-.035em;
+}
+.section-title h2{font-size:clamp(36px,5vw,62px);line-height:1.02}
+.section-title small,.eyebrow{
+  letter-spacing:.2em;font-size:10px;font-weight:750;
+}
+.intro{max-width:740px;line-height:1.85;color:var(--arctic-muted)}
+/* Navigation: quiet, floating acrylic with clear active and hover states. */
+body>header,body>.sitewide-header,body>.top,.site-header,.main-header{
+  background:rgba(255,255,255,.88)!important;
+  border-bottom:1px solid rgba(16,21,27,.08)!important;
+  box-shadow:0 8px 32px rgba(8,16,24,.055)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(155%)!important;
+  backdrop-filter:blur(28px) saturate(155%)!important;
+}
+body>header .header-inner,body>.sitewide-header .header-inner{
+  width:min(100% - 48px,1440px);min-height:78px;margin-inline:auto;
+  display:flex;align-items:center;gap:clamp(14px,2vw,30px);
+}
+body>header .brand img,body>.sitewide-header .brand img{max-height:52px;width:auto;object-fit:contain}
+body>header nav.glass-nav,body>.sitewide-header nav.glass-nav{
+  align-items:center;gap:6px;min-width:0;
+}
+body>header nav.glass-nav>a,body>.sitewide-header nav.glass-nav>a,
+body>header nav.glass-nav .nav-dropdown-toggle,body>.sitewide-header nav.glass-nav .nav-dropdown-toggle{
+  min-height:42px;padding:10px 15px;border-radius:999px;
+  color:#242b32;font-size:11px;font-weight:750;letter-spacing:.055em;
+  transition:background .2s ease,color .2s ease,transform .2s ease;
+}
+body>header nav.glass-nav>a:hover,body>.sitewide-header nav.glass-nav>a:hover,
+body>header nav.glass-nav .nav-dropdown-toggle:hover,body>.sitewide-header nav.glass-nav .nav-dropdown-toggle:hover{
+  background:rgba(16,21,27,.07);color:#000;transform:translateY(-1px);
+}
+body>header .header-cta,body>.sitewide-header .header-cta{
+  min-height:46px;padding:12px 22px;border-radius:999px;
+  background:#10151b!important;color:#fff!important;border:1px solid #10151b!important;
+  font-size:10px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;
+  box-shadow:0 8px 20px rgba(8,16,24,.13);
+}
+body>header .nav-dropdown-menu,body>.sitewide-header .nav-dropdown-menu{
+  border:1px solid rgba(16,21,27,.10)!important;border-radius:20px!important;
+  box-shadow:0 24px 60px rgba(8,16,24,.16)!important;
+  background:rgba(255,255,255,.96)!important;
+  -webkit-backdrop-filter:blur(24px)!important;backdrop-filter:blur(24px)!important;
+  overflow:hidden;
+}
+/* Cinematic hero treatment — preserve the original destination photography. */
+#home.hero,.hero,.page-hero,.destination-hero{
+  isolation:isolate;
+  background-color:#080b0f;
+}
+#home.hero{
+  min-height:min(820px,88svh);
+  padding:clamp(110px,13vw,180px) clamp(24px,8vw,120px);
+  background-position:center 48%;
+}
+#home.hero:before{background:linear-gradient(90deg,rgba(4,8,12,.82),rgba(4,8,12,.48) 48%,rgba(4,8,12,.08))!important}
+#home.hero:after{background:linear-gradient(180deg,transparent 45%,rgba(4,8,12,.55))!important}
+#home.hero .hero-content{max-width:780px}
+#home.hero .hero h1,#home.hero h1{font-size:clamp(58px,8.6vw,116px);line-height:.91}
+#home.hero p{max-width:600px;color:rgba(255,255,255,.84);font-size:15px;line-height:1.9}
+#home.hero .hero-service-icon{
+  border:1px solid rgba(255,255,255,.24)!important;border-radius:18px!important;
+  background:rgba(255,255,255,.10)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(140%)!important;backdrop-filter:blur(22px) saturate(140%)!important;
+}
+#home.hero .hero-build-cta,#home.hero .btn:not(.outline){
+  background:#fff!important;color:#080b0f!important;border:1px solid #fff!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.22)!important;
+}
+/* Section rhythm and premium monochrome surfaces. */
+:is(#upcoming-packages,#journey-story,#itineraries,#gallery,#reviews,#contact,.destination-gallery,section.content:not(.info)){
+  background-color:#f4f6f8;
+}
+:is(#plan-your-trip,#packages,#cabs,#more-than-tours,#instagram,#siteFooter,.enquiry-section,section.content.info){
+  background-color:#080b0f;
+}
+:is(#upcoming-packages,#journey-story,#itineraries,#gallery,#reviews,.destination-gallery) .section-title :is(h2,small){color:#111}
+:is(#plan-your-trip,#packages,#cabs,#more-than-tours,#instagram,#siteFooter,.enquiry-section) .section-title :is(h2,small){color:#fff}
+:is(#plan-your-trip,#packages,#cabs,#more-than-tours,#instagram) .intro{color:rgba(255,255,255,.68)}
+/* Consistent image cards: refined radius, image crop, quiet borders. */
+:is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.service-card,.info-box,.review-point,.property-card,.vehicle-card,.destination-card){
+  border:1px solid rgba(16,21,27,.10)!important;
+  border-radius:22px!important;
+  box-shadow:0 12px 36px rgba(8,16,24,.075)!important;
+  overflow:hidden;
+}
+:is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.service-card,.info-box,.review-point,.property-card,.vehicle-card){
+  background:#fff!important;
+}
+:is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.service-card,.info-box,.review-point,.property-card,.vehicle-card) :is(h1,h2,h3,h4,strong,b){color:#111}
+:is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.service-card,.info-box,.review-point,.property-card,.vehicle-card) p{color:#65717c}
+:is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.service-card,.info-box,.review-point,.property-card,.vehicle-card) img{
+  display:block;max-width:100%;object-fit:cover;
+}
+.destination-card{border-radius:24px!important;box-shadow:0 20px 48px rgba(8,16,24,.18)!important}
+.destination-card:after{background:linear-gradient(0deg,rgba(5,9,13,.88),rgba(5,9,13,.08) 75%)!important}
+.destination-info h3{font-size:clamp(32px,3vw,46px);letter-spacing:-.025em}
+:is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.service-card,.info-box,.review-point) .btn,
+.group-departure-cta{
+  background:#10151b!important;color:#fff!important;border:1px solid #10151b!important;
+}
+@media(hover:hover){
+  :is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.service-card,.info-box,.review-point,.property-card,.vehicle-card,.destination-card){
+    transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,border-color .35s ease;
+  }
+  :is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.service-card,.info-box,.review-point,.property-card,.vehicle-card,.destination-card):hover{
+    transform:translateY(-6px);box-shadow:0 24px 58px rgba(8,16,24,.14)!important;
+  }
+}
+/* Actions and forms: clear hierarchy, reliable tap targets. */
+body :is(button,.btn,.button,.submit-btn,.group-departure-cta,a[role=button],a[class*=btn],a[class*=button],a[class*=cta]){
+  min-height:46px;border-radius:999px;font-weight:800;letter-spacing:.045em;
+}
+body :is(input,select,textarea){
+  min-height:48px;border:1px solid rgba(16,21,27,.18);border-radius:13px;
+  background:#fff;color:#111;box-shadow:none;
+}
+body :is(input,select,textarea):focus{
+  border-color:#6f9fbd;box-shadow:0 0 0 3px rgba(111,159,189,.16);outline:0;
+}
+body label{font-weight:700}
+body :is(.enquiry-box,.htp-shell,.form-card,.booking-card,.enquiry-card){
+  border-radius:24px;
+}
+body footer,body .site-footer{background:#080b0f;color:#fff}
+body footer :is(h2,h3,h4,strong,b,p,small),body footer a,body .site-footer :is(h2,h3,h4,p,small,a){color:#fff}
+@media(max-width:900px){
+  body>header .header-inner,body>.sitewide-header .header-inner{width:calc(100% - 28px);min-height:70px}
+  body>header nav.glass-nav>a,body>.sitewide-header nav.glass-nav>a,
+  body>header nav.glass-nav .nav-dropdown-toggle,body>.sitewide-header nav.glass-nav .nav-dropdown-toggle{
+    padding-inline:10px;font-size:10px;
+  }
+}
+@media(max-width:760px){
+  html{scroll-padding-top:76px}
+  body{font-size:15px;line-height:1.65;overflow-x:hidden}
+  section.content{padding:58px 18px!important}
+  .section-inner{width:100%!important;max-width:100%!important}
+  .section-title{margin-bottom:25px!important;padding-inline:3px}
+  .section-title h2{font-size:clamp(32px,8.4vw,43px)!important;line-height:1.04!important}
+  .section-title small,.eyebrow{font-size:9px!important;letter-spacing:.17em!important}
+  .intro{font-size:14px!important;line-height:1.75!important;margin-bottom:28px!important}
+  body>header .header-inner,body>.sitewide-header .header-inner{min-height:64px!important;width:calc(100% - 24px)!important;gap:8px!important}
+  body>header .brand img,body>.sitewide-header .brand img{max-height:44px!important;max-width:min(54vw,180px)!important}
+  body>header nav.glass-nav,body>.sitewide-header nav.glass-nav{gap:2px!important}
+  body>header .header-menu-toggle{width:44px!important;height:44px!important;min-width:44px!important}
+  body>header nav#mobileMainNavigation,body>header .nav-dropdown-menu,body>.sitewide-header .nav-dropdown-menu{
+    max-height:calc(100dvh - 82px);overflow-y:auto;overscroll-behavior:contain;
+    border-radius:20px!important;
+  }
+  body :is(.btn,.button,.submit-btn,.group-departure-cta,a[role=button],a[class*=btn],a[class*=button],a[class*=cta]){
+    min-height:48px!important;padding:12px 18px!important;font-size:11px!important;
+  }
+  body :is(input,select,textarea){min-height:50px!important;font-size:16px!important}
+  body :is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.service-card,.info-box,.review-point,.property-card,.vehicle-card){
+    border-radius:19px!important;
+  }
+  body :is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.service-card,.info-box,.review-point) :is(h2,h3,h4){
+    font-size:clamp(21px,6vw,27px)!important;line-height:1.18!important;
+  }
+  body :is(.card,.group-departure-card,.package-slide,.itinerary-slide,.cab-card,.hotel-card,.guide-card,.service-card,.info-box,.review-point) p{
+    font-size:13px!important;line-height:1.65!important;
+  }
+  body :is(.card-body,.package-slide-content,.itinerary-slide-content){padding:18px!important}
+  body :is(.destination-card){height:clamp(245px,70vw,330px)!important;border-radius:20px!important}
+  body :is(.destination-info){left:16px!important;right:14px!important;bottom:18px!important}
+  body :is(.destination-info h3){font-size:clamp(25px,7vw,34px)!important}
+  .date-fields{grid-template-columns:minmax(0,1fr)!important;gap:10px!important}
+  .enquiry-box{padding:22px 18px!important;border-radius:20px!important}
+  .hotel-detail-content{padding:22px 16px!important;margin:12px auto!important;border-radius:18px!important}
+}
+@media(max-width:390px){
+  section.content{padding-inline:15px!important}
+  #home.hero .hero-service-icons{gap:6px!important}
+  #home.hero .hero-service-icon{padding-inline:4px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+
+
+/* Mobile only: remove the dark outer outline from cards in Our Travel Packages. */
+@media screen and (max-width:760px){
+  html body #packages .package-slide{
+    border:0!important;
+    outline:0!important;
+  }
+  html body #packages .package-slide:before,
+  html body #packages .package-slide:after{
+    border:0!important;
+    outline:0!important;
+  }
+}
+
+
+/* Mobile only: prevent a focus-restoration outline from appearing around a package card
+   after returning from its View Itinerary page. Keep keyboard focus styling on the link itself. */
+@media screen and (max-width:760px){
+  html body #packages .package-slide:focus-within{
+    border:0!important;
+    outline:0!important;
+    box-shadow:0 12px 36px rgba(8,16,24,.075)!important;
+  }
+}
+
+/* Source: hero-promo-cta-override.css */
+/* Final override: hero promotion CTA label must remain black after all theme styles. */
+@media (max-width: 760px) {
+  html body #home.hero section.mobile-next-departure > a.mobile-departure-cta,
+  html body #home.hero section.mobile-next-departure > a.mobile-departure-cta:link,
+  html body #home.hero section.mobile-next-departure > a.mobile-departure-cta:visited,
+  html body #home.hero section.mobile-next-departure > a.mobile-departure-cta:hover,
+  html body #home.hero section.mobile-next-departure > a.mobile-departure-cta:active,
+  html body #home.hero section.mobile-next-departure > a.mobile-departure-cta > span {
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+    text-shadow: none !important;
+  }
+}
+
+/* Mobile destination ticker — Basalt Fade Edge treatment. */
+@media screen and (max-width:760px){
+  html body #home.hero .hero-destination-list{
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin:18px 0 12px!important;
+    padding:14px 0!important;
+    overflow:hidden!important;
+    border:0!important;
+    border-radius:6px!important;
+    background:#111318!important;
+    color:#8b98a9!important;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 18%,#000 82%,transparent 100%)!important;
+    mask-image:linear-gradient(90deg,transparent 0%,#000 18%,#000 82%,transparent 100%)!important;
+  }
+  html body #home.hero .hero-destination-marquee{
+    display:flex!important;
+    width:100%!important;
+    overflow:hidden!important;
+    white-space:nowrap!important;
+  }
+  html body #home.hero .hero-destination-track{
+    display:flex!important;
+    align-items:center!important;
+    flex:0 0 auto!important;
+    width:max-content!important;
+    min-width:max-content!important;
+    gap:0!important;
+    animation:hoe-basalt-destination-drift 24s linear infinite!important;
+    will-change:transform;
+    color:#8b98a9!important;
+    font:300 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace!important;
+    letter-spacing:.22em!important;
+    text-transform:uppercase!important;
+  }
+  html body #home.hero .hero-destination-track span{
+    display:inline-block!important;
+    flex:none!important;
+    padding:0 18px 0 0!important;
+    color:#c4ccd6!important;
+    font:inherit!important;
+    letter-spacing:inherit!important;
+    text-transform:inherit!important;
+    white-space:nowrap!important;
+  }
+  html body #home.hero .hero-destination-track i{
+    display:inline-block!important;
+    flex:none!important;
+    padding:0 18px 0 0!important;
+    color:#718096!important;
+    font-style:normal!important;
+    font-size:12px!important;
+    line-height:1!important;
+  }
+  @keyframes hoe-basalt-destination-drift{
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
+  }
+}
+@media screen and (max-width:760px) and (prefers-reduced-motion:reduce){
+  html body #home.hero .hero-destination-track{animation:none!important}
+}
+
+/* Ensure itinerary labels are bold on every hero promotion card, including summary-based cards. */
+html body #home.hero .hero-promo-slide section.mobile-next-departure > details.mobile-departure-itinerary-details > summary.mobile-departure-cta,
+html body #home.hero .hero-promo-slide section.mobile-next-departure > a.mobile-departure-cta.mobile-departure-itinerary,
+html body #home.hero .hero-promo-slide section.mobile-next-departure > a.mobile-departure-cta {
+  font-weight: 800 !important;
+  -webkit-text-fill-color: #000 !important;
+}
+
+
+/* Cache-busted final rule: make the View Itinerary summary label visibly bold on iOS Safari too. */
+html body #home.hero .hero-promo-slide details.mobile-departure-itinerary-details > summary.mobile-departure-cta.mobile-departure-itinerary,
+html body #home.hero .hero-promo-slide details.mobile-departure-itinerary-details > summary.mobile-departure-cta.mobile-departure-itinerary * {
+  font-weight: 900 !important;
+  -webkit-text-stroke: 0.3px currentColor !important;
+}
+
+/* Source: hero-promo-itinerary-popup.css */
+/* Mobile-only Uiverse-inspired itinerary popup for homepage departure cards. */
+@media (max-width: 760px) {
+  #promo-itinerary-modal {
+    z-index: 10050;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 16px !important;
+    background: rgba(0, 0, 0, .68) !important;
+    -webkit-backdrop-filter: blur(7px);
+    backdrop-filter: blur(7px);
+  }
+  #promo-itinerary-modal .promo-itinerary-dialog {
+    width: min(420px, 100%) !important;
+    max-height: min(84dvh, 720px) !important;
+    border: 1px solid rgba(0, 0, 0, .08) !important;
+    border-radius: 10px !important;
+    background: #fff !important;
+    color: #111 !important;
+    box-shadow: 0 18px 55px rgba(0, 0, 0, .24) !important;
+  }
+  #promo-itinerary-modal .promo-itinerary-head {
+    position: relative;
+    display: block !important;
+    padding: 24px 58px 14px 22px !important;
+    border: 0 !important;
+    background: #fff !important;
+    color: #111 !important;
+  }
+  #promo-itinerary-modal .promo-itinerary-head small {
+    margin: 0 0 7px !important;
+    color: #666 !important;
+    font-size: 9px !important;
+    letter-spacing: 1.5px !important;
+  }
+  #promo-itinerary-modal .promo-itinerary-head h2 {
+    color: #111 !important;
+    font-size: 25px !important;
+    font-weight: 700 !important;
+    line-height: 1.15 !important;
+  }
+  #promo-itinerary-modal .promo-itinerary-close {
+    position: absolute !important;
+    top: 12px !important;
+    right: 12px !important;
+    width: 30px !important;
+    height: 30px !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+    background: #fff !important;
+    color: #111 !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, .16) !important;
+    font-size: 21px !important;
+  }
+  #promo-itinerary-modal .promo-itinerary-scroll {
+    min-height: 0 !important;
+    padding: 0 22px 22px !important;
+    overflow: auto !important;
+    overscroll-behavior: contain;
+  }
+  #promo-itinerary-modal .promo-itinerary-text {
+    max-width: none !important;
+    color: #202020 !important;
+    font-size: 13px !important;
+    line-height: 1.65 !important;
+  }
+  #promo-itinerary-modal .promo-itinerary-text .promo-itinerary-intro {
+    padding-bottom: 12px;
+    border-bottom: 1px solid #ededed;
+    color: #555;
+    font-size: 12px !important;
+    font-weight: 600;
+  }
+  #promo-itinerary-modal .promo-itinerary-text h3 {
+    margin: 17px 0 10px !important;
+    color: #111 !important;
+    font-size: 15px !important;
+  }
+  #promo-itinerary-modal .promo-itinerary-text ol {
+    margin: 0 !important;
+    padding-left: 22px !important;
+  }
+  #promo-itinerary-modal .promo-itinerary-text li {
+    padding: 0 0 13px 3px !important;
+  }
+  #promo-itinerary-modal .promo-itinerary-text li strong {
+    color: #111 !important;
+    font-size: 12px;
+  }
+  #promo-itinerary-modal .promo-itinerary-text li span {
+    color: #444;
+  }
+  #promo-itinerary-modal .promo-itinerary-note {
+    margin-top: 7px !important;
+    padding-top: 12px !important;
+    border-top: 1px solid #ededed !important;
+    color: #666 !important;
+    font-size: 11px !important;
+  }
+  #promo-itinerary-modal .promo-itinerary-page-link {
+    display: inline-flex;
+    margin-top: 8px;
+    color: #111;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #promo-itinerary-modal.is-open .promo-itinerary-dialog { animation: none !important; }
+}
+
+/* Source: homepage-mobile-package-itinerary-popup.css */
+/* Mobile-only day-wise itinerary popup for the main Travel Packages cards. */
+@media screen and (max-width:760px){
+  dialog.hoe-package-itinerary-modal{
+    width:min(560px,calc(100vw - 28px));
+    max-width:none;
+    max-height:84vh;
+    max-height:min(84dvh,780px);
+    margin:auto;
+    padding:0;
+    overflow:hidden;
+    border:1px solid rgba(30,55,78,.14);
+    border-radius:25px;
+    color:#142b43;
+    background:#f8f7f2;
+    box-shadow:0 24px 90px rgba(5,17,30,.30);
+  }
+  dialog.hoe-package-itinerary-modal[open]{
+    display:flex;
+    flex-direction:column;
+  }
+  dialog.hoe-package-itinerary-modal::backdrop{
+    background:rgba(7,17,29,.58);
+    -webkit-backdrop-filter:blur(8px);
+    backdrop-filter:blur(8px);
+  }
+  .hoe-package-itinerary-head{
+    position:relative;
+    flex:0 0 auto;
+    padding:23px 62px 18px 22px;
+    border-bottom:1px solid rgba(20,43,67,.10);
+    background:linear-gradient(135deg,#f8f7f2 0%,#eaf2f7 100%);
+  }
+  .hoe-package-itinerary-kicker{
+    display:block;
+    margin:0 0 7px;
+    color:#66839b;
+    font:800 10px/1.3 Inter,"Helvetica Neue",Arial,sans-serif;
+    letter-spacing:2px;
+    text-transform:uppercase;
+  }
+  .hoe-package-itinerary-title{
+    margin:0;
+    color:#142b43;
+    font:600 clamp(25px,7vw,34px)/1.02 "Cormorant Garamond",Georgia,serif;
+    letter-spacing:-.35px;
+    overflow-wrap:anywhere;
+  }
+  .hoe-package-itinerary-meta{
+    margin:8px 0 0;
+    color:#607487;
+    font:600 12px/1.5 Inter,"Helvetica Neue",Arial,sans-serif;
+  }
+  .hoe-package-itinerary-close{
+    position:absolute;
+    top:17px;
+    right:17px;
+    display:grid;
+    width:38px;
+    height:38px;
+    place-items:center;
+    padding:0 0 3px;
+    border:1px solid rgba(20,43,67,.13);
+    border-radius:50%;
+    color:#142b43;
+    background:rgba(255,255,255,.86);
+    font:400 27px/1 Arial,sans-serif;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .hoe-package-itinerary-close:focus-visible{
+    outline:3px solid #8dbfe0;
+    outline-offset:3px;
+  }
+  .hoe-package-itinerary-body{
+    flex:1 1 auto;
+    min-height:0;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+    padding:15px 16px 20px;
+  }
+  .hoe-package-itinerary-intro{
+    margin:0 4px 13px;
+    color:#65798b;
+    font:500 12px/1.55 Inter,"Helvetica Neue",Arial,sans-serif;
+  }
+  .hoe-package-day-card{
+    margin:0 0 11px;
+    padding:16px 16px 15px;
+    border:1px solid rgba(20,43,67,.09);
+    border-radius:17px;
+    background:#fff;
+    box-shadow:0 5px 16px rgba(11,29,47,.045);
+  }
+  .hoe-package-day-label{
+    display:block;
+    margin:0 0 7px;
+    color:#7394ad;
+    font:800 10px/1.35 Inter,"Helvetica Neue",Arial,sans-serif;
+    letter-spacing:1.8px;
+    text-transform:uppercase;
+  }
+  .hoe-package-day-title{
+    margin:0 0 10px;
+    color:#142b43;
+    font:700 17px/1.25 Inter,"Helvetica Neue",Arial,sans-serif;
+    overflow-wrap:anywhere;
+  }
+  .hoe-package-day-field{
+    margin-top:10px;
+  }
+  .hoe-package-day-field-label{
+    display:block;
+    margin:0 0 4px;
+    color:#8293a1;
+    font:800 9px/1.4 Inter,"Helvetica Neue",Arial,sans-serif;
+    letter-spacing:1.4px;
+    text-transform:uppercase;
+  }
+  .hoe-package-day-stay{
+    margin:0;
+    color:#203c56;
+    font:700 13px/1.5 Inter,"Helvetica Neue",Arial,sans-serif;
+    overflow-wrap:anywhere;
+  }
+  .hoe-package-day-description{
+    margin:0;
+    color:#566b7e;
+    font:400 13px/1.7 Inter,"Helvetica Neue",Arial,sans-serif;
+    white-space:pre-line;
+    overflow-wrap:anywhere;
+  }
+  .hoe-package-itinerary-empty{
+    margin:3px 0 0;
+    padding:22px 17px;
+    border:1px dashed rgba(20,43,67,.22);
+    border-radius:17px;
+    color:#566b7e;
+    background:rgba(255,255,255,.76);
+    text-align:center;
+    font:500 13px/1.65 Inter,"Helvetica Neue",Arial,sans-serif;
+  }
+}
+@media screen and (min-width:761px){
+  dialog.hoe-package-itinerary-modal{display:none!important}
+}
