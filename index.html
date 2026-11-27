@@ -51,6 +51,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://ynkoiuyjevclypumnyes.supabase.co">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" media="(max-width: 760px)">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap"></noscript>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..900&family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..900&family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet"></noscript>
@@ -164,7 +165,9 @@
 <!-- Removed duplicate early homepage-redesign.css import; final v9 stylesheet is loaded below. -->
 
 
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&family=Allura&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&family=Allura&display=swap" rel="stylesheet" media="(min-width: 761px)">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&family=Allura&display=swap" rel="preload" as="style" media="(max-width: 760px)" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&family=Allura&display=swap" rel="stylesheet" media="(max-width: 760px)"></noscript>
 <link rel="stylesheet" href="/homepage-editorial-refresh.css?v=3">
 
 <!-- Manrope faces already loaded by the main font stylesheet above; retain body rules without a duplicate network import. -->
@@ -2144,8 +2147,8 @@ observeReveals();
 
 loadPackages();
 loadItineraries();
-if (matchMedia("(min-width:761px)").matches && "IntersectionObserver" in window) {
-  // Keep bookings ready; defer heavy lower-page catalogue requests until approaching them.
+if ("IntersectionObserver" in window) {
+  // Keep bookings ready; defer heavy lower-page catalogue requests on both viewports.
   const deferredSections = new Map([
     [document.getElementById("cabs"), loadCabs],
     [document.getElementById("gallery"), loadHotels]
@@ -2158,7 +2161,7 @@ if (matchMedia("(min-width:761px)").matches && "IntersectionObserver" in window)
       deferredSections.delete(entry.target);
       if (load) load();
     }
-  }, {rootMargin:"1000px 0px"});
+  }, {rootMargin:matchMedia("(max-width:760px)").matches?"800px 0px":"1000px 0px"});
   for (const [section, load] of deferredSections) {
     if (section) catalogueObserver.observe(section);
     else load();
@@ -2207,6 +2210,7 @@ if (matchMedia("(min-width:761px)").matches && "IntersectionObserver" in window)
 <script>
 /* Load destination cards managed from the admin dashboard */
 (async()=>{
+  if (!document.getElementById("destinationsCarousel")) return;
   try{
     const client=window.supabase.createClient("https://ynkoiuyjevclypumnyes.supabase.co","sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-");
     const {data,error}=await client.from("destinations").select("title,tagline,image_url,link_url,sort_order").eq("is_active",true).order("sort_order",{ascending:true});
