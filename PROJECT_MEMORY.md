@@ -661,3 +661,7 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 ## 2026-11-27 — Mobile homepage scroll performance
 - Scoped homepage scrollbar discovery to card rails and paused decorative snowfall during vertical scroll. Hero resizing now checks actual dimensions before reallocating the canvas.
 - Local Chromium with external resources blocked: the 390px homepage went from four full-document scrollbar scans to zero, retained the promo indicator and scrolled 400px. Static site quality checks passed.
+
+## 2026-11-27 — Mobile dock and expedition animation during scrolling
+- Mobile dock gradient follows scrolling, with a smaller backdrop blur. Mobile route animation caches marker coordinates, limits redraws and pauses until vertical scrolling settles.
+- Local Chromium at 390px with third-party requests blocked: one idle second went from 30 dock writes and 720 marker coordinate reads to zero for both. The page scrolled 480px and the route resumed.
