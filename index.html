@@ -600,10 +600,10 @@ html body :is(#itineraries#itineraries,#odyssey-difference-mobile#odyssey-differ
 @media screen and (max-width:760px) and (prefers-reduced-motion:no-preference){
  #heroPromoTrack h2.hoe-promo-heading-reveal > .hoe-promo-heading-word,
  #heroPromoTrack h2.hoe-promo-heading-reveal > em{
-  display:inline-block;animation:hoePromoHeadingFadeUp 350ms cubic-bezier(.2,.7,.2,1) both;
+  display:inline-block;animation:hoePromoHeadingFadeUp 350ms cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(0ms - var(--hoe-reveal-elapsed,0ms));
  }
- #heroPromoTrack h2.hoe-promo-heading-reveal > em{animation-duration:400ms;animation-delay:120ms}
- #heroPromoTrack h2.hoe-promo-heading-reveal > .hoe-promo-heading-word:last-child{animation-duration:500ms;animation-delay:240ms}
+ #heroPromoTrack h2.hoe-promo-heading-reveal > em{animation-duration:400ms;animation-delay:calc(120ms - var(--hoe-reveal-elapsed,0ms))}
+ #heroPromoTrack h2.hoe-promo-heading-reveal > .hoe-promo-heading-word:last-child{animation-duration:500ms;animation-delay:calc(240ms - var(--hoe-reveal-elapsed,0ms))}
 }
 </style>
 </head>
@@ -734,19 +734,30 @@ html body :is(#itineraries#itineraries,#odyssey-difference-mobile#odyssey-differ
     (()=>{
       const track=document.getElementById("heroPromoTrack");
       if(!track||!matchMedia("(max-width:760px) and (prefers-reduced-motion:no-preference)").matches)return;
-      const heading=track.querySelector(".hero-promo-slide:first-child > .mobile-next-departure > h2");
-      if(!heading)return;
-      // Animate the initial heading only. A later data-driven carousel refresh remains readable without replay.
-      for(const node of Array.from(heading.childNodes)){
-        if(node.nodeType!==Node.TEXT_NODE||!node.textContent.trim())continue;
-        const parts=node.textContent.match(/^(\s*)(.*?)(\s*)$/s);
-        if(!parts)continue;
-        const word=document.createElement("span");
-        word.className="hoe-promo-heading-word";
-        word.textContent=parts[2];
-        node.replaceWith(document.createTextNode(parts[1]),word,document.createTextNode(parts[3]));
+      const started=performance.now();
+      function reveal(){
+        const elapsed=performance.now()-started;
+        const heading=track.querySelector(".hero-promo-slide:first-child > .mobile-next-departure > h2");
+        if(!heading||elapsed>=740||heading.classList.contains("hoe-promo-heading-reveal"))return;
+        for(const node of Array.from(heading.childNodes)){
+          if(node.nodeType!==Node.TEXT_NODE||!node.textContent.trim())continue;
+          const parts=node.textContent.match(/^(\s*)(.*?)(\s*)$/s);
+          if(!parts)continue;
+          const word=document.createElement("span");
+          word.className="hoe-promo-heading-word";
+          word.textContent=parts[2];
+          node.replaceWith(document.createTextNode(parts[1]),word,document.createTextNode(parts[3]));
+        }
+        // A fast data refresh continues the same entrance, rather than restarting it.
+        heading.style.setProperty("--hoe-reveal-elapsed",Math.round(elapsed)+"ms");
+        heading.classList.add("hoe-promo-heading-reveal");
       }
-      heading.classList.add("hoe-promo-heading-reveal");
+      reveal();
+      if("MutationObserver" in window){
+        const observer=new MutationObserver(reveal);
+        observer.observe(track,{childList:true});
+        setTimeout(()=>observer.disconnect(),740);
+      }
     })();
     </script>
 
