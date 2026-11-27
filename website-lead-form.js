@@ -156,7 +156,7 @@
         window.clearTimeout(timeout);
       }
       if (saved && !String(values.get("website") || "").trim()) window.HOEAnalytics?.track("generate_lead", { form_name: "website_enquiry", page_path: enquiryPath, acquisition_channel: acquisition.channel });
-      else window.HOEAnalytics?.track("enquiry_whatsapp_fallback", { page_path: location.pathname });
+      else if (!saved) window.HOEAnalytics?.track("enquiry_whatsapp_fallback", { page_path: location.pathname });
       status.dataset.state = saved ? "success" : "error";
       status.textContent = saved
         ? "Enquiry saved. Opening WhatsApp to continue…"
