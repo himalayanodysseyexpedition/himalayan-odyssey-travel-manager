@@ -25,6 +25,11 @@
     return "generic";
   }
   let activeTheme="",current=-1,frame=0,elapsed=0,last=0,visible=true,scrollPending=false,depthPending=false;
+  let resumeTimer = 0;
+  const stops = markers.map(marker => {
+    const circle = marker.querySelector("circle");
+    return {x: Number(circle.getAttribute("cx")), y: Number(circle.getAttribute("cy"))};
+  });
   const total=road.getTotalLength();
   function activeCard(){
     const cards=Array.from(track.querySelectorAll(".hero-promo-slide"));
@@ -57,16 +62,43 @@
     if(panel.dataset.weather!==weather)panel.dataset.weather=weather;
     vehicle.setAttribute("transform","translate("+p.x.toFixed(2)+" "+p.y.toFixed(2)+") scale("+(t<.5?1:-1)+" 1)");
     let nearest=-1,best=Infinity;
-    markers.forEach((m,i)=>{if(m.style.display==="none")return;const c=m.querySelector("circle"),dx=p.x-Number(c.getAttribute("cx")),dy=p.y-Number(c.getAttribute("cy")),d=dx*dx+dy*dy;if(d<best){nearest=i;best=d;}});
+    stops.forEach((stop, i) => {
+      if (!themes[activeTheme].stops[i]) return;
+      const distance = (p.x - stop.x) ** 2 + (p.y - stop.y) ** 2;
+      if (distance < best) { nearest = i; best = distance; }
+    });
     if(nearest!==current){current=nearest;markers.forEach((m,i)=>m.classList.toggle("is-current",i===nearest));stampText.textContent=nearest>=0?themes[activeTheme].stops[nearest].toUpperCase():"EXPLORE";stamp.classList.toggle("is-stamped",nearest>=0);}
   }
-  function canRun(){return mobile.matches&&!reduced.matches&&visible&&!document.hidden&&!document.body.classList.contains("promo-itinerary-modal-open");}
-  function tick(now){frame=0;if(!canRun()){last=0;panel.dataset.running="false";return;}if(last)elapsed+=Math.min(now-last,100);last=now;draw(elapsed);frame=requestAnimationFrame(tick);}
+  function canRun(){return mobile.matches&&!reduced.matches&&!resumeTimer&&visible&&!document.hidden&&!document.body.classList.contains("promo-itinerary-modal-open");}
+  function tick(now) {
+    frame = 0;
+    if (!canRun()) { last = 0; panel.dataset.running = "false"; return; }
+    if (!last || now - last >= 1000 / 30 - 1) {
+      if (last) elapsed += Math.min(now - last, 100);
+      last = now;
+      draw(elapsed);
+    }
+    frame = requestAnimationFrame(tick);
+  }
   function refresh(){const run=canRun();panel.dataset.running=String(run);if(run&&!frame){last=0;frame=requestAnimationFrame(tick);}else if(!run&&frame){cancelAnimationFrame(frame);frame=0;last=0;}if(mobile.matches){sync();if(reduced.matches){elapsed=0;draw(0);panel.style.setProperty("--journey-depth","0px");}}}
   function parallax(){depthPending=false;if(!mobile.matches||reduced.matches||!visible)return;const y=Math.max(-8,Math.min(8,(panel.getBoundingClientRect().top-innerHeight*.6)*.035));panel.style.setProperty("--journey-depth",y.toFixed(1)+"px");}
   function scheduleDepth(){if(!depthPending&&mobile.matches&&!reduced.matches&&visible){depthPending=true;requestAnimationFrame(parallax);}}
   track.addEventListener("scroll",scheduleSync,{passive:true});
-  addEventListener("scroll",scheduleDepth,{passive:true});
+  function onPageScroll() {
+    if (!mobile.matches || reduced.matches || !visible) return;
+    if (!resumeTimer) {
+      cancelAnimationFrame(frame);
+      frame = last = 0;
+      panel.dataset.running = "false";
+    }
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => {
+      resumeTimer = 0;
+      refresh();
+      scheduleDepth();
+    }, 150);
+  }
+  addEventListener("scroll",onPageScroll,{passive:true});
   addEventListener("resize",()=>{refresh();scheduleDepth();},{passive:true});
   document.addEventListener("visibilitychange",refresh);
   if("MutationObserver"in window){
