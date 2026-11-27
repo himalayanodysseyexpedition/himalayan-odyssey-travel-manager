@@ -638,16 +638,26 @@ html body :is(#itineraries#itineraries,#odyssey-difference-mobile#odyssey-differ
 }
 </style>
 <style id="hoe-mobile-flat-dock-final">
-/* Flat mobile navigation: familiar outline glyphs and a matte royal-purple surface. */
+/* Flat mobile glyphs over a translucent royal-purple frosted lens; page motion supplies the moving backdrop. */
 @media (max-width:760px){
  html:root[data-hoe-theme="home"] body nav.mobile-app-dock.mobile-app-dock{
-  background:#51239a!important;
-  border:1px solid #936acb!important;
+  background:rgba(56,21,109,.48)!important;
+  border:1px solid rgba(214,188,255,.36)!important;
   box-shadow:none!important;
-  backdrop-filter:none!important;
-  -webkit-backdrop-filter:none!important;
+  -webkit-backdrop-filter:blur(16px) saturate(145%)!important;
+  backdrop-filter:blur(16px) saturate(145%)!important;
+  background-clip:padding-box!important;
  }
- html:root[data-hoe-theme="home"] body nav.mobile-app-dock.mobile-app-dock::before,
+ html:root[data-hoe-theme="home"] body nav.mobile-app-dock.mobile-app-dock::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  border-radius:inherit!important;
+  pointer-events:none!important;
+  z-index:0!important;
+  background:radial-gradient(ellipse at 50% 50%,transparent 48%,rgba(180,125,255,.09) 78%,rgba(220,196,255,.17) 100%)!important;
+  box-shadow:none!important;
+ }
  html:root[data-hoe-theme="home"] body nav.mobile-app-dock.mobile-app-dock::after{
   content:none!important;
   box-shadow:none!important;
@@ -706,6 +716,16 @@ html body :is(#itineraries#itineraries,#odyssey-difference-mobile#odyssey-differ
  }
 }
 
+
+@media (max-width:760px){
+ @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  html:root[data-hoe-theme="home"] body nav.mobile-app-dock.mobile-app-dock{background:rgba(56,21,109,.94)!important}
+ }
+ @media (prefers-reduced-transparency:reduce){
+  html:root[data-hoe-theme="home"] body nav.mobile-app-dock.mobile-app-dock{background:#39166f!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+  html:root[data-hoe-theme="home"] body nav.mobile-app-dock.mobile-app-dock::before{content:none!important}
+ }
+}
 </style>
 </head>
 
@@ -2325,7 +2345,7 @@ if (matchMedia("(min-width:761px)").matches && "IntersectionObserver" in window)
 
 
 <link rel="manifest" href="/manifest.webmanifest">
-<script src="/mobile-app-experience-v18.js?v=5" defer></script>
+<script src="/mobile-app-experience-v18.js?v=6" defer></script>
 <script src="/site-navigation.js?v=28" defer></script>
 
 <!-- Final cascade guard: load approved Arctic layers after legacy page-level styles. -->
