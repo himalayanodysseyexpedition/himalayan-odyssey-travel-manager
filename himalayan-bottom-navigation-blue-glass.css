@@ -346,3 +346,71 @@ html body .dock-menu-popup.dock-fab-popup>a[role="menuitem"]:focus-visible{
 @media(max-width:760px) and (prefers-reduced-motion:reduce){
  html body nav.mobile-app-dock .dock-icon{animation:none!important}
 }
+
+/* Flat mobile navigation: familiar outline glyphs and a matte royal-purple surface. */
+@media (max-width:760px){
+ html:root body nav.mobile-app-dock.mobile-app-dock{
+  background:#51239a!important;
+  border:1px solid #936acb!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+ }
+ html:root body nav.mobile-app-dock.mobile-app-dock::before,
+ html:root body nav.mobile-app-dock.mobile-app-dock::after{
+  content:none!important;
+  box-shadow:none!important;
+ }
+ html:root body nav.mobile-app-dock.mobile-app-dock > :is(a[data-dock],button.dock-menu-trigger){
+  background:transparent!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+  text-shadow:none!important;
+  filter:none!important;
+  transform:none!important;
+  transition:background-color .15s ease!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+ }
+ html:root body nav.mobile-app-dock.mobile-app-dock > :is(a[data-dock],button.dock-menu-trigger):is(:active,.hoe-dock-pressed){
+  background:#39166f!important;
+  box-shadow:none!important;
+  filter:none!important;
+  transform:none!important;
+ }
+ html:root body nav.mobile-app-dock.mobile-app-dock > button.dock-menu-trigger{
+  background:#0d0d0f!important;
+ }
+ html:root body nav.mobile-app-dock.mobile-app-dock > button.dock-menu-trigger:is(:active,.hoe-dock-pressed,[aria-expanded="true"]){
+  background:#211334!important;
+ }
+ html:root body nav.mobile-app-dock.mobile-app-dock > :is(a[data-dock],button.dock-menu-trigger) > span{
+  text-shadow:none!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+ }
+ html:root body nav.mobile-app-dock.mobile-app-dock > :is(a[data-dock],button.dock-menu-trigger) .dock-icon,
+ html:root body nav.mobile-app-dock.mobile-app-dock > :is(a[data-dock],button.dock-menu-trigger):is(:active,.hoe-dock-pressed) .dock-icon{
+  fill:none!important;
+  stroke:#fff!important;
+  stroke-width:1.8!important;
+  filter:none!important;
+  box-shadow:none!important;
+  animation:none!important;
+  transform:none!important;
+  transition:none!important;
+ }
+ html:root body nav.mobile-app-dock.mobile-app-dock > :is(a[data-dock],button.dock-menu-trigger) .dock-icon :is(path,circle,rect){
+  fill:none!important;
+  stroke:#fff!important;
+  stroke-width:1.8!important;
+  filter:none!important;
+ }
+ html:root body nav.mobile-app-dock.mobile-app-dock [data-dock="home"] .dock-icon :is(path:nth-of-type(2),.icon-detail),
+ html:root body nav.mobile-app-dock.mobile-app-dock [data-dock="explore"] .dock-icon .icon-side{
+  display:none!important;
+ }
+ html:root body nav.mobile-app-dock.mobile-app-dock > button.dock-menu-trigger.is-open .dock-icon{
+  transform:rotate(45deg)!important;
+ }
+}
