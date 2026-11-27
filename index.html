@@ -821,10 +821,8 @@ function getPublishedItineraries() {
       .select("id,package_id,title,destination,duration_days,duration_nights,price,summary,published,created_at,gallery_images,cover_image")
       .eq("published", true)
       .order("created_at", { ascending: false });
-    // On mobile, resolve the Supabase thenable once so both sections share a real promise.
-    publishedItinerariesRequest = window.matchMedia("(max-width: 760px)").matches
-      ? Promise.resolve(query)
-      : query;
+    // Supabase query builders are thenables; share one actual request on both viewports.
+    publishedItinerariesRequest = Promise.resolve(query);
   }
   return publishedItinerariesRequest;
 }
@@ -1304,7 +1302,7 @@ function observeReveals() {
 
   const elements = document.querySelectorAll(".reveal:not(.visible)");
 
-  if (!("IntersectionObserver" in window)) {
+  if (window.matchMedia("(min-width:761px)").matches || !("IntersectionObserver" in window)) {
     elements.forEach(element => element.classList.add("visible"));
     return;
   }
@@ -1610,8 +1608,8 @@ loadHotels();
 })();
 </script>
 
-  <script src="/site-motion.js?v=1" defer></script>
-<script src="/cinematic-storytelling.js?v=4" defer></script>
+  <script src="/site-motion.js?v=2" defer></script>
+<script src="/cinematic-storytelling.js?v=5" defer></script>
 
 
 
@@ -1643,7 +1641,7 @@ loadHotels();
   applyResponsiveRotatingFont();
   window.addEventListener("resize", applyResponsiveRotatingFont, { passive: true });
   const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduceMotion) return;
+  if (reduceMotion || window.matchMedia("(min-width:761px)").matches) return;
 
   const selectors = [
     ".content > .section-title",
@@ -2077,7 +2075,7 @@ loadHotels();
 
 
 
-  <script src="/arctic-prestige-motion.js?v=2" defer></script>
+  <script src="/arctic-prestige-motion.js?v=3" defer></script>
 
 <style id="hero-service-button-label-bold-v1"> /* Keep Cabs, Hotels and Packages labels visibly bold on desktop and mobile. */ html body #home.hero .hero-service-icons .hero-service-icon span{ font-weight:700!important; -webkit-text-stroke:.25px currentColor!important; } </style>
 
@@ -3467,7 +3465,7 @@ html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cin
 </script>
 
 <link rel="stylesheet" href="/hoe-desktop-theme.css?v=1" media="(min-width: 761px)">
-<link rel="stylesheet" href="/hoe-desktop-home-theme.css?v=8" media="(min-width: 761px)">
+<link rel="stylesheet" href="/hoe-desktop-home-theme.css?v=9" media="(min-width: 761px)">
 
 
 <style id="hoe-desktop-destinations-ticker-v2">
@@ -3531,26 +3529,4 @@ html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cin
 }
 </style>
 
-<script id="hoe-desktop-hero-motion-budget">
-(() => {
-  const desktop = matchMedia("(min-width:761px)");
-  const hero = document.getElementById("home");
-  if (!hero) return;
-  let visible = true, scrolling = false, timer = 0;
-  const sync = () => hero.classList.toggle("hoe-desktop-motion-paused",
-    desktop.matches && (!visible || scrolling || document.hidden));
-  const stop = () => {
-    if (!desktop.matches || !visible) return;
-    if (!scrolling) { scrolling = true; sync(); }
-    clearTimeout(timer);
-    timer = setTimeout(() => { scrolling = false; sync(); }, 180);
-  };
-  if ("IntersectionObserver" in window) new IntersectionObserver(entries => {
-    visible = entries[0].isIntersecting; sync();
-  }).observe(hero);
-  window.addEventListener("scroll", stop, {passive:true});
-  document.addEventListener("visibilitychange", sync);
-  desktop.addEventListener("change", sync);
-  sync();
-})();
-</script>
+
