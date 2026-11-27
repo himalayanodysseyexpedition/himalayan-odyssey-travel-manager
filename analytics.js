@@ -2,6 +2,47 @@
    Leave analytics-config.json measurementId empty until the GA4 property is ready. */
 (() => {
   const pendingEvents = [];
+  // Tab-scoped first observed acquisition category; no identifiers or raw referrer/query stored.
+  function classifyChannel(source,medium,paid,host){
+    const src=String(source||"").trim().toLowerCase();
+    const m=String(medium||"").trim().toLowerCase();
+    if(paid||/^(cpc|ppc|paid|paidsearch|paid_search|paid_social|display|cpm|ads)$/.test(m))return "paid_campaign";
+    const aliases={google:"google_search",bing:"bing_search",instagram:"instagram",ig:"instagram",facebook:"facebook",fb:"facebook",chatgpt:"chatgpt",openai:"chatgpt",gemini:"gemini",perplexity:"perplexity",tripoto:"tripoto",whatsapp:"whatsapp",wa:"whatsapp",medium:"travel_referral",blogger:"travel_referral",holidify:"travel_referral",pinterest:"pinterest",quora:"quora"};
+    if(Object.prototype.hasOwnProperty.call(aliases,src))return aliases[src];
+    if(src||m)return "other_campaign";
+    if(!host)return "unknown";
+    const h=host.toLowerCase();
+    const domain=d=>h===d||h.endsWith("."+d);
+    if(domain("gemini.google.com"))return "gemini";
+    if(domain("google.com")||domain("google.co.in")||domain("google.co.uk"))return "google_search";
+    if(domain("bing.com"))return "bing_search";
+    if(domain("instagram.com"))return "instagram";
+    if(domain("facebook.com")||domain("fb.com"))return "facebook";
+    if(domain("chatgpt.com")||domain("chat.openai.com"))return "chatgpt";
+    if(domain("perplexity.ai"))return "perplexity";
+    if(domain("tripoto.com"))return "tripoto";
+    if(domain("wa.me")||domain("whatsapp.com"))return "whatsapp";
+    if(domain("pinterest.com")||domain("pinterest.co.in"))return "pinterest";
+    if(domain("quora.com"))return "quora";
+    if(domain("holidify.com")||domain("medium.com")||domain("blogspot.com"))return "travel_referral";
+    return "referral";
+  }
+  function safeLandingPath(path){return typeof path==="string"&&path.length<=100&&/^\/[a-z0-9/_\-.]*$/i.test(path)&&!/\d{7,}/.test(path)?path:"/";}
+  const acquisition = (() => {
+    let host = '';
+    try { const ref = new URL(document.referrer); if (ref.origin !== location.origin && /^https?:$/.test(ref.protocol)) host = ref.hostname; } catch (_) {}
+    const p = new URLSearchParams(location.search);
+    const current = {channel: classifyChannel(p.get('utm_source'), p.get('utm_medium'), p.has('gclid') || p.has('msclkid'), host), landing: safeLandingPath(location.pathname)};
+    const key = 'hoe-acquisition-v1';
+    try {
+      const previous = JSON.parse(sessionStorage.getItem(key) || 'null');
+      const known = /^(google_search|bing_search|instagram|facebook|chatgpt|gemini|perplexity|tripoto|whatsapp|travel_referral|pinterest|quora|paid_campaign|other_campaign|referral|unknown)$/;
+      if (previous && known.test(previous.channel) && typeof previous.landing === 'string' && safeLandingPath(previous.landing) === previous.landing) return {channel: previous.channel, landing: previous.landing};
+      sessionStorage.setItem(key, JSON.stringify(current));
+    } catch (_) { /* Storage may be disabled; use current page evidence. */ }
+    return current;
+  })();
+
   // Use page intent as a fallback for public landing-page enquiries.
   const pageService = (path) => {
     const slug = String(path || "").replace(/^\/+|\/+$/g, "");
@@ -28,7 +69,7 @@
     }
   };
 
-  window.HOEAnalytics = { track };
+  window.HOEAnalytics = { track, getAcquisition: () => ({ ...acquisition }) };
 
   document.addEventListener("click", (event) => {
     const link = event.target instanceof Element ? event.target.closest("a[href]") : null;

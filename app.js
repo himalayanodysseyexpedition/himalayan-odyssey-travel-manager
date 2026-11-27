@@ -170,6 +170,16 @@ async function optimizeStorageImage(file, options = {}) {
   }
 }
 
+function bookingAttributionNotes(lead){
+  const allowed=new Set(["google_search","bing_search","instagram","facebook","chatgpt","gemini","perplexity","tripoto","whatsapp","travel_referral","pinterest","quora","paid_campaign","other_campaign","referral","unknown"]);
+  const manual={google:"google_search",instagram:"instagram",facebook:"facebook",whatsapp:"whatsapp",tripoto:"tripoto",referral:"referral",manual:"manual",other:"unknown"};
+  const src=String(lead.source||"").trim().toLowerCase();
+  const details=String(lead.source_details||"").trim().slice(0,300);
+  const match=details.match(/^Website lead form · Channel: ([a-z_]+) · Landing: /);
+  const channel=src==="website"&&match&&allowed.has(match[1])?match[1]:(Object.prototype.hasOwnProperty.call(manual,src)?manual[src]:"unknown");
+  return [String(lead.notes||"").trim(),details?"Marketing source details: "+details.replace(/[\r\n]+/g," "):"","Marketing channel: "+channel].filter(Boolean).join("\n");
+}
+
 function getBooking(id) {
   return (D.bookings || []).find(
     item => String(item.id) === String(id)
@@ -3460,7 +3470,7 @@ document.addEventListener("click", async event => {
             supplier_cost_per_package: supplierCost,
             supplier_details: supplierDetails.trim() || null,
             amount_paid: advance,
-            notes: lead.notes
+            notes: bookingAttributionNotes(lead)
           });
 
         if (error) throw error;
