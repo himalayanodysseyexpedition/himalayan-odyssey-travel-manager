@@ -4,6 +4,7 @@
   const mobile = window.matchMedia("(max-width: 760px)");
   if (!mobile.matches) return;
 
+  const railSelector = document.currentScript?.dataset.rails;
   const style = document.createElement("style");
   style.textContent = `
     @media (max-width:760px) {
@@ -90,7 +91,7 @@
   };
 
   const scan = () => {
-    document.querySelectorAll("body *").forEach((el) => {
+    document.querySelectorAll(railSelector || "body *").forEach((el) => {
       if (!(el instanceof HTMLElement) || el.dataset.mobileScrollIndicator === "true") return;
       const overflow = getComputedStyle(el).overflowX;
       if ((overflow === "auto" || overflow === "scroll") && el.scrollWidth > el.clientWidth + 8) {
@@ -110,7 +111,13 @@
   window.addEventListener("resize", scheduleScan, {passive:true});
   window.addEventListener("orientationchange", scheduleScan, {passive:true});
   if ("MutationObserver" in window) {
-    new MutationObserver(scheduleScan).observe(document.body, {childList:true,subtree:true});
+    const observer = new MutationObserver(scheduleScan);
+    if (railSelector) {
+      // Cards arrive asynchronously inside the existing homepage rails.
+      document.querySelectorAll(railSelector).forEach(rail => observer.observe(rail, {childList:true}));
+    } else {
+      observer.observe(document.body, {childList:true,subtree:true});
+    }
   }
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", scheduleScan, {once:true});

@@ -657,3 +657,7 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 ## 2026-11-26 — Public mobile header parity
 - Match 22 secondary public HTML pages to homepage header: same transparent 3D logo, 92% opacity, engraved frame and scroll-linked flags with independent wind flutter.
 - Shared CSS and deferred script. Desktop, admin, homepage, redirect routes and navigation unchanged. JavaScript syntax checked; device rendering and deployment not verified at implementation time.
+
+## 2026-11-27 — Mobile homepage scroll performance
+- Scoped homepage scrollbar discovery to card rails and paused decorative snowfall during vertical scroll. Hero resizing now checks actual dimensions before reallocating the canvas.
+- Local Chromium with external resources blocked: the 390px homepage went from four full-document scrollbar scans to zero, retained the promo indicator and scrolled 400px. Static site quality checks passed.

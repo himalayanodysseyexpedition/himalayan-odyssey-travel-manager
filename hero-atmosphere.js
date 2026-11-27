@@ -29,6 +29,7 @@
     let frame = 0;
     let lastTime = 0;
     let visible = true;
+    let resumeTimer = 0;
 
     const makeFlake = (randomY = true) => {
       const depth = random(0.55, 1);
@@ -55,9 +56,13 @@
 
     const resize = () => {
       const rect = hero.getBoundingClientRect();
-      width = Math.max(1, rect.width);
-      height = Math.max(1, rect.height);
-      dpr = Math.min(window.devicePixelRatio || 1, 1.35);
+      const nextWidth = Math.max(1, Math.round(rect.width));
+      const nextHeight = Math.max(1, Math.round(rect.height));
+      const nextDpr = Math.min(window.devicePixelRatio || 1, 1.35);
+      if (width === nextWidth && height === nextHeight && dpr === nextDpr) return;
+      width = nextWidth;
+      height = nextHeight;
+      dpr = nextDpr;
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -100,7 +105,7 @@
     };
 
     const play = () => {
-      if (!visible || document.hidden || reducedMotion || frame) return;
+      if (!visible || document.hidden || reducedMotion || resumeTimer || frame) return;
       lastTime = performance.now();
       frame = requestAnimationFrame(animate);
     };
@@ -115,7 +120,18 @@
       : null;
 
     if (observer) observer.observe(hero);
-    window.addEventListener("resize", resize, { passive: true });
+    if ("ResizeObserver" in window) new ResizeObserver(resize).observe(hero);
+    else window.addEventListener("resize", resize, { passive: true });
+
+    if (!reducedMotion) window.addEventListener("scroll", () => {
+      if (!visible && !resumeTimer) return;
+      pause();
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => {
+        resumeTimer = 0;
+        play();
+      }, 150);
+    }, { passive: true });
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) pause();
       else play();
