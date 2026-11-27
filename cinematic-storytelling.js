@@ -12,6 +12,19 @@
     ".destination-card img,.group-departure-photo img,.guide-card img"
   )];
 
+  const visibleParallax = new Set();
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    const parallaxObserver = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) visibleParallax.add(entry.target);
+        else visibleParallax.delete(entry.target);
+      }
+    }, {rootMargin: "80px 0px"});
+    parallaxImages.forEach(img => parallaxObserver.observe(img));
+  } else if (!reduceMotion) {
+    parallaxImages.forEach(img => visibleParallax.add(img));
+  }
+
   // Small chapter markers make the long homepage feel like a guided journey.
   const marker = document.createElement("div");
   marker.className = "story-progress-label";
@@ -59,12 +72,15 @@
       hero.style.setProperty("--story-hero-shift", (y * 0.16).toFixed(1) + "px");
     }
     if (!reduceMotion && window.innerWidth > 700) {
-      parallaxImages.forEach(img => {
+      // Read all geometry before writing styles to avoid repeated forced layout.
+      const height = window.innerHeight;
+      const updates = [];
+      for (const img of visibleParallax) {
         const rect = img.getBoundingClientRect();
-        if (rect.bottom < -80 || rect.top > window.innerHeight + 80) return;
-        const center = rect.top + rect.height / 2 - window.innerHeight / 2;
-        img.style.setProperty("--story-parallax", (center * -0.025).toFixed(1) + "px");
-      });
+        if (rect.bottom < -80 || rect.top > height + 80) continue;
+        updates.push([img, ((rect.top + rect.height / 2 - height / 2) * -0.025).toFixed(1) + "px"]);
+      }
+      for (const [img, value] of updates) if (img.style.getPropertyValue("--story-parallax") !== value) img.style.setProperty("--story-parallax", value);
     }
     ticking = false;
   };
