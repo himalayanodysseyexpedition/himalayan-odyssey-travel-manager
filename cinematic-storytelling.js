@@ -7,7 +7,6 @@
   // Desktop homepage uses an immediately visible, static rendering path.
   if (desktop.matches) return;
   const hero = document.querySelector(".hero");
-  const progress = document.getElementById("scrollProgress");
   const scenes = [...document.querySelectorAll(
     "#our-approach,#upcoming-packages,#destinations,#travel-guides,#packages,#itineraries,#cabs,#gallery,#reviews,#faq,#instagram"
   )];
@@ -67,10 +66,6 @@
   let ticking = false;
   const update = () => {
     const y = window.scrollY || 0;
-    if (progress && !desktop.matches) {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      progress.style.width = (max > 0 ? Math.min(100, y / max * 100) : 0) + "%";
-    }
     if (!desktop.matches && !reduceMotion && hero && y < window.innerHeight * 1.2) {
       hero.style.setProperty("--story-hero-shift", (y * 0.16).toFixed(1) + "px");
     }
