@@ -3,6 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script id="hoe-ios26-scroll-shell-init">
+(()=>{
+ const root=document.documentElement,ua=navigator.userAgent;
+ const affected=/\b(?:iPhone|iPad|iPod)\b/.test(ua)&&(/\bVersion\/26(?:\.|\b)/.test(ua)||/\b(?:CPU (?:iPhone )?OS|iPhone OS) 26[_\.]/.test(ua));
+ const mobile=matchMedia('(max-width:760px)');
+ if(!affected)return;
+ const update=()=>root.classList.toggle('hoe-ios26-scroll-shell',mobile.matches);
+ update();
+ mobile.addEventListener('change',update);
+ document.addEventListener('DOMContentLoaded',()=>{
+  let frame=0;
+  document.body.addEventListener('scroll',()=>{
+   if(!root.classList.contains('hoe-ios26-scroll-shell')||frame)return;
+   frame=requestAnimationFrame(()=>{frame=0;window.dispatchEvent(new Event('scroll'));});
+  },{passive:true});
+ },{once:true});
+})();
+</script>
 <meta name="theme-color" content="#ffffff">
 
 <title>Himalayan Odyssey Expedition | Spiti & Himachal Tours</title>
@@ -648,9 +666,20 @@ html body :is(#itineraries#itineraries,#odyssey-difference-mobile#odyssey-differ
   transform:none!important;translate:none!important;transition:none!important;animation:none!important;
   z-index:1800!important;pointer-events:none!important;overflow:visible!important;
  }
- /* iOS 26 workaround: avoid native fixed-layer rendering, retain visual appearance. */
- html:root[data-hoe-theme="home"] body > #hoe-mobile-dock-host.hoe-ios26-document-dock{
-  position:absolute!important;inset:var(--hoe-dock-doc-top,0px) 0 auto 0!important;
+ /* Keep the browser's root viewport stationary on affected iOS 26 devices.
+    The body owns vertical scrolling; the fixed dock does not follow scroll events. */
+ html:root.hoe-ios26-scroll-shell{
+  height:100%;height:100dvh;overflow:hidden!important;overscroll-behavior:none;
+ }
+ html:root.hoe-ios26-scroll-shell body{
+  height:100%;min-height:0!important;max-height:100%;box-sizing:border-box;
+  overscroll-behavior-y:contain;scroll-padding-top:88px;scroll-padding-bottom:112px;
+ }
+ html:root.hoe-ios26-scroll-shell body:not(.modal-open):not(.guest-itinerary-popup-open):not(.promo-itinerary-modal-open){
+  overflow-y:auto!important;overflow-x:hidden!important;
+ }
+ html:root.hoe-ios26-scroll-shell body:is(.modal-open,.guest-itinerary-popup-open,.promo-itinerary-modal-open){
+  overflow:hidden!important;
  }
  html:root[data-hoe-theme="home"] body > #hoe-mobile-dock-host > nav.mobile-app-dock.mobile-app-dock,
  html:root[data-hoe-theme="home"] body > #hoe-mobile-dock-host > nav.mobile-app-dock.mobile-app-dock.is-hidden{
@@ -1903,11 +1932,11 @@ function observeReveals() {
 /* FLOATING CONTACT BAR - HIDE ON SCROLL DOWN, SHOW ON SCROLL UP */
 const footerContactBar = document.getElementById("footerContactBar");
 if (footerContactBar) {
-  let lastBarScrollY = window.scrollY;
+  let lastBarScrollY = (document.documentElement.classList.contains('hoe-ios26-scroll-shell')?document.body:(document.scrollingElement||document.documentElement)).scrollTop;
   footerContactBar.classList.add("visible");
   window.addEventListener("scroll", () => {
     if (window.matchMedia("(min-width:761px)").matches) return;
-    const currentY = window.scrollY;
+    const currentY = (document.documentElement.classList.contains('hoe-ios26-scroll-shell')?document.body:(document.scrollingElement||document.documentElement)).scrollTop;
     if (currentY < 40 || currentY < lastBarScrollY - 4) {
       footerContactBar.classList.remove("scroll-hidden");
       footerContactBar.classList.add("visible");
@@ -2085,7 +2114,7 @@ if (progressBar) {
   const updateScrollProgress = () => {
     progressFrame = 0;
     const max = scrollable;
-    const fraction = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    const fraction = max > 0 ? Math.min(1, Math.max(0, (document.documentElement.classList.contains('hoe-ios26-scroll-shell')?document.body:(document.scrollingElement||document.documentElement)).scrollTop / max)) : 0;
     if (desktopProgress.matches) {
       progressBar.style.width = "100%";
       progressBar.style.transform = "scaleX(" + fraction + ")";
@@ -2098,7 +2127,7 @@ if (progressBar) {
     if (!progressFrame) progressFrame = requestAnimationFrame(updateScrollProgress);
   };
   const measureProgress = () => {
-    scrollable = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    scrollable = Math.max(0, (document.documentElement.classList.contains('hoe-ios26-scroll-shell')?document.body:(document.scrollingElement||document.documentElement)).scrollHeight - (document.documentElement.classList.contains('hoe-ios26-scroll-shell')?document.body:(document.scrollingElement||document.documentElement)).clientHeight);
     scheduleProgress();
   };
   window.addEventListener("scroll", scheduleProgress, { passive: true });
@@ -2364,7 +2393,7 @@ if (matchMedia("(min-width:761px)").matches && "IntersectionObserver" in window)
 
 
 <link rel="manifest" href="/manifest.webmanifest">
-<script src="/mobile-app-experience-v18.js?v=12" defer></script>
+<script src="/mobile-app-experience-v18.js?v=13" defer></script>
 <script src="/site-navigation.js?v=28" defer></script>
 
 <!-- Final cascade guard: load approved Arctic layers after legacy page-level styles. -->
@@ -3349,8 +3378,8 @@ if (matchMedia("(min-width:761px)").matches && "IntersectionObserver" in window)
  function update(){
   frame=0;
   if(reduce.matches){header.style.removeProperty('--hoe-header-flag-scroll-x');return;}
-  const root=document.scrollingElement||document.documentElement;
-  const y=mobile.matches?Math.max(0,Math.min(window.scrollY,Math.max(0,root.scrollHeight-root.clientHeight))):Math.max(0,window.scrollY);
+  const root=(document.documentElement.classList.contains('hoe-ios26-scroll-shell')?document.body:(document.scrollingElement||document.documentElement));
+  const y=mobile.matches?Math.max(0,Math.min((document.documentElement.classList.contains('hoe-ios26-scroll-shell')?document.body:(document.scrollingElement||document.documentElement)).scrollTop,Math.max(0,root.scrollHeight-root.clientHeight))):Math.max(0,(document.documentElement.classList.contains('hoe-ios26-scroll-shell')?document.body:(document.scrollingElement||document.documentElement)).scrollTop);
   const period=mobile.matches?header.clientWidth/2:desktopPeriod;
   const x=period>0?-((y*.55)%period):0;
   header.style.setProperty('--hoe-header-flag-scroll-x',x.toFixed(2)+'px');
