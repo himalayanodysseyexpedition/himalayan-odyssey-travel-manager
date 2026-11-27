@@ -355,6 +355,77 @@ background:#fff!important;background-image:none!important;color:#000!important;-
   }
 }
 </style>
+
+<style id="hoe-mobile-odyssey-photo-theme">
+@media screen and (max-width:760px){
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile{background:#0b0b0b!important;color:#fff!important}
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile .odyssey-place-grid{gap:10px!important;align-items:stretch}
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile :is(.odyssey-place-card,.odyssey-experience-card){
+  position:relative!important;isolation:isolate;overflow:hidden!important;min-width:0;
+  background:#170b24!important;background-image:none!important;color:#fff!important;
+  border:1px solid #a77ae2!important;border-radius:18px!important;
+  box-shadow:0 4px 14px #0009!important;backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;padding:15px 13px 43px!important;
+ }
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile .odyssey-place-card{
+  display:flex!important;flex-direction:column!important;justify-content:flex-end!important;min-height:220px!important;
+ }
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile .odyssey-experience-card{
+  display:flex!important;align-items:flex-end!important;min-height:220px!important;gap:10px!important;
+ }
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile .odyssey-card-photo{
+  position:absolute!important;inset:0!important;display:block!important;z-index:0!important;
+  margin:0!important;padding:0!important;width:100%!important;height:100%!important;
+  border:0!important;border-radius:0!important;overflow:hidden!important;background:transparent!important;
+ }
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile .odyssey-card-photo img{
+  position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;
+  max-width:none!important;max-height:none!important;object-fit:cover!important;object-position:center!important;
+  margin:0!important;border:0!important;border-radius:0!important;opacity:1!important;
+ }
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile .odyssey-card-photo::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(0,0,0,.10) 0%,rgba(32,12,57,.28) 25%,rgba(16,6,28,.91) 65%,#080609 100%);
+ }
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile .odyssey-card-photo figcaption{
+  position:absolute!important;z-index:3!important;left:12px!important;right:12px!important;bottom:7px!important;
+  display:block!important;margin:0!important;padding:0!important;background:transparent!important;
+  color:#fff!important;-webkit-text-fill-color:#fff!important;font:400 9px/1.25 Inter,Arial,sans-serif!important;
+  text-align:left!important;overflow-wrap:anywhere;
+ }
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile .odyssey-card-photo figcaption a{
+  color:#fff!important;-webkit-text-fill-color:#fff!important;text-decoration:underline!important;font:inherit!important;
+ }
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile :is(.odyssey-place-card,.odyssey-experience-card)>:not(figure){
+  position:relative!important;z-index:1!important;
+ }
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile :is(.odyssey-place-card,.odyssey-experience-card) :is(h3,p,span){
+  color:#fff!important;-webkit-text-fill-color:#fff!important;text-shadow:0 1px 3px #000!important;
+ }
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile .odyssey-place-card>span,
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile .odyssey-kicker{
+  color:#fff!important;-webkit-text-fill-color:#fff!important;background:#50258a!important;
+  border-radius:5px;padding:4px 6px;align-self:flex-start;max-width:100%;display:inline-block!important;
+  font:700 9px/1.35 Montserrat,Arial,sans-serif!important;letter-spacing:.045em!important;
+ }
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile :is(.odyssey-place-card,.odyssey-experience-card) h3{
+  margin:8px 0 6px!important;font:700 clamp(17px,4.4vw,22px)/1.18 Inter,Arial,sans-serif!important;
+ }
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile :is(.odyssey-place-card,.odyssey-experience-card) p{
+  margin:0!important;font:400 12px/1.55 Inter,Arial,sans-serif!important;
+ }
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile .odyssey-experience-mark{background:#50258a!important;border:1px solid #c7a5ff!important}
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile .odyssey-flex-note{
+  background:linear-gradient(145deg,#3e1a69,#100b17)!important;border:1px solid #a77ae2!important;
+  border-radius:14px!important;color:#fff!important;
+ }
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile .odyssey-flex-note :is(strong,p){color:#fff!important;-webkit-text-fill-color:#fff!important}
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile .odyssey-difference-cta{
+  background:#5b21b6!important;border:1px solid #c7a5ff!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+ }
+ html body section#odyssey-difference-mobile#odyssey-difference-mobile .odyssey-difference-cta span{color:#fff!important;-webkit-text-fill-color:#fff!important}
+}
+</style>
 </head>
 
 <body>
@@ -693,19 +764,19 @@ background:#fff!important;background-image:none!important;color:#000!important;-
     <p class="intro reveal odyssey-difference-intro">More than the familiar tourist circuit. Discover offbeat Himalayan places and shared mountain experiences, thoughtfully planned around your journey.</p>
 
     <div class="odyssey-place-grid">
-      <article class="odyssey-place-card"><span>01 / KINNAUR</span><h3>Chitkul Border</h3><p>Explore the far end of the Baspa Valley, subject to current access rules.</p></article>
-      <article class="odyssey-place-card"><span>02 / KINNAUR</span><h3>Shipki La</h3><p>A remote high-altitude border region, visited only when access and permissions allow.</p></article>
-      <article class="odyssey-place-card"><span>03 / KINNAUR</span><h3>Lepcha La</h3><p>An offbeat mountain experience considered according to route feasibility.</p></article>
-      <article class="odyssey-place-card"><span>04 / SPITI</span><h3>Gue Village</h3><p>A distinctive high-altitude village with a remarkable cultural story.</p></article>
-      <article class="odyssey-place-card"><span>05 / SPITI</span><h3>Pin Valley</h3><p>Explore the dramatic landscapes and villages of this quieter Himalayan valley.</p></article>
+      <article class="odyssey-place-card"><figure class="odyssey-card-photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Chitkul_village.JPG/330px-Chitkul_village.JPG" alt="Chitkul village seen from the border-side road" width="330" height="220" loading="lazy" decoding="async" fetchpriority="low" referrerpolicy="no-referrer"><figcaption><a href="https://commons.wikimedia.org/wiki/File:Chitkul_village.JPG" target="_blank" rel="noopener noreferrer">Vachadave</a> · Public domain · Display crop</figcaption></figure><span>01 / KINNAUR</span><h3>Chitkul Border</h3><p>Explore the far end of the Baspa Valley, subject to current access rules.</p></article>
+      <article class="odyssey-place-card"><figure class="odyssey-card-photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Shipki_la.jpg/330px-Shipki_la.jpg" alt="Mountain landscape at Shipki La" width="330" height="220" loading="lazy" decoding="async" fetchpriority="low" referrerpolicy="no-referrer"><figcaption><a href="https://commons.wikimedia.org/wiki/File:Shipki_la.jpg" target="_blank" rel="noopener noreferrer">Rakeshk9548</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> · Display crop</figcaption></figure><span>02 / KINNAUR</span><h3>Shipki La</h3><p>A remote high-altitude border region, visited only when access and permissions allow.</p></article>
+      <article class="odyssey-place-card"><figure class="odyssey-card-photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/This_beautiful_hango_village_in_the_hangrang_valley_of_kinnaur_,himachal_pradesh_,_india.JPG/330px-This_beautiful_hango_village_in_the_hangrang_valley_of_kinnaur_,himachal_pradesh_,_india.JPG" alt="Hango village in Hangrang Valley, regional illustration" width="330" height="220" loading="lazy" decoding="async" fetchpriority="low" referrerpolicy="no-referrer"><figcaption>Hangrang Valley · regional view · <a href="https://commons.wikimedia.org/wiki/File:This_beautiful_hango_village_in_the_hangrang_valley_of_kinnaur_%2Chimachal_pradesh_%2C_india.JPG" target="_blank" rel="noopener noreferrer">Kamal negi91</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a> · Display crop</figcaption></figure><span>03 / KINNAUR</span><h3>Lepcha La</h3><p>An offbeat mountain experience considered according to route feasibility.</p></article>
+      <article class="odyssey-place-card"><figure class="odyssey-card-photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Gue_village_gateway.jpg/330px-Gue_village_gateway.jpg" alt="Gue village gateway in Spiti" width="330" height="220" loading="lazy" decoding="async" fetchpriority="low" referrerpolicy="no-referrer"><figcaption><a href="https://commons.wikimedia.org/wiki/File:Gue_village_gateway.jpg" target="_blank" rel="noopener noreferrer">Nrr1729</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> · Display crop</figcaption></figure><span>04 / SPITI</span><h3>Gue Village</h3><p>A distinctive high-altitude village with a remarkable cultural story.</p></article>
+      <article class="odyssey-place-card"><figure class="odyssey-card-photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Pin_Valley_in_Autumn.jpg/330px-Pin_Valley_in_Autumn.jpg" alt="Pin Valley mountain landscape in autumn" width="330" height="220" loading="lazy" decoding="async" fetchpriority="low" referrerpolicy="no-referrer"><figcaption><a href="https://commons.wikimedia.org/wiki/File:Pin_Valley_in_Autumn.jpg" target="_blank" rel="noopener noreferrer">Sukanya Ray</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> · Display crop</figcaption></figure><span>05 / SPITI</span><h3>Pin Valley</h3><p>Explore the dramatic landscapes and villages of this quieter Himalayan valley.</p></article>
     </div>
 
     <div class="odyssey-experiences">
-      <div class="odyssey-experience-card">
+      <div class="odyssey-experience-card"><figure class="odyssey-card-photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/SAVE_20250922_143436.jpg/500px-SAVE_20250922_143436.jpg" alt="Real campfire in the Dhauladhar Range" width="330" height="220" loading="lazy" decoding="async" fetchpriority="low" referrerpolicy="no-referrer"><figcaption>Dhauladhar campfire · illustrative · <a href="https://commons.wikimedia.org/wiki/File:SAVE_20250922_143436.jpg" target="_blank" rel="noopener noreferrer">Chetna Sarmal</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> · Display crop</figcaption></figure>
         <span class="odyssey-experience-mark" aria-hidden="true">✦</span>
         <div><span class="odyssey-kicker">TOGETHER UNDER THE STARS</span><h3>Bonfire Evenings</h3><p>Unwind, share stories and enjoy the mountain atmosphere with your travel group.</p></div>
       </div>
-      <div class="odyssey-experience-card">
+      <div class="odyssey-experience-card"><figure class="odyssey-card-photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Himachali_Nati.jpg/330px-Himachali_Nati.jpg" alt="Traditional Himachali Nati group celebration in Kullu, not a DJ event" width="330" height="220" loading="lazy" decoding="async" fetchpriority="low" referrerpolicy="no-referrer"><figcaption>Himachali Nati · illustrative celebration · <a href="https://commons.wikimedia.org/wiki/File:Himachali_Nati.jpg" target="_blank" rel="noopener noreferrer">Sirazee</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> · Display crop</figcaption></figure>
         <span class="odyssey-experience-mark" aria-hidden="true">♫</span>
         <div><span class="odyssey-kicker">MAKE IT A CELEBRATION</span><h3>DJ & Group Parties</h3><p>Add music and group celebrations to selected departures where arrangements permit.</p></div>
       </div>
