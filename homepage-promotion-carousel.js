@@ -24,14 +24,14 @@
       slides.forEach(slide => { slide.style.height = maxHeight + 'px'; });
     }
   };
-  const setActive = (index) => {
+  const setActive = (index, measure = true) => {
     activeIndex = Math.max(0, Math.min(index, lastIndex()));
     dots.forEach((dot, i) => {
       dot.classList.toggle('is-active', i === activeIndex);
       if (i === activeIndex) dot.setAttribute('aria-current', 'true');
       else dot.removeAttribute('aria-current');
     });
-    updateHeight();
+    if (measure) updateHeight();
   };
   const goTo = (index) => {
     index = Math.max(0, Math.min(index, lastIndex()));
@@ -109,7 +109,7 @@
         const d=desktop.matches ? Math.abs(track.scrollLeft-(slide.offsetLeft-slides[0].offsetLeft)) : Math.abs(center-(slide.offsetLeft+slide.offsetWidth/2));
         if(d<distance){distance=d;nearest=index;}
       });
-      setActive(nearest);ticking=false;
+      setActive(nearest, !('ResizeObserver' in window));ticking=false;
       scheduleAutoAdvance();
     });
   },{passive:true});
