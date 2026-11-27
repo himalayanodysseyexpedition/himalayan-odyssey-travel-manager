@@ -2,42 +2,86 @@
 let galleryVisible=typeof IntersectionObserver==="undefined";
 const watchGallery=(start,stop)=>{if(typeof IntersectionObserver==="undefined"){start();return;}const observer=new IntersectionObserver(entries=>{galleryVisible=entries.some(entry=>entry.isIntersecting);if(galleryVisible)start();else stop();},{threshold:0});observer.observe(carousel);};
 if(desktopImagesOnly){
- let active=0,dragStart=0,dragLast=0,draggingDesktop=false,timerDesktop=null;
- const visibleRange=2;
- const stopDesktop=()=>{clearInterval(timerDesktop);timerDesktop=null;};
- const playDesktop=()=>{stopDesktop();if(galleryVisible&&photos.length>1&&!reduced&&!document.hidden)timerDesktop=setInterval(()=>{if(!draggingDesktop&&!carousel.matches(":hover"))goDesktop(active+1);},3800);};
- const renderDesktop=()=>{
-  track.innerHTML=photos.map((p,i)=>'<article class="featured-travel-slide" role="group" aria-roledescription="slide" aria-label="'+(i+1)+' of '+photos.length+'"><img src="'+safe(p.image_url)+'" alt="'+safe(p.alt_text||p.title||"Himalayan travel photograph")+'" loading="lazy" decoding="async" fetchpriority="low"><div class="featured-travel-caption"><strong>'+safe(p.title||"")+'</strong>'+(p.caption?'<span>'+safe(p.caption)+'</span>':'')+'</div></article>').join("");
-  positionDesktop();
- };
- const positionDesktop=()=>{
-  [...track.children].forEach((item,i)=>{
-   let offset=i-active;
-   if(offset>photos.length/2)offset-=photos.length;
-   if(offset< -photos.length/2)offset+=photos.length;
-   const abs=Math.abs(offset);
-   item.style.setProperty("--cf-offset",offset);
-   item.style.setProperty("--cf-abs",abs);
-   item.style.setProperty("--cf-dir",offset===0?0:offset/abs);
-   item.classList.toggle("is-active",offset===0);
-   item.classList.toggle("is-far",abs>visibleRange);
-   if(offset===0)item.removeAttribute("aria-hidden");else item.setAttribute("aria-hidden","true");
+ // Desktop renders only the current three photos, without 3D layers or autoplay.
+ let active=0, drag=null, near=false;
+ const slots=new Map();
+ section.classList.add("featured-travel-lightweight");
+ function renderDesktop(){
+  if(!near||!photos.length)return;
+  const count=Math.min(3,photos.length);
+  const indexes=Array.from({length:count},(_,i)=>(active+i-Math.floor(count/2)+photos.length)%photos.length);
+  const wanted=new Set(indexes);
+  for(const [i,node] of slots){
+   if(!wanted.has(i)){node.remove();slots.delete(i);}
+  }
+  indexes.forEach((i,position)=>{
+   let item=slots.get(i);
+   if(!item){
+    const p=photos[i];
+    item=document.createElement("article");
+    item.className="featured-travel-slide";
+    item.setAttribute("role","group");
+    item.setAttribute("aria-roledescription","slide");
+    item.setAttribute("aria-label",(i+1)+" of "+photos.length);
+    const img=document.createElement("img");
+    img.alt=p.alt_text||p.title||"Himalayan travel photograph";
+    img.width=360;img.height=480;
+    img.loading="lazy";img.decoding="async";img.fetchPriority="low";
+    img.draggable=false;
+    img.src=p.image_url;
+    item.appendChild(img);
+    slots.set(i,item);
+   }
+   item.classList.toggle("is-active",i===active);
+   if(track.children[position]!==item)track.insertBefore(item,track.children[position]||null);
   });
- };
- const goDesktop=value=>{if(!photos.length)return;active=(value+photos.length)%photos.length;positionDesktop();};
- [prev,next].forEach((button,i)=>{if(!button)return;button.addEventListener("pointerdown",e=>e.stopPropagation());button.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();goDesktop(active+(i===0?-1:1));playDesktop();});});
- track.addEventListener("click",e=>{const item=e.target.closest(".featured-travel-slide");if(!item)return;const i=[...track.children].indexOf(item);if(i>=0&&i!==active){goDesktop(i);playDesktop();}});
- carousel.addEventListener("pointerdown",e=>{if(e.target.closest("button"))return;if(e.pointerType==="mouse"&&e.button!==0)return;dragStart=dragLast=e.clientX;draggingDesktop=true;carousel.classList.add("is-dragging");stopDesktop();});
- carousel.addEventListener("pointermove",e=>{if(draggingDesktop)dragLast=e.clientX;});
- const finishDesktop=()=>{if(!draggingDesktop)return;const delta=dragLast-dragStart;draggingDesktop=false;carousel.classList.remove("is-dragging");if(Math.abs(delta)>55)goDesktop(active+(delta<0?1:-1));playDesktop();};
- ["pointerup","pointercancel","lostpointercapture"].forEach(name=>carousel.addEventListener(name,finishDesktop));
- carousel.addEventListener("mouseenter",stopDesktop);carousel.addEventListener("mouseleave",playDesktop);
- carousel.addEventListener("focusin",stopDesktop);carousel.addEventListener("focusout",playDesktop);
- document.addEventListener("visibilitychange",()=>document.hidden?stopDesktop():playDesktop());
- carousel.addEventListener("keydown",e=>{if(e.key==="ArrowRight"){e.preventDefault();goDesktop(active+1);playDesktop();}else if(e.key==="ArrowLeft"){e.preventDefault();goDesktop(active-1);playDesktop();}});
- (async()=>{try{const client=window.supabase.createClient("https://ynkoiuyjevclypumnyes.supabase.co","sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-");const {data,error}=await client.from("featured_travel_photos").select("title,caption,alt_text,image_url,sort_order").eq("is_active",true).order("sort_order",{ascending:true});if(error)throw error;photos=(data||[]).filter(p=>p.image_url);if(!photos.length)return;active=Math.min(photos.length-1,Math.floor(photos.length/2));section.hidden=false;renderDesktop();watchGallery(playDesktop,stopDesktop);}catch(e){console.info("Featured photography is not configured yet.",e.message);}})();
+ }
+ function goDesktop(value){
+  if(!photos.length)return;
+  active=(value+photos.length)%photos.length;
+  near=true;renderDesktop();
+ }
+ [prev,next].forEach((button,i)=>{
+  if(!button)return;
+  button.addEventListener("click",e=>{e.preventDefault();goDesktop(active+(i===0?-1:1));});
+ });
+ carousel.addEventListener("pointerdown",e=>{
+  if(e.target.closest("button")||!e.isPrimary||(e.pointerType==="mouse"&&e.button!==0))return;
+  drag={id:e.pointerId,x:e.clientX,y:e.clientY};
+ });
+ carousel.addEventListener("pointerup",e=>{
+  if(!drag||e.pointerId!==drag.id)return;
+  const dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag=null;
+  if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy))goDesktop(active+(dx<0?1:-1));
+ });
+ ["pointercancel","pointerleave"].forEach(name=>carousel.addEventListener(name,()=>{drag=null;}));
+ carousel.addEventListener("keydown",e=>{
+  if(e.key==="ArrowRight"){e.preventDefault();goDesktop(active+1);}
+  else if(e.key==="ArrowLeft"){e.preventDefault();goDesktop(active-1);}
+  else if(e.key==="Home"){e.preventDefault();goDesktop(0);}
+  else if(e.key==="End"){e.preventDefault();goDesktop(photos.length-1);}
+ });
+ (async()=>{
+  try{
+   const client=window.supabase.createClient("https://ynkoiuyjevclypumnyes.supabase.co","sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-");
+   const {data,error}=await client.from("featured_travel_photos").select("title,caption,alt_text,image_url,sort_order").eq("is_active",true).order("sort_order",{ascending:true});
+   if(error)throw error;
+   photos=(data||[]).filter(p=>p.image_url);
+   if(!photos.length)return;
+   active=Math.floor(photos.length/2);
+   [prev,next].forEach(button=>{if(button)button.disabled=photos.length<2;});
+   section.hidden=false;
+   if("IntersectionObserver" in window){
+    const observer=new IntersectionObserver(entries=>{
+     if(!entries.some(entry=>entry.isIntersecting))return;
+     near=true;observer.disconnect();renderDesktop();
+    },{rootMargin:"400px 0px"});
+    observer.observe(carousel);
+   }else{near=true;renderDesktop();}
+  }catch(e){console.info("Featured photography is not configured yet.",e.message);}
+ })();
  return;
-} 
+}
 // Mobile-only 3D photography carousel. Desktop implementation above is unchanged.
 let active=3,swiped=false;
 const visibleRange=2;
