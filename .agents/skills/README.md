@@ -8,6 +8,7 @@ These project-local skills use the open `SKILL.md` format and are discoverable b
 |---|---|
 | `frontend-ui` | Responsive UI, accessibility, component states and browser verification. |
 | `web-motion` | CSS/WAAPI/View Transition/scroll motion, performance and reduced-motion handling. |
+| `himalayan-growth-agent` | Project-specific SEO, AEO, GEO, lead measurement and safe recurring optimization. |
 | `seo-audit` | Technical SEO, crawlability, indexation, on-page SEO and local SEO. |
 | `supabase` | Supabase database, Auth, Storage, RLS and client/backend troubleshooting. |
 
