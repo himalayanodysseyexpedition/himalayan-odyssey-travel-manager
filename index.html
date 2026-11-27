@@ -1591,7 +1591,7 @@ loadHotels();
 </script>
 
   <script src="/site-motion.js?v=1" defer></script>
-<script src="/cinematic-storytelling.js?v=2" defer></script>
+<script src="/cinematic-storytelling.js?v=3" defer></script>
 
 
 
@@ -3183,7 +3183,7 @@ html[data-hoe-theme="home"] body nav.mobile-app-dock .dock-icon{color:#fff!impor
 (() => {
   const mobile = matchMedia("(max-width:760px)");
   const reduced = matchMedia("(prefers-reduced-motion:reduce)");
-  let frame = 0, last = 0, scrollPhase = 0, dock;
+  let frame = 0, dock;
   function paint(phase) {
     if (!dock?.isConnected) dock = document.querySelector("nav.mobile-app-dock,nav.desktop-app-dock");
     dock?.style.setProperty("--hoe-dock-flow", (50 - 50 * Math.cos(phase)).toFixed(2) + "%");
@@ -3193,17 +3193,9 @@ html[data-hoe-theme="home"] body nav.mobile-app-dock .dock-icon{color:#fff!impor
     paint(Math.max(0, scrollY) / 280);
   }
   function onScroll() {
-    if (mobile.matches && !reduced.matches && !document.hidden && !frame) {
+    if (!reduced.matches && !document.hidden && !frame) {
       frame = requestAnimationFrame(mobileUpdate);
     }
-  }
-  function desktopTick(now) {
-    if (now - last >= 32) {
-      last = now;
-      scrollPhase += (Math.max(0, scrollY) / 280 - scrollPhase) * .12;
-      paint(now / 1700 + scrollPhase);
-    }
-    frame = requestAnimationFrame(desktopTick);
   }
   function sync() {
     cancelAnimationFrame(frame);
@@ -3211,7 +3203,7 @@ html[data-hoe-theme="home"] body nav.mobile-app-dock .dock-icon{color:#fff!impor
     if (reduced.matches) dock?.style.removeProperty("--hoe-dock-flow");
     dock = null;
     if (reduced.matches || document.hidden) return;
-    frame = requestAnimationFrame(mobile.matches ? mobileUpdate : desktopTick);
+    frame = requestAnimationFrame(mobileUpdate);
   }
   window.addEventListener("scroll", onScroll, {passive:true});
   mobile.addEventListener("change", sync);
@@ -3228,12 +3220,15 @@ html[data-hoe-theme="home"] body nav.mobile-app-dock .dock-icon{color:#fff!impor
  const header=document.querySelector('body > header');
  if(!header)return;
  let frame=0;
+ let desktopPeriod=header.clientWidth/2;
+ if('ResizeObserver' in window)new ResizeObserver(()=>{desktopPeriod=header.clientWidth/2;}).observe(header);
+ else window.addEventListener('resize',()=>{desktopPeriod=header.clientWidth/2;},{passive:true});
  function update(){
   frame=0;
   if(reduce.matches){header.style.removeProperty('--hoe-header-flag-scroll-x');return;}
   const root=document.scrollingElement||document.documentElement;
-  const y=Math.max(0,Math.min(window.scrollY,Math.max(0,root.scrollHeight-root.clientHeight)));
-  const period=header.clientWidth/2;
+  const y=mobile.matches?Math.max(0,Math.min(window.scrollY,Math.max(0,root.scrollHeight-root.clientHeight))):Math.max(0,window.scrollY);
+  const period=mobile.matches?header.clientWidth/2:desktopPeriod;
   const x=period>0?-((y*.55)%period):0;
   header.style.setProperty('--hoe-header-flag-scroll-x',x.toFixed(2)+'px');
  }
@@ -3452,7 +3447,7 @@ html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack section.hoe-cin
 </script>
 
 <link rel="stylesheet" href="/hoe-desktop-theme.css?v=1" media="(min-width: 761px)">
-<link rel="stylesheet" href="/hoe-desktop-home-theme.css?v=6" media="(min-width: 761px)">
+<link rel="stylesheet" href="/hoe-desktop-home-theme.css?v=7" media="(min-width: 761px)">
 
 
 <style id="hoe-desktop-destinations-ticker-v2">
