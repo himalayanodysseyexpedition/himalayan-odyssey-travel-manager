@@ -676,3 +676,7 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 ## 2026-11-27 — Lead and booking marketing attribution
 - Classify coarse source and landing page in existing browser analytics and preserve it in website enquiry source_details; no raw referrer, UTM text or click ID stored for CRM attribution. Preserve source in existing booking notes on lead conversion without schema changes or modifying historical records. Privacy notice updated; aggregate reporting documented in MARKETING_ATTRIBUTION.md.
 - 14 synthetic classification/path/booking assertions passed for the implementation functions. Production enquiry and booking conversion not tested; no fake records created. PR verification pending.
+
+
+## 2026-11-27 — Cloudflare Pages migration preparation
+- User requested hosting migration while retaining GitHub source and Supabase. Added filtered static build and migration checklist. Existing GitHub Pages workflow, DNS, domain, runtime and database unchanged. Cloudflare preview and route/auth verification required before cutover.
