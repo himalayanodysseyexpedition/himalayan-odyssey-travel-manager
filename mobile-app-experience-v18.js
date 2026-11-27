@@ -51,7 +51,8 @@
    document.body.appendChild(host);
    // iOS 26 WebKit has a fixed-layer rendering regression during momentum scroll.
    // Use document coordinates only on affected iPhone/iPad browsers.
-   const ios26=/\b(?:iPhone|iPad|iPod)\b/.test(navigator.userAgent)&&/\b(?:CPU (?:iPhone )?OS|iPhone OS) 26[_\.]/.test(navigator.userAgent);
+   const ua=navigator.userAgent;
+   const ios26=/\b(?:iPhone|iPad|iPod)\b/.test(ua)&&(/\bVersion\/26(?:\.|\b)/.test(ua)||/\b(?:CPU (?:iPhone )?OS|iPhone OS) 26[_\.]/.test(ua));
    if(ios26){
     const vv=window.visualViewport;
     const controller=new AbortController();
