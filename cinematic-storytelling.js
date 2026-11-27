@@ -3,6 +3,7 @@
 (() => {
   "use strict";
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const desktop = window.matchMedia("(min-width:761px)");
   const hero = document.querySelector(".hero");
   const progress = document.getElementById("scrollProgress");
   const scenes = [...document.querySelectorAll(
@@ -64,14 +65,14 @@
   let ticking = false;
   const update = () => {
     const y = window.scrollY || 0;
-    if (progress) {
+    if (progress && !desktop.matches) {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       progress.style.width = (max > 0 ? Math.min(100, y / max * 100) : 0) + "%";
     }
-    if (!reduceMotion && hero && y < window.innerHeight * 1.2) {
+    if (!desktop.matches && !reduceMotion && hero && y < window.innerHeight * 1.2) {
       hero.style.setProperty("--story-hero-shift", (y * 0.16).toFixed(1) + "px");
     }
-    if (!reduceMotion && window.innerWidth > 700) {
+    if (!desktop.matches && !reduceMotion && window.innerWidth > 700) {
       // Read all geometry before writing styles to avoid repeated forced layout.
       const height = window.innerHeight;
       const updates = [];
@@ -85,12 +86,18 @@
     ticking = false;
   };
   const requestUpdate = () => {
-    if (ticking) return;
+    if (desktop.matches || ticking) return;
     ticking = true;
     window.requestAnimationFrame(update);
   };
   window.addEventListener("scroll", requestUpdate, { passive: true });
   window.addEventListener("resize", requestUpdate, { passive: true });
+  desktop.addEventListener("change", () => {
+    if (desktop.matches) {
+      hero?.style.removeProperty("--story-hero-shift");
+      for (const img of parallaxImages) img.style.removeProperty("--story-parallax");
+    } else requestUpdate();
+  });
   update();
 
   // Respect hash navigation while the transparent header overlays the hero.

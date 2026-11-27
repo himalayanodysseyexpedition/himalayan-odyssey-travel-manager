@@ -52,6 +52,7 @@
   function update() {
     pending = false;
     if (!photo) return;
+    if (!mobile.matches) { photo.style.removeProperty("--hoe-hero-offset"); return; }
     if (reduced.matches) {
       photo.style.removeProperty("--hoe-hero-offset");
       return;
@@ -62,9 +63,9 @@
     photo.style.setProperty("--hoe-hero-offset", offset.toFixed(1) + "px");
   }
   function schedule() {
-    if (!pending) { pending = true; requestAnimationFrame(update); }
+    if (mobile.matches && !pending) { pending = true; requestAnimationFrame(update); }
   }
-  function resize() { refreshCards(); schedule(); }
+  function resize() { refreshCards(); if (mobile.matches) schedule(); else update(); }
   if ("MutationObserver" in window) new MutationObserver(refreshCards).observe(track,{childList:true});
   refreshCards();
   update();
