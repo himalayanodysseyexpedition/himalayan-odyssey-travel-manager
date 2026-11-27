@@ -665,3 +665,9 @@ A narrowly phrased user command authorizes a narrowly scoped change:
 ## 2026-11-27 — Mobile dock and expedition animation during scrolling
 - Mobile dock gradient follows scrolling, with a smaller backdrop blur. Mobile route animation caches marker coordinates, limits redraws and pauses until vertical scrolling settles.
 - Local Chromium at 390px with third-party requests blocked: one idle second went from 30 dock writes and 720 marker coordinate reads to zero for both. The page scrolled 480px and the route resumed.
+
+
+## 2026-11-27 — Himalayan growth agent repository integration
+- Added project-local `.agents/skills/himalayan-growth-agent/SKILL.md` and registered it in the skills index. Defines evidence-led daily intelligence, weekly safe optimization and conversion reporting; documentation only, not an autonomous runtime.
+- Existing GA4 measurement configuration and event instrumentation were inspected; actual event delivery is unverified. Free OpenSEO Search Console query read succeeded; GSC Wizard refused access because its trial/subscription is inactive. No private metrics or credentials committed.
+- No site runtime, homepage design, business data, hosting or deployment settings changed. PR verification pending at this entry.
