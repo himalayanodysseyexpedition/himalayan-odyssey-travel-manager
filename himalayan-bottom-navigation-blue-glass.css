@@ -347,16 +347,26 @@ html body .dock-menu-popup.dock-fab-popup>a[role="menuitem"]:focus-visible{
  html body nav.mobile-app-dock .dock-icon{animation:none!important}
 }
 
-/* Flat mobile navigation: familiar outline glyphs and a matte royal-purple surface. */
+/* Flat mobile glyphs over a translucent royal-purple frosted lens; page motion supplies the moving backdrop. */
 @media (max-width:760px){
  html:root body nav.mobile-app-dock.mobile-app-dock{
-  background:#51239a!important;
-  border:1px solid #936acb!important;
+  background:rgba(56,21,109,.48)!important;
+  border:1px solid rgba(214,188,255,.36)!important;
   box-shadow:none!important;
-  backdrop-filter:none!important;
-  -webkit-backdrop-filter:none!important;
+  -webkit-backdrop-filter:blur(16px) saturate(145%)!important;
+  backdrop-filter:blur(16px) saturate(145%)!important;
+  background-clip:padding-box!important;
  }
- html:root body nav.mobile-app-dock.mobile-app-dock::before,
+ html:root body nav.mobile-app-dock.mobile-app-dock::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  border-radius:inherit!important;
+  pointer-events:none!important;
+  z-index:0!important;
+  background:radial-gradient(ellipse at 50% 50%,transparent 48%,rgba(180,125,255,.09) 78%,rgba(220,196,255,.17) 100%)!important;
+  box-shadow:none!important;
+ }
  html:root body nav.mobile-app-dock.mobile-app-dock::after{
   content:none!important;
   box-shadow:none!important;
@@ -412,5 +422,15 @@ html body .dock-menu-popup.dock-fab-popup>a[role="menuitem"]:focus-visible{
  }
  html:root body nav.mobile-app-dock.mobile-app-dock > button.dock-menu-trigger.is-open .dock-icon{
   transform:rotate(45deg)!important;
+ }
+}
+
+@media (max-width:760px){
+ @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  html:root body nav.mobile-app-dock.mobile-app-dock{background:rgba(56,21,109,.94)!important}
+ }
+ @media (prefers-reduced-transparency:reduce){
+  html:root body nav.mobile-app-dock.mobile-app-dock{background:#39166f!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+  html:root body nav.mobile-app-dock.mobile-app-dock::before{content:none!important}
  }
 }
