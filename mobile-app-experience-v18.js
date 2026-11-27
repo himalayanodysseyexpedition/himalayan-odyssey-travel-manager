@@ -42,6 +42,37 @@
    icon(mobile()&&document.documentElement.dataset.hoeTheme!=='home'?'<path d="M12 4v16M4 12h16"/>':'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect class="icon-side" x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect class="icon-side" x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/>')+
    '<span>Menu</span></button>';
   document.body.appendChild(nav);
+  // iOS Safari can move the fixed-position containing viewport when its toolbar
+  // expands/collapses. Anchor the dock to the actual visible viewport instead.
+  if(nav.classList.contains('mobile-app-dock')&&document.documentElement.dataset.hoeTheme==='home'){
+   const viewport=window.visualViewport;
+   let frame=0,previousBottom=-1,previousHeight=-1;
+   const updateDockViewport=()=>{
+    frame=0;
+    if(!nav.isConnected)return;
+    const bottom=viewport&&viewport.height>0?viewport.offsetTop+viewport.height:window.innerHeight;
+    const height=nav.offsetHeight;
+    if(!Number.isFinite(bottom)||bottom<=0||height<=0)return;
+    if(bottom!==previousBottom||height!==previousHeight){
+     nav.style.setProperty('--hoe-dock-viewport-bottom',bottom+'px');
+     nav.style.setProperty('--hoe-dock-measured-height',height+'px');
+     previousBottom=bottom;previousHeight=height;
+    }
+   };
+   const queueDockViewport=()=>{
+    if(nav.isConnected&&!frame)frame=requestAnimationFrame(updateDockViewport);
+   };
+   window.addEventListener('scroll',queueDockViewport,{passive:true});
+   window.addEventListener('resize',queueDockViewport,{passive:true});
+   window.addEventListener('pageshow',queueDockViewport);
+   viewport?.addEventListener('resize',queueDockViewport,{passive:true});
+   viewport?.addEventListener('scroll',queueDockViewport,{passive:true});
+   if('ResizeObserver' in window){
+    const observer=new ResizeObserver(()=>{if(nav.isConnected)queueDockViewport();else observer.disconnect()});
+    observer.observe(nav);
+   }
+   queueDockViewport();
+  }
   const menuTrigger=nav.querySelector('.dock-menu-trigger');
   {
    // The dock popup is independent of the hidden header menu on mobile.
@@ -104,6 +135,13 @@
      menuPopup.style.setProperty('transform','none','important');
     }
    };
+   if(nav.classList.contains('mobile-app-dock')&&document.documentElement.dataset.hoeTheme==='home'&&window.visualViewport){
+    const queuePopupPosition=()=>{
+     if(nav.isConnected&&menuPopup.getAttribute('aria-hidden')==='false')requestAnimationFrame(()=>{if(nav.isConnected&&menuPopup.getAttribute('aria-hidden')==='false')positionMenuPopup()});
+    };
+    window.visualViewport.addEventListener('resize',queuePopupPosition,{passive:true});
+    window.visualViewport.addEventListener('scroll',queuePopupPosition,{passive:true});
+   }
    const closeDockPopup=()=>{
     menuPopup.style.display='none';
     menuPopup.setAttribute('aria-hidden','true');
