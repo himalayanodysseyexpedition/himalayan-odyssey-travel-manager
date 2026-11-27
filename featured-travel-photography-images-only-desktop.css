@@ -64,3 +64,80 @@
     line-height: 1.7 !important;
   }
 }
+
+
+/* Desktop: bounded three-photo grid instead of a composited 3D coverflow.
+   The reserved track height avoids a layout jump while photos are decoded. */
+@media screen and (min-width:761px){
+  html body #featured-travel-photography.featured-travel-lightweight #featuredTravelCarousel{
+    width:min(100%,1160px)!important;
+    margin-inline:auto!important;
+    perspective:none!important;
+    -webkit-perspective:none!important;
+    overflow:hidden!important;
+    contain:paint;
+  }
+  html body #featured-travel-photography.featured-travel-lightweight #featuredTravelTrack{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    align-items:stretch!important;
+    gap:clamp(12px,2vw,24px)!important;
+    width:100%!important;
+    height:clamp(300px,36vw,470px)!important;
+    box-sizing:border-box!important;
+    padding:0 clamp(44px,5vw,64px)!important;
+    overflow:hidden!important;
+    transform:none!important;
+    transform-style:flat!important;
+    -webkit-transform-style:flat!important;
+    transition:none!important;
+    animation:none!important;
+    will-change:auto!important;
+  }
+  html body #featured-travel-photography.featured-travel-lightweight #featuredTravelTrack .featured-travel-slide{
+    position:relative!important;
+    inset:auto!important;
+    width:100%!important;
+    height:100%!important;
+    min-width:0!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:hidden!important;
+    border-radius:14px!important;
+    transform:none!important;
+    transform-style:flat!important;
+    -webkit-transform-style:flat!important;
+    filter:none!important;
+    -webkit-filter:none!important;
+    -webkit-box-reflect:none!important;
+    box-shadow:none!important;
+    animation:none!important;
+    transition:none!important;
+    will-change:auto!important;
+    opacity:1!important;
+    z-index:auto!important;
+    background:#171717;
+  }
+  html body #featured-travel-photography.featured-travel-lightweight #featuredTravelTrack .featured-travel-slide img{
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover!important;
+    aspect-ratio:3/4!important;
+    border:0!important;
+    border-radius:14px!important;
+    outline:0!important;
+    box-shadow:none!important;
+    transform:none!important;
+    filter:none!important;
+    transition:none!important;
+    animation:none!important;
+    will-change:auto!important;
+  }
+  html body #featured-travel-photography.featured-travel-lightweight #featuredTravelCarousel:focus-visible{
+    outline:2px solid currentColor!important;
+    outline-offset:3px!important;
+  }
+  html body #featured-travel-photography.featured-travel-lightweight .featured-travel-arrow:disabled{
+    visibility:hidden!important;
+  }
+}
