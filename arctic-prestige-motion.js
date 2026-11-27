@@ -1,5 +1,6 @@
 /* Arctic Prestige motion controller — shared public-page motion, including async cards. */
 (()=>{"use strict";
+ if(document.getElementById("heroPromoTrack")&&matchMedia("(min-width:761px)").matches)return;
  const reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
  if(reduce||!("IntersectionObserver"in window))return;
  const selector=[
