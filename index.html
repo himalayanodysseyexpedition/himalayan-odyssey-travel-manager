@@ -264,6 +264,97 @@ background:#fff!important;background-image:none!important;color:#000!important;-
 <link rel="stylesheet" href="/hoe-desktop-theme.css?v=1" media="(min-width: 761px)">
 <link rel="stylesheet" href="/hoe-desktop-home-theme.css?v=11" media="(min-width: 761px)">
 <link rel="stylesheet" href="/homepage-cascade-4.css?v=1">
+<style id="hoe-mobile-property-itinerary-popup">
+#hotelDetailModal .hoe-property-popup-head{display:none}
+@media screen and (max-width:760px){
+  html body #hotelDetailModal.hotel-detail-modal{
+    position:fixed!important;inset:0!important;z-index:11000!important;
+    padding:0!important;margin:0!important;overflow:hidden!important;
+    align-items:flex-end;justify-content:center;
+    background:rgba(0,0,0,.72)!important;
+    -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  }
+  html body #hotelDetailModal.hotel-detail-modal.is-open{display:flex!important}
+  html body #hotelDetailModal .hotel-detail-content{
+    position:relative!important;display:flex!important;flex-direction:column;
+    width:100%!important;max-width:100%!important;box-sizing:border-box!important;
+    height:94vh;height:94dvh;max-height:960px;
+    margin:0!important;padding:0!important;overflow:hidden!important;
+    background:#fff!important;color:#111!important;
+    border:0!important;border-radius:22px 22px 0 0!important;
+    box-shadow:0 -16px 50px rgba(0,0,0,.35)!important;
+  }
+  html body #hotelDetailModal .hoe-property-popup-head{
+    display:block!important;position:relative;flex:0 0 auto;box-sizing:border-box;
+    padding:19px 64px 16px 17px;background:#000!important;color:#fff!important;
+    border-bottom:3px solid #5b21b6;border-radius:22px 22px 0 0;
+  }
+  #hotelDetailModal .hoe-property-popup-head::before{
+    content:"";position:absolute;top:7px;left:50%;width:42px;height:4px;
+    border-radius:4px;background:rgba(255,255,255,.48);transform:translateX(-50%);
+  }
+  html body #hotelDetailModal .hoe-property-popup-head small{
+    display:block;color:#fff!important;font-size:8px;font-weight:700;letter-spacing:1.2px;
+    line-height:1.45;
+  }
+  html body #hotelDetailModal .hoe-property-popup-head h2{
+    margin:4px 0 0!important;padding:0!important;color:#fff!important;
+    font-size:20px!important;line-height:1.2!important;overflow-wrap:anywhere;
+    -webkit-text-fill-color:#fff!important;
+  }
+  html body #hotelDetailModal #closeHotelDetails{
+    position:absolute!important;z-index:2;right:16px!important;top:20px!important;
+    display:grid!important;place-items:center;width:36px!important;height:36px!important;
+    padding:0!important;margin:0!important;border:1px solid #fff!important;
+    border-radius:50%!important;background:#fff!important;color:#000!important;
+    -webkit-text-fill-color:#000!important;font:400 25px/1 Arial,sans-serif!important;
+    box-shadow:none!important;cursor:pointer;transform:none!important;
+  }
+  html body #hotelDetailModal #hotelDetailBody{
+    flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;
+    overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+    padding:18px 16px calc(22px + env(safe-area-inset-bottom,0px));
+    background:#fff!important;color:#111!important;
+  }
+  #hotelDetailModal #hotelDetailBody>h2{display:none!important}
+  html body #hotelDetailModal #hotelDetailBody p{
+    color:#111!important;-webkit-text-fill-color:#111!important;font-size:14px;overflow-wrap:anywhere;
+  }
+  html body #hotelDetailModal #hotelDetailBody .hotel-location{
+    margin:0 0 15px!important;padding:10px 12px!important;
+    border:1px solid #5b21b6;border-radius:10px;background:#fff!important;
+    color:#5b21b6!important;-webkit-text-fill-color:#5b21b6!important;font-weight:700;
+  }
+  html body #hotelDetailModal #hotelDetailBody h3{
+    margin:22px 0 10px!important;color:#5b21b6!important;
+    -webkit-text-fill-color:#5b21b6!important;font-size:17px!important;
+    font-weight:700!important;line-height:1.3!important;
+  }
+  #hotelDetailModal #hotelDetailBody .hotel-photo-grid{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px;
+  }
+  #hotelDetailModal #hotelDetailBody .hotel-photo-grid img{
+    width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;
+    border-radius:10px;border:1px solid #e5e5e5;background:#fff;
+  }
+  #hotelDetailModal #hotelDetailBody .hotel-empty{grid-column:1/-1;color:#111}
+  html body #hotelDetailModal #hotelDetailBody .btn{
+    display:flex!important;justify-content:center!important;align-items:center!important;
+    width:100%!important;box-sizing:border-box!important;min-height:48px!important;
+    margin:0!important;padding:12px 16px!important;border:1px solid #5b21b6!important;
+    border-radius:12px!important;background:#5b21b6!important;color:#fff!important;
+    -webkit-text-fill-color:#fff!important;font-weight:800!important;text-align:center;
+    box-shadow:none!important;text-decoration:none!important;transform:none!important;
+  }
+  #hotelDetailModal #hotelDetailBody .btn::after{display:none!important}
+  #hotelDetailModal :is(#closeHotelDetails,.btn):focus-visible{outline:2px solid #5b21b6!important;outline-offset:3px!important}
+  #hotelDetailModal.is-open .hotel-detail-content{animation:hoePropertySheetIn .24s ease-out both}
+  @keyframes hoePropertySheetIn{from{transform:translateY(20px);opacity:.7}to{transform:translateY(0);opacity:1}}
+  @media(prefers-reduced-motion:reduce){
+    #hotelDetailModal.is-open .hotel-detail-content{animation:none!important}
+  }
+}
+</style>
 </head>
 
 <body>
@@ -687,6 +778,7 @@ background:#fff!important;background-image:none!important;color:#000!important;-
      aria-label="Property details">
 
   <div class="hotel-detail-content">
+    <div class="hoe-property-popup-head"><small>HIMALAYAN ODYSSEY EXPEDITION · PROPERTY DETAILS</small><h2 id="hoePropertyPopupTitle">Property Details</h2></div>
 
     <button type="button"
             class="hotel-close"
@@ -1308,7 +1400,10 @@ function showHotelDetails(hotelId) {
     </div>
   `;
 
+  document.getElementById("hoePropertyPopupTitle").textContent = hotel.name || "Property Details";
+  document.getElementById("hotelDetailModal").classList.add("is-open");
   document.getElementById("hotelDetailModal").style.display = "block";
+  if (matchMedia("(max-width:760px)").matches) document.getElementById("hotelDetailBody").scrollTop = 0;
 
   document.body.classList.add("modal-open");
 
@@ -1316,6 +1411,7 @@ function showHotelDetails(hotelId) {
 }
 
 function closeHotelDetails() {
+  document.getElementById("hotelDetailModal").classList.remove("is-open");
   document.getElementById("hotelDetailModal").style.display = "none";
   document.body.classList.remove("modal-open");
 }
