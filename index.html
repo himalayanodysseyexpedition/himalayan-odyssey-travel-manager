@@ -648,6 +648,10 @@ html body :is(#itineraries#itineraries,#odyssey-difference-mobile#odyssey-differ
   transform:none!important;translate:none!important;transition:none!important;animation:none!important;
   z-index:1800!important;pointer-events:none!important;overflow:visible!important;
  }
+ /* iOS 26 workaround: avoid native fixed-layer rendering, retain visual appearance. */
+ html:root[data-hoe-theme="home"] body > #hoe-mobile-dock-host.hoe-ios26-document-dock{
+  position:absolute!important;inset:var(--hoe-dock-doc-top,0px) 0 auto 0!important;
+ }
  html:root[data-hoe-theme="home"] body > #hoe-mobile-dock-host > nav.mobile-app-dock.mobile-app-dock,
  html:root[data-hoe-theme="home"] body > #hoe-mobile-dock-host > nav.mobile-app-dock.mobile-app-dock.is-hidden{
   position:relative!important;inset:auto!important;margin:0!important;
@@ -2360,7 +2364,7 @@ if (matchMedia("(min-width:761px)").matches && "IntersectionObserver" in window)
 
 
 <link rel="manifest" href="/manifest.webmanifest">
-<script src="/mobile-app-experience-v18.js?v=11" defer></script>
+<script src="/mobile-app-experience-v18.js?v=12" defer></script>
 <script src="/site-navigation.js?v=28" defer></script>
 
 <!-- Final cascade guard: load approved Arctic layers after legacy page-level styles. -->
