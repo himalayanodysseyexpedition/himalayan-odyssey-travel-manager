@@ -58,7 +58,7 @@
       const rect = hero.getBoundingClientRect();
       const nextWidth = Math.max(1, Math.round(rect.width));
       const nextHeight = Math.max(1, Math.round(rect.height));
-      const nextDpr = Math.min(window.devicePixelRatio || 1, 1.35);
+      const nextDpr = Math.min(window.devicePixelRatio || 1, 1.0);
       if (width === nextWidth && height === nextHeight && dpr === nextDpr) return;
       width = nextWidth;
       height = nextHeight;
@@ -67,7 +67,7 @@
       canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const count = Math.max(52, Math.min(105, Math.round((width * height) / 4300)));
+      const count = Math.max(28, Math.min(54, Math.round((width * height) / 8500)));
       flakes = Array.from({ length: count }, () => makeFlake());
       draw();
     };
@@ -82,9 +82,9 @@
         frame = 0;
         return;
       }
-      // Snow motion is decorative: cap canvas redraws near 30 fps on mobile.
+      // Snow motion is decorative: cap canvas redraws near 24 fps on mobile.
       // Keep movement time-based, so the visible falling speed stays the same.
-      if (time - lastTime < 1000 / 30 - 1) {
+      if (time - lastTime < 1000 / 24 - 1) {
         frame = requestAnimationFrame(animate);
         return;
       }
