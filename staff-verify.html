@@ -15,7 +15,7 @@ if(token&&(type==='email'||type==='signup'))r=await client.auth.verifyOtp({token
 else if(access&&refresh)r=await client.auth.setSession({access_token:access,refresh_token:refresh});
 else {unavailable();return}
 if(r.error)throw r.error;const {data,error}=await client.auth.getUser();if(error||!data.user?.email_confirmed_at)throw Error('Email confirmation not established');
-finish(true,'Email verified successfully','Your email address is confirmed. Tap Log in to Calling Desk and enter the email and password you created.');try{await client.auth.signOut({scope:'local'})}catch(_){}
+finish(true,'Email verified successfully','Your email address is confirmed. Your staff account is automatically activated. Tap Log in to Calling Desk to open your personal dashboard.');try{await client.auth.signOut({scope:'local'})}catch(_){}
 }catch(e){unavailable()}}
 function boot(){if(linkError||(!token&&!access)||code){unavailable();return}if(token){$('title').textContent='Confirm your email';$('message').textContent='Tap below to complete verification securely.';$('confirm').hidden=false;$('confirm').onclick=()=>{$('confirm').disabled=true;$('title').textContent='Verifying your email';verify()}}else verify()}
 </script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4" onload="boot()" onerror="unavailable()"></script></body></html>
