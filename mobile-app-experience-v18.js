@@ -168,7 +168,7 @@
    targets.forEach(t=>observer.observe(t));
   }
   let last=window.scrollY,raf=false;
-  window.addEventListener('scroll',()=>{
+  if(!nav.classList.contains('mobile-app-dock'))window.addEventListener('scroll',()=>{
    if(raf)return;raf=true;
    requestAnimationFrame(()=>{
     const y=window.scrollY;
@@ -186,6 +186,7 @@
   syncMenuState(nav);
  }
  function reveal(){
+  if(document.documentElement.dataset.hoeTheme==='home')return;
   if(!mobile()||!('IntersectionObserver'in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   const candidates=document.querySelectorAll('.section-title,.intro,.group-departures-rail,.packages-carousel,.destination-grid,.cta,.review-panel');
   const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('app-reveal','is-visible');io.unobserve(e.target)}}),{threshold:.08});

@@ -20,7 +20,8 @@
       return;
     }
 
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Retain a single static snowfall frame on the homepage; no running canvas loop.
+    const reducedMotion = document.documentElement.dataset.hoeTheme === "home" || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const random = (min, max) => min + Math.random() * (max - min);
     let width = 1;
     let height = 1;
