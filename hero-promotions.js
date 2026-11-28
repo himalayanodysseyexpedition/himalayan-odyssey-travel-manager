@@ -1,6 +1,6 @@
 "use strict";
 window.heroPromotionsReady=(async()=>{
- const db=window.supabase.createClient("https://ynkoiuyjevclypumnyes.supabase.co","sb_publishable_Y4JRhHCbljrd5catiUimJw_tr10Qvk-");
+ const db=window.HOEPublicCatalogue;if(!db)return;
  const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
  const{data,error}=await db.from("site_hero_promotions").select("*").eq("is_active",true).order("sort_order").order("created_at");
  if(error||!data?.length)return;
