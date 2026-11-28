@@ -777,6 +777,16 @@ html body :is(#itineraries#itineraries,#odyssey-difference-mobile#odyssey-differ
   html:root[data-hoe-theme="home"] body nav.mobile-app-dock.mobile-app-dock::before{content:none!important}
  }
 }
+
+/* Keep mobile package and cab price badges legible on their light backgrounds. */
+@media (max-width: 760px) {
+  html:root[data-hoe-theme="home"] body :is(#packages#packages #packageList#packageList,#cabs#cabs #cabList#cabList) > .card.package-slide[data-price]::after {
+    background: #fff !important;
+    color: #171717 !important;
+    -webkit-text-fill-color: #171717 !important;
+    text-shadow: none !important;
+  }
+}
 </style>
 </head>
 
