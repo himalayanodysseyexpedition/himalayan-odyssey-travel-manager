@@ -52,7 +52,7 @@
               <label>Number of travellers<input name="persons" type="number" min="1" max="100" value="2" required></label>
               <label>Starting city / pickup<input name="startCity" type="text" maxlength="100" required placeholder="e.g. Delhi, Chandigarh, Shimla"></label>
               <label>Tour duration (days)<input name="tourDays" type="number" min="1" max="60" placeholder="If decided"></label>
-              <label>Service required<select name="service" required><option>Group tour</option><option>Private / custom tour</option><option>Cab / sightseeing</option><option>Hotel / homestay</option><option>Not decided</option></select></label>
+              <label>Service required<select name="service" required><option>Not decided</option><option>Group tour</option><option>Private / custom tour</option><option>Cab / sightseeing</option><option>Hotel / homestay</option></select></label>
               <label>Drop location (optional)<input name="dropCity" maxlength="100" placeholder="e.g. Chandigarh"></label>
               <label>Other requirements (optional)<input name="requirements" maxlength="600" placeholder="Places, room, vehicle, budget, etc."></label>
             </div>
@@ -200,15 +200,16 @@
     let dialog=document.getElementById("hoeWhatsAppLeadDialog");
     if(!dialog){dialog=document.createElement("dialog");dialog.id="hoeWhatsAppLeadDialog";dialog.className="hoe-lead-dialog";dialog.setAttribute("aria-labelledby","hoeLeadModalTitle");dialog.innerHTML='<button type="button" class="hoe-lead-close" aria-label="Close enquiry">Close</button>'+formMarkup(true);document.body.appendChild(dialog);dialog.querySelector(".hoe-lead-close").onclick=()=>dialog.close();bind(dialog.querySelector("form"));}
     const f=dialog.querySelector("form");if(f.querySelector("button[type=submit]").disabled)return true;
+    f.reset();f.querySelector(".hoe-lead-fallback")?.remove();f.querySelector(".hoe-lead-status").textContent="No payment is required to send an enquiry.";f.querySelector(".hoe-lead-status").dataset.state="";f.querySelector("button[type=submit]").textContent="Submit enquiry & continue to WhatsApp";
     const message=String(url.searchParams.get("text")||"");
     const text=(String(options.context||"")+" "+message+" "+location.pathname).toLowerCase();
     f.dataset.enquiryContext=message.slice(0,1500);
-    const d=options.destination||destinations.find(x=>x!=="Other / flexible destination"&&text.includes(x.toLowerCase()))||(text.includes("spiti")?"Spiti Valley":selectedDestination());
+    const d=options.destination||[...destinations].sort((a,b)=>b.length-a.length).find(x=>x!=="Other / flexible destination"&&text.includes(x.toLowerCase()))||(text.includes("spiti")?"Spiti Valley":selectedDestination());
     if(d&&destinations.includes(d))f.elements.destination.value=d;
     if(text.includes("cab")||text.includes("taxi")||text.includes("sightseeing"))f.elements.service.value="Cab / sightseeing";
     else if(text.includes("hotel")||text.includes("homestay")||text.includes("room"))f.elements.service.value="Hotel / homestay";
     else if(text.includes("private")||text.includes("custom")||options.service==="Private / custom tour")f.elements.service.value="Private / custom tour";
-    else if(text.includes("group")||text.includes("expedition"))f.elements.service.value="Group tour";
+    else if(text.includes("group")||text.includes("winter spiti expedition"))f.elements.service.value="Group tour";
     else f.elements.service.value="Not decided";
     const days=options.days||message.match(/(?:Duration:\\s*)?(\\d{1,2})\\s*(?:days?\\b|D\\b)/i)?.[1];
     if(days&&Number(days)<=60)f.elements.tourDays.value=days;
