@@ -312,6 +312,142 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
  html body:has(>main>#auth:not([hidden])) #auth>.card h2{font-size:34px!important}
 }
 </style>
+<style id="hoe-admin-dashboard-branding">
+/* Signed-in dashboard only: responsive royal-purple skin, shared homepage artwork. */
+html:has(body>main>#app:not([hidden])){
+ --admin-bg:#0b0b0b;--admin-surface:#fff;--admin-ink:#171717;--admin-muted:#515151;
+ --admin-line:#ddd6e8;--admin-soft:#f1edf6;--admin-dark:#171717;--admin-radius:17px;
+ --forest:#171717;--forest2:#543486;--gold:#7040bb;--gold-light:#d9baff;
+ --cream:#0b0b0b;--paper:#fff;--ink:#171717;--muted:#515151;--line:#ddd6e8;
+ --sans:Inter,Manrope,Arial,sans-serif;--serif:Inter,Manrope,Arial,sans-serif;
+ background:#0b0b0b!important;color:#fff!important;scroll-padding-top:110px;
+}
+html body:has(>main>#app:not([hidden])){background:#0b0b0b!important;background-image:none!important;color:#fff!important;animation:none!important}
+html body:has(>main>#app:not([hidden]))>header{
+ position:sticky!important;top:0!important;left:0!important;right:0!important;width:100%!important;min-height:64px!important;
+ padding:0!important;margin:0!important;background:#0b0b0b!important;background-image:none!important;
+ border:0!important;border-bottom:1px solid #ffffff20!important;box-shadow:none!important;isolation:isolate!important;overflow:hidden!important;
+ backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+html body:has(>main>#app:not([hidden]))>header::after{
+ content:""!important;display:block!important;position:absolute!important;inset:0 0 auto!important;
+ width:100%!important;height:64px!important;margin:0!important;border:0!important;border-radius:0!important;
+ background:url("/tibetan-header-flags-wind.svg?v=1") repeat-x 0 0/50% 56px!important;opacity:.7!important;
+ box-shadow:none!important;filter:none!important;pointer-events:none!important;z-index:-1!important;animation:none!important;
+}
+html body:has(>main>#app:not([hidden]))>header>.topline{
+ display:flex!important;position:relative!important;align-items:center!important;justify-content:flex-end!important;
+ width:calc(100% - 24px)!important;height:63px!important;min-height:63px!important;margin:0 auto!important;padding:0!important;
+}
+html body:has(>main>#app:not([hidden]))>header .admin-header-copy{display:none!important}
+html body:has(>main>#app:not([hidden]))>header .admin-brand{
+ position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;
+ width:clamp(140px,43vw,200px)!important;max-width:calc(100% - 164px)!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;padding:3px 5px!important;margin:0!important;
+ background:#10101030!important;border:1px solid #ffffff40!important;border-top-color:#ffffff80!important;border-radius:9px!important;
+ box-shadow:inset 0 1px 0 #ffffff55,0 1px 3px #0008!important;animation:none!important;
+}
+html body:has(>main>#app:not([hidden]))>header .admin-brand::before,html body:has(>main>#app:not([hidden]))>header .admin-brand::after{display:none!important}
+html body:has(>main>#app:not([hidden]))>header .admin-brand img:not(.hoe-admin-login-logo){display:none!important}
+html body:has(>main>#app:not([hidden]))>header .admin-brand img.hoe-admin-login-logo[hidden]{
+ display:block!important;width:100%!important;height:auto!important;max-height:45px!important;object-fit:contain!important;
+ opacity:.92!important;animation:none!important;filter:none!important;margin:0!important;
+}
+html body:has(>main>#app:not([hidden]))>header #logout:not([hidden]){
+ position:relative!important;z-index:3!important;flex:0 0 auto!important;margin:0!important;
+ background:#7040bb!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+ border:1px solid #a477ed!important;border-radius:9px!important;min-height:40px!important;padding:8px 10px!important;
+ font:700 11px/1.2 var(--sans)!important;box-shadow:none!important;transform:none!important;text-transform:none!important;
+}
+html body:has(>main>#app:not([hidden]))>header #msg{
+ position:relative!important;margin:0 auto!important;padding:4px 14px 8px!important;text-align:center!important;
+ color:#fff!important;-webkit-text-fill-color:#fff!important;font:500 12px/1.45 var(--sans)!important;overflow-wrap:anywhere;
+}
+html body:has(>main>#app:not([hidden]))>header #msg:empty{display:none!important}
+html body:has(>main>#app:not([hidden]))>main{background:transparent!important;color:#fff!important}
+html body:has(>main>#app:not([hidden])) #app{background:transparent!important;color:#fff!important}
+html body:has(>main>#app:not([hidden])) #app>nav{
+ position:relative!important;top:auto!important;display:flex!important;gap:6px!important;overflow-x:auto!important;
+ background:linear-gradient(110deg,#2c1150,#592b97,#7040bb,#2c1150)!important;border:1px solid #a477ed!important;
+ border-radius:17px!important;padding:8px!important;box-shadow:none!important;scrollbar-color:#c9a9f5 transparent!important;
+ backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+html body:has(>main>#app:not([hidden])) #app>nav :is(button[data-tab],a){
+ flex:0 0 auto!important;min-height:44px!important;background:transparent!important;background-image:none!important;
+ border:1px solid transparent!important;border-radius:10px!important;box-shadow:none!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+ font:650 12px/1.2 var(--sans)!important;letter-spacing:0!important;text-transform:none!important;padding:10px 12px!important;transform:none!important;text-decoration:none!important;
+}
+html body:has(>main>#app:not([hidden])) #app>nav button[data-tab]:is(.active,:hover,:focus-visible),html body:has(>main>#app:not([hidden])) #app>nav a:is(:hover,:focus-visible){
+ background:#fff!important;border-color:#fff!important;color:#171717!important;-webkit-text-fill-color:#171717!important;
+}
+html body:has(>main>#app:not([hidden])) #app>.panel{
+ background:transparent!important;background-image:none!important;border:0!important;box-shadow:none!important;border-radius:0!important;
+ color:#fff!important;animation:none!important;padding:0!important;
+}
+html body:has(>main>#app:not([hidden])) #app>.panel :is(h1,h2,h3,h4,h5,h6){
+ color:#fff!important;-webkit-text-fill-color:#fff!important;font-family:var(--sans)!important;font-weight:650!important;letter-spacing:-.025em!important;
+}
+html body:has(>main>#app:not([hidden])) #app>.panel :is(p,small,.muted,.status,.finance-intro){color:#d1d1d1!important;-webkit-text-fill-color:#d1d1d1!important}
+html body:has(>main>#app:not([hidden])) #app>.panel a:not(.btn):not(.button){color:#d9baff!important}
+html body:has(>main>#app:not([hidden])) #app :is(.stat,.card,article,.finance-entry,.provider-payment-group,.item,.enquiry,.source-card,.wa-info,.wa-template-card),html body:has(>main>#app:not([hidden]))>dialog{
+ background:#fff!important;background-image:none!important;color:#171717!important;-webkit-text-fill-color:#171717!important;
+ border:1px solid #a477ed!important;border-radius:17px!important;box-shadow:0 4px 14px #0004!important;transform:none!important;
+}
+html body:has(>main>#app:not([hidden])) #app :is(.stat,.card,article,.finance-entry,.provider-payment-group,.item,.enquiry,.source-card,.wa-info,.wa-template-card) :is(h1,h2,h3,h4,h5,h6,strong,b),html body:has(>main>#app:not([hidden]))>dialog :is(h1,h2,h3,h4,h5,h6,strong,b){
+ color:#171717!important;-webkit-text-fill-color:#171717!important;font-family:var(--sans)!important;letter-spacing:-.015em!important;
+}
+html body:has(>main>#app:not([hidden])) #app :is(.stat,.card,article,.finance-entry,.provider-payment-group,.item,.enquiry,.source-card,.wa-info,.wa-template-card) :is(p,small,.muted,.status,label),html body:has(>main>#app:not([hidden]))>dialog :is(p,small,.muted,.status,label){
+ color:#444!important;-webkit-text-fill-color:#444!important;
+}
+html body:has(>main>#app:not([hidden])) #app :is(.stat,.card,article,.wa-info,.wa-template-card) a:not(.btn):not(.button),html body:has(>main>#app:not([hidden]))>dialog a:not(.btn):not(.button){color:#543486!important;-webkit-text-fill-color:#543486!important}
+html body:has(>main>#app:not([hidden])) #app .stat{color:#515151!important;-webkit-text-fill-color:#515151!important}
+html body:has(>main>#app:not([hidden])) #app .stat strong{color:#543486!important;-webkit-text-fill-color:#543486!important;font-family:var(--sans)!important}
+html body:has(>main>#app:not([hidden])) #app .stat::after{border-color:#7040bb35!important}
+html body:has(>main>#app:not([hidden])) #app :is(input:not([type=checkbox]):not([type=radio]),select,textarea),html body:has(>main>#app:not([hidden]))>dialog :is(input:not([type=checkbox]):not([type=radio]),select,textarea){
+ color-scheme:light;background:#fff!important;color:#171717!important;-webkit-text-fill-color:#171717!important;
+ border:1px solid #d3ceda!important;border-radius:10px!important;font:400 16px/1.4 var(--sans)!important;min-height:44px;box-shadow:none!important;
+}
+html body:has(>main>#app:not([hidden])) :is(#app,dialog) :is(input,select,textarea):focus{border-color:#7040bb!important;outline:2px solid #a477ed!important;outline-offset:1px!important;box-shadow:none!important}
+html body:has(>main>#app:not([hidden])) :is(#app,dialog) :is(input[type=checkbox],input[type=radio]){accent-color:#7040bb!important}
+html body:has(>main>#app:not([hidden])) :is(#app,dialog) button:not(.danger):not([data-tab]){
+ background:#7040bb!important;background-image:none!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+ border:1px solid #7040bb!important;border-radius:9px!important;box-shadow:none!important;
+ font:700 12px/1.3 var(--sans)!important;letter-spacing:.01em!important;text-transform:none!important;min-height:44px!important;padding:9px 12px!important;transform:none!important;
+}
+html body:has(>main>#app:not([hidden])) :is(#app,dialog) button.secondary:not(.danger),html body:has(>main>#app:not([hidden])) #app #refresh{
+ background:#171717!important;color:#fff!important;-webkit-text-fill-color:#fff!important;border-color:#171717!important;
+}
+html body:has(>main>#app:not([hidden])) :is(#app,dialog) button.danger{
+ background:#982f36!important;color:#fff!important;-webkit-text-fill-color:#fff!important;border:1px solid #982f36!important;border-radius:9px!important;min-height:44px!important;
+}
+html body:has(>main>#app:not([hidden])) :is(#app,dialog) button:not([data-tab]):disabled{opacity:.55!important}
+html body:has(>main>#app:not([hidden])) :is(#app,dialog) :is(.finance-quantity,.finance-breakdown>div,.finance-profit-line,.provider-payment-totals>div,.form-check,.day-entry,.package-day-entry,.hotel-photo){
+ background:#f1edf6!important;background-image:none!important;color:#171717!important;-webkit-text-fill-color:#171717!important;border:1px solid #ddd6e8!important;border-radius:10px!important;
+}
+html body:has(>main>#app:not([hidden])) #app :is(.finance-profit-line,.provider-payment-totals,.finance-breakdown) strong{color:#171717!important;-webkit-text-fill-color:#171717!important}
+html body:has(>main>#app:not([hidden]))>dialog{color-scheme:light;max-width:calc(100vw - 24px)!important}
+html body:has(>main>#app:not([hidden]))>dialog::backdrop{background:#000b!important;backdrop-filter:none!important}
+html body:has(>main>#app:not([hidden])) :is(button,a,input,textarea,select):focus-visible{outline:2px solid #a477ed!important;outline-offset:3px!important}
+html body:has(>main>#app:not([hidden])) #app[hidden],html body:has(>main>#app:not([hidden])) #auth[hidden],html body:has(>main>#app:not([hidden])) #logout[hidden]{display:none!important}
+@keyframes hoeAdminFlagDrift{from{transform:translateX(0)}to{transform:translateX(-400px)}}
+@media screen and (min-width:761px){
+ html body:has(>main>#app:not([hidden]))>header{min-height:74px!important}
+ html body:has(>main>#app:not([hidden]))>header>.topline{height:74px!important;min-height:74px!important}
+ html body:has(>main>#app:not([hidden]))>header::after{height:74px!important;width:calc(100% + 400px)!important;background:url("/tibetan-header-flags-static.svg?v=1") repeat-x 0 0/400px 56px!important;animation:hoeAdminFlagDrift 28s linear infinite!important}
+ html body:has(>main>#app:not([hidden]))>header .admin-brand{width:220px!important;padding:4px 8px!important}
+ html body:has(>main>#app:not([hidden]))>header .admin-brand img.hoe-admin-login-logo[hidden]{max-height:57px!important}
+ html body:has(>main>#app:not([hidden]))>main{padding:28px 24px 70px!important}
+ html body:has(>main>#app:not([hidden])) #app .stats:not(.finance-stats){grid-template-columns:repeat(4,minmax(0,1fr))}
+ html body:has(>main>#app:not([hidden])) #app .finance-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+ html body:has(>main>#app:not([hidden])) #app .stat strong{font-size:clamp(24px,2.8vw,34px)!important}
+}
+@media screen and (max-width:760px){
+ html body:has(>main>#app:not([hidden])) #app>nav :is(button[data-tab],a){font-size:11px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ html body:has(>main>#app:not([hidden]))>header::after{background-image:url("/tibetan-header-flags-static.svg?v=1")!important;animation:none!important;transform:none!important}
+}
+</style>
 </head>
 
 <body>
