@@ -788,6 +788,12 @@ html body :is(#itineraries#itineraries,#odyssey-difference-mobile#odyssey-differ
   }
 }
 </style>
+<style id="hoe-public-catalogue-visibility-recovery">
+/* Keep the original layouts; content must not depend on competing scroll observers. */
+html[data-hoe-theme="home"] body :is(#upcoming-packages,#packages,#itineraries,#odyssey-difference-mobile,#journey-story) :is(.reveal,.motion-reveal,.hoe-motion-reveal,.app-reveal,.arctic-reveal){
+  opacity:1!important;visibility:visible!important;transform:none!important;transition-delay:0s!important;animation-delay:0s!important;
+}
+</style>
 </head>
 
 <body>
@@ -2415,7 +2421,7 @@ if ("IntersectionObserver" in window) {
 
 
 <link rel="manifest" href="/manifest.webmanifest">
-<script src="/mobile-app-experience-v18.js?v=13-r20261128" defer></script>
+<script src="/mobile-app-experience-v18.js?v=14-r20261128" defer></script>
 <script src="/site-navigation.js?v=29-r20261128" defer></script>
 
 <!-- Final cascade guard: load approved Arctic layers after legacy page-level styles. -->
