@@ -238,7 +238,7 @@
 
 <style id="mobile-destination-cylinder-styles"> .mobile-destination-cylinder{display:none} @media(max-width:760px){ .mobile-destination-cylinder{display:block!important;position:relative;isolation:isolate;overflow:hidden;padding:38px 0 32px;background:radial-gradient(ellipse at 50% 44%,rgba(169,216,242,.18),transparent 58%),linear-gradient(180deg,#f3f8fc,#eaf1f7);color:#10243b} .mobile-destination-inner{width:100%;max-width:680px;margin:0 auto} .mobile-destination-heading{text-align:center;padding:0 20px} .mobile-destination-heading>small{color:#527a98;font-size:9px;font-weight:850;letter-spacing:2.2px} .mobile-destination-heading h2{margin:7px 0 5px;color:#10243b;font:750 clamp(29px,8vw,38px)/1.04 "General Sans",Inter,Arial,sans-serif;letter-spacing:-.055em} .mobile-destination-heading p{margin:0 auto;color:#647b90;font-size:12px;line-height:1.65;max-width:290px} .mdc-stage{height:auto;position:relative;overflow:visible;touch-action:pan-y;user-select:auto;-webkit-user-select:auto;padding:22px 18px 8px} .mdc-stage:before{content:none} .mdc-ring{position:static;inset:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;transform:none!important;transform-style:flat;outline:none;cursor:auto} .mdc-ring .destination-card{position:relative!important;left:auto!important;top:auto!important;width:100%!important;height:245px!important;max-width:none!important;margin:0!important;overflow:hidden!important;border:1px solid rgba(255,255,255,.62)!important;border-radius:17px!important;background:#10243b!important;box-shadow:0 12px 26px rgba(16,36,59,.16)!important;transform:none!important;transform-origin:center center;transition:box-shadow .3s ease,border-color .3s ease;will-change:auto} .mdc-ring .destination-card img{width:100%!important;height:100%!important;object-fit:cover!important;filter:brightness(.88) saturate(1.05)!important} .mdc-ring .destination-card:after{content:"";position:absolute;inset:28% 0 0;z-index:1;background:linear-gradient(180deg,transparent,rgba(7,20,33,.94))!important;pointer-events:none} .mdc-ring .destination-info{position:absolute!important;z-index:2!important;left:0!important;right:0!important;bottom:0!important;padding:17px!important;transform:none!important} .mdc-ring .destination-info small{color:#dceefa!important;font-size:7px!important;letter-spacing:1.35px!important} .mdc-ring .destination-info h3{margin:7px 0 9px!important;color:#fff!important;font:650 24px/1.04 "General Sans",Inter,Arial,sans-serif!important;letter-spacing:-.04em!important} .mdc-ring .destination-info span{color:#fff!important;font-size:8px!important;letter-spacing:.8px!important} .mdc-ring .destination-info span:after{display:none!important} .mdc-controls{display:flex;align-items:center;justify-content:center;gap:16px;margin:0 auto} .mdc-controls>span{min-width:60px;color:#4d657a;font-size:10px;font-weight:800;letter-spacing:1.4px;text-align:center} .mdc-controls button{width:39px;height:39px;border:1px solid rgba(16,36,59,.2);border-radius:50%;background:rgba(255,255,255,.88);color:#10243b;font-size:20px;box-shadow:0 5px 14px rgba(16,36,59,.08)} .mdc-hint{text-align:center;margin:14px 0 0;color:#7b8da0;font-size:8px;font-weight:800;letter-spacing:1.5px} } @media(prefers-reduced-motion:reduce){.mdc-ring .destination-card{transition:none!important}} </style>
 <link rel="stylesheet" href="/hero-motion-repair.css?v=8-r20261128">
-<script src="/hero-atmosphere.js?v=5-perf20261128" defer></script>
+<script src="/hero-atmosphere.js?v=6-native20261128" defer></script>
 <script>if(window.matchMedia("(max-width: 760px)").matches)document.documentElement.classList.add("hoe-gallery-pending");</script>
 <link rel="stylesheet" href="/featured-travel-photography.css?v=11-r20261128">
 
@@ -806,6 +806,46 @@ html[data-hoe-theme="home"] body :is(#upcoming-packages,#packages,#itineraries,#
 }
 html[data-hoe-theme="home"].hoe-page-scrolling #home :is(.hero-ken-burns-photo,.hero-weather-motion,.hero-bottom-motion,.hero-weather-motion *, .hero-bottom-motion *){animation-play-state:paused!important}
 html[data-hoe-theme="home"].hoe-hero-offscreen #home :is(.hero-ken-burns-photo,.hero-weather-motion,.hero-bottom-motion,.hero-weather-motion *, .hero-bottom-motion *){animation-play-state:paused!important}
+</style>
+<style id="hoe-mobile-native-scroll-stability">
+@media(max-width:760px){
+ html[data-hoe-theme="home"]{scroll-behavior:auto!important}
+ html[data-hoe-theme="home"] body{animation:none!important}
+ html[data-hoe-theme="home"] body > header,
+ html[data-hoe-theme="home"] body > header > .header-inner > a.brand::before,
+ html:root[data-hoe-theme="home"] body nav.mobile-app-dock.mobile-app-dock,
+ html:root[data-hoe-theme="home"].hoe-page-scrolling body nav.mobile-app-dock.mobile-app-dock,
+ html[data-hoe-theme="home"] body #home.hero#home .hoe-reference-services a,
+ html[data-hoe-theme="home"] body #odyssey-difference-mobile :is(.odyssey-place-card,.odyssey-experience-card){
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+ }
+ html:root[data-hoe-theme="home"] body nav.mobile-app-dock.mobile-app-dock,
+ html:root[data-hoe-theme="home"].hoe-page-scrolling body nav.mobile-app-dock.mobile-app-dock{
+  background:rgba(56,21,109,.89)!important;
+ }
+ html[data-hoe-theme="home"] body > header::after{
+  background-image:url("/tibetan-header-flags-static.svg?v=1")!important;
+  background-position:0 0!important;animation:none!important;filter:none!important;
+ }
+ html[data-hoe-theme="home"] body #home.hero#home,
+ html[data-hoe-theme="home"] body #home.hero#home::before,
+ html[data-hoe-theme="home"] body #home.hero#home::after,
+ html[data-hoe-theme="home"] body #home.hero#home > img.hero-ken-burns-photo,
+ html[data-hoe-theme="home"] body #home.hero#home :is(.hero-weather-motion,.hero-bottom-motion,.hero-weather-motion *,.hero-bottom-motion *),
+ html[data-hoe-theme="home"] body #home.hero#home :is(.hero-weather-motion,.hero-bottom-motion)::before,
+ html[data-hoe-theme="home"] body #home.hero#home :is(.hero-weather-motion,.hero-bottom-motion)::after{
+  animation:none!important;will-change:auto!important;background-attachment:scroll!important;
+ }
+ html[data-hoe-theme="home"] body :is(.reveal,.motion-reveal,.hoe-motion-reveal,.app-reveal,.arctic-reveal,.story-scene){
+  opacity:1!important;visibility:visible!important;transform:none!important;transition:none!important;will-change:auto!important;
+ }
+ html[data-hoe-theme="home"] body :is(.card,.package-slide,.group-departure-card,.destination-card,.guide-card,.hotel-card,.itinerary-slide,.odyssey-place-card,.odyssey-experience-card){
+  will-change:auto!important;animation:none!important;
+ }
+ html[data-hoe-theme="home"] body :is(.card,.package-slide,.group-departure-card,.destination-card,.guide-card,.hotel-card,.itinerary-slide) img{
+  will-change:auto!important;animation:none!important;
+ }
+}
 </style>
 </head>
 
@@ -1943,7 +1983,7 @@ function observeReveals() {
 
   const elements = document.querySelectorAll(".reveal:not(.visible)");
 
-  if (window.matchMedia("(min-width:761px)").matches || !("IntersectionObserver" in window)) {
+  if (document.documentElement.dataset.hoeTheme === "home" || window.matchMedia("(min-width:761px)").matches || !("IntersectionObserver" in window)) {
     elements.forEach(element => element.classList.add("visible"));
     return;
   }
@@ -2280,8 +2320,6 @@ if ("IntersectionObserver" in window) {
 })();
 </script>
 
-  <script src="/site-motion.js?v=2-r20261128" defer></script>
-<script src="/cinematic-storytelling.js?v=7-r20261128" defer></script>
 
 
 
@@ -2430,7 +2468,7 @@ if ("IntersectionObserver" in window) {
 
 
 <link rel="manifest" href="/manifest.webmanifest">
-<script src="/mobile-app-experience-v18.js?v=14-r20261128" defer></script>
+<script src="/mobile-app-experience-v18.js?v=15-native20261128" defer></script>
 <script src="/site-navigation.js?v=29-r20261128" defer></script>
 
 <!-- Final cascade guard: load approved Arctic layers after legacy page-level styles. -->
@@ -2744,7 +2782,6 @@ if ("IntersectionObserver" in window) {
 
 
 
-  <script src="/arctic-prestige-motion.js?v=3-r20261128" defer></script>
 
 
 
@@ -3414,34 +3451,7 @@ if ("IntersectionObserver" in window) {
 
 <!-- Mobile dock uses a static matte surface; scroll-driven gradient removed. -->
 
-<script id="hoe-mobile-header-scroll-direction-flags">
-// Only page displacement moves the flag strip; the SVG's cloth flutter runs independently.
-(()=>{
- const mobile=matchMedia('(max-width:760px)'),reduce=matchMedia('(prefers-reduced-motion:reduce)');
- const header=document.querySelector('body > header');
- if(!header)return;
- let frame=0;
- let desktopPeriod=header.clientWidth/2;
- if('ResizeObserver' in window)new ResizeObserver(()=>{desktopPeriod=header.clientWidth/2;}).observe(header);
- else window.addEventListener('resize',()=>{desktopPeriod=header.clientWidth/2;},{passive:true});
- function update(){
-  frame=0;
-  if(reduce.matches){header.style.removeProperty('--hoe-header-flag-scroll-x');return;}
-  const root=(document.documentElement.classList.contains('hoe-ios26-scroll-shell')?document.body:(document.scrollingElement||document.documentElement));
-  const y=mobile.matches?Math.max(0,Math.min((document.documentElement.classList.contains('hoe-ios26-scroll-shell')?document.body:(document.scrollingElement||document.documentElement)).scrollTop,Math.max(0,root.scrollHeight-root.clientHeight))):Math.max(0,(document.documentElement.classList.contains('hoe-ios26-scroll-shell')?document.body:(document.scrollingElement||document.documentElement)).scrollTop);
-  const period=mobile.matches?header.clientWidth/2:desktopPeriod;
-  const x=period>0?-((y*.55)%period):0;
-  header.style.setProperty('--hoe-header-flag-scroll-x',x.toFixed(2)+'px');
- }
- function queue(){if(!mobile.matches){header.style.removeProperty('--hoe-header-flag-scroll-x');return;}if(!frame)frame=requestAnimationFrame(update);}
- window.addEventListener('scroll',()=>{if(mobile.matches)queue();},{passive:true});
- window.addEventListener('resize',queue,{passive:true});
- window.addEventListener('pageshow',queue);
- mobile.addEventListener('change',queue);
- reduce.addEventListener('change',queue);
- queue();
-})();
-</script>
+<!-- Mobile uses the same prayer flag artwork without continuous SVG animation or scroll position writes. -->
 
 
 
