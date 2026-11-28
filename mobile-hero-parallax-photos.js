@@ -69,7 +69,7 @@
   if ("MutationObserver" in window) new MutationObserver(refreshCards).observe(track,{childList:true});
   refreshCards();
   update();
-  window.addEventListener("scroll",schedule,{passive:true});
+  // Avoid per-frame photo layout reads during vertical scrolling. Static photo remains unchanged.
   window.addEventListener("resize",resize,{passive:true});
   if (mobile.addEventListener) mobile.addEventListener("change",resize);
   if (reduced.addEventListener) reduced.addEventListener("change",schedule);

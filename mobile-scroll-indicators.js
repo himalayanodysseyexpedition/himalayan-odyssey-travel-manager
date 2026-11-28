@@ -47,17 +47,20 @@
 
   const page = makeThumb("mobile-page-scroll-indicator");
   document.body.appendChild(page.track);
+  let pageFrame=0, lastHeight=0, lastTrackHeight=0, lastViewport=0, cachedThumb=24;
   const updatePage = () => {
-    const root = document.documentElement;
-    const max = Math.max(0, root.scrollHeight - window.innerHeight);
+    pageFrame=0;
+    const root = document.documentElement.classList.contains("hoe-ios26-scroll-shell")?document.body:(document.scrollingElement||document.documentElement);
+    const viewport=root.clientHeight||window.innerHeight;
+    const max = Math.max(0, root.scrollHeight - viewport);
     const visible = max > 24;
     page.track.classList.toggle("is-visible", visible);
     if (!visible) return;
     const trackHeight = page.track.clientHeight;
-    const thumbHeight = Math.max(24, trackHeight * window.innerHeight / root.scrollHeight);
+    if(lastHeight!==root.scrollHeight||lastTrackHeight!==trackHeight||lastViewport!==viewport){lastHeight=root.scrollHeight;lastTrackHeight=trackHeight;lastViewport=viewport;cachedThumb=Math.max(24,trackHeight*viewport/root.scrollHeight);page.thumb.style.height=cachedThumb+"px";}
+    const thumbHeight=cachedThumb;
     const travel = Math.max(0, trackHeight - thumbHeight);
-    const progress = max ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
-    page.thumb.style.height = thumbHeight + "px";
+    const progress = max ? Math.min(1, Math.max(0, root.scrollTop / max)) : 0;
     page.thumb.style.transform = "translateY(" + (travel * progress) + "px)";
   };
 
@@ -107,7 +110,7 @@
     scheduled = true;
     requestAnimationFrame(() => { scheduled = false; scan(); });
   };
-  window.addEventListener("scroll", updatePage, {passive:true});
+  window.addEventListener("scroll",()=>{if(!pageFrame)pageFrame=requestAnimationFrame(updatePage);},{passive:true});
   window.addEventListener("resize", scheduleScan, {passive:true});
   window.addEventListener("orientationchange", scheduleScan, {passive:true});
   if ("MutationObserver" in window) {

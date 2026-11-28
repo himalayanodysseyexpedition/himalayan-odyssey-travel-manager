@@ -10,7 +10,7 @@
   const lastIndex = () => Math.max(0, slides.length - (desktop.matches ? 3 : 1));
   const canNavigate = () => lastIndex() > 0;
   carousel.classList.toggle('has-fourth-promotion', slides.length > 3);
-  let activeIndex = 0, ticking = false;
+  let activeIndex = 0, ticking = false, measuredHeight = 0;
   // Keep the viewport tall enough for whichever departure has the tallest content.
   // This prevents the longer card from being clipped when it is swiped into view.
   const updateHeight = () => {
@@ -19,7 +19,8 @@
       .filter(Boolean)
       .map(card => Math.ceil(card.getBoundingClientRect().height));
     const maxHeight = Math.max(0, ...heights);
-    if (maxHeight > 0) {
+    if (maxHeight > 0 && maxHeight !== measuredHeight) {
+      measuredHeight = maxHeight;
       track.style.height = (maxHeight + 2) + 'px';
       slides.forEach(slide => { slide.style.height = maxHeight + 'px'; });
     }
@@ -39,7 +40,7 @@
     if (!slide) return;
     const left = desktop.matches ? slide.offsetLeft - slides[0].offsetLeft : slide.offsetLeft;
     track.scrollTo({left,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
-    setActive(index);
+    setActive(index, false);
   };
 
   if (slides.length > 1) {
@@ -66,15 +67,18 @@
   let autoAdvanceTimer = null;
   let interactionPaused = false;
   let hoverPaused = false;
+  let carouselVisible = !('IntersectionObserver' in window);
+  if('IntersectionObserver' in window)new IntersectionObserver(entries=>{carouselVisible=entries[0].isIntersecting;scheduleAutoAdvance();},{threshold:0.15}).observe(carousel);
   const scheduleAutoAdvance = () => {
     window.clearTimeout(autoAdvanceTimer);
-    if (!autoAdvanceEnabled() || slides.length < 2 || interactionPaused || hoverPaused ||
+    if (!carouselVisible || !autoAdvanceEnabled() || slides.length < 2 || interactionPaused || hoverPaused ||
         document.hidden || (window.matchMedia('(hover: hover) and (pointer: fine)').matches && carousel.matches(':hover')) ||
         carousel.contains(document.activeElement) ||
         carousel.querySelector('.mobile-departure-itinerary-details[open]') ||
         document.body.classList.contains('promo-itinerary-modal-open')) return;
     autoAdvanceTimer = window.setTimeout(() => {
-      if (document.body.classList.contains('promo-itinerary-modal-open')) return;
+      if (!carouselVisible || document.body.classList.contains('promo-itinerary-modal-open')) return;
+      if(document.documentElement.classList.contains('hoe-page-scrolling')){scheduleAutoAdvance();return;}
       goTo((activeIndex + 1) % slides.length);
       scheduleAutoAdvance();
     }, 3000);
@@ -109,7 +113,7 @@
         const d=desktop.matches ? Math.abs(track.scrollLeft-(slide.offsetLeft-slides[0].offsetLeft)) : Math.abs(center-(slide.offsetLeft+slide.offsetWidth/2));
         if(d<distance){distance=d;nearest=index;}
       });
-      setActive(nearest, !('ResizeObserver' in window));ticking=false;
+      if(nearest!==activeIndex)setActive(nearest, false);ticking=false;
       scheduleAutoAdvance();
     });
   },{passive:true});
