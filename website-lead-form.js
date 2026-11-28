@@ -195,7 +195,7 @@
   function openEnquiry(rawUrl, options = {}) {
     let url;
     try{url=new URL(rawUrl,location.href)}catch(_){return false}
-    if(!((url.hostname==="wa.me"&&url.pathname.replace(/\\D/g,"")===PHONE)|| (url.hostname==="api.whatsapp.com"&&url.searchParams.get("phone")?.replace(/\\D/g,"")===PHONE)))return false;
+    if(!((url.hostname==="wa.me"&&url.pathname.replace(/\D/g,"")===PHONE)|| (url.hostname==="api.whatsapp.com"&&url.searchParams.get("phone")?.replace(/\D/g,"")===PHONE)))return false;
     addStyles();
     let dialog=document.getElementById("hoeWhatsAppLeadDialog");
     if(!dialog){dialog=document.createElement("dialog");dialog.id="hoeWhatsAppLeadDialog";dialog.className="hoe-lead-dialog";dialog.setAttribute("aria-labelledby","hoeLeadModalTitle");dialog.innerHTML='<button type="button" class="hoe-lead-close" aria-label="Close enquiry">Close</button>'+formMarkup(true);document.body.appendChild(dialog);dialog.querySelector(".hoe-lead-close").onclick=()=>dialog.close();bind(dialog.querySelector("form"));}
@@ -211,11 +211,11 @@
     else if(text.includes("private")||text.includes("custom")||options.service==="Private / custom tour")f.elements.service.value="Private / custom tour";
     else if(text.includes("group")||text.includes("winter spiti expedition"))f.elements.service.value="Group tour";
     else f.elements.service.value="Not decided";
-    const days=options.days||message.match(/(?:Duration:\\s*)?(\\d{1,2})\\s*(?:days?\\b|D\\b)/i)?.[1];
+    const days=options.days||message.match(/(?:Duration:\s*)?(\d{1,2})\s*(?:days?\b|D\b)/i)?.[1];
     if(days&&Number(days)<=60)f.elements.tourDays.value=days;
-    const guests=options.persons||message.match(/(?:travellers|guests|persons|passengers):\\s*(\\d{1,3})/i)?.[1];
+    const guests=options.persons||message.match(/(?:travellers|guests|persons|passengers):\s*(\d{1,3})/i)?.[1];
     if(guests&&Number(guests)<=100)f.elements.persons.value=guests;
-    const date=options.travelDate||message.match(/(?:Dates?|Travel date):\\s*(\\d{4}-\\d{2}-\\d{2})/i)?.[1];
+    const date=options.travelDate||message.match(/(?:Dates?|Travel date):\s*(\d{4}-\d{2}-\d{2})/i)?.[1];
     if(date)f.elements.travelDate.value=date;
     if(options.startCity)f.elements.startCity.value=options.startCity;
     if(!dialog.open)dialog.showModal();return true;
