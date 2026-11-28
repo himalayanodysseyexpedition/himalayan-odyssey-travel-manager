@@ -270,6 +270,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
   <button data-tab="hotels">Hotels & Properties</button>
   <button data-tab="cabs">Cabs</button>
   <button data-tab="leads">Guest Leads</button>
+  <a href="/calling-staff.html" style="display:inline-flex;align-items:center;padding:11px 15px;border-radius:7px;background:#6536c7;color:#fff;font-weight:700;text-decoration:none;white-space:nowrap">Calling Staff CRM ↗</a>
   <button data-tab="bookings">Bookings</button>
   <button data-tab="vendors">Vendors</button>
   <button data-tab="suppliers">Supplier Network</button>
@@ -596,6 +597,7 @@ Publish this cab on the guest website
 <label>Estimated Budget (₹)</label><input name="budget" type="number" min="0">
 <label>Lead Status</label>
 <select name="status"><option>New</option><option>Contacted</option><option>Quotation Sent</option><option>Follow-up</option><option>Confirmed</option><option>Lost</option></select>
+<label>Package / price pitched (shared with calling staff)</label><textarea name="calling_pitch" rows="3" placeholder="Offer, package, quoted price and calling instructions"></textarea>
 <label>Notes / Follow-up details</label><textarea name="notes" rows="3"></textarea>
 <button type="submit">Save Guest Lead</button>
 <button type="button" data-close class="secondary">Cancel</button>
@@ -737,7 +739,7 @@ Publish this cab on the guest website
 </form>
 </dialog>
 
-<script src="app.js?v=20261125-review-button"></script>
+<script src="app.js?v=20261128-calling-crm"></script>
 <script src="whatsapp-automation.js?v=4"></script>
 <script src="/mobile-scroll-indicators.js?v=2" defer></script>
 </body>
