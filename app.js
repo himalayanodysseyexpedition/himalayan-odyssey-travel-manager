@@ -2928,6 +2928,7 @@ function bindForms() {
             travellers: Number(obj.travellers) || 1,
             budget: Number(obj.budget) || 0,
             notes: obj.notes || null,
+            calling_pitch: obj.calling_pitch || null,
             source: obj.source || "Manual",
             source_details: obj.source_details || null,
             status: obj.status || "New"
