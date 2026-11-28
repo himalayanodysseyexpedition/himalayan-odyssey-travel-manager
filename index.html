@@ -623,7 +623,7 @@ html body :is(#itineraries#itineraries,#odyssey-difference-mobile#odyssey-differ
   animation:none!important;transform:none!important;clip-path:none!important;filter:none!important;opacity:1!important;
  }
  html[data-hoe-theme="home"] body #home.hero#home #heroPromoTrack#heroPromoTrack .hero-promo-slide > section.mobile-next-departure > :is(h2,.mobile-departure-topline,.mobile-departure-kicker,.mobile-departure-date,.mobile-departure-facts,.mobile-departure-price,.mobile-departure-seats,.mobile-departure-track,.mobile-departure-cta,.mobile-departure-itinerary-details,.hoe-ticket-route,.hoe-promo-thumb){
-  animation:none!important;translate:none!important;clip-path:none!important;opacity:1!important;
+  animation:none!important;translate:none!important;clip-path:none!important;
  }
 }
 @keyframes hoePromoHeadingFadeUp{from{opacity:.55;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
@@ -3484,6 +3484,7 @@ if ("IntersectionObserver" in window) {
   refresh();
   if(window.heroPromotionsReady)window.heroPromotionsReady.then(refresh,refresh);
   if("MutationObserver"in window)new MutationObserver(refresh).observe(track,{childList:true});
+  track.addEventListener("hoe:promotions-refreshed",refresh);
   if(mobile.addEventListener)mobile.addEventListener("change",refresh);
 })();
 </script>
