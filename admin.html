@@ -230,6 +230,73 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
  html body *,html body *::before,html body *::after{animation:none!important;transition:none!important}
 }
 </style>
+<style id="hoe-admin-login-branding">
+/* Only the signed-out mobile admin login; existing signed-in dashboard is untouched. */
+@media screen and (max-width:760px){
+ html body:has(>main>#auth:not([hidden]))>header{
+  position:sticky!important;top:0!important;left:0!important;right:0!important;width:100%!important;
+  min-height:64px!important;height:auto!important;padding:0!important;margin:0!important;
+  background:#0b0b0b!important;border:0!important;border-bottom:1px solid #ffffff20!important;
+  box-shadow:none!important;isolation:isolate!important;overflow:hidden!important;z-index:100!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+ }
+ html body:has(>main>#auth:not([hidden]))>header::after{
+  content:""!important;display:block!important;position:absolute!important;inset:0 0 auto!important;
+  width:100%!important;height:64px!important;border:0!important;border-radius:0!important;
+  background:url("/tibetan-header-flags-wind.svg?v=1") repeat-x 0 0/50% 56px!important;
+  opacity:.7!important;box-shadow:none!important;filter:none!important;pointer-events:none!important;z-index:-1!important;
+ }
+ html body:has(>main>#auth:not([hidden]))>header>.topline{
+  position:relative!important;display:flex!important;align-items:center!important;justify-content:center!important;
+  width:calc(100% - 24px)!important;height:63px!important;min-height:63px!important;margin:0 auto!important;padding:0!important;
+ }
+ html body:has(>main>#auth:not([hidden]))>header .admin-header-copy{display:none!important}
+ html body:has(>main>#auth:not([hidden]))>header .admin-brand{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  width:clamp(150px,45vw,200px)!important;max-width:calc(100vw - 80px)!important;
+  margin:0!important;padding:3px 5px!important;border:1px solid #ffffff40!important;border-top-color:#ffffff80!important;
+  border-radius:9px!important;background:#10101030!important;box-shadow:inset 0 1px 0 #ffffff55,0 1px 3px #0008!important;
+  animation:none!important;transform:none!important;
+ }
+ html body:has(>main>#auth:not([hidden]))>header .admin-brand::before,
+ html body:has(>main>#auth:not([hidden]))>header .admin-brand::after{display:none!important}
+ html body:has(>main>#auth:not([hidden]))>header .admin-brand img:not(.hoe-admin-login-logo){display:none!important}
+ html body:has(>main>#auth:not([hidden]))>header .admin-brand img.hoe-admin-login-logo{
+  display:block!important;width:100%!important;height:auto!important;max-height:45px!important;object-fit:contain!important;
+  opacity:.92!important;animation:none!important;filter:none!important;margin:0!important;
+ }
+ html body:has(>main>#auth:not([hidden]))>header #msg{
+  position:relative!important;margin:0 auto!important;padding:4px 14px 8px!important;text-align:center!important;
+  color:#fff!important;-webkit-text-fill-color:#fff!important;font:500 12px/1.45 Inter,Arial,sans-serif!important;
+ }
+ html body:has(>main>#auth:not([hidden]))>header #msg:empty{display:none!important}
+ html body:has(>main>#auth:not([hidden]))>main{padding:24px 18px 48px!important}
+ html body:has(>main>#auth:not([hidden])) #auth{width:100%!important;max-width:440px!important;margin:clamp(20px,7vh,56px) auto 0!important}
+ html body:has(>main>#auth:not([hidden])) #auth>.card{
+  background:#151515!important;background-image:none!important;border:1px solid #7145a8!important;border-top:3px solid #8b55d7!important;
+  border-radius:20px!important;padding:26px 22px!important;box-shadow:0 8px 26px #0007!important;transform:none!important;color:#fff!important;
+ }
+ html body:has(>main>#auth:not([hidden])) #auth>.card h2{
+  color:#fff!important;-webkit-text-fill-color:#fff!important;font:700 29px/1.2 Inter,Arial,sans-serif!important;
+  letter-spacing:-.035em!important;text-align:center!important;margin:0 0 26px!important;
+ }
+ html body:has(>main>#auth:not([hidden])) #auth>.card label{color:#fff!important;-webkit-text-fill-color:#fff!important;font:600 13px/1.4 Inter,Arial,sans-serif!important}
+ html body:has(>main>#auth:not([hidden])) #auth>.card input{
+  background:#fff!important;color:#101010!important;-webkit-text-fill-color:#101010!important;border:1px solid #fff!important;
+  border-radius:10px!important;min-height:48px!important;font:400 16px/1.4 Inter,Arial,sans-serif!important;padding:12px 14px!important;
+ }
+ html body:has(>main>#auth:not([hidden])) #auth>.card input:focus{border-color:#a477ed!important;outline:2px solid #a477ed!important;outline-offset:2px!important;box-shadow:none!important}
+ html body:has(>main>#auth:not([hidden])) #auth>.card button#login{
+  width:100%!important;min-height:48px!important;margin:12px 0 0!important;background:#7040bb!important;background-image:none!important;
+  color:#fff!important;-webkit-text-fill-color:#fff!important;border:1px solid #a477ed!important;border-radius:10px!important;
+  box-shadow:none!important;font:700 13px/1.4 Inter,Arial,sans-serif!important;letter-spacing:.01em!important;text-transform:none!important;
+ }
+ html body:has(>main>#auth:not([hidden])) #auth>.card button#login:disabled{opacity:.55!important}
+}
+@media screen and (max-width:760px) and (prefers-reduced-motion:reduce){
+ html body:has(>main>#auth:not([hidden]))>header::after{background-image:url("/tibetan-header-flags-static.svg?v=1")!important}
+}
+</style>
 </head>
 
 <body>
@@ -237,6 +304,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
   <div class="topline">
     <a class="admin-brand" href="/" aria-label="Himalayan Odyssey Expedition guest website">
       <img src="/logo.webp" alt="Himalayan Odyssey Expedition">
+      <img class="hoe-admin-login-logo" src="/hoe-home-header-3d.webp" alt="Himalayan Odyssey Expedition" width="280" height="103" hidden>
     </a>
     <div class="admin-header-copy">
       <h2>HIMALAYAN ODYSSEY EXPEDITION</h2>
@@ -251,10 +319,10 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
 <section id="auth">
   <div class="card">
     <h2>Admin Login</h2>
-    <label>Email</label>
-    <input id="email" type="email" placeholder="Admin email">
-    <label>Password</label>
-    <input id="password" type="password" placeholder="Password">
+    <label for="email">Email</label>
+    <input id="email" type="email" placeholder="Admin email" autocomplete="username">
+    <label for="password">Password</label>
+    <input id="password" type="password" placeholder="Password" autocomplete="current-password">
     <button id="login">Login to Dashboard</button>
   </div>
 </section>
