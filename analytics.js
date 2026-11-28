@@ -60,7 +60,7 @@
       const service = parameters.enquiry_service ||
         (parameters.form_name === "website_enquiry" ? "website_form" :
          parameters.form_name === "trip_calculator" ? "trip_calculator" : pageService(window.location.pathname));
-      parameters = { ...parameters, enquiry_service: service, link_url: "https://wa.me/" };
+      parameters = { ...parameters, enquiry_service: service, link_url: "https://wa.me/", acquisition_channel: acquisition.channel, acquisition_landing: acquisition.landing };
     }
     if (typeof window.gtag === "function") {
       window.gtag("event", eventName, parameters);
@@ -82,13 +82,18 @@
         "/spiti-valley-tours/", "/winter-spiti-tours/", "/spiti-tour-from-chandigarh/",
         "/kinnaur-tours/", "/narkanda-tours/", "/summer-spiti-tour/",
         "/chandigarh-to-spiti-valley-taxi/", "/delhi-to-spiti-valley-taxi/",
-        "/spiti-valley-hotels-homestays/", "/spiti-valley-taxi-service/"
+        "/spiti-valley-hotels-homestays/", "/spiti-valley-taxi-service/",
+        "/kinnaur-hotels-homestays/", "/kaza-hotels-homestays/", "/tabo-hotels-homestays/",
+        "/spiti-valley-private-tour/", "/spiti-valley-family-tour/", "/spiti-valley-couple-tour/",
+        "/spiti-valley-solo-trip/", "/spiti-valley-budget-trip/", "/kaza-sightseeing-taxi/", "/himachal-b2b-tour-operator/"
       ]);
       if (commercialPaths.has(url.pathname)) {
         track("guide_to_booking_click", {
           page_path: window.location.pathname,
           destination_path: url.pathname,
-          enquiry_service: pageService(url.pathname)
+          enquiry_service: pageService(url.pathname),
+          acquisition_channel: acquisition.channel,
+          acquisition_landing: acquisition.landing
         });
       }
     }
