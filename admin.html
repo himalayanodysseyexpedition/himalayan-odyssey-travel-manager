@@ -231,8 +231,13 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
 }
 </style>
 <style id="hoe-admin-login-branding">
-/* Only the signed-out mobile admin login; existing signed-in dashboard is untouched. */
-@media screen and (max-width:760px){
+/* Only the signed-out admin login on all screen sizes; existing signed-in dashboard is untouched. */
+@media screen{
+ html:has(body>main>#auth:not([hidden])){background:#0b0b0b!important;color-scheme:dark}
+ html body:has(>main>#auth:not([hidden])){background:#0b0b0b!important;background-image:none!important;color:#fff!important;animation:none!important}
+ html body>header .admin-brand img.hoe-admin-login-logo[hidden]{display:none!important}
+ html body:has(>main>#auth:not([hidden]))>main{background:transparent!important}
+
  html body:has(>main>#auth:not([hidden]))>header{
   position:sticky!important;top:0!important;left:0!important;right:0!important;width:100%!important;
   min-height:64px!important;height:auto!important;padding:0!important;margin:0!important;
@@ -261,7 +266,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
  html body:has(>main>#auth:not([hidden]))>header .admin-brand::before,
  html body:has(>main>#auth:not([hidden]))>header .admin-brand::after{display:none!important}
  html body:has(>main>#auth:not([hidden]))>header .admin-brand img:not(.hoe-admin-login-logo){display:none!important}
- html body:has(>main>#auth:not([hidden]))>header .admin-brand img.hoe-admin-login-logo{
+ html body:has(>main>#auth:not([hidden]))>header .admin-brand img.hoe-admin-login-logo[hidden]{
   display:block!important;width:100%!important;height:auto!important;max-height:45px!important;object-fit:contain!important;
   opacity:.92!important;animation:none!important;filter:none!important;margin:0!important;
  }
@@ -282,7 +287,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
  }
  html body:has(>main>#auth:not([hidden])) #auth>.card label{color:#fff!important;-webkit-text-fill-color:#fff!important;font:600 13px/1.4 Inter,Arial,sans-serif!important}
  html body:has(>main>#auth:not([hidden])) #auth>.card input{
-  background:#fff!important;color:#101010!important;-webkit-text-fill-color:#101010!important;border:1px solid #fff!important;
+  color-scheme:light;background:#fff!important;color:#101010!important;-webkit-text-fill-color:#101010!important;border:1px solid #fff!important;
   border-radius:10px!important;min-height:48px!important;font:400 16px/1.4 Inter,Arial,sans-serif!important;padding:12px 14px!important;
  }
  html body:has(>main>#auth:not([hidden])) #auth>.card input:focus{border-color:#a477ed!important;outline:2px solid #a477ed!important;outline-offset:2px!important;box-shadow:none!important}
@@ -293,8 +298,18 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
  }
  html body:has(>main>#auth:not([hidden])) #auth>.card button#login:disabled{opacity:.55!important}
 }
-@media screen and (max-width:760px) and (prefers-reduced-motion:reduce){
+@media screen and (prefers-reduced-motion:reduce){
  html body:has(>main>#auth:not([hidden]))>header::after{background-image:url("/tibetan-header-flags-static.svg?v=1")!important}
+}
+@media screen and (min-width:761px){
+ html body:has(>main>#auth:not([hidden]))>header{min-height:74px!important}
+ html body:has(>main>#auth:not([hidden]))>header>.topline{height:74px!important;min-height:74px!important}
+ html body:has(>main>#auth:not([hidden]))>header::after{height:74px!important;background-size:400px 56px!important;background-position:center top!important}
+ html body:has(>main>#auth:not([hidden]))>header .admin-brand{width:220px!important;padding:4px 8px!important}
+ html body:has(>main>#auth:not([hidden]))>header .admin-brand img.hoe-admin-login-logo[hidden]{max-height:57px!important}
+ html body:has(>main>#auth:not([hidden])) #auth{max-width:460px!important;margin:clamp(40px,9vh,92px) auto 0!important}
+ html body:has(>main>#auth:not([hidden])) #auth>.card{padding:34px 32px!important}
+ html body:has(>main>#auth:not([hidden])) #auth>.card h2{font-size:34px!important}
 }
 </style>
 </head>
