@@ -740,6 +740,7 @@ Publish this cab on the guest website
 </dialog>
 
 <script src="app.js?v=20261128-calling-crm"></script>
+<script>if(location.hash==="#calling-leads"){const target=document.getElementById("app");const openLead=()=>{if(!target.hidden&&getComputedStyle(target).display!=="none"){document.querySelector('[data-tab="leads"]')?.click();document.querySelector('[data-open="leadDialog"]')?.click();history.replaceState(null,"",location.pathname);return true}return false};if(!openLead()){const observer=new MutationObserver(()=>{if(openLead())observer.disconnect()});observer.observe(target,{attributes:true,attributeFilter:["hidden","style","class"]})}}</script>
 <script src="whatsapp-automation.js?v=4"></script>
 <script src="/mobile-scroll-indicators.js?v=2" defer></script>
 </body>
