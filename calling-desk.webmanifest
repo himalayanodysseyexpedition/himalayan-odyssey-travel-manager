@@ -1,0 +1,25 @@
+{
+  "id": "/calling-staff.html",
+  "name": "Himalayan Odyssey Expedition — Calling Desk",
+  "short_name": "Calling Desk",
+  "description": "Private calling workspace for Himalayan Odyssey Expedition staff.",
+  "start_url": "/calling-staff.html",
+  "scope": "/calling-staff.html",
+  "display": "standalone",
+  "background_color": "#f6f5f8",
+  "theme_color": "#17111f",
+  "icons": [
+    {
+      "src": "/calling-desk-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/calling-desk-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
