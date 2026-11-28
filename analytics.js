@@ -3,10 +3,11 @@
 (() => {
   const pendingEvents = [];
   // Tab-scoped first observed acquisition category; no identifiers or raw referrer/query stored.
-  function classifyChannel(source,medium,paid,host){
+  function classifyChannel(source,medium,paid,host,campaign){
     const src=String(source||"").trim().toLowerCase();
     const m=String(medium||"").trim().toLowerCase();
     if(paid||/^(cpc|ppc|paid|paidsearch|paid_search|paid_social|display|cpm|ads)$/.test(m))return "paid_campaign";
+    if(src==="google" && String(campaign||"").trim().toLowerCase()==="google_business_profile")return "google_business_profile";
     const aliases={google:"google_search",bing:"bing_search",instagram:"instagram",ig:"instagram",facebook:"facebook",fb:"facebook",chatgpt:"chatgpt",openai:"chatgpt",gemini:"gemini",perplexity:"perplexity",tripoto:"tripoto",whatsapp:"whatsapp",wa:"whatsapp",medium:"travel_referral",blogger:"travel_referral",holidify:"travel_referral",pinterest:"pinterest",quora:"quora"};
     if(Object.prototype.hasOwnProperty.call(aliases,src))return aliases[src];
     if(src||m)return "other_campaign";
@@ -32,11 +33,11 @@
     let host = '';
     try { const ref = new URL(document.referrer); if (ref.origin !== location.origin && /^https?:$/.test(ref.protocol)) host = ref.hostname; } catch (_) {}
     const p = new URLSearchParams(location.search);
-    const current = {channel: classifyChannel(p.get('utm_source'), p.get('utm_medium'), p.has('gclid') || p.has('msclkid'), host), landing: safeLandingPath(location.pathname)};
+    const current = {channel: classifyChannel(p.get('utm_source'), p.get('utm_medium'), p.has('gclid') || p.has('msclkid'), host, p.get('utm_campaign')), landing: safeLandingPath(location.pathname)};
     const key = 'hoe-acquisition-v1';
     try {
       const previous = JSON.parse(sessionStorage.getItem(key) || 'null');
-      const known = /^(google_search|bing_search|instagram|facebook|chatgpt|gemini|perplexity|tripoto|whatsapp|travel_referral|pinterest|quora|paid_campaign|other_campaign|referral|unknown)$/;
+      const known = /^(google_business_profile|google_search|bing_search|instagram|facebook|chatgpt|gemini|perplexity|tripoto|whatsapp|travel_referral|pinterest|quora|paid_campaign|other_campaign|referral|unknown)$/;
       if (previous && known.test(previous.channel) && typeof previous.landing === 'string' && safeLandingPath(previous.landing) === previous.landing) return {channel: previous.channel, landing: previous.landing};
       sessionStorage.setItem(key, JSON.stringify(current));
     } catch (_) { /* Storage may be disabled; use current page evidence. */ }
