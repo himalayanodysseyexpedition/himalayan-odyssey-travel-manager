@@ -10,7 +10,7 @@
  ];
  function loadStyles(){
   if(document.getElementById('himalayan-bottom-navigation-css'))return;
-  const link=document.createElement('link');link.id='himalayan-bottom-navigation-css';link.rel='stylesheet';link.href='/himalayan-bottom-navigation-blue-glass.css?v=4';document.head.appendChild(link);
+  const link=document.createElement('link');link.id='himalayan-bottom-navigation-css';link.rel='stylesheet';link.href='/himalayan-bottom-navigation-blue-glass.css?v=4-r20261128';document.head.appendChild(link);
  }
  function removeLegacy(){
   document.querySelectorAll('#footerContactBar,.footer-contact-bar,nav.quick-nav-bar,nav.quick-nav').forEach(el=>el.remove());
@@ -191,7 +191,7 @@
   const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('app-reveal','is-visible');io.unobserve(e.target)}}),{threshold:.08});
   candidates.forEach(el=>{if(!el.classList.contains('app-reveal')){el.classList.add('app-reveal');io.observe(el)}});
  }
- function registerPwa(){if('serviceWorker'in navigator&&location.protocol==='https:'){window.addEventListener('load',()=>navigator.serviceWorker.register('/service-worker.js?build=23',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}),{once:true})}}
+ function registerPwa(){if('serviceWorker'in navigator&&location.protocol==='https:'){window.addEventListener('load',()=>navigator.serviceWorker.register('/service-worker.js?build=24',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}),{once:true})}}
  // Keep the mobile Home shortcut independent; Menu taps reach the popup's own click handler.
  document.addEventListener('click',event=>{
   if(!mobile())return;
