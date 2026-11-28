@@ -56,7 +56,22 @@
     return "general";
   };
 
+  // Landing-page intent is a proxy, never a declaration of actual party size.
+  const audienceIntent = (path) => {
+    const slug = String(path || "").replace(/^\/+|\/+$/g, "");
+    if (slug === "spiti-valley-solo-trip") return "solo_group_interest";
+    if (slug === "spiti-valley-couple-tour") return "two_traveller_interest";
+    if (/^(spiti-valley-tours|winter-spiti-tours|summer-spiti-tour|spiti-tour-from-chandigarh|spiti-tour-from-across-india)(?:\/|$)/.test(slug)) return "group_or_private_interest";
+    if (/^(kinnaur-tours|narkanda-tours)$/.test(slug)) return "regional_tour_interest";
+    if (/taxi|cab/.test(slug)) return "cab_interest";
+    if (slug === "blog/spiti-group-tour-booking-checklist-2027") return "group_booking_research";
+    return "other";
+  };
+
   const track = (eventName, parameters = {}) => {
+    if (["whatsapp_click", "generate_lead", "guide_to_booking_click"].includes(eventName)) {
+      parameters = { ...parameters, audience_intent: audienceIntent(acquisition.landing), enquiry_page_intent: audienceIntent(location.pathname) };
+    }
     if (eventName === "whatsapp_click") {
       const service = parameters.enquiry_service ||
         (parameters.form_name === "website_enquiry" ? "website_form" :
