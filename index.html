@@ -2418,7 +2418,7 @@ if ("IntersectionObserver" in window) {
 
 
 
-<script src="/homepage-trip-planner.js?v=26" defer></script>
+<script src="/homepage-trip-planner.js?v=27" defer></script>
 
 
 
@@ -3041,7 +3041,7 @@ if ("IntersectionObserver" in window) {
    const packageName=record?.name||record?.destination||"Himalayan tour package";
    const message="Hello Himalayan Odyssey Expedition, I am interested in the "+packageName+" package. Please share the full itinerary, dates, inclusions, availability and booking details.";
    window.HOEAnalytics?.track("whatsapp_click", { enquiry_service: "tour_package", page_path: location.pathname });
-   window.location.href="https://wa.me/919816929669?text="+encodeURIComponent(message);
+   {const url="https://wa.me/919816929669?text="+encodeURIComponent(message);if(!window.HOELeadCapture?.open(url,{context:packageName}))window.location.href=url;}
    return;
   }
   if(cardSelector==="#itineraryList > article.itinerary-slide" && label.includes("enquire about this itinerary")){
@@ -3050,7 +3050,7 @@ if ("IntersectionObserver" in window) {
    const itineraryName=heading?heading.textContent.trim():"Himalayan tour itinerary";
    const message="Hello Himalayan Odyssey Expedition, I am interested in the "+itineraryName+" itinerary. Please share the full details, dates, inclusions, availability and booking information.";
    window.HOEAnalytics?.track("whatsapp_click", { enquiry_service: "itinerary", page_path: location.pathname });
-   window.location.href="https://wa.me/919816929669?text="+encodeURIComponent(message);
+   {const url="https://wa.me/919816929669?text="+encodeURIComponent(message);if(!window.HOELeadCapture?.open(url,{context:itineraryName}))window.location.href=url;}
    return;
   }
   if(!label.includes("explore full itinerary") && !label.includes("view itinerary"))return;
@@ -3175,7 +3175,7 @@ if ("IntersectionObserver" in window) {
     const message = "Hello Himalayan Odyssey Expedition, I am interested in enquiring about " +
       name + " in " + location + ". Please share room options, rates, availability and booking details.";
     window.HOEAnalytics?.track("whatsapp_click", { enquiry_service: "accommodation", page_path: location.pathname });
-    window.location.href = "https://wa.me/919816929669?text=" + encodeURIComponent(message);
+    {const url="https://wa.me/919816929669?text="+encodeURIComponent(message);if(!window.HOELeadCapture?.open(url,{context:name+" "+location}))window.location.href=url;}
   });
 })();
 </script>
@@ -3266,7 +3266,7 @@ if ("IntersectionObserver" in window) {
 
 
 
-<script src="/website-lead-form.js?v=1" defer></script></body>
+<script src="/website-lead-form.js?v=2" defer></script></body>
 
 
 

@@ -31,3 +31,6 @@
  reduce.addEventListener('change',queue);
  queue();
 })();
+
+// All public secondary pages use the same consent-based WhatsApp enquiry capture.
+(()=>{if(!document.querySelector('script[src*="website-lead-form.js"]')){const s=document.createElement('script');s.src='/website-lead-form.js?v=2';document.head.appendChild(s)}})();
